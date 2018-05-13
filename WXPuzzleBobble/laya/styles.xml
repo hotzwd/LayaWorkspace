@@ -1,0 +1,4 @@
+<res>
+   <item name="Loading/img_wenzi-5.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="Loading/progress.png" type="ProgressBar" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+</res>

@@ -1,0 +1,72 @@
+/**
+ * 结算界面逻辑 by lzq
+ */
+var GameoverUILogic = (function(_super){
+    function GameoverUILogic(){
+        GameoverUILogic.super(this);
+
+    }
+    Laya.class(GameoverUILogic,"UILogic.GameoverUILogic",_super);
+    var _proto = GameoverUILogic.prototype;
+    
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+
+        this.img_light.rotation = 0;
+        var timeLine = new Laya.TimeLine();
+        timeLine.addLabel("show",0).to(this.img_light,
+        {
+            rotation:360
+        },4000);
+        timeLine.play(0,true);
+
+
+        var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
+        this.label_overScore.text = scoreNum;
+
+        this.img_light.visible = false;
+        var highScore = LocalStorage.getItem("HighScore");
+        if(highScore){
+            if(scoreNum > parseInt(highScore)){
+                highScore = scoreNum;
+                this.img_light.visible = true;
+            }
+        }else{
+            highScore = scoreNum;
+            this.img_light.visible = true;
+        }
+        LocalStorage.setItem("HighScore",highScore);
+        this.label_heightScore.text = highScore;
+
+
+        this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
+       // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
+
+        //this.updateListData();
+
+        //MessageController.getInstance().AddNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+    }
+    _proto.onDestroy = function(){
+        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+    }
+
+     
+     /**重新开始 */
+    _proto.onGameAgain = function(){
+        UIManager.getInstance().closeUI("GameoverUI");
+        MusicManager.getInstance().playSound("res/music/1.wav");
+        SceneManager.getInstance().currentScene.restartGame();
+        // UIManager.getInstance().showUI('RoomUI');
+        // UIManager.getInstance().closeUI("GameUI",true);
+        
+    }
+    /**关闭游戏 */
+    _proto.onCloseGame = function(){
+        //跳转到玩吧
+        window.location.href=UserModule.getInstance().redirect;
+    }
+    return GameoverUILogic;
+})(GameoverUI);
