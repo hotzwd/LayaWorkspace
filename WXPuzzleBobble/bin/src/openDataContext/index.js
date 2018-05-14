@@ -18,7 +18,7 @@ const NICK_NAME_WIDTH = 0.42;//昵称x值所在比例
 const COUNT_WIDTH = 0.85;//特戒数量x值所在比例
 const SPACE_HEIGHT = 30;//间隔高度
 const ICON_SIZE = 46;//头像大小 0、46、64、96、132
-const ICON_GAP = ICON_SIZE +50; //头像间距
+const ICON_GAP = ICON_SIZE +30; //头像间距
 
 
 const FRIEND = 1;//好友排行
@@ -54,7 +54,7 @@ wx.onMessage(data => {
 
   }
   else if (data.msgType == SCORE) {//发送分数
-
+    sendScore(data.score + "");
   }
 
   console.log("执行onMessage结束:");
@@ -162,7 +162,7 @@ function drawRenderNickName(index, nickName) {
 
   sharedContext.fillStyle = '#000000';
   sharedContext.font = "16px Arial";
-  let tempX = centenrX - 10;
+  let tempX = centenrX - 20;
   let tempY = centenrY + (index * ICON_GAP) +20;
 
   if (nickName.length > 7) {//目前名字最多显示7个
@@ -179,7 +179,7 @@ function drawRenderScore(index, scoreNum) {
 
   sharedContext.fillStyle = '#000000';
   sharedContext.font = "16px Arial";
-  let tempX = centenrX + 100;
+  let tempX = centenrX + 80;
   let tempY = centenrY + (index * ICON_GAP) + 20;
 
   sharedContext.fillText(scoreNum, tempX, tempY);

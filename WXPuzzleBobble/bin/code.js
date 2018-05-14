@@ -51136,14 +51136,15 @@ var GameoverUILogic = (function(_super){
             if(scoreNum > parseInt(highScore)){
                 highScore = scoreNum;
                 this.img_light.visible = true;
+                this.sendScore(highScore);
             }
         }else{
             highScore = scoreNum;
             this.img_light.visible = true;
+            this.sendScore(highScore);
         }
         LocalStorage.setItem("HighScore",highScore);
         this.label_heightScore.text = highScore;
-
 
         this.onGetRankList();
 
@@ -51173,13 +51174,22 @@ var GameoverUILogic = (function(_super){
         //跳转到玩吧
         // window.location.href=UserModule.getInstance().redirect;
     }
-
+    /**发送数据 */
+    _proto.sendScore = function(highScore){
+        if(onWeiXin){
+            let openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                msgType:3,
+                score:highScore,
+            })
+        }
+    }
     /**获取排行榜 */
     _proto.onGetRankList = function(){
         if(onWeiXin){
 
             let openDataContext = wx.getOpenDataContext()
-            
+
             openDataContext.postMessage({
                 msgType:1,
             })
@@ -51187,10 +51197,10 @@ var GameoverUILogic = (function(_super){
             let sharedCanvas = openDataContext.canvas;
 
             var rankSprite2 = new Laya.Sprite();
-            Laya.stage.addChild(rankSprite2);
+            this.addChild(rankSprite2);
             Laya.timer.once(1000, this, function () {
                 var rankTexture = new Laya.Texture(sharedCanvas);
-                // rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+                //rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
                 rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
             });   
         }
@@ -54588,20 +54598,20 @@ if(onWeiXin){
     //   year: (new Date()).getFullYear()
     // })
 
-    openDataContext.postMessage({
-        msgType:1,
-    })
+    // openDataContext.postMessage({
+    //     msgType:1,
+    // })
 
     // console.log(sharedCanvas.width);
 
-    setTimeout(function () {
-    let canvas = wx.createCanvas()
+    // setTimeout(function () {
+    // let canvas = wx.createCanvas()
 
-    let context = canvas.getContext('2d')
+    // let context = canvas.getContext('2d')
 
-    context.drawImage(sharedCanvas, 0, 0)
-    // console.log(sharedCanvas.width);
+    // context.drawImage(sharedCanvas, 0, 0)
+    // // console.log(sharedCanvas.width);
 
-    }, 1000);
+    // }, 1000);
 
 }

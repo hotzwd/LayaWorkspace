@@ -75,20 +75,20 @@ if(onWeiXin){
     //   year: (new Date()).getFullYear()
     // })
 
-    openDataContext.postMessage({
-        msgType:1,
-    })
+    // openDataContext.postMessage({
+    //     msgType:1,
+    // })
 
     // console.log(sharedCanvas.width);
 
-    setTimeout(function () {
-    let canvas = wx.createCanvas()
+    // setTimeout(function () {
+    // let canvas = wx.createCanvas()
 
-    let context = canvas.getContext('2d')
+    // let context = canvas.getContext('2d')
 
-    context.drawImage(sharedCanvas, 0, 0)
-    // console.log(sharedCanvas.width);
+    // context.drawImage(sharedCanvas, 0, 0)
+    // // console.log(sharedCanvas.width);
 
-    }, 1000);
+    // }, 1000);
 
 }
