@@ -42,6 +42,8 @@ var GameoverUILogic = (function(_super){
         this.label_heightScore.text = highScore;
 
 
+        this.onGetRankList();
+
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
 
@@ -66,7 +68,29 @@ var GameoverUILogic = (function(_super){
     /**关闭游戏 */
     _proto.onCloseGame = function(){
         //跳转到玩吧
-        window.location.href=UserModule.getInstance().redirect;
+        // window.location.href=UserModule.getInstance().redirect;
+    }
+
+    /**获取排行榜 */
+    _proto.onGetRankList = function(){
+        if(onWeiXin){
+
+            let openDataContext = wx.getOpenDataContext()
+            
+            openDataContext.postMessage({
+                msgType:1,
+            })
+            
+            let sharedCanvas = openDataContext.canvas;
+
+            var rankSprite2 = new Laya.Sprite();
+            Laya.stage.addChild(rankSprite2);
+            Laya.timer.once(1000, this, function () {
+                var rankTexture = new Laya.Texture(sharedCanvas);
+                // rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+                rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
+            });   
+        }
     }
     return GameoverUILogic;
 })(GameoverUI);

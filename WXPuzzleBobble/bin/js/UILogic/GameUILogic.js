@@ -22,8 +22,8 @@ var GameUILogic = (function(_super){
     this.hurtSelfPlayerId = 0;                                //伤害自己的人物id
 
     _proto.onInit = function(){
-        this.width = Laya.stage.width;
-        this.height = Laya.stage.height;
+        // this.width = Laya.stage.width;
+        // this.height = Laya.stage.height;
 
         MusicManager.getInstance().playMusic("res/music/1.mp3");
 

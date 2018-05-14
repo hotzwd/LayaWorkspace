@@ -80,12 +80,5 @@ function loadingCallback(){
 
     SceneManager.getInstance().currentScene  = new GameScene();
 
-     var rankSprite2 = new Laya.Sprite();
-    Laya.stage.addChild(rankSprite2);
-    Laya.timer.once(1000, this, function () {
-      var rankTexture = new Laya.Texture(sharedCanvas);
-      // rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
-      // rankSprite2.graphics.drawTexture(rankTexture, 0, 0, sharedCanvas.width, sharedCanvas.height);
-      rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
-    });  
+    
 }

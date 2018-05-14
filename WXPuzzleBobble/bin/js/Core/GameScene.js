@@ -101,7 +101,7 @@ var GameScene = (function(_super){
         //     this.liveGraphics = liveGraphicsCanvas.graphics;
         // }
         this.gameUI.startGameUI();
-        Laya.timer.scale =1;
+        // Laya.timer.scale =1; 
        // MessageController.getInstance().AddNotification(MessageEventName.GameOverEvent,this,this.gameOverReceiver);
     }
 
@@ -112,6 +112,7 @@ var GameScene = (function(_super){
 
     /**开始游戏 */
     _proto.startGame = function(){
+        
         //显示最上层的桶
         this.gameUI.imgTong.visible = true;
 

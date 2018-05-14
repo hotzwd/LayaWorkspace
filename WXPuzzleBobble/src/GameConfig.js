@@ -46,16 +46,7 @@ var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 // var HttpUrl = "http://192.168.1.101:8080/cometoplay2/ranking/putScore";
 
 /**Socket 地址 */
-// var SocketUrl = "ws:/test.yulelp.com:8080/basketballFly/webSocketServer";
-// var SocketUrl = "ws://192.168.1.101:8080/paintAndGuess/webSocketServer";    //zjw
-// var SocketUrl = "ws://192.168.1.101:8081/roomForGame/webSocketServer";
 var SocketUrl = "wss://mineForBusiness.laiwan.jtkshop.net/bubbleproject/webSocketServer";
 // var SocketUrl = "ws://192.168.1.101:8081/bubbleproject/webSocketServer";
-
-/**测试用的人物id */
-// var TestPlayerId = "7a54b5ee72654a1f953d032289285725";// boy
-var TestPlayerId = "46f4b6f40aed4cea85911310085e0d23";//girl
-
-var TestOpenid = "oBc4WwYnyaI6mr2ST3iEdM42BNU4";
-var TestRedirect = "http://laiwan.jtkshop.net/laiwan/bin/index.html?openId=oLDrp1DyKOh39oH7uxBz4MqKThUs&playerId=de97c3b366d7475a94e6718c119f6568";
-// var TestPlayerId = "c7afc582880c4806a223651fff6b2a9d";
+/**是否在微信内 */
+var onWeiXin = Laya.Browser.onWeiXin;
