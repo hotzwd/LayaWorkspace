@@ -51085,6 +51085,8 @@ var GameoverUI=(function(_super){
 		    this.label_overScore=null;
 		    this.label_heightScore=null;
 		    this.btn_again=null;
+		    this.btn_next=null;
+		    this.btn_last=null;
 
 			GameoverUI.__super.call(this);
 		}
@@ -51098,7 +51100,7 @@ var GameoverUI=(function(_super){
 
 		}
 
-		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"var":"gameoverPanel","centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1280}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":694}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":484,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":609,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":481,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":1027,"x":507,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":535,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}}]}]};
+		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"var":"gameoverPanel","centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1280}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":694}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":452,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":564,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":449,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":1027,"x":507,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":490,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}},{"type":"Image","props":{"y":675,"x":421,"width":434,"skin":"game/img_rankBg.png","height":282,"sizeGrid":"21,26,28,29"}},{"type":"Label","props":{"y":626,"x":534,"text":"好友排行榜","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":964,"x":634,"width":150,"var":"btn_next","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"下一页","height":50}},{"type":"Button","props":{"y":964,"x":487,"width":150,"var":"btn_last","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"上一页","height":50}}]}]};
 		return GameoverUI;
 	})(View);
 /**
@@ -51111,7 +51113,8 @@ var GameoverUILogic = (function(_super){
     }
     Laya.class(GameoverUILogic,"UILogic.GameoverUILogic",_super);
     var _proto = GameoverUILogic.prototype;
-    
+    var rankSprite2;
+
     _proto.onInit = function(){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
@@ -51146,9 +51149,16 @@ var GameoverUILogic = (function(_super){
         LocalStorage.setItem("HighScore",highScore);
         this.label_heightScore.text = highScore;
 
+        if(rankSprite2 == null){
+            rankSprite2 = new Laya.Sprite();
+            this.addChild(rankSprite2);
+        }
+
         this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
+        this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
+        this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
 
         //this.updateListData();
@@ -51157,6 +51167,7 @@ var GameoverUILogic = (function(_super){
     }
     _proto.onDestroy = function(){
         //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+      rankSprite2.destroy();
     }
 
      
@@ -51184,25 +51195,52 @@ var GameoverUILogic = (function(_super){
             })
         }
     }
+    var rankTexture;
     /**获取排行榜 */
     _proto.onGetRankList = function(){
         if(onWeiXin){
 
             let openDataContext = wx.getOpenDataContext()
-
             openDataContext.postMessage({
                 msgType:1,
+                page:0,
             })
             
             let sharedCanvas = openDataContext.canvas;
+            // var rankSprite2 = new Laya.Sprite();
+            // this.addChild(rankSprite2);
 
-            var rankSprite2 = new Laya.Sprite();
+            rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
-            Laya.timer.once(1000, this, function () {
+
+            Laya.timer.once(100, this, function () {
                 var rankTexture = new Laya.Texture(sharedCanvas);
-                //rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+                rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
                 rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
+               
             });   
+        }
+    }
+    _proto.onRankPageLast = function(){
+        // console.log("--------onRankPageLast");
+        
+        if(onWeiXin){
+            let openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                msgType:1,
+                page:-1,
+            }) 
+        }
+    }
+    _proto.onRankPageNext = function(){
+        // console.log("--------onRankPageNext");
+        if(onWeiXin){
+            let openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                msgType:1,
+                page:1,
+            })
+           
         }
     }
     return GameoverUILogic;
@@ -54545,26 +54583,27 @@ if(onWeiXin){
     })
 
     function showUserInfoBtn(){
-    var button = wx.createUserInfoButton({
-        type: 'text',
-        text: '获取用户信息',
-        style: {
-        left: 100,
-        top: 76,
-        width: 200,
-        height: 40,
-        lineHeight: 40,
-        backgroundColor: '#ff0000',
-        color: '#ffffff',
-        textAlign: 'center',
-        fontSize: 16,
-        borderRadius: 4
-        }
-    })
-    button.onTap(function (res) {
-        console.log(res)
-    })
-    button.show();
+        var button = wx.createUserInfoButton({
+            type: 'text',
+            text: '授权用户信息',
+            style: {
+            left: 100,
+            top: 76,
+            width: 200,
+            height: 40,
+            lineHeight: 40,
+            backgroundColor: '#ff0000',
+            color: '#ffffff',
+            textAlign: 'center',
+            fontSize: 16,
+            borderRadius: 4
+            }
+        })
+        button.onTap(function (res) {
+            console.log(res)
+            button.hide();
+        })
+        button.show();
     }
 
     function getWxUserInfo(){

@@ -8,7 +8,8 @@ var GameoverUILogic = (function(_super){
     }
     Laya.class(GameoverUILogic,"UILogic.GameoverUILogic",_super);
     var _proto = GameoverUILogic.prototype;
-    
+    var rankSprite2;
+
     _proto.onInit = function(){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
@@ -43,9 +44,16 @@ var GameoverUILogic = (function(_super){
         LocalStorage.setItem("HighScore",highScore);
         this.label_heightScore.text = highScore;
 
+        if(rankSprite2 == null){
+            rankSprite2 = new Laya.Sprite();
+            this.addChild(rankSprite2);
+        }
+
         this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
+        this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
+        this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
 
         //this.updateListData();
@@ -54,6 +62,7 @@ var GameoverUILogic = (function(_super){
     }
     _proto.onDestroy = function(){
         //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+        rankSprite2.destroy();
     }
 
      
@@ -86,20 +95,41 @@ var GameoverUILogic = (function(_super){
         if(onWeiXin){
 
             let openDataContext = wx.getOpenDataContext()
-
             openDataContext.postMessage({
                 msgType:1,
+                page:0,
             })
             
             let sharedCanvas = openDataContext.canvas;
-
-            var rankSprite2 = new Laya.Sprite();
+            
+            rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
             Laya.timer.once(1000, this, function () {
                 var rankTexture = new Laya.Texture(sharedCanvas);
-                //rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+                rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
                 rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
             });   
+        }
+    }
+    _proto.onRankPageLast = function(){
+        // console.log("--------onRankPageLast");
+        
+        if(onWeiXin){
+            let openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                msgType:1,
+                page:-1,
+            })
+        }
+    }
+    _proto.onRankPageNext = function(){
+        // console.log("--------onRankPageNext");
+        if(onWeiXin){
+            let openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                msgType:1,
+                page:1,
+            })
         }
     }
     return GameoverUILogic;

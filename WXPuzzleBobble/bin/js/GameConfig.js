@@ -49,4 +49,4 @@ var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 var SocketUrl = "wss://mineForBusiness.laiwan.jtkshop.net/bubbleproject/webSocketServer";
 // var SocketUrl = "ws://192.168.1.101:8081/bubbleproject/webSocketServer";
 /**是否在微信内 */
-var onWeiXin = Laya.Browser.onWeiXin;
+var onWeiXin = Laya.Browser.onMiniGame;

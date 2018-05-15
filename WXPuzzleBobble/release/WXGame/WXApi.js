@@ -30,6 +30,6 @@ setTimeout(function () {
   let context = canvas.getContext('2d')
 
   context.drawImage(sharedCanvas, 0, 0)
-  // console.log(sharedCanvas.width);
+  console.log(sharedCanvas.width);
 
 }, 1000);

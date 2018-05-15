@@ -22,26 +22,27 @@ if(onWeiXin){
     })
 
     function showUserInfoBtn(){
-    var button = wx.createUserInfoButton({
-        type: 'text',
-        text: '获取用户信息',
-        style: {
-        left: 100,
-        top: 76,
-        width: 200,
-        height: 40,
-        lineHeight: 40,
-        backgroundColor: '#ff0000',
-        color: '#ffffff',
-        textAlign: 'center',
-        fontSize: 16,
-        borderRadius: 4
-        }
-    })
-    button.onTap(function (res) {
-        console.log(res)
-    })
-    button.show();
+        var button = wx.createUserInfoButton({
+            type: 'text',
+            text: '授权用户信息',
+            style: {
+            left: 100,
+            top: 76,
+            width: 200,
+            height: 40,
+            lineHeight: 40,
+            backgroundColor: '#ff0000',
+            color: '#ffffff',
+            textAlign: 'center',
+            fontSize: 16,
+            borderRadius: 4
+            }
+        })
+        button.onTap(function (res) {
+            console.log(res)
+            button.hide();
+        })
+        button.show();
     }
 
     function getWxUserInfo(){
