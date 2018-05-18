@@ -26,7 +26,13 @@ ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
 ResourceVersion.enable("version.json", Handler.create(this, beginLoad));   
 
 function  beginLoad(){
-
+    // Laya.URL.basePath = "https://testcos-1256468286.cos.ap-beijing.myqcloud.com/"
+  
+  // Laya.MiniAdpter.nativefiles = [
+  //   "res",
+  //   "res/atlas/game.atlas",
+  //   "res/atlas/bubbles.atlas",
+  // ];
     var asset = [];
         //loading界面
         asset.push({

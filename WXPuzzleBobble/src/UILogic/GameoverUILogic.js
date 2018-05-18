@@ -34,16 +34,15 @@ var GameoverUILogic = (function(_super){
             if(scoreNum > parseInt(highScore)){
                 highScore = scoreNum;
                 this.img_light.visible = true;
-                this.sendScore(highScore);
             }
         }else{
             highScore = scoreNum;
             this.img_light.visible = true;
-            this.sendScore(highScore);
         }
         LocalStorage.setItem("HighScore",highScore);
         this.label_heightScore.text = highScore;
 
+        this.sendScore(highScore);
         if(rankSprite2 == null){
             rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
@@ -101,7 +100,7 @@ var GameoverUILogic = (function(_super){
             })
             
             let sharedCanvas = openDataContext.canvas;
-            
+
             rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
             Laya.timer.once(1000, this, function () {

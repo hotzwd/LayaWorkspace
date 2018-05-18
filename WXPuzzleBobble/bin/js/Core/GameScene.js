@@ -59,6 +59,7 @@ var GameScene = (function(_super){
     _proto.currentTime = 0;                                                  //当前游戏时间
     _proto.shootBubbleMoveFinish = false;                                    //发射的泡泡是否移动完毕
     _proto.shootPropNum = 0;                                                 //统计该发射道具球的个数
+    _proto.isShowShared = false;                                             //是否已经显示分享过
     
     _proto.Init = function(){
 
@@ -88,6 +89,7 @@ var GameScene = (function(_super){
         this.gameUI.label_score.text = 0;
         this.currentTime = GameTime;
         this.shootPropNum = 0;
+        this.isShowShared = false;
 
         this.prepareBubble.skin = this.randomBubble();
         this.shootBubble.skin = this.randomBubble();
@@ -1075,7 +1077,11 @@ var GameScene = (function(_super){
         if(this.currentTime<=0){
                 Laya.timer.clear(this,this.animateTimeBased);
                 this.gameOver();
-                this.gameUI.gameoverByTime();
+                if(!this.isShowShared){
+                    UIManager.getInstance().showUI("GameSharedUI");
+                }else{
+                    this.gameUI.gameoverByTime();
+                }
         }
     }
     //接收服务器游戏结束
@@ -1088,12 +1094,17 @@ var GameScene = (function(_super){
     _proto.gameOver = function(){
         // Gamelog("----!!!!!!!!!游戏结束-------");
         // GameModule.getInstance().sendGameScore(this.scoreNum);
-        // Laya.timer.clear(this,this.animateTimeBased);
+        Laya.timer.clear(this,this.animateTimeBased);
         Laya.timer.clear(this,this.onUpdate);
         //_proto.matterScene.removeAllBasketBall();
         // _proto.matterScene.setEngineTimeScale(0);
         if(this.m_curReady != undefined){
-            this.m_curReady.destroy();
+            for(var j=0; j<this.m_listBubble.length; j++){
+                if(this.m_listBubble[j] === this.m_curReady){
+                    this.m_listBubble.splice(j,1);
+                }
+            }
+           this.m_curReady.destroy();
         }
         //舞台监听鼠标
         // Laya.stage.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);
@@ -1119,6 +1130,7 @@ var GameScene = (function(_super){
         this.gameUI.label_score.text = 0;
         //this.gameUI.bossProgress.value = 0;
         this.shootBubble.visible = true;
+        this.isShowShared = false;
 
         this.prepareBubble.skin = this.randomBubble();
         this.shootBubble.skin = this.randomBubble();
@@ -1140,7 +1152,19 @@ var GameScene = (function(_super){
         // Laya.timer.loop(1000, this, this.animateTimeBased);
 
     }
-
+    /**分享游戏 */
+    _proto.sharedRestartGame = function(){
+        this.currentTime = GameTime;
+        this.gameUI.label_time.text = GameTime;
+        this.shootBubble.visible = true;
+        this.prepareBubble.skin = this.randomBubble();
+        this.shootBubble.skin = this.randomBubble();
+        if(this.m_curReady != undefined){
+            this.m_curReady.isStop = true;
+        }
+        this.isShowShared = true;
+        this.startGame();
+    }
 
     //生成道具球
     _proto.createPropBubble = function(){

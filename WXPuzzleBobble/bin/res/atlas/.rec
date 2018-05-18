@@ -7,11 +7,11 @@ P 3D1EC85C bomb_04.png
 D game
 P 34D4C79B bg_heise.png
 R B97F6933 bgGame.png
+P B3ABBC4B btn_fangjian_red_164x54.png
 P 1FD45519 btn_kaishi.png
 P 8CB7517E btn_shengyin_guan.png
 P D2C5B424 btn_shengyin_kai.png
 P B644C227 btn_zaiwan.png
-P 41053B5B defen_dikuang.png
 P BECB40AB image_bencidefen.png
 P 42A7B3FB image_youxijieshu-.png
 P 641DF8E4 img_beiyongqiu_1.png
@@ -37,17 +37,15 @@ P A2A7CFD3 img_qiu_2.png
 P 92EA9C4B img_qiu_3.png
 P 2251537D img_qiu_4.png
 P 3190C370 img_qiu_5.png
-P EE037D97 img_qiu_zhezhao.png
 P CD21C6B7 img_rankBg.png
 P 5F79A7B9 img_shijian_dikuang.png
 P FBC674D7 img_shijiandao.png
+P E2A4F1A3 img_tanchuang_bg.png
 P 6DC3FBD6 img_tong1.png
 P D9BB2CA6 img_tong11.png
 P 9045D227 img_toulan01.png
 P 3AB0C82A img_toulan02.png
 R E862AAC7 img_xinxilan_dikuang.png
-P B2C47D00 img_yingzi.png
 P 683C682A img_youxiguize.png
-P 20D97B7A img_zhedang.png
 P 87262D00 img_zhunbei.png
 R 19CDF67D shard.png
