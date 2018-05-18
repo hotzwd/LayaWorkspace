@@ -1,5 +1,5 @@
 
-if(onWeiXin){
+if(Browser.onMiniGame){
 
     wx.getSetting({
     success: function (res) {

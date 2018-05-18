@@ -33,14 +33,19 @@
 	<!--粒子类库-->
     <!-- <script type="text/javascript" src="libs/laya.particle.js"></script> -->
 	<!--提供tileMap解析支持-->
-    <script type="text/javascript" src="libs/laya.tiledmap.js"></script>
+    <!--<script type="text/javascript" src="libs/laya.tiledmap.js"></script>-->
 	<!--提供了制作UI的各种组件实现-->
     <script type="text/javascript" src="libs/laya.ui.js"></script>
 	<!--IDE生成的UI文件-->
 	<script src="../src/ui/layaUI.max.all.js"></script>
+	<!-- 物理引擎matter.js -->
+    <!--<script type="text/javascript" src="libs/matter.js"></script>-->
+	<script type="text/javascript" src="libs/LayaRender.js"></script>
+
 	<!--自定义的js(bin/js文件夹下)文件自动添加到下面jsfile模块标签里面里，js的顺序可以手动修改，修改后保留修改的顺序，新增加的js会默认依次追加到标签里-->
 	<!--删除标签，ide不会自动添加js文件，请谨慎操作-->
 	<!--jsfile--startTag-->
+	<script src="../src/Core/MatterSceneMonster.js"></script>
 	<script src="../src/UILogic/GameSharedUILogic.js"></script>
 	<script src="../src/UILogic/GameoverUILogic.js"></script>
 	<script src="../src/Core/Bubble.js"></script>

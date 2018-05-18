@@ -4,8 +4,6 @@
 (function()
 {
 	var LayaRender = {};
-	
-	var Matter = window.Matter; 
 
 	var Common = Matter.Common;
 	var Composite = Matter.Composite;

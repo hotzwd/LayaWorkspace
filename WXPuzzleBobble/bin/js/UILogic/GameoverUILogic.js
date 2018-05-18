@@ -81,7 +81,7 @@ var GameoverUILogic = (function(_super){
     }
     /**发送数据 */
     _proto.sendScore = function(highScore){
-        if(onWeiXin){
+        if(Browser.onMiniGame){
             let openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:3,
@@ -91,7 +91,7 @@ var GameoverUILogic = (function(_super){
     }
     /**获取排行榜 */
     _proto.onGetRankList = function(){
-        if(onWeiXin){
+        if(Browser.onMiniGame){
 
             let openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
@@ -113,7 +113,7 @@ var GameoverUILogic = (function(_super){
     _proto.onRankPageLast = function(){
         // console.log("--------onRankPageLast");
         
-        if(onWeiXin){
+        if(Browser.onMiniGame){
             let openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:1,
@@ -123,7 +123,7 @@ var GameoverUILogic = (function(_super){
     }
     _proto.onRankPageNext = function(){
         // console.log("--------onRankPageNext");
-        if(onWeiXin){
+        if(Browser.onMiniGame){
             let openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:1,

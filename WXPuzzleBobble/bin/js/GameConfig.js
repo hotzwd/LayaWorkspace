@@ -40,7 +40,9 @@ var GameConfig = {
 /**是否显示Log */
 var GameLogVisible = false;
 /**物理边框显示 */
-var GameMatterBody = false;
+var GameMatterBody = true;
+/**物理模式 */
+var GameMatterModle = true;
 /**请求地址 */
 var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 // var HttpUrl = "http://192.168.1.101:8080/cometoplay2/ranking/putScore";
@@ -48,5 +50,3 @@ var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 /**Socket 地址 */
 var SocketUrl = "wss://mineForBusiness.laiwan.jtkshop.net/bubbleproject/webSocketServer";
 // var SocketUrl = "ws://192.168.1.101:8081/bubbleproject/webSocketServer";
-/**是否在微信内 */
-var onWeiXin = Laya.Browser.onMiniGame;

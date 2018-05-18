@@ -31,7 +31,7 @@ var GameSharedUILogic = (function(_super){
     }
     /**分享游戏 */
     _proto.onShardClick = function(){
-        if(onWeiXin){
+        if(Browser.onMiniGame){
             wx.shareAppMessage({
             // 用户点击了“转发”按钮
             title: '最好玩的泡泡龙，快来比试一下吧！',
@@ -50,7 +50,7 @@ var GameSharedUILogic = (function(_super){
     }
     /**发送数据 */
     _proto.sendScore = function(highScore){
-        if(onWeiXin){
+        if(Browser.onMiniGame){
             let openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:3,

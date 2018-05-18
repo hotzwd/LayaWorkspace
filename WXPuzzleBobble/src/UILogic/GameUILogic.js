@@ -129,8 +129,9 @@ var GameUILogic = (function(_super){
         {
             alpha:0
         },500);
-        var b_point = new Point(imgGuang.x + imgGuang.width /2,imgGuang.y + imgGuang.height /2);
-        // b_point = imgGuang.localToGlobal(b_point);
+        // var b_point = new Point(imgGuang.x + imgGuang.width /2,imgGuang.y + imgGuang.height /2);
+        var b_point = new Point(imgGuang.x + 20 ,imgGuang.y);
+        b_point = this.imgGuang.localToGlobal(new Point(this.imgGuang.width/2,this.imgGuang.height/2));
         BubbleScoreAnim(b_point,_addScore);
 
         //攻击人物特效
@@ -160,26 +161,26 @@ var GameUILogic = (function(_super){
                 break;
         }
         //boss光点
-        var bossPoint = this.img_bossIcon.localToGlobal(new Point(this.img_bossIcon.width/2,this.img_bossIcon.height/2));
-        var img_bossItem = new Laya.Image("game/img_defen_dikuang39.png");
-        img_bossItem.anchorX = 0.5;
-        img_bossItem.anchorY = 0.5;
-        img_bossItem.pos(b_point.x, b_point.y);
-        img_bossItem.zOrder=0.1;
-        Laya.stage.addChild(img_bossItem);
+        // var bossPoint = this.img_bossIcon.localToGlobal(new Point(this.img_bossIcon.width/2,this.img_bossIcon.height/2));
+        // var img_bossItem = new Laya.Image("game/img_defen_dikuang39.png");
+        // img_bossItem.anchorX = 0.5;
+        // img_bossItem.anchorY = 0.5;
+        // img_bossItem.pos(b_point.x, b_point.y);
+        // img_bossItem.zOrder=0.1;
+        // Laya.stage.addChild(img_bossItem);
         
-        Laya.Tween.to(img_bossItem,{
-            x:bossPoint.x,
-            y:bossPoint.y
-        },400,null,new Handler(this,function(){
-            img_bossItem.destroy();
-            this.bossProgress.value += bossValue;
-            //boss攻击进度
-            if(this.bossProgress.value >= 1){
-                this.progressAnim.visible = true;
-                this.progressAnim.play(0,true);
-            }
-        }));
+        // Laya.Tween.to(img_bossItem,{
+        //     x:bossPoint.x,
+        //     y:bossPoint.y
+        // },400,null,new Handler(this,function(){
+        //     img_bossItem.destroy();
+        //     this.bossProgress.value += bossValue;
+        //     //boss攻击进度
+        //     if(this.bossProgress.value >= 1){
+        //         this.progressAnim.visible = true;
+        //         this.progressAnim.play(0,true);
+        //     }
+        // }));
 
     }
     //飞向人物效果

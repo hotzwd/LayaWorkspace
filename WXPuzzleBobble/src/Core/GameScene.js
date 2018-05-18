@@ -71,7 +71,9 @@ var GameScene = (function(_super){
             this.shootBubble.visible = true;
         }
         if(_proto.matterScene == undefined){
-            //_proto.matterScene = new MatterSceneMonster();
+            if(GameMatterModle){
+                _proto.matterScene = new MatterSceneMonster();
+            }
         }
         this.m_board = [];
         this.m_listBubble = [];
@@ -679,10 +681,13 @@ var GameScene = (function(_super){
             }
         }
         // console.debug("--------NO link count = "+NoLinkBubblelist.length);
-       // _proto.matterScene.addBodyBubble(NoLinkBubblelist,noLinkBubbleDataList);
-        //this.fallBubble(NoLinkBubblelist);
-        this.clearBubble(NoLinkBubblelist);
-        this.AddScoreShow(BubbleTypes.Normal,NoLinkBubblelist.length * singleBubbleScore);
+        if(GameMatterModle){
+            _proto.matterScene.addBodyBubble(NoLinkBubblelist,noLinkBubbleDataList);
+            this.fallBubble(NoLinkBubblelist);
+        }else{
+            this.clearBubble(NoLinkBubblelist);
+            this.AddScoreShow(BubbleTypes.Normal,NoLinkBubblelist.length * singleBubbleScore);
+        }
         //检查完可以掉落的球 才可以继续弹球
         this.m_curReady.isStop = true;
         //移动面板
@@ -1096,7 +1101,9 @@ var GameScene = (function(_super){
         // GameModule.getInstance().sendGameScore(this.scoreNum);
         Laya.timer.clear(this,this.animateTimeBased);
         Laya.timer.clear(this,this.onUpdate);
-        //_proto.matterScene.removeAllBasketBall();
+        if(GameMatterModle){
+            _proto.matterScene.removeAllBasketBall();
+        }
         // _proto.matterScene.setEngineTimeScale(0);
         if(this.m_curReady != undefined){
             for(var j=0; j<this.m_listBubble.length; j++){
