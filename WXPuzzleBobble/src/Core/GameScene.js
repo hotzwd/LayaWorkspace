@@ -23,7 +23,7 @@ var GameScene = (function(_super){
     }
 
     var BUBBLECOLORNUM = 5;                                                     //泡泡的颜色种类
-    var BeginRowNum = 100;                                                      //开始生成泡泡的行号
+    var BeginRowNum = 1000;                                                      //开始生成泡泡的行号
     var BeginCreateNum = 5;                                                     //开始生成的泡泡行数  
     var ShootCreateNum = 10;                                                    //发射多少个后创建新的一行  
     var MoveOtherBubbleDistance = 5;                                            //碰撞其他球移动的距离

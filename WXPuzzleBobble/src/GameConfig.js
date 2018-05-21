@@ -42,7 +42,7 @@ var GameLogVisible = false;
 /**物理边框显示 */
 var GameMatterBody = true;
 /**物理模式 */
-var GameMatterModle = true;
+var GameMatterModle = false;
 /**请求地址 */
 var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 // var HttpUrl = "http://192.168.1.101:8080/cometoplay2/ranking/putScore";

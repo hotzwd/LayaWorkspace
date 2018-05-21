@@ -50,6 +50,17 @@
         
         nRow = parseInt(nRow);
         nCol = parseInt(nCol);
+        if(nCol < 0){
+            nCol = 0;
+        }
+        if(nCol > MAX_COLS - 1){
+            nCol = MAX_COLS - 1;
+        }
+        if (nRow % 2 != 0) {
+            if(nCol > MAX_COLS - 2){
+                nCol = MAX_COLS - 2;
+            }
+        }
         // console.debug("------nrow="+nRow+",ncol="+nCol);
         return new Point( nRow, nCol );
     }

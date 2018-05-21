@@ -54043,23 +54043,27 @@ if(Browser.onMiniGame){
         }
     })
     }
-    wx.showToast({
-      title: '成功',
-      icon: 'loading',
-      duration: 1000,
-      mask: true
-    })
-    wx.showModal({
-      title: '提示',
-      content: '模态弹窗',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else {
-          console.log('用户点击取消')
-        }
+    // wx.showToast({
+    //   title: '成功',
+    //   icon: 'loading',
+    //   duration: 1000,
+    //   mask: true
+    // })
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '模态弹窗',
+    //   success: function (res) {
+    //     if (res.confirm) {
+    //       console.log('用户点击确定')
+    //     } else {
+    //       console.log('用户点击取消')
+    //     }
 
-      }
+    //   }
+    // })
+    wx.showLoading({
+      title:"stata",
+      mask:true
     })
     wx.showShareMenu()
     wx.onShareAppMessage(function () {
