@@ -19,9 +19,9 @@ let sharedCanvas = openDataContext.canvas
 //   year: (new Date()).getFullYear()
 // })
 
-openDataContext.postMessage({
-  msgType:1,
-})
+// openDataContext.postMessage({
+//   msgType:1,
+// })
 
 // console.log(sharedCanvas.width);
 
@@ -34,3 +34,10 @@ setTimeout(function () {
   console.log(sharedCanvas.width);
 
 }, 1000);
+
+wx.onHide(function(){
+  console.log("-------wx.onHide");
+});
+wx.onShow(function () {
+  console.log("-------wx.onShow");
+});

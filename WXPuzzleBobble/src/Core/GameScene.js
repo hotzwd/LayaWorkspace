@@ -23,7 +23,7 @@ var GameScene = (function(_super){
     }
 
     var BUBBLECOLORNUM = 5;                                                     //泡泡的颜色种类
-    var BeginRowNum = 1000;                                                      //开始生成泡泡的行号
+    var BeginRowNum = 10000;                                                      //开始生成泡泡的行号
     var BeginCreateNum = 5;                                                     //开始生成的泡泡行数  
     var ShootCreateNum = 10;                                                    //发射多少个后创建新的一行  
     var MoveOtherBubbleDistance = 5;                                            //碰撞其他球移动的距离
@@ -1019,10 +1019,11 @@ var GameScene = (function(_super){
 
     /**检查泡泡最底部位置 */
     _proto.checkBubblesPos = function(){
+         var viewPos = this.gameUI.localToGlobal(new Point(0,0));
         // var bottomY = GameConfig.GameHeight -GameConfig.GameHeight / 3;
         var bottomPosY = 0;
         var cowHeight = (BUBBLE_RADIUS * 2) * Math.sin ( Math.PI/3 );
-        var bottomY = 13*cowHeight;
+        var bottomY = 13*cowHeight + viewPos.y;;
         for(var i=0; i<this.m_listBubble.length; i++){
             var tempBubble = this.m_listBubble[i];
             if(tempBubble != null){
