@@ -26,10 +26,10 @@ ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
 
 if(GameInFackBook){
     initializeAsync();
-    beginLoad();
     FBInstant.startGameAsync().then(function() {
         console.log("-------------startGameAsync ");
-        loadingCallback();
+        beginLoad();
+        // loadingCallback();
     });
 }else{
     beginLoad();
@@ -42,10 +42,11 @@ function initializeAsync() {
         console.log("getSDKVersion", FBInstant.getSDKVersion());
         console.log("getSupportedAPIs", FBInstant.getSupportedAPIs());
         console.log("getEntryPointData", FBInstant.getEntryPointData());
+        // beginLoad();
     })
-    // Laya.timer.once(100, this,function(){
-    //    FBInstant.setLoadingProgress(100);
-    // });
+    Laya.timer.once(100, this,function(){
+       FBInstant.setLoadingProgress(100);
+    });
 }
 
 
@@ -66,12 +67,13 @@ function  beginLoad(){
             type:Laya.Loader.IMAGE
         }); 
 
-    if(GameInFackBook){
-        Laya.loader.load(asset, null, Handler.create(this, onLoading, null, false));
-    }else
-    {
-        Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);    
-    }
+    // if(GameInFackBook){
+    //     Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), Handler.create(this, onLoading, null, false));
+    // }else
+    // {
+    //     Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);    
+    // }
+    Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);
     
 }
 
@@ -80,8 +82,8 @@ function onLoading (progress){
     console.log("loadingUI onLoading: " + progress);
     var intPro = parseInt(progress *100+"");
     console.log("loadingUI onLoading: " + intPro);
-    if(intPro > 80)
-        intPro = 80;
+    // if(intPro > 80)
+    //     intPro = 80;
     FBInstant.setLoadingProgress(intPro);
     //取小数点后2位
     // this.loadingLabel.text = (progress).toFixed(2) * 100 +"%";
