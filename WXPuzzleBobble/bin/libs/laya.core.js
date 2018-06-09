@@ -14364,7 +14364,7 @@ var Texture=(function(_super){
 		/**@private */
 		this.scaleRate=1;
 		Texture.__super.call(this);
-		if (bitmap){
+		if (bitmap && bitmap._addReference){
 			bitmap._addReference();
 		}
 		this.setTo(bitmap,uv);

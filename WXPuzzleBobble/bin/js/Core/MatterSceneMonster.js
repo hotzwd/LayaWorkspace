@@ -78,6 +78,7 @@ var MatterSceneMonster = (function(_super){
     _proto.initWorld=function()
 	{
         var stageCenter = Laya.stage.width/2;
+        var stageCenterY = Laya.stage.height/2;
         //左边墙
         // var groundLeft = Matter.Bodies.rectangle(0, Laya.stage.height/2, 10, Laya.stage.height,
         var groundLeft = Matter.Bodies.rectangle(stageCenter - GameConfig.GameWidth / 2 -5, Laya.stage.height/2, 10, Laya.stage.height,
@@ -102,7 +103,7 @@ var MatterSceneMonster = (function(_super){
         });
         //地面
         // var groundDown = Matter.Bodies.rectangle(Laya.stage.width/2, Laya.stage.height, Laya.stage.width*1.5, Laya.stage.height*0.01,
-        var groundDown = Matter.Bodies.rectangle(stageCenter, Laya.stage.height, GameConfig.GameWidth, Laya.stage.height*0.01,
+        var groundDown = Matter.Bodies.rectangle(stageCenter, stageCenterY + GameConfig.GameHeight/2, GameConfig.GameWidth, Laya.stage.height*0.01,
         {
                 id: GROUNDID,
                 isStatic: true,
@@ -144,6 +145,8 @@ var MatterSceneMonster = (function(_super){
         var rightBorder = Laya.stage.width - leftBorder;
         var borderWidth = 250;
         var borderHeight = 50;
+        var stageCenterY = Laya.stage.height/2;
+        var downPosY = stageCenterY + GameConfig.GameHeight/2;
 
         // var leftBottom = Matter.Bodies.rectangle(leftBorder + borderWidth/2, Laya.stage.height - borderHeight/2 , borderWidth, borderHeight,
         // {
@@ -155,7 +158,7 @@ var MatterSceneMonster = (function(_super){
         //                 fillStyle:"FC0404"
         //         },
         // });
-        var leftUp = Matter.Bodies.rectangle(leftBorder + borderWidth/2, Laya.stage.height  - borderHeight*2 +40 , borderWidth+20, 50,
+        var leftUp = Matter.Bodies.rectangle(leftBorder + borderWidth/2, downPosY  - borderHeight*2 +40 , borderWidth+20, 50,
         {
                 id: 80100,
                 isStatic: true,
@@ -169,7 +172,7 @@ var MatterSceneMonster = (function(_super){
                 },
         });
 
-        var center = Matter.Bodies.rectangle(Laya.stage.width/2, Laya.stage.height - 10 , 180, 20,
+        var center = Matter.Bodies.rectangle(Laya.stage.width/2, downPosY - 10 , 180, 20,
         {
                 id: GROUNDID+1000,
                 isStatic: true,
@@ -190,7 +193,7 @@ var MatterSceneMonster = (function(_super){
         //                 fillStyle:"FC0404"
         //         },
         // });
-        var rightUp = Matter.Bodies.rectangle(rightBorder - borderWidth/2, Laya.stage.height  - borderHeight*2+40 , borderWidth+20, 50,
+        var rightUp = Matter.Bodies.rectangle(rightBorder - borderWidth/2, downPosY  - borderHeight*2+40 , borderWidth+20, 50,
         {
                 id: 80200,
                 isStatic: true,

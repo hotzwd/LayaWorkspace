@@ -1,25 +1,25 @@
 
 if(Browser.onMiniGame){
 
-    wx.getSetting({
-    success: function (res) {
-        var authSetting = res.authSetting
-        if (authSetting['scope.userInfo'] === true) {
-        // 用户已授权，可以直接调用相关 API
-        console.log("获取用户信息成功");
-        getWxUserInfo();
-        } else if (authSetting['scope.userInfo'] === false) {
-        // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
-        wx.openSetting();
-        } else {
-        // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
-        showUserInfoBtn();
-        }
-    },
-    fail: function (res) {
-        console.log("获取设置失败");
-    }
-    })
+    // wx.getSetting({
+    // success: function (res) {
+    //     var authSetting = res.authSetting
+    //     if (authSetting['scope.userInfo'] === true) {
+    //     // 用户已授权，可以直接调用相关 API
+    //     console.log("获取用户信息成功");
+    //     getWxUserInfo();
+    //     } else if (authSetting['scope.userInfo'] === false) {
+    //     // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
+    //     wx.openSetting();
+    //     } else {
+    //     // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
+    //     showUserInfoBtn();
+    //     }
+    // },
+    // fail: function (res) {
+    //     console.log("获取设置失败");
+    // }
+    // })
 
     function showUserInfoBtn(){
         var button = wx.createUserInfoButton({
@@ -68,8 +68,34 @@ if(Browser.onMiniGame){
     }
     })
 
-    let openDataContext = wx.getOpenDataContext()
-    let sharedCanvas = openDataContext.canvas
+    wx.onShow(function () {
+        console.log("--------------wx.onShow");
+        MusicManager.getInstance().playMusic("res/music/1.mp3")
+
+        //小游戏更新
+        if (typeof wx.getUpdateManager === 'function') {
+            console.log('支持 wx.getUpdateManager')
+            var updateManager = wx.getUpdateManager()
+
+            updateManager.onCheckForUpdate(function (res) {
+                // 请求完新版本信息的回调
+                console.log("----更新" + res.hasUpdate)
+            })
+
+            updateManager.onUpdateReady(function () {
+                // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                updateManager.applyUpdate()
+            })
+
+            updateManager.onUpdateFailed(function () {
+                // 新的版本下载失败
+            })
+        }
+    })
+
+    // let openDataContext = wx.getOpenDataContext()
+    // let sharedCanvas = openDataContext.canvas
+    
 
     // openDataContext.postMessage({
     //   text: 'hello',
@@ -91,5 +117,8 @@ if(Browser.onMiniGame){
     // // console.log(sharedCanvas.width);
 
     // }, 1000);
+
+     //监听小游戏回到前台的事件
+    
 
 }

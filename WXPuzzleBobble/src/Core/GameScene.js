@@ -1083,11 +1083,12 @@ var GameScene = (function(_super){
         if(this.currentTime<=0){
                 Laya.timer.clear(this,this.animateTimeBased);
                 this.gameOver();
-                if(!this.isShowShared){
-                    UIManager.getInstance().showUI("GameSharedUI");
-                }else{
-                    this.gameUI.gameoverByTime();
-                }
+                this.gameUI.gameoverByTime();
+                // if(!this.isShowShared){
+                //     UIManager.getInstance().showUI("GameSharedUI");
+                // }else{
+                //     this.gameUI.gameoverByTime();
+                // }
         }
     }
     //接收服务器游戏结束
