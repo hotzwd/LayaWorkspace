@@ -51,7 +51,7 @@ var GameSharedUILogic = (function(_super){
     /**发送数据 */
     _proto.sendScore = function(highScore){
         if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
+            var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:3,
                 score:highScore,

@@ -85,6 +85,5 @@ function loadingCallback(){
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
     SceneManager.getInstance().currentScene  = new GameScene();
-
     
 }

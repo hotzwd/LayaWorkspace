@@ -65,8 +65,8 @@ function BubbleScoreAnim(_point,_score,_fontName){
     scoreLabel.anchorX = 0.5;
     scoreLabel.anchorY = 0.5;
     scoreLabel.pos(_point.x,_point.y);
-    // Laya.stage.addChild(scoreLabel);
-    UIManager.getInstance().getUI("GameUI").addChild(scoreLabel);
+    Laya.stage.addChild(scoreLabel);
+    // UIManager.getInstance().getUI("GameUI").addChild(scoreLabel);
     scoreLabel.alpha = 0;
     scoreLabel.scaleX = 0;
     scoreLabel.scaleY = 0;

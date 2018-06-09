@@ -13,7 +13,7 @@ Laya.stage.alignH = "center";
 //垂直居中对齐
 Laya.stage.alignV = "middle";
 
-Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
+Laya.stage.bgColor = "#000000";//设置画布的背景颜色。
 //使用WebWorker加载并解码图片，把耗费cpu的工作放到worker中执行，防止js主线程卡死，从而能大大减少游戏中加载卡顿现象。
 //指定worker.js所在的路径,比如放在libs目录下
 //Laya.WorkerLoader.workerPath = "libs/worker.js";
@@ -85,6 +85,5 @@ function loadingCallback(){
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
     SceneManager.getInstance().currentScene  = new GameScene();
-
     
 }

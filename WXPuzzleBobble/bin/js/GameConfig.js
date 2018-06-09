@@ -40,7 +40,7 @@ var GameConfig = {
 /**是否显示Log */
 var GameLogVisible = false;
 /**物理边框显示 */
-var GameMatterBody = true;
+var GameMatterBody = false;
 /**物理模式 */
 var GameMatterModle = true;
 /**请求地址 */

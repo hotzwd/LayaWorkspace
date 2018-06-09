@@ -8,7 +8,7 @@ var GameoverUILogic = (function(_super){
     }
     Laya.class(GameoverUILogic,"UILogic.GameoverUILogic",_super);
     var _proto = GameoverUILogic.prototype;
-    var rankSprite2;
+    var rankSprite2 = null;
 
     _proto.onInit = function(){
         this.width = Laya.stage.width;
@@ -43,16 +43,16 @@ var GameoverUILogic = (function(_super){
         this.label_heightScore.text = highScore;
 
         this.sendScore(highScore);
-        if(rankSprite2 == null){
-            rankSprite2 = new Laya.Sprite();
-            this.addChild(rankSprite2);
-        }
+        
+
+        this.ani1.play(0, true);
 
         this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
         this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
         this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
+        this.btn_share.on(Laya.Event.CLICK,this,this.onShareGame);
        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
 
         //this.updateListData();
@@ -67,7 +67,7 @@ var GameoverUILogic = (function(_super){
      
      /**重新开始 */
     _proto.onGameAgain = function(){
-        UIManager.getInstance().closeUI("GameoverUI");
+        UIManager.getInstance().closeUI("GameoverUI",true);
         MusicManager.getInstance().playSound("res/music/1.wav");
         SceneManager.getInstance().currentScene.restartGame();
         // UIManager.getInstance().showUI('RoomUI');
@@ -82,7 +82,7 @@ var GameoverUILogic = (function(_super){
     /**发送数据 */
     _proto.sendScore = function(highScore){
         if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
+            var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:3,
                 score:highScore,
@@ -93,17 +93,19 @@ var GameoverUILogic = (function(_super){
     _proto.onGetRankList = function(){
         if(Browser.onMiniGame){
 
-            let openDataContext = wx.getOpenDataContext()
+            var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:1,
                 page:0,
             })
-            
-            let sharedCanvas = openDataContext.canvas;
-
+            if(rankSprite2 != null){
+                rankSprite2.destroy();
+            }
             rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
-            Laya.timer.once(1000, this, function () {
+
+            var sharedCanvas = openDataContext.canvas;
+            Laya.timer.once(200, this, function () {
                 var rankTexture = new Laya.Texture(sharedCanvas);
                 rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
                 rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
@@ -114,7 +116,7 @@ var GameoverUILogic = (function(_super){
         // console.log("--------onRankPageLast");
         
         if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
+            var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:1,
                 page:-1,
@@ -124,11 +126,19 @@ var GameoverUILogic = (function(_super){
     _proto.onRankPageNext = function(){
         // console.log("--------onRankPageNext");
         if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
+            var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
                 msgType:1,
                 page:1,
             })
+        }
+    }
+    _proto.onShareGame = function(){
+        if(Browser.onMiniGame){
+            wx.shareAppMessage({
+                    title: '最好玩的泡泡龙，快来比试一下吧！',
+                    imageUrl:"game/shard.png"
+                })
         }
     }
     return GameoverUILogic;

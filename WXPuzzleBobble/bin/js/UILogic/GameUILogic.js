@@ -25,7 +25,7 @@ var GameUILogic = (function(_super){
         // this.width = Laya.stage.width;
         // this.height = Laya.stage.height;
 
-        MusicManager.getInstance().playMusic("res/music/1.mp3");
+        // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         _proto.imgTong = new Laya.Image();
         _proto.imgGuang = new Laya.Image();

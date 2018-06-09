@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":109,
-    "selecteID":4,
+    "selectedBox":73,
+    "selecteID":72,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -385,8 +385,22 @@
                     "compId":72,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":1239,"x":290,"text":"v1.0","fontSize":26,"font":"SimHei","color":"#585454"},
+                    "nodeParent":73,
+                    "label":"Label",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":110,
+                    "child":[
+                        ]
                 }],
-            "$HIDDEN":true
+            "$HIDDEN":false
         },
         {
             "x":15,
