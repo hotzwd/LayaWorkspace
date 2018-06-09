@@ -428,6 +428,17 @@ var GameUILogic = (function(_super){
         // SceneManager.getInstance().currentScene.startGame();
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
+        if(Laya.Browser.onFacebook){
+            console.log("----------share ")
+            FBInstant.shareAsync({
+                intent: 'REQUEST',
+                // image: "",
+                text: 'X is asking for your help!',
+                // data: { myReplayData: '...' },
+                }).then(function() {
+                // 继续游戏
+                });
+        }
     }
 
     _proto.onTweenFinish = function(){

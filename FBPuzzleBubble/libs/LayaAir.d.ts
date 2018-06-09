@@ -26477,6 +26477,8 @@ declare module laya.utils {
         /** 微信内*/
         static onWeiXin: boolean;
         static onMiniGame: boolean;
+        /**表示是否在Facebook */
+        static onFacebook:boolean;
         /** 表示是否在 PC 端。*/
         static onPC: boolean;
         /** 表示是否是 HTTP 协议。*/

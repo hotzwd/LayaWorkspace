@@ -425,7 +425,7 @@ var ___Laya=(function(){
 	Laya.timer=null;
 	Laya.scaleTimer=null;
 	Laya.loader=null;
-	Laya.version="1.7.18beta";
+	Laya.version="1.7.18";
 	Laya.render=null;
 	Laya._currentStage=null;
 	Laya._isinit=false;
@@ -4953,9 +4953,10 @@ var SoundManager=(function(){
 			if (SoundManager._soundMuted)return null;
 		};
 		var tSound;
-		if (!Browser.onMiniGame){
-			tSound=Laya.loader.getRes(url);
-		}
+		// if (!Browser.onMiniGame){
+		// 	tSound=Laya.loader.getRes(url);
+		// }
+		tSound=Laya.loader.getRes(url);
 		if (!soundClass)soundClass=SoundManager._soundClass;
 		if (!tSound){
 			tSound=new soundClass();
@@ -7127,6 +7128,9 @@ var Browser=(function(){
 		Browser.onMiniGame=/*[SAFE]*/ Browser.u.indexOf('MiniGame')>-1;
 		Browser.onLimixiu=/*[SAFE]*/ Browser.u.indexOf('limixiu')>-1;
 		Browser.httpProtocol=/*[SAFE]*/ Browser.window.location.protocol=="http:";
+		if(Browser.window.location.ancestorOrigins.length >0){
+			Browser.onFacebook=/*[SAFE]*/ Browser.window.location.ancestorOrigins[0].indexOf('facebook')>-1;
+		}
 		if (Browser.onMiniGame && Browser.window.focus==null){
 			console.error("请先初始化小游戏适配库，详细教程https://ldc.layabox.com/doc/?nav=zh-ts-5-0-0");
 		}
@@ -7200,6 +7204,7 @@ var Browser=(function(){
 	Browser.onEdge=false;
 	Browser.onIE=false;
 	Browser.onWeiXin=false;
+	Browser.onFacebook = false;
 	Browser.onMiniGame=false;
 	Browser.onLimixiu=false;
 	Browser.onPC=false;
@@ -12860,7 +12865,10 @@ var Loader=(function(_super){
 				this._data=data;
 				this.event(/*laya.events.Event.PROGRESS*/"progress",0.5);
 				return this._loadImage(this._url.replace(".fnt",".png"));
-				}else {
+			}else {
+				if (Browser.onMiniGame) {
+					this._data = Utils.parseXMLFromString(this._data);
+				}
 				var bFont=new BitmapFont();
 				bFont.parseFont(this._data,data);
 				var tArr=this._url.split(".fnt")[0].split("/");
@@ -14364,7 +14372,7 @@ var Texture=(function(_super){
 		/**@private */
 		this.scaleRate=1;
 		Texture.__super.call(this);
-		if (bitmap){
+		if (bitmap&& bitmap._addReference){
 			bitmap._addReference();
 		}
 		this.setTo(bitmap,uv);
@@ -16119,6 +16127,8 @@ var Sprite=(function(_super){
 			if (value=="bitmap")this.conchModel && this.conchModel.cacheAs(1);
 			this._set$P("cacheForFilters",false);
 			}else {
+			if (this._$P["_mask"]){
+			}else
 			if (this._$P["hasFilter"]){
 				this._set$P("cacheForFilters",true);
 				}else {
@@ -16554,9 +16564,9 @@ var Sprite=(function(_super){
 			this._set$P("_mask",value);
 			value._set$P("maskParent",this);
 			}else {
-			this.cacheAs="none";
 			this.mask && this.mask._set$P("maskParent",null);
 			this._set$P("_mask",value);
+			this.cacheAs="none";
 		}
 		this.conchModel && this.conchModel.mask(value ? value.conchModel :null);
 		this._renderType |=/*laya.renders.RenderSprite.MASK*/0x40;
@@ -28866,8 +28876,8 @@ var RenderTarget2D=(function(_super){
 			t._surfaceFormat=surfaceFormat;
 			t._surfaceType=surfaceType;
 			t._depthStencilFormat=depthStencilFormat;
-			if (Render.isConchWebGL && this._depthStencilFormat===/*laya.webgl.WebGLContext.DEPTH_STENCIL*/0x84F9){
-				this._depthStencilFormat=/*laya.webgl.WebGLContext.DEPTH_COMPONENT16*/0x81A5;
+			if (Render.isConchWebGL && t._depthStencilFormat===/*laya.webgl.WebGLContext.DEPTH_STENCIL*/0x84F9){
+				t._depthStencilFormat=/*laya.webgl.WebGLContext.DEPTH_COMPONENT16*/0x81A5;
 			}
 			t._mipMap=mipMap;
 			t._repeat=repeat;
@@ -38534,8 +38544,8 @@ if (typeof define === 'function' && define.amd){
 	var Render=laya.renders.Render,Sprite=laya.display.Sprite,Text=laya.display.Text,Texture=laya.resource.Texture;
 	var Tween=laya.utils.Tween,Utils=laya.utils.Utils,WeakObject=laya.utils.WeakObject;
 Laya.interface('laya.ui.IItem');
-Laya.interface('laya.ui.IRender');
 Laya.interface('laya.ui.ISelect');
+Laya.interface('laya.ui.IRender');
 Laya.interface('laya.ui.IComponent');
 Laya.interface('laya.ui.IBox','IComponent');
 /**
@@ -45063,6 +45073,97 @@ var List=(function(_super){
 
 
 /**
+*使用 <code>HScrollBar</code> （水平 <code>ScrollBar</code> ）控件，可以在因数据太多而不能在显示区域完全显示时控制显示的数据部分。
+*@example <caption>以下示例代码，创建了一个 <code>HScrollBar</code> 实例。</caption>
+*package
+*{
+	*import laya.ui.HScrollBar;
+	*import laya.utils.Handler;
+	*public class HScrollBar_Example
+	*{
+		*private var hScrollBar:HScrollBar;
+		*public function HScrollBar_Example()
+		*{
+			*Laya.init(640,800);//设置游戏画布宽高。
+			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+			*Laya.loader.load(["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"],Handler.create(this,onLoadComplete));//加载资源。
+			*}
+		*private function onLoadComplete():void
+		*{
+			*hScrollBar=new HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
+			*hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
+			*hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
+			*hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
+			*hScrollBar.changeHandler=new Handler(this,onChange);//设置 hScrollBar 的滚动变化处理器。
+			*Laya.stage.addChild(hScrollBar);//将此 hScrollBar 对象添加到显示列表。
+			*}
+		*private function onChange(value:Number):void
+		*{
+			*trace("滚动条的位置： value="+value);
+			*}
+		*}
+	*}
+*@example
+*Laya.init(640,800);//设置游戏画布宽高
+*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
+*var hScrollBar;
+*var res=["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"];
+*Laya.loader.load(res,laya.utils.Handler.create(this,onLoadComplete));//加载资源。
+*function onLoadComplete(){
+	*console.log("资源加载完成！");
+	*hScrollBar=new laya.ui.HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
+	*hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
+	*hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
+	*hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
+	*hScrollBar.changeHandler=new laya.utils.Handler(this,onChange);//设置 hScrollBar 的滚动变化处理器。
+	*Laya.stage.addChild(hScrollBar);//将此 hScrollBar 对象添加到显示列表。
+	*}
+*function onChange(value)
+*{
+	*console.log("滚动条的位置： value="+value);
+	*}
+*@example
+*import HScrollBar=laya.ui.HScrollBar;
+*import Handler=laya.utils.Handler;
+*class HScrollBar_Example {
+	*private hScrollBar:HScrollBar;
+	*constructor(){
+		*Laya.init(640,800);//设置游戏画布宽高。
+		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+		*Laya.loader.load(["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"],Handler.create(this,this.onLoadComplete));//加载资源。
+		*}
+	*private onLoadComplete():void {
+		*this.hScrollBar=new HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
+		*this.hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
+		*this.hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
+		*this.hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
+		*this.hScrollBar.changeHandler=new Handler(this,this.onChange);//设置 hScrollBar 的滚动变化处理器。
+		*Laya.stage.addChild(this.hScrollBar);//将此 hScrollBar 对象添加到显示列表。
+		*}
+	*private onChange(value:number):void {
+		*console.log("滚动条的位置： value="+value);
+		*}
+	*}
+*/
+//class laya.ui.HScrollBar extends laya.ui.ScrollBar
+var HScrollBar=(function(_super){
+	function HScrollBar(){
+		HScrollBar.__super.call(this);;
+	}
+
+	__class(HScrollBar,'laya.ui.HScrollBar',_super);
+	var __proto=HScrollBar.prototype;
+	/**@inheritDoc */
+	__proto.initialize=function(){
+		_super.prototype.initialize.call(this);
+		this.slider.isVertical=false;
+	}
+
+	return HScrollBar;
+})(ScrollBar)
+
+
+/**
 *<code>Panel</code> 是一个面板容器类。
 */
 //class laya.ui.Panel extends laya.ui.Box
@@ -45380,97 +45481,6 @@ var Panel=(function(_super){
 
 	return Panel;
 })(Box)
-
-
-/**
-*使用 <code>HScrollBar</code> （水平 <code>ScrollBar</code> ）控件，可以在因数据太多而不能在显示区域完全显示时控制显示的数据部分。
-*@example <caption>以下示例代码，创建了一个 <code>HScrollBar</code> 实例。</caption>
-*package
-*{
-	*import laya.ui.HScrollBar;
-	*import laya.utils.Handler;
-	*public class HScrollBar_Example
-	*{
-		*private var hScrollBar:HScrollBar;
-		*public function HScrollBar_Example()
-		*{
-			*Laya.init(640,800);//设置游戏画布宽高。
-			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-			*Laya.loader.load(["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"],Handler.create(this,onLoadComplete));//加载资源。
-			*}
-		*private function onLoadComplete():void
-		*{
-			*hScrollBar=new HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
-			*hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
-			*hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
-			*hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
-			*hScrollBar.changeHandler=new Handler(this,onChange);//设置 hScrollBar 的滚动变化处理器。
-			*Laya.stage.addChild(hScrollBar);//将此 hScrollBar 对象添加到显示列表。
-			*}
-		*private function onChange(value:Number):void
-		*{
-			*trace("滚动条的位置： value="+value);
-			*}
-		*}
-	*}
-*@example
-*Laya.init(640,800);//设置游戏画布宽高
-*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
-*var hScrollBar;
-*var res=["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"];
-*Laya.loader.load(res,laya.utils.Handler.create(this,onLoadComplete));//加载资源。
-*function onLoadComplete(){
-	*console.log("资源加载完成！");
-	*hScrollBar=new laya.ui.HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
-	*hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
-	*hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
-	*hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
-	*hScrollBar.changeHandler=new laya.utils.Handler(this,onChange);//设置 hScrollBar 的滚动变化处理器。
-	*Laya.stage.addChild(hScrollBar);//将此 hScrollBar 对象添加到显示列表。
-	*}
-*function onChange(value)
-*{
-	*console.log("滚动条的位置： value="+value);
-	*}
-*@example
-*import HScrollBar=laya.ui.HScrollBar;
-*import Handler=laya.utils.Handler;
-*class HScrollBar_Example {
-	*private hScrollBar:HScrollBar;
-	*constructor(){
-		*Laya.init(640,800);//设置游戏画布宽高。
-		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-		*Laya.loader.load(["resource/ui/hscroll.png","resource/ui/hscroll$bar.png","resource/ui/hscroll$down.png","resource/ui/hscroll$up.png"],Handler.create(this,this.onLoadComplete));//加载资源。
-		*}
-	*private onLoadComplete():void {
-		*this.hScrollBar=new HScrollBar();//创建一个 HScrollBar 类的实例对象 hScrollBar 。
-		*this.hScrollBar.skin="resource/ui/hscroll.png";//设置 hScrollBar 的皮肤。
-		*this.hScrollBar.x=100;//设置 hScrollBar 对象的属性 x 的值，用于控制 hScrollBar 对象的显示位置。
-		*this.hScrollBar.y=100;//设置 hScrollBar 对象的属性 y 的值，用于控制 hScrollBar 对象的显示位置。
-		*this.hScrollBar.changeHandler=new Handler(this,this.onChange);//设置 hScrollBar 的滚动变化处理器。
-		*Laya.stage.addChild(this.hScrollBar);//将此 hScrollBar 对象添加到显示列表。
-		*}
-	*private onChange(value:number):void {
-		*console.log("滚动条的位置： value="+value);
-		*}
-	*}
-*/
-//class laya.ui.HScrollBar extends laya.ui.ScrollBar
-var HScrollBar=(function(_super){
-	function HScrollBar(){
-		HScrollBar.__super.call(this);;
-	}
-
-	__class(HScrollBar,'laya.ui.HScrollBar',_super);
-	var __proto=HScrollBar.prototype;
-	/**@inheritDoc */
-	__proto.initialize=function(){
-		_super.prototype.initialize.call(this);
-		this.slider.isVertical=false;
-	}
-
-	return HScrollBar;
-})(ScrollBar)
 
 
 /**
@@ -57652,8 +57662,6 @@ var Common = require('../core/Common');
 (function()
 {
 	var LayaRender = {};
-	
-	var Matter = window.Matter; 
 
 	var Common = Matter.Common;
 	var Composite = Matter.Composite;
@@ -61827,7 +61835,7 @@ var GameMatterBody = true;
 /**物理模式 */
 var GameMatterModle = true;
 /**是否在FB */
-var GameInFackBook = true;
+// var GameInFackBook = true;
 /**请求地址 */
 var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 // var HttpUrl = "http://192.168.1.101:8080/cometoplay2/ranking/putScore";
@@ -61859,18 +61867,17 @@ Laya.stage.bgColor = "#000000";//设置画布的背景颜色。
 //设置版本控制类型为使用文件名映射的方式
 ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
 //加载版本信息文件
-// ResourceVersion.enable("version.json", Handler.create(this, beginLoad));   
+ResourceVersion.enable("version.json", Handler.create(this, initVersion));   
 
-if(GameInFackBook){
-    initializeAsync();
-    FBInstant.startGameAsync().then(function() {
-        console.log("-------------startGameAsync ");
+function initVersion(){
+    if(Laya.Browser.onFacebook){
+        initializeAsync();
+    }else{
         beginLoad();
-        // loadingCallback();
-    });
-}else{
-    beginLoad();
+    }
 }
+
+var preloadedInterstitial = null;
 
 function initializeAsync() {
     FBInstant.initializeAsync().then(function () {
@@ -61879,38 +61886,82 @@ function initializeAsync() {
         console.log("getSDKVersion", FBInstant.getSDKVersion());
         console.log("getSupportedAPIs", FBInstant.getSupportedAPIs());
         console.log("getEntryPointData", FBInstant.getEntryPointData());
-        // beginLoad();
+
+        beginLoad();
+
+
+        FBInstant.getInterstitialAdAsync(
+            '757410831128353_758273957708707'// Your Ad Placement Id
+        ).then(function(interstitial){
+        // Load the Ad asynchronously
+            preloadedInterstitial = interstitial;
+            return preloadedInterstitial.loadAsync();
+        }).then(function() {
+            console.log('Interstitial preloaded');
+        }).catch(function(err){
+            console.error('Interstitial failed to preload: ' + err.message);
+        });
     })
-    Laya.timer.once(100, this,function(){
-       FBInstant.setLoadingProgress(100);
-    });
+    // Laya.timer.once(100, this,function(){
+    //    FBInstant.setLoadingProgress(100);
+    // });
 }
 
 
 function  beginLoad(){
+    var arr = [
+                //图集
+                ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/game.atlas",Laya.Loader.ATLAS],
+                // ["res/atlas/bomb.atlas",Laya.Loader.ATLAS],
+                //图片
+                ["game/bgGame.png",Laya.Loader.IMAGE],
+                //字体
+                // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
+                //声音
+                ["res/music/1.mp3",Laya.Loader.SOUND],
+                ["res/music/1.wav",Laya.Loader.SOUND],
+                ["res/music/2.wav",Laya.Loader.SOUND],
+                ["res/music/3.wav",Laya.Loader.SOUND],
+                ["res/music/4.wav",Laya.Loader.SOUND],
+                ["res/music/6.wav",Laya.Loader.SOUND],
+                ["res/music/7.wav",Laya.Loader.SOUND],
+                ["res/music/8.wav",Laya.Loader.SOUND],
+                ["res/music/9.wav",Laya.Loader.SOUND],
+                ["res/music/12.ogg",Laya.Loader.SOUND],
+
+                ];
 
     var asset = [];
-        //loading界面
+    for(var i=0; i<arr.length; i++){
         asset.push({
-            url : "res/atlas/game.atlas",
-            type:Laya.Loader.ATLAS
+            url : [
+                arr[i][0]
+            ],
+            type:arr[i][1]
         }); 
-        asset.push({
-            url : "res/atlas/bubbles.atlas",
-            type:Laya.Loader.ATLAS
-        }); 
-        asset.push({
-            url : "game/bgGame.png",
-            type:Laya.Loader.IMAGE
-        }); 
+    }
+    // var asset = [];
+    //     //loading界面
+    //     asset.push({
+    //         url : "res/atlas/game.atlas",
+    //         type:Laya.Loader.ATLAS
+    //     }); 
+    //     asset.push({
+    //         url : "res/atlas/bubbles.atlas",
+    //         type:Laya.Loader.ATLAS
+    //     }); 
+    //     asset.push({
+    //         url : "game/bgGame.png",
+    //         type:Laya.Loader.IMAGE
+    //     }); 
 
-    // if(GameInFackBook){
-    //     Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), Handler.create(this, onLoading, null, false));
-    // }else
-    // {
-    //     Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);    
-    // }
-    Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);
+    if(Laya.Browser.onFacebook){
+        Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), Handler.create(this, onLoading, null, false));
+    }else
+    {
+        Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);    
+    }
     
 }
 
@@ -61929,12 +61980,6 @@ function onLoading (progress){
 
 function loadingCallback(){
     console.log("----------loadingCallback ");
-     //音乐开关
-    // var soundSwitch = LocalStorage.getItem("soundSwitch");
-    // if(soundSwitch === null)
-    //     LocalStorage.setItem("soundSwitch",1);
-    
-    // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
     Laya.Animation.createFrames(["bubbles/bomb_01.png","bubbles/bomb_02.png","bubbles/bomb_03.png","bubbles/bomb_04.png"],"bomb");
     
@@ -61942,7 +61987,41 @@ function loadingCallback(){
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
-    SceneManager.getInstance().currentScene  = new GameScene();
+    if(Laya.Browser.onFacebook){
+        FBInstant.startGameAsync().then(function() {
+            var contextId = FBInstant.context.getID();
+            console.log("-------------startGameAsync contextId="+contextId);
+
+            FBInstant.getLeaderboardAsync('globlaScore').then(
+                function(leaderboard){
+                    leaderboard.setScoreAsync(123);
+                    leaderboard.getEntriesAsync().then(
+                        function(entries){
+                            for (var i = 0; i < entries.length; i++) {
+                            console.log(
+                                entries[i].getRank() + '. ' +
+                                entries[i].getPlayer().getName() + ': ' +
+                                entries[i].getScore()
+                            );
+                        }
+                    }).catch(error => console.error(error));
+
+                });
+            SceneManager.getInstance().currentScene  = new GameScene();
+
+            preloadedInterstitial.showAsync().then(function(){
+                // Perform post-ad success operation
+                console.log('Interstitial ad finished successfully');        
+            }).catch(function(e){
+                console.error(e.message);
+            });
+
+        });
+    }else{
+        SceneManager.getInstance().currentScene  = new GameScene();
+    }
+
+
 
     
 }

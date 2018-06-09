@@ -40,11 +40,11 @@ var GameConfig = {
 /**是否显示Log */
 var GameLogVisible = false;
 /**物理边框显示 */
-var GameMatterBody = true;
+var GameMatterBody = false;
 /**物理模式 */
 var GameMatterModle = true;
 /**是否在FB */
-var GameInFackBook = true;
+// var GameInFackBook = true;
 /**请求地址 */
 var HttpUrl = "http://test.yulelp.com:8081/cometoplay/ranking/putScore";
 // var HttpUrl = "http://192.168.1.101:8080/cometoplay2/ranking/putScore";

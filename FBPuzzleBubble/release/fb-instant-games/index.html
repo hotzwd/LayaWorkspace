@@ -17,8 +17,52 @@
 </head>
 <body>
 	<script src="https://www.facebook.com/assets.php/en_US/fbinstant.6.2.js"></script>
-	<script type="text/javascript" src="code.js"></script>
+	<!--<script type="text/javascript" src="code.js"></script>-->
 	
+	<!--以下引用了常用类库，如果不使用，可以删除-->
 	
+	<!--核心包，封装了显示对象渲染，事件，时间管理，时间轴动画，缓动，消息交互,socket，本地存储，鼠标触摸，声音，加载，颜色滤镜，位图字体等-->
+	<script type="text/javascript" src="libs/laya.core.js"></script>
+	<!--封装了webgl渲染管线，如果使用webgl渲染，可以在初始化时调用Laya.init(1000,800,laya.webgl.WebGL);-->
+    <script type="text/javascript" src="libs/laya.webgl.js"></script>
+	<!--是动画模块，包含了swf动画，骨骼动画等-->
+    <script type="text/javascript" src="libs/laya.ani.js"></script>
+	<!--包含更多webgl滤镜，比如外发光，阴影，模糊以及更多-->
+    <script type="text/javascript" src="libs/laya.filter.js"></script>
+	<!--封装了html动态排版功能-->
+    <script type="text/javascript" src="libs/laya.html.js"></script>
+	<!--粒子类库-->
+    <!-- <script type="text/javascript" src="libs/laya.particle.js"></script> -->
+	<!--提供tileMap解析支持-->
+    <!--<script type="text/javascript" src="libs/laya.tiledmap.js"></script>-->
+	<!--提供了制作UI的各种组件实现-->
+    <script type="text/javascript" src="libs/laya.ui.js"></script>
+	<!--IDE生成的UI文件-->
+	<script src="js/ui/layaUI.max.all.js"></script>
+	<!-- 物理引擎matter.js -->
+    <script type="text/javascript" src="libs/matter.js"></script>
+	<script type="text/javascript" src="libs/LayaRender.js"></script>
+
+	<!--自定义的js(bin/js文件夹下)文件自动添加到下面jsfile模块标签里面里，js的顺序可以手动修改，修改后保留修改的顺序，新增加的js会默认依次追加到标签里-->
+	<!--删除标签，ide不会自动添加js文件，请谨慎操作-->
+	<!--jsfile--startTag-->
+	<script src="js/Core/MatterSceneMonster.js"></script>
+	<script src="js/UILogic/GameSharedUILogic.js"></script>
+	<script src="js/UILogic/GameoverUILogic.js"></script>
+	<script src="js/Core/Bubble.js"></script>
+	<script src="js/Core/GameScene.js"></script>
+	<script src="js/Core/Utility.js"></script>
+	<script src="js/UILogic/GameUILogic.js"></script>
+	<script src="js/Tool/GameDebug.js"></script>
+	<script src="js/Tool/MessageController.js"></script>
+	<script src="js/Tool/Notification.js"></script>
+	<script src="js/Tool/SceneManager.js"></script>
+	<script src="js/Tool/SoundManager.js"></script>
+	<script src="js/Tool/UIManager.js"></script>
+	<script src="js/Tool/Utils.js"></script>
+	<script src="js/GameConfig.js"></script>
+	<script src="js/Game.js"></script>
+
+	<!--jsfile--endTag-->
 </body>
 </html>
