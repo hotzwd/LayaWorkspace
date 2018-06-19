@@ -108,6 +108,7 @@ var GameScene = (function (_super) {
     _proto.initHero = function(){
         this.curHero = new Hero();
         this.heroBox.addChild(this.curHero);
+        this.curHero.pos(this.curTower.x, this.curTower.y + 200);
 
     }
     /**初始化怪物 */
@@ -121,8 +122,10 @@ var GameScene = (function (_super) {
         var birthPos = new Point(-50,200);
         tempMonster.pos(birthPos.x,birthPos.y);
 
-        var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
-        var targetPos = GetPointOnCircle(centerGlobalPos,80,200);
+        // var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
+        var towerGlobalPos = this.towerBox.localToGlobal(new Point(this.curTower.x, this.curTower.y));
+        this.monsterBox.globalToLocal(towerGlobalPos);
+        var targetPos = GetPointOnCircle(towerGlobalPos,80,200);
 
         tempMonster.setTargetPos(targetPos);
         // Laya.Tween.to(tempMonster,
@@ -221,6 +224,7 @@ var GameScene = (function (_super) {
 
         }
     }
+    
 
     return GameScene;
 })();

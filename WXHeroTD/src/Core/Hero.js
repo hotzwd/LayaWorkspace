@@ -19,11 +19,13 @@ var Hero = (function(_super){
     _proto.anim = null;
     _proto.targetPos = null;                                            //目标坐标
     _proto.targetVector = null;                                         //目标向量
+    _proto.targetTower = null;                                          //目标塔
     _proto.isMoveFinsih = false;                                        //是否在移动
     _proto.HeroRadios = 10;                                             //英雄的半径
     _proto.attackValue = 20;                                            //攻击力
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
+    _proto.isResetMove = false;                                         //是否重置移动
 
     _proto.onInit = function(){
         this.width = HeroWidth;
@@ -53,6 +55,7 @@ var Hero = (function(_super){
         var tempVector = PointSub(_pos,curPos);
         tempVector.normalize();
         this.targetVector = tempVector;
+        this.isResetMove = true;
     }
 
     _proto.onUpdate = function(){
@@ -65,14 +68,29 @@ var Hero = (function(_super){
     _proto.heroMove = function(){
         if(this.isMoveFinsih || this.targetPos == null)
             return;
+        if(this.targetTower == null){
+            this.targetTower = SceneManager.getInstance().currentScene.curTower;
+        }
         this.isMoveFinsih = false;
         // Gamelog("-------hero x="+this.x+",y="+this.y);
         // var tower =  SceneManager.getInstance().currentScene.curTower;
-        var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios,this.targetPos,0);
-        if(collisionTower){
+        var collisionTarget = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios,this.targetPos,0);
+        var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios,this.targetTower,this.targetTower.TowerRadios);
+        if(collisionTarget){
             isMoveFinsih = true;
         }else{
-            this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+            
+            if(!collisionTower ){
+                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+            }else if(this.isResetMove){
+                var t_pos = this.parent.localToGlobal(new Point(this.targetPos.x,this.targetPos.y),true);
+                var isIn = this.targetTower.isInCircle(t_pos);
+                if(!isIn){
+                    this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+                    this.isResetMove = false;
+                }
+            }
+
         }
     }
     _proto.getPointDistance = function(bu1,bu2){

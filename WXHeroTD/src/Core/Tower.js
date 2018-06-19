@@ -66,6 +66,18 @@ var Tower = (function(_super){
         this.hpProgress.value = 0;
         Gamelog("----------防御塔挂掉了-----");
     }
+    /**是否在圆内 */
+    _proto.isInCircle = function(p){
+        var t_pos = this.parent.globalToLocal(new Point(p.x,p.y),true);
+
+        var num1 = Number(Math.pow(t_pos.x - this.x, 2) + Math.pow(t_pos.y - this.y, 2));
+        var num2 = Math.pow(this.TowerRadios,2);
+        if(num1 <num2){
+            return true
+        }else{
+            return false;
+        }
+    }
 
     return Tower;
 })(Laya.Sprite);
