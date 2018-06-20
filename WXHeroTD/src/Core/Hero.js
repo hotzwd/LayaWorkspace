@@ -50,12 +50,17 @@ var Hero = (function(_super){
 
     /**设置目标点 */
     _proto.setTargetPos = function(_pos){
+        if(this.targetTower == null){
+            this.targetTower = SceneManager.getInstance().currentScene.curTower;
+        }
+
         this.targetPos = _pos;
         var curPos = new Point(this.x, this.y);
         var tempVector = PointSub(_pos,curPos);
         tempVector.normalize();
         this.targetVector = tempVector;
         this.isResetMove = true;
+        Gamelog("---------线段是否相交="+this.lineIsCollisionTower());
     }
 
     _proto.onUpdate = function(){
@@ -68,9 +73,7 @@ var Hero = (function(_super){
     _proto.heroMove = function(){
         if(this.isMoveFinsih || this.targetPos == null)
             return;
-        if(this.targetTower == null){
-            this.targetTower = SceneManager.getInstance().currentScene.curTower;
-        }
+        
         this.isMoveFinsih = false;
         // Gamelog("-------hero x="+this.x+",y="+this.y);
         // var tower =  SceneManager.getInstance().currentScene.curTower;
@@ -93,10 +96,57 @@ var Hero = (function(_super){
 
         }
     }
+    _proto.lineIsCollisionTower = function (targetPoint,middlePoint){
+        //参考线段与圆相交检测
+        //https://blog.csdn.net/rabbit729/article/details/4285119
+
+        //当前位置到圆心向量
+        var t_pos = this.targetTower.parent.localToGlobal(new Point(this.targetTower.x,this.targetTower.y),true);
+        t_pos = this.parent.globalToLocal(t_pos);
+        var curPos = new Point(this.x, this.y);
+        //起点到圆心的向量
+        var centerDis = PointSub(t_pos,curPos);
+        var centerDis2 = Math.pow(centerDis.x, 2) + Math.pow(centerDis.y, 2);
+        //起点到圆心的向量 归一化
+        var centerVector = PointSub(t_pos,curPos).normalize();
+
+        //点积 起点到圆心距离 与线段归一向量 投影
+        var dotVector = centerDis.x * this.targetVector.x + centerDis.y * this.targetVector.y;
+        var dotVector2 = Math.pow(dotVector,2);
+
+        var r2 = Math.pow(this.targetTower.TowerRadios, 2);
+
+        if ((r2 - (centerDis2 - dotVector2)) < 0)  
+        {  
+            return false;  
+        }else{
+            var intersectPoint = new Point(dotVector * this.targetVector.x + this.x ,dotVector * this.targetVector.x + this.y);
+            var intersectVector = PointSub(intersectPoint,t_pos);
+            intersectVector.normalize();
+            var circlePoint = new Point(this.targetTower.TowerRadios * intersectVector.x + t_pos.x,this.targetTower.TowerRadios * intersectVector.y + t_pos.y);
+            Gamelog("-------改变目标点x="+circlePoint.x +",y="+circlePoint.y);
+            return true;
+        }
+
+    }
+    /**是否在圆内 */
+    _proto.pointIsInCircle = function(p){
+        var t_pos = this.targetTower.parent.globalToLocal(new Point(p.x,p.y),true);
+
+        var num1 = Number(Math.pow(t_pos.x - this.targetTower.x, 2) + Math.pow(t_pos.y - this.targetTower.y, 2));
+        var num2 = Math.pow(this.targetTower.TowerRadios,2);
+        if(num1 <num2){
+            return true
+        }else{
+            return false;
+        }
+    }
     _proto.getPointDistance = function(bu1,bu2){
         var num1 = Number(Math.pow(bu1.x - bu2.x, 2) + Math.pow(bu1.y - bu2.y, 2));
         var num2 = Number(Math.sqrt(num1));
+        
         return num2;
+
     }
     /**获取可以攻击的怪物列表 */
     _proto.getAttackMonsterList = function(){
