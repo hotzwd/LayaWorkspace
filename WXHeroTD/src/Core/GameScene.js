@@ -207,8 +207,8 @@ var GameScene = (function (_super) {
     /**按下移动监听事件 */
     _proto._mouseMoveEvent = function(_event){
         // this.curHero.setTargetPos(_event.stageX,_event.stageY);
-        // var tarPos = this.heroBox.globalToLocal(new Point(_event.stageX,_event.stageY));
-        // this.curHero.setTargetPos(tarPos);
+        var tarPos = this.heroBox.globalToLocal(new Point(_event.stageX,_event.stageY));
+        this.curHero.setTargetPos(tarPos);
     }
 
 
