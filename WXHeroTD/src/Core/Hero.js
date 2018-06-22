@@ -13,7 +13,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 3;
+    var HeroSpeed = 5;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -23,7 +23,8 @@ var Hero = (function(_super){
     _proto.targetVector2 = null;                                        //目标向量2
 
     _proto.targetTower = null;                                          //目标塔
-    _proto.isMoveFinsih = false;                                        //是否在移动
+    _proto.isMoveFinsih1 = false;                                        //是否在移动
+    _proto.isMoveFinsih2 = false;                                        //是否在移动
     _proto.HeroRadios = 10;                                             //英雄的半径
     _proto.attackValue = 20;                                            //攻击力
     _proto.isAttack = false;                                            //是否在攻击
@@ -56,6 +57,8 @@ var Hero = (function(_super){
         if(this.targetTower == null){
             this.targetTower = SceneManager.getInstance().currentScene.curTower;
         }
+        if(this.pointIsInCircle(_pos))
+            return;
         Gamelog("-------目标点x="+_pos.x +",y="+_pos.y);
         // this.targetPos = _pos;
         // var curPos = new Point(this.x, this.y);
@@ -63,6 +66,9 @@ var Hero = (function(_super){
         // tempVector.normalize();
         // this.targetVector = tempVector;
         // this.isResetMove = true;
+
+        this.isMoveFinsih1 = false;
+        this.isMoveFinsih2 = false;
 
         this.targetPos = null;
         this.targetVector = null;
@@ -82,30 +88,32 @@ var Hero = (function(_super){
 
     /**设置移动路径 */
     _proto.heroMove = function(){
-        if(this.isMoveFinsih || this.targetPos == null)
+        if((this.isMoveFinsih1 && this.isMoveFinsih2) || this.targetPos == null)
             return;
         
-        this.isMoveFinsih = false;
         // Gamelog("-------hero x="+this.x+",y="+this.y);
         // var tower =  SceneManager.getInstance().currentScene.curTower;
         
-        var collisionTarget = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios -5,this.targetPos,0);
-        var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios,this.targetTower,this.targetTower.TowerRadios);
-        if(collisionTarget){
-            isMoveFinsih = true;
+        if(!this.isMoveFinsih1){
+
+            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),5,this.targetPos,0);
+
+            if(collisionTarget1){
+                this.isMoveFinsih1 = true;
+            }else{
+                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed); 
+            }
         }else{
-            this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed); 
-            
-            // if(!collisionTower ){
-                // this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
-            // }else if(this.isResetMove){
-            //     var t_pos = this.parent.localToGlobal(new Point(this.targetPos.x,this.targetPos.y),true);
-            //     var isIn = this.targetTower.isInCircle(t_pos);
-            //     if(!isIn){
-            //         this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
-            //         this.isResetMove = false;
-            //     }
-            // }
+            if(this.targetPos2 == null){
+                this.isMoveFinsih2 = true;
+            }else{
+                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),5,this.targetPos2,0);
+                if(collisionTarget2){
+                    this.isMoveFinsih2 = true;
+                }else{
+                    this.pos(this.x + this.targetVector2.x * HeroSpeed, this.y + this.targetVector2.y * HeroSpeed); 
+                }
+            }
 
         }
     }
@@ -116,6 +124,7 @@ var Hero = (function(_super){
         var curPos = new Point(this.x, this.y);
         this.targetPos = _pos;
         this.targetVector = PointSub(_pos,curPos);
+        var targetDis2 = Math.pow(this.targetVector.x, 2) + Math.pow(this.targetVector.y, 2);
         this.targetVector.normalize();
         //当前位置到圆心向量
         var t_pos = this.targetTower.parent.localToGlobal(new Point(this.targetTower.x,this.targetTower.y),true);
@@ -136,20 +145,24 @@ var Hero = (function(_super){
         var r2 = Math.pow(this.targetTower.TowerRadios - 0, 2);
 
         // if ((r2 - (centerDis2 - dotVector2)) < 0)  
-        if (r2 <= (centerDis2 - dotVector2) || jiajiao <= 0)
+        // if (r2 <= (centerDis2 - dotVector2) || jiajiao <= 0)
+        if (r2 > (centerDis2 - dotVector2) && jiajiao > 0 && targetDis2 > centerDis2)
         {  
-            return false;  
-        }else{
             var intersectPoint = new Point(dotVector * this.targetVector.x + this.x ,dotVector * this.targetVector.y + this.y);
             var intersectVector = PointSub(intersectPoint,t_pos);
             intersectVector.normalize();
-            var circlePoint = new Point((this.targetTower.TowerRadios+10) * intersectVector.x + t_pos.x,(this.targetTower.TowerRadios+10) * intersectVector.y + t_pos.y);
+            var circlePoint = new Point((this.targetTower.TowerRadios+20) * intersectVector.x + t_pos.x,(this.targetTower.TowerRadios+20) * intersectVector.y + t_pos.y);
             Gamelog("-------改变目标点x="+circlePoint.x +",y="+circlePoint.y);
             this.targetPos = circlePoint;
-            this.targetVector = PointSub(circlePoint,curPos)
+            this.targetVector = PointSub(circlePoint,curPos);
             this.targetVector.normalize();
 
+            this.targetPos2 = _pos;
+            this.targetVector2 = PointSub(_pos,circlePoint);
+            this.targetVector2.normalize();
             return true;
+        }else{
+            return false;  
         }
 
     }
