@@ -196,6 +196,8 @@ function CTextButton(a, d, b, c, f, e, g) {
     this._init(a, d, b, c, f, e, g);
     return this
 }
+
+//分数文字
 function CScoreText(a, d, b) {
     var c;
     this._init = function(a, b, d) {
@@ -426,340 +428,10 @@ function DuckShooterMain(a) {
     e = a;
     this.initContainer()
 }
-//下面的分数面板
-function CInterface() {
-    var a, d, b, c, f, e, g, k, l, h, p, u, n, r, t, x, B, y;
-    this._init = function() {
-        a = 0;
-        p = [];
-        y = createBitmap(s_oSpriteLibrary.getSprite("life_panel"));
-        y.x = 770;
-        y.y = 600;
-        s_oStage.addChild(y);
-        _oButShot = new CGfxButton(897, 688, s_oSpriteLibrary.getSprite("shot_panel"), !0);
-        _oButShot.addEventListener(ON_MOUSE_UP, this._onShot, this);
-        b = createBitmap(s_oSpriteLibrary.getSprite("hit_panel"));
-        b.x = 218;
-        b.y = 643;
-        s_oStage.addChild(b);
-        x = new createjs.Text(TEXT_HIT, "bold 30px walibi0615bold", "#ffffff");
-        x.x = 238;
-        x.y = 663;
-        s_oStage.addChild(x);
-        r = new createjs.Text(TEXT_BONUS, "bold 22px walibi0615bold", "#ffffff");
-        r.x = 360;
-        r.y = 658;
-        s_oStage.addChild(r);
-        u = new createjs.Text(TEXT_SCORE, "bold 30px walibi0615bold", "#000");
-        u.x = 32;
-        u.y = 12;
-        s_oStage.addChild(u);
-        n = new createjs.Text(TEXT_SCORE, "bold 30px walibi0615bold", "#ffffff");
-        n.x = 30;
-        n.y = 10;
-        s_oStage.addChild(n);
-        g = new createjs.Text(TEXT_NOAMMO, "bold 30px walibi0615bold", "#ffffff");
-        g.x = 800;
-        g.y = 670;
-        g.lineWidth = 60;
-        g.shadow = new createjs.Shadow("#000", 2, 2, 2);
-        g.visible = !1;
-        s_oStage.addChild(g);
-        k = new createjs.Text("X " + PLAYER_LIVES, "bold 22px walibi0615bold", "#ffffff");
-        k.x = 895;
-        k.y = 630;
-        k.textAlign = "right";
-        k.textBaseline = "alphabetic";
-        s_oStage.addChild(k);
-        f = new createjs.Text("0", "bold 30px walibi0615bold", "#000");
-        f.x = 172;
-        f.y = 12;
-        s_oStage.addChild(f);
-        c = new createjs.Text("0", "bold 30px walibi0615bold", "#ffffff");
-        c.x = 170;
-        c.y = 10;
-        s_oStage.addChild(c);
-        e = new createjs.Text("", "bold 30px walibi0615bold", "yellow");
-        e.textAlign = "center";
-        e.shadow = new createjs.Shadow("#000", 2, 2, 2);
-        t = new createjs.Text("0000", "bold 30px ComicSansMS-Bold", "#ffffff");
-        t.x = 660;
-        t.y = 682;
-        t.textAlign = "right";
-        t.textBaseline = "alphabetic";
-        s_oStage.addChild(t);
-        l = [];
-        for (var q = s_oSpriteLibrary.getSprite("hit_icon"), v = new createjs.SpriteSheet({
-            images: [q],
-            frames: {
-                width: 51,
-                height: 43
-            },
-            animations: {
-                nohit: [0],
-                hit: [1]
-            }
-        }), z = 230, q = 0; 9 > q; q++) {
-            var w = createSprite(v, "nohit", 0, 0, 51, 43);
-            w.x = z;
-            w.y = 710;
-            w.visible = !1;
-            s_oStage.addChild(w);
-            l[q] = w;
-            z += 58
-        }
-        h = [];
-        v = 800;
-        for (q = 0; q < NUM_BULLETS; q++)
-			w = createBitmap(s_oSpriteLibrary.getSprite("bullet")),
-        w.x = v,
-        w.y = 680,
-        s_oStage.addChild(w),
-        h[q] = w,
-        v += 30;
-        q = s_oSpriteLibrary.getSprite("but_exit");
-        //d = new CGfxButton(CANVAS_WIDTH - q.height / 2 - 10, q.height / 2 + 10, q, !0);
-        //d.addEventListener(ON_MOUSE_UP, this._onExit, this);
-        w = CANVAS_WIDTH - q.width / 2 - 80;
-        if (!1 === DISABLE_SOUND_MOBILE || !1 === s_bMobile) 
-			q = s_oSpriteLibrary.getSprite("audio_icon"),
-        B = new CToggle(w, 10 + q.height / 2, q, s_bAudioActive),
-        B.addEventListener(ON_MOUSE_UP, this._onAudioToggle, this)
-    };
-    this.unload = function() {
-        //d.unload();
-        d = null;
-        _oButShot.unload();
-        _oButShot = null;
-        if (!1 === DISABLE_SOUND_MOBILE || !1 === s_bMobile) B.unload(),
-        B = null
-    };
-    this.refreshScore = function(a) {
-        f.text = a;
-        c.text = a
-    };
-    this.refreshTime = function(a) {
-        t.text = a
-    };
-    this.viewMultiScore = function(a) {
-        e.text = TEXT_MULTIPLY + " X" + a;
-        e.x = CANVAS_WIDTH / 2;
-        e.y = CANVAS_HEIGHT / 2;
-        s_oStage.addChild(e)
-    };
-    this.cleanScore = function() {
-        s_oStage.removeChild(e)
-    };
-    this.refreshLife = function(a) {
-        k.text = "X " + a
-    };
-    this.refreshBullets = function(a) {
-        h[a].visible = !1
-    };
-    this.reloadBullets = function(a) {
-        for (var b = 0; b < a; b++) h[b].visible = !0
-    };
-    this.noAmmo = function() {
-        g.visible = !0;
-        g.alpha = 1;
-        createjs.Tween.get(g, {
-            override: !0
-        }).to({
-            alpha: 0
-        },
-        1E3, createjs.Ease.quadIn)
-    };
-    this.noAmmoDelete = function() {
-        g.visible = !1;
-        createjs.Tween.removeTweens(g)
-    };
-    this.setHit = function() {
-        p.push(!0);
-        this._setVisibleDuck()
-    };
-    this.setNoHit = function() {
-        p.push(!1);
-        this._setVisibleDuck()
-    };
-    this._setVisibleDuck = function() {
-        if (8 < a) {
-            for (var b = 0; 8 > b; b++) ! 0 === p[a - 8 + b] ? l[b].gotoAndPlay("hit") : l[b].gotoAndPlay("nohit"); ! 0 === p[a] ? l[8].gotoAndPlay("hit") : l[8].gotoAndPlay("nohit")
-        } else ! 0 === p[a] ? (l[a].gotoAndPlay("hit"), l[a].visible = !0) : !1 === p[a] && (l[a].gotoAndPlay("nohit"), l[a].visible = !0);
-        a++
-    };
-    this._onKeyUpReleased = function() {
-        s_oGame.onKeyUpReleased()
-    };
-    this._onKeyDownReleased = function() {
-        s_oGame.onKeyDownReleased()
-    };
-    this._onKeyRightReleased = function() {
-        s_oGame.onKeyRightReleased()
-    };
-    this._onKeyLeftReleased = function() {
-        s_oGame.onKeyLeftReleased()
-    };
-    this._onLeftPressed = function() {
-        s_oGame.onLeft()
-    };
-    this._onRightPressed = function() {
-        s_oGame.onRight()
-    };
-    this._onDownPressed = function() {
-        s_oGame.onDown()
-    };
-    this._onUpPressed = function() {
-        s_oGame.onUp()
-    };
-    this._onShot = function() {
-        s_oGame.onShot()
-    };
-    this.onExitFromHelp = function() { (void 0).unload()
-    };
-    this._onAudioToggle = function() {
-        createjs.Sound.setMute(s_bAudioActive);
-        s_bAudioActive = !s_bAudioActive
-    };
-    this._onExit = function() {
-        s_oGame.onExit()
-    };
-    this._init();
-    return this
-}
-//开始引导界面
-function CHelpPanel() {
-    var a, d, b, c, f, e, g, k, l, h;
-    this._init = function() {
-        var p;
-        p = s_bMobile ? s_oSpriteLibrary.getSprite("help_panel_mobile") : s_oSpriteLibrary.getSprite("help_panel_desktop");
-        l = createBitmap(p);
-        s_oStage.addChild(l); ! 1 === s_bMobile ? (g = TEXT_HELP1, k = TEXT_HELP2) : (g = TEXT_HELP_MOB1, k = TEXT_HELP_MOB2);
-        d = new createjs.Text(g, "bold 22px walibi0615bold", "#000000");
-        d.textAlign = "left";
-        d.lineWidth = 360;
-        d.x = 230;
-        d.y = 212;
-        a = new createjs.Text(g, "bold 22px walibi0615bold", "#ffffff");
-        a.textAlign = "left";
-        a.lineWidth = 360;
-        a.x = 232;
-        a.y = 210;
-        c = new createjs.Text(k, "bold 22px walibi0615bold", "#000000");
-        c.textAlign = "left";
-        c.lineWidth = 300;
-        c.x = 230;
-        c.y = 342;
-        b = new createjs.Text(k, "bold 22px walibi0615bold", "#ffffff");
-        b.textAlign = "left";
-        b.lineWidth = 300;
-        b.x = 232;
-        b.y = 340;
-        e = new createjs.Text(TEXT_HELP3, "bold 22px walibi0615bold", "#000000");
-        e.textAlign = "left";
-        e.lineWidth = 440;
-        e.x = 230;
-        e.y = 462;
-        f = new createjs.Text(TEXT_HELP3, "bold 22px walibi0615bold", "#ffffff");
-        f.textAlign = "left";
-        f.lineWidth = 440;
-        f.x = 232;
-        f.y = 460;
-        h = new createjs.Container;
-        h.addChild(l, d, a, c, b, e, f);
-        s_oStage.addChild(h);
-        p = createBitmap(s_oSpriteLibrary.getSprite("bullet"));
-        p.x = 700;
-        p.y = 460;
-        h.addChild(p);
-        p = createBitmap(s_oSpriteLibrary.getSprite("bullet"));
-        p.x = 730;
-        p.y = 460;
-        h.addChild(p);
-        p = createBitmap(s_oSpriteLibrary.getSprite("bullet"));
-        p.x = 760;
-        p.y = 460;
-        h.addChild(p);
-        var u = this;
-        h.on("pressup",
-        function() {
-            u._onExitHelp()
-        })
-    };
-    this.unload = function() {
-        s_oStage.removeChild(h);
-        var a = this;
-        h.off("pressup",
-        function() {
-            a._onExitHelp()
-        })
-    };
-    this._onExitHelp = function() {
-        this.unload();
-        s_oGame._onExitHelp()
-    };
-    this._init()
-}
-function CGfxButton(a, d, b) {
-    var c, f, e;
-    this._init = function(a, b, d) {
-        c = [];
-        f = [];
-        e = createBitmap(d);
-        e.x = a;
-        e.y = b;
-        e.regX = d.width / 2;
-        e.regY = d.height / 2;
-        s_oStage.addChild(e);
-        this._initListener()
-    };
-    this.unload = function() {
-        e.off("mousedown", this.buttonDown);
-        e.off("pressup", this.buttonRelease);
-        s_oStage.removeChild(e)
-    };
-    this.setVisible = function(a) {
-        e.visible = a
-    };
-    this._initListener = function() {
-        e.on("mousedown", this.buttonDown);
-        e.on("pressup", this.buttonRelease)
-    };
-    this.addEventListener = function(a, b, d) {
-        c[a] = b;
-        f[a] = d
-    };
-    this.buttonRelease = function() {
-        e.scaleX = 1;
-        e.scaleY = 1;
-        c[ON_MOUSE_UP] && c[ON_MOUSE_UP].call(f[ON_MOUSE_UP])
-    };
-    this.buttonDown = function() {
-        e.scaleX = .9;
-        e.scaleY = .9;
-        c[ON_MOUSE_DOWN] && c[ON_MOUSE_DOWN].call(f[ON_MOUSE_DOWN])
-    };
-    this.setPosition = function(a, b) {
-        e.x = a;
-        e.y = b
-    };
-    this.setX = function(a) {
-        e.x = a
-    };
-    this.setY = function(a) {
-        e.y = a
-    };
-    this.getButtonImage = function() {
-        return e
-    };
-    this.getX = function() {
-        return e.x
-    };
-    this.getY = function() {
-        return e.y
-    };
-    this._init(a, d, b);
-    return this
-}
+
+
+
+
 //游戏类
 function CGame(a) {
     function d(a) {
@@ -901,8 +573,9 @@ function CGame(a) {
     this.onMouseEnd = function() {
         y = !1;
         m.resetAllDirection()
-		//m.playShot();
-		s_oGame.onShot();
+		if (B) {
+			s_oGame.onShot();
+		}
     };
     this.onTouchStart = function(a) {
         y || (n = parseInt((a.touches[0].pageX - s_oCanvasLeft) / s_iScaleFactor), r = parseInt((a.touches[0].pageY - s_oCanvasTop) / s_iScaleFactor), y = !0)
@@ -933,8 +606,10 @@ function CGame(a) {
         m.unload();
         A.unload();
         null !== M && M.unload();
-        for (var a = 0; a < q.length; a++) q[a].unload();
-        s_oStage.removeAllChildren()
+        for (var a = 0; a < q.length; a++)
+			q[a].unload();
+        s_oStage.removeAllChildren();
+		
     };
 	//初始化鸭子
     this._initDucks = function() {
@@ -984,6 +659,7 @@ function CGame(a) {
         h++;
         this._refreshScreen()
     };
+	//重新出现鸭子 鸭子飞出后调用
     this.checkDuck = function() {
         k--;
         0 === k && this.initDuckObj()
@@ -1012,37 +688,63 @@ function CGame(a) {
     this.onDown = function() {
         m.moveDown()
     };
+	//攻击开枪
     this.onShot = function() {
-        0 === f ? (A.noAmmo(), !1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("click")) : (f--, A.refreshBullets(f), m.playShot(), x = !0)
+		if(0 === f ){
+			A.noAmmo(),
+			!1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("click");
+		} else{
+			f--, 
+			//下面的面板刷新子弹
+			A.refreshBullets(f),
+			//瞄准器射击
+			m.playShot(),
+			x = !0;
+		}      
+		//0 === f ? (A.noAmmo(), !1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("click")) :
+			//(f--, A.refreshBullets(f), m.playShot(), x = !0)
     };
+	//重新装弹
     this._reloadRifle = function() {
         f = NUM_BULLETS;
         A.reloadBullets(f)
     };
+	//刷新时间
     this._showTime = function() {
         A.refreshTime(g)
     };
+	//检测是否撞到鸭子的范围
     this._checkIfDuckHit = function(a) {
-        if (m.bullsEye().x > a.target().x && m.bullsEye().x < a.target().x + a.target().w && m.bullsEye().y > a.target().y && m.bullsEye().y < a.target().y + a.target().h) return ! 0
+        if (m.bullsEye().x > a.target().x && m.bullsEye().x < a.target().x + a.target().w && m.bullsEye().y > a.target().y && m.bullsEye().y < a.target().y + a.target().h) 
+			return ! 0
     };
+	//刷新检查是否与鸭子相撞
     this.checkCollision = function(a) {
         if (this._checkIfDuckHit(a) && x && a.isVisible() && !a.isHit()) {
+			//鸭子被射击，播放受伤动画
             a.onHit();
+			//计算分数 初始分数+ 剩余时间
             var b = SCORE_HIT + g;
             p++;
+			//连击
             1 < p && (b *= p, A.viewMultiScore(p));
             p = 0;
             c += b;
             new CScoreText(b, a.getPos().x, a.getPos().y);
-            A.refreshScore(c); ! 1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("duck_hit")
+			//更新总分
+            A.refreshScore(c);
+			! 1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("duck_hit")
         }
     };
+	//设置击中状态图
     this.setHitPane = function() {
         A.setHit()
     };
+	//鸭子飞出 设置没击中状态图
     this.setNoHitPane = function() {
         A.setNoHit()
     };
+	//计算生命
     this.subtractLife = function() {
         l--;
         0 === l && (this.gameOver(), B = !1);
@@ -1055,6 +757,8 @@ function CGame(a) {
         A.cleanScore();
         A.noAmmoDelete()
     };
+	
+	//游戏重新开始
     this.onExit = function() {
         this.unload();
         s_oMain.gotoMenu();
@@ -1063,7 +767,9 @@ function CGame(a) {
     this._onExitHelp = function() {
         B = !0
     };
-    this.gameOver = function() { ! 1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("game_over");
+	//游戏结束
+    this.gameOver = function() {
+		! 1 !== DISABLE_SOUND_MOBILE && !1 !== s_bMobile || createjs.Sound.play("game_over");
         M = CEndPanel(s_oSpriteLibrary.getSprite("msg_box"));
         M.show(c)
     };
@@ -1104,7 +810,9 @@ function CGame(a) {
 				q[a].update(),
 				this.checkCollision(q[a]);
             x = !1;
+			//分数的刷新位置
             m.update();
+			//时间减少
             g -= s_iTimeElaps;
             0 > g && (g = 0);
             this._showTime()
@@ -1123,6 +831,8 @@ function CGame(a) {
     this._init()
 }
 //var s_oGame;              //当前游戏
+
+//游戏结束面板
 function CEndPanel(a) {
     var d, b, c, f, e, g;
     this._init = function(a) {

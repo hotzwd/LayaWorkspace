@@ -147,6 +147,7 @@ function CDuck(a) {
     this.isVisible = function() {
         return n.visible
     };
+	//被射击，播放受伤动画
     this.onHit = function() {
         n.alpha = 1;
         n.gotoAndPlay("hit");
@@ -165,8 +166,10 @@ function CDuck(a) {
     this.isHit = function() {
         return l
     };
+	//更新飞行状态
     this._updateFly = function() {
         b += c;
+		//飞出边界 设置没击中
         b > f && (b = 0, k = n.visible = !1, s_oGame.setNoHitPane(), s_oGame.checkDuck(), s_oGame.subtractLife());
         var a;
         switch (e) {
@@ -181,6 +184,7 @@ function CDuck(a) {
         n.y = a.y;
         this._updateRect()
     };
+	//更新掉落状态
     this._updateFall = function() {
         createjs.Tween.get(n).to({
             y: CANVAS_HEIGHT

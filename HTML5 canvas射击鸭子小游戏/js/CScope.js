@@ -1,5 +1,5 @@
 /*
-*得分类
+*得分瞄准器类
 */
 function CScope() {
     var a, d, b, c, f = !1,
@@ -11,6 +11,7 @@ function CScope() {
         a = 88;
         d = 87.5;
         h = l = 0;
+		//瞄准镜
         var e = s_oSpriteLibrary.getSprite("scope");
         b = createBitmap(e);
         b.x = CANVAS_WIDTH / 2 - a;
@@ -45,6 +46,7 @@ function CScope() {
     this.onAnimationEnd = function() {
         c.visible = !1
     };
+	//播放开枪
     this.playShot = function() {
         c.x = b.x + a;
         c.y = b.y + d;

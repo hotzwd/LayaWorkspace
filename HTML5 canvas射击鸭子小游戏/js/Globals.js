@@ -28,4 +28,4 @@ TEXT_HIT = "提示";
 TEXT_BONUS = "奖励分数";
 TEXT_SCORE = "分数";
 TEXT_NOAMMO = "没有子弹";
-TEXT_MULTIPLY = "MULTIPY";
+TEXT_MULTIPLY = "连击";
