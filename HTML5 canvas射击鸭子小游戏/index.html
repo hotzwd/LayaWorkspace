@@ -10,9 +10,18 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 	<meta name="msapplication-tap-highlight" content="no"/>
 
-        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="js/createjs-2014.12.12.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="js/lib/createjs-2014.12.12.min.js"></script>
+		
+		<script type="text/javascript" src="js/GameConfig.js"></script>
+		<script type="text/javascript" src="js/Globals.js"></script>
+		<script type="text/javascript" src="js/Utils.js"></script>
 		<script type="text/javascript" src="js/CSpriteLibrary.js"></script>
+		<script type="text/javascript" src="js/CToggle.js"></script>
+		<script type="text/javascript" src="js/CMenu.js"></script>
+		<script type="text/javascript" src="js/CDuck.js"></script>
+		<script type="text/javascript" src="js/CScope.js"></script>
+		
         <script type="text/javascript" src="js/main.js"></script>
         
     </head>
@@ -21,25 +30,25 @@
           <script>
             $(document).ready(function(){
                      var oMain = new DuckShooterMain({
-                                            scope_accelleration:2,    //SCOPE ACCELLERATION
-											scope_friction:0.85,      //SCOPE FRICTION
-											max_scope_speed:40,       //MAXIMUM SCOPE SPEED
-											num_bullets:3,            //NUMBER OF PLAYER BULLETS FOR EACH SHOT LEVEL
-											hit_score: 100,           //POINTS GAINED WHEN DUCK IS HITTEN
-											bonus_time:4000,          //BONUS TIME IN MILLISECONDS
-											lives:4,                  //NUMBER OF PLAYER LIVES
-											duck_increase_speed: 0.5, //INCREASE THIS VALUE TO SPEED UP DUCKS AFTER EACH LEVEL SHOT
-											duck_occurence: [ 1,  //NUMBER OF DUCKS IN SHOT 1
-															  1,  //NUMBER OF DUCKS IN SHOT 2
-															  1,  //NUMBER OF DUCKS IN SHOT 3
-															  1,  //NUMBER OF DUCKS IN SHOT 4
-															  1,  //NUMBER OF DUCKS IN SHOT 5
-															  2,  //NUMBER OF DUCKS IN SHOT 6
-															  2,  //NUMBER OF DUCKS IN SHOT 7
-															  2,  //NUMBER OF DUCKS IN SHOT 8
-															  2,  //NUMBER OF DUCKS IN SHOT 9
-															  3   //NUMBER OF DUCKS IN SHOT 10
-																  //ADD NEW DUCK OCCURENCE HERE IF YOU NEED...
+                                            scope_accelleration:2,    //视野范围
+											scope_friction:0.85,      //视野摩擦力
+											max_scope_speed:40,       //视野最大移动速度
+											num_bullets:3,            //子弹数量
+											hit_score: 100,           //当鸭子被击中时获得的点数
+											bonus_time:4000,          //奖金时间 毫秒
+											lives:4,                  //生命值
+											duck_increase_speed: 0.5, //鸭子增加的速度
+											duck_occurence: [ 1,  // 1  每轮出现数量
+															  1,  // 2
+															  1,  // 3
+															  1,  // 4
+															  1,  // 5
+															  2,  // 6
+															  2,  // 7
+															  2,  //8
+															  2,  // 9
+															  3   // 10
+																  
 															]
                                            });
                       

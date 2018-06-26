@@ -1,5 +1,7 @@
 /**
 *CreateJs sprite 库
+*加载精灵
+*获取精灵
 */
 function CSpriteLibrary() {
     var spriteDic,

@@ -50,7 +50,7 @@ function DuckShooterMain(a) {
     this._initSounds = function() {
 		
 		createjs.Sound.initializeDefaultPlugins() ;
-		createjs.Sound.alternateExtensions = ["m4a"], 
+		createjs.Sound.alternateExtensions = ["ogg"], 
 		createjs.Sound.addEventListener("fileload", createjs.proxy(this.soundLoaded, this)),
 		createjs.Sound.registerSound("./sounds/ds_duck_hit.ogg", "duck_hit", 5),
 		createjs.Sound.registerSound("./sounds/ds_duck_intro.ogg", "duck_intro", 5), 
