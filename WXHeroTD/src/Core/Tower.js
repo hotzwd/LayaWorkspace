@@ -15,7 +15,7 @@ var Tower = (function(_super){
     var TowerHeight = 110;
     var TowerMaxHp = 500;                                                       //防御塔最高血量
     /**防御塔半径 */
-    _proto.TowerRadios = 80;                                                    //防御塔半径
+    _proto.TowerRadios = 150;                                                    //防御塔半径
     _proto.hp = 500;                                                            //防御塔血量
     _proto.hpProgress = null;                                                   //血量进度条
 
@@ -28,6 +28,14 @@ var Tower = (function(_super){
         this.pivotX = TowerWidth / 2;
         this.pivotY = TowerHeight / 2;
 
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.TowerRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
+
         this.anim = new Laya.Animation();
         this.anim.play(0, true, "tower_idle");
         this.anim.pivotX = 132;
@@ -36,12 +44,12 @@ var Tower = (function(_super){
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
-        this.hpProgress = new Laya.ProgressBar("game/progress.png");
+        this.hpProgress = new Laya.ProgressBar("game/progress_xuetiao.png");
         this.hpProgress.anchorX = 0.5;
         this.hpProgress.anchorY = 0.5;
         this.hpProgress.value = 1;
         this.addChild(this.hpProgress);
-        this.hpProgress.pos(TowerWidth / 2,0);
+        this.hpProgress.pos(TowerWidth / 2,-100);
     }
 
     _proto.onDestroy = function(){

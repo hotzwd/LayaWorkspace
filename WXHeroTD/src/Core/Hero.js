@@ -13,7 +13,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 5;
+    var HeroSpeed = 12;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -25,8 +25,9 @@ var Hero = (function(_super){
     _proto.targetTower = null;                                          //目标塔
     _proto.isMoveFinsih1 = false;                                        //是否在移动
     _proto.isMoveFinsih2 = false;                                        //是否在移动
-    _proto.HeroRadios = 10;                                             //英雄的半径
+    _proto.HeroRadios = 50;                                             //英雄的半径
     _proto.attackValue = 20;                                            //攻击力
+    _proto.attackRadios = 150;                                             //英雄攻击的半径
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
     _proto.isResetMove = false;                                         //是否重置移动
@@ -35,15 +36,34 @@ var Hero = (function(_super){
         this.width = HeroWidth;
         this.height = HeroHeight;
         this.pivotX = HeroWidth / 2;
-        this.pivotY = HeroHeight / 2;
+        this.pivotY = HeroHeight / 2;       
 
+         if(ShowRang){
+            var rangSpAttack = new Laya.Sprite();
+            rangSpAttack.graphics.drawCircle(0,0,this.attackRadios,"#84ff00","#84ff00",1);
+            rangSpAttack.x = this.pivotX;
+            rangSpAttack.y = this.pivotY;
+            this.addChild(rangSpAttack);
+        }
+        
         this.anim = new Laya.Animation();
-        this.anim.play(0, true, "monster001_walk_r");
-        this.anim.pivotX = 140;
-        this.anim.pivotY = 140;
+        // this.anim.play(0, true, "monster001_walk_r");
+        this.anim.play(0, true, "hero_attack");
+        
+        this.anim.pivotX = 179;
+        this.anim.pivotY = 147;
+        // this.anim.pivotX = this.anim.width / 2;
+        // this.anim.pivotY = this.anim.width / 2;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.HeroRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
         _proto.attackMonsterList = [];
         // Gamelog("------ani.width="+this.anim.width);
     }
@@ -96,10 +116,14 @@ var Hero = (function(_super){
         
         if(!this.isMoveFinsih1){
 
-            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),5,this.targetPos,0);
-
+            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos,HeroSpeed);
+            // Gamelog("-----this.x="+this.x+",this.y="+this.y);
+            // Gamelog("-----this.x="+this.targetPos.x+",this.y="+this.targetPos.y);
+            // var collisionTarget1 = this.x == this.targetPos.x && this.y == this.targetPos.y;
             if(collisionTarget1){
                 this.isMoveFinsih1 = true;
+                this.x = this.targetPos.x;
+                this.y = this.targetPos.y;
             }else{
                 this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed); 
             }
@@ -191,7 +215,7 @@ var Hero = (function(_super){
         var monsterList =  SceneManager.getInstance().currentScene.monsterList;
         for (var i = 0; i < monsterList.length; i++) {
             var t_monster = monsterList[i];
-            var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.HeroRadios,t_monster,t_monster.MonsterRadios);
+            var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.attackRadios,t_monster,t_monster.MonsterRadios);
             if(collisionTower){
                 this.attackMonsterList.push(t_monster);
             }

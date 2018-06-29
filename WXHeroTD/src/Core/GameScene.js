@@ -34,6 +34,9 @@ var GameScene = (function (_super) {
     _proto.monsterList = null;                                               //怪物对象列表
     _proto.monsterPool = null;                                               //怪物对象池
     _proto.towerGlobaPos = null;                                             //防御塔坐标
+
+    _proto.pointLinePanel1 = null;                                                //指引点面板
+    _proto.pointLinePanel2 = null;                                                //指引点面板
     
 
     _proto.Init = function () {
@@ -65,8 +68,9 @@ var GameScene = (function (_super) {
 
         this.initMonsterPool();
 
+        //初始化 防御塔
         this.curTower = new Tower();
-        this.curTower.pos(Laya.stage.width /2,Laya.stage.height / 2);
+        this.curTower.pos(Laya.stage.width /2,Laya.stage.height / 2 +45);
         this.towerBox.addChild(this.curTower);
 
 
@@ -119,13 +123,17 @@ var GameScene = (function (_super) {
         this.monsterList.push(tempMonster);
 
         //出生点
-        var birthPos = new Point(-50,200);
+        
+        // var birthPos = new Point(-50,200); // 180 -270度
+        // var birthPos = new Point(Laya.stage.width + 50,-50); // 270 - 360度
+        // var birthPos = new Point(Laya.stage.width + 50,1300); //0 - 90度
+        var birthPos = new Point(-50,1300); //90 - 180度
         tempMonster.pos(birthPos.x,birthPos.y);
 
         // var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
         var towerGlobalPos = this.towerBox.localToGlobal(new Point(this.curTower.x, this.curTower.y));
         this.monsterBox.globalToLocal(towerGlobalPos);
-        var targetPos = GetPointOnCircle(towerGlobalPos,80,200);
+        var targetPos = GetPointOnCircle(towerGlobalPos,this.curTower.TowerRadios,110);
 
         tempMonster.setTargetPos(targetPos);
         // Laya.Tween.to(tempMonster,
@@ -224,6 +232,8 @@ var GameScene = (function (_super) {
 
         }
     }
+
+   
     
 
     return GameScene;

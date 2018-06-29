@@ -27,8 +27,8 @@ var ResourceVersion = laya.net.ResourceVersion;
 var GameConfig = {
     
     //游戏宽 高
-    GameWidth : 640,
-    GameHeight : 1008,
+    GameWidth : 720,
+    GameHeight : 1280,
 
     //游戏速度
     speed : 8
@@ -36,5 +36,5 @@ var GameConfig = {
 };
 /**是否显示Log */
 var GameLogVisible = true;
-
-
+/**显示范围 */
+var ShowRang = true;

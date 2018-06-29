@@ -19,7 +19,7 @@ var Monster = (function(_super){
     _proto.targetPos = null;                                           //目标坐标
     _proto.targetVector = null;                                        //目标向量
 
-    _proto.MonsterRadios = 5;                                          //怪物的半径
+    _proto.MonsterRadios = 30;                                          //怪物的半径
     _proto.targetTower = null;                                         //目标塔
     _proto.targetHero = null;                                          //目标英雄
     _proto.hp = 100;                                                   //血量
@@ -36,11 +36,20 @@ var Monster = (function(_super){
         this.pivotY = MonsterHeight / 2;
 
         this.anim = new Laya.Animation();
-        this.anim.play(0, true, "monster001_walk_r");
-        this.anim.pivotX = 140;
-        this.anim.pivotY = 140;
+        // this.anim.play(0, true, "monster001_walk_r");
+        this.anim.play(0, true, "monster01_up_l");
+        this.anim.pivotX = 52;
+        this.anim.pivotY = 56;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
+
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.MonsterRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
 
         // var test = new Laya.ProgressBar("game/progress.png");
         this.hpProgress = new Laya.ProgressBar("game/progress.png");

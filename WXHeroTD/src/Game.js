@@ -42,7 +42,7 @@ function beginLoad() {
                 //图片
                 ["game/loading_ky_zgtz.jpg",Laya.Loader.IMAGE],
                 //字体
-                // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
+                ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
                 // ["res/music/1.mp3",Laya.Loader.SOUND],
                 // ["res/music/1.wav",Laya.Loader.SOUND],
@@ -78,7 +78,10 @@ function loadingCallback() {
     Laya.Animation.createFrames(["tower/tower_10_idle02_10000.png", "tower/tower_10_idle02_10001.png","tower/tower_10_idle02_10002.png","tower/tower_10_idle02_10003.png",
     "tower/tower_10_idle02_10004.png","tower/tower_10_idle02_10005.png",], "tower_idle");
 
-    // Laya.Animation.createFrames(["bomb/firing_000.png", "bomb/firing_002.png", "bomb/firing_004.png", "bomb/firing_006.png"], "firing");
+    Laya.Animation.createFrames(["hero/gailun-01.png", "hero/gailun-02.png", "hero/gailun-03.png", "hero/gailun-04.png", "hero/gailun-05.png", "hero/gailun-06.png", "hero/gailun-07.png"], "hero_attack");
+
+    
+    Laya.Animation.createFrames(["monster/xiaobing01-animation_0.png","monster/xiaobing01-animation_1.png"], "monster01_up_l");
 
     SceneManager.getInstance().currentScene = new GameScene();
     // Laya.stage.addChild(new GameUILogic());

@@ -7,6 +7,7 @@ var GameUI=(function(_super){
 			
 		    this.moveBox=null;
 		    this.centerBox=null;
+		    this.t_score=null;
 
 			GameUI.__super.call(this);
 		}
@@ -14,12 +15,13 @@ var GameUI=(function(_super){
 		CLASS$(GameUI,'ui.GameUI',_super);
 		var __proto__=GameUI.prototype;
 		__proto__.createChildren=function(){
-		    
+		    			View.regComponent("Text",laya.display.Text);
+
 			laya.ui.Component.prototype.createChildren.call(this);
 			this.createView(GameUI.uiView);
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":640,"height":1008,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":640,"height":1386,"centerY":0,"centerX":0},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":640,"lineWidth":1,"height":1386,"fillColor":"#f4ff00"}}]},{"type":"Box","props":{"width":640,"var":"moveBox","mouseEnabled":true,"height":1008,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"width":640,"skin":"game/loading_ky_zgtz.jpg","height":1008}},{"type":"Sprite","props":{"y":636,"x":122,"width":110,"height":110},"child":[{"type":"Image","props":{"y":0,"x":0,"width":110,"skin":"hero/tower_pichengnvjing_attack_0000.png","height":95}}]},{"type":"Box","props":{"y":504,"x":320,"width":264,"visible":true,"var":"centerBox","height":264,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Sprite","props":{"y":132,"x":132,"width":0,"height":0},"child":[{"type":"Circle","props":{"y":0,"x":0,"radius":80,"lineWidth":1,"fillColor":"#ff0000"}}]},{"type":"Animation","props":{"y":0,"x":0,"visible":false,"source":"tower/tower_10_idle02_10000.png,tower/tower_10_idle02_10001.png,tower/tower_10_idle02_10002.png,tower/tower_10_idle02_10003.png,tower/tower_10_idle02_10004.png,tower/tower_10_idle02_10005.png","interval":150,"autoPlay":true}}]}]},{"type":"Box","props":{"top":0,"left":0},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":238,"lineWidth":1,"height":80,"fillColor":"#ff0000"}}]},{"type":"Sprite","props":{"y":295,"x":344,"width":110,"pivotY":55,"pivotX":55,"height":110},"child":[{"type":"Animation","props":{"y":55,"x":55,"width":281,"source":"monster/npc_102_walk_r_0001.png,monster/npc_102_walk_r_0002.png,monster/npc_102_walk_r_0003.png,monster/npc_102_walk_r_0004.png","pivotY":140,"pivotX":140,"height":281,"autoPlay":true}}]}]};
+		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":720,"lineWidth":1,"height":1556,"fillColor":"#f4ff00"}}]},{"type":"Box","props":{"width":720,"var":"moveBox","mouseEnabled":true,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"width":720,"skin":"game/beijing.jpg","height":1280}},{"type":"Box","props":{"y":685,"x":360,"width":264,"visible":false,"var":"centerBox","height":264,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Sprite","props":{"y":132,"x":132,"width":0,"height":0},"child":[{"type":"Circle","props":{"y":0,"x":0,"radius":150,"lineWidth":1,"fillColor":"#ff0000"}}]},{"type":"Animation","props":{"y":0,"x":0,"visible":false,"source":"tower/tower_10_idle02_10000.png,tower/tower_10_idle02_10001.png,tower/tower_10_idle02_10002.png,tower/tower_10_idle02_10003.png,tower/tower_10_idle02_10004.png,tower/tower_10_idle02_10005.png","interval":150,"autoPlay":true}}]},{"type":"Text","props":{"y":79,"x":78,"width":552,"var":"t_score","text":"123456","height":101,"font":"shuzi","align":"center"}}]},{"type":"Box","props":{"y":303,"x":182,"width":154,"height":130}},{"type":"Sprite","props":{"y":380,"x":352,"width":112,"visible":false,"pivotY":55,"pivotX":55,"height":110},"child":[{"type":"Animation","props":{"y":56,"x":50,"width":385,"source":"hero/gailun-07.png","pivotY":155,"pivotX":180,"height":294,"autoPlay":true}}]},{"type":"Image","props":{"y":772,"x":47,"skin":"monster/xiaobing01-animation_0.png"}}]};
 		return GameUI;
 	})(View);
