@@ -125,17 +125,18 @@ var GameScene = (function (_super) {
         //出生点
         
         // var birthPos = new Point(-50,200); // 180 -270度
-        // var birthPos = new Point(Laya.stage.width + 50,-50); // 270 - 360度
+        var birthPos = new Point(Laya.stage.width + 50,-50); // 270 - 360度
         // var birthPos = new Point(Laya.stage.width + 50,1300); //0 - 90度
-        var birthPos = new Point(-50,1300); //90 - 180度
+        // var birthPos = new Point(-50,1300); //90 - 180度
+        var t_anlge = 350;
         tempMonster.pos(birthPos.x,birthPos.y);
 
         // var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
         var towerGlobalPos = this.towerBox.localToGlobal(new Point(this.curTower.x, this.curTower.y));
         this.monsterBox.globalToLocal(towerGlobalPos);
-        var targetPos = GetPointOnCircle(towerGlobalPos,this.curTower.TowerRadios,110);
+        var targetPos = GetPointOnCircle(towerGlobalPos,this.curTower.TowerRadios,t_anlge);
 
-        tempMonster.setTargetPos(targetPos);
+        tempMonster.setTargetPos(targetPos,t_anlge);
         // Laya.Tween.to(tempMonster,
         //         {
         //             x:targetPos.x,

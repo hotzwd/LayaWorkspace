@@ -18,6 +18,7 @@ var Monster = (function(_super){
     _proto.anim = null;
     _proto.targetPos = null;                                           //目标坐标
     _proto.targetVector = null;                                        //目标向量
+    _proto.targetAngle = 0;                                            //目标角度
 
     _proto.MonsterRadios = 30;                                          //怪物的半径
     _proto.targetTower = null;                                         //目标塔
@@ -28,6 +29,7 @@ var Monster = (function(_super){
     _proto.attackValue = 50;                                           //攻击力
     _proto.isAttack = false;                                           //是否在攻击
     _proto.isHurt = false;                                             //是否被攻击
+    _proto.hurtSprite = null;                                          //被攻击的特效
 
     _proto.onInit = function(){
         this.width = MonsterWidth;
@@ -58,6 +60,9 @@ var Monster = (function(_super){
         this.hpProgress.value = 1;
         this.addChild(this.hpProgress);
         this.hpProgress.pos(MonsterWidth / 2,0);
+
+        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
+        this.addChild(this.hurtSprite);
     }
 
     _proto.onDestroy = function(){
@@ -67,12 +72,33 @@ var Monster = (function(_super){
         _proto.isHurt = false;
     }
     /**设置目标点 */
-    _proto.setTargetPos = function(_pos){
+    _proto.setTargetPos = function(_pos,_angle){
         this.targetPos = _pos;
         var curPos = new Point(this.x, this.y);
         var tempVector = PointSub(_pos,curPos);
         tempVector.normalize();
         this.targetVector = tempVector;
+
+        this.setHurtRotation(_angle);
+    }
+
+    //设置目标角度
+    _proto.setHurtRotation = function(_ang){
+        this.targetAngle = _ang;
+
+        var dis_x = Math.abs(this.targetPos.x - this.x);
+        var dis_y = Math.abs(this.targetPos.y - this.y);
+        var jiajiao = 360*Math.atan(dis_y/dis_x)/(2*Math.PI);
+
+        if(this.targetAngle >= 180 && this.targetAngle< 270){
+            this.hurtSprite.pos(0,0);
+            this.hurtSprite.anchorY = 1;
+            this.hurtSprite.rotation = 180 +45 + jiajiao;
+        }else if(this.targetAngle >= 270 && this.targetAngle<360){
+            this.hurtSprite.anchorY = 1;
+            this.hurtSprite.pos(MonsterWidth,-MonsterHeight );
+            this.hurtSprite.rotation = jiajiao -45;
+        }
     }
 
     _proto.onUpdate = function(){

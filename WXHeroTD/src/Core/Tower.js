@@ -36,12 +36,17 @@ var Tower = (function(_super){
             this.addChild(rangSp);
         }
 
-        this.anim = new Laya.Animation();
-        this.anim.play(0, true, "tower_idle");
-        this.anim.pivotX = 132;
-        this.anim.pivotY = 132;
-        this.anim.interval = 150
-        this.anim.pos(this.pivotX,this.pivotY);
+        // this.anim = new Laya.Animation();
+        // this.anim.play(0, true, "tower_idle");
+        // this.anim.pivotX = 132;
+        // this.anim.pivotY = 132;
+        // this.anim.interval = 150
+        // this.anim.pos(this.pivotX,this.pivotY);
+        // this.addChild(this.anim);
+        this.anim = new Laya.Image("game/tower.png");
+        this.anim.pivotX = 70;
+        this.anim.pivotY = 100;
+        this.anim.pos(this.pivotX,this.pivotY -30);
         this.addChild(this.anim);
 
         this.hpProgress = new Laya.ProgressBar("game/progress_xuetiao.png");

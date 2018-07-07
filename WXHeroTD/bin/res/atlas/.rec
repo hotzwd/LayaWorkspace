@@ -1,14 +1,14 @@
 D .
 D bitmapFont
 D game
-R C949118E beijing.jpg
-R 630DBBD5 loading_ky_zgtz.jpg
+R 3A981CDD beijing.jpg
 P 84201301 penjian-texiao.png
 P 448CF29D point.png
 P 9E4DD730 progress$bar.png
 P 3FD78E12 progress.png
 P D12662B6 progress_xuetiao$bar.png
 P A8BD7C79 progress_xuetiao.png
+P 793CC8F1 tower.png
 D hero
 P 3E8DEBB9 gailun-01.png
 P 582C0DD3 gailun-02.png
@@ -39,6 +39,7 @@ P 3F3C897D xiaobing05-animation_1.png
 P D5932350 xiaobing06-animation_0.png
 P 7C8F749F xiaobing06-animation_1.png
 D tower
+P 793CC8F1 tower.png
 P B0CE6355 tower_10_idle02_10000.png
 P 0653BDCD tower_10_idle02_10001.png
 P 759B41CA tower_10_idle02_10002.png
