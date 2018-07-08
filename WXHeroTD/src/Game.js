@@ -73,15 +73,21 @@ function loadingCallback() {
 
     // Laya.Animation.createFrames(["bubbles/bomb_00.png","bubbles/bomb_01.png", "bubbles/bomb_02.png", "bubbles/bomb_03.png", "bubbles/bomb_04.png", "bubbles/bomb_05.png", "bubbles/bomb_06.png"], "bomb");
 
-    Laya.Animation.createFrames(["monster/npc_102_walk_r_0001.png","monster/npc_102_walk_r_0001.png","monster/npc_102_walk_r_0003.png","monster/npc_102_walk_r_0004.png"], "monster001_walk_r");
+    // Laya.Animation.createFrames(["monster/npc_102_walk_r_0001.png","monster/npc_102_walk_r_0001.png","monster/npc_102_walk_r_0003.png","monster/npc_102_walk_r_0004.png"], "monster001_walk_r");
 
-    Laya.Animation.createFrames(["tower/tower_10_idle02_10000.png", "tower/tower_10_idle02_10001.png","tower/tower_10_idle02_10002.png","tower/tower_10_idle02_10003.png",
-    "tower/tower_10_idle02_10004.png","tower/tower_10_idle02_10005.png",], "tower_idle");
+    Laya.Animation.createFrames(["tower/tower_dead_01.png", "tower/tower_dead_02.png","tower/tower_dead_03.png","tower/tower_dead_04.png",
+    "tower/tower_dead_05.png","tower/tower_dead_06.png"], "tower_dead");
 
     Laya.Animation.createFrames(["hero/gailun-01.png", "hero/gailun-02.png", "hero/gailun-03.png", "hero/gailun-04.png", "hero/gailun-05.png", "hero/gailun-06.png", "hero/gailun-07.png"], "hero_attack");
+    Laya.Animation.createFrames(["hero/gailun-animation_0.png","hero/gailun-animation_4.png","hero/gailun-animation_8.png","hero/gailun-animation_12.png"], "hero_dead");
 
-    
-    Laya.Animation.createFrames(["monster/xiaobing01-animation_0.png","monster/xiaobing01-animation_1.png"], "monster01_up_l");
+    Laya.Animation.createFrames(["monster/xiaobing02-animation_0.png","monster/xiaobing02-animation_1.png"], "monster01_up");
+    Laya.Animation.createFrames(["monster/xiaobing06-animation_0.png","monster/xiaobing06-animation_1.png"], "monster02_up");
+    Laya.Animation.createFrames(["monster/xiaobing01-animation_0.png","monster/xiaobing01-animation_1.png"], "monster03_up");
+
+    Laya.Animation.createFrames(["monster/xiaobing03-animation_0.png","monster/xiaobing03-animation_1.png"], "monster01_down");
+    Laya.Animation.createFrames(["monster/xiaobing05-animation_0.png","monster/xiaobing05-animation_1.png"], "monster02_down");
+    Laya.Animation.createFrames(["monster/xiaobing04-animation_0.png","monster/xiaobing04-animation_1.png"], "monster03_down");
 
     SceneManager.getInstance().currentScene = new GameScene();
     // Laya.stage.addChild(new GameUILogic());

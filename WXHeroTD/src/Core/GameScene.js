@@ -46,7 +46,7 @@ var GameScene = (function (_super) {
             this.gameUI = UIManager.getInstance().showUI("GameUI");
         }
 
-        this.monsterList = [];
+        this.monsterList = new Array();
         this.monsterPool = [];
 
         this.monsterBox = new Laya.Box();
@@ -65,18 +65,18 @@ var GameScene = (function (_super) {
         Laya.stage.addChild(this.towerBox);
         Laya.stage.addChild(this.heroBox);
 
-
-        this.initMonsterPool();
-
         //初始化 防御塔
         this.curTower = new Tower();
         this.curTower.pos(Laya.stage.width /2,Laya.stage.height / 2 +45);
         this.towerBox.addChild(this.curTower);
 
+        
+        // this.initMonsterPool();
+        //初始化生成器
+        MonsterGenerator.getInstance().initGenerator(this.monsterBox,this.curTower);
 
         //自动适配完后初始化
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
-
 
         this.initHero();
         this.initMonster();
@@ -87,6 +87,7 @@ var GameScene = (function (_super) {
         Laya.timer.frameLoop(1, this, this.onUpdate);
         
         MessageController.getInstance().AddNotification("Monster_Dead",this,this._monsterDeadEvent);
+        MessageController.getInstance().AddNotification("Tower_Dead",this,this._towerDeadEvent);
        
     }
 
@@ -118,30 +119,29 @@ var GameScene = (function (_super) {
     /**初始化怪物 */
     _proto.initMonster = function(){
 
-        var tempMonster = this.getMonsterFromPool();
-        tempMonster.visible = true;
-        this.monsterList.push(tempMonster);
+        var t_list = MonsterGenerator.getInstance().createMonster(4);
+        this.monsterList = this.monsterList.concat(t_list);
 
-        //出生点
+        // var tempMonster = this.getMonsterFromPool();
+        // tempMonster.visible = true;
+        // this.monsterList.push(tempMonster);
+
+        // //出生点
         
-        // var birthPos = new Point(-50,200); // 180 -270度
-        var birthPos = new Point(Laya.stage.width + 50,-50); // 270 - 360度
-        // var birthPos = new Point(Laya.stage.width + 50,1300); //0 - 90度
+        // // var birthPos = new Point(-50,200); // 180 -270度
+        // // var birthPos = new Point(Laya.stage.width + 50,-50); // 270 - 360度
+        // // var birthPos = new Point(Laya.stage.width + 50,1300); //0 - 90度
         // var birthPos = new Point(-50,1300); //90 - 180度
-        var t_anlge = 350;
-        tempMonster.pos(birthPos.x,birthPos.y);
+        // var t_anlge = 100;
+        // tempMonster.pos(birthPos.x,birthPos.y);
 
-        // var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
-        var towerGlobalPos = this.towerBox.localToGlobal(new Point(this.curTower.x, this.curTower.y));
-        this.monsterBox.globalToLocal(towerGlobalPos);
-        var targetPos = GetPointOnCircle(towerGlobalPos,this.curTower.TowerRadios,t_anlge);
+        // // var centerGlobalPos = this.gameUI.centerBox.localToGlobal(new Point(this.gameUI.centerBox.width / 2, this.gameUI.centerBox.height / 2));
+        // var towerGlobalPos = this.towerBox.localToGlobal(new Point(this.curTower.x, this.curTower.y));
+        // this.monsterBox.globalToLocal(towerGlobalPos);
+        // var targetPos = GetPointOnCircle(towerGlobalPos,this.curTower.TowerRadios,t_anlge);
 
-        tempMonster.setTargetPos(targetPos,t_anlge);
-        // Laya.Tween.to(tempMonster,
-        //         {
-        //             x:targetPos.x,
-        //             y: targetPos.y,
-        //         }, 5000);
+        // tempMonster.setTargetPos(targetPos,t_anlge);
+
     }
 
     /**开始游戏 */
@@ -152,38 +152,38 @@ var GameScene = (function (_super) {
         // Laya.timer.loop(1000, this, this.animateTimeBased);
 
     }   
-     /**初始化对象池 */
-     _proto.initMonsterPool = function(){
-        for (var i = 0; i < MonsterPoolNum; i++) {
-            var tempMonster = new Monster();
-            tempMonster.pos(-1000,0);
-            tempMonster.visible = false;
-            this.monsterBox.addChild(tempMonster);
-            this.monsterPool.push(tempMonster);     
-        }
-     }
+    //  /**初始化对象池 */
+    //  _proto.initMonsterPool = function(){
+    //     for (var i = 0; i < MonsterPoolNum; i++) {
+    //         var tempMonster = new Monster();
+    //         tempMonster.pos(-1000,0);
+    //         tempMonster.visible = false;
+    //         this.monsterBox.addChild(tempMonster);
+    //         this.monsterPool.push(tempMonster);     
+    //     }
+    //  }
 
-    /**从缓冲池中拿怪物 */
-    _proto.getMonsterFromPool = function(){
-        var tempMonster = null;
-        if(this.monsterPool.length == 0){
-            var tempMonster = new Monster();
-            tempMonster.pos(-1000,0);
-            tempMonster.visible = false;
-            this.monsterBox.addChild(tempMonster);
-            this.monsterPool.push(tempMonster);   
-        }
-        tempMonster = this.monsterPool[0];
-        this.monsterPool.splice(0, 1);
-        return tempMonster;
-    }
-    /**怪物还到对象池 */
-    _proto.recoveryMonsterToPool = function(_monster){
-        _monster.onDestroy();
-        _monster.visible = false;
-        _monster.pos(-1000,0);
-        this.monsterPool.push(_monster);
-    }
+    // /**从缓冲池中拿怪物 */
+    // _proto.getMonsterFromPool = function(){
+    //     var tempMonster = null;
+    //     if(this.monsterPool.length == 0){
+    //         var tempMonster = new Monster();
+    //         tempMonster.pos(-1000,0);
+    //         tempMonster.visible = false;
+    //         this.monsterBox.addChild(tempMonster);
+    //         this.monsterPool.push(tempMonster);   
+    //     }
+    //     tempMonster = this.monsterPool[0];
+    //     this.monsterPool.splice(0, 1);
+    //     return tempMonster;
+    // }
+    // /**怪物还到对象池 */
+    // _proto.recoveryMonsterToPool = function(_monster){
+    //     _monster.onDestroy();
+    //     _monster.visible = false;
+    //     _monster.pos(-1000,0);
+    //     this.monsterPool.push(_monster);
+    // }
 
     /**
      * update刷新
@@ -228,13 +228,16 @@ var GameScene = (function (_super) {
             if(t_monster == notif.Content){
                 // Gamelog("------删除怪物");
                 this.monsterList.splice(i, 1);
-                this.recoveryMonsterToPool(t_monster);
+                // MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
             }
 
         }
     }
 
-   
+    _proto._towerDeadEvent = function(notif){
+        Laya.timer.clear(this,this.onUpdate);
+    }
+
     
 
     return GameScene;

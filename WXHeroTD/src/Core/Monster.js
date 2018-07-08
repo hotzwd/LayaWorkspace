@@ -10,6 +10,52 @@ var Monster = (function(_super){
     Laya.class(Monster,"Monster",_super);
     _proto = Monster.prototype;
 
+    var MonsterData = [
+        {
+            type:1,
+            name:"小兵1上",
+            anim:"monster01_up",
+            hp:100,
+            attack:50
+        },
+        {
+            type:1,
+            name:"小兵2上",
+            anim:"monster02_up",
+            hp:200,
+            attack:80
+        },
+        {
+            type:1,
+            name:"小兵3上",
+            anim:"monster03_up",
+            hp:300,
+            attack:100
+        },
+        {
+            type:2,
+            name:"小兵1下",
+            anim:"monster01_down",
+            hp:100,
+            attack:50
+        },
+        {
+            type:2,
+            name:"小兵2下",
+            anim:"monster02_down",
+            hp:100,
+            attack:50
+        },
+        {
+            type:2,
+            name:"小兵3下",
+            anim:"monster03_down",
+            hp:100,
+            attack:50
+        },
+        
+    ];
+
     var MonsterWidth = 110;                                            //怪物宽高
     var MonsterHeight = 110;
     var MONSTER_SPEED = 2;                                              //移动速度
@@ -39,9 +85,10 @@ var Monster = (function(_super){
 
         this.anim = new Laya.Animation();
         // this.anim.play(0, true, "monster001_walk_r");
-        this.anim.play(0, true, "monster01_up_l");
+        this.anim.play(0, true, "monster01_up");
         this.anim.pivotX = 52;
         this.anim.pivotY = 56;
+        this.anim.interval = 200;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
@@ -63,6 +110,8 @@ var Monster = (function(_super){
 
         this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
         this.addChild(this.hurtSprite);
+
+
     }
 
     _proto.onDestroy = function(){
@@ -71,8 +120,27 @@ var Monster = (function(_super){
         _proto.isAttack = false;
         _proto.isHurt = false;
     }
+
+    //初始化怪物
+    _proto.initMonster = function(_posType,_type)
+    {
+        this.anim.scaleX = 1;
+        if(_posType == 2 || _posType == 4)
+            this.anim.scaleX = -1;
+        
+        var t_data = MonsterData[_type];
+        
+        this.anim.play(0, true, t_data.anim);
+        this.anim.visible = true;
+
+        this.hpProgress.visible = true;
+        this.hp = 100;
+        this.maxHp = 100;
+        this.attackValue = 50;
+    }
     /**设置目标点 */
     _proto.setTargetPos = function(_pos,_angle){
+
         this.targetPos = _pos;
         var curPos = new Point(this.x, this.y);
         var tempVector = PointSub(_pos,curPos);
@@ -90,14 +158,24 @@ var Monster = (function(_super){
         var dis_y = Math.abs(this.targetPos.y - this.y);
         var jiajiao = 360*Math.atan(dis_y/dis_x)/(2*Math.PI);
 
+        this.hurtSprite.visible = false;
+        this.hurtSprite.anchorY = 1;
         if(this.targetAngle >= 180 && this.targetAngle< 270){
             this.hurtSprite.pos(0,0);
-            this.hurtSprite.anchorY = 1;
+            // this.hurtSprite.anchorY = 1;
             this.hurtSprite.rotation = 180 +45 + jiajiao;
         }else if(this.targetAngle >= 270 && this.targetAngle<360){
-            this.hurtSprite.anchorY = 1;
-            this.hurtSprite.pos(MonsterWidth,-MonsterHeight );
-            this.hurtSprite.rotation = jiajiao -45;
+            // this.hurtSprite.anchorY = 1;
+            this.hurtSprite.pos(MonsterWidth,0 );
+            this.hurtSprite.rotation = 90 -jiajiao -45;
+        }else if(this.targetAngle > 0 && this.targetAngle<90){
+            // this.hurtSprite.anchorY = 1;
+            this.hurtSprite.pos(MonsterWidth,MonsterHeight );
+            this.hurtSprite.rotation = 90 +jiajiao -45;
+        }else if(this.targetAngle >= 90 && this.targetAngle<180){
+            // this.hurtSprite.anchorY = 1;
+            this.hurtSprite.pos(0,MonsterHeight );
+            this.hurtSprite.rotation = 180 + (90 -jiajiao) -45;
         }
     }
 
@@ -153,7 +231,18 @@ var Monster = (function(_super){
         this.hpProgress.value = 0;
         var notif = new Notification("Monster_Dead",this,this);
         MessageController.getInstance().SendNotification(notif);
-        
+
+        this.anim.visible = false;
+        this.hpProgress.visible = false;
+
+        this.hurtSprite.visible = true;
+        this.hurtSprite.alpha = 1;
+        Laya.Tween.to(this.hurtSprite,
+        {
+            alpha:0
+        },2000,null,new Laya.Handler(this,function(){
+            MonsterFactory.getInstance().recoveryMonsterToPool(this);
+        }));
 
     }
     return Monster;

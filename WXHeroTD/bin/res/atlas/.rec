@@ -22,10 +22,6 @@ P 26075C4A gailun-animation_12.png
 P 3AFF62DA gailun-animation_4.png
 P 05FEA6E9 gailun-animation_8.png
 D monster
-P 5F32C9D5 npc_102_walk_r_0001.png
-P 0A5DCFA3 npc_102_walk_r_0002.png
-P 09645D8D npc_102_walk_r_0003.png
-P 9142BDF2 npc_102_walk_r_0004.png
 P 92B10355 xiaobing01-animation_0.png
 P 8DB65527 xiaobing01-animation_1.png
 P F228C88D xiaobing02-animation_0.png
@@ -40,9 +36,9 @@ P D5932350 xiaobing06-animation_0.png
 P 7C8F749F xiaobing06-animation_1.png
 D tower
 P 793CC8F1 tower.png
-P B0CE6355 tower_10_idle02_10000.png
-P 0653BDCD tower_10_idle02_10001.png
-P 759B41CA tower_10_idle02_10002.png
-P 4D779CCD tower_10_idle02_10003.png
-P BF773EB8 tower_10_idle02_10004.png
-P 4C5F8607 tower_10_idle02_10005.png
+R 0ECF0509 tower_dead_01.png
+R 5629A521 tower_dead_02.png
+R A8930994 tower_dead_03.png
+R F34F27F9 tower_dead_04.png
+R E6B6FA88 tower_dead_05.png
+R 77B0DBC2 tower_dead_06.png

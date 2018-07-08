@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":9,
-    "selecteID":12,
+    "selectedBox":12,
+    "selecteID":10,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -70,13 +70,14 @@
                     "props":{"y":685,"x":360,"width":264,"visible":false,"var":"centerBox","height":264,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":9,
                     "label":"Box(centerBox)",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":12,
                     "child":[
                         {
+                            "x":45,
                             "type":"Sprite",
                             "props":{"y":132,"x":132,"width":0,"height":0},
                             "nodeParent":12,
@@ -88,6 +89,7 @@
                             "compId":14,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Circle",
                                     "props":{"y":0,"x":0,"radius":150,"lineWidth":1,"fillColor":"#ff0000"},
                                     "nodeParent":14,
@@ -99,19 +101,6 @@
                                     "child":[
                                         ]
                                 }],
-                            "$HIDDEN":false
-                        },
-                        {
-                            "type":"Animation",
-                            "props":{"y":0,"x":0,"visible":false,"source":"tower/tower_10_idle02_10000.png,tower/tower_10_idle02_10001.png,tower/tower_10_idle02_10002.png,tower/tower_10_idle02_10003.png,tower/tower_10_idle02_10004.png,tower/tower_10_idle02_10005.png","interval":150,"autoPlay":true},
-                            "nodeParent":12,
-                            "label":"Animation",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":10,
-                            "child":[
-                                ],
                             "$HIDDEN":false
                         }],
                     "$HIDDEN":true
@@ -169,19 +158,6 @@
                     "child":[
                         ]
                 }]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "props":{"y":772,"x":47,"skin":"monster/xiaobing01-animation_0.png"},
-            "nodeParent":1,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":25,
-            "child":[
-                ]
         }],
     "animations":[
         {

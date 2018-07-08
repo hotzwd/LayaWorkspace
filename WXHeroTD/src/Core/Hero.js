@@ -26,7 +26,7 @@ var Hero = (function(_super){
     _proto.isMoveFinsih1 = false;                                        //是否在移动
     _proto.isMoveFinsih2 = false;                                        //是否在移动
     _proto.HeroRadios = 50;                                             //英雄的半径
-    _proto.attackValue = 20;                                            //攻击力
+    _proto.attackValue = 50;                                            //攻击力
     _proto.attackRadios = 150;                                             //英雄攻击的半径
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
@@ -47,13 +47,10 @@ var Hero = (function(_super){
         }
         
         this.anim = new Laya.Animation();
-        // this.anim.play(0, true, "monster001_walk_r");
         this.anim.play(0, true, "hero_attack");
-        
+        this.anim.interval = 0;
         this.anim.pivotX = 179;
         this.anim.pivotY = 147;
-        // this.anim.pivotX = this.anim.width / 2;
-        // this.anim.pivotY = this.anim.width / 2;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
@@ -65,7 +62,8 @@ var Hero = (function(_super){
             this.addChild(rangSp);
         }
         _proto.attackMonsterList = [];
-        // Gamelog("------ani.width="+this.anim.width);
+
+        MessageController.getInstance().AddNotification("Tower_Dead",this,this._towerDeadEvent);
     }
 
     _proto.onDestroy = function(){
@@ -229,6 +227,11 @@ var Hero = (function(_super){
                 this.isAttack = false;
             });
         
+    }
+
+    _proto._towerDeadEvent = function(notif){
+        this.anim.interval = 300;
+        this.anim.play(0, false, "hero_dead");
     }
 
     return Hero;

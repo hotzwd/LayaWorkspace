@@ -21,6 +21,8 @@ var Tower = (function(_super){
 
     /**防御塔动画 */
     _proto.anim = null;
+    _proto.towerSp = null;
+
 
     _proto.onInit = function(){
         this.width = TowerWidth;
@@ -35,19 +37,11 @@ var Tower = (function(_super){
             rangSp.y = this.pivotY;
             this.addChild(rangSp);
         }
-
-        // this.anim = new Laya.Animation();
-        // this.anim.play(0, true, "tower_idle");
-        // this.anim.pivotX = 132;
-        // this.anim.pivotY = 132;
-        // this.anim.interval = 150
-        // this.anim.pos(this.pivotX,this.pivotY);
-        // this.addChild(this.anim);
-        this.anim = new Laya.Image("game/tower.png");
-        this.anim.pivotX = 70;
-        this.anim.pivotY = 100;
-        this.anim.pos(this.pivotX,this.pivotY -30);
-        this.addChild(this.anim);
+        this.towerSp = new Laya.Image("game/tower.png");
+        this.towerSp.pivotX = 70;
+        this.towerSp.pivotY = 100;
+        this.towerSp.pos(this.pivotX,this.pivotY -30);
+        this.addChild(this.towerSp);
 
         this.hpProgress = new Laya.ProgressBar("game/progress_xuetiao.png");
         this.hpProgress.anchorX = 0.5;
@@ -55,6 +49,15 @@ var Tower = (function(_super){
         this.hpProgress.value = 1;
         this.addChild(this.hpProgress);
         this.hpProgress.pos(TowerWidth / 2,-100);
+
+        this.anim = new Laya.Animation();
+        this.anim.play(0, true, "tower_dead");
+        this.anim.pivotX = 270;
+        this.anim.pivotY = 242;
+        this.anim.interval = 150;
+        this.anim.pos(this.pivotX,this.pivotY);
+        this.addChild(this.anim);
+        this.anim.visible = false;
     }
 
     _proto.onDestroy = function(){
@@ -78,6 +81,20 @@ var Tower = (function(_super){
     _proto.towerDead = function(){
         this.hpProgress.value = 0;
         Gamelog("----------防御塔挂掉了-----");
+
+        this.hpProgress.visible = false;
+        this.towerSp.visible = false;
+        var an = new Laya.Animation();
+        this.anim.visible = true;
+        this.anim.play(0, false, "tower_dead");
+        this.anim.on(Laya.Event.COMPLETE,this,this.onPlayDeadComplete);
+
+        var notif = new Notification("Tower_Dead",this,this);
+        MessageController.getInstance().SendNotification(notif);
+    }
+
+    _proto.onPlayDeadComplete = function(){
+        this.anim.visible = false;
     }
     /**是否在圆内 */
     _proto.isInCircle = function(p){

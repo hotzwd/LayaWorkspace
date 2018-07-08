@@ -37,4 +37,4 @@ var GameConfig = {
 /**是否显示Log */
 var GameLogVisible = true;
 /**显示范围 */
-var ShowRang = true;
+var ShowRang = false;
