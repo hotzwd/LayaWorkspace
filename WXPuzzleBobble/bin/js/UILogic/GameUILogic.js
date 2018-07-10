@@ -20,6 +20,7 @@ var GameUILogic = (function(_super){
     _proto.bossAnim = null;                                   //boss动画
     _proto.showImgGameover = false;                           //是否已经显示完游戏结束
     this.hurtSelfPlayerId = 0;                                //伤害自己的人物id
+    _proto.bannerAd = null;                                   //横幅广告
 
     _proto.onInit = function(){
         // this.width = Laya.stage.width;
@@ -59,7 +60,7 @@ var GameUILogic = (function(_super){
         
         //MessageController.getInstance().AddNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         
-
+        this.showBannerAd();
     }
 
    
@@ -67,7 +68,46 @@ var GameUILogic = (function(_super){
         MusicManager.getInstance().stopMusic();
         MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
     }
+    //显示广告
+    _proto.showBannerAd = function(){
+        if (Browser.onMiniGame) {
+            var isPass = false;
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                    if(isPassNum >= 0){
+                        isPass = true;
+                    }
+                }
+            }); 
+            if(!isPass){
+                return;
+            }
+            if(this.bannerAd != null){
+                this.bannerAd.destroy();
+            }
+            this.bannerAd = wx.createBannerAd({
+                    adUnitId: 'adunit-5d20c903466a86db',
+                    style: {
+                        left: 0,
+                        top: 0,
+                        width: 300
+                    }
+                })
+            this.bannerAd.show();
 
+            var sysInfo = wx.getSystemInfoSync();
+            var Ad = this.bannerAd;         
+            var sysInfo = wx.getSystemInfoSync();
+            this.bannerAd.onResize(function (res) {
+                Ad.style.top = sysInfo.screenHeight - 86;
+                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            });
+
+        }
+
+    }
     _proto.delayShow = function(){
 
         //创建新的桶 位于球的上层
@@ -428,6 +468,9 @@ var GameUILogic = (function(_super){
         // SceneManager.getInstance().currentScene.startGame();
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
+        if(this.bannerAd != null){
+            this.bannerAd.hide();
+        }
     }
 
     _proto.onTweenFinish = function(){

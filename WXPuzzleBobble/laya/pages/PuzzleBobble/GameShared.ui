@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":3,
+    "selectedBox":3,
+    "selecteID":4,
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
     "label":"View",
@@ -41,7 +41,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":408,"x":362,"width":546,"skin":"game/img_tanchuang_bg.png","sizeGrid":"60,60,60,60","height":297},
+                    "props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":337},
                     "nodeParent":3,
                     "label":"Image",
                     "isDirectory":false,
@@ -50,7 +50,7 @@
                     "compId":6,
                     "child":[
                         ],
-                    "$HIDDEN":false
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
@@ -63,12 +63,13 @@
                     "hasChild":false,
                     "compId":69,
                     "child":[
-                        ]
+                        ],
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":621,"x":512,"var":"btn_shard","stateNum":"2","skin":"game/btn_fangjian_red_164x54.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","label":"分享复活"},
+                    "props":{"y":577,"x":488,"var":"btn_shard","stateNum":"1","skin":"game/fuhuo.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff"},
                     "nodeParent":3,
                     "label":"Button(btn_shard)",
                     "isDirectory":false,
@@ -81,7 +82,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":727,"x":538,"width":169,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":72},
+                    "props":{"y":771,"x":541,"width":169,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":72},
                     "nodeParent":3,
                     "label":"Button(btn_cancel)",
                     "isDirectory":false,
