@@ -62,11 +62,13 @@ var GameUILogic = (function(_super){
         
         this.showBannerAd();
     }
-
    
     _proto.onDestroy = function(){
         MusicManager.getInstance().stopMusic();
         MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
+        if(this.bannerAd != null){
+            this.bannerAd.destroy();
+        }
     }
     //显示广告
     _proto.showBannerAd = function(){
@@ -429,6 +431,7 @@ var GameUILogic = (function(_super){
         this.anim_panda.stop();
 
         //this.onStartClick();
+        this.showBannerAd();
     }
 
     /**游戏倒计时 显示 */
@@ -466,6 +469,7 @@ var GameUILogic = (function(_super){
         },1500,Laya.Ease.expoOut,new Laya.Handler(this,this.onTweenFinish));
         //开始游戏
         // SceneManager.getInstance().currentScene.startGame();
+        SceneManager.getInstance().currentScene.createPointLine(-90);
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
         if(this.bannerAd != null){

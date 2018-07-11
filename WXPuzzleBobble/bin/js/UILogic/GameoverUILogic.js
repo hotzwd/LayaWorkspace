@@ -9,6 +9,7 @@ var GameoverUILogic = (function(_super){
     Laya.class(GameoverUILogic,"UILogic.GameoverUILogic",_super);
     var _proto = GameoverUILogic.prototype;
     var rankSprite2 = null;
+    _proto.bannerAd = null;                                   //横幅广告
 
     _proto.onInit = function(){
         this.width = Laya.stage.width;
@@ -58,12 +59,58 @@ var GameoverUILogic = (function(_super){
         //this.updateListData();
 
         //MessageController.getInstance().AddNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
-    }
-    _proto.onDestroy = function(){
-        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
-        rankSprite2.destroy();
+
+        this.showBannerAd();
     }
 
+
+    _proto.onDestroy = function(){
+        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+        if(this.bannerAd != null){
+            this.bannerAd.destroy();
+        }
+    }
+
+    //显示广告
+    _proto.showBannerAd = function(){
+        if (Browser.onMiniGame) {
+            var isPass = false;
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                    if(isPassNum >= 0){
+                        isPass = true;
+                    }
+                }
+            }); 
+            if(!isPass){
+                return;
+            }
+            if(this.bannerAd != null){
+                this.bannerAd.destroy();
+            }
+            this.bannerAd = wx.createBannerAd({
+                    adUnitId: 'adunit-1fcd79ff1d1dcbec',
+                    style: {
+                        left: 0,
+                        top: 0,
+                        width: 300
+                    }
+                })
+            this.bannerAd.show();
+
+            var sysInfo = wx.getSystemInfoSync();
+            var Ad = this.bannerAd;         
+            var sysInfo = wx.getSystemInfoSync();
+            this.bannerAd.onResize(function (res) {
+                Ad.style.top = sysInfo.screenHeight - 86;
+                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            });
+
+        }
+
+    }
      
      /**重新开始 */
     _proto.onGameAgain = function(){

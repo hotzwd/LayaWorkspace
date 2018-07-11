@@ -240,7 +240,8 @@ var MatterSceneMonster = (function(_super){
             // Gamelog("------------forceX="+forceX+",direct ="+direct);
             var gameUI =  UIManager.getInstance().getUI("GameUI");
             var bubble = bubbleList[i];
-            
+            // if(bubble == null)
+            //     continue;
             
             rockOptions = {
                 id: this.getBodyIDByType(bubble.bubbleType),

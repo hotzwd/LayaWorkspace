@@ -35,6 +35,9 @@ var UIManager = (function(_super){
 
         if(uiLogic != null){
             uiLogic.visible = true;
+            if(uiLogic.onShow != null){
+                uiLogic.onShow();
+            }
         }else{
             uiLogic = getNewUILogicByName(_name);
 
