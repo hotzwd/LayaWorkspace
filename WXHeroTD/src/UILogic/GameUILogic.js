@@ -19,12 +19,16 @@ var GameUILogic = (function (_super) {
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
 
     }
-
+    
 
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
     }
 
+    _proto.addScore = function(p_score){
+        // Gamelog("-------gamescore="+SceneManager.getInstance().currentScene.gameScore)
+        this.t_score.text = SceneManager.getInstance().currentScene.gameScore;
+    }
 
     /**关闭游戏 */
     _proto.onCloseGame = function () {

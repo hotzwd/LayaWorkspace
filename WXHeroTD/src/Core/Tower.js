@@ -13,10 +13,10 @@ var Tower = (function(_super){
     //防御塔宽高
     var TowerWidth = 110;
     var TowerHeight = 110;
-    var TowerMaxHp = 500;                                                       //防御塔最高血量
+    var TowerMaxHp = 1000;                                                       //防御塔最高血量
     /**防御塔半径 */
     _proto.TowerRadios = 150;                                                    //防御塔半径
-    _proto.hp = 500;                                                            //防御塔血量
+    _proto.hp = 1000;                                                            //防御塔血量
     _proto.hpProgress = null;                                                   //血量进度条
 
     /**防御塔动画 */

@@ -60,7 +60,15 @@ var MonsterGenerator = (function(_super){
          posTypeId = parseInt(posTypeId, 10);
         //  posTypeId = 3;
 
-         var typeId = parseInt(Math.random()*3, 10);
+        var monsterRanomNum = parseInt(Math.random()*10, 10);
+        var typeId = parseInt(Math.random()*3, 10);
+        if(monsterRanomNum > 7){
+            typeId = 2;
+        }else if(monsterRanomNum > 4){
+            typeId = 1;
+        }else{
+            typeId = 0;
+        }
 
          _mos.initMonster(posTypeId,typeId);
 
@@ -90,7 +98,7 @@ var MonsterGenerator = (function(_super){
             t_anlge = Math.random()*70 + 10;
          }
 
-         Gamelog("----生成怪物 pos="+birthPos +",角度="+t_anlge);
+        //  Gamelog("----生成怪物 pos="+birthPos +",角度="+t_anlge);
          //初始坐标
          _mos.pos(birthPos.x,birthPos.y);
          //设置目标点跟角度

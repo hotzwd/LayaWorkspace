@@ -10,52 +10,6 @@ var Monster = (function(_super){
     Laya.class(Monster,"Monster",_super);
     _proto = Monster.prototype;
 
-    var MonsterData = [
-        {
-            type:1,
-            name:"小兵1上",
-            anim:"monster01_up",
-            hp:100,
-            attack:50
-        },
-        {
-            type:1,
-            name:"小兵2上",
-            anim:"monster02_up",
-            hp:200,
-            attack:80
-        },
-        {
-            type:1,
-            name:"小兵3上",
-            anim:"monster03_up",
-            hp:300,
-            attack:100
-        },
-        {
-            type:2,
-            name:"小兵1下",
-            anim:"monster01_down",
-            hp:100,
-            attack:50
-        },
-        {
-            type:2,
-            name:"小兵2下",
-            anim:"monster02_down",
-            hp:100,
-            attack:50
-        },
-        {
-            type:2,
-            name:"小兵3下",
-            anim:"monster03_down",
-            hp:100,
-            attack:50
-        },
-        
-    ];
-
     var MonsterWidth = 110;                                            //怪物宽高
     var MonsterHeight = 110;
     var MONSTER_SPEED = 2;                                              //移动速度
@@ -76,6 +30,8 @@ var Monster = (function(_super){
     _proto.isAttack = false;                                           //是否在攻击
     _proto.isHurt = false;                                             //是否被攻击
     _proto.hurtSprite = null;                                          //被攻击的特效
+    _proto.monsterSpeed = 1;                                           //怪物速度
+    _proto.monsterScore = 0;                                           //怪物分数
 
     _proto.onInit = function(){
         this.width = MonsterWidth;
@@ -105,8 +61,9 @@ var Monster = (function(_super){
         this.hpProgress.anchorX = 0.5;
         this.hpProgress.anchorY = 0.5;
         this.hpProgress.value = 1;
-        this.addChild(this.hpProgress);
+        // this.addChild(this.hpProgress);
         this.hpProgress.pos(MonsterWidth / 2,0);
+
 
         this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
         this.addChild(this.hurtSprite);
@@ -133,10 +90,12 @@ var Monster = (function(_super){
         this.anim.play(0, true, t_data.anim);
         this.anim.visible = true;
 
-        this.hpProgress.visible = true;
-        this.hp = 100;
-        this.maxHp = 100;
-        this.attackValue = 50;
+        // this.hpProgress.visible = true;
+        this.hp = t_data.hp;
+        this.maxHp = t_data.hp;
+        this.attackValue = t_data.attack;
+        this.monsterSpeed = t_data.speed;
+        this.monsterScore = t_data.score;
     }
     /**设置目标点 */
     _proto.setTargetPos = function(_pos,_angle){
@@ -191,7 +150,9 @@ var Monster = (function(_super){
             if(this.hp > 0){
                 var collisionTower = isCollisionWithTwoCricle(new Point(this.x,this.y),this.MonsterRadios,this.targetTower,this.targetTower.TowerRadios);
                 if(!collisionTower){
-                    this.pos(this.x + this.targetVector.x * MONSTER_SPEED, this.y + this.targetVector.y * MONSTER_SPEED);
+                    // this.pos(this.x + this.targetVector.x * MONSTER_SPEED, this.y + this.targetVector.y * MONSTER_SPEED);
+                    this.pos(this.x + this.targetVector.x * this.monsterSpeed, this.y + this.targetVector.y * this.monsterSpeed);
+                    
                 }else{
                     this.attackTower();
                 }
@@ -208,7 +169,7 @@ var Monster = (function(_super){
         this.isAttack = true;
         if(this.targetTower.hp > 0){
             this.targetTower.hurtMonster(this.attackValue);
-            Laya.timer.once(1000,this,function(){
+            Laya.timer.once(500,this,function(){
                 this.isAttack = false;
             });
         }
@@ -227,7 +188,7 @@ var Monster = (function(_super){
 
     /**怪物死亡 */
     _proto.monsterDead = function(){
-        Gamelog("----------怪物挂掉了-----");
+        // Gamelog("----------怪物挂掉了-----");
         this.hpProgress.value = 0;
         var notif = new Notification("Monster_Dead",this,this);
         MessageController.getInstance().SendNotification(notif);
@@ -240,7 +201,7 @@ var Monster = (function(_super){
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
-        },2000,null,new Laya.Handler(this,function(){
+        },1000,null,new Laya.Handler(this,function(){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
