@@ -138,32 +138,16 @@ var UIManager = (function(_super){
             case "GameUI":
                 uiLogic = new GameUILogic();
                 break;
-            case "GameoverUI":
-                uiLogic = new GameoverUILogic();
+            case "GameOverUI":
+                uiLogic = new GameOverUILogic();
                 break;
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
             break;
-            case "GameEndShareUI":
-                uiLogic = new GameEndShareUILogic();
+            case "GameStartUI":
+                uiLogic = new GameStartUILogic();
             break;
-            case "GamePauseUI":
-                uiLogic = new GamePauseUILogic();
-            break;
-            /**
-            case "LoadingUI":
-                uiLogic = new LoadingUILogic();
-                break;
-            case "WBAlertUI":
-                uiLogic = new WBAlertUILogic();
-                break;
-            case "RoomUI":
-                uiLogic = new RoomUILogic();
-            break;
-            case "WBShardUI":
-                uiLogic = new WBShardUILogic();
-            break;
-            **/
+            
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
             break;

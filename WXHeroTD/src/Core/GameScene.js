@@ -45,9 +45,7 @@ var GameScene = (function (_super) {
     _proto.Init = function () {
         //初始化当前类属性
         this.gameScore = 0;
-        if (this.gameUI == undefined) {
-            this.gameUI = UIManager.getInstance().showUI("GameUI");
-        }
+        
 
         this.monsterList = new Array();
         this.monsterPool = [];
@@ -59,12 +57,12 @@ var GameScene = (function (_super) {
         this.heroBox = new Laya.Box();
         this.heroBox.width = Laya.stage.width;
         this.heroBox.height = Laya.stage.height;
-        this.heroBox.zOrder = 20;
+        this.heroBox.zOrder = 30;
         
         this.towerBox = new Laya.Box();
         this.towerBox.width = Laya.stage.width;
         this.towerBox.height = Laya.stage.height;
-        this.towerBox.zOrder = 30;
+        this.towerBox.zOrder = 20;
 
 
         Laya.stage.addChild(this.monsterBox);
@@ -82,17 +80,19 @@ var GameScene = (function (_super) {
         MonsterGenerator.getInstance().initGenerator(this.monsterBox,this.curTower);
 
         //自动适配完后初始化
-        Laya.timer.frameOnce(8, this, this.delayInitShow);
+        // Laya.timer.frameOnce(8, this, this.delayInitShow);
         
-        
-
         this.initHero();
-        this.initMonster();
+        // this.initMonster();
+
+        if (this.gameUI == undefined) {
+            this.gameUI = UIManager.getInstance().showUI("GameUI");
+        }
 
         this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
         this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
         
-        Laya.timer.frameLoop(1, this, this.onUpdate);
+        
         
         MessageController.getInstance().AddNotification("Monster_Dead",this,this._monsterDeadEvent);
         MessageController.getInstance().AddNotification("Tower_Dead",this,this._towerDeadEvent);
@@ -100,7 +100,6 @@ var GameScene = (function (_super) {
     }
 
     _proto.onDestroy = function () {
-        
 
     }
     //自动适配完后初始化
@@ -116,25 +115,21 @@ var GameScene = (function (_super) {
         this.curHero = new Hero();
         this.heroBox.addChild(this.curHero);
         this.curHero.pos(this.curTower.x, this.curTower.y + 200);
-
+        this.curHero.stopAnim();
     }
 
    
     /**初始化怪物 */
     _proto.initMonster = function(){
-
-
+       
     }
 
     
 
     /**开始游戏 */
     _proto.startGame = function () {
-
-        // this.gameUI.anim_panda.play(0, true, "pandaDaiji");
-        //游戏倒计时
-        // Laya.timer.loop(1000, this, this.animateTimeBased);
-
+         Laya.timer.frameLoop(1, this, this.onUpdate);
+         this.curHero.playAnim();
     }
 
     /**
@@ -155,14 +150,21 @@ var GameScene = (function (_super) {
         }
 
        this.updateGeneratorMonster();
-
-
+       this.updateHeroZorder();
 
     }
 
-    /**根据时间生成怪物 */
+    /**刷新英雄防御塔层级 */
      _proto.updateHeroZorder = function(){
-     
+        var t_heroPos = this.curHero.parent.localToGlobal(new Point(this.curHero.x,this.curHero.y),true);
+        var t_towerPos = this.curTower.parent.localToGlobal(new Point(this.curTower.x,this.curTower.y),true);
+        if(t_heroPos.y > t_towerPos.y){
+            this.heroBox.zOrder = 30;
+            this.towerBox.zOrder = 20;
+        }else{
+            this.heroBox.zOrder = 20;
+            this.towerBox.zOrder = 30;
+        }
     }
     /**根据时间生成怪物 */
      _proto.updateGeneratorMonster = function(){

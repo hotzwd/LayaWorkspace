@@ -70,6 +70,16 @@ var Hero = (function(_super){
         
     }
 
+    /**停止动画 */
+    _proto.stopAnim = function(){
+        this.anim.play(0, true, "hero_attack");
+        this.anim.stop();
+    }
+    /**停止动画 */
+    _proto.playAnim = function(){
+        this.anim.play(0, true, "hero_attack");
+    }
+
     /**设置目标点 */
     _proto.setTargetPos = function(_pos){
         if(this.targetTower == null){

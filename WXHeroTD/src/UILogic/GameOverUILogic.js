@@ -2,13 +2,13 @@
  * 主游戏界面
  */
 
-var GameUILogic = (function (_super) {
+var GameOverUILogic = (function (_super) {
 
-    function GameUILogic() {
-        GameUILogic.super(this);
+    function GameOverUILogic() {
+        GameOverUILogic.super(this);
     }
-    Laya.class(GameUILogic, "GameUILogic", _super);
-    _proto = GameUILogic.prototype;
+    Laya.class(GameOverUILogic, "GameOverUILogic", _super);
+    _proto = GameOverUILogic.prototype;
 
     _proto.onInit = function () {
         this.width = Laya.stage.width;
@@ -17,18 +17,14 @@ var GameUILogic = (function (_super) {
         // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
-        UIManager.getInstance().showUI("GameStartUI").zOrder = 100;
+
     }
     
+
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
     }
 
-    // _proto.addScore = function(p_score){
-
-    // }
-
-    //显示分数
     _proto.addScore = function(p_score){
         // Gamelog("-------gamescore="+SceneManager.getInstance().currentScene.gameScore)
         this.t_score.text = SceneManager.getInstance().currentScene.gameScore;
@@ -39,5 +35,5 @@ var GameUILogic = (function (_super) {
 
     }
 
-    return GameUILogic;
-})(GameUI);
+    return GameOverUILogic;
+})(GameOverUI);
