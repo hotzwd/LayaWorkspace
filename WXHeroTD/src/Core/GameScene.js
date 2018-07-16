@@ -136,6 +136,7 @@ var GameScene = (function (_super) {
     /**重置游戏 */
     _proto.restartGame = function(){
         this.gameScore = 0;
+        this.gameUI.t_score.text = 0;
 
         this.curTower.resetHp();
 
@@ -232,7 +233,7 @@ var GameScene = (function (_super) {
         // Gamelog("-----_monsterDeadEvent");
         var t_score = notif.Content.monsterScore;
         this.gameScore += t_score;
-        this.gameUI.addScore(t_score);
+        this.gameUI.t_score.text = this.gameScore;
 
         for (var i = 0; i < this.monsterList.length; i++) {
             var t_monster = this.monsterList[i];
@@ -248,7 +249,7 @@ var GameScene = (function (_super) {
     /**防御塔死亡 */
     _proto._towerDeadEvent = function(notif){
         Laya.timer.clear(this,this.onUpdate);
-        UIManager.getInstance().showUI("GameOverUI").zOrder = 200;
+        
     }
 
     

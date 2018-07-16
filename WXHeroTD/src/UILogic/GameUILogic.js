@@ -17,8 +17,8 @@ var GameUILogic = (function (_super) {
         // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
-        // UIManager.getInstance().showUI("GameStartUI").zOrder = 100;
-        UIManager.getInstance().showUI("GameOverUI").zOrder = 200;
+        UIManager.getInstance().showUI("GameStartUI").zOrder = 100;
+        // UIManager.getInstance().showUI("GameOverUI").zOrder = 200;
     }
     
     _proto.onDestroy = function () {

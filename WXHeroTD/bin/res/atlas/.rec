@@ -6,6 +6,7 @@ P 34D4C79B bg_heise.png
 P C1EFD075 btn_kaishianniu.png
 P C6E0028A btn_xuanyaodefen.png
 P A04FD96C btn_zaiwanyici.png
+R 2B35DC6E huodechenghao-di.png
 P 7A521376 jiantou.png
 P A5114F75 logo.png
 P 84201301 penjian-texiao.png
@@ -16,6 +17,7 @@ P D12662B6 progress_xuetiao$bar.png
 P A8BD7C79 progress_xuetiao.png
 P 793CC8F1 tower.png
 P 9F1BA619 yuandi.png
+P 6B52DC79 zuigaofen.png
 D hero
 P 3E8DEBB9 gailun-01.png
 P 582C0DD3 gailun-02.png

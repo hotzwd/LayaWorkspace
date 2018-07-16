@@ -32,6 +32,17 @@ var GameStartUILogic = (function (_super) {
         this.btn_start.on(Laya.Event.CLICK,this,this._startClickEvent);
         this.guildBox.on(Laya.Event.CLICK,this,this._guildClickEvent);
 
+
+        //绘制一个圆形区域，利用叠加模式，从遮罩区域抠出可交互区
+		var interactionArea = new Sprite();
+		//设置叠加模式
+		interactionArea.blendMode = "destination-out";
+		// guideContainer.addChild(interactionArea);
+        this.guildBox.addChild(interactionArea);
+        interactionArea.graphics.drawCircle(400, 1050, 170, "#000000");
+
+        // this.delayInitShow();
+
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
     }
     
@@ -55,7 +66,8 @@ var GameStartUILogic = (function (_super) {
 		var interactionArea = new Sprite();
 		//设置叠加模式
 		interactionArea.blendMode = "destination-out";
-		guideContainer.addChild(interactionArea);
+		// guideContainer.addChild(interactionArea);
+        this.guildBox.addChild(interactionArea);
         interactionArea.graphics.drawCircle(200, 400, 240, "#000000");
      }
     _proto.onDestroy = function () {

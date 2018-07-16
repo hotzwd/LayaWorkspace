@@ -249,6 +249,10 @@ var Hero = (function(_super){
     _proto._towerDeadEvent = function(notif){
         this.anim.interval = 300;
         this.anim.play(0, false, "hero_dead");
+        this.anim.on(Laya.Event.COMPLETE,this,function(){
+            UIManager.getInstance().showUI("GameOverUI").zOrder = 200;
+        });
+
     }
 
     return Hero;
