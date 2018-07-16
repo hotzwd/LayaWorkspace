@@ -63,6 +63,13 @@ var Tower = (function(_super){
     _proto.onDestroy = function(){
     }
 
+    _proto.resetHp = function(){
+        this.hp = 1000;
+        this.hpProgress.value = 1;
+        this.hpProgress.visible = true;
+        this.towerSp.visible = true;
+        this.anim.visible = false;
+    }
     _proto.onUpdate = function(){
         if(this.hp < TowerMaxHp){
             this.hpProgress.value = this.hp / TowerMaxHp;
@@ -84,7 +91,7 @@ var Tower = (function(_super){
 
         this.hpProgress.visible = false;
         this.towerSp.visible = false;
-        var an = new Laya.Animation();
+        // var an = new Laya.Animation();
         this.anim.visible = true;
         this.anim.play(0, false, "tower_dead");
         this.anim.on(Laya.Event.COMPLETE,this,this.onPlayDeadComplete);

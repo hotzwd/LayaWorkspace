@@ -53,6 +53,7 @@ var GameScene = (function (_super) {
         this.monsterBox = new Laya.Box();
         this.monsterBox.width = Laya.stage.width;
         this.monsterBox.height = Laya.stage.height;
+        this.monsterBox.zOrder = 10;
 
         this.heroBox = new Laya.Box();
         this.heroBox.width = Laya.stage.width;
@@ -130,6 +131,21 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
          this.curHero.playAnim();
+    }
+
+    /**重置游戏 */
+    _proto.restartGame = function(){
+        this.gameScore = 0;
+
+        this.curTower.resetHp();
+
+        this.curHero.pos(this.curTower.x, this.curTower.y + 200);
+        this.curHero.stopAnim();
+
+        for (var i = 0; i < this.monsterList.length; i++) {
+            var t_monster = this.monsterList[i];
+            MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
+        }
     }
 
     /**
@@ -229,8 +245,10 @@ var GameScene = (function (_super) {
         }
     }
 
+    /**防御塔死亡 */
     _proto._towerDeadEvent = function(notif){
         Laya.timer.clear(this,this.onUpdate);
+        UIManager.getInstance().showUI("GameOverUI").zOrder = 200;
     }
 
     

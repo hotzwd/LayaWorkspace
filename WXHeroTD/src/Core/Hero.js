@@ -77,7 +77,14 @@ var Hero = (function(_super){
     }
     /**停止动画 */
     _proto.playAnim = function(){
+        this.anim.destroy();
+        this.anim = new Laya.Animation();
         this.anim.play(0, true, "hero_attack");
+        this.anim.interval = 0;
+        this.anim.pivotX = 179;
+        this.anim.pivotY = 147;
+        this.anim.pos(this.pivotX,this.pivotY);
+        this.addChild(this.anim);
     }
 
     /**设置目标点 */

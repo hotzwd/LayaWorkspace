@@ -2,6 +2,7 @@ D .
 D bitmapFont
 D game
 R 3A981CDD beijing.jpg
+P 34D4C79B bg_heise.png
 P C1EFD075 btn_kaishianniu.png
 P C6E0028A btn_xuanyaodefen.png
 P A04FD96C btn_zaiwanyici.png

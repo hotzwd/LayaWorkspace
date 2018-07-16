@@ -17,6 +17,8 @@ var GameOverUILogic = (function (_super) {
         // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
+        this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
+        this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
 
     }
     
@@ -25,14 +27,17 @@ var GameOverUILogic = (function (_super) {
         // MusicManager.getInstance().stopMusic();
     }
 
-    _proto.addScore = function(p_score){
-        // Gamelog("-------gamescore="+SceneManager.getInstance().currentScene.gameScore)
-        this.t_score.text = SceneManager.getInstance().currentScene.gameScore;
+
+    /**分享游戏 */
+    _proto._sharedClickEvent = function () {
+
     }
-
-    /**关闭游戏 */
-    _proto.onCloseGame = function () {
-
+    /**重新开始 */
+    _proto._playAgainClickEvent = function () {
+        SceneManager.getInstance().currentScene.restartGame();
+        UIManager.getInstance().closeUI("GameOverUI",true);
+        UIManager.getInstance().showUI("GameStartUI");
+        
     }
 
     return GameOverUILogic;
