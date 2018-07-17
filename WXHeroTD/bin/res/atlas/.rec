@@ -1,14 +1,17 @@
 D .
 D bitmapFont
 D game
-R 3A981CDD beijing.jpg
-P 34D4C79B bg_heise.png
+R ACF788EC beijing.jpg
+P 336359A8 btn_guanbi.png
 P C1EFD075 btn_kaishianniu.png
 P C6E0028A btn_xuanyaodefen.png
 P A04FD96C btn_zaiwanyici.png
-R 2B35DC6E huodechenghao-di.png
+R 4CF5F507 huodechenghao-di.png
+R 85B3320E img_line.png
 P 7A521376 jiantou.png
 P A5114F75 logo.png
+P 0D5CD876 No.1.png
+R ECF10DCC paohangbang-di.png
 P 84201301 penjian-texiao.png
 P 448CF29D point.png
 P 9E4DD730 progress$bar.png
@@ -16,6 +19,7 @@ P 3FD78E12 progress.png
 P D12662B6 progress_xuetiao$bar.png
 P A8BD7C79 progress_xuetiao.png
 P 793CC8F1 tower.png
+P A3DF852F xunzhang-01.png
 P 9F1BA619 yuandi.png
 P 6B52DC79 zuigaofen.png
 D hero
@@ -45,9 +49,9 @@ P D5932350 xiaobing06-animation_0.png
 P 7C8F749F xiaobing06-animation_1.png
 D tower
 P 793CC8F1 tower.png
-R 0ECF0509 tower_dead_01.png
-R 5629A521 tower_dead_02.png
-R A8930994 tower_dead_03.png
-R F34F27F9 tower_dead_04.png
-R E6B6FA88 tower_dead_05.png
-R 77B0DBC2 tower_dead_06.png
+R B43590E3 tower_dead_01.png
+R CEDA428F tower_dead_02.png
+R 3FBF5657 tower_dead_03.png
+R 80C49D74 tower_dead_04.png
+R FD3DCBA8 tower_dead_05.png
+R CEC1A9E0 tower_dead_06.png
