@@ -230,6 +230,12 @@ var MatterSceneMonster = (function(_super){
      * 增加掉落的球
      */
     _proto.addBodyBubble = function(bubbleList,bubbleDataList){
+        if(bubbleList.length > 5){
+            if (Browser.onMiniGame) {
+                //震动
+                wx.vibrateLong({});
+            }
+        }
         for(var i=0; i<bubbleList.length; i++){
             var num = Math.random()*5 + 1;
             var direct = Math.random()*1;

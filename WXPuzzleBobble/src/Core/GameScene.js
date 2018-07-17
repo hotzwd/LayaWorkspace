@@ -1166,7 +1166,8 @@ var GameScene = (function(_super){
             _proto.matterScene.removeAllBasketBall();
         }
         // _proto.matterScene.setEngineTimeScale(0);
-        if(this.m_curReady != undefined){
+        // if(this.m_curReady != undefined){
+        if(this.m_curReady.m_nRowIndex == -1 && this.m_curReady.m_nColIndex == -1){
             for(var j=0; j<this.m_listBubble.length; j++){
                 if(this.m_listBubble[j] === this.m_curReady){
                     this.m_listBubble.splice(j,1);

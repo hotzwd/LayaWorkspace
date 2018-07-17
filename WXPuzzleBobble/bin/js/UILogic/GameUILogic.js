@@ -60,7 +60,9 @@ var GameUILogic = (function(_super){
         
         //MessageController.getInstance().AddNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         
-        this.showBannerAd();
+        // this.showBannerAd();
+        
+
     }
    
     _proto.onDestroy = function(){
@@ -68,6 +70,9 @@ var GameUILogic = (function(_super){
         MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         if(this.bannerAd != null){
             this.bannerAd.destroy();
+        }
+        if(this.button != null){
+            this.button.destroy();
         }
     }
     //显示广告
@@ -432,6 +437,17 @@ var GameUILogic = (function(_super){
 
         //this.onStartClick();
         this.showBannerAd();
+        if (Browser.onMiniGame) {
+            this.button = wx.createGameClubButton({
+                icon: 'green',
+                style: {
+                    left: 10,
+                    top: 70,
+                    width: 40,
+                    height: 40
+                }
+            })
+        }
     }
 
     /**游戏倒计时 显示 */
@@ -473,7 +489,10 @@ var GameUILogic = (function(_super){
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
         if(this.bannerAd != null){
-            this.bannerAd.hide();
+            this.bannerAd.destroy();
+        }
+        if(this.button != null){
+            this.button.destroy();
         }
     }
 
