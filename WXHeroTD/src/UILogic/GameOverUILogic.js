@@ -51,6 +51,7 @@ var GameOverUILogic = (function (_super) {
     }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
+        wxGame.getInstance().showOpenDataContext(false);
         SceneManager.getInstance().currentScene.restartGame();
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");

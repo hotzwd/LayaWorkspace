@@ -1,4 +1,4 @@
-console.log("index.js enter");
+// console.log("index.js enter");
 require("./weapp-adapter.js");
 require('./libs/laya.core.js');
 require('./libs/laya.wxmini.js');
@@ -8,7 +8,7 @@ require('./libs/laya.ui.js');
 // require('./code.js');
 
 require("./RankItem.js");
-require('./Tool/GameDebug.js');
+// require('./Tool/GameDebug.js');
 
 var baseNode = null;
 var userInfo = null;
@@ -34,7 +34,7 @@ Laya.stage.alignV = "middle";
 
 Laya.stage.bgColor = "#191514";//设置画布的背景颜色。
 
-addBaseNode();
+// addBaseNode();
 login();
 // removeAllScore();
 
