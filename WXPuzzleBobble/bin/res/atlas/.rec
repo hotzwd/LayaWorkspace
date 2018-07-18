@@ -6,7 +6,7 @@ P 5727DC0A bomb_03.png
 P 3D1EC85C bomb_04.png
 D game
 P 34D4C79B bg_heise.png
-R B97F6933 bgGame.png
+R 09B37443 bgGame.jpg
 P B3ABBC4B btn_fangjian_red_164x54.png
 P C7EB612B btn_fenxiangyouxi.png
 P 336359A8 btn_guanbi.png
@@ -40,16 +40,19 @@ P A2A7CFD3 img_qiu_2.png
 P 92EA9C4B img_qiu_3.png
 P 2251537D img_qiu_4.png
 P 3190C370 img_qiu_5.png
+P 5591F2DF img_qiu_fireworks.png
+P 8876EF50 img_qiu_rainbow.png
 P CD21C6B7 img_rankBg.png
 P 5F79A7B9 img_shijian_dikuang.png
 P FBC674D7 img_shijiandao.png
 P E2A4F1A3 img_tanchuang_bg.png
-P 6DC3FBD6 img_tong1.png
+P 316A5FE4 img_tong1.png
 P D9BB2CA6 img_tong11.png
 P 9045D227 img_toulan01.png
 P 3AB0C82A img_toulan02.png
 R E862AAC7 img_xinxilan_dikuang.png
 P 683C682A img_youxiguize.png
+P 738C869C img_zhadan.png
 P 87262D00 img_zhunbei.png
 P 7DDCB054 point.png
 R 08DD90CA rank_bg.png

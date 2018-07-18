@@ -44,7 +44,7 @@ function  beginLoad(){
             type:Laya.Loader.ATLAS
         }); 
         asset.push({
-            url : "game/bgGame.png",
+            url : "game/bgGame.jpg",
             type:Laya.Loader.IMAGE
         }); 
 
