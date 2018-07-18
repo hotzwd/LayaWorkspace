@@ -183,7 +183,7 @@ var GameoverUILogic = (function(_super){
     _proto.onShareGame = function(){
         if(Browser.onMiniGame){
             wx.shareAppMessage({
-                    title: '最好玩的泡泡龙，快来比试一下吧！',
+                    title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
                     imageUrl:"game/shard.png"
                 })
         }
