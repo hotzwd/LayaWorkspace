@@ -9,6 +9,7 @@ P 34D4C79B bg_heise.png
 R B97F6933 bgGame.png
 P B3ABBC4B btn_fangjian_red_164x54.png
 P C7EB612B btn_fenxiangyouxi.png
+P 336359A8 btn_guanbi.png
 P 1FD45519 btn_kaishi.png
 P 8CB7517E btn_shengyin_guan.png
 P D2C5B424 btn_shengyin_kai.png
@@ -51,4 +52,5 @@ R E862AAC7 img_xinxilan_dikuang.png
 P 683C682A img_youxiguize.png
 P 87262D00 img_zhunbei.png
 P 7DDCB054 point.png
+R 08DD90CA rank_bg.png
 R 19CDF67D shard.png
