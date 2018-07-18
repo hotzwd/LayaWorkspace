@@ -49672,7 +49672,7 @@ var GameUI=(function(_super){
 var GameOverUI=(function(_super){
 		function GameOverUI(){
 			
-		    this.img_highScore=null;
+		    this.aniShare=null;
 		    this.t_score=null;
 		    this.t_highScore=null;
 		    this.t_title=null;
@@ -49680,6 +49680,7 @@ var GameOverUI=(function(_super){
 		    this.btn_shared=null;
 		    this.btn_rank=null;
 		    this.list_rank=null;
+		    this.img_high=null;
 
 			GameOverUI.__super.call(this);
 		}
@@ -49694,7 +49695,7 @@ var GameOverUI=(function(_super){
 
 		}
 
-		GameOverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-3,"x":0,"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":196,"x":255,"var":"img_highScore","skin":"game/zuigaofen.png"}},{"type":"Text","props":{"y":441,"x":224,"text":"当前得分:","fontSize":35,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":441,"x":404,"width":216,"var":"t_score","text":"9999999","height":40,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":320,"x":131,"width":552,"var":"t_highScore","text":"0","height":101,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":517,"x":165,"skin":"game/huodechenghao-di.png"}},{"type":"Text","props":{"y":528,"x":271,"text":"获得称号:","fontSize":35,"font":"SimHei","color":"#eacd83"}},{"type":"Text","props":{"y":528,"x":435,"width":153,"var":"t_title","text":"青铜守卫","height":35,"fontSize":35,"font":"SimHei","color":"#eacd83","align":"center"}},{"type":"Button","props":{"y":1163,"x":273,"var":"btn_playAgain","stateNum":2,"skin":"game/btn_zaiwanyici.png"}},{"type":"Button","props":{"y":1032,"x":273,"var":"btn_shared","stateNum":2,"skin":"game/btn_xuanyaodefen.png"}},{"type":"Button","props":{"y":1292,"x":299,"width":216,"visible":false,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"查看全部排行","height":58}},{"type":"List","props":{"y":656,"x":108,"width":630,"visible":false,"var":"list_rank","height":322},"child":[{"type":"Box","props":{"y":0,"x":0,"width":628,"renderType":"render","height":108},"child":[{"type":"Image","props":{"y":2,"x":425,"skin":"game/xunzhang-01.png"}},{"type":"Text","props":{"y":24,"x":486,"text":"青铜守卫","name":"t_title","fontSize":30,"font":"SimHei","color":"#eacd83"}},{"type":"Image","props":{"y":68,"x":19,"skin":"game/img_line.png","name":"img_title"}},{"type":"Text","props":{"y":19,"x":309,"width":132,"text":"999999","name":"t_score","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":19,"x":102,"width":216,"text":"玩家名字七个字","name":"t_name","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":57,"skin":"game/yuandi.png"}},{"type":"Text","props":{"y":22,"x":58,"width":39,"text":"1","name":"t_rank","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":0,"skin":"game/yuandi.png","name":"img_icon"}}]}]}]}]};
+		GameOverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-3,"x":0,"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Text","props":{"y":464,"x":224,"visible":false,"text":"当前得分:","fontSize":35,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":464,"x":404,"width":216,"visible":false,"var":"t_score","text":"9999999","height":40,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":355,"x":131,"width":552,"var":"t_highScore","text":"0","height":101,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":517,"x":165,"skin":"game/huodechenghao-di.png"}},{"type":"Text","props":{"y":528,"x":271,"text":"获得称号:","fontSize":35,"font":"SimHei","color":"#fff2d0"}},{"type":"Text","props":{"y":528,"x":435,"width":153,"var":"t_title","text":"青铜守卫","height":35,"fontSize":35,"font":"SimHei","color":"#fff2d0","align":"center"}},{"type":"Button","props":{"y":990,"x":444,"var":"btn_playAgain","stateNum":2,"skin":"game/btn_zaiwanyici.png"}},{"type":"Button","props":{"y":1035,"x":258,"var":"btn_shared","stateNum":2,"skin":"game/btn_xuanyaodefen.png","scaleY":0.88,"scaleX":0.88,"anchorY":0.5,"anchorX":0.5},"compId":5},{"type":"Button","props":{"y":1116,"x":299,"width":216,"visible":false,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"查看全部排行","height":58}},{"type":"List","props":{"y":656,"x":108,"width":630,"visible":false,"var":"list_rank","height":322},"child":[{"type":"Box","props":{"y":0,"x":0,"width":628,"renderType":"render","height":108},"child":[{"type":"Image","props":{"y":2,"x":425,"skin":"game/xunzhang-01.png"}},{"type":"Text","props":{"y":24,"x":486,"text":"青铜守卫","name":"t_title","fontSize":30,"font":"SimHei","color":"#dbc17d"}},{"type":"Image","props":{"y":68,"x":19,"skin":"game/img_line.png","name":"img_title"}},{"type":"Text","props":{"y":19,"x":309,"width":132,"text":"999999","name":"t_score","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":19,"x":102,"width":216,"text":"玩家名字七个字","name":"t_name","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":57,"skin":"game/yuandi.png"}},{"type":"Text","props":{"y":22,"x":58,"width":39,"text":"1","name":"t_rank","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":0,"skin":"game/yuandi.png","name":"img_icon"}}]}]},{"type":"Image","props":{"y":231,"x":255,"var":"img_high","skin":"game/high.png"}}]}],"animations":[{"nodes":[{"target":5,"keyframes":{"x":[{"value":258,"tweenMethod":"linearNone","tween":true,"target":5,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":40}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":40}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
 		return GameOverUI;
 	})(View);
 var GameRankUI=(function(_super){
@@ -49742,9 +49743,50 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":257,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":925,"x":344,"width":125,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":233,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}},{"type":"Text","props":{"y":1366,"x":70,"text":"v1.0","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
+/**游戏称号数据 */
+var GameTitleData = [
+    {
+        score:0,
+        name:"石头守卫",
+        icon:"",
+    },
+    {
+        score:500,
+        name:"英勇黄铜",
+        icon:"xunzhang-01.png",
+        
+    },
+    {
+        score:1000,
+        name:"不屈白银",
+        icon:"xunzhang-02.png",
+    },
+    {
+        score:3000,
+        name:"荣耀黄金",
+        icon:"xunzhang-03.png",
+    },
+    {
+        score:5000,
+        name:"华贵铂金",
+        icon:"xunzhang-04.png",
+    },
+    {
+        score:10000,
+        name:"璀璨钻石",
+        icon:"xunzhang-05.png",
+    },
+    {
+        score:20000,
+        name:"超凡大师",
+        icon:"xunzhang-06.png",
+    },
+    
+    
+];
 /**
  * 结算界面逻辑 by lzq
  */
@@ -49798,27 +49840,35 @@ var GameOverUILogic = (function (_super) {
         this.height = Laya.stage.height;
 
         this.zOrder = 200;
-
+        
         var scoreNum = SceneManager.getInstance().currentScene.gameScore;
         this.t_score.text = scoreNum;
         this.t_highScore.text = scoreNum;
 
-        //存储在本地并上传
-        // scoreNum = SetLocalMaxScore(scoreNum);
-        // wxGame.getInstance().uploadUserScore(scoreNum);
+        this.t_title.text = getTitleBySocre(scoreNum);
 
-        //测试显示排行
-        wxGame.getInstance().uploadUserScore(200);
-        if (Browser.onMiniGame) {
-            wxGame.getInstance().postMessage({
-                act: "showEndFriends",
-            }, true);
+        //存储在本地并上传
+        var highscoreNum = SetLocalMaxScore(scoreNum);
+        wxGame.getInstance().uploadUserScore(highscoreNum);
+
+        this.img_high.visible = false;
+        if(scoreNum >= highscoreNum){
+            this.img_high.visible = true;
         }
+        
+        //测试显示排行
+        // wxGame.getInstance().uploadUserScore(200);
+        // if (Browser.onMiniGame) {
+        //     wxGame.getInstance().postMessage({
+        //         act: "showEndFriends",
+        //     }, true);
+        // }
 
         this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         
+        this.aniShare.play(0, true);
 
     }
     
@@ -49830,10 +49880,11 @@ var GameOverUILogic = (function (_super) {
 
     /**分享游戏 */
     _proto._sharedClickEvent = function () {
-
+        wxGame.getInstance().shareGame();
     }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
+        wxGame.getInstance().showOpenDataContext(false);
         SceneManager.getInstance().currentScene.restartGame();
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
@@ -49959,6 +50010,10 @@ var MonsterRefreshData = [
         score:5000,
         time:200
     },
+    {
+        score:10000,
+        time:150
+    },
     
     
 ];
@@ -49971,7 +50026,8 @@ var MonsterData = [
         hp:100,
         attack:20,
         score:16,
-        speed:1
+        speed:2,
+        radius:30,
     },
     {
         type:1,
@@ -49980,7 +50036,8 @@ var MonsterData = [
         hp:200,
         attack:30,
         score:19,
-        speed:1.5
+        speed:2.5,
+        radius:45,
     },
     {
         type:1,
@@ -49989,7 +50046,8 @@ var MonsterData = [
         hp:300,
         attack:50,
         score:40,
-        speed:2
+        speed:4,
+        radius:60,
     },
     {
         type:2,
@@ -49998,7 +50056,8 @@ var MonsterData = [
         hp:100,
         attack:20,
         score:16,
-        speed:1
+        speed:2,
+        radius:30,
     },
     {
         type:2,
@@ -50007,7 +50066,8 @@ var MonsterData = [
         hp:100,
         attack:30,
         score:19,
-        speed:1.5
+        speed:2.5,
+        radius:45,
     },
     {
         type:2,
@@ -50016,7 +50076,8 @@ var MonsterData = [
         hp:100,
         attack:50,
         score:40,
-        speed:2
+        speed:4,
+        radius:60,
     },
     
 ];
@@ -50368,7 +50429,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 12;
+    var HeroSpeed = 10;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -50451,6 +50512,13 @@ var Hero = (function(_super){
             return;
         // Gamelog("-------目标点x="+_pos.x +",y="+_pos.y);
 
+        this.reserTarget();
+
+        var isCollion = this.lineIsCollisionTower(_pos);
+        // Gamelog("---------线段是否相交="+isCollion);
+    }
+    /**重置目标 */
+    _proto.reserTarget = function(){
         this.isMoveFinsih1 = false;
         this.isMoveFinsih2 = false;
 
@@ -50459,9 +50527,6 @@ var Hero = (function(_super){
 
         this.targetPos2 = null;
         this.targetVector2 = null;
-
-        var isCollion = this.lineIsCollisionTower(_pos);
-        // Gamelog("---------线段是否相交="+isCollion);
     }
 
     _proto.onUpdate = function(){
@@ -50662,14 +50727,6 @@ var Monster = (function(_super){
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
-        if(ShowRang){
-            var rangSp = new Laya.Sprite();
-            rangSp.graphics.drawCircle(0,0,this.MonsterRadios,"#ff0000","#ff0000",1);
-            rangSp.x = this.pivotX;
-            rangSp.y = this.pivotY;
-            this.addChild(rangSp);
-        }
-
         // var test = new Laya.ProgressBar("game/progress.png");
         this.hpProgress = new Laya.ProgressBar("game/progress.png");
         this.hpProgress.anchorX = 0.5;
@@ -50701,6 +50758,7 @@ var Monster = (function(_super){
         
         var t_data = MonsterData[_type];
         
+        this.anim.clear()
         this.anim.play(0, true, t_data.anim);
         this.anim.visible = true;
 
@@ -50710,6 +50768,15 @@ var Monster = (function(_super){
         this.attackValue = t_data.attack;
         this.monsterSpeed = t_data.speed;
         this.monsterScore = t_data.score;
+        this.MonsterRadios = t_data.radius;
+
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.MonsterRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
     }
     /**设置目标点 */
     _proto.setTargetPos = function(_pos,_angle){
@@ -50815,7 +50882,7 @@ var Monster = (function(_super){
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
-        },1000,null,new Laya.Handler(this,function(){
+        },800,null,new Laya.Handler(this,function(){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
@@ -50870,7 +50937,6 @@ var GameScene = (function (_super) {
         //初始化当前类属性
         this.gameScore = 0;
         
-
         this.monsterList = new Array();
         this.monsterPool = [];
 
@@ -50888,7 +50954,6 @@ var GameScene = (function (_super) {
         this.towerBox.width = Laya.stage.width;
         this.towerBox.height = Laya.stage.height;
         this.towerBox.zOrder = 20;
-
 
         Laya.stage.addChild(this.monsterBox);
         Laya.stage.addChild(this.towerBox);
@@ -50929,8 +50994,6 @@ var GameScene = (function (_super) {
     }
     //自动适配完后初始化
      _proto.delayInitShow = function () {
-
-        this.gameUI.addScore(0);
         
      }
     
@@ -50960,17 +51023,19 @@ var GameScene = (function (_super) {
     /**重置游戏 */
     _proto.restartGame = function(){
         this.gameScore = 0;
-        this.gameUI.t_score.text = 0;
+        this.gameUI.setScore(0,false);
 
         this.curTower.resetHp();
 
         this.curHero.pos(this.curTower.x, this.curTower.y + 200);
         this.curHero.stopAnim();
+        this.curHero.reserTarget();
 
         for (var i = 0; i < this.monsterList.length; i++) {
             var t_monster = this.monsterList[i];
             MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
         }
+        this.monsterList = [];
     }
 
     /**
@@ -51057,7 +51122,9 @@ var GameScene = (function (_super) {
         // Gamelog("-----_monsterDeadEvent");
         var t_score = notif.Content.monsterScore;
         this.gameScore += t_score;
-        this.gameUI.t_score.text = this.gameScore;
+        this.gameUI.setScore(this.gameScore,true);
+
+        this.gameUI.stageShake();
 
         for (var i = 0; i < this.monsterList.length; i++) {
             var t_monster = this.monsterList[i];
@@ -51076,6 +51143,8 @@ var GameScene = (function (_super) {
         
     }
 
+ 
+
     
 
     return GameScene;
@@ -51091,6 +51160,9 @@ var GameUILogic = (function (_super) {
     }
     Laya.class(GameUILogic, "GameUILogic", _super);
     _proto = GameUILogic.prototype;
+    _proto.scoreLable = null;                                                //分数文字
+     /** 是否震动中 */
+    this._isShake = false;
 
     _proto.onInit = function () {
         this.width = Laya.stage.width;
@@ -51101,6 +51173,19 @@ var GameUILogic = (function (_super) {
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
         UIManager.getInstance().showUI("GameStartUI");
         // UIManager.getInstance().showUI("GameOverUI");
+
+        this.t_score.visible = false;
+
+        this.scoreLable = new Laya.Label("0");
+        // var lab = new Laya.Label();
+        this.scoreLable.align = "center";
+        this.scoreLable.font = "shuzi";
+        this.scoreLable.width = 400;
+        this.scoreLable.height = 260;
+        this.scoreLable.pivot(200,130);
+        this.scoreLable.pos(Laya.stage.width/2,Laya.stage.height/2 - 400);
+        this.scoreLable.zOrder = 40;
+        Laya.stage.addChild(this.scoreLable);
     }
     
     _proto.onDestroy = function () {
@@ -51112,15 +51197,55 @@ var GameUILogic = (function (_super) {
     // }
 
     //显示分数
-    _proto.addScore = function(p_score){
+    _proto.setScore = function(p_score,p_anim){
         // Gamelog("-------gamescore="+SceneManager.getInstance().currentScene.gameScore)
-        this.t_score.text = SceneManager.getInstance().currentScene.gameScore;
+        this.scoreLable.text = p_score;
+        if(p_anim){
+            this.scoreLable.scale(1.2,1.2);
+            Laya.Tween.to(this.scoreLable,
+            {
+                scaleX:1,
+                scaleY:1,
+            },500,Laya.Ease.elasticOut);
+        }
     }
 
-    /**关闭游戏 */
-    _proto.onCloseGame = function () {
+      
+  /**
+   * 震动屏幕 
+   * @param callBack
+   * @param times
+   * @param offset
+   * @param speed
+   *
+   */  
+    _proto.stageShake = function(){
+        if(this._isShake)
+             return;
+        var times = 1;
+        var offset = 10;
+        var speed = 32
 
-    }
+        this._isShake = true;
+        var num = 0;
+        var offsetArr = [0, 0];
+        var point = new Laya.Point(Laya.stage.x, Laya.stage.y);
+        Laya.stage.timerLoop(speed, this, shakeObject);
+        
+        function shakeObject(){
+            var count = (num++) % 4;
+            offsetArr[num % 2] = count < 2 ? 0 : offset;
+            Laya.stage.x = offsetArr[0] + point.x;
+            Laya.stage.y = offsetArr[1] + point.y;
+            if(num > (times * 4 + 1)){
+                Laya.stage.clearTimer(this, shakeObject);
+                num = 0;
+                this._isShake = false;
+            }
+        }
+   
+  }
+
 
     return GameUILogic;
 })(GameUI);
@@ -51783,6 +51908,18 @@ function isCollisionWithTwoCricle(cp1,r1,cp2,r2) {
     // console.debug("---------num1="+num1+",num2="+num2+",result = "+result);
     return result;	//判断两圆是否相交, 公式：（x1-x2)^2 + (y1-y2)^2 < (r1 + r2)^2
 }
+/**获取称号 */
+function getTitleBySocre(p_score){
+    var t_title = "";
+    for (var i = GameTitleData.length -1 ; i >=0; i--) {
+        var t_data = GameTitleData[i];
+        if(p_score > t_data.score){
+            t_title = t_data.name;
+            break;
+        }
+    }
+    return t_title;
+}
 /*
 * name;
 */
@@ -51948,8 +52085,6 @@ var wxGame = (function (_super) {
             wx.showShareMenu({
                 withShareTicket: false
             });
-
-
 
             var shareInfoArr = this.shareInfo();
             wx.onShareAppMessage(function () {
@@ -52128,16 +52263,14 @@ var wxGame = (function (_super) {
 
     _proto.shareInfo = function () {
         var shareInfoArr = new Array();
-        // 最经典的泡泡龙，你敢与我一决高下吗？
-        // 以前爱不释手的泡泡龙，我都玩上万分了！
-        // 这游戏，你能打到上万分算我输！
         var rand = Math.random() * 3 + 1;
         rand = parseInt(rand, 10);
-
+        rand = 1;
+        
         var str = "";
         switch (rand) {
             case 1:
-                str = "最经典的泡泡龙，你敢与我一决高下吗？";
+                str = "【好基友@你】人在塔在！快来守护住你们的水晶枢纽吧！";
                 break;
             case 2:
                 str = "以前爱不释手的泡泡龙，我都玩上万分了！";
@@ -52153,6 +52286,7 @@ var wxGame = (function (_super) {
 
         var rand2 = Math.random() * 2 + 1;
         rand2 = parseInt(rand2, 10);
+        rand2 = 1;
         var strImage = "res/openDataRes/share" + rand2 + ".png";
 
         shareInfoArr.push(str);
@@ -52296,16 +52430,14 @@ function beginLoad() {
                 ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
                 //图片
                 ["game/beijing.jpg",Laya.Loader.IMAGE],
+                ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
+                ["game/img_line.png",Laya.Loader.IMAGE],
+                ["game/paohangbang-di.png",Laya.Loader.IMAGE],
                 //字体
                 ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
                 // ["res/music/1.mp3",Laya.Loader.SOUND],
                 // ["res/music/1.wav",Laya.Loader.SOUND],
-                // ["res/music/4.wav",Laya.Loader.SOUND],
-                // ["res/music/6.wav",Laya.Loader.SOUND],
-                // ["res/music/7.wav",Laya.Loader.SOUND],
-                // ["res/music/8.wav",Laya.Loader.SOUND],
-                // ["res/music/14.wav",Laya.Loader.SOUND],
 
                 ];
 

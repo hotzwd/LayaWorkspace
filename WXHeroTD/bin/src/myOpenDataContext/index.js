@@ -140,15 +140,10 @@ function updateScore(data){
         if (data.score >= max_score) {
           result = true;
           // 历史最高分
-          var head = writeImage("res/openDataRes/huangguan.png", 0, -440, 167, 104);
-          head.anchorX = 0.5;
-          head.anchorY = 0.5;
-          Laya.stage.addChild(head);
-
-          var highest = writeImage("res/openDataRes/high.png", 0, -350, 303, 68);
-          highest.anchorX = 0.5;
-          highest.anchorY = 0.5;
-          Laya.stage.addChild(highest);
+          // var highest = writeImage("res/openDataRes/high.png", 0, -550, 303, 68);
+          // highest.anchorX = 0.5;
+          // highest.anchorY = 0.5;
+          // Laya.stage.addChild(highest);
         }
       }
 
@@ -263,11 +258,16 @@ function showEndFriends(data){
             scoreNum.anchorY = 0.5;
             Laya.stage.addChild(scoreNum);
 
-            var img_title = writeImage("res/openDataRes/xunzhang-01.png", 170, item_start + item_heigh * (1 - i), 70, 70);
-            img_title.anchorY = 0.5;
-            Laya.stage.addChild(img_title);
+            var t_score = parseInt(t_item.KVDataList[0].value, 10);
 
-            var title = writeText("青铜守卫", 260, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "#eacd83", "center");
+            var t_icon = Utils.getTitleImgBySocre(t_score);
+            if(t_icon != ""){
+              var img_title = writeImage("res/openDataRes/"+t_icon, 170, item_start + item_heigh * (1 - i), 70, 70);
+              img_title.anchorY = 0.5;
+              Laya.stage.addChild(img_title);
+            }
+
+            var title = writeText(Utils.getTitleBySocre(t_score), 260, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "#dbc17d", "center");
             title.anchorY = 0.5;
             Laya.stage.addChild(title);
 

@@ -115,6 +115,37 @@ var GameUILogic = (function(_super){
         }
 
     }
+
+    /**创建游戏圈按钮 */
+    _proto.createClub = function(){
+        if (Browser.onMiniGame) {
+            var isPass = false;
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    var isPassNum = compareVersion(res.SDKVersion,"2.0.3");
+                    if(isPassNum >= 0){
+                        isPass = true;
+                    }
+                }
+            }); 
+            if(!isPass){
+                return;
+            }
+            if(this.button != null){
+                this.button.destroy();
+            }
+            this.button = wx.createGameClubButton({
+                icon: 'green',
+                style: {
+                    left: 10,
+                    top: 70,
+                    width: 40,
+                    height: 40
+                }
+            })
+        }
+    }
     _proto.delayShow = function(){
 
         //创建新的桶 位于球的上层
@@ -437,17 +468,7 @@ var GameUILogic = (function(_super){
 
         //this.onStartClick();
         this.showBannerAd();
-        if (Browser.onMiniGame) {
-            this.button = wx.createGameClubButton({
-                icon: 'green',
-                style: {
-                    left: 10,
-                    top: 70,
-                    width: 40,
-                    height: 40
-                }
-            })
-        }
+        this.createClub();
     }
 
     /**游戏倒计时 显示 */

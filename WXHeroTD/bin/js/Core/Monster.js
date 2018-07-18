@@ -48,14 +48,6 @@ var Monster = (function(_super){
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
 
-        if(ShowRang){
-            var rangSp = new Laya.Sprite();
-            rangSp.graphics.drawCircle(0,0,this.MonsterRadios,"#ff0000","#ff0000",1);
-            rangSp.x = this.pivotX;
-            rangSp.y = this.pivotY;
-            this.addChild(rangSp);
-        }
-
         // var test = new Laya.ProgressBar("game/progress.png");
         this.hpProgress = new Laya.ProgressBar("game/progress.png");
         this.hpProgress.anchorX = 0.5;
@@ -87,6 +79,7 @@ var Monster = (function(_super){
         
         var t_data = MonsterData[_type];
         
+        this.anim.clear()
         this.anim.play(0, true, t_data.anim);
         this.anim.visible = true;
 
@@ -96,6 +89,15 @@ var Monster = (function(_super){
         this.attackValue = t_data.attack;
         this.monsterSpeed = t_data.speed;
         this.monsterScore = t_data.score;
+        this.MonsterRadios = t_data.radius;
+
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.MonsterRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
     }
     /**设置目标点 */
     _proto.setTargetPos = function(_pos,_angle){
@@ -201,7 +203,7 @@ var Monster = (function(_super){
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
-        },1000,null,new Laya.Handler(this,function(){
+        },800,null,new Laya.Handler(this,function(){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 

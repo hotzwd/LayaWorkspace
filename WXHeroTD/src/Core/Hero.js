@@ -13,7 +13,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 12;
+    var HeroSpeed = 10;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -96,6 +96,13 @@ var Hero = (function(_super){
             return;
         // Gamelog("-------目标点x="+_pos.x +",y="+_pos.y);
 
+        this.reserTarget();
+
+        var isCollion = this.lineIsCollisionTower(_pos);
+        // Gamelog("---------线段是否相交="+isCollion);
+    }
+    /**重置目标 */
+    _proto.reserTarget = function(){
         this.isMoveFinsih1 = false;
         this.isMoveFinsih2 = false;
 
@@ -104,9 +111,6 @@ var Hero = (function(_super){
 
         this.targetPos2 = null;
         this.targetVector2 = null;
-
-        var isCollion = this.lineIsCollisionTower(_pos);
-        // Gamelog("---------线段是否相交="+isCollion);
     }
 
     _proto.onUpdate = function(){

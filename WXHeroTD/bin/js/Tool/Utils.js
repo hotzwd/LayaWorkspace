@@ -215,3 +215,15 @@ function isCollisionWithTwoCricle(cp1,r1,cp2,r2) {
     // console.debug("---------num1="+num1+",num2="+num2+",result = "+result);
     return result;	//判断两圆是否相交, 公式：（x1-x2)^2 + (y1-y2)^2 < (r1 + r2)^2
 }
+/**获取称号 */
+function getTitleBySocre(p_score){
+    var t_title = "";
+    for (var i = GameTitleData.length -1 ; i >=0; i--) {
+        var t_data = GameTitleData[i];
+        if(p_score > t_data.score){
+            t_title = t_data.name;
+            break;
+        }
+    }
+    return t_title;
+}

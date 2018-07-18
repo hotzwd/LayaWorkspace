@@ -46,7 +46,6 @@ var GameScene = (function (_super) {
         //初始化当前类属性
         this.gameScore = 0;
         
-
         this.monsterList = new Array();
         this.monsterPool = [];
 
@@ -64,7 +63,6 @@ var GameScene = (function (_super) {
         this.towerBox.width = Laya.stage.width;
         this.towerBox.height = Laya.stage.height;
         this.towerBox.zOrder = 20;
-
 
         Laya.stage.addChild(this.monsterBox);
         Laya.stage.addChild(this.towerBox);
@@ -105,8 +103,6 @@ var GameScene = (function (_super) {
     }
     //自动适配完后初始化
      _proto.delayInitShow = function () {
-
-        this.gameUI.addScore(0);
         
      }
     
@@ -136,17 +132,19 @@ var GameScene = (function (_super) {
     /**重置游戏 */
     _proto.restartGame = function(){
         this.gameScore = 0;
-        this.gameUI.t_score.text = 0;
+        this.gameUI.setScore(0,false);
 
         this.curTower.resetHp();
 
         this.curHero.pos(this.curTower.x, this.curTower.y + 200);
         this.curHero.stopAnim();
+        this.curHero.reserTarget();
 
         for (var i = 0; i < this.monsterList.length; i++) {
             var t_monster = this.monsterList[i];
             MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
         }
+        this.monsterList = [];
     }
 
     /**
@@ -233,7 +231,9 @@ var GameScene = (function (_super) {
         // Gamelog("-----_monsterDeadEvent");
         var t_score = notif.Content.monsterScore;
         this.gameScore += t_score;
-        this.gameUI.t_score.text = this.gameScore;
+        this.gameUI.setScore(this.gameScore,true);
+
+        this.gameUI.stageShake();
 
         for (var i = 0; i < this.monsterList.length; i++) {
             var t_monster = this.monsterList[i];
@@ -251,6 +251,8 @@ var GameScene = (function (_super) {
         Laya.timer.clear(this,this.onUpdate);
         
     }
+
+ 
 
     
 

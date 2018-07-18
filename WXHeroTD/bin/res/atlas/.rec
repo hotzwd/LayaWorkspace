@@ -3,13 +3,14 @@ D bitmapFont
 D game
 R ACF788EC beijing.jpg
 P 336359A8 btn_guanbi.png
-P C1EFD075 btn_kaishianniu.png
+P 6DD5C08F btn_kaishianniu.png
 P C6E0028A btn_xuanyaodefen.png
 P A04FD96C btn_zaiwanyici.png
+P 6B52DC79 high.png
 R 4CF5F507 huodechenghao-di.png
 R 85B3320E img_line.png
 P 7A521376 jiantou.png
-P A5114F75 logo.png
+P 08232FD8 logo.png
 P 0D5CD876 No.1.png
 R ECF10DCC paohangbang-di.png
 P 84201301 penjian-texiao.png
@@ -21,7 +22,6 @@ P A8BD7C79 progress_xuetiao.png
 P 793CC8F1 tower.png
 P A3DF852F xunzhang-01.png
 P 9F1BA619 yuandi.png
-P 6B52DC79 zuigaofen.png
 D hero
 P 3E8DEBB9 gailun-01.png
 P 582C0DD3 gailun-02.png

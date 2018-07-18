@@ -7,7 +7,8 @@ var MonsterData = [
         hp:100,
         attack:20,
         score:16,
-        speed:1
+        speed:2,
+        radius:30,
     },
     {
         type:1,
@@ -16,7 +17,8 @@ var MonsterData = [
         hp:200,
         attack:30,
         score:19,
-        speed:1.5
+        speed:2.5,
+        radius:45,
     },
     {
         type:1,
@@ -25,7 +27,8 @@ var MonsterData = [
         hp:300,
         attack:50,
         score:40,
-        speed:2
+        speed:4,
+        radius:60,
     },
     {
         type:2,
@@ -34,7 +37,8 @@ var MonsterData = [
         hp:100,
         attack:20,
         score:16,
-        speed:1
+        speed:2,
+        radius:30,
     },
     {
         type:2,
@@ -43,7 +47,8 @@ var MonsterData = [
         hp:100,
         attack:30,
         score:19,
-        speed:1.5
+        speed:2.5,
+        radius:45,
     },
     {
         type:2,
@@ -52,7 +57,8 @@ var MonsterData = [
         hp:100,
         attack:50,
         score:40,
-        speed:2
+        speed:4,
+        radius:60,
     },
     
 ];

@@ -41,16 +41,14 @@ function beginLoad() {
                 ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
                 //图片
                 ["game/beijing.jpg",Laya.Loader.IMAGE],
+                ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
+                ["game/img_line.png",Laya.Loader.IMAGE],
+                ["game/paohangbang-di.png",Laya.Loader.IMAGE],
                 //字体
                 ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
                 // ["res/music/1.mp3",Laya.Loader.SOUND],
                 // ["res/music/1.wav",Laya.Loader.SOUND],
-                // ["res/music/4.wav",Laya.Loader.SOUND],
-                // ["res/music/6.wav",Laya.Loader.SOUND],
-                // ["res/music/7.wav",Laya.Loader.SOUND],
-                // ["res/music/8.wav",Laya.Loader.SOUND],
-                // ["res/music/14.wav",Laya.Loader.SOUND],
 
                 ];
 

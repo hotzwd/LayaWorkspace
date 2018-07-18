@@ -24,6 +24,10 @@ var MonsterRefreshData = [
         score:5000,
         time:200
     },
+    {
+        score:10000,
+        time:150
+    },
     
     
 ];

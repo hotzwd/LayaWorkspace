@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":3,
-    "selecteID":14,
+    "selecteID":15,
     "props":{"width":720,"sceneColor":"#ffffff","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -117,13 +117,14 @@
                     "props":{"alpha":0.9},
                     "nodeParent":3,
                     "label":"Sprite",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":6,
                     "child":[
                         {
+                            "x":45,
                             "type":"Rect",
                             "props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"},
                             "nodeParent":6,
@@ -152,7 +153,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":803,"x":257,"var":"btn_start","stateNum":"1","skin":"game/btn_kaishianniu.png"},
+                    "props":{"y":803,"x":233,"var":"btn_start","stateNum":"1","skin":"game/btn_kaishianniu.png"},
                     "nodeParent":3,
                     "label":"Button(btn_start)",
                     "isDirectory":false,
@@ -165,13 +166,26 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":925,"x":344,"width":125,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38},
+                    "props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38},
                     "nodeParent":3,
                     "label":"Button(btn_rank)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":14,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":1366,"x":70,"text":"v1.0","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                    "nodeParent":3,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":15,
                     "child":[
                         ]
                 }],

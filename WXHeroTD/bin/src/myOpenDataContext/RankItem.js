@@ -43,14 +43,19 @@ RankItem.prototype.init = function (cell,index) {
   this.addChild(this.headimg);
 
   // 用户昵称
-  this.nickname = this.writeText(cell.dataSource.nickname, 200, 28, 36, "#070201", "left", 50,0);
+  this.nickname = this.writeText(cell.dataSource.nickname, 170, 30, 25, "#070201", "left", 50,0);
   this.nickname.text = Utils.labelTransform(this.nickname.text,36,250);
   // this.nickname.overflow = Laya.Text.VISIBLE;
   this.addChild(this.nickname);
 
   // 分数
-  this.score = this.writeText(cell.dataSource.KVDataList[0].value, 350, 36, 32, "red", "right",200,1);
+  this.score = this.writeText(cell.dataSource.KVDataList[0].value, 250, 36, 25, "red", "right",200,1);
   this.addChild(this.score);
+
+  var t_score = parseInt(cell.dataSource.KVDataList[0].value, 10);
+  //称呼
+  this.title = this.writeText(Utils.getTitleBySocre(t_score), 370, 36, 25, "#000000", "right", 200, 1);
+  this.addChild(this.title);
 
   //线
   this.line = new Laya.Sprite()

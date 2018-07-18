@@ -30,8 +30,6 @@ var wxGame = (function (_super) {
                 withShareTicket: false
             });
 
-
-
             var shareInfoArr = this.shareInfo();
             wx.onShareAppMessage(function () {
                 // 用户点击了“转发”按钮
@@ -209,16 +207,14 @@ var wxGame = (function (_super) {
 
     _proto.shareInfo = function () {
         var shareInfoArr = new Array();
-        // 最经典的泡泡龙，你敢与我一决高下吗？
-        // 以前爱不释手的泡泡龙，我都玩上万分了！
-        // 这游戏，你能打到上万分算我输！
         var rand = Math.random() * 3 + 1;
         rand = parseInt(rand, 10);
-
+        rand = 1;
+        
         var str = "";
         switch (rand) {
             case 1:
-                str = "最经典的泡泡龙，你敢与我一决高下吗？";
+                str = "【好基友@你】人在塔在！快来守护住你们的水晶枢纽吧！";
                 break;
             case 2:
                 str = "以前爱不释手的泡泡龙，我都玩上万分了！";
@@ -234,6 +230,7 @@ var wxGame = (function (_super) {
 
         var rand2 = Math.random() * 2 + 1;
         rand2 = parseInt(rand2, 10);
+        rand2 = 1;
         var strImage = "res/openDataRes/share" + rand2 + ".png";
 
         shareInfoArr.push(str);
