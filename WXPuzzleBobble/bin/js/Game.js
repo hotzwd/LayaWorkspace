@@ -2,6 +2,9 @@
 Laya.MiniAdpter.init();
 //laya初始化
 Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
+
+wxGame.getInstance().Init();
+
 //FPS
 // Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
@@ -44,29 +47,13 @@ function  beginLoad(){
             type:Laya.Loader.ATLAS
         }); 
         asset.push({
-            url : "game/bgGame.png",
+            url : "game/bgGame.jpg",
             type:Laya.Loader.IMAGE
         }); 
 
     //loading 界面需要的图集
     // Laya.loader.load(asset,Laya.Handler.create(this,showLoaded),null);
     Laya.loader.load(asset,Laya.Handler.create(this,loadingCallback),null);
-}
-
-/**
- * 显示loading界面
- */
-function showLoaded(){
-    
-    var loadingLogic = UIManager.getInstance().showUI("LoadingUI");
-    var arr = [
-                //图集
-                ["res/atlas/game.atlas",Laya.Loader.ATLAS],
-                ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
-                ];
-    // var arr = [["res/atlas/comp.json",Laya.Loader.ATLAS]];
-
-    loadingLogic.loadAsset(arr,loadingCallback);
 }
 
 function loadingCallback(){

@@ -1,3 +1,11 @@
+require("./weapp-adapter.js");
+require('./libs/laya.core.js');
+require('./libs/laya.wxmini.js');
+require('./libs/laya.webgl.js');
+require('./libs/laya.ani.js');
+require('./libs/laya.ui.js');
+require("./RankItem.js");
+
 var sharedCanvas;
 var sharedContext;//共享离屏上下文
 
@@ -26,6 +34,27 @@ var RANKITEMNUM = 3;//每页排行榜显示数量
 var FRIEND = 1;//好友排行
 var GROUP = 2;//群组排行
 var SCORE = 3;//发送分数
+var RANK = 4;//全部排行榜
+
+
+//初始化微信小游戏
+Laya.MiniAdpter.init(true, true);
+
+//laya初始化
+Laya.init(720, 1280);
+
+//FPS
+// Laya.Stat.show(0,0);
+//设置适配模式 宽度不变，高度根据屏幕比缩放
+Laya.stage.scaleMode = "fixedauto";
+//场景布局类型 自动竖屏
+Laya.stage.screenMode = "vertical";
+//设置水平居中对齐
+Laya.stage.alignH = "center";
+//垂直居中对齐
+Laya.stage.alignV = "middle";
+
+Laya.stage.bgColor = "#191514";//设置画布的背景颜色。
 
 
 wx.onMessage(function(data){
@@ -53,6 +82,9 @@ wx.onMessage(function(data){
   else if (data.msgType == SCORE) {//发送分数
     sendScore(data.score + "");
   }
+  else if (data.msgType == RANK) {//全部排行榜
+    showRank();
+  }
 
   console.log("执行onMessage结束:");
 })
@@ -73,6 +105,40 @@ function sendScore(scoreNum) {
       //console.log("发送完成");
     }
   })
+}
+
+function showRank() {
+    wx.getFriendCloudStorage({
+      keyList: ['rankScore'],
+      fail:function(res){console.log(res)},
+        success: function (res) {
+            console.log("getFriendCloudStorage");
+
+            // Utils.GameLogObject(res.data[0].KVDataList);
+            //有效数据--res.data里返回当前同玩好友KVDataList 没有当前key 则为长度为0
+            var dataArr = Utils.getValidData(res.data);
+            dataArr = Utils.scoreOrder(dataArr);
+
+            //testData(10, dataArr);
+
+
+            var list = new Laya.List();
+            list.itemRender = RankItem;
+            list.vScrollBarSkin = "";  // 滚动条
+            list.repeatX = 1;//设置 list 的水平方向单元格数量。
+            list.repeatY = 5;//设置 list 的垂直方向单元格数量。
+            list.array = dataArr;
+
+            list.centerX = 0;
+            list.centerY = 0;
+            list.size(577, 636);
+            list.renderHandler = new Laya.Handler(this, updateItem);
+            Laya.stage.addChild(list);
+        }
+    });
+}
+function updateItem(cell, index) {
+    cell.init(cell, index);
 }
 
 /**获取好友排行榜页面 */
@@ -131,7 +197,7 @@ function getFriendRank(){
 function compareScore(a,b){
   var tempA = a.KVDataList[0].value;
   var tempB = b.KVDataList[0].value;
-  console.log("------------排行对比--tempA="+tempA+",tempB="+tempB);
+  // console.log("------------排行对比--tempA="+tempA+",tempB="+tempB);
   return tempB - tempA;
 }
 

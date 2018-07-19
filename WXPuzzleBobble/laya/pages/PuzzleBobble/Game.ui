@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":92,
+    "selecteID":73,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -55,6 +55,7 @@
             "compId":30,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0},
                     "nodeParent":30,
@@ -67,6 +68,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5},
                     "nodeParent":30,
@@ -80,6 +82,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5},
                     "nodeParent":30,
@@ -92,6 +95,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
                     "props":{"y":-1,"x":291,"var":"btn_sound","stateNum":"2","skin":"game/btn_shengyin_kai.png"},
                     "nodeParent":30,
@@ -105,6 +109,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"},
                     "nodeParent":30,
@@ -118,6 +123,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"},
                     "nodeParent":30,
@@ -128,6 +134,32 @@
                     "compId":28,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"y":-201,"x":0,"alpha":0.6},
+                    "nodeParent":30,
+                    "label":"Sprite",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":114,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Rect",
+                            "props":{"y":62,"x":0,"width":1280,"lineWidth":1,"height":140,"fillColor":"#050505"},
+                            "nodeParent":114,
+                            "label":"Rect",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":115,
+                            "child":[
+                                ]
+                        }]
                 }]
         },
         {
@@ -143,7 +175,6 @@
             "compId":109,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"},
                     "nodeParent":109,
@@ -156,7 +187,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "props":{"y":1061,"x":422,"var":"changeBubbleBox"},
                     "nodeParent":109,
@@ -195,7 +225,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Animation",
                     "props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false},
                     "nodeParent":109,
@@ -209,7 +238,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"},
                     "nodeParent":109,
@@ -223,7 +251,6 @@
                     "$HIDDEN":true
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":109,
@@ -236,7 +263,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"},
                     "nodeParent":109,
@@ -250,7 +276,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"},
                     "nodeParent":109,
@@ -264,7 +289,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":109,
@@ -292,7 +316,6 @@
             "compId":73,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556},
                     "nodeParent":73,
@@ -306,7 +329,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":451,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305},
                     "nodeParent":73,
@@ -320,7 +342,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":418,"x":489,"skin":"game/img_youxiguize.png"},
                     "nodeParent":73,
@@ -333,7 +354,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"y":680,"x":517,"var":"btn_start","stateNum":"2","skin":"game/btn_kaishi.png"},
                     "nodeParent":73,
@@ -346,7 +366,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":539,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
@@ -360,7 +379,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":579,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
@@ -374,7 +392,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":620,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
@@ -388,7 +405,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":1239,"x":290,"text":"v1.2","fontSize":26,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":73,
@@ -402,7 +418,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"y":865,"x":544,"width":192,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"查看排行榜","height":35},
                     "nodeParent":73,

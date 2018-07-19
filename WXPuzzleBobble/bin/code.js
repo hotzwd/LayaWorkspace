@@ -49657,6 +49657,7 @@ var GameUI=(function(_super){
 		    this.img_guang=null;
 		    this.gameStartPanel=null;
 		    this.btn_start=null;
+		    this.btn_rank=null;
 		    this.img_black=null;
 		    this.img_start=null;
 
@@ -49672,7 +49673,7 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"var":"img_bg","skin":"game/bgGame.png","height":1280,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"y":0,"var":"gameStartPanel","centerX":0},"child":[{"type":"Image","props":{"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1280}},{"type":"Image","props":{"y":451,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":418,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":680,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":539,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":579,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":620,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":1239,"x":290,"text":"v1.2","fontSize":26,"font":"SimHei","color":"#585454"}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1280,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
+		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"var":"img_bg","skin":"game/bgGame.jpg","centerY":0,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"width":1280,"var":"gameStartPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":451,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":418,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":680,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":539,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":579,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":620,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":1239,"x":290,"text":"v1.2","fontSize":26,"font":"SimHei","color":"#ffffff"}},{"type":"Button","props":{"y":865,"x":544,"width":192,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"查看排行榜","height":35}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
 		return GameUI;
 	})(View);
 var GameoverUI=(function(_super){
@@ -49700,8 +49701,32 @@ var GameoverUI=(function(_super){
 
 		}
 
-		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"var":"gameoverPanel","centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1280}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":694}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":452,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":564,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":449,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":1030,"x":640,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":490,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}},{"type":"Image","props":{"y":675,"x":421,"width":434,"skin":"game/img_rankBg.png","height":282,"sizeGrid":"21,26,28,29"}},{"type":"Label","props":{"y":626,"x":534,"text":"好友排行榜","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":964,"x":634,"width":150,"var":"btn_next","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"下一页","height":50}},{"type":"Button","props":{"y":964,"x":487,"width":150,"var":"btn_last","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"上一页","height":50}},{"type":"Button","props":{"y":1075,"x":512,"var":"btn_share","stateNum":2,"skin":"game/btn_fenxiangyouxi.png","anchorY":0.5,"anchorX":0.5},"compId":78}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"x":[{"value":512,"tweenMethod":"linearNone","tween":true,"target":78,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":40}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":40}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}]};
+		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"var":"gameoverPanel","centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":694}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":452,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":564,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":449,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":1030,"x":640,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":490,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}},{"type":"Image","props":{"y":675,"x":421,"width":434,"skin":"game/img_rankBg.png","height":282,"sizeGrid":"21,26,28,29"}},{"type":"Label","props":{"y":626,"x":534,"text":"好友排行榜","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":964,"x":634,"width":150,"var":"btn_next","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"下一页","height":50}},{"type":"Button","props":{"y":964,"x":487,"width":150,"var":"btn_last","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"上一页","height":50}},{"type":"Button","props":{"y":1075,"x":512,"var":"btn_share","stateNum":2,"skin":"game/btn_fenxiangyouxi.png","anchorY":0.5,"anchorX":0.5},"compId":78}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"x":[{"value":512,"tweenMethod":"linearNone","tween":true,"target":78,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":40}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":40}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}]};
 		return GameoverUI;
+	})(View);
+var GameRankUI=(function(_super){
+		function GameRankUI(){
+			
+		    this.gameoverPanel=null;
+		    this.RankList=null;
+		    this.playerItem=null;
+		    this.listName=null;
+		    this.close=null;
+
+			GameRankUI.__super.call(this);
+		}
+
+		CLASS$(GameRankUI,'ui.PuzzleBobble.GameRankUI',_super);
+		var __proto__=GameRankUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameRankUI.uiView);
+
+		}
+
+		GameRankUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Box","props":{"y":367,"centerX":0},"child":[{"type":"Image","props":{"y":12,"x":0,"width":618,"skin":"game/rank_bg.png","sizeGrid":"10,10,10,10","height":728},"child":[{"type":"List","props":{"y":89,"x":6,"width":610,"visible":false,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":6,"repeatX":1,"height":536},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"var":"playerItem","renderType":"render","height":85},"child":[{"type":"Label","props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":30,"font":"SimHei","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":23,"x":135,"width":205,"text":"玩家名字七个字","name":"playerName","height":40,"fontSize":25,"font":"SimHei"}},{"type":"Label","props":{"y":25,"x":350,"width":116,"text":"9999999","name":"playerScore","height":30,"fontSize":25,"font":"SimHei","color":"#ff0000","align":"center"}},{"type":"Label","props":{"y":26,"x":471,"width":116,"text":"青铜卫士","name":"playerTitle","height":30,"fontSize":25,"font":"SimHei","color":"#010101","align":"center"}}]}]},{"type":"Label","props":{"y":21,"var":"listName","text":"好友排行","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":-7}},{"type":"Label","props":{"y":669,"x":306,"text":"每周一更新排名","fontSize":26,"font":"SimHei","color":"#070201","bold":true,"anchorY":0.5,"anchorX":0.5}}]},{"type":"Image","props":{"y":-2,"x":577,"var":"close","skin":"game/btn_guanbi.png"}}]}]}]};
+		return GameRankUI;
 	})(View);
 var GameSharedUI=(function(_super){
 		function GameSharedUI(){
@@ -49722,7 +49747,7 @@ var GameSharedUI=(function(_super){
 
 		}
 
-		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1280}},{"type":"Image","props":{"y":408,"x":362,"width":546,"visible":false,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":337}},{"type":"Label","props":{"y":486,"x":415,"width":445,"text":"看视频重新获得120秒时间","strokeColor":"#f10c09","stroke":0,"height":87,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":624,"x":622,"var":"btn_shard","stateNum":1,"skin":"game/fuhuo.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":771,"x":541,"width":169,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":72}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"x":[{"value":622,"tweenMethod":"linearNone","tween":true,"target":78,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":408,"x":362,"width":546,"visible":false,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":337}},{"type":"Label","props":{"y":486,"x":415,"width":445,"text":"看视频重新获得120秒时间","strokeColor":"#f10c09","stroke":0,"height":87,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":624,"x":622,"var":"btn_shard","stateNum":1,"skin":"game/fuhuo.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":771,"x":541,"width":169,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":72}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"x":[{"value":622,"tweenMethod":"linearNone","tween":true,"target":78,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
 		return GameSharedUI;
 	})(View);
 /**
@@ -50152,6 +50177,357 @@ var GameSharedUI=(function(_super){
 
 	window.LayaRender = LayaRender;
 })();
+
+/**
+ * wxGame
+ */
+var wxGame = (function (_super) {
+
+    Laya.class(wxGame, "wxGame", _super);
+    var _proto = wxGame.prototype;
+
+    var instance;
+
+    function getInstance() {
+        if (instance === undefined) {
+            instance = new wxGame();
+        }
+        return instance;
+    }
+    function wxGame() {
+        //无父类
+        // wxGame.super(this);
+    }
+
+    _proto.sharedCanvasTexture = null;
+    /**当前微信版本 */
+    var wxSDKVersion;
+    //游戏圈按钮
+    _proto.btn_club = null;
+
+    _proto.Init = function () {
+
+        if (Browser.onMiniGame) {
+
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    wxSDKVersion = res.SDKVersion;
+                }
+            });
+
+
+            wx.showShareMenu({
+                withShareTicket: false
+            });
+
+            var shareInfoArr = this.shareInfo();
+            wx.onShareAppMessage(function () {
+                // 用户点击了“转发”按钮
+                return {
+                    title: shareInfoArr[0],
+                    imageUrl: shareInfoArr[1]
+                }
+            })
+            //监听小游戏回到前台的事件
+            wx.onShow(function () {
+                Gamelog("--------------wx.onShow");
+                MusicManager.getInstance().playMusic("res/music/1.mp3")
+
+                //小游戏更新
+                if (typeof wx.getUpdateManager === 'function') {
+                    console.log('支持 wx.getUpdateManager')
+                    var updateManager = wx.getUpdateManager()
+
+                    updateManager.onCheckForUpdate(function (res) {
+                        // 请求完新版本信息的回调
+                        console.log("----更新" + res.hasUpdate)
+                    })
+
+                    updateManager.onUpdateReady(function () {
+                        // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                        updateManager.applyUpdate()
+                    })
+
+                    updateManager.onUpdateFailed(function () {
+                        // 新的版本下载失败
+                    })
+                }
+            })
+
+            Laya.timer.once(400, this, function () {
+                var sharedSprite = new Laya.Sprite();
+                sharedSprite.zOrder = 400;
+                sharedSprite.name = "OpenDataContext";
+                Laya.stage.addChild(sharedSprite);
+                sharedSprite.visible = false;
+
+                Browser.window.sharedCanvas.width = Laya.stage.width;
+                Browser.window.sharedCanvas.height = Laya.stage.height;
+
+                sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
+                // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
+                // Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
+                sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
+            });
+        }
+    }
+
+    /**
+     * 登陆并返回用户数据
+     */
+    _proto.login = function (callback) {
+        if (Browser.onMiniGame) {
+            wx.getSetting({
+                success: function (res) {
+                    var authSetting = res.authSetting
+                    if (authSetting['scope.userInfo'] === true) {
+                        // 用户已授权，可以直接调用相关 API
+                        Gamelog("用户已授权");
+                        // wxGame.getInstance().wxLogin(callback);
+                        wxLogin(callback);
+                    } else if (authSetting['scope.userInfo'] === false) {
+                        // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
+                        Gamelog("用户已拒绝授权");
+                        // wx.openSetting({
+                        //     success:function (params) {}
+                        // })
+                        showUserInfoButton();
+                    } else {
+                        // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
+                        Gamelog("未询问过用户授权");
+                        wx.authorize({
+                            scope: 'scope.userInfo'
+                        })
+                    }
+                }
+            })
+        }
+    }
+
+    wxLogin = function (callback) {
+        wx.login({
+            success: function () {
+                Gamelog("login success");
+                wx.getUserInfo({
+                    success: function (res) {
+                        GameLogObject(res);
+
+                        var userInfo = res.userInfo
+                        var nickName = userInfo.nickName
+                        var avatarUrl = userInfo.avatarUrl
+                        var gender = userInfo.gender //性别 0：未知、1：男、2：女
+                        var province = userInfo.province
+                        var city = userInfo.city
+                        var country = userInfo.country
+                        Gamelog("userInfo.nickName" + userInfo.nickName);
+                        callback(userInfo);
+                    }
+                })
+            },
+            fail: function () {
+                Gamelog("login fail");
+            }
+        })
+    }
+
+    showUserInfoButton = function () {
+        var button = wx.createUserInfoButton({
+            type: 'text',
+            text: '获取用户信息',
+            image: "images/huangguan.png",
+            style: {
+                left: 10,
+                top: 76,
+                width: 200,
+                height: 40,
+                lineHeight: 40,
+                // backgroundColor: '#ff0000',
+                color: '#ffffff',
+                textAlign: 'center',
+                fontSize: 16,
+                borderRadius: 4
+            }
+        });
+
+        button.onTap(function (res) {
+            console.log(res)
+        })
+    }
+
+
+    /**
+     * 发送数据
+     */
+    _proto.postMessage = function (type, isShowOpenData) {
+        if (Browser.onMiniGame) {
+            wx.postMessage({
+                msgType:type
+            });
+            if (isShowOpenData) {
+                this.showOpenDataContext(isShowOpenData);
+            }
+        }
+    }
+
+    /**
+     * 上传分数
+     */
+    _proto.uploadUserScore = function (score) {
+        if (Browser.onMiniGame) {
+            this.postMessage({
+                act: "updateScore",
+                score: score
+            }, true);
+        }
+    }
+
+    /**
+     * 显示或者关闭 开放域数据
+     */
+    _proto.showOpenDataContext = function (visible) {
+        if (Browser.onMiniGame) {
+            if (visible == false) {
+                this.postMessage({
+                    act: "clearChildren",
+                }, false);
+            }
+            var openData = Laya.stage.getChildByName("OpenDataContext");
+            openData.visible = visible;
+            sharedCanvasTexture.bitmap.alwaysChange = visible;
+        }
+    }
+
+    _proto.shareInfo = function () {
+        var shareInfoArr = new Array();
+        var rand = Math.random() * 4 + 1;
+        rand = parseInt(rand, 10);
+        
+        var str = "";
+        switch (rand) {
+            case 1:
+                str = "最好玩的泡泡龙，快来比试一下吧！";
+                break;
+            case 2:
+                str = "[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？";
+                break;
+            case 3:
+                str = "[有人@我]小哥哥，小哥哥，我有个游戏你玩吗？";
+                break;
+            case 4:
+                str = "[有人@我]这个游戏有点怪，怪好玩的！";
+                break;
+        }
+
+        var rand2 = Math.random() * 2 + 1;
+        rand2 = parseInt(rand2, 10);
+        var strImage = "game/shard.png";
+
+        shareInfoArr.push(str);
+        shareInfoArr.push(strImage);
+
+        return shareInfoArr;
+    }
+
+    /**分享游戏 */
+    _proto.shareGame = function () {
+
+        var shareInfoArr = this.shareInfo();
+
+        this.share(shareInfoArr[0], shareInfoArr[1]);
+    }
+
+    /**
+     * 分享
+     */
+    _proto.share = function (title, image) {
+        if (Browser.onMiniGame) {
+            wx.shareAppMessage({
+                title: title,
+                imageUrl: image,
+                success: function (msg) {
+                    console.log('share success', msg)
+                },
+                fail: function (msg) {
+                    console.log('share fail', msg)
+                }
+            })
+        }
+    }
+
+    /**显示微信游戏圈 */
+    _proto.showClubBtn = function(_show){
+        if (Browser.onMiniGame) {
+
+            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
+                return;
+            }
+            if(this.btn_club == null){
+                // this.btn_club.destroy();
+                this.btn_club = wx.createGameClubButton({
+                    icon: 'white',
+                    style: {
+                        left: 10,
+                        top: 70,
+                        width: 40,
+                        height: 40
+                    }
+                })
+            }
+
+            if(_show){
+                this.btn_club.show();
+            }else{
+                this.btn_club.hide();
+            }
+            
+        }
+    }
+
+    return {
+        getInstance: getInstance
+    }
+})();
+/**
+ * 结算界面逻辑 by lzq
+ */
+var GameRankUILogic = (function(_super){
+    function GameRankUILogic(){
+        GameRankUILogic.super(this);
+
+    }
+    Laya.class(GameRankUILogic,"UILogic.GameRankUILogic",_super);
+    var _proto = GameRankUILogic.prototype;
+    
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 10;
+
+        wxGame.getInstance().postMessage(4, true);
+
+
+        this.close.on(Laya.Event.CLICK,this,this.onCloseRank);
+    }
+    _proto.onDestroy = function(){
+        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+    }
+
+    _proto.updateItem = function(cell, index) {
+
+    }
+
+    /**关闭排行 */
+    _proto.onCloseRank = function(){
+        
+        wxGame.getInstance().showOpenDataContext(false);
+        UIManager.getInstance().closeUI("GameRankUI");
+        
+        MusicManager.getInstance().playSound("res/music/1.wav");
+    }
+    return GameRankUILogic;
+})(GameRankUI);
 /*
 * name;
 */
@@ -51059,12 +51435,13 @@ var GameoverUILogic = (function(_super){
         }
     }
     _proto.onShareGame = function(){
-        if(Browser.onMiniGame){
-            wx.shareAppMessage({
-                    title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
-                    imageUrl:"game/shard.png"
-                })
-        }
+        wxGame.getInstance().shareGame();
+        // if(Browser.onMiniGame){
+        //     wx.shareAppMessage({
+        //             title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
+        //             imageUrl:"game/shard.png"
+        //         })
+        // }
     }
     return GameoverUILogic;
 })(GameoverUI);
@@ -52292,14 +52669,15 @@ var GameScene = (function(_super){
             _proto.matterScene.removeAllBasketBall();
         }
         // _proto.matterScene.setEngineTimeScale(0);
-        // if(this.m_curReady != undefined){
-        if(this.m_curReady.m_nRowIndex == -1 && this.m_curReady.m_nColIndex == -1){
-            for(var j=0; j<this.m_listBubble.length; j++){
-                if(this.m_listBubble[j] === this.m_curReady){
-                    this.m_listBubble.splice(j,1);
+        if(this.m_curReady != undefined){
+            if(this.m_curReady.m_nRowIndex == -1 && this.m_curReady.m_nColIndex == -1){
+                for(var j=0; j<this.m_listBubble.length; j++){
+                    if(this.m_listBubble[j] === this.m_curReady){
+                        this.m_listBubble.splice(j,1);
+                    }
                 }
+            this.m_curReady.destroy();
             }
-           this.m_curReady.destroy();
         }
         //舞台监听鼠标
         // Laya.stage.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);
@@ -52852,6 +53230,8 @@ var GameUILogic = (function(_super){
        
         this.btn_sound.on(Laya.Event.CLICK,this,this.onSoundClick);
         this.btn_start.on(Laya.Event.CLICK,this,this.onStartClick);
+        this.btn_rank.on(Laya.Event.CLICK,this,this.onRankClick);
+
         this.changeBubbleBox.on(Laya.Event.CLICK,this,this.onChangeBubble);
         //this.bossBox.on(Laya.Event.CLICK,this,this.onBossBoxClick);
         Laya.timer.frameOnce(8, this, this.delayShow); 
@@ -52865,7 +53245,7 @@ var GameUILogic = (function(_super){
    
     _proto.onDestroy = function(){
         MusicManager.getInstance().stopMusic();
-        MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
+        // MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         if(this.bannerAd != null){
             this.bannerAd.destroy();
         }
@@ -52912,6 +53292,37 @@ var GameUILogic = (function(_super){
 
         }
 
+    }
+
+    /**创建游戏圈按钮 */
+    _proto.createClub = function(){
+        if (Browser.onMiniGame) {
+            var isPass = false;
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    var isPassNum = compareVersion(res.SDKVersion,"2.0.3");
+                    if(isPassNum >= 0){
+                        isPass = true;
+                    }
+                }
+            }); 
+            if(!isPass){
+                return;
+            }
+            if(this.button != null){
+                this.button.destroy();
+            }
+            this.button = wx.createGameClubButton({
+                icon: 'white',
+                style: {
+                    left: 10,
+                    top: 70,
+                    width: 40,
+                    height: 40
+                }
+            })
+        }
     }
     _proto.delayShow = function(){
 
@@ -53235,17 +53646,8 @@ var GameUILogic = (function(_super){
 
         //this.onStartClick();
         this.showBannerAd();
-        if (Browser.onMiniGame) {
-            this.button = wx.createGameClubButton({
-                icon: 'green',
-                style: {
-                    left: 10,
-                    top: 70,
-                    width: 40,
-                    height: 40
-                }
-            })
-        }
+        // this.createClub();
+        wxGame.getInstance().showClubBtn(true);
     }
 
     /**游戏倒计时 显示 */
@@ -53289,9 +53691,10 @@ var GameUILogic = (function(_super){
         if(this.bannerAd != null){
             this.bannerAd.destroy();
         }
-        if(this.button != null){
-            this.button.destroy();
-        }
+        // if(this.button != null){
+        //     this.button.destroy();
+        // }
+        wxGame.getInstance().showClubBtn(false);
     }
 
     _proto.onTweenFinish = function(){
@@ -53373,367 +53776,11 @@ var GameUILogic = (function(_super){
         window.location.href=UserModule.getInstance().redirect;
     }
 
-    //接收服务器返回排行榜
-    _proto.updatePlayerListReceiver = function(notify){
-        //遍历需要修改的玩家hp 获得减掉的hp
-        //调用this.playerHurtHp()
-        // var updateList = notify.Content;
-        var hurtPlayerData = notify.Content;
-        //伤害自己的人物Id
-        if(hurtPlayerData.attackPlayerId != null){
-            this.hurtSelfPlayerId = hurtPlayerData.attackPlayerId;
-        }
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId == hurtPlayerData.playerId){
-                this.playerHurtHp(data.playerId,data.hp - hurtPlayerData.hp);
-            }
-        }
-    }
-    //玩家掉血效果
-    _proto.playerListHurtEffect = function(_playerData,_hp){
-        var isLive = false;
-        var maxHp = 0;
-        var maxIndex = 0;
-        var playerCell;
-        //更新list UI
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            var tempCell = this.playerList.getCell(i);
-
-            //心形图片
-            var bloodImg = tempCell.getChildByName("bloodImg");
-            bloodImg.visible = false;
-            var topImg = tempCell.getChildByName("topImg");
-            topImg.visible = false;
-            //血量数字
-            var bloodLabel = tempCell.getChildByName("bloodLabel");
-            bloodLabel.visible = false;
-            var deadImg = tempCell.getChildByName("deadImg");
-            deadImg.visible = false;
-            //变灰
-            tempCell.gray = false;
-
-            if(data.playerId == _playerData.playerId){
-                playerCell = tempCell;
-                if(data.hp >0){
-                    isLive = true;
-                    data.hp = _playerData.hp;
-                }
-            }
-            //血条
-            var progres_hp = tempCell.getChildByName("progres_hp");
-            var hpValue = data.hp / data.baseHp;
-            if(hpValue > 0.75){
-                progres_hp.skin = "game/progress_green.png";
-            }else if(hpValue > 0.25){
-                progres_hp.skin = "game/progress_yellow.png";
-            }else{
-                progres_hp.skin = "game/progress_red.png";
-            }
-            progres_hp.value  = hpValue;
-
-            //如果血量大于0
-            if(data.hp > 0){
-                bloodImg.visible  = true;
-                bloodLabel.visible = true;
-                bloodLabel.text = data.hp;
-            }else{
-                deadImg.visible = true;
-                tempCell.gray = true;
-                bloodLabel.text = 0;
-            }
-            //比较最大血量
-            if(data.hp > maxHp){
-                maxHp =  data.hp;
-                maxIndex = i;
-            }
-
-        }
-        var topCell = this.playerList.getCell(maxIndex);
-        //设置最大血量
-        if(maxHp > 0){
-            topCell.getChildByName("topImg").visible = true;
-        }
-
-        //可以受伤才执行效果
-        // if(hurtPlayer.isHurt){
-        if(isLive){
-            //减血文字
-            var bloodLabel = playerCell.getChildByName("bloodImg");
-            var bloodPoint = bloodLabel.localToGlobal(new Point(0,0));
-            BubbleScoreAnim(bloodPoint,"-"+_hp,"shuziRed");
-            Gamelog("------------掉血数字="+_hp);
-            //自己受伤
-            if(_playerData.playerId == UserModule.getInstance().playerId){
-                MusicManager.getInstance().playSound("res/music/10.wav");
-                if(_playerData.hp <=0){
-                    this.gameoverByBottom();
-                }
-                this.img_bloodBg.visible = true;
-                this.img_bloodBg.alpha = 1;
-                var timeLineBlood = new Laya.TimeLine();
-                timeLineBlood.addLabel("hide",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200).addLabel("show",0).to(this.img_bloodBg,
-                {
-                    alpha:1
-                },200).addLabel("hide1",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200);
-                timeLineBlood.play(0,false);
-                timeLineBlood.on(Laya.Event.COMPLETE,this,function(){
-                    timeLineBlood.destroy();
-                });
-                //伤害自己的人物展示效果
-                this.showAttackPlayerEffect(_hp);
-            }else{
-                MusicManager.getInstance().playSound("res/music/11.wav");
-            }
-            var img_bloodBgCell = playerCell.getChildByName("img_bloodBg");
-            img_bloodBgCell.visible = true;
-            img_bloodBgCell.alpha  = 1;
-            //闪红
-            var timeLine = new Laya.TimeLine();
-            timeLine.addLabel("hide1",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200).addLabel("show1",0).to(img_bloodBgCell,
-            {
-                alpha:1
-            },200).addLabel("hide11",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200);
-            timeLine.play(0,false);
-            timeLine.on(Laya.Event.COMPLETE,null,function(){
-                timeLine.destroy();
-            });
-        }
-
-    }
-    //人物造成伤害
-    _proto.playerHurtHp = function(_id,_hp){
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == _id){
-                playerData.hp -= _hp;
-                hurtPlayer = playerData;
-                
-            }
-            
-        }
-
-        this.playerListHurtEffect(hurtPlayer,_hp);
-
-    }
-    //初始化人物列表
-    _proto.initPlayerListData = function(){
-        _proto.dataArr = [];
-        _proto.dataArr.push(GameModule.getInstance().playerDataList[0]);
-        for(var i = 0;i < GameModule.getInstance().playerDataList.length;i++){
-            var playerData = GameModule.getInstance().playerDataList[i];
-            var dataTemp = {
-                playerId: playerData.playerId,
-                name: playerData.name,
-                hp: playerData.hp,
-                baseHp:playerData.baseHp,
-                icon: playerData.icon,
-                isTop:false,
-                isHurt:false,
-            };
-            if(playerData.playerId == UserModule.getInstance().playerId){
-                dataTemp.isTop = true;
-                _proto.dataArr[0] = dataTemp;
-            }else{
-                _proto.dataArr.push(dataTemp);
-            }
-        }
-        this.updateList();
-
-    }
-    _proto.updateList = function(e){
-        this.playerList.vScrollBarSkin = '';
-        this.playerList.array = _proto.dataArr;
-        //list渲染函数
-        this.playerList.renderHandler = new Laya.Handler(this,this.onRender);
+    _proto.onRankClick = function(){
+        UIManager.getInstance().showUI("GameRankUI");
     }
 
-     _proto.onRender = function(cell,index){
-
-        if(index > _proto.dataArr.length) return;
-        var data = _proto.dataArr[index];
-        if(data === undefined) return;
-
-        //头像
-        var icon = cell.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = data.icon;
-            icon.visible = true;
-        }
-
-        //心形图片
-        var bloodImg = cell.getChildByName("bloodImg");
-        bloodImg.visible = false;
-        var topImg = cell.getChildByName("topImg");
-        topImg.visible = false;
-        //掉血闪红
-        var img_bloodBg = cell.getChildByName("img_bloodBg");
-        img_bloodBg.visible = false;
-        //血量数字
-        var bloodLabel = cell.getChildByName("bloodLabel");
-        bloodLabel.visible = false;
-        var deadImg = cell.getChildByName("deadImg");
-        deadImg.visible = false;
-        //变灰
-        cell.gray = false;
-
-        //血条
-        var progres_hp = cell.getChildByName("progres_hp");
-        var hpValue = data.hp / data.baseHp;
-        if(hpValue > 0.75){
-            progres_hp.skin = "game/progress_green.png";
-        }else if(hpValue > 0.25){
-            progres_hp.skin = "game/progress_yellow.png";
-        }else{
-            progres_hp.skin = "game/progress_red.png";
-        }
-        progres_hp.value  = hpValue;
-
-        //如果血量大于0
-        if(data.hp > 0){
-            bloodImg.visible  = true;
-            bloodLabel.visible = true;
-            bloodLabel.text = data.hp;
-            //如果是血量最高
-            if(data.isTop){
-                topImg.visible =true;
-            }
-        }else{
-            deadImg.visible = true;
-            cell.gray = true;
-        }
-        //闪红
-        // if(data.isHurt){
-        //     img_bloodBg.visible = true;
-        //     img_bloodBg.alpha = 1;
-        //     var timeLine = new Laya.TimeLine();
-        //     timeLine.addLabel("hide",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200).addLabel("show",0).to(img_bloodBg,
-        //     {
-        //         alpha:1
-        //     },200).addLabel("hide1",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200);
-        //     timeLine.play(0,false);
-        //     timeLine.on(Laya.Event.COMPLETE,null,function(){
-        //         timeLine.destroy();
-        //     });
-        // }
-        
-        
-     }
-
-     //释放技能
-     _proto.onBossBoxClick = function(e){
-         if(this.bossProgress.value >= 1){
-            this.bossProgress.value = 0;
-            this.bossHurtEffect();
-            this.progressAnim.visible = false;
-         }
-     }
-
-     //复制精灵
-    _proto.copySpriteSelf = function(_sprite){
-        var copySprite = new Laya.Sprite();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        for(var i=0; i<_sprite.numChildren; i++){
-            var element = _sprite.getChildAt(i);
-            copySprite.addChild(this.copySprite(element));
-        }
-
-        return copySprite;
-        
-    }
-
-    _proto.copySprite = function(_sprite){
-        var copySprite = new Laya.Node();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        return copySprite;
-    }
-
-    //攻击者头像效果
-    _proto.showAttackPlayerEffect = function(_hp){
-
-        // Gamelog("----------伤害自己的人物Id="+this.hurtSelfPlayerId);
-        var hurtSprite = new HurtPlayerBoxUILogic();
-        var b_point  = new Point(0,0);
-        b_point = this.hurtPlayerBox.localToGlobal(b_point);
-        var globalX = b_point.x;
-        var globaly = b_point.y;
-        hurtSprite.initHurtPlayerBox(this.hurtSelfPlayerId,_hp,globalX,globaly);
-        hurtSprite.zOrder = 1;
-        Laya.stage.addChild(hurtSprite);
-
-        return;
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == this.hurtSelfPlayerId){
-                hurtPlayer = playerData;
-            }
-        }
-        //减血
-        var hurtHp = hurtSprite.getChildByName("hurtHp");
-        hurtHp.text = _hp;
-        //头像
-        var icon = hurtSprite.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = hurtPlayer.icon;
-            icon.visible = true;
-        }
-        
-        var timeLineHurt = new Laya.TimeLine();
-        timeLineHurt.addLabel("one",0).to(hurtSprite,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },800).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },800);
-        timeLineHurt.play(0,false);
-        timeLineHurt.on(Laya.Event.COMPLETE,this,function(){
-            hurtSprite.destroy();
-        });
-        
-    }
+    
     return GameUILogic;
 })(GameUI);
 /**
@@ -54156,6 +54203,9 @@ var UIManager = (function(_super){
             case "GameSharedUI":
                 uiLogic = new GameSharedUILogic();
                 break;
+            case "GameRankUI":
+                uiLogic = new GameRankUILogic();
+                break;
 
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -54283,6 +54333,63 @@ function compareVersion(v1, v2) {
     }
     return 0
 }
+//获取第几周
+function GetWeekNum() {
+    var myDate = new Date();
+    // myDate.setFullYear(2018, 5, 4);
+    var curDay = myDate.toLocaleDateString();
+    // console.log("curDay:" + curDay);
+
+    var dateBase = new Date();
+    dateBase.setFullYear(2018, 4, 20);
+    dateBase.setHours(0, 0, 0);
+    // console.log("dateBase:" + dateBase.toLocaleDateString());
+    var dayDiff = DateDiff("d", dateBase, myDate);
+    var weekNum = Math.ceil(dayDiff / 7);
+    // console.log("dayDiff = " + dayDiff);
+    console.log("weekNum = " + weekNum);
+
+    return weekNum;
+}
+
+function DateDiff(interval, date1, date2) {
+    var long = date2.getTime() - date1.getTime(); //相差毫秒
+    switch (interval.toLowerCase()) {
+        case "y": return parseInt(date2.getFullYear() - date1.getFullYear());
+        case "m": return parseInt((date2.getFullYear() - date1.getFullYear()) * 12 + (date2.getMonth() - date1.getMonth()));
+        case "d": return parseInt(long / 1000 / 60 / 60 / 24);
+        case "w": return parseInt(long / 1000 / 60 / 60 / 24 / 7);
+        case "h": return parseInt(long / 1000 / 60 / 60);
+        case "n": return parseInt(long / 1000 / 60);
+        case "s": return parseInt(long / 1000);
+        case "l": return parseInt(long);
+    }
+}
+
+//设置本地最高分
+function SetLocalMaxScore(newScore) {
+    // console.log("Utils.setLocalScore");
+    // console.log("newScore = " + newScore);
+
+    var maxScore = newScore;
+    var key = "HighScore";
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        LocalStorage.setItem(key, newScore);
+    }
+    else {
+        score = parseInt(score, 10);
+        if (newScore > score) {
+            LocalStorage.setItem(key, newScore);
+        }
+        else {
+            maxScore = score;
+        }
+    }
+
+    // console.log("maxScore = " + maxScore);
+    return maxScore;
+}
 var Sprite = laya.display.Sprite;
 var Text = laya.display.Text;
 var Bitmap = laya.resource.Bitmap;
@@ -54339,6 +54446,9 @@ var SocketUrl = "wss://mineForBusiness.laiwan.jtkshop.net/bubbleproject/webSocke
 Laya.MiniAdpter.init();
 //laya初始化
 Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
+
+wxGame.getInstance().Init();
+
 //FPS
 // Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
@@ -54381,29 +54491,13 @@ function  beginLoad(){
             type:Laya.Loader.ATLAS
         }); 
         asset.push({
-            url : "game/bgGame.png",
+            url : "game/bgGame.jpg",
             type:Laya.Loader.IMAGE
         }); 
 
     //loading 界面需要的图集
     // Laya.loader.load(asset,Laya.Handler.create(this,showLoaded),null);
     Laya.loader.load(asset,Laya.Handler.create(this,loadingCallback),null);
-}
-
-/**
- * 显示loading界面
- */
-function showLoaded(){
-    
-    var loadingLogic = UIManager.getInstance().showUI("LoadingUI");
-    var arr = [
-                //图集
-                ["res/atlas/game.atlas",Laya.Loader.ATLAS],
-                ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
-                ];
-    // var arr = [["res/atlas/comp.json",Laya.Loader.ATLAS]];
-
-    loadingLogic.loadAsset(arr,loadingCallback);
 }
 
 function loadingCallback(){
@@ -54423,129 +54517,4 @@ function loadingCallback(){
 
     SceneManager.getInstance().currentScene  = new GameScene();
     
-}
-
-
-if(Browser.onMiniGame){
-
-    // wx.getSetting({
-    // success: function (res) {
-    //     var authSetting = res.authSetting
-    //     if (authSetting['scope.userInfo'] === true) {
-    //     // 用户已授权，可以直接调用相关 API
-    //     console.log("获取用户信息成功");
-    //     getWxUserInfo();
-    //     } else if (authSetting['scope.userInfo'] === false) {
-    //     // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
-    //     wx.openSetting();
-    //     } else {
-    //     // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
-    //     showUserInfoBtn();
-    //     }
-    // },
-    // fail: function (res) {
-    //     console.log("获取设置失败");
-    // }
-    // })
-
-    function showUserInfoBtn(){
-        var button = wx.createUserInfoButton({
-            type: 'text',
-            text: '授权用户信息',
-            style: {
-            left: 100,
-            top: 76,
-            width: 200,
-            height: 40,
-            lineHeight: 40,
-            backgroundColor: '#ff0000',
-            color: '#ffffff',
-            textAlign: 'center',
-            fontSize: 16,
-            borderRadius: 4
-            }
-        })
-        button.onTap(function (res) {
-            console.log(res)
-            button.hide();
-        })
-        button.show();
-    }
-
-    function getWxUserInfo(){
-    wx.getUserInfo({
-        success: function (res) {
-        var userInfo = res.userInfo
-        var nickName = userInfo.nickName
-        var avatarUrl = userInfo.avatarUrl
-        var gender = userInfo.gender //性别 0：未知、1：男、2：女
-        var province = userInfo.province
-        var city = userInfo.city
-        var country = userInfo.country
-        }
-    })
-    }
-
-    wx.showShareMenu()
-    wx.onShareAppMessage(function () {
-    // 用户点击了“转发”按钮
-    return {
-        title: '最好玩的泡泡龙，快来比试一下吧！',
-        imageUrl:"game/shard.png"
-    }
-    })
-
-    wx.onShow(function () {
-        console.log("--------------wx.onShow");
-        MusicManager.getInstance().playMusic("res/music/1.mp3")
-
-        //小游戏更新
-        if (typeof wx.getUpdateManager === 'function') {
-            console.log('支持 wx.getUpdateManager')
-            var updateManager = wx.getUpdateManager()
-
-            updateManager.onCheckForUpdate(function (res) {
-                // 请求完新版本信息的回调
-                console.log("----更新" + res.hasUpdate)
-            })
-
-            updateManager.onUpdateReady(function () {
-                // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                updateManager.applyUpdate()
-            })
-
-            updateManager.onUpdateFailed(function () {
-                // 新的版本下载失败
-            })
-        }
-    })
-
-    // let openDataContext = wx.getOpenDataContext()
-    // let sharedCanvas = openDataContext.canvas
-    
-
-    // openDataContext.postMessage({
-    //   text: 'hello',
-    //   year: (new Date()).getFullYear()
-    // })
-
-    // openDataContext.postMessage({
-    //     msgType:1,
-    // })
-
-    // console.log(sharedCanvas.width);
-
-    // setTimeout(function () {
-    // let canvas = wx.createCanvas()
-
-    // let context = canvas.getContext('2d')
-
-    // context.drawImage(sharedCanvas, 0, 0)
-    // // console.log(sharedCanvas.width);
-
-    // }, 1000);
-
-     //监听小游戏回到前台的事件
-    
-
 }

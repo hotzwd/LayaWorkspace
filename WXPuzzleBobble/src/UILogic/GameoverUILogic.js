@@ -181,12 +181,13 @@ var GameoverUILogic = (function(_super){
         }
     }
     _proto.onShareGame = function(){
-        if(Browser.onMiniGame){
-            wx.shareAppMessage({
-                    title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
-                    imageUrl:"game/shard.png"
-                })
-        }
+        wxGame.getInstance().shareGame();
+        // if(Browser.onMiniGame){
+        //     wx.shareAppMessage({
+        //             title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
+        //             imageUrl:"game/shard.png"
+        //         })
+        // }
     }
     return GameoverUILogic;
 })(GameoverUI);

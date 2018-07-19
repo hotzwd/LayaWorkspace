@@ -112,3 +112,60 @@ function compareVersion(v1, v2) {
     }
     return 0
 }
+//获取第几周
+function GetWeekNum() {
+    var myDate = new Date();
+    // myDate.setFullYear(2018, 5, 4);
+    var curDay = myDate.toLocaleDateString();
+    // console.log("curDay:" + curDay);
+
+    var dateBase = new Date();
+    dateBase.setFullYear(2018, 4, 20);
+    dateBase.setHours(0, 0, 0);
+    // console.log("dateBase:" + dateBase.toLocaleDateString());
+    var dayDiff = DateDiff("d", dateBase, myDate);
+    var weekNum = Math.ceil(dayDiff / 7);
+    // console.log("dayDiff = " + dayDiff);
+    console.log("weekNum = " + weekNum);
+
+    return weekNum;
+}
+
+function DateDiff(interval, date1, date2) {
+    var long = date2.getTime() - date1.getTime(); //相差毫秒
+    switch (interval.toLowerCase()) {
+        case "y": return parseInt(date2.getFullYear() - date1.getFullYear());
+        case "m": return parseInt((date2.getFullYear() - date1.getFullYear()) * 12 + (date2.getMonth() - date1.getMonth()));
+        case "d": return parseInt(long / 1000 / 60 / 60 / 24);
+        case "w": return parseInt(long / 1000 / 60 / 60 / 24 / 7);
+        case "h": return parseInt(long / 1000 / 60 / 60);
+        case "n": return parseInt(long / 1000 / 60);
+        case "s": return parseInt(long / 1000);
+        case "l": return parseInt(long);
+    }
+}
+
+//设置本地最高分
+function SetLocalMaxScore(newScore) {
+    // console.log("Utils.setLocalScore");
+    // console.log("newScore = " + newScore);
+
+    var maxScore = newScore;
+    var key = "HighScore";
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        LocalStorage.setItem(key, newScore);
+    }
+    else {
+        score = parseInt(score, 10);
+        if (newScore > score) {
+            LocalStorage.setItem(key, newScore);
+        }
+        else {
+            maxScore = score;
+        }
+    }
+
+    // console.log("maxScore = " + maxScore);
+    return maxScore;
+}
