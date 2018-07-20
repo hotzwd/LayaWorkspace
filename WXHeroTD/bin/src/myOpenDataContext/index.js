@@ -267,7 +267,9 @@ function showEndFriends(data){
               Laya.stage.addChild(img_title);
             }
 
-            var title = writeText(Utils.getTitleBySocre(t_score), 260, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "#dbc17d", "center");
+            var t_titleData = Utils.getTitleDataBySocre(t_score);
+
+            var title = writeText(t_titleData.name, 260, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "#dbc17d", "center");
             title.anchorY = 0.5;
             Laya.stage.addChild(title);
 

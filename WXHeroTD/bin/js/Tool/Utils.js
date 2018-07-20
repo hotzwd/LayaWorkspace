@@ -204,6 +204,23 @@ function PointSub(v1,v2){
     return new Point(v1.x - v2.x, v1.y - v2.y);
 }
 
+/**获得两个坐标的距离 */
+function PointDistance(v1,v2){
+    var num1 = Number(Math.pow(v1.x - v2.x, 2) + Math.pow(v1.y - v2.y, 2));
+    return Math.sqrt(num1);
+}
+
+/**点是否在圆内 */
+function pointIsInCircle(centerPos,radius,pos){
+    var num1 = Number(Math.pow(pos.x - centerPos.x, 2) + Math.pow(pos.y - centerPos.y, 2));
+    var num2 = Math.pow(radius,2);
+    if(num1 <num2){
+        return true
+    }else{
+        return false;
+    }
+}
+
 /**
  * 两个圆是否碰撞
  */
@@ -226,4 +243,15 @@ function getTitleBySocre(p_score){
         }
     }
     return t_title;
+}
+
+/**获取称号数据 */
+function getTitleDataBySocre(p_score){
+    for (var i = GameTitleData.length -1 ; i >=0; i--) {
+        var t_data = GameTitleData[i];
+        if(p_score > t_data.score){
+            return t_data;
+        }
+    }
+    return null;
 }

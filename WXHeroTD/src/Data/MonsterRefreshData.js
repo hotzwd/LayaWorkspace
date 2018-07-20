@@ -5,28 +5,48 @@ var MonsterRefreshData = [
         time:700
     },
     {
-        score:100,
+        score:500,
         time:600
     },
     {
-        score:500,
+        score:1000,
         time:500
     },
     {
-        score:1000,
-        time:400
+        score:2000,
+        time:450
     },
     {
         score:3000,
-        time:300
+        time:400
+    },
+    {
+        score:4000,
+        time:350
     },
     {
         score:5000,
-        time:200
+        time:320
     },
     {
-        score:10000,
-        time:150
+        score:7000,
+        time:290
+    },
+    {
+        score:9000,
+        time:260
+    },
+    {
+        score:12000,
+        time:240
+    },
+    {
+        score:15000,
+        time:220
+    },
+    {
+        score:18000,
+        time:200
     },
     
     

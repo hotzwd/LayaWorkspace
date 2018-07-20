@@ -216,7 +216,7 @@ var Monster = (function(_super){
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
-        },800,null,new Laya.Handler(this,function(){
+        },1000,null,new Laya.Handler(this,function(){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 

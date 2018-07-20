@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":15,
+    "selecteID":6,
     "props":{"width":720,"sceneColor":"#f31713","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -146,7 +146,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1035,"x":258,"var":"btn_shared","stateNum":"2","skin":"game/btn_xuanyaodefen.png","scaleY":0.88,"scaleX":0.88,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":1035,"x":258,"var":"btn_shared","stateNum":"2","skin":"game/btn_xuanyao.png","scaleY":0.88,"scaleX":0.88,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":2,
                     "label":"Button(btn_shared)",
                     "isDirectory":false,

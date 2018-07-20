@@ -53,8 +53,9 @@ RankItem.prototype.init = function (cell,index) {
   this.addChild(this.score);
 
   var t_score = parseInt(cell.dataSource.KVDataList[0].value, 10);
+  var t_titleData = Utils.getTitleDataBySocre(t_score);
   //称呼
-  this.title = this.writeText(Utils.getTitleBySocre(t_score), 370, 36, 25, "#000000", "right", 200, 1);
+  this.title = this.writeText(t_titleData.name, 370, 36, 25, "#000000", "right", 200, 1);
   this.addChild(this.title);
 
   //线

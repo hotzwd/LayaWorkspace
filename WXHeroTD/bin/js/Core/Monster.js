@@ -74,12 +74,25 @@ var Monster = (function(_super){
     _proto.initMonster = function(_posType,_type)
     {
         this.anim.scaleX = 1;
-        if(_posType == 2 || _posType == 4)
+        var directionId = 1;
+        if(_posType == 2 || _posType == 3){
             this.anim.scaleX = -1;
+        }
+        if(_posType == 3 || _posType == 4){
+            directionId = 2;
+        }
+
+        var t_monsterData = [];
+        for (var i = 0; i < MonsterData.length; i++) {
+            var element = MonsterData[i];
+            if(element.type == directionId){
+                t_monsterData.push(element);
+            }
+        }
         
-        var t_data = MonsterData[_type];
+        var t_data = t_monsterData[_type];
         
-        this.anim.clear()
+        this.anim.clear();
         this.anim.play(0, true, t_data.anim);
         this.anim.visible = true;
 
@@ -203,7 +216,7 @@ var Monster = (function(_super){
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
-        },800,null,new Laya.Handler(this,function(){
+        },1000,null,new Laya.Handler(this,function(){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 

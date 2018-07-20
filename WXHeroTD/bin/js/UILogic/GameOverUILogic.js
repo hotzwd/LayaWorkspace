@@ -10,6 +10,8 @@ var GameOverUILogic = (function (_super) {
     Laya.class(GameOverUILogic, "GameOverUILogic", _super);
     _proto = GameOverUILogic.prototype;
 
+    _proto.isSharing  = false;                                 //是否正在分享
+
     _proto.onInit = function () {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
@@ -20,7 +22,9 @@ var GameOverUILogic = (function (_super) {
         this.t_score.text = scoreNum;
         this.t_highScore.text = scoreNum;
 
-        this.t_title.text = getTitleBySocre(scoreNum);
+        var t_titleData = getTitleDataBySocre(scoreNum);
+        this.t_title.text = t_titleData.name;
+        // this.t_title.color = t_titleData.color;
 
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
@@ -39,6 +43,9 @@ var GameOverUILogic = (function (_super) {
         //     }, true);
         // }
 
+        //是否正在分享
+        this.isSharing = false;
+
         this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
@@ -55,14 +62,24 @@ var GameOverUILogic = (function (_super) {
 
     /**分享游戏 */
     _proto._sharedClickEvent = function () {
-        wxGame.getInstance().shareGame();
+        if(!this.isSharing){
+            this.isSharing = true;
+            // wxGame.getInstance().shareGame();
+            wxGame.getInstance().shareScore(SceneManager.getInstance().currentScene.gameScore,this._shareEnd)
+        }
+    }
+    _proto._shareEnd = function(){
+        Gamelog("--------------分享结束-------");
+        UIManager.getInstance().getUI("GameOverUI").isSharing = false;
     }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
-        wxGame.getInstance().showOpenDataContext(false);
-        SceneManager.getInstance().currentScene.restartGame();
-        UIManager.getInstance().closeUI("GameOverUI");
-        UIManager.getInstance().showUI("GameStartUI");
+        if(!this.isSharing){
+            wxGame.getInstance().showOpenDataContext(false);
+            SceneManager.getInstance().currentScene.restartGame();
+            UIManager.getInstance().closeUI("GameOverUI");
+            UIManager.getInstance().showUI("GameStartUI");
+        }
         
     }
     /**点击排行榜 */

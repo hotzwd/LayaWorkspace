@@ -13,7 +13,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 10;
+    var HeroSpeed = 11;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -47,8 +47,8 @@ var Hero = (function(_super){
         }
         
         this.anim = new Laya.Animation();
+        // this.anim.interval = 5000;
         this.anim.play(0, true, "hero_attack");
-        this.anim.interval = 0;
         this.anim.pivotX = 179;
         this.anim.pivotY = 147;
         this.anim.pos(this.pivotX,this.pivotY);
@@ -64,6 +64,8 @@ var Hero = (function(_super){
         _proto.attackMonsterList = [];
 
         MessageController.getInstance().AddNotification("Tower_Dead",this,this._towerDeadEvent);
+
+        
     }
 
     _proto.onDestroy = function(){
@@ -79,8 +81,8 @@ var Hero = (function(_super){
     _proto.playAnim = function(){
         this.anim.destroy();
         this.anim = new Laya.Animation();
+        this.anim.interval = 40;
         this.anim.play(0, true, "hero_attack");
-        this.anim.interval = 0;
         this.anim.pivotX = 179;
         this.anim.pivotY = 147;
         this.anim.pos(this.pivotX,this.pivotY);
@@ -132,7 +134,7 @@ var Hero = (function(_super){
                 this.x = this.targetPos.x;
                 this.y = this.targetPos.y;
             }else{
-                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed); 
+                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
             }
         }else{
             if(this.targetPos2 == null){
@@ -159,6 +161,10 @@ var Hero = (function(_super){
         this.targetVector = PointSub(_pos,curPos);
         var targetDis2 = Math.pow(this.targetVector.x, 2) + Math.pow(this.targetVector.y, 2);
         this.targetVector.normalize();
+
+        var t_curGlobaPos = this.parent.localToGlobal(new Point(this.x,this.y),true);
+        SceneManager.getInstance().currentScene.createPointLine(t_curGlobaPos,_pos);
+
         //当前位置到圆心向量
         var t_pos = this.targetTower.parent.localToGlobal(new Point(this.targetTower.x,this.targetTower.y),true);
         t_pos = this.parent.globalToLocal(t_pos);
@@ -191,6 +197,9 @@ var Hero = (function(_super){
             this.targetPos2 = _pos;
             this.targetVector2 = PointSub(_pos,circlePoint);
             this.targetVector2.normalize();
+
+            var t_targetGlobaPos = this.parent.localToGlobal(new Point(this.targetPos.x,this.targetPos.y),true);
+            SceneManager.getInstance().currentScene.createPointLine(t_curGlobaPos,t_targetGlobaPos,t_targetGlobaPos,_pos);
             return true;
         }else{
             return false;  

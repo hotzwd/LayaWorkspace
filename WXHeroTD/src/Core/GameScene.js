@@ -28,6 +28,7 @@ var GameScene = (function (_super) {
     _proto.gameUI = null;                                                    //ui对象
     _proto.curHero = null;                                                   //当前英雄
     _proto.curTower = null;                                                  //当前防御塔
+    _proto.pointBoard = null;                                                //指引线盒子
     _proto.heroBox = null;                                                   //存放英雄对象的盒子
     _proto.monsterBox = null;                                                //存放怪物对象的盒子
     _proto.towerBox = null;                                                  //存放防御塔对象的盒子
@@ -49,6 +50,11 @@ var GameScene = (function (_super) {
         this.monsterList = new Array();
         this.monsterPool = [];
 
+        this.pointBoard = new Sprite();
+        this.pointBoard.width = Laya.stage.width;
+        this.pointBoard.height = Laya.stage.height;
+        this.pointBoard.zOrder = 5;
+
         this.monsterBox = new Laya.Box();
         this.monsterBox.width = Laya.stage.width;
         this.monsterBox.height = Laya.stage.height;
@@ -64,6 +70,7 @@ var GameScene = (function (_super) {
         this.towerBox.height = Laya.stage.height;
         this.towerBox.zOrder = 20;
 
+        Laya.stage.addChild(this.pointBoard);
         Laya.stage.addChild(this.monsterBox);
         Laya.stage.addChild(this.towerBox);
         Laya.stage.addChild(this.heroBox);
@@ -127,6 +134,8 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
          this.curHero.playAnim();
+         this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
+         this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
     }
 
     /**重置游戏 */
@@ -145,6 +154,7 @@ var GameScene = (function (_super) {
             MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
         }
         this.monsterList = [];
+        this.pointBoard.destroyChildren();
     }
 
     /**
@@ -166,6 +176,7 @@ var GameScene = (function (_super) {
 
        this.updateGeneratorMonster();
        this.updateHeroZorder();
+       this.updatePointLine();
 
     }
 
@@ -249,11 +260,53 @@ var GameScene = (function (_super) {
     /**防御塔死亡 */
     _proto._towerDeadEvent = function(notif){
         Laya.timer.clear(this,this.onUpdate);
-        
+        this.gameUI.moveBox.off(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
+        this.gameUI.moveBox.off(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        this.pointBoard.destroyChildren();
     }
 
- 
+    
+    /**创建指引线 */
+    _proto.createPointLine = function (_start,_end,_start2,_end2) {
+        this.pointBoard.destroyChildren();
+        this.drawLine(_start,_end);
+        if(_start2 != null){
+            this.drawLine(_start2,_end2);
+        }
+        
+    }
+    _proto.drawLine = function(_start,_end){
+        var targetVector = PointSub(_end,_start);
+        targetVector.normalize();
 
+        var t_pintDis = 40;
+        var t_dis = PointDistance(_end,_start);
+        var pointNum = Math.floor(t_dis / t_pintDis );
+
+        for (var i = 0; i < pointNum; i++) {
+            var pointSprite = new Sprite();
+            pointSprite.loadImage("game/point.png");
+            pointSprite.x = _start.x + t_pintDis *i * targetVector.x;
+            pointSprite.y = _start.y + t_pintDis * i * targetVector.y;
+            pointSprite.pivot(pointSprite.width / 2, pointSprite.height / 2);
+            this.pointBoard.addChild(pointSprite);
+        }
+    }
+
+    /**根据英雄位置更新指引线 */
+    _proto.updatePointLine = function(){
+
+        var t_heroGlobaPos = this.curHero.parent.localToGlobal(new Point(this.curHero.x,this.curHero.y),true);
+
+        for (var i = 0; i < this.pointBoard.numChildren; i++) {
+            var t_point = this.pointBoard.getChildAt(i); 
+            var t_pos = this.pointBoard.globalToLocal(new Point(t_point.x,t_point.y),true);
+
+            if(pointIsInCircle(t_heroGlobaPos,20,t_pos)){
+                t_point.destroy();
+            }
+        }
+    }
     
 
     return GameScene;

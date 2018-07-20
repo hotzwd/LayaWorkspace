@@ -21,6 +21,7 @@ var wxGame = (function (_super) {
     }
 
     _proto.sharedCanvasTexture = null;
+    _proto.shareSp = null;
 
     _proto.Init = function () {
 
@@ -240,6 +241,7 @@ var wxGame = (function (_super) {
         // wxGame.getInstance().share(str, strImage);
     }
 
+    //分享游戏
     _proto.shareGame = function () {
         var shareInfoArr = this.shareInfo();
 
@@ -284,6 +286,69 @@ var wxGame = (function (_super) {
         this.postMessage({
             act: "showEndFriends"
         }, true);
+    }
+
+    //分享分数
+    _proto.shareScore = function(scoreNum,callback){
+        if (Browser.onMiniGame) {
+
+            if (this.shareSp != null) {
+                this.shareSp.destroy();
+            }
+            this.shareSp = new Laya.Sprite();
+            this.shareSp.loadImage("res/openDataRes/shareScore.png");
+            var scoreTxt = new Laya.Label(scoreNum + "");
+            scoreTxt.font = "shuzi";
+            // scoreTxt.fontSize = 50;
+            scoreTxt.scale(0.8,0.8);
+            scoreTxt.anchorX = 0.5;
+            scoreTxt.anchorY = 0.5;
+            scoreTxt.align = "center";
+            scoreTxt.pos(165, 92);
+            this.shareSp.addChild(scoreTxt);
+
+            var t_titleData = getTitleDataBySocre(scoreNum);
+
+            var scoreTitle = new Laya.Label(t_titleData.name);
+            scoreTitle.fontSize = 35;
+            scoreTitle.anchorX = 0.5;
+            scoreTitle.anchorY = 0.5;
+            scoreTitle.align = "center";
+            scoreTitle.color = t_titleData.color;
+            scoreTitle.pos(155, 203);
+            this.shareSp.addChild(scoreTitle);
+
+
+            
+
+            Laya.timer.frameOnce(20, this, function () {
+                var shareWidth = 500;
+                var shareHeight = 400;
+                // var title = "我得分达到了" + scoreNum + "，你能超越我吗？";
+                var title = "我的得分超过你啦，快来与我一决高下！";
+                var htmlC = this.shareSp.drawToCanvas(shareWidth, shareHeight, 0, 0);
+                var canvas = htmlC.getCanvas();
+                Laya.timer.frameOnce(20, this, function () {
+                    canvas.toTempFilePath({
+                        x: 0,
+                        y: 0,
+                        width: shareWidth,
+                        height: shareHeight,
+                        destWidth: shareWidth,
+                        destHeight: shareHeight,
+                        success: function (res) {
+                            wx.shareAppMessage({
+                                imageUrl: res.tempFilePath,
+                                title: title
+                            })
+                            callback();
+                        }
+                    })
+
+                });
+            });
+
+        }
     }
 
     return {
