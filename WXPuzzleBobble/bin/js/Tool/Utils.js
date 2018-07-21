@@ -151,7 +151,7 @@ function SetLocalMaxScore(newScore) {
     // console.log("newScore = " + newScore);
 
     var maxScore = newScore;
-    var key = "HighScore";
+    var key = "LocalHighScore_" + GetWeekNum();
     var score = LocalStorage.getItem(key);
     if (score == null || score == "") {
         LocalStorage.setItem(key, newScore);

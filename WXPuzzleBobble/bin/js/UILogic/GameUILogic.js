@@ -63,7 +63,7 @@ var GameUILogic = (function(_super){
         //MessageController.getInstance().AddNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         
         // this.showBannerAd();
-        
+        // var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
 
     }
    
@@ -72,9 +72,6 @@ var GameUILogic = (function(_super){
         // MessageController.getInstance().RemoveNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         if(this.bannerAd != null){
             this.bannerAd.destroy();
-        }
-        if(this.button != null){
-            this.button.destroy();
         }
     }
     //显示广告
@@ -118,36 +115,6 @@ var GameUILogic = (function(_super){
 
     }
 
-    /**创建游戏圈按钮 */
-    _proto.createClub = function(){
-        if (Browser.onMiniGame) {
-            var isPass = false;
-            wx.getSystemInfo({
-                success: function (res) {
-                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                    var isPassNum = compareVersion(res.SDKVersion,"2.0.3");
-                    if(isPassNum >= 0){
-                        isPass = true;
-                    }
-                }
-            }); 
-            if(!isPass){
-                return;
-            }
-            if(this.button != null){
-                this.button.destroy();
-            }
-            this.button = wx.createGameClubButton({
-                icon: 'white',
-                style: {
-                    left: 10,
-                    top: 70,
-                    width: 40,
-                    height: 40
-                }
-            })
-        }
-    }
     _proto.delayShow = function(){
 
         //创建新的桶 位于球的上层
@@ -176,16 +143,6 @@ var GameUILogic = (function(_super){
         this.flyAnim.zOrder = 1;
         Laya.stage.addChild(this.flyAnim);
         this.flyAnim.visible = false;
-        // //弹出 开始
-        // var popPos = new Point(this.img_start.width/2,this.img_start.height/2);
-        // popPos =  this.img_start.localToGlobal(popPos);
-        // this.img_pop.skin = this.img_start.skin;
-        // this.img_pop.pos(popPos.x,popPos.y);
-        // this.img_pop.anchorX = 0.5;
-        // this.img_pop.anchorY = 0.5;
-        // Laya.stage.addChild(this.img_pop);
-        // this.img_pop.zOrder = 10;
-        // this.img_pop.visible = false;
 
         //boss动画
         this.bossAnim.interval = 60;
@@ -240,179 +197,10 @@ var GameUILogic = (function(_super){
             default:
                 break;
         }
-        //boss光点
-        // var bossPoint = this.img_bossIcon.localToGlobal(new Point(this.img_bossIcon.width/2,this.img_bossIcon.height/2));
-        // var img_bossItem = new Laya.Image("game/img_defen_dikuang39.png");
-        // img_bossItem.anchorX = 0.5;
-        // img_bossItem.anchorY = 0.5;
-        // img_bossItem.pos(b_point.x, b_point.y);
-        // img_bossItem.zOrder=0.1;
-        // Laya.stage.addChild(img_bossItem);
-        
-        // Laya.Tween.to(img_bossItem,{
-        //     x:bossPoint.x,
-        //     y:bossPoint.y
-        // },400,null,new Handler(this,function(){
-        //     img_bossItem.destroy();
-        //     this.bossProgress.value += bossValue;
-        //     //boss攻击进度
-        //     if(this.bossProgress.value >= 1){
-        //         this.progressAnim.visible = true;
-        //         this.progressAnim.play(0,true);
-        //     }
-        // }));
+
 
     }
-    //飞向人物效果
-    _proto.playerFlyEffect = function(_anim,_playerData){
-        //播放动画
-        var guangPos =  this.img_guang.localToGlobal(new Point(0,0));
-        _anim.pos(guangPos.x,guangPos.y);
-        _anim.play(0,true,"flyToPlayer");
 
-        // var targetPos = this.btn_sound.localToGlobal(new Point(0,0));
-        var targetPos;
-        for(var i = 0;i < this.dataArr.length;i++){
-            if(_playerData.playerId == this.dataArr[i].playerId){
-                var target = this.playerList.getCell(i);
-                targetPos = target.localToGlobal(new Laya.Point(0,0));
-
-            }
-        }
-        MusicManager.getInstance().playSound("res/music/13.wav");
-        Laya.Tween.to(_anim,
-        {
-            x:targetPos.x - 50,
-            y:targetPos.y
-        },700,null,new Laya.Handler(this,function(){
-            _anim.destroy();
-            var hurtAnim = new Laya.Animation();
-            hurtAnim.interval = 100;
-            hurtAnim.zOrder = 1;
-            hurtAnim.pos(targetPos.x - 50 ,targetPos.y -50);
-            Laya.stage.addChild(hurtAnim);
-            hurtAnim.play(0,false,"hurtPlayer");
-            hurtAnim.on(Laya.Event.COMPLETE,this,this.playerHurtEffect,[hurtAnim,_playerData]);
-        }));
-
-    }
-    //伤害人物效果
-    _proto.playerHurtEffect = function(_anim,_playerData){
-        _anim.destroy();
-        MusicManager.getInstance().playSound("res/music/14.wav");
-        Gamelog("------造成人物伤害");
-        if(_playerData.hp > 0){
-            this.playerHurtHp(_playerData.playerId,5);
-            GameModule.getInstance().sendHurtPlayer(1,_playerData.playerId);
-        }
-    }
-
-    //boss伤害
-    _proto.bossHurtEffect = function(_data){
-        this.bossAnim.visible = true;
-        this.bossAnim.width = 869;
-        this.bossAnim.height = 674;
-        this.bossAnim.pos(-500,40);
-        this.bossAnim.autoPlay = false;
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width/2 - 350
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.play(0,false,"bossHurt");
-            this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-        }));
-
-    }
-    //boss伤害人物效果
-    _proto.bossHurtEffectEnd = function(_anim){
-        Gamelog("------造成全部伤害");
-        MusicManager.getInstance().playSound("res/music/17.wav");
-        var tempList = new Array();
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId != UserModule.getInstance().playerId && data.hp > 0){
-                this.playerHurtHp(data.playerId,10);
-            }
-        }
-        GameModule.getInstance().sendHurtPlayer(2,"");
-        // var notify = new Notification(MessageEventName.UpdatePlayerListEvent,this,tempList);
-        // notify.Send();
-
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width + 900
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.visible = false;
-            this.bossAnim.off(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            // this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            
-        }));
-    }
-
-    //获得金蛋动画效果
-    _proto.showEggEffect = function(){
-        MusicManager.getInstance().playSound("res/music/18.wav");
-        var imgGuang = this.imgGuang;
-        var b_point = new Point(imgGuang.x + imgGuang.width /2,imgGuang.y + imgGuang.height /2);
-
-        var eggBox = new Laya.Box();
-        // eggBox.anchorX = 0.5;
-        // eggBox.anchorY = 0.5;
-        eggBox._zOrder = 0.2;
-        eggBox.pos(b_point.x,b_point.y);
-        Laya.stage.addChild(eggBox);
-
-        var eggBg = new Laya.Image("game/img_guangxiao.png");
-        eggBg.anchorX = 0.5;
-        eggBg.anchorY = 0.5;
-        eggBox.addChild(eggBg);
-
-        var eggImg = new Laya.Image("game/img_dajindan.png");
-        eggImg.anchorX = 0.5;
-        eggImg.anchorY = 0.5;
-        eggBox.addChild(eggImg);
-
-        var timeLineBg = new Laya.TimeLine();
-        timeLineBg.addLabel("show",0).to(eggBg,
-        {
-            rotation:360
-        },4000);
-        timeLineBg.play(0,true);
-
-        //动画
-        var timeLineEgg = new Laya.TimeLine();
-        eggBox.scaleX =0;
-        eggBox.scaleY = 0;
-        var playerCell = this.playerList.getCell(0);
-        var playerPoint = playerCell.localToGlobal(new Laya.Point(0,0));
-        timeLineEgg.addLabel("one",0).to(eggBox,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },500).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },500);
-        timeLineEgg.play(0,false);
-        timeLineEgg.on(Laya.Event.COMPLETE,this,function(){
-            timeLineBg.destroy();
-            eggBox.destroy();
-        });
-    }
     /**改变发射球 */
     _proto.onChangeBubble = function(){
         SceneManager.getInstance().currentScene.changeBubble();
@@ -597,7 +385,7 @@ var GameUILogic = (function(_super){
     /**关闭游戏 */
     _proto.onCloseGame = function(){
         //跳转到玩吧
-        window.location.href=UserModule.getInstance().redirect;
+        // window.location.href=UserModule.getInstance().redirect;
     }
 
     _proto.onRankClick = function(){

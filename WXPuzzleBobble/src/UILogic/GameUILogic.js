@@ -63,7 +63,7 @@ var GameUILogic = (function(_super){
         //MessageController.getInstance().AddNotification(MessageEventName.UpdatePlayerListEvent,this,this.updatePlayerListReceiver);
         
         // this.showBannerAd();
-        
+        // var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
 
     }
    

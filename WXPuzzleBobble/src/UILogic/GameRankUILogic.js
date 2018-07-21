@@ -15,7 +15,9 @@ var GameRankUILogic = (function(_super){
         //设置层级 相对于stage
         this.zOrder = 10;
 
-        wxGame.getInstance().postMessage(4, true);
+        wxGame.getInstance().postMessage({
+                act: "showRank"
+            }, true);
 
 
         this.close.on(Laya.Event.CLICK,this,this.onCloseRank);

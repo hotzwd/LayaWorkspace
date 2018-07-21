@@ -49,7 +49,7 @@ RankItem.prototype.init = function (cell,index) {
   this.addChild(this.nickname);
 
   // 分数
-  this.score = this.writeText(cell.dataSource.KVDataList[0].value, 250, 36, 25, "red", "right",200,1);
+  this.score = this.writeText(cell.dataSource.KVDataList[0].value, 250, 36, 25, "#000000", "right",200,1);
   this.addChild(this.score);
 
   //线

@@ -34,6 +34,7 @@ function  beginLoad(){
                 //图集
                 ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/paopaol.atlas",Laya.Loader.ATLAS],
                 //图片
                 ["game/bgGame.jpg",Laya.Loader.IMAGE],
                 ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],

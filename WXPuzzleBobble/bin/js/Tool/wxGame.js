@@ -180,11 +180,9 @@ var wxGame = (function (_super) {
     /**
      * 发送数据
      */
-    _proto.postMessage = function (type, isShowOpenData) {
+    _proto.postMessage = function (data, isShowOpenData) {
         if (Browser.onMiniGame) {
-            wx.postMessage({
-                msgType:type
-            });
+            wx.postMessage(data);
             if (isShowOpenData) {
                 this.showOpenDataContext(isShowOpenData);
             }

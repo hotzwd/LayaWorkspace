@@ -29,28 +29,33 @@ ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
 ResourceVersion.enable("version.json", Handler.create(this, beginLoad));   
 
 function  beginLoad(){
-    // Laya.URL.basePath = "https://testcos-1256468286.cos.ap-beijing.myqcloud.com/"
-  
-  // Laya.MiniAdpter.nativefiles = [
-  //   "res",
-  //   "res/atlas/game.atlas",
-  //   "res/atlas/bubbles.atlas",
-  // ];
-    var asset = [];
-        //loading界面
-        asset.push({
-            url : "res/atlas/game.atlas",
-            type:Laya.Loader.ATLAS
-        }); 
-        asset.push({
-            url : "res/atlas/bubbles.atlas",
-            type:Laya.Loader.ATLAS
-        }); 
-        asset.push({
-            url : "game/bgGame.jpg",
-            type:Laya.Loader.IMAGE
-        }); 
+    
+    var arr = [
+                //图集
+                ["res/atlas/game.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/paopaol.atlas",Laya.Loader.ATLAS],
+                //图片
+                ["game/bgGame.jpg",Laya.Loader.IMAGE],
+                ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],
+                ["game/img_xinxilan_dikuang.png",Laya.Loader.IMAGE],
+                //字体
+                ["bitmapFont/shuzi1Font.fnt",Laya.Loader.FONT],
+                //声音
+                // ["res/music/1.mp3",Laya.Loader.SOUND],
+                // ["res/music/1.wav",Laya.Loader.SOUND],
 
+                ];
+
+    var asset = [];
+    for(var i=0; i<arr.length; i++){
+        asset.push({
+            url : [
+                arr[i][0]
+            ],
+            type:arr[i][1]
+        }); 
+    }
     //loading 界面需要的图集
     // Laya.loader.load(asset,Laya.Handler.create(this,showLoaded),null);
     Laya.loader.load(asset,Laya.Handler.create(this,loadingCallback),null);

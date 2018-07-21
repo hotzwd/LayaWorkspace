@@ -29,26 +29,37 @@ var GameoverUILogic = (function(_super){
         var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
         this.label_overScore.text = scoreNum;
 
+         //存储在本地并上传
+        var highscoreNum = SetLocalMaxScore(scoreNum);
+        this.label_heightScore.text = highscoreNum;
+        wxGame.getInstance().uploadUserScore(highscoreNum);
+
         this.img_light.visible = false;
-        var highScore = LocalStorage.getItem("HighScore");
-        if(highScore){
-            if(scoreNum > parseInt(highScore)){
-                highScore = scoreNum;
-                this.img_light.visible = true;
-            }
-        }else{
-            highScore = scoreNum;
+        if(scoreNum >= highscoreNum){
             this.img_light.visible = true;
         }
-        LocalStorage.setItem("HighScore",highScore);
-        this.label_heightScore.text = highScore;
+        
 
-        this.sendScore(highScore);
+        // this.img_light.visible = false;
+        // var highScore = LocalStorage.getItem("HighScore");
+        // if(highScore){
+        //     if(scoreNum > parseInt(highScore)){
+        //         highScore = scoreNum;
+        //         this.img_light.visible = true;
+        //     }
+        // }else{
+        //     highScore = scoreNum;
+        //     this.img_light.visible = true;
+        // }
+        // LocalStorage.setItem("HighScore",highScore);
+        // this.label_heightScore.text = highScore;
+
+        // this.sendScore(highScore);
         
 
         this.ani1.play(0, true);
 
-        this.onGetRankList();
+        // this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
         this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
@@ -114,6 +125,7 @@ var GameoverUILogic = (function(_super){
      
      /**重新开始 */
     _proto.onGameAgain = function(){
+        wxGame.getInstance().showOpenDataContext(false);
         UIManager.getInstance().closeUI("GameoverUI",true);
         MusicManager.getInstance().playSound("res/music/1.wav");
         SceneManager.getInstance().currentScene.restartGame();
@@ -128,13 +140,14 @@ var GameoverUILogic = (function(_super){
     }
     /**发送数据 */
     _proto.sendScore = function(highScore){
-        if(Browser.onMiniGame){
-            var openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:3,
-                score:highScore,
-            })
-        }
+        wxGame.getInstance().uploadUserScore(highScore);
+        // if(Browser.onMiniGame){
+        //     var openDataContext = wx.getOpenDataContext()
+        //     openDataContext.postMessage({
+        //         msgType:3,
+        //         score:highScore,
+        //     })
+        // }
     }
     /**获取排行榜 */
     _proto.onGetRankList = function(){
