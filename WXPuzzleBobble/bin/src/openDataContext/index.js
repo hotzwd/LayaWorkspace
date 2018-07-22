@@ -147,8 +147,7 @@ function updateScore(data){
         }
       }
 
-      var t_date = new Date();
-      var t_date = new Date().getTime();
+      var t_date = parseInt(new Date().getTime()/1000);      
       var t_value = {
         "wxgame": {
           "score": data.score,
