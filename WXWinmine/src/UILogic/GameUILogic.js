@@ -18,6 +18,9 @@ var GameUILogic = (function(_super){
     _proto.onInit = function(){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
+
+        UIManager.getInstance().showUI("GameStartUI");
+        
         //存放UI效果
         this.blockBox.width = Laya.stage.width;
         this.blockBox.height = Laya.stage.height;

@@ -141,8 +141,11 @@ var UIManager = (function(_super){
             case "GameoverUI":
                 uiLogic = new GameoverUILogic();
                 break;
-            case "GameSharedUI":
-                uiLogic = new GameSharedUILogic();
+            case "GameRankUI":
+                uiLogic = new GameRankUILogic();
+                break;
+            case "GameStartUI":
+                uiLogic = new GameStartUILogic();
                 break;
 
             default:

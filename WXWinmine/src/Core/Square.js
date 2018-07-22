@@ -74,6 +74,9 @@ var Square = (function(_super){
     }
 
     _proto.onDestroy = function(){
+        if(this.qiAnim != null){
+            this.qiAnim.destroy();
+        }
     }
 
     _proto.setRowColIndex = function(row,col){
@@ -126,6 +129,10 @@ var Square = (function(_super){
             var mineAnim = this.playAnimation("mineAnim"+animNum,true,function(e){
                 e[0].icon.visible = true;
                 e[0].icon.skin = "GameUI/img_kulou.png";
+
+                var notif = new Notification("square_dead",this,this);
+                MessageController.getInstance().SendNotification(notif);
+
             },[this]);
             if(animNum == 1 || animNum == 2){
                 mineAnim.y -= 20;

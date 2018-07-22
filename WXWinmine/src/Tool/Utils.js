@@ -30,6 +30,22 @@ function GetCountDownText(countDownNum){
     return timeText;
 }
 /**
+ * 获得时间格式化 00:00
+ */
+function GetTimeFormat(secondNum){
+    var t_minute = parseInt(secondNum / 60);
+    var t_second = secondNum % 60;
+    if(t_minute < 10){
+        t_minute = "0"+t_minute;
+    }
+    if(t_second < 10){
+        t_second = "0"+t_second;
+    }
+    
+    var t_str = t_minute + ":" + t_second;
+    return t_str;
+}
+/**
  * 格式化名字长度
  */
 function GetFormtName(name){

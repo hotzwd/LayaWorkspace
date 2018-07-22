@@ -70,7 +70,7 @@
                             "props":{"y":1,"x":292,"name":"top"},
                             "nodeParent":91,
                             "label":"Box(top)",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -78,7 +78,7 @@
                             "child":[
                                 {
                                     "type":"Image",
-                                    "props":{"y":43,"x":248,"skin":"GameUI/img_shijian.png"},
+                                    "props":{"y":43,"x":271,"width":217,"skin":"GameUI/img_shijian.png","height":70},
                                     "nodeParent":13,
                                     "label":"Image",
                                     "isDirectory":false,
@@ -90,9 +90,10 @@
                                 },
                                 {
                                     "type":"Label",
-                                    "props":{"y":56,"x":315,"width":64,"var":"label_time","text":"0","height":37,"fontSize":40,"font":"shijianFont","color":"#ffffff","bold":true,"align":"right"},
+                                    "props":{"y":57,"x":335,"width":129,"var":"label_time","text":"00:00","height":42,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"},
                                     "nodeParent":13,
                                     "label":"Label(label_time)",
+                                    "isOpen":true,
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
@@ -102,7 +103,7 @@
                                 },
                                 {
                                     "type":"Image",
-                                    "props":{"y":50,"x":7,"skin":"GameUI/img_leishu.png"},
+                                    "props":{"y":45,"x":7,"width":187,"skin":"GameUI/img_leishu.png","height":70},
                                     "nodeParent":13,
                                     "label":"Image",
                                     "isDirectory":false,
@@ -114,7 +115,7 @@
                                 },
                                 {
                                     "type":"Label",
-                                    "props":{"y":64,"x":77,"width":60,"var":"label_mineNum","text":"0","height":37,"fontSize":40,"font":"shijianFont","color":"#ffffff","bold":true,"align":"right"},
+                                    "props":{"y":61,"x":68,"width":119,"var":"label_mineNum","text":"00/00","height":37,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
                                     "nodeParent":13,
                                     "label":"Label(label_mineNum)",
                                     "isDirectory":false,
@@ -126,7 +127,7 @@
                                 },
                                 {
                                     "type":"Button",
-                                    "props":{"y":28,"x":618,"var":"btn_setting","stateNum":"2","skin":"GameUI/btn_shzhi.png"},
+                                    "props":{"y":28,"x":594,"var":"btn_setting","stateNum":"2","skin":"GameUI/btn_shzhi.png"},
                                     "nodeParent":13,
                                     "label":"Button(btn_setting)",
                                     "isDirectory":false,
@@ -181,18 +182,19 @@
         {
             "x":15,
             "type":"Box",
-            "props":{"width":1280,"visible":false,"var":"setBox","mouseEnabled":true,"height":1280,"centerY":0,"centerX":0},
+            "props":{"width":1280,"visible":false,"var":"setBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Box(setBox)",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":42,
             "child":[
                 {
+                    "x":30,
                     "type":"Sprite",
-                    "props":{"y":0,"x":0,"width":1280,"height":1280,"alpha":0.7},
+                    "props":{"y":0,"x":0,"width":1280,"alpha":0.7},
                     "nodeParent":42,
                     "label":"Sprite",
                     "isOpen":false,
@@ -203,7 +205,7 @@
                     "child":[
                         {
                             "type":"Rect",
-                            "props":{"width":1280,"lineWidth":1,"height":1280,"fillColor":"#000000"},
+                            "props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"},
                             "nodeParent":39,
                             "label":"Rect",
                             "isDirectory":false,
@@ -215,8 +217,9 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":330,"x":382,"skin":"GameUI/img_dikuang.png"},
+                    "props":{"y":508,"x":382,"width":530,"skin":"GameUI/img_dikuang.png","height":486},
                     "nodeParent":42,
                     "label":"Image",
                     "isDirectory":false,
@@ -227,8 +230,9 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Box",
-                    "props":{"y":293,"x":405,"var":"setMainBox","cacheAs":"bitmap"},
+                    "props":{"y":471,"x":405,"var":"setMainBox","cacheAs":"bitmap"},
                     "nodeParent":42,
                     "label":"Box(setMainBox)",
                     "isOpen":false,
@@ -262,18 +266,6 @@
                                 ]
                         },
                         {
-                            "type":"Button",
-                            "props":{"y":576,"x":114,"var":"btn_exitRoom","stateNum":"2","skin":"GameUI/btn_tuichufangjian.png"},
-                            "nodeParent":58,
-                            "label":"Button(btn_exitRoom)",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":46,
-                            "child":[
-                                ]
-                        },
-                        {
                             "type":"Image",
                             "props":{"y":184,"x":64,"skin":"GameUI/img_yinxiao.png"},
                             "nodeParent":58,
@@ -300,7 +292,7 @@
                         },
                         {
                             "type":"Image",
-                            "props":{"y":378,"x":64,"skin":"GameUI/img_youxiguize.png"},
+                            "props":{"y":330,"x":64,"skin":"GameUI/img_youxiguize.png"},
                             "nodeParent":58,
                             "label":"Image",
                             "isDirectory":false,
@@ -312,44 +304,7 @@
                         },
                         {
                             "type":"Box",
-                            "props":{"y":286,"x":70,"width":346,"var":"btn_setPlayerList","height":52},
-                            "nodeParent":58,
-                            "label":"Box(btn_setPlayerList)",
-                            "isOpen":false,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":56,
-                            "child":[
-                                {
-                                    "type":"Button",
-                                    "props":{"stateNum":"2","skin":"GameUI/btn_jiantou.png","right":0},
-                                    "nodeParent":56,
-                                    "label":"Button",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":54,
-                                    "child":[
-                                        ]
-                                }],
-                            "$HIDDEN":false
-                        },
-                        {
-                            "type":"Image",
-                            "props":{"y":280,"x":64,"skin":"GameUI/img_chengyuanliebiao2.png"},
-                            "nodeParent":58,
-                            "label":"Image",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":51,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Box",
-                            "props":{"y":376,"x":69,"width":347,"var":"btn_rule","height":52},
+                            "props":{"y":328,"x":69,"width":347,"var":"btn_rule","height":52},
                             "nodeParent":58,
                             "label":"Box(btn_rule)",
                             "isOpen":false,
@@ -370,149 +325,13 @@
                                     "child":[
                                         ]
                                 }]
-                        },
-                        {
-                            "type":"Box",
-                            "props":{"y":123,"x":64,"visible":false,"var":"setGoldBox"},
-                            "nodeParent":58,
-                            "label":"Box(setGoldBox)",
-                            "isOpen":false,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":110,
-                            "child":[
-                                {
-                                    "type":"Image",
-                                    "props":{"skin":"GameUI/img_jinbi.png"},
-                                    "nodeParent":110,
-                                    "label":"Image",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":50,
-                                    "child":[
-                                        ],
-                                    "$HIDDEN":false
-                                },
-                                {
-                                    "type":"Label",
-                                    "props":{"y":2,"x":152,"width":200,"var":"label_setGold","text":"99999","height":64,"fontSize":50,"font":"jiesuanFont1","color":"#f8f808","align":"right"},
-                                    "nodeParent":110,
-                                    "label":"Label(label_setGold)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":52,
-                                    "child":[
-                                        ],
-                                    "$HIDDEN":false
-                                }],
-                            "$HIDDEN":true
                         }],
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Box",
-                    "props":{"y":310,"x":360,"visible":false,"var":"setPlayerBox"},
-                    "nodeParent":42,
-                    "label":"Box(setPlayerBox)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":67,
-                    "child":[
-                        {
-                            "type":"List",
-                            "props":{"y":75,"x":73,"var":"setPlayerList","repeatY":6},
-                            "nodeParent":67,
-                            "label":"List(setPlayerList)",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":64,
-                            "child":[
-                                {
-                                    "type":"Box",
-                                    "props":{"renderType":"render","cacheAs":"bitmap"},
-                                    "nodeParent":64,
-                                    "label":"Box",
-                                    "isOpen":false,
-                                    "isDirectory":true,
-                                    "isAniNode":false,
-                                    "hasChild":true,
-                                    "compId":63,
-                                    "child":[
-                                        {
-                                            "type":"Image",
-                                            "props":{"skin":"GameUI/img_chengyuanliebiao.png"},
-                                            "nodeParent":63,
-                                            "label":"Image",
-                                            "isDirectory":false,
-                                            "isAniNode":false,
-                                            "hasChild":false,
-                                            "compId":59,
-                                            "child":[
-                                                ]
-                                        },
-                                        {
-                                            "type":"Image",
-                                            "props":{"y":6,"x":41,"width":65,"skin":"GameUI/image_touxiang.png","name":"img_icon","height":65},
-                                            "nodeParent":63,
-                                            "label":"Image(img_icon)",
-                                            "isOpen":true,
-                                            "isDirectory":true,
-                                            "isAniNode":false,
-                                            "hasChild":true,
-                                            "compId":60,
-                                            "child":[
-                                                {
-                                                    "type":"Image",
-                                                    "props":{"y":0,"x":0,"width":65,"skin":"GameUI/img_zhuye_touxiang_02.png","renderType":"mask","height":65},
-                                                    "nodeParent":60,
-                                                    "label":"Image",
-                                                    "isDirectory":false,
-                                                    "isAniNode":false,
-                                                    "hasChild":false,
-                                                    "compId":61,
-                                                    "child":[
-                                                        ]
-                                                }],
-                                            "$HIDDEN":false
-                                        },
-                                        {
-                                            "type":"Label",
-                                            "props":{"y":23,"x":137,"width":229,"text":"名称名称名称","name":"label_name","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"},
-                                            "nodeParent":63,
-                                            "label":"Label(label_name)",
-                                            "isDirectory":false,
-                                            "isAniNode":false,
-                                            "hasChild":false,
-                                            "compId":62,
-                                            "child":[
-                                                ]
-                                        }]
-                                }]
-                        },
-                        {
-                            "type":"Button",
-                            "props":{"var":"btn_setPlayerClose","stateNum":"2","skin":"GameUI/btn_fanhui.png"},
-                            "nodeParent":67,
-                            "label":"Button(btn_setPlayerClose)",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":65,
-                            "child":[
-                                ]
-                        }],
-                    "$HIDDEN":true
-                },
-                {
-                    "type":"Box",
-                    "props":{"y":310,"x":360,"visible":false,"var":"rulesBox","cacheAs":"bitmap"},
+                    "props":{"y":488,"x":360,"visible":false,"var":"rulesBox","cacheAs":"bitmap"},
                     "nodeParent":42,
                     "label":"Box(rulesBox)",
                     "isOpen":true,
@@ -522,6 +341,7 @@
                     "compId":70,
                     "child":[
                         {
+                            "x":45,
                             "type":"Button",
                             "props":{"var":"btn_rulesBox","stateNum":"2","skin":"GameUI/btn_fanhui.png"},
                             "nodeParent":70,
@@ -534,8 +354,9 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Label",
-                            "props":{"y":99,"x":62,"wordWrap":true,"width":444,"var":"label_rules","text":"1、数字表示周围有几个雷\\n2、每回合可以行动一次（单击扫雷，长按插旗）\\n3、选对、标对旗加分\\n4、踩雷、标错旗扣分\\n5、有几率获得神秘收集品兑换超值礼物","height":476,"fontSize":35,"font":"SimHei","color":"#ffffff"},
+                            "props":{"y":99,"x":62,"wordWrap":true,"width":444,"var":"label_rules","text":"1、数字表示周围有几个雷\\n2、单击扫雷\\n3、长按插旗或者取消插旗\\n4、标记正确全部的雷即可获得胜利","height":476,"fontSize":35,"font":"SimHei","color":"#ffffff"},
                             "nodeParent":70,
                             "label":"Label(label_rules)",
                             "isDirectory":false,

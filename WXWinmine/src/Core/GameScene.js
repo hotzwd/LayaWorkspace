@@ -21,6 +21,9 @@ var GameScene = (function(_super){
     _proto.panel_diban = null;                                               //方块所在面板
     _proto.m_listMine = new Array();                                         //地雷所在位置
     _proto.mineNum = 0;                                                      //地雷个数
+    _proto.startTime = 0;                                                    //游戏开始时间
+    _proto.gameTime = 0;                                                     //游戏时间
+    _proto.isGameover = false;                                               //游戏是否结束
     
 
     //初始化场景
@@ -32,15 +35,86 @@ var GameScene = (function(_super){
         this.m_listSquare = [];
         this.m_board = [];
         this.m_listMine = [];
+        this.isGameover = false;
 
         // this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        this.mineNum = 16;
+        this.mineNum = 2;
         Gamelog("------minenum ="+this.mineNum);
         // this.mineNum = 8;
 
+        // this.startGame();
+        
+        MessageController.getInstance().AddNotification("square_dead",this,this._squareDeadEvent);
+    }
+
+    /**开始游戏 */
+    _proto.startGame = function(){
+
         this.initMapPanel();
-        Laya.timer.once(200,this,this.createSquareMap);
-        // this.createSquareMap();
+        // Laya.timer.once(200,this,this.createSquareMap);
+        this.createSquareMap();
+
+        this.startTime = new Date().getTime();
+        Laya.timer.loop(1000,this,this.updateGameTime);
+    }
+    /**重置游戏 */
+    _proto.resetGame = function(){
+
+        // var sp = new Laya.Sprite();
+        this.isGameover = false;
+        for (var i = 0; i < this.m_listSquare.length; i++) {
+            var t_square = this.m_listSquare[i];
+            t_square.onDestroy();
+            t_square.destroy();
+        }
+        this.panel_diban.destroyChildren();
+        this.m_listSquare = [];
+        this.m_board = [];
+        this.m_listMine = [];
+
+        this.gameTime = 0;
+        this.gameUI.label_time.text = "00:00";
+    }
+
+    /**游戏结束 */
+    _proto.gameOver = function(){
+        this.isGameover = true;
+
+        for (var i = 0; i < this.m_listSquare.length; i++) {
+            var t_square = this.m_listSquare[i];
+            t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
+            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);   
+        }
+        Laya.timer.clear(this,this.updateGameTime);
+    }
+
+    /**接受到踩雷事件 */
+    _proto._squareDeadEvent = function(){
+        UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+    }
+    /**踩到地雷 */
+    _proto.mineGameover = function(){
+        Gamelog("-----踩雷结束");
+        this.gameOver();
+        // Laya.timer.once(1000,this,function(){
+        //     UIManager.getInstance().showUI("GameoverUI");
+
+        // });
+    }
+
+    /**扫雷完成 游戏胜利 */
+    _proto.gameWin = function(){
+        this.gameOver();
+        Laya.timer.once(1000,this,function(){
+            UIManager.getInstance().showUI("GameoverUI").initGameover(true);
+        });
+    }
+
+    /**更新游戏时间 */
+    _proto.updateGameTime = function(){
+        this.gameTime = Math.floor((new Date().getTime() - this.startTime) / 1000);
+        this.gameUI.label_time.text = GetTimeFormat(this.gameTime);
+
     }
 
     /**初始化地图面板 */
@@ -136,6 +210,7 @@ var GameScene = (function(_super){
         if((clickMine + flagMine) == this.m_listMine.length){
             //找到所有的地雷
             Gamelog("----------扫雷完成----");
+            this.gameWin();
         }
 
     }
@@ -147,13 +222,8 @@ var GameScene = (function(_super){
     _proto.onSquareMouseUp = function(e){
         var square = e.target;
 
-        if(Laya.timer.currTimer - square.mouseDownTime > 1000){
+        if(Laya.timer.currTimer - square.mouseDownTime > 500){
             Gamelog("--------------长按  插旗");
-            // if(square.type == SquareTypes.Flag){
-            //     square.type = SquareTypes.NoClick;    
-            // }else{
-            //     square.type = SquareTypes.Flag;
-            // }
             square.UpdateFlag();
         }else{
             Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
@@ -163,6 +233,9 @@ var GameScene = (function(_super){
                 }else{
                     square.UpdateByType();
                     square.isClicked = true;
+                    // Gamelog("----------踩到雷 游戏结束----");
+                    this.mineGameover();
+
                 }
             }
         }
