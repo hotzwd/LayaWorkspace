@@ -91,6 +91,9 @@ var Square = (function(_super){
                 //播放碎裂动画
                 this.playAnimation("suilie",true,null);
                 Laya.timer.once(200,this,this.UpdateEffect);
+                if(this.type != SquareTypes.Mine){
+                    MusicManager.getInstance().playSound("res/music/4.wav");
+                }
             }
         }
 
@@ -108,7 +111,7 @@ var Square = (function(_super){
                 this.qiAnim.y -= 40;
                 this.qiAnim.x += 15;
                 this.isFlag = true;
-                
+                MusicManager.getInstance().playSound("res/music/5.wav");
             }
 
         }
@@ -139,6 +142,21 @@ var Square = (function(_super){
             }
             if(animNum == 3){
                 mineAnim.y -= 60;
+            }
+
+            switch(animNum){
+                case 1:
+                    MusicManager.getInstance().playSound("res/music/7.wav");
+                    break;
+                case 2:
+                    MusicManager.getInstance().playSound("res/music/8.wav");
+                    break;
+                case 3:
+                    MusicManager.getInstance().playSound("res/music/9.wav");
+                    break;
+                case 4:
+                    MusicManager.getInstance().playSound("res/music/6.wav");
+                    break;
             }
 
         }

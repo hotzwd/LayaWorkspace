@@ -23,6 +23,7 @@ var GameScene = (function(_super){
     _proto.mineNum = 0;                                                      //地雷个数
     _proto.startTime = 0;                                                    //游戏开始时间
     _proto.gameTime = 0;                                                     //游戏时间
+    _proto.leftGameTime = 0;                                                 //上一次保存的游戏时间
     _proto.isGameover = false;                                               //游戏是否结束
     
 
@@ -73,6 +74,7 @@ var GameScene = (function(_super){
         this.m_listMine = [];
 
         this.gameTime = 0;
+        this.leftGameTime = 0;
         this.gameUI.label_time.text = "00:00";
     }
 
@@ -112,11 +114,22 @@ var GameScene = (function(_super){
 
     /**更新游戏时间 */
     _proto.updateGameTime = function(){
-        this.gameTime = Math.floor((new Date().getTime() - this.startTime) / 1000);
+        this.gameTime = this.leftGameTime + Math.floor((new Date().getTime() - this.startTime) / 1000);
         this.gameUI.label_time.text = GetTimeFormat(this.gameTime);
 
     }
 
+    /**暂停游戏 */
+    _proto.pauseGame = function(){
+        Laya.timer.clear(this,this.updateGameTime);
+        this.leftGameTime = this.gameTime;
+    }
+
+    /**重回游戏 */
+    _proto.resuemGame =function(){
+        Laya.timer.loop(1000,this,this.updateGameTime);
+        this.startTime = new Date().getTime();
+    }
     /**初始化地图面板 */
     _proto.initMapPanel = function(){
         for (var x = 0; x < MAX_ROWS; x++) {

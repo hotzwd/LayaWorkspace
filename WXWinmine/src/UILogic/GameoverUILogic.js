@@ -36,6 +36,7 @@ var GameoverUILogic = (function(_super){
     }
      /**分享游戏 */
     _proto._sharedClickEvent = function () {
+        MusicManager.getInstance().playSound("res/music/1.wav");
         if(!this.isSharing){
             this.isSharing = true;
             // wxGame.getInstance().shareGame();
@@ -44,6 +45,7 @@ var GameoverUILogic = (function(_super){
     }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
+        MusicManager.getInstance().playSound("res/music/1.wav");
         SceneManager.getInstance().currentScene.resetGame();
         UIManager.getInstance().closeUI("GameoverUI");
         UIManager.getInstance().showUI("GameStartUI");
