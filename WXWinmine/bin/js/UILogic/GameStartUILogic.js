@@ -28,7 +28,7 @@ var GameStartUILogic = (function(_super){
     _proto._guidBoxClickEvent = function(){
         wxGame.getInstance().showClubBtn(false);
         UIManager.getInstance().closeUI("GameStartUI");
-        SceneManager.getInstance().currentScene.startGame();
+        // SceneManager.getInstance().currentScene.startGame();
 
         UIManager.getInstance().showUI("GameRankUI");
     }
