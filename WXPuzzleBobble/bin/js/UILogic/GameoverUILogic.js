@@ -29,8 +29,18 @@ var GameoverUILogic = (function(_super){
         var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
         this.label_overScore.text = scoreNum;
 
+
          //存储在本地并上传
+        
         var highscoreNum = SetLocalMaxScore(scoreNum);
+
+        //兼容老版本
+        var t_highScore = LocalStorage.getItem("HighScore");
+        if(t_highScore != null || t_highScore != ""){
+            if(GetWeekNum() == 10){
+                highscoreNum = t_highScore;
+            }
+        }
         this.label_heightScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 

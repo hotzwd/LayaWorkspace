@@ -234,7 +234,7 @@ var wxGame = (function (_super) {
                 str = "[有人@我]小哥哥，小哥哥，我有个游戏你玩吗？";
                 break;
             case 4:
-                str = "[有人@我]这个游戏有点怪，怪好玩的！";
+                str = "这个游戏有点怪，怪好玩的！";
                 break;
         }
 
