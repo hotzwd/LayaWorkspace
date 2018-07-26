@@ -30,17 +30,20 @@ var GameoverUILogic = (function(_super){
         this.label_overScore.text = scoreNum;
 
 
-         //存储在本地并上传
-        
-        var highscoreNum = SetLocalMaxScore(scoreNum);
-
-        //兼容老版本
-        var t_highScore = LocalStorage.getItem("HighScore");
-        if(t_highScore != null || t_highScore != ""){
-            if(GetWeekNum() == 10){
-                highscoreNum = t_highScore;
+         //兼容老版本
+        var key = "LocalHighScore_" + GetWeekNum();
+        var score = LocalStorage.getItem(key);
+        if (score == null || score == "") {
+            var t_highScore = LocalStorage.getItem("HighScore");
+            if(t_highScore != null || t_highScore != ""){
+                if(GetWeekNum() == 10){
+                    scoreNum = t_highScore;
+                }
             }
         }
+         //存储在本地并上传
+        var highscoreNum = SetLocalMaxScore(scoreNum);
+        
         this.label_heightScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 
