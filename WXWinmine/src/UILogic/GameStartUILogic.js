@@ -16,6 +16,8 @@ var GameStartUILogic = (function(_super){
         this.zOrder = 10;
 
         this.guidBox.on(Laya.Event.CLICK,this,this._guidBoxClickEvent);
+
+        wxGame.getInstance().showClubBtn(true);
     }
 
     _proto.onDestroy = function(){
@@ -24,8 +26,11 @@ var GameStartUILogic = (function(_super){
 
     /**点击引导结束 */
     _proto._guidBoxClickEvent = function(){
+        wxGame.getInstance().showClubBtn(false);
         UIManager.getInstance().closeUI("GameStartUI");
         SceneManager.getInstance().currentScene.startGame();
+
+        UIManager.getInstance().showUI("GameRankUI");
     }
 
     return GameStartUILogic;

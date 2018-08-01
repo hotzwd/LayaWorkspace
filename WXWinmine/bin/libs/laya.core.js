@@ -4953,9 +4953,10 @@ var SoundManager=(function(){
 			if (SoundManager._soundMuted)return null;
 		};
 		var tSound;
-		if (!Browser.onMiniGame){
-			tSound=Laya.loader.getRes(url);
-		}
+		// if (!Browser.onMiniGame){
+		// 	tSound=Laya.loader.getRes(url);
+		// }
+		tSound=Laya.loader.getRes(url);
 		if (!soundClass)soundClass=SoundManager._soundClass;
 		if (!tSound){
 			tSound=new soundClass();
@@ -12860,7 +12861,10 @@ var Loader=(function(_super){
 				this._data=data;
 				this.event(/*laya.events.Event.PROGRESS*/"progress",0.5);
 				return this._loadImage(this._url.replace(".fnt",".png"));
-				}else {
+			}else {
+				if (Browser.onMiniGame) {
+					this._data = Utils.parseXMLFromString(this._data);
+				}
 				var bFont=new BitmapFont();
 				bFont.parseFont(this._data,data);
 				var tArr=this._url.split(".fnt")[0].split("/");
@@ -14364,7 +14368,7 @@ var Texture=(function(_super){
 		/**@private */
 		this.scaleRate=1;
 		Texture.__super.call(this);
-		if (bitmap){
+		if (bitmap&& bitmap._addReference){
 			bitmap._addReference();
 		}
 		this.setTo(bitmap,uv);
