@@ -58,7 +58,7 @@ Utils.scoreOrder = function(arr) {
     return arr;
   }
   arr.sort(function (a, b) {
-    return b.KVDataList[0].value - a.KVDataList[0].value;
+    return a.KVDataList[0].value - b.KVDataList[0].value;
   });
 
   return arr;
@@ -121,7 +121,7 @@ Utils.setLocalScore = function(newScore){
   }
   else{
     score = parseInt(score, 10);
-    if (newScore > score){
+    if (newScore < score){
       // LocalStorage.setItem("localHighScore", newScore);
       wx.setStorageSync("localHighScore", newScore.toString());
     }

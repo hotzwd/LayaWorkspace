@@ -18,6 +18,7 @@ var GameoverUILogic = (function(_super){
         this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
 
+        this.aniShare.play(0, true);
         
     }
 
@@ -30,13 +31,14 @@ var GameoverUILogic = (function(_super){
         var scoreNum = SceneManager.getInstance().currentScene.gameTime;
         this.label_time.text = GetTimeFormat(scoreNum);
 
-        if(_isWin){
+        if(_isWin  && scoreNum > 0){
             this.img_result.skin = "GameUI/jiesuan_biaoti_shengli.png";
             //存储在本地并上传
             var highscoreNum = SetLocalMaxScore(scoreNum);
             wxGame.getInstance().uploadUserScore(highscoreNum);
         }else{
             this.img_result.skin = "GameUI/jiesuan_biaoti_shibai.png";
+            wxGame.getInstance().showFriends();
         }
 
 
@@ -54,9 +56,9 @@ var GameoverUILogic = (function(_super){
     _proto._playAgainClickEvent = function () {
         MusicManager.getInstance().playSound("res/music/1.wav");
         SceneManager.getInstance().currentScene.resetGame();
+        wxGame.getInstance().showOpenDataContext(false);
         UIManager.getInstance().closeUI("GameoverUI");
         UIManager.getInstance().showUI("GameStartUI");
-        // wxGame.getInstance().showOpenDataContext(false);
         // SceneManager.getInstance().currentScene.startGame();
         
     }

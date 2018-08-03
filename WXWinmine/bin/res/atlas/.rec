@@ -1,18 +1,14 @@
 D .
-D bitmapFont
 D GameUI
-P 23BAEC78 btn_anniu_goumai.png
-P D4B5F02A btn_changeRoom.png
 P D3A369F0 btn_fanhui.png
-P C7EB612B btn_fenxiangyouxi.png
 P BDEC19F3 btn_guan.png
 P 4D8AC60A btn_guanbi.png
 P EEAAFF2F btn_jiantou.png
 P B401CBFA btn_kai.png
+P C4694B11 btn_playAgain.png
+P 406437FA btn_shareScore.png
 P 9D322BB5 btn_shzhi.png
-P 929E819E btn_tuichufangjian.png
-P B644C227 btn_zaiwan.png
-R FDFA89FA img_beijing.png
+R 6E8EA1AA img_beijing.jpg
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
 P EE919311 img_chaqi3.png
@@ -20,8 +16,8 @@ P AE376BCB img_chaqi4.png
 P AE376BCB img_chaqi5.png
 P AE376BCB img_chaqi6.png
 P E08C2C3B img_chaqi7.png
-R 1641C503 img_diban.png
-R 29399517 img_dikuang.png
+R A59A3EA6 img_diban.jpg
+R 9EE36BA7 img_dikuang.jpg
 P 0B3A7ED2 img_guaiwu1.png
 P 06BAE7E0 img_guaiwu2.png
 P 664F2E77 img_guaiwu3.png
@@ -30,7 +26,6 @@ P 664F2E77 img_guaiwu5.png
 P D8207A7A img_guaiwu6.png
 P 18717367 img_guaiwu7.png
 P 18717367 img_guaiwu8.png
-P 52B03FD5 img_jiangchi.png
 P C04C2370 img_kulou.png
 P 68E7E58B img_leishu.png
 P F229F549 img_luoshi1.png
@@ -64,7 +59,6 @@ P FE359DF8 img_suilie3.png
 P 688B7907 img_suilie4.png
 P 930CDB2C img_suilie5.png
 P DC362CB5 img_suilie6.png
-R A15F0835 img_xinshouyindao.png
 P 6C521086 img_yinxiao.png
 P 15823BEA img_youxiguize.png
 P CF22DB2B img_zhadan1.png
@@ -86,7 +80,15 @@ P B85585BF img_zhouweileishu-7.png
 P 771217C8 img_zhouweileishu-8.png
 P 7EDA2FC8 jiesuan_biaoti_shengli.png
 P 8522A064 jiesuan_biaoti_shibai.png
-P F935867F jiesuan_dikuang.png
-R 45892BCD kaibaoxiang-dikuang.png
-R 34782297 progress$bar.png
-R 26ABDB5E progress.png
+R 543297C7 shard.png
+D StartUI
+R EF2957AF 1.png
+R 62926C83 2.png
+R C7DE5049 3.png
+R 1EA88389 4.png
+R 7244967C 5.png
+P A0897746 btn_play.png
+P 2310B2BE btn_rank.png
+P B183B4EB btn_share.png
+R 00CEE0AA img_xinshouyindao.png
+R 67D37954 logo.png

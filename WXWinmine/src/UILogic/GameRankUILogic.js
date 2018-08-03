@@ -13,7 +13,7 @@ var GameRankUILogic = (function(_super){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
         //设置层级 相对于stage
-        this.zOrder = 10;
+        this.zOrder = 100;
 
         wxGame.getInstance().postMessage({
                 act: "showRank"

@@ -32,10 +32,16 @@ function  beginLoad(){
     var arr = [
                 //图集
                 ["res/atlas/GameUI.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/StartUI.atlas",Laya.Loader.ATLAS],
                 //图片
-                ["GameUI/img_beijing.png",Laya.Loader.IMAGE],
-                ["GameUI/img_diban.png",Laya.Loader.IMAGE],
-                ["GameUI/img_dikuang.png",Laya.Loader.IMAGE],
+                ["GameUI/img_beijing.jpg",Laya.Loader.IMAGE],
+                ["GameUI/img_diban.jpg",Laya.Loader.IMAGE],
+                ["GameUI/img_dikuang.jpg",Laya.Loader.IMAGE],
+                ["StartUI/1.png",Laya.Loader.IMAGE],
+                ["StartUI/2.png",Laya.Loader.IMAGE],
+                ["StartUI/3.png",Laya.Loader.IMAGE],
+                ["StartUI/4.png",Laya.Loader.IMAGE],
+                ["StartUI/5.png",Laya.Loader.IMAGE],
                 //字体
                 // ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音

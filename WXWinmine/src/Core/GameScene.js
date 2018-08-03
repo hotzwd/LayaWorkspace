@@ -39,7 +39,7 @@ var GameScene = (function(_super){
         this.isGameover = false;
 
         // this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        this.mineNum = 2;
+        this.mineNum = 16;
         Gamelog("------minenum ="+this.mineNum);
         // this.mineNum = 8;
 
@@ -210,15 +210,19 @@ var GameScene = (function(_super){
                 clickMine++;
             }
         }
-        this.gameUI.label_mineNum.text = clickMine+"/"+this.m_listMine.length;
 
         var flagMine =0;
+        var flagNum = 0;
         for (var y = 0; y < this.m_listSquare.length; y++) {
             var squareTemp = this.m_listSquare[y];
             if(squareTemp.isFlag && !squareTemp.isClicked && squareTemp.type == SquareTypes.Mine){
                 flagMine++;
             }
+            if(squareTemp.isFlag && !squareTemp.isClicked){
+                flagNum++;
+            }
         }
+        this.gameUI.label_mineNum.text = clickMine + flagNum + "/"+this.m_listMine.length;
 
         if((clickMine + flagMine) == this.m_listMine.length){
             //找到所有的地雷

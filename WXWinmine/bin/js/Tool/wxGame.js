@@ -201,6 +201,16 @@ var wxGame = (function (_super) {
         }
     }
 
+    /**显示结束好友信息 */
+    _proto.showFriends = function(){
+        if (Browser.onMiniGame) {
+            this.postMessage({
+                act: "showEndFriends",
+            }, true);
+        }
+    }
+        
+
     /**
      * 显示或者关闭 开放域数据
      */
@@ -225,7 +235,7 @@ var wxGame = (function (_super) {
         var str = "";
         switch (rand) {
             case 1:
-                str = "最好玩的泡泡龙，快来比试一下吧！";
+                str = "重温windows经典扫雷，快来试一下吧！";
                 break;
             case 2:
                 str = "[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？";
@@ -234,13 +244,13 @@ var wxGame = (function (_super) {
                 str = "[有人@我]小哥哥，小哥哥，我有个游戏你玩吗？";
                 break;
             case 4:
-                str = "[有人@我]这个游戏有点怪，怪好玩的！";
+                str = "[有人@我]扫雷重出江湖，化身丛林冒险，等你挑战！";
                 break;
         }
 
         var rand2 = Math.random() * 2 + 1;
         rand2 = parseInt(rand2, 10);
-        var strImage = "game/shard.png";
+        var strImage = "GameUI/shard.png";
 
         shareInfoArr.push(str);
         shareInfoArr.push(strImage);

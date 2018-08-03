@@ -178,7 +178,7 @@ function SetLocalMaxScore(newScore) {
     }
     else {
         score = parseInt(score, 10);
-        if (newScore > score) {
+        if (newScore < score) {
             LocalStorage.setItem(key, newScore);
         }
         else {

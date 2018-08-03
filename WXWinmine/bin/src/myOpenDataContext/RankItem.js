@@ -15,7 +15,7 @@ RankItem.prototype.init = function (cell,index) {
   this.removeChildren();
 
   // 排名
-  this.rankIndex = this.writeText((index + 1).toString(), 45, 23, 36, "black", "center", 50, 1);
+  this.rankIndex = this.writeText((index + 1).toString(), 45, 23, 36, "#ffffff", "center", 50, 1);
   this.addChild(this.rankIndex);
   this.rankIndex.anchorX = 0.5;
 
@@ -26,13 +26,13 @@ RankItem.prototype.init = function (cell,index) {
   this.addChild(this.headimg);
 
   // 用户昵称
-  this.nickname = this.writeText(cell.dataSource.nickname, 170, 30, 25, "#070201", "left", 50,0);
+  this.nickname = this.writeText(cell.dataSource.nickname, 170, 30, 25, "#ffffff", "left", 50,0);
   this.nickname.text = Utils.labelTransform(this.nickname.text,36,250);
   // this.nickname.overflow = Laya.Text.VISIBLE;
   this.addChild(this.nickname);
 
   // 分数
-  this.score = this.writeText(Utils.GetTimeFormat(cell.dataSource.KVDataList[0].value), 250, 36, 30, "red", "right",200,1);
+  this.score = this.writeText(Utils.GetTimeFormat(cell.dataSource.KVDataList[0].value), 270, 36, 30, "#ffffff", "right",200,1);
   this.addChild(this.score);
 
 

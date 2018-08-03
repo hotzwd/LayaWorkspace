@@ -137,7 +137,7 @@ function updateScore(data){
       }
       else {
         var max_score = parseInt(res.KVDataList[0].value, 10);
-        if (data.score >= max_score) {
+        if (data.score <= max_score) {
           result = true;
           // 历史最高分
           // var highest = writeImage("res/openDataRes/high.png", 0, -550, 303, 68);
@@ -235,22 +235,22 @@ function showEndFriends(data){
             var index = friends[i];
             var t_item = res.data[index];
 
-            var item_start = 150;
+            var item_start = 10;
             var item_heigh = -100;
             // 头像
-            var head = writeImage(res.data[index].avatarUrl, -280, item_start + item_heigh * (1 - i), 60, 60);
+            var head = writeImage(res.data[index].avatarUrl, -120, item_start + item_heigh * (1 - i), 60, 60);
             head.anchorY = 0.5;
             Laya.stage.addChild(head);
 
-            var rank = writeText((index + 1).toString(), -220, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
+            var rank = writeText((index + 1).toString(), -180, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
             rank.anchorY = 0.5;
             Laya.stage.addChild(rank);
 
-            var name = writeText(t_item.nickname, -130, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
+            var name = writeText(t_item.nickname, -20, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
             name.anchorY = 0.5;
             Laya.stage.addChild(name);
 
-            var scoreNum = writeText(Utils.GetTimeFormat(t_item.KVDataList[0].value), 100, item_start + item_heigh * (1 - i), 410, 600 + i * 90, 120, 30, 30, "#FFFFFF", "left");
+            var scoreNum = writeText(Utils.GetTimeFormat(t_item.KVDataList[0].value), 150, item_start + item_heigh * (1 - i), 410, 600 + i * 90, 120, 30, 30, "#FFFFFF", "left");
             scoreNum.anchorY = 0.5;
             Laya.stage.addChild(scoreNum);
           }
