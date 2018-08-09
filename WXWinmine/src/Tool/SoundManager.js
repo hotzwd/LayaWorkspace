@@ -39,6 +39,7 @@ var MusicManager = (function (_super) {
         var soundSwitch = this.managerSwitch;
         if(soundSwitch == 1){
             // console.debug("---------play()-------" + musicName);
+            SoundManager.stopAllSound();
             SoundManager.playSound(musicName);
         }
     }

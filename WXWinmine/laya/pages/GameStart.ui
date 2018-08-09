@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":16,
-    "selecteID":12,
+    "selecteID":17,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -214,7 +214,7 @@
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":1190,"x":-211,"text":"V1.0","fontSize":30,"font":"SimHei","color":"#ada7a7"},
+                            "props":{"y":1190,"x":-211,"text":"V1.0.1","fontSize":30,"font":"SimHei","color":"#ada7a7"},
                             "nodeParent":16,
                             "label":"Label",
                             "isDirectory":false,

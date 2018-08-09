@@ -10,8 +10,8 @@ var GameScene = (function(_super){
     Laya.class(GameScene,"GameScene",_super);
     _proto = GameScene.prototype;
     //常量
-    var RANDOMEMINEMIN = 11;                                                //随机产生雷的最小值
-    var RANDOMMINEMAX = 16;                                                 //随机尝试雷的最大值+最小值
+    var RANDOMEMINEMIN = 4;                                                //随机产生雷的最小值
+    var RANDOMMINEMAX = 11;                                                 //随机尝试雷的最大值+最小值
 
     //初始化当前类属性
        
@@ -38,8 +38,8 @@ var GameScene = (function(_super){
         this.m_listMine = [];
         this.isGameover = false;
 
-        // this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        this.mineNum = 16;
+        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
+        // this.mineNum = 16;
         Gamelog("------minenum ="+this.mineNum);
         // this.mineNum = 8;
 
@@ -85,7 +85,7 @@ var GameScene = (function(_super){
         for (var i = 0; i < this.m_listSquare.length; i++) {
             var t_square = this.m_listSquare[i];
             t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
-            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);   
+            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
         }
         Laya.timer.clear(this,this.updateGameTime);
     }
@@ -234,14 +234,22 @@ var GameScene = (function(_super){
     /**方块鼠标按下 */
     _proto.onSquareMouseDown = function(e){
         e.target.mouseDownTime = Laya.timer.currTimer;
+        Laya.timer.once(500,this,this.onSquareUpdateFlag,[e.target]);
     }
+
+    _proto.onSquareUpdateFlag = function(square){
+         Gamelog("--------------长按  插旗");
+         square.UpdateFlag();
+    }
+
     /**方块鼠标抬起 */
     _proto.onSquareMouseUp = function(e){
+        Laya.timer.clear(this,this.onSquareUpdateFlag);
         var square = e.target;
 
         if(Laya.timer.currTimer - square.mouseDownTime > 500){
-            Gamelog("--------------长按  插旗");
-            square.UpdateFlag();
+            // Gamelog("--------------长按  插旗");
+            // square.UpdateFlag();
         }else{
             Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
             if(!square.isFlag){
@@ -257,22 +265,6 @@ var GameScene = (function(_super){
             }
         }
         this.updateMineList();
-    }
-    /**方块点击事件 */
-    _proto.onSquareClick = function(e){
-        // Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
-        // var square = e.target;
-
-        // if(square.type != SquareTypes.Mine || square.type != SquareTypes.Flag){
-        //     // square.type = SquareTypes.Clicked;
-        //     this.seachAroundBlankSquare(square.m_nRowIndex,square.m_nColIndex);
-        // }else{
-        //     square.UpdateByType();
-        //     if(square.type != SquareTypes.Flag)
-        //         square.isClicked = true;
-        // }
-        
-
     }
 
     /**寻找周围空白方块*/
