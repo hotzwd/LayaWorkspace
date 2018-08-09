@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":91,
-    "selecteID":13,
+    "selectedBox":1,
+    "selecteID":2,
     "referenceLines":[
         {
             "value":-7128,
@@ -31,7 +31,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"width":1280,"skin":"GameUI/img_beijing.jpg","height":1280,"centerY":0,"centerX":0},
+            "props":{"width":814,"skin":"GameUI/img_beijing.jpg","height":1556,"centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Image",
             "isDirectory":false,

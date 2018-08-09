@@ -1,4 +1,5 @@
 D .
+D bitmapFont
 D GameUI
 P D3A369F0 btn_fanhui.png
 P BDEC19F3 btn_guan.png
@@ -8,7 +9,7 @@ P B401CBFA btn_kai.png
 P C4694B11 btn_playAgain.png
 P 406437FA btn_shareScore.png
 P 9D322BB5 btn_shzhi.png
-R 6E8EA1AA img_beijing.jpg
+R 2B81ACA5 img_beijing.jpg
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
 P EE919311 img_chaqi3.png
