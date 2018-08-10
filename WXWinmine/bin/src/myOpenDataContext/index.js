@@ -147,13 +147,25 @@ function updateScore(data){
         }
       }
 
+      var t_date = parseInt(new Date().getTime()/1000);  
+      var t_value = JSON.stringify({
+        "wxgame": {
+          "score": data.score,
+          "update_time": t_date
+        }
+      });    
+      
+
       if (result) {
         wx.setUserCloudStorage({
           KVDataList: [
             {
               key: 'score_' + Utils.getWeekNum(),
               value: data.score.toString()
-            },
+            },{
+              key:'gScore',
+              value: t_value,
+            }
           ],
           success: function (res) {
             console.log('update user score success');

@@ -49322,7 +49322,7 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"skin":"GameUI/img_beijing.jpg","height":1280,"centerY":0,"centerX":0}},{"type":"Box","props":{"width":1280,"name":"center","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"contentBox","height":1280,"centerX":0},"child":[{"type":"Box","props":{"y":16,"x":278,"name":"top"},"child":[{"type":"Image","props":{"y":43,"x":213,"width":217,"skin":"GameUI/img_shijian.png","height":70,"sizeGrid":"22,24,23,76"}},{"type":"Label","props":{"y":57,"x":277,"width":129,"var":"label_time","text":"00:00","height":42,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Image","props":{"y":45,"x":7,"width":187,"skin":"GameUI/img_leishu.png","height":70,"sizeGrid":"20,23,24,84"}},{"type":"Label","props":{"y":61,"x":68,"width":119,"var":"label_mineNum","text":"00/00","height":37,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}},{"type":"Button","props":{"y":34,"x":447,"var":"btn_setting","stateNum":2,"skin":"GameUI/btn_shzhi.png"}}]},{"type":"Image","props":{"y":265,"x":280,"skin":"GameUI/img_diban.jpg"}},{"type":"Panel","props":{"y":287,"x":302,"width":675,"var":"panel_diban","height":673}},{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"blockBox","height":1280,"centerX":0}}]}]},{"type":"Box","props":{"width":1280,"visible":false,"var":"setBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"width":1280,"alpha":0.7},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":508,"x":382,"width":530,"skin":"GameUI/img_dikuang.jpg","height":486}},{"type":"Box","props":{"y":471,"x":405,"var":"setMainBox","cacheAs":"bitmap"},"child":[{"type":"Image","props":{"skin":"GameUI/img_shezhi.png"}},{"type":"Button","props":{"y":13,"x":444,"var":"btn_setClose","stateNum":2,"skin":"GameUI/btn_guanbi.png"}},{"type":"Image","props":{"y":184,"x":64,"skin":"GameUI/img_yinxiao.png"}},{"type":"Button","props":{"y":167,"x":302,"var":"btn_setSound","stateNum":2,"skin":"GameUI/btn_kai.png"}},{"type":"Image","props":{"y":330,"x":64,"skin":"GameUI/img_youxiguize.png"}},{"type":"Box","props":{"y":328,"x":69,"width":347,"var":"btn_rule","mouseEnabled":true,"height":52},"child":[{"type":"Button","props":{"stateNum":2,"skin":"GameUI/btn_jiantou.png","right":0}}]}]},{"type":"Box","props":{"y":488,"x":360,"visible":false,"var":"rulesBox","cacheAs":"bitmap"},"child":[{"type":"Button","props":{"var":"btn_rulesBox","stateNum":2,"skin":"GameUI/btn_fanhui.png"}},{"type":"Label","props":{"y":99,"x":62,"wordWrap":true,"width":444,"var":"label_rules","text":"1、数字表示周围有几个雷\\n2、单击扫雷\\n3、长按插旗或者取消插旗\\n4、标记正确全部的雷即可获得胜利","height":476,"fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]}]};
+		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":814,"skin":"GameUI/img_beijing.jpg","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"width":1280,"name":"center","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"contentBox","height":1280,"centerX":0},"child":[{"type":"Box","props":{"y":16,"x":278,"name":"top"},"child":[{"type":"Image","props":{"y":43,"x":213,"width":217,"skin":"GameUI/img_shijian.png","height":70,"sizeGrid":"22,24,23,76"}},{"type":"Label","props":{"y":57,"x":277,"width":129,"var":"label_time","text":"00:00","height":42,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Image","props":{"y":45,"x":7,"width":187,"skin":"GameUI/img_leishu.png","height":70,"sizeGrid":"20,23,24,84"}},{"type":"Label","props":{"y":61,"x":68,"width":119,"var":"label_mineNum","text":"00/00","height":37,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}},{"type":"Button","props":{"y":34,"x":447,"var":"btn_setting","stateNum":2,"skin":"GameUI/btn_shzhi.png"}}]},{"type":"Image","props":{"y":265,"x":280,"skin":"GameUI/img_diban.jpg"}},{"type":"Panel","props":{"y":287,"x":302,"width":675,"var":"panel_diban","height":673}},{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"blockBox","height":1280,"centerX":0}}]}]},{"type":"Box","props":{"width":1280,"visible":false,"var":"setBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"width":1280,"alpha":0.7},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":508,"x":382,"width":530,"skin":"GameUI/img_dikuang.jpg","height":486}},{"type":"Box","props":{"y":471,"x":405,"var":"setMainBox","cacheAs":"bitmap"},"child":[{"type":"Image","props":{"skin":"GameUI/img_shezhi.png"}},{"type":"Button","props":{"y":13,"x":444,"var":"btn_setClose","stateNum":2,"skin":"GameUI/btn_guanbi.png"}},{"type":"Image","props":{"y":184,"x":64,"skin":"GameUI/img_yinxiao.png"}},{"type":"Button","props":{"y":167,"x":302,"var":"btn_setSound","stateNum":2,"skin":"GameUI/btn_kai.png"}},{"type":"Image","props":{"y":330,"x":64,"skin":"GameUI/img_youxiguize.png"}},{"type":"Box","props":{"y":328,"x":69,"width":347,"var":"btn_rule","mouseEnabled":true,"height":52},"child":[{"type":"Button","props":{"stateNum":2,"skin":"GameUI/btn_jiantou.png","right":0}}]}]},{"type":"Box","props":{"y":488,"x":360,"visible":false,"var":"rulesBox","cacheAs":"bitmap"},"child":[{"type":"Button","props":{"var":"btn_rulesBox","stateNum":2,"skin":"GameUI/btn_fanhui.png"}},{"type":"Label","props":{"y":99,"x":62,"wordWrap":true,"width":444,"var":"label_rules","text":"1、数字表示周围有几个雷\\n2、单击扫雷\\n3、长按插旗或者取消插旗\\n4、标记正确全部的雷即可获得胜利","height":476,"fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]}]};
 		return GameUI;
 	})(View);
 var GameoverUI=(function(_super){
@@ -49394,7 +49394,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"var":"guidBox","mouseEnabled":true,"height":1556,"centerY":-2,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":1},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":138,"x":0,"skin":"StartUI/img_xinshouyindao.png","centerY":0,"centerX":0}}]},{"type":"Box","props":{"width":1280,"var":"startBox","height":1556,"centerY":0,"centerX":0,"alpha":1},"child":[{"type":"Image","props":{"x":0,"skin":"StartUI/5.png","name":"5","alpha":1},"compId":7},{"type":"Image","props":{"x":0,"skin":"StartUI/4.png","name":"4","alpha":1},"compId":8},{"type":"Image","props":{"x":0,"skin":"StartUI/3.png","name":"3","alpha":1},"compId":9},{"type":"Image","props":{"x":0,"skin":"StartUI/2.png","name":"2","alpha":1},"compId":10},{"type":"Image","props":{"y":0,"x":0,"skin":"StartUI/1.png","name":"1","alpha":1},"compId":11},{"type":"Box","props":{"y":159,"x":504,"alpha":1},"compId":16,"child":[{"type":"Button","props":{"y":861,"x":139,"var":"btn_rank","stateNum":1,"skin":"StartUI/btn_rank.png"}},{"type":"Button","props":{"y":857,"var":"btn_share","stateNum":1,"skin":"StartUI/btn_share.png"}},{"type":"Image","props":{"y":149,"x":75,"skin":"StartUI/logo.png","scaleY":0.8,"scaleX":0.8,"name":"logo"}},{"type":"Button","props":{"y":746,"x":19,"var":"btn_startGame","stateNum":1,"skin":"StartUI/btn_play.png"}},{"type":"Label","props":{"y":1190,"x":-211,"text":"V1.0","fontSize":30,"font":"SimHei","color":"#ada7a7"}}]}]}],"animations":[{"nodes":[{"target":16,"keyframes":{"x":[{"value":504,"tweenMethod":"linearNone","tween":true,"target":16,"key":"x","index":0}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":20}]}},{"target":10,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":20},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":60}]}},{"target":11,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":20},{"value":200,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":60}]}},{"target":8,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":30},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":30},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":60}]}},{"target":9,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":30},{"value":200,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":30},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":60}]}},{"target":7,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":40}],"alpha":[{"value":0.9928888888888889,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":60}]}}],"name":"aniStart","id":1,"frameRate":24,"action":0}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"var":"guidBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":1},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":138,"x":0,"skin":"StartUI/img_xinshouyindao.png","centerY":0,"centerX":0}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0,"alpha":1},"child":[{"type":"Image","props":{"x":0,"skin":"StartUI/5.png","name":"5","alpha":0.9928888888888889},"compId":7},{"type":"Image","props":{"x":0,"skin":"StartUI/4.png","name":"4","alpha":1},"compId":8},{"type":"Image","props":{"x":0,"skin":"StartUI/3.png","name":"3","alpha":1},"compId":9},{"type":"Image","props":{"x":0,"skin":"StartUI/2.png","name":"2","alpha":1},"compId":10},{"type":"Image","props":{"y":0,"x":0,"skin":"StartUI/1.png","name":"1","alpha":1},"compId":11},{"type":"Box","props":{"y":159,"x":289,"alpha":1},"compId":16,"child":[{"type":"Button","props":{"y":861,"x":139,"var":"btn_rank","stateNum":1,"skin":"StartUI/btn_rank.png"}},{"type":"Button","props":{"y":857,"var":"btn_share","stateNum":1,"skin":"StartUI/btn_share.png"}},{"type":"Image","props":{"y":149,"x":75,"skin":"StartUI/logo.png","scaleY":0.8,"scaleX":0.8,"name":"logo"}},{"type":"Button","props":{"y":746,"x":19,"var":"btn_startGame","stateNum":1,"skin":"StartUI/btn_play.png"}},{"type":"Label","props":{"y":1190,"x":-211,"text":"V1.0.1","fontSize":30,"font":"SimHei","color":"#ada7a7"}}]}]}],"animations":[{"nodes":[{"target":16,"keyframes":{"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":20}]}},{"target":10,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":20},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":60}]}},{"target":11,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":20},{"value":200,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":60}]}},{"target":8,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":30},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":30},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":60}]}},{"target":9,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":30},{"value":200,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":30},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":60}]}},{"target":7,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":40}],"alpha":[{"value":0.9928888888888889,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":60}]}}],"name":"aniStart","id":1,"frameRate":24,"action":0}]};
 		return GameStartUI;
 	})(View);
 
@@ -49995,7 +49995,7 @@ var Square = (function(_super){
         if(!this.isClicked){
             if(this.type != SquareTypes.Flag && !this.isFlag){
                 //播放碎裂动画
-                this.playAnimation("suilie",true,null);
+                this.playAnimation("suilie",true,null,null,80);
                 Laya.timer.once(200,this,this.UpdateEffect);
                 if(this.type != SquareTypes.Mine){
                     MusicManager.getInstance().playSound("res/music/4.wav");
@@ -50013,7 +50013,7 @@ var Square = (function(_super){
                     this.qiAnim.destroy();
                 this.isFlag = false;
             }else{
-                this.qiAnim = this.playAnimation("chaqi",false,null);
+                this.qiAnim = this.playAnimation("chaqi",false,null,null,80);
                 this.qiAnim.y -= 40;
                 this.qiAnim.x += 15;
                 this.isFlag = true;
@@ -50068,10 +50068,13 @@ var Square = (function(_super){
         }
 
     }
-    _proto.playAnimation = function(_name,_isDestroy,_call,_callArg){
+    _proto.playAnimation = function(_name,_isDestroy,_call,_callArg,_interval){
         //动画
         var squareAnim = new Laya.Animation();
-        squareAnim.interval = 100;
+        if(_interval == null){
+            _interval = 100;
+        }
+        squareAnim.interval = _interval;
         squareAnim.zOrder = 1;
         var b_point  = new Point(0,0);
         b_point = this.localToGlobal(b_point);
@@ -50193,8 +50196,8 @@ var GameScene = (function(_super){
     Laya.class(GameScene,"GameScene",_super);
     _proto = GameScene.prototype;
     //常量
-    var RANDOMEMINEMIN = 11;                                                //随机产生雷的最小值
-    var RANDOMMINEMAX = 16;                                                 //随机尝试雷的最大值+最小值
+    var RANDOMEMINEMIN = 4;                                                //随机产生雷的最小值
+    var RANDOMMINEMAX = 11;                                                 //随机尝试雷的最大值+最小值
 
     //初始化当前类属性
        
@@ -50221,8 +50224,8 @@ var GameScene = (function(_super){
         this.m_listMine = [];
         this.isGameover = false;
 
-        // this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        this.mineNum = 16;
+        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
+        // this.mineNum = 16;
         Gamelog("------minenum ="+this.mineNum);
         // this.mineNum = 8;
 
@@ -50268,7 +50271,7 @@ var GameScene = (function(_super){
         for (var i = 0; i < this.m_listSquare.length; i++) {
             var t_square = this.m_listSquare[i];
             t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
-            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);   
+            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
         }
         Laya.timer.clear(this,this.updateGameTime);
     }
@@ -50417,14 +50420,22 @@ var GameScene = (function(_super){
     /**方块鼠标按下 */
     _proto.onSquareMouseDown = function(e){
         e.target.mouseDownTime = Laya.timer.currTimer;
+        Laya.timer.once(500,this,this.onSquareUpdateFlag,[e.target]);
     }
+
+    _proto.onSquareUpdateFlag = function(square){
+         Gamelog("--------------长按  插旗");
+         square.UpdateFlag();
+    }
+
     /**方块鼠标抬起 */
     _proto.onSquareMouseUp = function(e){
+        Laya.timer.clear(this,this.onSquareUpdateFlag);
         var square = e.target;
 
         if(Laya.timer.currTimer - square.mouseDownTime > 500){
-            Gamelog("--------------长按  插旗");
-            square.UpdateFlag();
+            // Gamelog("--------------长按  插旗");
+            // square.UpdateFlag();
         }else{
             Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
             if(!square.isFlag){
@@ -50440,22 +50451,6 @@ var GameScene = (function(_super){
             }
         }
         this.updateMineList();
-    }
-    /**方块点击事件 */
-    _proto.onSquareClick = function(e){
-        // Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
-        // var square = e.target;
-
-        // if(square.type != SquareTypes.Mine || square.type != SquareTypes.Flag){
-        //     // square.type = SquareTypes.Clicked;
-        //     this.seachAroundBlankSquare(square.m_nRowIndex,square.m_nColIndex);
-        // }else{
-        //     square.UpdateByType();
-        //     if(square.type != SquareTypes.Flag)
-        //         square.isClicked = true;
-        // }
-        
-
     }
 
     /**寻找周围空白方块*/
@@ -50892,6 +50887,7 @@ var MusicManager = (function (_super) {
         var soundSwitch = this.managerSwitch;
         if(soundSwitch == 1){
             // console.debug("---------play()-------" + musicName);
+            SoundManager.stopAllSound();
             SoundManager.playSound(musicName);
         }
     }
@@ -51288,7 +51284,7 @@ Laya.stage.alignH = "center";
 //垂直居中对齐
 Laya.stage.alignV = "middle";
 
-Laya.stage.bgColor = "#000000";//设置画布的背景颜色。
+Laya.stage.bgColor = "#7a75a9";//设置画布的背景颜色。
 //使用WebWorker加载并解码图片，把耗费cpu的工作放到worker中执行，防止js主线程卡死，从而能大大减少游戏中加载卡顿现象。
 //指定worker.js所在的路径,比如放在libs目录下
 //Laya.WorkerLoader.workerPath = "libs/worker.js";

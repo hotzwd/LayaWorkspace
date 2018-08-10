@@ -89,7 +89,7 @@ var Square = (function(_super){
         if(!this.isClicked){
             if(this.type != SquareTypes.Flag && !this.isFlag){
                 //播放碎裂动画
-                this.playAnimation("suilie",true,null);
+                this.playAnimation("suilie",true,null,null,80);
                 Laya.timer.once(200,this,this.UpdateEffect);
                 if(this.type != SquareTypes.Mine){
                     MusicManager.getInstance().playSound("res/music/4.wav");
@@ -107,7 +107,7 @@ var Square = (function(_super){
                     this.qiAnim.destroy();
                 this.isFlag = false;
             }else{
-                this.qiAnim = this.playAnimation("chaqi",false,null);
+                this.qiAnim = this.playAnimation("chaqi",false,null,null,80);
                 this.qiAnim.y -= 40;
                 this.qiAnim.x += 15;
                 this.isFlag = true;
@@ -162,10 +162,13 @@ var Square = (function(_super){
         }
 
     }
-    _proto.playAnimation = function(_name,_isDestroy,_call,_callArg){
+    _proto.playAnimation = function(_name,_isDestroy,_call,_callArg,_interval){
         //动画
         var squareAnim = new Laya.Animation();
-        squareAnim.interval = 100;
+        if(_interval == null){
+            _interval = 100;
+        }
+        squareAnim.interval = _interval;
         squareAnim.zOrder = 1;
         var b_point  = new Point(0,0);
         b_point = this.localToGlobal(b_point);

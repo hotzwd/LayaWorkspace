@@ -1,5 +1,4 @@
 D .
-D bitmapFont
 D GameUI
 P D3A369F0 btn_fanhui.png
 P BDEC19F3 btn_guan.png
@@ -9,7 +8,7 @@ P B401CBFA btn_kai.png
 P C4694B11 btn_playAgain.png
 P 406437FA btn_shareScore.png
 P 9D322BB5 btn_shzhi.png
-R 2B81ACA5 img_beijing.jpg
+R 88811BE6 img_beijing.jpg
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
 P EE919311 img_chaqi3.png
@@ -83,11 +82,11 @@ P 7EDA2FC8 jiesuan_biaoti_shengli.png
 P 8522A064 jiesuan_biaoti_shibai.png
 R 543297C7 shard.png
 D StartUI
-R EF2957AF 1.png
-R 62926C83 2.png
-R C7DE5049 3.png
-R 1EA88389 4.png
-R 7244967C 5.png
+R 43BFEA28 1.png
+R 7143871B 2.png
+R A04F51DA 3.png
+R 92ED02E2 4.png
+R 69629890 5.png
 P A0897746 btn_play.png
 P 2310B2BE btn_rank.png
 P B183B4EB btn_share.png
