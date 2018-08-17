@@ -260,6 +260,14 @@ var GameUILogic = (function(_super){
         this.showBannerAd();
         // this.createClub();
         wxGame.getInstance().showClubBtn(true);
+
+        // var image = wx.createImage();
+        // image.src = 'game/game.jpg';
+        // var img = image.imagePath;
+        // wx.previewImage({
+        //     current: image.src,
+        //     urls: [image.src],
+        // });
     }
 
     /**游戏倒计时 显示 */

@@ -51,6 +51,8 @@ var GameScene = (function(_super){
     /**开始游戏 */
     _proto.startGame = function(){
 
+        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
+        
         this.initMapPanel();
         // Laya.timer.once(200,this,this.createSquareMap);
         this.createSquareMap();

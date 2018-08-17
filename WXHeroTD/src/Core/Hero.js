@@ -1,3 +1,5 @@
+/**英雄默认速度 */
+var Hero_Speed = 11;
  /**
  * 英雄
  */
@@ -13,7 +15,7 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 11;
+    // var HeroSpeed = 11;
 
     /**英雄动画 */
     _proto.anim = null;
@@ -31,6 +33,7 @@ var Hero = (function(_super){
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
     _proto.isResetMove = false;                                         //是否重置移动
+    _proto.heroSpeed = 11;                                              //英雄移动速度
 
     _proto.onInit = function(){
         this.width = HeroWidth;
@@ -113,12 +116,14 @@ var Hero = (function(_super){
 
         this.targetPos2 = null;
         this.targetVector2 = null;
+
+        
     }
 
     _proto.onUpdate = function(){
         this.heroMove();
         this.attackMonster();
-        
+        Gamelog("--------heroMove ="+ this.heroSpeed);
     }
 
     /**设置移动路径 */
@@ -128,25 +133,25 @@ var Hero = (function(_super){
         
         if(!this.isMoveFinsih1){
 
-            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos,HeroSpeed);
+            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos,this.heroSpeed);
             if(collisionTarget1){
                 this.isMoveFinsih1 = true;
                 this.x = this.targetPos.x;
                 this.y = this.targetPos.y;
             }else{
-                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+                this.pos(this.x + this.targetVector.x * this.heroSpeed, this.y + this.targetVector.y * this.heroSpeed);
             }
         }else{
             if(this.targetPos2 == null){
                 this.isMoveFinsih2 = true;
             }else{
-                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos2,HeroSpeed);
+                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos2,this.heroSpeed);
                 if(collisionTarget2){
                     this.isMoveFinsih2 = true;
                     this.x = this.targetPos2.x;
                     this.y = this.targetPos2.y;
                 }else{
-                    this.pos(this.x + this.targetVector2.x * HeroSpeed, this.y + this.targetVector2.y * HeroSpeed); 
+                    this.pos(this.x + this.targetVector2.x * this.heroSpeed, this.y + this.targetVector2.y * this.heroSpeed); 
                 }
             }
 
@@ -266,6 +271,19 @@ var Hero = (function(_super){
             UIManager.getInstance().showUI("GameOverUI");
         });
 
+    }
+
+    /**增加速度 */
+    _proto.addSpeed = function(_addSpeed,_time){
+        Laya.timer.clear(this,this.resetSpeed);
+
+        this.heroSpeed = Hero_Speed + _addSpeed;
+        Laya.timer.once(_time,this,this.resetSpeed);
+    }
+
+    _proto.resetSpeed = function(){
+        Gamelog("--------resetSpeed ="+ this.heroSpeed);
+        this.heroSpeed = Hero_Speed;
     }
 
     return Hero;

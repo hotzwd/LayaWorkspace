@@ -56,11 +56,6 @@ var Monster = (function(_super){
         // this.addChild(this.hpProgress);
         this.hpProgress.pos(MonsterWidth / 2,0);
 
-
-        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
-        this.addChild(this.hurtSprite);
-
-
     }
 
     _proto.onDestroy = function(){
@@ -73,6 +68,9 @@ var Monster = (function(_super){
     //初始化怪物
     _proto.initMonster = function(_posType,_type)
     {
+        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
+        SceneManager.getInstance().currentScene.floorBoard.addChild(this.hurtSprite);
+
         this.anim.scaleX = 1;
         var directionId = 1;
         if(_posType == 2 || _posType == 3){
@@ -151,6 +149,9 @@ var Monster = (function(_super){
             this.hurtSprite.pos(0,MonsterHeight );
             this.hurtSprite.rotation = 180 + (90 -jiajiao) -45;
         }
+
+        
+
     }
 
     _proto.onUpdate = function(){
@@ -213,13 +214,26 @@ var Monster = (function(_super){
 
         this.hurtSprite.visible = true;
         this.hurtSprite.alpha = 1;
+        //转换到Floor图层坐标
+        var t_hurtPos = this.localToGlobal(new Point(this.hurtSprite.x,this.hurtSprite.y),true);
+        this.hurtSprite.pos(t_hurtPos.x,t_hurtPos.y);
+
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
         },1000,null,new Laya.Handler(this,function(){
+            this.createProp();
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
+    }
+
+    /**
+     * 产生道具
+     */
+    _proto.createProp = function(){
+
+        SceneManager.getInstance().currentScene.createProp(this.x,this.y);
     }
     return Monster;
 })(Laya.Sprite);

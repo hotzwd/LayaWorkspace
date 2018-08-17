@@ -27,7 +27,7 @@ var GameScene = (function(_super){
     var BeginCreateNum = 5;                                                     //开始生成的泡泡行数  
     var ShootCreateNum = 10;                                                    //发射多少个后创建新的一行  
     var MoveOtherBubbleDistance = 5;                                            //碰撞其他球移动的距离
-    var GameTime = 120;                                                         //游戏时间
+    var GameTime = 12;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
     var CreatePropNum = 10;                                                     //发射多少个后创建道具球
@@ -1395,10 +1395,10 @@ var GameScene = (function(_super){
 
         var t_videoAd = this.videoAd;
         this.videoAd.load().then(function () {
-            Gamelog("createVideoAD 拉取成功");
+            console.log("createVideoAD 拉取成功");
             // this.videoAd.show();
         }).catch( function(err){
-            Gamelog("createVideoAD 拉取失败");
+            console.log("createVideoAD 拉取失败");
             t_videoAd.load();
             console.log(err.errMsg)
         })

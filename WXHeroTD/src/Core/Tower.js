@@ -63,6 +63,12 @@ var Tower = (function(_super){
     _proto.onDestroy = function(){
     }
 
+    _proto.addHp = function(_hp){
+        this.hp += _hp;
+        if(this.hp > TowerMaxHp){
+            this.hp = TowerMaxHp;
+        }
+    }
     _proto.resetHp = function(){
         this.hp = 1000;
         this.hpProgress.value = 1;
@@ -71,7 +77,7 @@ var Tower = (function(_super){
         this.anim.visible = false;
     }
     _proto.onUpdate = function(){
-        if(this.hp < TowerMaxHp){
+        if(this.hp <= TowerMaxHp){
             this.hpProgress.value = this.hp / TowerMaxHp;
         }
     }

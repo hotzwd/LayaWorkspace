@@ -28,11 +28,14 @@ var GameScene = (function (_super) {
     _proto.gameUI = null;                                                    //ui对象
     _proto.curHero = null;                                                   //当前英雄
     _proto.curTower = null;                                                  //当前防御塔
+    _proto.floorBoard = null;                                                //地面盒子
     _proto.pointBoard = null;                                                //指引线盒子
+    _proto.propBoard = null;                                                 //道具盒子
     _proto.heroBox = null;                                                   //存放英雄对象的盒子
     _proto.monsterBox = null;                                                //存放怪物对象的盒子
     _proto.towerBox = null;                                                  //存放防御塔对象的盒子
     _proto.monsterList = null;                                               //怪物对象列表
+    _proto.propList = null;                                                  //道具物对象列表
     _proto.monsterPool = null;                                               //怪物对象池
     _proto.towerGlobaPos = null;                                             //防御塔坐标
 
@@ -49,11 +52,23 @@ var GameScene = (function (_super) {
         
         this.monsterList = new Array();
         this.monsterPool = [];
+        this.propList = new Array();
+
+
+        this.floorBoard = new Sprite();
+        this.floorBoard.width = Laya.stage.width;
+        this.floorBoard.height = Laya.stage.height;
+        this.floorBoard.zOrder = 1;
 
         this.pointBoard = new Sprite();
         this.pointBoard.width = Laya.stage.width;
         this.pointBoard.height = Laya.stage.height;
         this.pointBoard.zOrder = 5;
+
+        this.propBoard = new Sprite();
+        this.propBoard.width = Laya.stage.width;
+        this.propBoard.height = Laya.stage.height;
+        this.propBoard.zOrder = 6;
 
         this.monsterBox = new Laya.Box();
         this.monsterBox.width = Laya.stage.width;
@@ -70,7 +85,9 @@ var GameScene = (function (_super) {
         this.towerBox.height = Laya.stage.height;
         this.towerBox.zOrder = 20;
 
+        Laya.stage.addChild(this.floorBoard);
         Laya.stage.addChild(this.pointBoard);
+        Laya.stage.addChild(this.propBoard);
         Laya.stage.addChild(this.monsterBox);
         Laya.stage.addChild(this.towerBox);
         Laya.stage.addChild(this.heroBox);
@@ -145,6 +162,7 @@ var GameScene = (function (_super) {
 
         this.curTower.resetHp();
 
+        this.curHero.heroSpeed = Hero_Speed;
         this.curHero.pos(this.curTower.x, this.curTower.y + 200);
         this.curHero.stopAnim();
         this.curHero.reserTarget();
@@ -154,7 +172,10 @@ var GameScene = (function (_super) {
             MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
         }
         this.monsterList = [];
+        this.propList = [];
         this.pointBoard.destroyChildren();
+        this.floorBoard.destroyChildren();
+        this.propBoard.destroyChildren();
     }
 
     /**
@@ -172,6 +193,12 @@ var GameScene = (function (_super) {
         }
         if(this.curTower != null){
             this.curTower.onUpdate();
+        }
+        if(this.propList.length > 0){
+            for (var i = 0; i < this.propList.length; i++) {
+                var t_prop = this.propList[i];
+                t_prop.onUpdate();
+            }
         }
 
        this.updateGeneratorMonster();
@@ -308,6 +335,14 @@ var GameScene = (function (_super) {
         }
     }
     
+    /**创建道具 */
+    _proto.createProp = function(_x,_y){
+
+        var t_prop = new Prop();
+        t_prop.pos(_x,_y);
+        this.propBoard.addChild(t_prop);
+        this.propList.push(t_prop);
+    }
 
     return GameScene;
 })();

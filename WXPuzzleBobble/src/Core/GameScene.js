@@ -1395,10 +1395,10 @@ var GameScene = (function(_super){
 
         var t_videoAd = this.videoAd;
         this.videoAd.load().then(function () {
-            Gamelog("createVideoAD 拉取成功");
+            console.log("createVideoAD 拉取成功");
             // this.videoAd.show();
         }).catch( function(err){
-            Gamelog("createVideoAD 拉取失败");
+            console.log("createVideoAD 拉取失败");
             t_videoAd.load();
             console.log(err.errMsg)
         })

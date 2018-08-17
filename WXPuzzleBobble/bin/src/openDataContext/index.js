@@ -148,12 +148,12 @@ function updateScore(data){
       }
 
       var t_date = parseInt(new Date().getTime()/1000);      
-      var t_value = {
+      var t_value = JSON.stringify({
         "wxgame": {
           "score": data.score,
           "update_time": t_date
         }
-      } 
+      });
 
       if (result) {
         wx.setUserCloudStorage({
@@ -163,7 +163,7 @@ function updateScore(data){
               value: data.score.toString()
             },{
               key:'gameRank',
-              value: t_value.toString(),
+              value: t_value,
             }
           ],
           success: function (res) {
@@ -267,7 +267,7 @@ function showEndFriends(data){
             Laya.stage.addChild(head);
             
             //名字
-            var name = writeText(t_item.nickname, 0, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
+            var name = writeText(Utils.labelTransform(t_item.nickname,36,250), 0, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
             name.anchorY = 0.5;
             Laya.stage.addChild(name);
 
