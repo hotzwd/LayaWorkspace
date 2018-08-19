@@ -232,6 +232,9 @@ var Monster = (function(_super){
      * 产生道具
      */
     _proto.createProp = function(){
+        var monsterRanomNum = parseInt(Math.random()*10000, 10);
+
+        
 
         SceneManager.getInstance().currentScene.createProp(this.x,this.y);
     }

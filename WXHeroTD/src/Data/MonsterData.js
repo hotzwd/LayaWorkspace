@@ -9,6 +9,8 @@ var MonsterData = [
         score:16,
         speed:2,
         radius:30,
+        props:[{propId:1,weight:1000},
+        {propId:2,weight:1000}],
     },
     {
         type:1,
