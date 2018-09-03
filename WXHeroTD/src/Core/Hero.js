@@ -19,6 +19,7 @@ var Hero = (function(_super){
 
     /**英雄动画 */
     _proto.anim = null;
+    _proto.effectAnim = null;                                           //特效动画
     _proto.targetPos = null;                                            //目标坐标
     _proto.targetVector = null;                                         //目标向量
     _proto.targetPos2 = null;                                           //目标坐标2
@@ -56,6 +57,7 @@ var Hero = (function(_super){
         this.anim.pivotY = 147;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
+
 
         if(ShowRang){
             var rangSp = new Laya.Sprite();
@@ -123,7 +125,7 @@ var Hero = (function(_super){
     _proto.onUpdate = function(){
         this.heroMove();
         this.attackMonster();
-        Gamelog("--------heroMove ="+ this.heroSpeed);
+        // Gamelog("--------heroMove ="+ this.heroSpeed);
     }
 
     /**设置移动路径 */
@@ -277,6 +279,17 @@ var Hero = (function(_super){
     _proto.addSpeed = function(_addSpeed,_time){
         Laya.timer.clear(this,this.resetSpeed);
 
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
+        this.effectAnim = new Laya.Animation();
+        this.effectAnim.interval = 100;
+        this.effectAnim.play(0, true, "hero_speed");
+        this.effectAnim.pivotX = 40;
+        this.effectAnim.pivotY = 43;
+        this.effectAnim.pos(this.pivotX,this.pivotY - 40);
+        this.addChild(this.effectAnim);
+
         this.heroSpeed = Hero_Speed + _addSpeed;
         Laya.timer.once(_time,this,this.resetSpeed);
     }
@@ -284,6 +297,7 @@ var Hero = (function(_super){
     _proto.resetSpeed = function(){
         Gamelog("--------resetSpeed ="+ this.heroSpeed);
         this.heroSpeed = Hero_Speed;
+        this.effectAnim.destroy();
     }
 
     return Hero;

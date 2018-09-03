@@ -32,6 +32,7 @@ var Monster = (function(_super){
     _proto.hurtSprite = null;                                          //被攻击的特效
     _proto.monsterSpeed = 1;                                           //怪物速度
     _proto.monsterScore = 0;                                           //怪物分数
+    _proto.monsterData = null;                                         //怪物数据
 
     _proto.onInit = function(){
         this.width = MonsterWidth;
@@ -89,6 +90,7 @@ var Monster = (function(_super){
         }
         
         var t_data = t_monsterData[_type];
+        this.monsterData = t_data;
         
         this.anim.clear();
         this.anim.play(0, true, t_data.anim);
@@ -233,10 +235,24 @@ var Monster = (function(_super){
      */
     _proto.createProp = function(){
         var monsterRanomNum = parseInt(Math.random()*10000, 10);
-
-        
-
-        SceneManager.getInstance().currentScene.createProp(this.x,this.y);
+        var t_props = this.monsterData.props.length;
+        if(t_props == 0){
+            return;
+        }
+        var t_weight = 0;
+        var t_type = -1;
+        for (var i = 0; i < t_props; i++) {
+            var propData = this.monsterData.props[i];
+            t_weight += propData.weight;
+            if(monsterRanomNum <= t_weight){
+                t_type = propData.propId;
+                break;
+            }
+        }
+        // Gamelog("-------createProp monsterRanomNum="+monsterRanomNum + ",t_type="+t_type);
+        if(t_type != -1){
+            SceneManager.getInstance().currentScene.createProp(this.x,this.y,t_type);
+        }
     }
     return Monster;
 })(Laya.Sprite);

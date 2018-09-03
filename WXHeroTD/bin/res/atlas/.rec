@@ -10,6 +10,8 @@ P A04FD96C btn_zaiwanyici.png
 P 6B52DC79 high.png
 R 4CF5F507 huodechenghao-di.png
 R 85B3320E img_line.png
+P EA9029BE item_hp.png
+P 2FAB8261 item_speed.png
 P 7A521376 jiantou.png
 P 08232FD8 logo.png
 P 0D5CD876 No.1.png
@@ -35,6 +37,9 @@ P 5AEE1630 gailun-animation_0.png
 P 26075C4A gailun-animation_12.png
 P 3AFF62DA gailun-animation_4.png
 P 05FEA6E9 gailun-animation_8.png
+P 5EFBA1C7 speed_1.png
+P 3D81CE8B speed_2.png
+P F3ECD2CE speed_3.png
 D monster
 P 92B10355 xiaobing01-animation_0.png
 P 8DB65527 xiaobing01-animation_1.png

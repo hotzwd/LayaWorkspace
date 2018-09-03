@@ -336,12 +336,25 @@ var GameScene = (function (_super) {
     }
     
     /**创建道具 */
-    _proto.createProp = function(_x,_y){
+    _proto.createProp = function(_x,_y,_type){
 
         var t_prop = new Prop();
         t_prop.pos(_x,_y);
+        t_prop.setPropType(_type);
+
         this.propBoard.addChild(t_prop);
         this.propList.push(t_prop);
+    }
+
+    _proto.removeProp = function(_proto){
+        for (var i = 0; i < this.propList.length; i++) {
+            var t_prop = this.propList[i];
+            if(t_prop == _proto){
+                // Gamelog("------删除怪物");
+                this.propList.splice(i, 1);
+            }
+
+        }
     }
 
     return GameScene;

@@ -68,6 +68,7 @@ var Tower = (function(_super){
         if(this.hp > TowerMaxHp){
             this.hp = TowerMaxHp;
         }
+        BubbleScoreAnim(new Point(this.x,this.y -200),"+"+_hp);
     }
     _proto.resetHp = function(){
         this.hp = 1000;
