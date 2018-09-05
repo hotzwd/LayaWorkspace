@@ -34,6 +34,8 @@ var GameStartUILogic = (function (_super) {
         // this.delayInitShow();
 
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
+         wxGame.getInstance().showAD(1);
+         wxGame.getInstance().showClubBtn(true);
     }
     
      //自动适配完后初始化
@@ -69,12 +71,14 @@ var GameStartUILogic = (function (_super) {
     _proto._startClickEvent = function () {
         this.guildBox.visible = true;
         this.startBox.visible = false;
+         wxGame.getInstance().showAD(0);
+         wxGame.getInstance().showClubBtn(false);
     }
     /**点击引导 */
     _proto._guildClickEvent = function () {
         // this.zOrder = 25;
         this.guildBox.visible = false;
-        UIManager.getInstance().closeUI("GameStartUI");
+        UIManager.getInstance().closeUI("GameStartUI",true);
         SceneManager.getInstance().currentScene.startGame();
     }
     /**点击排行榜 */

@@ -1,4 +1,5 @@
-
+/**当前微信版本 */
+window.wxSDKVersion;
 /**
  * wxGame
  */
@@ -22,10 +23,24 @@ var wxGame = (function (_super) {
 
     _proto.sharedCanvasTexture = null;
     _proto.shareSp = null;
+    //两个广告切换
+    _proto.bannerAd_1 = null;
+    _proto.bannerAd_2 = null;
+    //视频广告
+    _proto.videoAd = null;
+    //游戏圈按钮
+    _proto.btn_club = null;
 
     _proto.Init = function () {
 
         if (Browser.onMiniGame) {
+
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    wxSDKVersion = res.SDKVersion;
+                }
+            });
 
             wx.showShareMenu({
                 withShareTicket: false
@@ -348,6 +363,200 @@ var wxGame = (function (_super) {
                 });
             });
 
+        }
+    }
+
+    //显示广告
+    _proto.showAD = function (AdIndex) {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        var adIndex = 0;
+        Gamelog("showAD");
+        // this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        // Laya.timer.loop(30000, this, function () {
+        //     Gamelog("adIndex = " + adIndex);
+        //     adIndex++;
+        //     if (adIndex % 2 == 0) {
+        //         // this.bannerAd_1 = this.createAD(this.bannerAd_1, "adunit-ee34510033de8989", this.bannerAd_2);
+        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        //     }
+        //     else {
+        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        //     }
+        // });
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+
+        if (AdIndex == 0) {
+            this.bannerAd_2.hide();
+        }
+        else {
+            var AdID = null;
+            switch (AdIndex) {
+                //开始
+                case 1:
+                    AdID = "adunit-a3b210c4532d1370";
+                    break;
+                //游戏
+                case 2:
+                    AdID = "adunit-a8c6ef7647f7c2a6";
+                    break;
+
+                default:
+                    break;
+            }
+            
+            if(isPass)
+                this.bannerAd_2 = this.createAD(this.bannerAd_2, AdID, this.bannerAd_1);
+        }
+    }
+
+    //创建广告
+    _proto.createAD = function (Ad, AdID, hideAd) {
+        if (Browser.onMiniGame) {
+            
+            if (Ad != null) {
+                Gamelog("destroy");
+                Ad.destroy();
+            }
+
+            Gamelog("create ad " + AdID);
+            if(wx.createBannerAd == null){
+                return;
+            }
+            Ad = wx.createBannerAd({
+                adUnitId: AdID,
+                style: {
+                    left: 0,
+                    top: 0,
+                    width: 300
+                }
+            })
+            Ad.show();
+
+            var sysInfo = wx.getSystemInfoSync();
+
+            // this.bannerAd.style.width = sysInfo.screenWidth;
+
+            // var tempAd = Ad;
+            Ad.onResize(function (res) {
+                // console.log(res.width, res.height);
+                // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
+                Ad.style.top = sysInfo.screenHeight - 86;
+                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            })
+
+            Ad.onLoad(function () {
+                // console.log('banner 广告加载成功')
+                if (hideAd != null) {
+                    Gamelog("hideAd destroy");
+                    // hideAd.destroy();
+                    // hideAd.hide();
+                }
+            })
+
+        }
+
+        return Ad;
+    }
+
+     //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-02b50b30ad61154f'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            Gamelog("createVideoAD 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            Gamelog("createVideoAD 拉取失败");
+            t_videoAd.load();
+            console.log(err.errMsg)
+        })
+    }
+
+    /**微信官方对比版本号 */
+    function compareVersion(v1, v2) {
+        v1 = v1.split('.')
+        v2 = v2.split('.')
+        var len = Math.max(v1.length, v2.length)
+        while (v1.length < len) {
+            v1.push('0')
+        }
+        while (v2.length < len) {
+            v2.push('0')
+        }
+        for (var i = 0; i < len; i++) {
+            var num1 = parseInt(v1[i])
+            var num2 = parseInt(v2[i])
+            if (num1 > num2) {
+                return 1
+            } else if (num1 < num2) {
+                return -1
+            }
+        }
+        return 0
+    }
+
+    /**显示微信游戏圈 */
+    _proto.showClubBtn = function(_show){
+        if (Browser.onMiniGame) {
+
+            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
+                return;
+            }
+            if(this.btn_club == null){
+                // this.btn_club.destroy();
+                this.btn_club = wx.createGameClubButton({
+                    icon: 'white',
+                    style: {
+                        left: 10,
+                        top: 50,
+                        width: 40,
+                        height: 40
+                    }
+                })
+            }
+
+            if(_show){
+                this.btn_club.show();
+            }else{
+                this.btn_club.hide();
+            }
+            
         }
     }
 

@@ -49669,6 +49669,33 @@ var GameUI=(function(_super){
 		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#f4ff00"}}]},{"type":"Box","props":{"width":814,"var":"moveBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/beijing.jpg"}},{"type":"Box","props":{"y":685,"x":360,"width":264,"visible":false,"var":"centerBox","height":264,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Sprite","props":{"y":132,"x":132,"width":0,"height":0},"child":[{"type":"Circle","props":{"y":0,"x":0,"radius":150,"lineWidth":1,"fillColor":"#ff0000"}}]}]},{"type":"Text","props":{"y":251,"x":408,"width":552,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"}}]},{"type":"Sprite","props":{"y":963,"x":361,"width":112,"visible":false,"var":"s_hero","pivotY":55,"pivotX":55,"height":110},"child":[{"type":"Animation","props":{"y":56,"x":50,"width":385,"source":"hero/gailun-01.png","pivotY":155,"pivotX":180,"height":294,"autoPlay":true}}]}]};
 		return GameUI;
 	})(View);
+var GameEndShareUI=(function(_super){
+		function GameEndShareUI(){
+			
+		    this.aniShare=null;
+		    this.gameoverPanel=null;
+		    this.cancleBtn=null;
+		    this.shareBtn=null;
+		    this.endTimer=null;
+		    this.score=null;
+		    this.friendAvatar=null;
+		    this.friendScore=null;
+
+			GameEndShareUI.__super.call(this);
+		}
+
+		CLASS$(GameEndShareUI,'ui.GameEndShareUI',_super);
+		var __proto__=GameEndShareUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameEndShareUI.uiView);
+
+		}
+
+		GameEndShareUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":233,"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]}]},{"type":"Label","props":{"y":1031,"x":564,"visible":true,"var":"cancleBtn","underlineColor":"#ffffff","underline":true,"text":"点击跳过","fontSize":32,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Button","props":{"y":941,"x":634,"var":"shareBtn","stateNum":1,"skin":"game/fuhuo.png","anchorY":0.5,"anchorX":0.5},"compId":116},{"type":"Label","props":{"y":1157,"x":541,"visible":false,"underlineColor":"#ffffff","underline":true,"text":"下一个即将超越好友","fontSize":24,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":653,"x":630,"visible":true,"var":"endTimer","underlineColor":"#ffffff","underline":false,"text":"10","fontSize":150,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":336,"x":628,"visible":true,"underlineColor":"#ffffff","underline":false,"text":"当前分数","fontSize":22,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":388,"x":630,"visible":true,"var":"score","underlineColor":"#ffffff","underline":false,"text":"9999","fontSize":50,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Image","props":{"y":1125,"x":682,"visible":false,"var":"friendAvatar","skin":"game/No.1.png"}},{"type":"Label","props":{"y":1158,"x":822,"visible":false,"var":"friendScore","underlineColor":"#ffffff","underline":false,"text":"9999","fontSize":40,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":841,"x":640,"visible":true,"underlineColor":"#ffffff","underline":false,"text":"每局限1次复活机会","fontSize":25,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}}]}],"animations":[{"nodes":[{"target":116,"keyframes":{"x":[{"value":634,"tweenMethod":"linearNone","tween":true,"target":116,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		return GameEndShareUI;
+	})(View);
 var GameOverUI=(function(_super){
 		function GameOverUI(){
 			
@@ -49743,9 +49770,306 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":233,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}},{"type":"Text","props":{"y":1366,"x":70,"text":"v1.0.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":233,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}},{"type":"Text","props":{"y":1366,"x":70,"text":"v1.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
+/**
+ * 结算界面逻辑 by lzq
+ */
+var GameEndShareUILogic = (function (_super) {
+    function GameEndShareUILogic() {
+        GameEndShareUILogic.super(this);
+
+    }
+    Laya.class(GameEndShareUILogic, "UILogic.GameEndShareUILogic", _super);
+    var _proto = GameEndShareUILogic.prototype;
+
+    this.timerNum = 10;
+
+    _proto.onInit = function () {
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+        this.timerNum = 10;
+
+        var scoreNum = SceneManager.getInstance().currentScene.gameScore;
+        this.score.text = scoreNum;
+        this.endTimer.text = this.timerNum;
+
+        // this.friendAvatar
+        wxGame.getInstance().showFriendAvatar(402,this.friendAvatar.y,80,80,false);
+
+        // this.shareBtn.on(Laya.Event.CLICK, this, this.onShare);
+        this.shareBtn.on(Laya.Event.CLICK, this, this.onShowVidoAd);
+        this.cancleBtn.on(Laya.Event.CLICK, this, this.onCloseShare);
+
+        Laya.timer.loop(1000, this, this.onEndTimer);
+        this.aniShare.play(0, true);
+
+        // if (Browser.onMiniGame)&& wxGame.getInstance().videoAd == null) {
+        //     if(wx.createRewardedVideoAd != null)
+        //         this.onCloseShare();
+        // }
+    }
+    _proto.onDestroy = function () {
+        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+        Laya.timer.clear(this, this.onEndTimer);
+    }
+
+    /**
+     * 结束倒计时
+     */
+    _proto.onEndTimer = function () {
+        this.timerNum -= 1;
+        this.endTimer.text = this.timerNum + "s";
+
+        if (this.timerNum <= 0) {
+            this.onCloseShare();
+            return;
+        }
+    }
+
+    /**分享 */
+    _proto.onShare = function () {
+        if (!Browser.onMiniGame) {
+            shareResult(1);
+            return;
+        }
+
+        wxGame.getInstance().shareGame();
+    }
+
+    shareResult = function (res) {
+        if (res == 1) {
+                Gamelog("分享成功");
+                // var ui = UIManager.getInstance().getUI("GameEndShareUI");
+                // Laya.timer.clear(ui, ui.onEndTimer);
+
+                UIManager.getInstance().closeUI("GameEndShareUI",true);
+                var scoreNum = SceneManager.getInstance().currentScene.gameScore;
+                Gamelog("scoreNum = "+scoreNum);
+                SceneManager.getInstance().currentScene.isShowVideoAd = true;
+                Gamelog("------shareResult isShowVideoAd="+SceneManager.getInstance().currentScene.isShowVideoAd);
+                SceneManager.getInstance().currentScene.restartGame(scoreNum);
+                //开始游戏
+                SceneManager.getInstance().currentScene.startGame();
+                wxGame.getInstance().showOpenDataContext(false);
+
+                // SceneManager.getInstance().currentScene.isShared = true;
+            } else {
+                Gamelog("分享失败");
+                // SceneManager.getInstance().currentScene.isShowVideoAd = true;
+                wxGame.getInstance().showOpenDataContext(false);
+                UIManager.getInstance().closeUI("GameEndShareUI",true);
+                UIManager.getInstance().showUI("GameOverUI");
+            }
+    }
+
+    /**跳过 */
+    _proto.onCloseShare = function () {
+        
+        wxGame.getInstance().showOpenDataContext(false);
+        // Laya.timer.clear(this, this.onEndTimer);
+        UIManager.getInstance().closeUI("GameEndShareUI",true);
+        UIManager.getInstance().showUI("GameOverUI");
+        
+    }
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+        if (!Browser.onMiniGame) {
+            shareResult(1);
+            return;
+        }
+
+        var ui = UIManager.getInstance().getUI("GameEndShareUI");
+        Laya.timer.clear(ui, ui.onEndTimer);
+
+        var t_videoAd = wxGame.getInstance().videoAd;
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            t_videoAd.offClose();
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                shareResult(1);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                shareResult(0);
+            }
+        })
+
+    }
+
+    return GameEndShareUILogic;
+})(GameEndShareUI);
+ /**
+ * 道具
+ */
+var Prop = (function(_super){
+
+    function Prop(){
+        Prop.super(this);
+        this.onInit();
+    }
+    Laya.class(Prop,"Prop",_super);
+    _proto = Prop.prototype;
+
+    //道具宽高
+    var PropWidth = 110;
+    var PropHeight = 110;
+    var PropMaxHp = 1000;                                                       //防御塔最高血量
+
+    /**道具动画 */
+    _proto.anim = null;
+    _proto.propImg = null;
+    _proto.propRadios = 30;                                                   //道具半径
+    _proto.targetHero = null;                                                 //英雄
+    _proto.targetTower = null;                                                //防御塔
+    _proto.propType = -1;                                                      //道具类型
+    _proto.timeLine = null;                                                   //呼吸效果
+
+
+    _proto.onInit = function(){
+        // this.width = PropWidth;
+        // this.height = PropHeight;
+        // this.pivotX = PropWidth / 2;
+        // this.pivotY = PropHeight / 2;
+
+        if(ShowRang){
+            var rangSp = new Laya.Sprite();
+            rangSp.graphics.drawCircle(0,0,this.propRadios,"#ff0000","#ff0000",1);
+            rangSp.x = this.pivotX;
+            rangSp.y = this.pivotY;
+            this.addChild(rangSp);
+        }
+
+        // this.propImg = new Laya.Image("game/No.1.png");
+        // this.propImg.pivotX = 26;
+        // this.propImg.pivotY = 24;
+        // // this.propImg.pos(this.pivotX,this.pivotY -30);
+        // this.addChild(this.propImg);
+
+
+        // this.anim = new Laya.Animation();
+        // this.anim.play(0, true, "tower_dead");
+        // this.anim.pivotX = 270;
+        // this.anim.pivotY = 242;
+        // this.anim.interval = 150;
+        // this.anim.pos(this.pivotX,this.pivotY);
+        // this.addChild(this.anim);
+        // this.anim.visible = false;
+
+        
+
+        this.initProp();
+    }
+
+    _proto.onDestroy = function(){
+        this.timeLine.destroy();
+        SceneManager.getInstance().currentScene.removeProp(this);
+        this.destroy(true);
+    }
+
+    _proto.initProp = function(){
+        this.targetHero = SceneManager.getInstance().currentScene.curHero;
+        this.targetTower =SceneManager.getInstance().currentScene.curTower;
+    }
+
+    _proto.setPropType = function(_type){
+        this.propType = _type;
+        
+        var t_typeImg = "";
+        switch(this.propType){
+            case 1:
+                t_typeImg = "game/item_hp.png";
+                break;
+            case 2:
+                t_typeImg = "game/item_speed.png";
+                break;
+        }
+
+        this.propImg = new Laya.Image(t_typeImg);
+        this.propImg.pivotX = 15;
+        this.propImg.pivotY = 22;
+        this.propImg.scaleX = 1.5;
+        this.propImg.scaleY = 1.5;
+        this.addChild(this.propImg);
+
+        this.timeLine = new Laya.TimeLine();
+        this.timeLine.addLabel("show", 0).to(this.propImg,
+            {
+                // alpha: 1,
+                scaleX: 2,
+                scaleY: 2,
+            }, 500).addLabel("go", 0).to(this.propImg,
+            {
+                // alpha: 0,
+                scaleX: 1.5,
+                scaleY: 1.5,
+            }, 500);
+        
+        this.timeLine.play(0, true);
+        
+        //逐渐消失
+        Laya.timer.once(5000,this,function(){
+            Laya.Tween.to(this.propImg,
+            {
+                alpha:0
+            },1000,null,new Laya.Handler(this,function(){
+                this.onDestroy();
+            }));
+        });
+
+    }
+    _proto.onUpdate = function(){
+        var collisionProp = isCollisionWithTwoCricle(new Point(this.x,this.y),this.propRadios,this.targetHero,this.targetHero.HeroRadios);
+        if(collisionProp && this != null){
+            
+            switch(this.propType){
+                case 1:
+                    this.addHpPorp();
+                    break;
+                case 2:
+                    this.addHeroSpeed();
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 加血道具
+     */
+    _proto.addHpPorp = function(){
+        var t_addHp = 100;
+
+        this.targetTower.addHp(t_addHp);
+
+        // SceneManager.getInstance().currentScene.removeProp(this);
+        // this.destroy(true);
+        // this.removeSelf();
+        this.onDestroy();
+        
+    }
+
+    /**
+     * 增加英雄使用速度
+     */
+    _proto.addHeroSpeed = function(){
+        var t_addSpeed = 5;
+        var t_time = 3000;
+
+        this.targetHero.addSpeed(t_addSpeed,t_time);
+        // SceneManager.getInstance().currentScene.removeProp(this);
+        // this.destroy(true);
+        this.onDestroy();
+    }
+
+    return Prop;
+})(Laya.Sprite);
 /**游戏称号数据 */
 var GameTitleData = [
     {
@@ -49761,25 +50085,25 @@ var GameTitleData = [
         color:"#bb885f",
     },
     {
-        score:3000,
+        score:4000,
         name:"不屈白银",
         icon:"xunzhang-02.png",
         color:"#c3fcf9",
     },
     {
-        score:5000,
+        score:7000,
         name:"荣耀黄金",
         icon:"xunzhang-03.png",
         color:"#ffdb49",
     },
     {
-        score:8000,
+        score:10000,
         name:"华贵铂金",
         icon:"xunzhang-04.png",
         color:"#424fff",
     },
     {
-        score:10000,
+        score:15000,
         name:"璀璨钻石",
         icon:"xunzhang-05.png",
         color:"#ffa5fe",
@@ -49883,11 +50207,15 @@ var GameOverUILogic = (function (_super) {
         
         this.aniShare.play(0, true);
 
+        SceneManager.getInstance().currentScene.isShowVideoAd = false;
+        wxGame.getInstance().showAD(1);
+
     }
     
 
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
+        wxGame.getInstance().showAD(0);
     }
 
 
@@ -49908,7 +50236,7 @@ var GameOverUILogic = (function (_super) {
         if(!this.isSharing){
             wxGame.getInstance().showOpenDataContext(false);
             SceneManager.getInstance().currentScene.restartGame();
-            UIManager.getInstance().closeUI("GameOverUI");
+            UIManager.getInstance().closeUI("GameOverUI",true);
             UIManager.getInstance().showUI("GameStartUI");
         }
         
@@ -49957,6 +50285,8 @@ var GameStartUILogic = (function (_super) {
         // this.delayInitShow();
 
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
+         wxGame.getInstance().showAD(1);
+         wxGame.getInstance().showClubBtn(true);
     }
     
      //自动适配完后初始化
@@ -49992,12 +50322,14 @@ var GameStartUILogic = (function (_super) {
     _proto._startClickEvent = function () {
         this.guildBox.visible = true;
         this.startBox.visible = false;
+         wxGame.getInstance().showAD(0);
+         wxGame.getInstance().showClubBtn(false);
     }
     /**点击引导 */
     _proto._guildClickEvent = function () {
         // this.zOrder = 25;
         this.guildBox.visible = false;
-        UIManager.getInstance().closeUI("GameStartUI");
+        UIManager.getInstance().closeUI("GameStartUI",true);
         SceneManager.getInstance().currentScene.startGame();
     }
     /**点击排行榜 */
@@ -50011,56 +50343,128 @@ var GameStartUILogic = (function (_super) {
 var MonsterRefreshData = [
     {
         score:-1,
-        time:700
+        time:700,
+	diff:0
     },
     {
         score:500,
-        time:600
+        time:600,
+	diff:50
     },
     {
         score:1000,
-        time:500
+        time:500,
+	diff:100
+    },
+    {
+        score:1500,
+        time:450,
+	diff:130
     },
     {
         score:2000,
-        time:450
+        time:400,
+	diff:160
+    },
+    {
+        score:2500,
+        time:375,
+	diff:200
     },
     {
         score:3000,
-        time:400
+        time:350,
+	diff:230
+    },
+    {
+        score:3500,
+        time:325,
+	diff:260
     },
     {
         score:4000,
-        time:350
+        time:300,
+	diff:300
     },
     {
-        score:5000,
-        time:320
+        score:4750,
+        time:290,
+	diff:330
+    },
+    {
+        score:5500,
+        time:280,
+	diff:360
+    },
+    {
+        score:6250,
+        time:270,
+	diff:400
     },
     {
         score:7000,
-        time:290
+        time:260,
+	diff:430
     },
     {
-        score:9000,
-        time:260
+        score:8500,
+        time:250,
+	diff:460
+    },
+    {
+        score:10000,
+        time:240,
+	diff:500
+    },
+    {
+        score:11000,
+        time:230,
+	diff:600
     },
     {
         score:12000,
-        time:240
+        time:220,
+	diff:700
     },
     {
-        score:15000,
-        time:220
+        score:13000,
+        time:210,
+	diff:800
     },
     {
-        score:18000,
-        time:200
+        score:14000,
+        time:200,
+	diff:900
     },
-    
+    {
+    	score:15000,
+        time:180,
+	diff:1000
+    },
+    {
+    	score:16000,
+        time:160,
+	diff:1000
+    },
+    {
+    	score:17000,
+        time:140,
+	diff:1000
+    },
+    {
+    	score:18000,
+        time:120,
+	diff:1000
+    },
+    {
+    	score:19000,
+        time:100,
+	diff:1000
+    },
     
 ];
-/**怪物数据 */
+
+ /**怪物数据 */
 var MonsterData = [
     {
         type:1,
@@ -50071,6 +50475,7 @@ var MonsterData = [
         score:16,
         speed:2,
         radius:30,
+        props:[{propId:2,weight:500}],
     },
     {
         type:1,
@@ -50081,6 +50486,8 @@ var MonsterData = [
         score:19,
         speed:2.5,
         radius:45,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:500}],
     },
     {
         type:1,
@@ -50091,6 +50498,8 @@ var MonsterData = [
         score:40,
         speed:4,
         radius:60,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:1000}],
     },
     {
         type:2,
@@ -50101,6 +50510,7 @@ var MonsterData = [
         score:16,
         speed:2,
         radius:30,
+        props:[{propId:2,weight:500}],
     },
     {
         type:2,
@@ -50110,7 +50520,9 @@ var MonsterData = [
         attack:30,
         score:19,
         speed:2.5,
-        radius:45,
+        radius:45,  
+	props:[{propId:1,weight:500},
+        {propId:2,weight:500}],
     },
     {
         type:2,
@@ -50121,9 +50533,12 @@ var MonsterData = [
         score:40,
         speed:4,
         radius:60,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:1000}],
     },
     
 ];
+
 /**
  * 怪物生成器
  */
@@ -50402,6 +50817,13 @@ var Tower = (function(_super){
     _proto.onDestroy = function(){
     }
 
+    _proto.addHp = function(_hp){
+        this.hp += _hp;
+        if(this.hp > TowerMaxHp){
+            this.hp = TowerMaxHp;
+        }
+        BubbleScoreAnim(new Point(this.x,this.y -200),"+"+_hp);
+    }
     _proto.resetHp = function(){
         this.hp = 1000;
         this.hpProgress.value = 1;
@@ -50410,7 +50832,7 @@ var Tower = (function(_super){
         this.anim.visible = false;
     }
     _proto.onUpdate = function(){
-        if(this.hp < TowerMaxHp){
+        if(this.hp <= TowerMaxHp){
             this.hpProgress.value = this.hp / TowerMaxHp;
         }
     }
@@ -50427,6 +50849,7 @@ var Tower = (function(_super){
     _proto.towerDead = function(){
         this.hpProgress.value = 0;
         Gamelog("----------防御塔挂掉了-----");
+        MusicManager.getInstance().playSound("res/music/tower_dead.wav");
 
         this.hpProgress.visible = false;
         this.towerSp.visible = false;
@@ -50457,6 +50880,8 @@ var Tower = (function(_super){
 
     return Tower;
 })(Laya.Sprite);
+/**英雄默认速度 */
+var Hero_Speed = 11;
  /**
  * 英雄
  */
@@ -50472,10 +50897,11 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 11;
+    // var HeroSpeed = 11;
 
     /**英雄动画 */
     _proto.anim = null;
+    _proto.effectAnim = null;                                           //特效动画
     _proto.targetPos = null;                                            //目标坐标
     _proto.targetVector = null;                                         //目标向量
     _proto.targetPos2 = null;                                           //目标坐标2
@@ -50490,6 +50916,7 @@ var Hero = (function(_super){
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
     _proto.isResetMove = false;                                         //是否重置移动
+    _proto.heroSpeed = 11;                                              //英雄移动速度
 
     _proto.onInit = function(){
         this.width = HeroWidth;
@@ -50512,6 +50939,7 @@ var Hero = (function(_super){
         this.anim.pivotY = 147;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
+
 
         if(ShowRang){
             var rangSp = new Laya.Sprite();
@@ -50572,12 +51000,14 @@ var Hero = (function(_super){
 
         this.targetPos2 = null;
         this.targetVector2 = null;
+
+        
     }
 
     _proto.onUpdate = function(){
         this.heroMove();
         this.attackMonster();
-        
+        // Gamelog("--------heroMove ="+ this.heroSpeed);
     }
 
     /**设置移动路径 */
@@ -50587,25 +51017,25 @@ var Hero = (function(_super){
         
         if(!this.isMoveFinsih1){
 
-            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos,HeroSpeed);
+            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos,this.heroSpeed);
             if(collisionTarget1){
                 this.isMoveFinsih1 = true;
                 this.x = this.targetPos.x;
                 this.y = this.targetPos.y;
             }else{
-                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+                this.pos(this.x + this.targetVector.x * this.heroSpeed, this.y + this.targetVector.y * this.heroSpeed);
             }
         }else{
             if(this.targetPos2 == null){
                 this.isMoveFinsih2 = true;
             }else{
-                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos2,HeroSpeed);
+                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos2,this.heroSpeed);
                 if(collisionTarget2){
                     this.isMoveFinsih2 = true;
                     this.x = this.targetPos2.x;
                     this.y = this.targetPos2.y;
                 }else{
-                    this.pos(this.x + this.targetVector2.x * HeroSpeed, this.y + this.targetVector2.y * HeroSpeed); 
+                    this.pos(this.x + this.targetVector2.x * this.heroSpeed, this.y + this.targetVector2.y * this.heroSpeed); 
                 }
             }
 
@@ -50722,9 +51152,42 @@ var Hero = (function(_super){
         this.anim.interval = 300;
         this.anim.play(0, false, "hero_dead");
         this.anim.on(Laya.Event.COMPLETE,this,function(){
-            UIManager.getInstance().showUI("GameOverUI");
+            // UIManager.getInstance().showUI("GameOverUI");
+            Laya.timer.clear(this,this.resetSpeed);
+            this.resetSpeed();
+            SceneManager.getInstance().currentScene.gameover();
         });
+        MusicManager.getInstance().playSound("res/music/hero_dead.wav");
 
+    }
+
+    /**增加速度 */
+    _proto.addSpeed = function(_addSpeed,_time){
+        Laya.timer.clear(this,this.resetSpeed);
+
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
+        this.effectAnim = new Laya.Animation();
+        this.effectAnim.interval = 100;
+        this.effectAnim.play(0, true, "hero_speed");
+        this.effectAnim.pivotX = 40;
+        this.effectAnim.pivotY = 43;
+        this.effectAnim.scaleX = 2.0;
+        this.effectAnim.scaleY = 2.0;
+        this.effectAnim.pos(this.pivotX,this.pivotY - 40);
+        this.addChild(this.effectAnim);
+
+        this.heroSpeed = Hero_Speed + _addSpeed;
+        Laya.timer.once(_time,this,this.resetSpeed);
+    }
+
+    _proto.resetSpeed = function(){
+        // Gamelog("--------resetSpeed ="+ this.heroSpeed);
+        this.heroSpeed = Hero_Speed;
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
     }
 
     return Hero;
@@ -50763,6 +51226,7 @@ var Monster = (function(_super){
     _proto.hurtSprite = null;                                          //被攻击的特效
     _proto.monsterSpeed = 1;                                           //怪物速度
     _proto.monsterScore = 0;                                           //怪物分数
+    _proto.monsterData = null;                                         //怪物数据
 
     _proto.onInit = function(){
         this.width = MonsterWidth;
@@ -50787,11 +51251,6 @@ var Monster = (function(_super){
         // this.addChild(this.hpProgress);
         this.hpProgress.pos(MonsterWidth / 2,0);
 
-
-        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
-        this.addChild(this.hurtSprite);
-
-
     }
 
     _proto.onDestroy = function(){
@@ -50804,6 +51263,9 @@ var Monster = (function(_super){
     //初始化怪物
     _proto.initMonster = function(_posType,_type)
     {
+        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
+        SceneManager.getInstance().currentScene.floorBoard.addChild(this.hurtSprite);
+
         this.anim.scaleX = 1;
         var directionId = 1;
         if(_posType == 2 || _posType == 3){
@@ -50822,6 +51284,7 @@ var Monster = (function(_super){
         }
         
         var t_data = t_monsterData[_type];
+        this.monsterData = t_data;
         
         this.anim.clear();
         this.anim.play(0, true, t_data.anim);
@@ -50882,6 +51345,9 @@ var Monster = (function(_super){
             this.hurtSprite.pos(0,MonsterHeight );
             this.hurtSprite.rotation = 180 + (90 -jiajiao) -45;
         }
+
+        
+
     }
 
     _proto.onUpdate = function(){
@@ -50913,6 +51379,7 @@ var Monster = (function(_super){
         if(this.isAttack)
             return;
         this.isAttack = true;
+        MusicManager.getInstance().playSound("res/music/enemy_hit.wav");
         if(this.targetTower.hp > 0){
             this.targetTower.hurtMonster(this.attackValue);
             Laya.timer.once(500,this,function(){
@@ -50939,11 +51406,20 @@ var Monster = (function(_super){
         var notif = new Notification("Monster_Dead",this,this);
         MessageController.getInstance().SendNotification(notif);
 
+        MusicManager.getInstance().playSound("res/music/tower_hit.wav");
+
         this.anim.visible = false;
         this.hpProgress.visible = false;
 
         this.hurtSprite.visible = true;
         this.hurtSprite.alpha = 1;
+        //转换到Floor图层坐标
+        var t_hurtPos = this.localToGlobal(new Point(this.hurtSprite.x,this.hurtSprite.y),true);
+        this.hurtSprite.pos(t_hurtPos.x,t_hurtPos.y);
+
+        //掉落道具
+        this.createProp();
+
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
@@ -50951,6 +51427,50 @@ var Monster = (function(_super){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
+    }
+
+    /**
+     * 产生道具
+     */
+    _proto.createProp = function(){
+        var monsterRanomNum = parseInt(Math.random()*10000, 10);
+        var t_props = this.monsterData.props.length;
+        if(t_props == 0){
+            return;
+        }
+        var t_weight = 0;
+        var t_type = -1;
+        var t_diff = this.getDiff();
+        for (var i = 0; i < t_props; i++) {
+            var propData = this.monsterData.props[i];
+            var t_weightDiff = propData.weight - t_diff;
+            if(t_weightDiff < 0){
+                t_weightDiff = 0;
+            }
+            t_weight += t_weightDiff;
+            if(monsterRanomNum <= t_weight){
+                t_type = propData.propId;
+                break;
+            }
+        }
+        if(t_type != -1){
+            Gamelog("-------createProp monsterRanomNum="+monsterRanomNum + ",t_weight="+t_weight+",t_type="+t_type);
+            SceneManager.getInstance().currentScene.createProp(this.x,this.y,t_type);
+        }
+    }
+
+    /**获取道具减掉的概率 */
+    _proto.getDiff = function(){
+        var t_diff = 0;
+        var t_scene = SceneManager.getInstance().currentScene;
+        for (var i = MonsterRefreshData.length -1; i >=0 ; i--) {
+            var t_data = MonsterRefreshData[i];
+            if(t_scene.gameScore > t_data.score){
+                t_diff = t_data.diff ;
+                break;
+            }
+        }
+        return t_diff;
     }
     return Monster;
 })(Laya.Sprite);
@@ -50984,11 +51504,14 @@ var GameScene = (function (_super) {
     _proto.gameUI = null;                                                    //ui对象
     _proto.curHero = null;                                                   //当前英雄
     _proto.curTower = null;                                                  //当前防御塔
+    _proto.floorBoard = null;                                                //地面盒子
     _proto.pointBoard = null;                                                //指引线盒子
+    _proto.propBoard = null;                                                 //道具盒子
     _proto.heroBox = null;                                                   //存放英雄对象的盒子
     _proto.monsterBox = null;                                                //存放怪物对象的盒子
     _proto.towerBox = null;                                                  //存放防御塔对象的盒子
     _proto.monsterList = null;                                               //怪物对象列表
+    _proto.propList = null;                                                  //道具物对象列表
     _proto.monsterPool = null;                                               //怪物对象池
     _proto.towerGlobaPos = null;                                             //防御塔坐标
 
@@ -50998,6 +51521,7 @@ var GameScene = (function (_super) {
     _proto.gameScore = 0;                                                    //游戏分数
     _proto.createMonstrCD = 0;                                               //产生怪物cd
     _proto.lastUpdateTime = 0;                                               //上一次更新时间
+    _proto.isShowVideoAd = false;                                            //是否已经显示广告
 
     _proto.Init = function () {
         //初始化当前类属性
@@ -51005,11 +51529,23 @@ var GameScene = (function (_super) {
         
         this.monsterList = new Array();
         this.monsterPool = [];
+        this.propList = new Array();
+
+
+        this.floorBoard = new Sprite();
+        this.floorBoard.width = Laya.stage.width;
+        this.floorBoard.height = Laya.stage.height;
+        this.floorBoard.zOrder = 1;
 
         this.pointBoard = new Sprite();
         this.pointBoard.width = Laya.stage.width;
         this.pointBoard.height = Laya.stage.height;
         this.pointBoard.zOrder = 5;
+
+        this.propBoard = new Sprite();
+        this.propBoard.width = Laya.stage.width;
+        this.propBoard.height = Laya.stage.height;
+        this.propBoard.zOrder = 6;
 
         this.monsterBox = new Laya.Box();
         this.monsterBox.width = Laya.stage.width;
@@ -51026,7 +51562,9 @@ var GameScene = (function (_super) {
         this.towerBox.height = Laya.stage.height;
         this.towerBox.zOrder = 20;
 
+        Laya.stage.addChild(this.floorBoard);
         Laya.stage.addChild(this.pointBoard);
+        Laya.stage.addChild(this.propBoard);
         Laya.stage.addChild(this.monsterBox);
         Laya.stage.addChild(this.towerBox);
         Laya.stage.addChild(this.heroBox);
@@ -51092,15 +51630,22 @@ var GameScene = (function (_super) {
          this.curHero.playAnim();
          this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
          this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+
+         wxGame.getInstance().showAD(2);
     }
 
     /**重置游戏 */
-    _proto.restartGame = function(){
-        this.gameScore = 0;
-        this.gameUI.setScore(0,false);
+    _proto.restartGame = function(_score){
+        var t_score =0;
+        if(_score != null){
+            t_score = _score;
+        }
+        this.gameScore = t_score;
+        this.gameUI.setScore(t_score,false);
 
         this.curTower.resetHp();
 
+        this.curHero.heroSpeed = Hero_Speed;
         this.curHero.pos(this.curTower.x, this.curTower.y + 200);
         this.curHero.stopAnim();
         this.curHero.reserTarget();
@@ -51110,9 +51655,29 @@ var GameScene = (function (_super) {
             MonsterFactory.getInstance().recoveryMonsterToPool(t_monster);
         }
         this.monsterList = [];
+        this.propList = [];
         this.pointBoard.destroyChildren();
-    }
+        this.floorBoard.destroyChildren();
+        this.propBoard.destroyChildren();
 
+        
+    }
+    /**游戏结束 */
+    _proto.gameover = function(){
+        wxGame.getInstance().showAD(0);
+        // UIManager.getInstance().showUI("GameOverUI");
+        var endUIStr = "GameOverUI";
+        if (!SceneManager.getInstance().currentScene.isShowVideoAd) {
+            if (Browser.onMiniGame){
+                if(wxGame.getInstance().videoAd != null){
+                    endUIStr = "GameEndShareUI";
+                }
+            }else{
+                endUIStr = "GameEndShareUI";
+            }
+        }
+        var gameoverUI = UIManager.getInstance().showUI(endUIStr);
+    }
     /**
      * update刷新
      */
@@ -51128,6 +51693,12 @@ var GameScene = (function (_super) {
         }
         if(this.curTower != null){
             this.curTower.onUpdate();
+        }
+        if(this.propList.length > 0){
+            for (var i = 0; i < this.propList.length; i++) {
+                var t_prop = this.propList[i];
+                t_prop.onUpdate();
+            }
         }
 
        this.updateGeneratorMonster();
@@ -51264,6 +51835,79 @@ var GameScene = (function (_super) {
         }
     }
     
+    /**创建道具 */
+    _proto.createProp = function(_x,_y,_type){
+
+        var t_prop = new Prop();
+        t_prop.pos(_x,_y);
+        t_prop.setPropType(_type);
+
+        this.propBoard.addChild(t_prop);
+        this.propList.push(t_prop);
+
+        //位移
+        var t_propRadius = 100;
+        var randomNum = parseInt(Math.random()*t_propRadius, 10) + 100;
+        var randomPm = parseInt(Math.random()*2, 10);
+        var target_X = _x;
+        var target_Y = _y;
+        if(randomPm == 1){
+            target_X += randomNum;
+            target_Y += randomNum;
+        }else{
+            target_X -= randomNum;
+            target_Y -= randomNum;
+        }
+        //取值范围
+        var t_minNum = 25;
+        if(target_X < t_minNum){
+            target_X = t_minNum;
+        }
+        if(target_Y < t_minNum){
+            target_Y = t_minNum;
+        }
+
+        if(target_X > Laya.stage.width - t_minNum){
+            target_X = Laya.stage.width - t_minNum;
+        }
+        if(target_Y > Laya.stage.height - t_minNum){
+            target_Y = Laya.stage.height - t_minNum;
+        }
+        //跳过防御塔范围
+        var t_towerRadius = this.curTower.TowerRadios;
+        if(target_X > this.curTower.x - t_towerRadius && target_X < this.curTower.x + t_towerRadius){
+            if(target_X < this.curTower.x){
+                target_X = this.curTower.x - t_towerRadius;
+            }else{
+                target_X = this.curTower.x + t_towerRadius;
+            }
+        }
+        if(target_Y > this.curTower.y - t_towerRadius && target_Y < this.curTower.y + t_towerRadius){
+            if(target_Y < this.curTower.y){
+                target_Y = this.curTower.y - t_towerRadius;
+            }else{
+                target_Y = this.curTower.y + t_towerRadius;
+            }
+        }
+
+
+        Laya.Tween.to(t_prop,{
+            x:target_X,
+            y:target_Y,
+        },300);
+
+    }
+
+    _proto.removeProp = function(_proto){
+        for (var i = 0; i < this.propList.length; i++) {
+            var t_prop = this.propList[i];
+            if(t_prop == _proto){
+                // Gamelog("------删除怪物");
+                this.propList.splice(i, 1);
+            }
+
+        }
+    }
 
     return GameScene;
 })();
@@ -51286,7 +51930,7 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
 
-        // MusicManager.getInstance().playMusic("res/music/1.mp3");
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
         UIManager.getInstance().showUI("GameStartUI");
@@ -51628,7 +52272,7 @@ var MusicManager = (function (_super) {
         if(musicSwitch == 1){
             // console.debug("---------play()-------" + musicName);
             if(musicVolume === undefined)
-                musicVolume = 1;
+                musicVolume = 0.5;
             SoundManager.musicVolume = musicVolume;
             SoundManager.playMusic(musicName,0);
         }
@@ -51795,6 +52439,9 @@ var UIManager = (function(_super){
             break;
             case "GameStartUI":
                 uiLogic = new GameStartUILogic();
+            break;
+            case "GameEndShareUI":
+                uiLogic = new GameEndShareUILogic();
             break;
             
             default:
@@ -52200,7 +52847,8 @@ Vector2.prototype={
     }
     /*END~!Vector*/
 }
-
+/**当前微信版本 */
+window.wxSDKVersion;
 /**
  * wxGame
  */
@@ -52224,10 +52872,24 @@ var wxGame = (function (_super) {
 
     _proto.sharedCanvasTexture = null;
     _proto.shareSp = null;
+    //两个广告切换
+    _proto.bannerAd_1 = null;
+    _proto.bannerAd_2 = null;
+    //视频广告
+    _proto.videoAd = null;
+    //游戏圈按钮
+    _proto.btn_club = null;
 
     _proto.Init = function () {
 
         if (Browser.onMiniGame) {
+
+            wx.getSystemInfo({
+                success: function (res) {
+                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                    wxSDKVersion = res.SDKVersion;
+                }
+            });
 
             wx.showShareMenu({
                 withShareTicket: false
@@ -52553,6 +53215,200 @@ var wxGame = (function (_super) {
         }
     }
 
+    //显示广告
+    _proto.showAD = function (AdIndex) {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        var adIndex = 0;
+        Gamelog("showAD");
+        // this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        // Laya.timer.loop(30000, this, function () {
+        //     Gamelog("adIndex = " + adIndex);
+        //     adIndex++;
+        //     if (adIndex % 2 == 0) {
+        //         // this.bannerAd_1 = this.createAD(this.bannerAd_1, "adunit-ee34510033de8989", this.bannerAd_2);
+        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        //     }
+        //     else {
+        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
+        //     }
+        // });
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+
+        if (AdIndex == 0) {
+            this.bannerAd_2.hide();
+        }
+        else {
+            var AdID = null;
+            switch (AdIndex) {
+                //开始
+                case 1:
+                    AdID = "adunit-a3b210c4532d1370";
+                    break;
+                //游戏
+                case 2:
+                    AdID = "adunit-a8c6ef7647f7c2a6";
+                    break;
+
+                default:
+                    break;
+            }
+            
+            if(isPass)
+                this.bannerAd_2 = this.createAD(this.bannerAd_2, AdID, this.bannerAd_1);
+        }
+    }
+
+    //创建广告
+    _proto.createAD = function (Ad, AdID, hideAd) {
+        if (Browser.onMiniGame) {
+            
+            if (Ad != null) {
+                Gamelog("destroy");
+                Ad.destroy();
+            }
+
+            Gamelog("create ad " + AdID);
+            if(wx.createBannerAd == null){
+                return;
+            }
+            Ad = wx.createBannerAd({
+                adUnitId: AdID,
+                style: {
+                    left: 0,
+                    top: 0,
+                    width: 300
+                }
+            })
+            Ad.show();
+
+            var sysInfo = wx.getSystemInfoSync();
+
+            // this.bannerAd.style.width = sysInfo.screenWidth;
+
+            // var tempAd = Ad;
+            Ad.onResize(function (res) {
+                // console.log(res.width, res.height);
+                // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
+                Ad.style.top = sysInfo.screenHeight - 86;
+                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            })
+
+            Ad.onLoad(function () {
+                // console.log('banner 广告加载成功')
+                if (hideAd != null) {
+                    Gamelog("hideAd destroy");
+                    // hideAd.destroy();
+                    // hideAd.hide();
+                }
+            })
+
+        }
+
+        return Ad;
+    }
+
+     //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-02b50b30ad61154f'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            Gamelog("createVideoAD 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            Gamelog("createVideoAD 拉取失败");
+            t_videoAd.load();
+            console.log(err.errMsg)
+        })
+    }
+
+    /**微信官方对比版本号 */
+    function compareVersion(v1, v2) {
+        v1 = v1.split('.')
+        v2 = v2.split('.')
+        var len = Math.max(v1.length, v2.length)
+        while (v1.length < len) {
+            v1.push('0')
+        }
+        while (v2.length < len) {
+            v2.push('0')
+        }
+        for (var i = 0; i < len; i++) {
+            var num1 = parseInt(v1[i])
+            var num2 = parseInt(v2[i])
+            if (num1 > num2) {
+                return 1
+            } else if (num1 < num2) {
+                return -1
+            }
+        }
+        return 0
+    }
+
+    /**显示微信游戏圈 */
+    _proto.showClubBtn = function(_show){
+        if (Browser.onMiniGame) {
+
+            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
+                return;
+            }
+            if(this.btn_club == null){
+                // this.btn_club.destroy();
+                this.btn_club = wx.createGameClubButton({
+                    icon: 'white',
+                    style: {
+                        left: 10,
+                        top: 50,
+                        width: 40,
+                        height: 40
+                    }
+                })
+            }
+
+            if(_show){
+                this.btn_club.show();
+            }else{
+                this.btn_club.hide();
+            }
+            
+        }
+    }
+
     return {
         getInstance: getInstance
     }
@@ -52687,7 +53543,10 @@ function loadingCallback() {
     Laya.Animation.createFrames(["monster/xiaobing05-animation_0.png","monster/xiaobing05-animation_1.png"], "monster02_down");
     Laya.Animation.createFrames(["monster/xiaobing04-animation_0.png","monster/xiaobing04-animation_1.png"], "monster03_down");
 
+    Laya.Animation.createFrames(["hero/speed_1.png","hero/speed_2.png","hero/speed_3.png"], "hero_speed");
+
     SceneManager.getInstance().currentScene = new GameScene();
+    wxGame.getInstance().createVideoAD();
     // Laya.stage.addChild(new GameUILogic());
     // UIManager.getInstance().showUI("GameUI");
 

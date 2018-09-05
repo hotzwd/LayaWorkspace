@@ -185,6 +185,7 @@ var Monster = (function(_super){
         if(this.isAttack)
             return;
         this.isAttack = true;
+        MusicManager.getInstance().playSound("res/music/enemy_hit.wav");
         if(this.targetTower.hp > 0){
             this.targetTower.hurtMonster(this.attackValue);
             Laya.timer.once(500,this,function(){
@@ -211,6 +212,8 @@ var Monster = (function(_super){
         var notif = new Notification("Monster_Dead",this,this);
         MessageController.getInstance().SendNotification(notif);
 
+        MusicManager.getInstance().playSound("res/music/tower_hit.wav");
+
         this.anim.visible = false;
         this.hpProgress.visible = false;
 
@@ -220,11 +223,13 @@ var Monster = (function(_super){
         var t_hurtPos = this.localToGlobal(new Point(this.hurtSprite.x,this.hurtSprite.y),true);
         this.hurtSprite.pos(t_hurtPos.x,t_hurtPos.y);
 
+        //掉落道具
+        this.createProp();
+
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
         },1000,null,new Laya.Handler(this,function(){
-            this.createProp();
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
@@ -241,18 +246,37 @@ var Monster = (function(_super){
         }
         var t_weight = 0;
         var t_type = -1;
+        var t_diff = this.getDiff();
         for (var i = 0; i < t_props; i++) {
             var propData = this.monsterData.props[i];
-            t_weight += propData.weight;
+            var t_weightDiff = propData.weight - t_diff;
+            if(t_weightDiff < 0){
+                t_weightDiff = 0;
+            }
+            t_weight += t_weightDiff;
             if(monsterRanomNum <= t_weight){
                 t_type = propData.propId;
                 break;
             }
         }
-        // Gamelog("-------createProp monsterRanomNum="+monsterRanomNum + ",t_type="+t_type);
         if(t_type != -1){
+            Gamelog("-------createProp monsterRanomNum="+monsterRanomNum + ",t_weight="+t_weight+",t_type="+t_type);
             SceneManager.getInstance().currentScene.createProp(this.x,this.y,t_type);
         }
+    }
+
+    /**获取道具减掉的概率 */
+    _proto.getDiff = function(){
+        var t_diff = 0;
+        var t_scene = SceneManager.getInstance().currentScene;
+        for (var i = MonsterRefreshData.length -1; i >=0 ; i--) {
+            var t_data = MonsterRefreshData[i];
+            if(t_scene.gameScore > t_data.score){
+                t_diff = t_data.diff ;
+                break;
+            }
+        }
+        return t_diff;
     }
     return Monster;
 })(Laya.Sprite);

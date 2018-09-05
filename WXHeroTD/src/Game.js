@@ -90,6 +90,7 @@ function loadingCallback() {
     Laya.Animation.createFrames(["hero/speed_1.png","hero/speed_2.png","hero/speed_3.png"], "hero_speed");
 
     SceneManager.getInstance().currentScene = new GameScene();
+    wxGame.getInstance().createVideoAD();
     // Laya.stage.addChild(new GameUILogic());
     // UIManager.getInstance().showUI("GameUI");
 

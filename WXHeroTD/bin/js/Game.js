@@ -87,7 +87,10 @@ function loadingCallback() {
     Laya.Animation.createFrames(["monster/xiaobing05-animation_0.png","monster/xiaobing05-animation_1.png"], "monster02_down");
     Laya.Animation.createFrames(["monster/xiaobing04-animation_0.png","monster/xiaobing04-animation_1.png"], "monster03_down");
 
+    Laya.Animation.createFrames(["hero/speed_1.png","hero/speed_2.png","hero/speed_3.png"], "hero_speed");
+
     SceneManager.getInstance().currentScene = new GameScene();
+    wxGame.getInstance().createVideoAD();
     // Laya.stage.addChild(new GameUILogic());
     // UIManager.getInstance().showUI("GameUI");
 

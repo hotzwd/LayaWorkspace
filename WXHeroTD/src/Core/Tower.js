@@ -95,6 +95,7 @@ var Tower = (function(_super){
     _proto.towerDead = function(){
         this.hpProgress.value = 0;
         Gamelog("----------防御塔挂掉了-----");
+        MusicManager.getInstance().playSound("res/music/tower_dead.wav");
 
         this.hpProgress.visible = false;
         this.towerSp.visible = false;

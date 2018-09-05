@@ -270,8 +270,12 @@ var Hero = (function(_super){
         this.anim.interval = 300;
         this.anim.play(0, false, "hero_dead");
         this.anim.on(Laya.Event.COMPLETE,this,function(){
-            UIManager.getInstance().showUI("GameOverUI");
+            // UIManager.getInstance().showUI("GameOverUI");
+            Laya.timer.clear(this,this.resetSpeed);
+            this.resetSpeed();
+            SceneManager.getInstance().currentScene.gameover();
         });
+        MusicManager.getInstance().playSound("res/music/hero_dead.wav");
 
     }
 
@@ -287,6 +291,8 @@ var Hero = (function(_super){
         this.effectAnim.play(0, true, "hero_speed");
         this.effectAnim.pivotX = 40;
         this.effectAnim.pivotY = 43;
+        this.effectAnim.scaleX = 2.0;
+        this.effectAnim.scaleY = 2.0;
         this.effectAnim.pos(this.pivotX,this.pivotY - 40);
         this.addChild(this.effectAnim);
 
@@ -295,9 +301,11 @@ var Hero = (function(_super){
     }
 
     _proto.resetSpeed = function(){
-        Gamelog("--------resetSpeed ="+ this.heroSpeed);
+        // Gamelog("--------resetSpeed ="+ this.heroSpeed);
         this.heroSpeed = Hero_Speed;
-        this.effectAnim.destroy();
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
     }
 
     return Hero;

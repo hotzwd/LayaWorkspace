@@ -1,3 +1,5 @@
+/**英雄默认速度 */
+var Hero_Speed = 11;
  /**
  * 英雄
  */
@@ -13,10 +15,11 @@ var Hero = (function(_super){
     //英雄宽高
     var HeroWidth = 110;
     var HeroHeight = 110;
-    var HeroSpeed = 11;
+    // var HeroSpeed = 11;
 
     /**英雄动画 */
     _proto.anim = null;
+    _proto.effectAnim = null;                                           //特效动画
     _proto.targetPos = null;                                            //目标坐标
     _proto.targetVector = null;                                         //目标向量
     _proto.targetPos2 = null;                                           //目标坐标2
@@ -31,6 +34,7 @@ var Hero = (function(_super){
     _proto.isAttack = false;                                            //是否在攻击
     _proto.attackMonsterList = null;                                    //可以攻击的怪物对象列表
     _proto.isResetMove = false;                                         //是否重置移动
+    _proto.heroSpeed = 11;                                              //英雄移动速度
 
     _proto.onInit = function(){
         this.width = HeroWidth;
@@ -53,6 +57,7 @@ var Hero = (function(_super){
         this.anim.pivotY = 147;
         this.anim.pos(this.pivotX,this.pivotY);
         this.addChild(this.anim);
+
 
         if(ShowRang){
             var rangSp = new Laya.Sprite();
@@ -113,12 +118,14 @@ var Hero = (function(_super){
 
         this.targetPos2 = null;
         this.targetVector2 = null;
+
+        
     }
 
     _proto.onUpdate = function(){
         this.heroMove();
         this.attackMonster();
-        
+        // Gamelog("--------heroMove ="+ this.heroSpeed);
     }
 
     /**设置移动路径 */
@@ -128,25 +135,25 @@ var Hero = (function(_super){
         
         if(!this.isMoveFinsih1){
 
-            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos,HeroSpeed);
+            var collisionTarget1 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos,this.heroSpeed);
             if(collisionTarget1){
                 this.isMoveFinsih1 = true;
                 this.x = this.targetPos.x;
                 this.y = this.targetPos.y;
             }else{
-                this.pos(this.x + this.targetVector.x * HeroSpeed, this.y + this.targetVector.y * HeroSpeed);
+                this.pos(this.x + this.targetVector.x * this.heroSpeed, this.y + this.targetVector.y * this.heroSpeed);
             }
         }else{
             if(this.targetPos2 == null){
                 this.isMoveFinsih2 = true;
             }else{
-                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),HeroSpeed,this.targetPos2,HeroSpeed);
+                var collisionTarget2 = isCollisionWithTwoCricle(new Point(this.x,this.y),this.heroSpeed,this.targetPos2,this.heroSpeed);
                 if(collisionTarget2){
                     this.isMoveFinsih2 = true;
                     this.x = this.targetPos2.x;
                     this.y = this.targetPos2.y;
                 }else{
-                    this.pos(this.x + this.targetVector2.x * HeroSpeed, this.y + this.targetVector2.y * HeroSpeed); 
+                    this.pos(this.x + this.targetVector2.x * this.heroSpeed, this.y + this.targetVector2.y * this.heroSpeed); 
                 }
             }
 
@@ -263,9 +270,42 @@ var Hero = (function(_super){
         this.anim.interval = 300;
         this.anim.play(0, false, "hero_dead");
         this.anim.on(Laya.Event.COMPLETE,this,function(){
-            UIManager.getInstance().showUI("GameOverUI");
+            // UIManager.getInstance().showUI("GameOverUI");
+            Laya.timer.clear(this,this.resetSpeed);
+            this.resetSpeed();
+            SceneManager.getInstance().currentScene.gameover();
         });
+        MusicManager.getInstance().playSound("res/music/hero_dead.wav");
 
+    }
+
+    /**增加速度 */
+    _proto.addSpeed = function(_addSpeed,_time){
+        Laya.timer.clear(this,this.resetSpeed);
+
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
+        this.effectAnim = new Laya.Animation();
+        this.effectAnim.interval = 100;
+        this.effectAnim.play(0, true, "hero_speed");
+        this.effectAnim.pivotX = 40;
+        this.effectAnim.pivotY = 43;
+        this.effectAnim.scaleX = 2.0;
+        this.effectAnim.scaleY = 2.0;
+        this.effectAnim.pos(this.pivotX,this.pivotY - 40);
+        this.addChild(this.effectAnim);
+
+        this.heroSpeed = Hero_Speed + _addSpeed;
+        Laya.timer.once(_time,this,this.resetSpeed);
+    }
+
+    _proto.resetSpeed = function(){
+        // Gamelog("--------resetSpeed ="+ this.heroSpeed);
+        this.heroSpeed = Hero_Speed;
+        if(this.effectAnim != null){
+            this.effectAnim.destroy();
+        }
     }
 
     return Hero;

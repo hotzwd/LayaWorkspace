@@ -17,7 +17,7 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
 
-        // MusicManager.getInstance().playMusic("res/music/1.mp3");
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
 
         // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
         UIManager.getInstance().showUI("GameStartUI");

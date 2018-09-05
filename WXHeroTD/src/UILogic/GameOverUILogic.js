@@ -52,11 +52,15 @@ var GameOverUILogic = (function (_super) {
         
         this.aniShare.play(0, true);
 
+        SceneManager.getInstance().currentScene.isShowVideoAd = false;
+        wxGame.getInstance().showAD(1);
+
     }
     
 
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
+        wxGame.getInstance().showAD(0);
     }
 
 
@@ -77,7 +81,7 @@ var GameOverUILogic = (function (_super) {
         if(!this.isSharing){
             wxGame.getInstance().showOpenDataContext(false);
             SceneManager.getInstance().currentScene.restartGame();
-            UIManager.getInstance().closeUI("GameOverUI");
+            UIManager.getInstance().closeUI("GameOverUI",true);
             UIManager.getInstance().showUI("GameStartUI");
         }
         

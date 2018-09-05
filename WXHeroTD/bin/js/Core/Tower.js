@@ -63,6 +63,13 @@ var Tower = (function(_super){
     _proto.onDestroy = function(){
     }
 
+    _proto.addHp = function(_hp){
+        this.hp += _hp;
+        if(this.hp > TowerMaxHp){
+            this.hp = TowerMaxHp;
+        }
+        BubbleScoreAnim(new Point(this.x,this.y -200),"+"+_hp);
+    }
     _proto.resetHp = function(){
         this.hp = 1000;
         this.hpProgress.value = 1;
@@ -71,7 +78,7 @@ var Tower = (function(_super){
         this.anim.visible = false;
     }
     _proto.onUpdate = function(){
-        if(this.hp < TowerMaxHp){
+        if(this.hp <= TowerMaxHp){
             this.hpProgress.value = this.hp / TowerMaxHp;
         }
     }
@@ -88,6 +95,7 @@ var Tower = (function(_super){
     _proto.towerDead = function(){
         this.hpProgress.value = 0;
         Gamelog("----------防御塔挂掉了-----");
+        MusicManager.getInstance().playSound("res/music/tower_dead.wav");
 
         this.hpProgress.visible = false;
         this.towerSp.visible = false;

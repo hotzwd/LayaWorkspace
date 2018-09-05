@@ -32,6 +32,7 @@ var Monster = (function(_super){
     _proto.hurtSprite = null;                                          //被攻击的特效
     _proto.monsterSpeed = 1;                                           //怪物速度
     _proto.monsterScore = 0;                                           //怪物分数
+    _proto.monsterData = null;                                         //怪物数据
 
     _proto.onInit = function(){
         this.width = MonsterWidth;
@@ -56,11 +57,6 @@ var Monster = (function(_super){
         // this.addChild(this.hpProgress);
         this.hpProgress.pos(MonsterWidth / 2,0);
 
-
-        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
-        this.addChild(this.hurtSprite);
-
-
     }
 
     _proto.onDestroy = function(){
@@ -73,6 +69,9 @@ var Monster = (function(_super){
     //初始化怪物
     _proto.initMonster = function(_posType,_type)
     {
+        this.hurtSprite = new Laya.Image("game/penjian-texiao.png");
+        SceneManager.getInstance().currentScene.floorBoard.addChild(this.hurtSprite);
+
         this.anim.scaleX = 1;
         var directionId = 1;
         if(_posType == 2 || _posType == 3){
@@ -91,6 +90,7 @@ var Monster = (function(_super){
         }
         
         var t_data = t_monsterData[_type];
+        this.monsterData = t_data;
         
         this.anim.clear();
         this.anim.play(0, true, t_data.anim);
@@ -151,6 +151,9 @@ var Monster = (function(_super){
             this.hurtSprite.pos(0,MonsterHeight );
             this.hurtSprite.rotation = 180 + (90 -jiajiao) -45;
         }
+
+        
+
     }
 
     _proto.onUpdate = function(){
@@ -182,6 +185,7 @@ var Monster = (function(_super){
         if(this.isAttack)
             return;
         this.isAttack = true;
+        MusicManager.getInstance().playSound("res/music/enemy_hit.wav");
         if(this.targetTower.hp > 0){
             this.targetTower.hurtMonster(this.attackValue);
             Laya.timer.once(500,this,function(){
@@ -208,11 +212,20 @@ var Monster = (function(_super){
         var notif = new Notification("Monster_Dead",this,this);
         MessageController.getInstance().SendNotification(notif);
 
+        MusicManager.getInstance().playSound("res/music/tower_hit.wav");
+
         this.anim.visible = false;
         this.hpProgress.visible = false;
 
         this.hurtSprite.visible = true;
         this.hurtSprite.alpha = 1;
+        //转换到Floor图层坐标
+        var t_hurtPos = this.localToGlobal(new Point(this.hurtSprite.x,this.hurtSprite.y),true);
+        this.hurtSprite.pos(t_hurtPos.x,t_hurtPos.y);
+
+        //掉落道具
+        this.createProp();
+
         Laya.Tween.to(this.hurtSprite,
         {
             alpha:0
@@ -220,6 +233,50 @@ var Monster = (function(_super){
             MonsterFactory.getInstance().recoveryMonsterToPool(this);
         }));
 
+    }
+
+    /**
+     * 产生道具
+     */
+    _proto.createProp = function(){
+        var monsterRanomNum = parseInt(Math.random()*10000, 10);
+        var t_props = this.monsterData.props.length;
+        if(t_props == 0){
+            return;
+        }
+        var t_weight = 0;
+        var t_type = -1;
+        var t_diff = this.getDiff();
+        for (var i = 0; i < t_props; i++) {
+            var propData = this.monsterData.props[i];
+            var t_weightDiff = propData.weight - t_diff;
+            if(t_weightDiff < 0){
+                t_weightDiff = 0;
+            }
+            t_weight += t_weightDiff;
+            if(monsterRanomNum <= t_weight){
+                t_type = propData.propId;
+                break;
+            }
+        }
+        if(t_type != -1){
+            Gamelog("-------createProp monsterRanomNum="+monsterRanomNum + ",t_weight="+t_weight+",t_type="+t_type);
+            SceneManager.getInstance().currentScene.createProp(this.x,this.y,t_type);
+        }
+    }
+
+    /**获取道具减掉的概率 */
+    _proto.getDiff = function(){
+        var t_diff = 0;
+        var t_scene = SceneManager.getInstance().currentScene;
+        for (var i = MonsterRefreshData.length -1; i >=0 ; i--) {
+            var t_data = MonsterRefreshData[i];
+            if(t_scene.gameScore > t_data.score){
+                t_diff = t_data.diff ;
+                break;
+            }
+        }
+        return t_diff;
     }
     return Monster;
 })(Laya.Sprite);

@@ -1,4 +1,4 @@
-/**怪物数据 */
+ /**怪物数据 */
 var MonsterData = [
     {
         type:1,
@@ -9,6 +9,7 @@ var MonsterData = [
         score:16,
         speed:2,
         radius:30,
+        props:[{propId:2,weight:500}],
     },
     {
         type:1,
@@ -19,6 +20,8 @@ var MonsterData = [
         score:19,
         speed:2.5,
         radius:45,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:500}],
     },
     {
         type:1,
@@ -29,6 +32,8 @@ var MonsterData = [
         score:40,
         speed:4,
         radius:60,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:1000}],
     },
     {
         type:2,
@@ -39,6 +44,7 @@ var MonsterData = [
         score:16,
         speed:2,
         radius:30,
+        props:[{propId:2,weight:500}],
     },
     {
         type:2,
@@ -48,7 +54,9 @@ var MonsterData = [
         attack:30,
         score:19,
         speed:2.5,
-        radius:45,
+        radius:45,  
+	props:[{propId:1,weight:500},
+        {propId:2,weight:500}],
     },
     {
         type:2,
@@ -59,6 +67,8 @@ var MonsterData = [
         score:40,
         speed:4,
         radius:60,
+        props:[{propId:1,weight:500},
+        {propId:2,weight:1000}],
     },
     
 ];

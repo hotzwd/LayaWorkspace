@@ -54,7 +54,7 @@ var MusicManager = (function (_super) {
         if(musicSwitch == 1){
             // console.debug("---------play()-------" + musicName);
             if(musicVolume === undefined)
-                musicVolume = 1;
+                musicVolume = 0.5;
             SoundManager.musicVolume = musicVolume;
             SoundManager.playMusic(musicName,0);
         }

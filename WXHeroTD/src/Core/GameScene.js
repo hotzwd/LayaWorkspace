@@ -45,6 +45,7 @@ var GameScene = (function (_super) {
     _proto.gameScore = 0;                                                    //游戏分数
     _proto.createMonstrCD = 0;                                               //产生怪物cd
     _proto.lastUpdateTime = 0;                                               //上一次更新时间
+    _proto.isShowVideoAd = false;                                            //是否已经显示广告
 
     _proto.Init = function () {
         //初始化当前类属性
@@ -153,12 +154,18 @@ var GameScene = (function (_super) {
          this.curHero.playAnim();
          this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
          this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+
+         wxGame.getInstance().showAD(2);
     }
 
     /**重置游戏 */
-    _proto.restartGame = function(){
-        this.gameScore = 0;
-        this.gameUI.setScore(0,false);
+    _proto.restartGame = function(_score){
+        var t_score =0;
+        if(_score != null){
+            t_score = _score;
+        }
+        this.gameScore = t_score;
+        this.gameUI.setScore(t_score,false);
 
         this.curTower.resetHp();
 
@@ -176,8 +183,25 @@ var GameScene = (function (_super) {
         this.pointBoard.destroyChildren();
         this.floorBoard.destroyChildren();
         this.propBoard.destroyChildren();
-    }
 
+        
+    }
+    /**游戏结束 */
+    _proto.gameover = function(){
+        wxGame.getInstance().showAD(0);
+        // UIManager.getInstance().showUI("GameOverUI");
+        var endUIStr = "GameOverUI";
+        if (!SceneManager.getInstance().currentScene.isShowVideoAd) {
+            if (Browser.onMiniGame){
+                if(wxGame.getInstance().videoAd != null){
+                    endUIStr = "GameEndShareUI";
+                }
+            }else{
+                endUIStr = "GameEndShareUI";
+            }
+        }
+        var gameoverUI = UIManager.getInstance().showUI(endUIStr);
+    }
     /**
      * update刷新
      */
@@ -344,6 +368,58 @@ var GameScene = (function (_super) {
 
         this.propBoard.addChild(t_prop);
         this.propList.push(t_prop);
+
+        //位移
+        var t_propRadius = 100;
+        var randomNum = parseInt(Math.random()*t_propRadius, 10) + 100;
+        var randomPm = parseInt(Math.random()*2, 10);
+        var target_X = _x;
+        var target_Y = _y;
+        if(randomPm == 1){
+            target_X += randomNum;
+            target_Y += randomNum;
+        }else{
+            target_X -= randomNum;
+            target_Y -= randomNum;
+        }
+        //取值范围
+        var t_minNum = 25;
+        if(target_X < t_minNum){
+            target_X = t_minNum;
+        }
+        if(target_Y < t_minNum){
+            target_Y = t_minNum;
+        }
+
+        if(target_X > Laya.stage.width - t_minNum){
+            target_X = Laya.stage.width - t_minNum;
+        }
+        if(target_Y > Laya.stage.height - t_minNum){
+            target_Y = Laya.stage.height - t_minNum;
+        }
+        //跳过防御塔范围
+        var t_towerRadius = this.curTower.TowerRadios;
+        if(target_X > this.curTower.x - t_towerRadius && target_X < this.curTower.x + t_towerRadius){
+            if(target_X < this.curTower.x){
+                target_X = this.curTower.x - t_towerRadius;
+            }else{
+                target_X = this.curTower.x + t_towerRadius;
+            }
+        }
+        if(target_Y > this.curTower.y - t_towerRadius && target_Y < this.curTower.y + t_towerRadius){
+            if(target_Y < this.curTower.y){
+                target_Y = this.curTower.y - t_towerRadius;
+            }else{
+                target_Y = this.curTower.y + t_towerRadius;
+            }
+        }
+
+
+        Laya.Tween.to(t_prop,{
+            x:target_X,
+            y:target_Y,
+        },300);
+
     }
 
     _proto.removeProp = function(_proto){
