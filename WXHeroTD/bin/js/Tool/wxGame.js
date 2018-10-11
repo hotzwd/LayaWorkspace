@@ -454,7 +454,8 @@ var wxGame = (function (_super) {
             Ad.onResize(function (res) {
                 // console.log(res.width, res.height);
                 // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
-                Ad.style.top = sysInfo.screenHeight - 86;
+                // Ad.style.top = sysInfo.screenHeight - 86;
+                Ad.style.top = sysInfo.screenHeight - 89;
                 Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
             })
 

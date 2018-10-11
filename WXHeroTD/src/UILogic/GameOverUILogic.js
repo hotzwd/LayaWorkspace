@@ -49,7 +49,17 @@ var GameOverUILogic = (function (_super) {
         this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
-        
+        this.btn_revive.on(Laya.Event.CLICK,this,this._reviveClickEvent);
+
+        this.btn_revive.visible = false;
+        if (Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd != null){
+                this.btn_revive.visible = true;
+            }
+        }else{
+             this.btn_revive.visible = true;
+        }
+
         this.aniShare.play(0, true);
 
         SceneManager.getInstance().currentScene.isShowVideoAd = false;
@@ -62,7 +72,51 @@ var GameOverUILogic = (function (_super) {
         // MusicManager.getInstance().stopMusic();
         wxGame.getInstance().showAD(0);
     }
+    //复活视频
+    _proto._reviveClickEvent = function(){
+        if(!this.isSharing){
+            if (!Browser.onMiniGame) {
+                shareResult(1);
+                return;
+            }
 
+            wxGame.getInstance().showOpenDataContext(false);
+            wxGame.getInstance().showAD(0);
+
+            var t_videoAd = wxGame.getInstance().videoAd;
+            t_videoAd.show();
+            t_videoAd.onClose( function(res){
+                t_videoAd.offClose();
+                // 用户点击了【关闭广告】按钮
+                // 小于 2.1.0 的基础库版本，res 是一个 undefined
+                if (res && res.isEnded || res === undefined) {
+                    // 正常播放结束，可以下发游戏奖励
+                    shareResult(1);
+                }
+                else {
+                    // 播放中途退出，不下发游戏奖励
+                    shareResult(0);
+                }
+            })
+        }
+    }
+
+    shareResult = function (res) {
+        if (res == 1) {
+                Gamelog("复活成功");
+
+                UIManager.getInstance().closeUI("GameOverUI",true);
+                var scoreNum = SceneManager.getInstance().currentScene.gameScore;
+                Gamelog("scoreNum = "+scoreNum);
+                SceneManager.getInstance().currentScene.restartGame(scoreNum);
+                //开始游戏
+                SceneManager.getInstance().currentScene.startGame();
+
+            } else {
+                Gamelog("复活失败");
+                UIManager.getInstance().closeUI("GameOverUI",true);
+            }
+    }
 
     /**分享游戏 */
     _proto._sharedClickEvent = function () {

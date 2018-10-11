@@ -189,18 +189,18 @@ var GameScene = (function (_super) {
     /**游戏结束 */
     _proto.gameover = function(){
         wxGame.getInstance().showAD(0);
-        // UIManager.getInstance().showUI("GameOverUI");
-        var endUIStr = "GameOverUI";
-        if (!SceneManager.getInstance().currentScene.isShowVideoAd) {
-            if (Browser.onMiniGame){
-                if(wxGame.getInstance().videoAd != null){
-                    endUIStr = "GameEndShareUI";
-                }
-            }else{
-                endUIStr = "GameEndShareUI";
-            }
-        }
-        var gameoverUI = UIManager.getInstance().showUI(endUIStr);
+        UIManager.getInstance().showUI("GameOverUI");
+        // var endUIStr = "GameOverUI";
+        // if (!SceneManager.getInstance().currentScene.isShowVideoAd) {
+        //     if (Browser.onMiniGame){
+        //         if(wxGame.getInstance().videoAd != null){
+        //             endUIStr = "GameEndShareUI";
+        //         }
+        //     }else{
+        //         endUIStr = "GameEndShareUI";
+        //     }
+        // }
+        // var gameoverUI = UIManager.getInstance().showUI(endUIStr);
     }
     /**
      * update刷新
@@ -396,6 +396,12 @@ var GameScene = (function (_super) {
         }
         if(target_Y > Laya.stage.height - t_minNum){
             target_Y = Laya.stage.height - t_minNum;
+        }
+        if(target_X < t_minNum){
+            target_X = t_minNum;
+        }
+        if(target_Y < t_minNum){
+            target_Y = t_minNum;
         }
         //跳过防御塔范围
         var t_towerRadius = this.curTower.TowerRadios;

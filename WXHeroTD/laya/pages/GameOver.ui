@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":6,
+    "selecteID":13,
     "props":{"width":720,"sceneColor":"#f31713","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -167,7 +167,8 @@
                     "hasChild":false,
                     "compId":13,
                     "child":[
-                        ]
+                        ],
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
@@ -175,14 +176,13 @@
                     "props":{"y":656,"x":108,"width":630,"visible":false,"var":"list_rank","height":322},
                     "nodeParent":2,
                     "label":"List(list_rank)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":15,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "props":{"y":0,"x":0,"width":628,"renderType":"render","height":108},
                             "nodeParent":15,
@@ -194,7 +194,6 @@
                             "compId":16,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "props":{"y":2,"x":425,"skin":"game/xunzhang-01.png"},
                                     "nodeParent":16,
@@ -207,7 +206,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":24,"x":486,"text":"青铜守卫","name":"t_title","fontSize":30,"font":"SimHei","color":"#dbc17d"},
                                     "nodeParent":16,
@@ -221,7 +219,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "props":{"y":68,"x":19,"skin":"game/img_line.png","name":"img_title"},
                                     "nodeParent":16,
@@ -234,7 +231,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":19,"x":309,"width":132,"text":"999999","name":"t_score","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"},
                                     "nodeParent":16,
@@ -248,7 +244,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":19,"x":102,"width":216,"text":"玩家名字七个字","name":"t_name","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"},
                                     "nodeParent":16,
@@ -262,7 +257,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "props":{"y":16,"x":57,"skin":"game/yuandi.png"},
                                     "nodeParent":16,
@@ -275,7 +269,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Text",
                                     "props":{"y":22,"x":58,"width":39,"text":"1","name":"t_rank","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"},
                                     "nodeParent":16,
@@ -289,7 +282,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "props":{"y":16,"x":0,"skin":"game/yuandi.png","name":"img_icon"},
                                     "nodeParent":16,
@@ -314,6 +306,19 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":26,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1149,"x":407,"var":"btn_revive","stateNum":"1","skin":"game/fuhuo.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":2,
+                    "label":"Button(btn_revive)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":27,
                     "child":[
                         ]
                 }],

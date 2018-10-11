@@ -77,9 +77,9 @@ var GameEndShareUILogic = (function (_super) {
                 SceneManager.getInstance().currentScene.isShowVideoAd = true;
                 Gamelog("------shareResult isShowVideoAd="+SceneManager.getInstance().currentScene.isShowVideoAd);
                 SceneManager.getInstance().currentScene.restartGame(scoreNum);
+                wxGame.getInstance().showOpenDataContext(false);
                 //开始游戏
                 SceneManager.getInstance().currentScene.startGame();
-                wxGame.getInstance().showOpenDataContext(false);
 
                 // SceneManager.getInstance().currentScene.isShared = true;
             } else {
