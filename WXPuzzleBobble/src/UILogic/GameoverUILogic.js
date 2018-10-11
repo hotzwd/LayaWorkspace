@@ -141,7 +141,7 @@ var GameoverUILogic = (function(_super){
         wxGame.getInstance().showOpenDataContext(false);
         UIManager.getInstance().closeUI("GameoverUI",true);
         MusicManager.getInstance().playSound("res/music/1.wav");
-        SceneManager.getInstance().currentScene.restartGame();
+        SceneManager.getInstance().currentScene.restartGame(true,0);
         // UIManager.getInstance().showUI('RoomUI');
         // UIManager.getInstance().closeUI("GameUI",true);
         

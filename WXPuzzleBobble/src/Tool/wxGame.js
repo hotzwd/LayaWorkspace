@@ -1,4 +1,6 @@
-
+/**当前微信版本 */
+window.wxSDKVersion;
+window.wxLoadVideoAd = false;
 /**
  * wxGame
  */
@@ -21,10 +23,11 @@ var wxGame = (function (_super) {
     }
 
     _proto.sharedCanvasTexture = null;
-    /**当前微信版本 */
-    var wxSDKVersion;
+
     //游戏圈按钮
     _proto.btn_club = null;
+    //视频广告
+    _proto.videoAd = null;
 
     _proto.Init = function () {
 
@@ -301,6 +304,52 @@ var wxGame = (function (_super) {
             }
             
         }
+    }
+
+    //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-04783191a572fddf'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            console.log("createVideoAD 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            console.log("createVideoAD 拉取失败");
+            t_videoAd.load();
+            console.log(err.errMsg)
+        });
+
+        this.videoAd.onError(function () {
+            console.log("createVideoAD 拉取失败 = false");
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
     }
 
     return {

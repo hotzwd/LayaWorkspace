@@ -54,7 +54,7 @@ var GameOverUILogic = (function (_super) {
         this.btn_revive.visible = false;
         if (Browser.onMiniGame){
             if(wxGame.getInstance().videoAd != null){
-                this.btn_revive.visible = true;
+                this.btn_revive.visible = wxLoadVideoAd;
             }
         }else{
              this.btn_revive.visible = true;
@@ -80,11 +80,11 @@ var GameOverUILogic = (function (_super) {
                 return;
             }
 
-            wxGame.getInstance().showOpenDataContext(false);
-            wxGame.getInstance().showAD(0);
-
             var t_videoAd = wxGame.getInstance().videoAd;
-            t_videoAd.show();
+            t_videoAd.show().then(function () {
+                wxGame.getInstance().showOpenDataContext(false);
+                wxGame.getInstance().showAD(0);
+            });
             t_videoAd.onClose( function(res){
                 t_videoAd.offClose();
                 // 用户点击了【关闭广告】按钮
@@ -114,7 +114,10 @@ var GameOverUILogic = (function (_super) {
 
             } else {
                 Gamelog("复活失败");
+                // UIManager.getInstance().closeUI("GameOverUI",true);
+                SceneManager.getInstance().currentScene.restartGame();
                 UIManager.getInstance().closeUI("GameOverUI",true);
+                UIManager.getInstance().showUI("GameStartUI");
             }
     }
 

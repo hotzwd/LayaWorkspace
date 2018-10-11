@@ -78,5 +78,6 @@ function loadingCallback(){
 
     SceneManager.getInstance().currentScene  = new GameScene();
     
+    wxGame.getInstance().createVideoAD();
     
 }

@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":13,
+    "selecteID":27,
     "props":{"width":720,"sceneColor":"#f31713","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -133,7 +133,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":990,"x":444,"var":"btn_playAgain","stateNum":"2","skin":"game/btn_zaiwanyici.png"},
+                    "props":{"y":1153,"x":407,"var":"btn_playAgain","stateNum":"2","skin":"game/btn_zaiwanyici.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":2,
                     "label":"Button(btn_playAgain)",
                     "isDirectory":false,
@@ -146,7 +146,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1035,"x":258,"var":"btn_shared","stateNum":"2","skin":"game/btn_xuanyao.png","scaleY":0.88,"scaleX":0.88,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":1035,"x":249,"var":"btn_shared","stateNum":"2","skin":"game/btn_xuanyao.png","scaleY":0.95,"scaleX":1,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":2,
                     "label":"Button(btn_shared)",
                     "isDirectory":false,
@@ -312,7 +312,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1149,"x":407,"var":"btn_revive","stateNum":"1","skin":"game/fuhuo.png","anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":1035,"x":568,"var":"btn_revive","stateNum":"1","skin":"game/fuhuo.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":2,
                     "label":"Button(btn_revive)",
                     "isDirectory":false,
@@ -328,23 +328,14 @@
         {
             "nodes":[
                 {
-                    "target":5,
+                    "target":27,
                     "keyframes":{
-                        "x":[
-                            {
-                                "value":258,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":5,
-                                "key":"x",
-                                "index":0
-                            }],
                         "scaleY":[
                             {
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleY",
                                 "index":0
                             },
@@ -352,7 +343,7 @@
                                 "value":0.8,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleY",
                                 "index":20
                             },
@@ -360,7 +351,7 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleY",
                                 "index":40
                             }],
@@ -369,7 +360,7 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleX",
                                 "index":0
                             },
@@ -377,7 +368,7 @@
                                 "value":0.8,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleX",
                                 "index":20
                             },
@@ -385,7 +376,7 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":27,
                                 "key":"scaleX",
                                 "index":40
                             }]

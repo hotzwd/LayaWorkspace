@@ -432,7 +432,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1239,"x":290,"text":"v2.0.1","fontSize":26,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1239,"x":290,"text":"v2.0.2","fontSize":26,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":73,
                     "label":"Label",
                     "isOpen":true,

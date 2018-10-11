@@ -330,8 +330,8 @@ var GameUILogic = (function(_super){
     /**时间到结束游戏 */
     _proto.gameoverByTime = function(){
         this.label_time.text = 0;
-        var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
-        gameoverUI.visible = false;
+        // var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
+        // gameoverUI.visible = false;
         if(!this.showImgGameover){
         // if(this.img_pop.alpha <= 1 && !this.img_pop.visible){
             MusicManager.getInstance().playSound("res/music/3.wav");
@@ -358,31 +358,36 @@ var GameUILogic = (function(_super){
 
     //撞到底部显示游戏结束 
     _proto.gameoverByBottom = function(){
-        MusicManager.getInstance().playSound("res/music/3.wav");
-        this.img_pop.skin ="game/img_shijiandao.png";
-        this.img_pop.alpha = 0;
-        this.img_pop.scaleX = 0;
-        this.img_pop.scaleY = 0;
-        this.img_pop.visible = true;
-        Laya.Tween.to(this.img_pop,{
-            alpha:1,
-            scaleX:1,
-            scaleY:1,
-        },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
-            // this.img_pop.visible = false;
-            this.imgTong.visible = false;
-            this.img_black.visible = true;
-            this.showImgGameover = true;
-            this.gameoverByTime();
-        }));
+        // MusicManager.getInstance().playSound("res/music/3.wav");
+        // this.img_pop.skin ="game/img_shijiandao.png";
+        // this.img_pop.alpha = 0;
+        // this.img_pop.scaleX = 0;
+        // this.img_pop.scaleY = 0;
+        // this.img_pop.visible = true;
+        // Laya.Tween.to(this.img_pop,{
+        //     alpha:1,
+        //     scaleX:1,
+        //     scaleY:1,
+        // },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
+            
+        //     this.imgTong.visible = false;
+        //     this.img_black.visible = true;
+        //     this.showImgGameover = true;
+        //     this.gameoverByTime();
+        // }));
         this.anim_panda.stop();
+        this.img_black.visible = false;
+        this.imgTong.visible = false;
+        this.img_pop.visible = false;
+        this.hideAllImgGuang();
     }
 
     /**显示结算ui */
     _proto.gameoverUI = function(){
         // this.gameoverUI.visible = true;
         this.img_black.visible = false;
-        UIManager.getInstance().getUI("GameoverUI").visible = true;
+        UIManager.getInstance().showUI("GameoverUI");
+        // UIManager.getInstance().getUI("GameoverUI").visible = true;
         this.imgTong.visible = false;
         this.hideAllImgGuang();
         this.anim_panda.stop();

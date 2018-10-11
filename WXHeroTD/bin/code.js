@@ -49723,7 +49723,7 @@ var GameOverUI=(function(_super){
 
 		}
 
-		GameOverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-3,"x":0,"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Text","props":{"y":464,"x":224,"visible":false,"text":"当前得分:","fontSize":35,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":464,"x":404,"width":216,"visible":false,"var":"t_score","text":"9999999","height":40,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":355,"x":131,"width":552,"var":"t_highScore","text":"0","height":101,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":517,"x":165,"skin":"game/huodechenghao-di.png"}},{"type":"Text","props":{"y":528,"x":271,"text":"获得称号:","fontSize":35,"font":"SimHei","color":"#fff2d0"}},{"type":"Text","props":{"y":528,"x":435,"width":153,"var":"t_title","text":"青铜守卫","height":35,"fontSize":35,"font":"SimHei","color":"#fff2d0","align":"center"}},{"type":"Button","props":{"y":990,"x":444,"var":"btn_playAgain","stateNum":2,"skin":"game/btn_zaiwanyici.png"}},{"type":"Button","props":{"y":1035,"x":258,"var":"btn_shared","stateNum":2,"skin":"game/btn_xuanyao.png","scaleY":0.88,"scaleX":0.88,"anchorY":0.5,"anchorX":0.5},"compId":5},{"type":"Button","props":{"y":1116,"x":299,"width":216,"visible":false,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"查看全部排行","height":58}},{"type":"List","props":{"y":656,"x":108,"width":630,"visible":false,"var":"list_rank","height":322},"child":[{"type":"Box","props":{"y":0,"x":0,"width":628,"renderType":"render","height":108},"child":[{"type":"Image","props":{"y":2,"x":425,"skin":"game/xunzhang-01.png"}},{"type":"Text","props":{"y":24,"x":486,"text":"青铜守卫","name":"t_title","fontSize":30,"font":"SimHei","color":"#dbc17d"}},{"type":"Image","props":{"y":68,"x":19,"skin":"game/img_line.png","name":"img_title"}},{"type":"Text","props":{"y":19,"x":309,"width":132,"text":"999999","name":"t_score","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":19,"x":102,"width":216,"text":"玩家名字七个字","name":"t_name","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":57,"skin":"game/yuandi.png"}},{"type":"Text","props":{"y":22,"x":58,"width":39,"text":"1","name":"t_rank","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":0,"skin":"game/yuandi.png","name":"img_icon"}}]}]},{"type":"Image","props":{"y":231,"x":255,"var":"img_high","skin":"game/high.png"}},{"type":"Button","props":{"y":1149,"x":407,"var":"btn_revive","stateNum":1,"skin":"game/fuhuo.png","anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":5,"keyframes":{"x":[{"value":258,"tweenMethod":"linearNone","tween":true,"target":5,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleY","index":40}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":5,"key":"scaleX","index":40}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		GameOverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-3,"x":0,"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Text","props":{"y":464,"x":224,"visible":false,"text":"当前得分:","fontSize":35,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":464,"x":404,"width":216,"visible":false,"var":"t_score","text":"9999999","height":40,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":355,"x":131,"width":552,"var":"t_highScore","text":"0","height":101,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":517,"x":165,"skin":"game/huodechenghao-di.png"}},{"type":"Text","props":{"y":528,"x":271,"text":"获得称号:","fontSize":35,"font":"SimHei","color":"#fff2d0"}},{"type":"Text","props":{"y":528,"x":435,"width":153,"var":"t_title","text":"青铜守卫","height":35,"fontSize":35,"font":"SimHei","color":"#fff2d0","align":"center"}},{"type":"Button","props":{"y":1153,"x":407,"var":"btn_playAgain","stateNum":2,"skin":"game/btn_zaiwanyici.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1035,"x":249,"var":"btn_shared","stateNum":2,"skin":"game/btn_xuanyao.png","scaleY":0.95,"scaleX":1,"anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1116,"x":299,"width":216,"visible":false,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"查看全部排行","height":58}},{"type":"List","props":{"y":656,"x":108,"width":630,"visible":false,"var":"list_rank","height":322},"child":[{"type":"Box","props":{"y":0,"x":0,"width":628,"renderType":"render","height":108},"child":[{"type":"Image","props":{"y":2,"x":425,"skin":"game/xunzhang-01.png"}},{"type":"Text","props":{"y":24,"x":486,"text":"青铜守卫","name":"t_title","fontSize":30,"font":"SimHei","color":"#dbc17d"}},{"type":"Image","props":{"y":68,"x":19,"skin":"game/img_line.png","name":"img_title"}},{"type":"Text","props":{"y":19,"x":309,"width":132,"text":"999999","name":"t_score","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Text","props":{"y":19,"x":102,"width":216,"text":"玩家名字七个字","name":"t_name","height":35,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":57,"skin":"game/yuandi.png"}},{"type":"Text","props":{"y":22,"x":58,"width":39,"text":"1","name":"t_rank","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Image","props":{"y":16,"x":0,"skin":"game/yuandi.png","name":"img_icon"}}]}]},{"type":"Image","props":{"y":231,"x":255,"var":"img_high","skin":"game/high.png"}},{"type":"Button","props":{"y":1035,"x":568,"var":"btn_revive","stateNum":1,"skin":"game/fuhuo.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5},"compId":27}]}],"animations":[{"nodes":[{"target":27,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleY","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleY","index":40}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleX","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":27,"key":"scaleX","index":40}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
 		return GameOverUI;
 	})(View);
 var GameRankUI=(function(_super){
@@ -49771,7 +49771,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":233,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}},{"type":"Text","props":{"y":1366,"x":70,"text":"v1.1.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":814,"visible":false,"var":"guildBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0,"cacheAs":"bitmap"},"child":[{"type":"Sprite","props":{"y":0,"x":0,"name":"s_mask","alpha":0.8},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":1044,"x":562,"skin":"game/jiantou.png"}},{"type":"Image","props":{"y":1039,"x":231,"skin":"game/jiantou.png","scaleX":-1}},{"type":"Text","props":{"y":1327,"x":300,"text":"点击任意位置开始","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":573,"x":90,"text":"点击或滑动英雄来击退敌人，保护水晶不被破坏","fontSize":30,"font":"SimHei","color":"#ffffff"}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.9},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":814,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":404,"x":191,"skin":"game/logo.png"}},{"type":"Button","props":{"y":803,"x":233,"var":"btn_start","stateNum":1,"skin":"game/btn_kaishianniu.png"}},{"type":"Button","props":{"y":969,"x":330,"width":153,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelAlign":"center","label":"排行榜>>","height":38}},{"type":"Text","props":{"y":1366,"x":70,"text":"v1.1.2","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
 /**
@@ -50210,7 +50210,7 @@ var GameOverUILogic = (function (_super) {
         this.btn_revive.visible = false;
         if (Browser.onMiniGame){
             if(wxGame.getInstance().videoAd != null){
-                this.btn_revive.visible = true;
+                this.btn_revive.visible = wxLoadVideoAd;
             }
         }else{
              this.btn_revive.visible = true;
@@ -50236,11 +50236,11 @@ var GameOverUILogic = (function (_super) {
                 return;
             }
 
-            wxGame.getInstance().showOpenDataContext(false);
-            wxGame.getInstance().showAD(0);
-
             var t_videoAd = wxGame.getInstance().videoAd;
-            t_videoAd.show();
+            t_videoAd.show().then(function () {
+                wxGame.getInstance().showOpenDataContext(false);
+                wxGame.getInstance().showAD(0);
+            });
             t_videoAd.onClose( function(res){
                 t_videoAd.offClose();
                 // 用户点击了【关闭广告】按钮
@@ -50270,7 +50270,10 @@ var GameOverUILogic = (function (_super) {
 
             } else {
                 Gamelog("复活失败");
+                // UIManager.getInstance().closeUI("GameOverUI",true);
+                SceneManager.getInstance().currentScene.restartGame();
                 UIManager.getInstance().closeUI("GameOverUI",true);
+                UIManager.getInstance().showUI("GameStartUI");
             }
     }
 
@@ -52910,6 +52913,7 @@ Vector2.prototype={
 }
 /**当前微信版本 */
 window.wxSDKVersion;
+window.wxLoadVideoAd = false;
 /**
  * wxGame
  */
@@ -53364,8 +53368,7 @@ var wxGame = (function (_super) {
             Ad.onResize(function (res) {
                 // console.log(res.width, res.height);
                 // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
-                // Ad.style.top = sysInfo.screenHeight - 86;
-                Ad.style.top = sysInfo.screenHeight - 89;
+                Ad.style.top = sysInfo.screenHeight - 86;
                 Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
             })
 
@@ -53416,7 +53419,19 @@ var wxGame = (function (_super) {
             Gamelog("createVideoAD 拉取失败");
             t_videoAd.load();
             console.log(err.errMsg)
-        })
+        });
+
+        this.videoAd.onError(function () {
+            Gamelog("createVideoAD 拉取失败 = false");
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            Gamelog("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
+
+
     }
 
     /**微信官方对比版本号 */

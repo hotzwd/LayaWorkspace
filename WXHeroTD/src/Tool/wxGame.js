@@ -1,5 +1,6 @@
 /**当前微信版本 */
 window.wxSDKVersion;
+window.wxLoadVideoAd = false;
 /**
  * wxGame
  */
@@ -505,7 +506,19 @@ var wxGame = (function (_super) {
             Gamelog("createVideoAD 拉取失败");
             t_videoAd.load();
             console.log(err.errMsg)
-        })
+        });
+
+        this.videoAd.onError(function () {
+            Gamelog("createVideoAD 拉取失败 = false");
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            Gamelog("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
+
+
     }
 
     /**微信官方对比版本号 */

@@ -27,7 +27,7 @@ var GameScene = (function(_super){
     var BeginCreateNum = 5;                                                     //开始生成的泡泡行数  
     var ShootCreateNum = 10;                                                    //发射多少个后创建新的一行  
     var MoveOtherBubbleDistance = 5;                                            //碰撞其他球移动的距离
-    var GameTime = 12;                                                         //游戏时间
+    var GameTime = 120;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
     var CreatePropNum = 10;                                                     //发射多少个后创建道具球
@@ -111,7 +111,7 @@ var GameScene = (function(_super){
         this.gameUI.startGameUI();
         // Laya.timer.scale =1; 
        // MessageController.getInstance().AddNotification(MessageEventName.GameOverEvent,this,this.gameOverReceiver);
-       this.createVideoAD();
+    //    this.createVideoAD();
     //    this.createPointLine(-90);
     }
 
@@ -941,7 +941,6 @@ var GameScene = (function(_super){
     /**检查泡泡最底部位置 */
     _proto.checkBubblesPos = function(){
          var viewPos = this.gameUI.localToGlobal(new Point(0,0));
-        // var bottomY = GameConfig.GameHeight -GameConfig.GameHeight / 3;
         var bottomPosY = 0;
         var cowHeight = (BUBBLE_RADIUS * 2) * Math.sin ( Math.PI/3 );
         var bottomY = 13*cowHeight + viewPos.y;;
@@ -954,24 +953,23 @@ var GameScene = (function(_super){
                     bottomPosY = b_point.y;
                 if(b_point.y > bottomY){
                     this.gameOver();
-                    var hurtHp = 0;
-                    // for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-                    //     var playerData = GameModule.getInstance().playerDataList[x];
-                    //     if(playerData.playerId == UserModule.getInstance().playerId){
-                    //         hurtHp = playerData.hp;
-                    //     }
-                    // }
-                    // this.gameUI.playerHurtHp(UserModule.getInstance().playerId,hurtHp);
-                    //发送自杀
-                    //GameModule.getInstance().sendHurtPlayer(3,"");
-                    // this.gameUI.gameoverByTime();
                     this.gameUI.gameoverByBottom();
+
+                    var endUIStr = "GameoverUI";
+                    if (Browser.onMiniGame){
+                        if(wxGame.getInstance().videoAd != null && wxLoadVideoAd == true){
+                            endUIStr = "GameSharedUI";
+                        }
+                    }else{
+                        endUIStr = "GameSharedUI";
+                    }
+                    UIManager.getInstance().showUI(endUIStr);
+
                     break;
                 }
 
             }
         }
-        // Gamelog("-----------bottom posy="+bottomPosY+",bottomY ="+bottomY);
         
     }
     /**改变发射球 */
@@ -1005,12 +1003,12 @@ var GameScene = (function(_super){
         if(this.currentTime<=0){
                 Laya.timer.clear(this,this.animateTimeBased);
                 this.gameOver();
-                // this.gameUI.gameoverByTime();
-                if(!this.isShowShared){
-                    UIManager.getInstance().showUI("GameSharedUI");
-                }else{
-                    this.gameUI.gameoverByTime();
-                }
+                this.gameUI.gameoverByTime();
+                // if(!this.isShowShared){
+                //     UIManager.getInstance().showUI("GameSharedUI");
+                // }else{
+                //     this.gameUI.gameoverByTime();
+                // }
         }
     }
     //接收服务器游戏结束
@@ -1045,7 +1043,7 @@ var GameScene = (function(_super){
         MusicManager.getInstance().playSound("res/music/12.ogg");
     }
     /**重新开始游戏 */
-    _proto.restartGame = function(){
+    _proto.restartGame = function(_isOver,curScore){
         // this.gameUI.gameoverPanel.visible = false;
         // this.Init();
         bubblePanel.destroyChildren();
@@ -1057,10 +1055,17 @@ var GameScene = (function(_super){
         this.moveOtherBubbleFinish = false;
         this.shootBubbleMoveFinish = true;
         this.shootNum = 0;
-        this.scoreNum = 0;
-        this.currentTime = GameTime;
-        this.gameUI.label_time.text = GameTime;
-        this.gameUI.label_score.text = 0;
+
+        if(_isOver){
+            this.scoreNum = 0;
+            this.gameUI.label_score.text = 0;
+            this.currentTime = GameTime;
+            this.gameUI.label_time.text = GameTime;
+        }else{
+            this.scoreNum = curScore;
+            this.gameUI.label_score.text = curScore;
+        }
+
         //this.gameUI.bossProgress.value = 0;
         this.shootBubble.visible = true;
         this.isShowShared = false;
@@ -1074,19 +1079,15 @@ var GameScene = (function(_super){
             this.m_curReady.isStop = true;
         }
             
-        Laya.timer.clear(this,this.animateTimeBased);
-        this.gameUI.startGameUI();
-
-        //显示最上层的桶
-        // this.gameUI.imgTong.visible = true;
-        // this.gameUI.anim_panda.play(0,true,"pandaDaiji");
-        // // Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
-        // this.gameUI.img_bg.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
-        // Laya.timer.loop(1000, this, this.animateTimeBased);
-        
+        if(_isOver){
+            Laya.timer.clear(this,this.animateTimeBased);
+            this.gameUI.startGameUI();
+        }else{
+            this.startGame();
+        }
         this.createPointLine(-90);
 
-        if (this.pointBoard != null) {
+        if (this.pointBoard != null && _isOver) {
             this.pointBoardPreAngle = this.pointBoard.rotation;
             this.pointBoard.destroy(true);
             this.pointBoard = null;
@@ -1366,42 +1367,6 @@ var GameScene = (function(_super){
         }while(sameIndex != samelist.length)
 
         return samelist;
-    }
-
-    //显示广告
-    _proto.createVideoAD = function () {
-         if (!Browser.onMiniGame) {
-             return;
-         }
-        Gamelog("createVideoAD-----");
-
-        var isPass = false;
-        wx.getSystemInfo({
-            success: function (res) {
-                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
-                if(isPassNum >= 0){
-                    isPass = true;
-                }
-            }
-        }); 
-        if(!isPass){
-            return;
-        }
-        
-        this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-04783191a572fddf'
-        });
-
-        var t_videoAd = this.videoAd;
-        this.videoAd.load().then(function () {
-            console.log("createVideoAD 拉取成功");
-            // this.videoAd.show();
-        }).catch( function(err){
-            console.log("createVideoAD 拉取失败");
-            t_videoAd.load();
-            console.log(err.errMsg)
-        })
     }
 
     return GameScene;
