@@ -2,7 +2,7 @@
 //laya初始化
 Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
 //FPS
-// Laya.Stat.show(0,0);
+Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
 Laya.stage.scaleMode = "fixedauto";
 //场景布局类型 自动竖屏
@@ -20,22 +20,13 @@ Laya.stage.bgColor = "#000000";//设置画布的背景颜色。
 //Laya.WorkerLoader.enable = true;
 
 //设置版本控制类型为使用文件名映射的方式
-ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
+// ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
 //加载版本信息文件
-ResourceVersion.enable("version.json", Handler.create(this, initVersion));   
+// ResourceVersion.enable("version.json", Handler.create(this, initVersion));   
 
-function initVersion(){
-    if(Laya.Browser.onFacebook){
-        initializeAsync();
-    }else{
-        beginLoad();
-    }
-}
-
-var preloadedInterstitial = null;
-
-function initializeAsync() {
+if (GameInFackBook) {
     FBInstant.initializeAsync().then(function () {
+        console.log("initializeAsync End 004");
         console.log("getLocale:", FBInstant.getLocale());
         console.log("getPlatform:", FBInstant.getPlatform());
         console.log("getSDKVersion", FBInstant.getSDKVersion());
@@ -43,24 +34,15 @@ function initializeAsync() {
         console.log("getEntryPointData", FBInstant.getEntryPointData());
 
         beginLoad();
+        FBInstant.setLoadingProgress(10);
+        
+        FBGame.getInstance().Init();
 
-        if (supportedAPIs.includes('getInterstitialAdAsync') && supportedAPIs.includes('getRewardedVideoAsync')){
-            FBInstant.getInterstitialAdAsync(
-                '757410831128353_758273957708707'// Your Ad Placement Id
-            ).then(function(interstitial){
-            // Load the Ad asynchronously
-                preloadedInterstitial = interstitial;
-                return preloadedInterstitial.loadAsync();
-            }).then(function() {
-                console.log('Interstitial preloaded');
-            }).catch(function(err){
-                console.error('Interstitial failed to preload: ' + err.message);
-            });
-        }
     })
-    // Laya.timer.once(100, this,function(){
-    //    FBInstant.setLoadingProgress(100);
-    // });
+
+    
+} else {
+    beginLoad();
 }
 
 
@@ -71,7 +53,13 @@ function  beginLoad(){
                 ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/bomb.atlas",Laya.Loader.ATLAS],
                 //图片
-                ["game/bgGame.png",Laya.Loader.IMAGE],
+                ["game/bgGame.jpg",Laya.Loader.IMAGE],
+                ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],
+                ["game/img_xinxilan_dikuang.png",Laya.Loader.IMAGE],
+                ["game/rank_bg.png",Laya.Loader.IMAGE],
+                ["game/img_di1.png",Laya.Loader.IMAGE],
+                ["game/img_di2.png",Laya.Loader.IMAGE],
+                ["game/img_di3.png",Laya.Loader.IMAGE],
                 //字体
                 // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
                 //声音
@@ -97,26 +85,12 @@ function  beginLoad(){
             type:arr[i][1]
         }); 
     }
-    // var asset = [];
-    //     //loading界面
-    //     asset.push({
-    //         url : "res/atlas/game.atlas",
-    //         type:Laya.Loader.ATLAS
-    //     }); 
-    //     asset.push({
-    //         url : "res/atlas/bubbles.atlas",
-    //         type:Laya.Loader.ATLAS
-    //     }); 
-    //     asset.push({
-    //         url : "game/bgGame.png",
-    //         type:Laya.Loader.IMAGE
-    //     }); 
-
-    if(Laya.Browser.onFacebook){
-        Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), Handler.create(this, onLoading, null, false));
-    }else
-    {
-        Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);    
+    //loading 界面需要的图集
+    if (GameInFackBook) {
+        Laya.loader.load(asset, Laya.Handler.create(null, loadingEnd), Laya.Handler.create(null, onLoading,null,false));
+        // Laya.loader.load(asset, Laya.Handler.create(null, loadingCallback));
+    } else {
+        Laya.loader.load(asset, Laya.Handler.create(null, loadingCallback));
     }
     
 }
@@ -133,8 +107,18 @@ function onLoading (progress){
     // this.loadingLabel.text = (progress).toFixed(2) * 100 +"%";
 }
 
+function loadingEnd() {
+    console.log("-------------loadingEnd");
+
+    FBInstant.startGameAsync().then(function () {
+		console.log("-------------startGameAsync");
+        loadingCallback();
+    });
+
+}
 
 function loadingCallback(){
+
     console.log("----------loadingCallback ");
 
     Laya.Animation.createFrames(["bubbles/bomb_01.png","bubbles/bomb_02.png","bubbles/bomb_03.png","bubbles/bomb_04.png"],"bomb");
@@ -143,43 +127,10 @@ function loadingCallback(){
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
-    if(Laya.Browser.onFacebook){
-        FBInstant.startGameAsync().then(function() {
-            var contextId = FBInstant.context.getID();
-            console.log("-------------startGameAsync contextId="+contextId);
-
-            FBInstant.getLeaderboardAsync('globlaScore').then(
-                function(leaderboard){
-                    leaderboard.setScoreAsync(123);
-                    leaderboard.getEntriesAsync().then(
-                        function(entries){
-                            for (var i = 0; i < entries.length; i++) {
-                            console.log(
-                                entries[i].getRank() + '. ' +
-                                entries[i].getPlayer().getName() + ': ' +
-                                entries[i].getScore()+",+"+
-                                entries[i].getPlayer().getPhoto()
-                            );
-                        }
-                    }).catch(error => console.error(error));
-
-                });
-            SceneManager.getInstance().currentScene  = new GameScene();
-            
-            if(preloadedInterstitial!= null){
-                preloadedInterstitial.showAsync().then(function(){
-                    // Perform post-ad success operation
-                    console.log('Interstitial ad finished successfully');        
-                }).catch(function(e){
-                    console.error(e.message);
-                });
-            }
-
-        });
-    }else{
-        SceneManager.getInstance().currentScene  = new GameScene();
+    if (GameInFackBook) {
+        FBGame.getInstance().loadRewardAd();
     }
-
+    SceneManager.getInstance().currentScene = new GameScene();
 
 
     

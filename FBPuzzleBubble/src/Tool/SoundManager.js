@@ -16,7 +16,7 @@ var MusicManager = (function (_super) {
                 instantiated = new MusicManager();
                 instantiated.initSound();
                 //声音开关 1开 0关
-                _proto.managerSwitch = 1;
+                _proto.managerSwitch = 0;
                 // SoundManager.autoStopMusic = false; 
             }
         return instantiated;
