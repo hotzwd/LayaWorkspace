@@ -89,3 +89,39 @@ function BubbleScoreAnim(_point,_score,_fontName){
         arg.destroy();
     },[scoreLabel]);
 }
+
+//检测是否为中文，true表示是中文，false表示非中文
+function isChinese(str) {
+    if (/^[\u3220-\uFA29]+$/.test(str)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+//名字太长转换...
+function labelTransform(strOld, fontSize, width) {
+    var strLen = 0;
+    var strNew = "";
+    for (var i = 0; i < strOld.length; i++) {
+        var char = strOld.charAt(i);
+        var isChin = isChinese(char);
+        // Gamelog(char + ":" + isChin);
+        if (isChin) {
+            strLen = strLen + fontSize;
+        }
+        else {
+            strLen = strLen + fontSize / 2;
+        }
+
+        if (strLen > width - fontSize) {
+            strNew = strNew + "..";
+            break;
+        }
+        else {
+            strNew = strNew + char;
+        }
+    }
+
+    return strNew;
+}
+

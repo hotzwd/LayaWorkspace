@@ -30,7 +30,7 @@ var GameoverUILogic = (function(_super){
 
         this.img_light.visible = false;
         var highScore = LocalStorage.getItem("HighScore");
-        if(highScore){
+        if(highScore != null){
             if(scoreNum > parseInt(highScore)){
                 highScore = scoreNum;
                 this.img_light.visible = true;
@@ -42,7 +42,8 @@ var GameoverUILogic = (function(_super){
         LocalStorage.setItem("HighScore",highScore);
         this.label_heightScore.text = highScore;
 
-        this.sendScore(highScore);
+        FBGame.getInstance().uploadUserScore(highScore);
+
         if(rankSprite2 == null){
             rankSprite2 = new Laya.Sprite();
             this.addChild(rankSprite2);
@@ -51,8 +52,8 @@ var GameoverUILogic = (function(_super){
         this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
-        this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
-        this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
+        // this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
+        // this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
 
         //this.updateListData();
@@ -69,7 +70,7 @@ var GameoverUILogic = (function(_super){
     _proto.onGameAgain = function(){
         UIManager.getInstance().closeUI("GameoverUI");
         MusicManager.getInstance().playSound("res/music/1.wav");
-        SceneManager.getInstance().currentScene.restartGame();
+        SceneManager.getInstance().currentScene.restartGame(true,0);
         // UIManager.getInstance().showUI('RoomUI');
         // UIManager.getInstance().closeUI("GameUI",true);
         

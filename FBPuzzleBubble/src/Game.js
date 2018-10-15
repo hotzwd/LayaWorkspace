@@ -2,7 +2,7 @@
 //laya初始化
 Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
 //FPS
-Laya.Stat.show(0,0);
+// Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
 Laya.stage.scaleMode = "fixedauto";
 //场景布局类型 自动竖屏

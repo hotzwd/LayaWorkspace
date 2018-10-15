@@ -53,7 +53,13 @@ function  beginLoad(){
                 ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/bomb.atlas",Laya.Loader.ATLAS],
                 //图片
-                ["game/bgGame.png",Laya.Loader.IMAGE],
+                ["game/bgGame.jpg",Laya.Loader.IMAGE],
+                ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],
+                ["game/img_xinxilan_dikuang.png",Laya.Loader.IMAGE],
+                ["game/rank_bg.png",Laya.Loader.IMAGE],
+                ["game/img_di1.png",Laya.Loader.IMAGE],
+                ["game/img_di2.png",Laya.Loader.IMAGE],
+                ["game/img_di3.png",Laya.Loader.IMAGE],
                 //字体
                 // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
                 //声音

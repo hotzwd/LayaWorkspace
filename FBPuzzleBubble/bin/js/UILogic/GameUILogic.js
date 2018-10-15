@@ -54,6 +54,7 @@ var GameUILogic = (function(_super){
         this.btn_sound.on(Laya.Event.CLICK,this,this.onSoundClick);
         this.btn_start.on(Laya.Event.CLICK,this,this.onStartClick);
         this.changeBubbleBox.on(Laya.Event.CLICK,this,this.onChangeBubble);
+        this.btn_rank.on(Laya.Event.CLICK,this,this.onRankClick);
         //this.bossBox.on(Laya.Event.CLICK,this,this.onBossBoxClick);
         Laya.timer.frameOnce(8, this, this.delayShow); 
         
@@ -426,6 +427,7 @@ var GameUILogic = (function(_super){
         },1500,Laya.Ease.expoOut,new Laya.Handler(this,this.onTweenFinish));
         //开始游戏
         // SceneManager.getInstance().currentScene.startGame();
+        SceneManager.getInstance().currentScene.createPointLine(-90);
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
         if(Laya.Browser.onFacebook){
@@ -482,24 +484,28 @@ var GameUILogic = (function(_super){
 
     //撞到底部显示游戏结束 
     _proto.gameoverByBottom = function(){
-        MusicManager.getInstance().playSound("res/music/3.wav");
-        this.img_pop.skin ="game/img_shijiandao.png";
-        this.img_pop.alpha = 0;
-        this.img_pop.scaleX = 0;
-        this.img_pop.scaleY = 0;
-        this.img_pop.visible = true;
-        Laya.Tween.to(this.img_pop,{
-            alpha:1,
-            scaleX:1,
-            scaleY:1,
-        },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
-            // this.img_pop.visible = false;
-            this.imgTong.visible = false;
-            this.img_black.visible = true;
-            this.showImgGameover = true;
-            this.gameoverByTime();
-        }));
+        // MusicManager.getInstance().playSound("res/music/3.wav");
+        // this.img_pop.skin ="game/img_shijiandao.png";
+        // this.img_pop.alpha = 0;
+        // this.img_pop.scaleX = 0;
+        // this.img_pop.scaleY = 0;
+        // this.img_pop.visible = true;
+        // Laya.Tween.to(this.img_pop,{
+        //     alpha:1,
+        //     scaleX:1,
+        //     scaleY:1,
+        // },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
+        //     // this.img_pop.visible = false;
+        //     this.imgTong.visible = false;
+        //     this.img_black.visible = true;
+        //     this.showImgGameover = true;
+        //     this.gameoverByTime();
+        // }));
         this.anim_panda.stop();
+        this.img_black.visible = false;
+        this.imgTong.visible = false;
+        this.img_pop.visible = false;
+        this.hideAllImgGuang();
     }
 
     /**显示结算ui */
@@ -880,6 +886,10 @@ var GameUILogic = (function(_super){
             hurtSprite.destroy();
         });
         
+    }
+
+    _proto.onRankClick = function(){
+        UIManager.getInstance().showUI("GameRankUI");
     }
     return GameUILogic;
 })(GameUI);

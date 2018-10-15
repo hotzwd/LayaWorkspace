@@ -105,10 +105,11 @@ var FBGame = (function (_super) {
     /**
      * 上传分数
      */
-    _proto.uploadUserScore = function (score) {
+    _proto.uploadUserScore = function (_score) {
         if (!GameInFackBook) 
             return;
-            contextId = FBInstant.context.getID();
+        contextId = FBInstant.context.getID();
+        var score = parseInt(_score);
         //好友排行榜
          if (contextId != null) {
             FBInstant
@@ -232,7 +233,7 @@ var FBGame = (function (_super) {
     /**获取图片base64 地址 */
     _proto.getImgBase64 = function(){
         var shareSp = new Laya.Sprite();
-        shareSp.loadImage("res/openDataRes/share1.png");
+        shareSp.loadImage("game/shard.png");
 
         var shareWidth = 500;
         var shareHeight = 400;
