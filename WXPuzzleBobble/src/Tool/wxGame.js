@@ -1,6 +1,7 @@
 /**当前微信版本 */
 window.wxSDKVersion;
 window.wxLoadVideoAd = false;
+window.wxLoadEggVideoAd = false;
 /**
  * wxGame
  */
@@ -28,6 +29,7 @@ var wxGame = (function (_super) {
     _proto.btn_club = null;
     //视频广告
     _proto.videoAd = null;
+    _proto.eggVideoAd = null;
 
     _proto.Init = function () {
 
@@ -350,6 +352,23 @@ var wxGame = (function (_super) {
             console.log("createVideoAD 拉取成功 = true");
             wxLoadVideoAd = true;
         });
+
+        //金蛋视频
+        this.eggVideoAd =wx.createRewardedVideoAd({
+            adUnitId: 'adunit-0f564afc288f3ccd'
+        });
+
+        this.eggVideoAd.onError(function () {
+            console.log("createVideoAD 拉取失败 = false");
+            wxLoadEggVideoAd = false;
+        });
+
+        this.eggVideoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadEggVideoAd = true;
+        });
+
+
     }
 
     return {

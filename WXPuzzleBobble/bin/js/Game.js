@@ -76,6 +76,8 @@ function loadingCallback(){
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
+    Laya.Animation.createFrames(["game/jindan_1.png","game/jindan_2.png","game/jindan_3.png","game/jindan_4.png","game/jindan_5.png","game/jindan_6.png"],"jindan");
+
     SceneManager.getInstance().currentScene  = new GameScene();
     
     wxGame.getInstance().createVideoAD();

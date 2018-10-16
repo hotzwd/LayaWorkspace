@@ -49679,8 +49679,31 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"var":"img_bg","skin":"game/bgGame.jpg","centerY":0,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Sprite","props":{"y":-201,"x":0,"alpha":0.6},"child":[{"type":"Rect","props":{"y":62,"x":0,"width":1280,"lineWidth":1,"height":140,"fillColor":"#050505"}}]}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"width":1280,"var":"gameStartPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":-5,"x":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":252,"x":433,"width":444,"skin":"game/logo.png","name":"logo","height":413}},{"type":"Image","props":{"y":660,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":627,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":889,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":748,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":788,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":829,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Button","props":{"y":1019,"x":544,"width":192,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":35}},{"type":"Label","props":{"y":1239,"x":290,"text":"v2.0.2","fontSize":26,"font":"SimHei","color":"#ffffff"}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
+		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"var":"img_bg","skin":"game/bgGame.jpg","centerY":0,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Sprite","props":{"y":-201,"x":0,"alpha":0.6},"child":[{"type":"Rect","props":{"y":62,"x":0,"width":1280,"lineWidth":1,"height":140,"fillColor":"#050505"}}]}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"width":1280,"var":"gameStartPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":-5,"x":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":252,"x":433,"width":444,"skin":"game/logo.png","name":"logo","height":413}},{"type":"Image","props":{"y":660,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":627,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":889,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":748,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":788,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":829,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Button","props":{"y":1019,"x":544,"width":192,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":35}},{"type":"Label","props":{"y":1239,"x":290,"text":"v2.1","fontSize":26,"font":"SimHei","color":"#ffffff"}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
 		return GameUI;
+	})(View);
+var GameEggUI=(function(_super){
+		function GameEggUI(){
+			
+		    this.ani1=null;
+		    this.ani2=null;
+		    this.btn_go=null;
+		    this.btn_pass=null;
+
+			GameEggUI.__super.call(this);
+		}
+
+		CLASS$(GameEggUI,'ui.PuzzleBobble.GameEggUI',_super);
+		var __proto__=GameEggUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameEggUI.uiView);
+
+		}
+
+		GameEggUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":1280,"visible":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]}]},{"type":"Image","props":{"y":550,"x":351,"skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5},"compId":18},{"type":"Button","props":{"y":739,"x":235,"var":"btn_go","stateNum":2,"skin":"game/btn_fangjian_red_164x54.png","labelSize":35,"labelPadding":"-10,0,0,0","labelFont":"SimHei","labelColors":"#ffffff","label":"获取"},"compId":19},{"type":"Image","props":{"y":566,"x":347,"skin":"game/img_dajindan.png","anchorY":0.5,"anchorX":0.5},"compId":20},{"type":"Button","props":{"y":835,"x":356,"width":78,"var":"btn_pass","mouseEnabled":true,"labelSize":25,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"放弃","height":44,"anchorY":0.5,"anchorX":0.5},"compId":21}],"animations":[{"nodes":[{"target":18,"keyframes":{"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":0},{"value":180,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":30},{"value":360,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":60}]}}],"name":"ani1","id":1,"frameRate":24,"action":0},{"nodes":[{"target":20,"keyframes":{"scaleY":[{"value":0,"tweenMethod":"circOut","tween":true,"target":20,"key":"scaleY","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":20,"key":"scaleY","index":10}],"scaleX":[{"value":0,"tweenMethod":"circOut","tween":true,"target":20,"key":"scaleX","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":20,"key":"scaleX","index":10}]}},{"target":19,"keyframes":{"x":[{"value":235,"tweenMethod":"linearNone","tween":true,"target":19,"key":"x","index":0},{"value":245,"tweenMethod":"linearNone","tween":true,"target":19,"key":"x","index":10}]}},{"target":21,"keyframes":{"x":[{"value":356,"tweenMethod":"linearNone","tween":true,"target":21,"key":"x","index":0},{"value":360,"tweenMethod":"linearNone","tween":true,"target":21,"key":"x","index":10}]}}],"name":"ani2","id":2,"frameRate":24,"action":0}]};
+		return GameEggUI;
 	})(View);
 var GameoverUI=(function(_super){
 		function GameoverUI(){
@@ -50242,9 +50265,80 @@ var Prop_CarUI=(function(_super){
 
 	window.LayaRender = LayaRender;
 })();
+/**
+ * 获得金蛋界面逻辑 by lzq
+ */
+var GameEggUILogic = (function(_super){
+    function GameEggUILogic(){
+        GameEggUILogic.super(this);
+
+    }
+    Laya.class(GameEggUILogic,"UILogic.GameEggUILogic",_super);
+    var _proto = GameEggUILogic.prototype;
+
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+
+        this.ani1.play(0, true);
+        this.ani2.play(0, false);
+        
+        this.btn_go.on(Laya.Event.CLICK,this,this.onShowVidoAd);
+        this.btn_pass.on(Laya.Event.CLICK,this,this.onCancelClick);
+
+        SceneManager.getInstance().currentScene.pauseGame();
+        SceneManager.getInstance().currentScene.m_propBubleList = [];
+
+    }
+    _proto.onDestroy = function(){
+       
+    }
+
+     
+     /**点击跳过 */
+    _proto.onCancelClick = function(){
+        UIManager.getInstance().closeUI("GameEggUI",true);
+        SceneManager.getInstance().currentScene.resumeGame();
+    }
+ 
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+        if (!Browser.onMiniGame) {
+            UIManager.getInstance().closeUI("GameEggUI",true);
+            SceneManager.getInstance().currentScene.resumeGame();
+            SceneManager.getInstance().currentScene.createPropBubble();
+            return;
+        }
+
+        var t_videoAd = wxGame.getInstance().eggVideoAd;
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                UIManager.getInstance().closeUI("GameEggUI",true);
+                SceneManager.getInstance().currentScene.createPropBubble();
+                SceneManager.getInstance().currentScene.resumeGame();
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                UIManager.getInstance().closeUI("GameEggUI",true);
+                SceneManager.getInstance().currentScene.resumeGame();
+            }
+        })
+
+    }
+
+    return GameEggUILogic;
+})(GameEggUI);
 /**当前微信版本 */
 window.wxSDKVersion;
 window.wxLoadVideoAd = false;
+window.wxLoadEggVideoAd = false;
 /**
  * wxGame
  */
@@ -50272,6 +50366,7 @@ var wxGame = (function (_super) {
     _proto.btn_club = null;
     //视频广告
     _proto.videoAd = null;
+    _proto.eggVideoAd = null;
 
     _proto.Init = function () {
 
@@ -50594,6 +50689,23 @@ var wxGame = (function (_super) {
             console.log("createVideoAD 拉取成功 = true");
             wxLoadVideoAd = true;
         });
+
+        //金蛋视频
+        this.eggVideoAd =wx.createRewardedVideoAd({
+            adUnitId: 'adunit-0f564afc288f3ccd'
+        });
+
+        this.eggVideoAd.onError(function () {
+            console.log("createVideoAD 拉取失败 = false");
+            wxLoadEggVideoAd = false;
+        });
+
+        this.eggVideoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadEggVideoAd = true;
+        });
+
+
     }
 
     return {
@@ -51661,7 +51773,7 @@ var GameScene = (function(_super){
     var GameTime = 120;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
-    var CreatePropNum = 10;                                                     //发射多少个后创建道具球
+    var CreatePropNum = 20;                                                     //发射多少个后创建道具球
 
     //初始化当前类属性
        
@@ -52529,7 +52641,7 @@ var GameScene = (function(_super){
         }
        // this.createPlayerBubble(createBoardNumList);
         //----------屏蔽生成金蛋
-        // this.createEggBubble(createBoardNumList);
+        this.createEggBubble(createBoardNumList);
         //生成的最后一行作为顶部
         this.gameTopRow = mapBeginLine;
         //生成一行重置发射个数
@@ -52648,6 +52760,19 @@ var GameScene = (function(_super){
         this.gameOver();
         this.gameUI.gameoverByTime();
     }
+
+    /**
+     * 游戏暂停
+     */
+     _proto.pauseGame = function(){
+         Laya.timer.clear(this,this.animateTimeBased);
+     }
+     /**恢复游戏 */
+     _proto.resumeGame = function(){
+         //游戏倒计时
+        Laya.timer.loop(1000, this, this.animateTimeBased);
+     }
+
     /**游戏结束 */
     _proto.gameOver = function(){
         // Gamelog("----!!!!!!!!!游戏结束-------");
@@ -52998,6 +53123,61 @@ var GameScene = (function(_super){
         }while(sameIndex != samelist.length)
 
         return samelist;
+    }
+
+    /**生成金蛋球 */
+    _proto.createEggBubble = function(createBoardNumList){
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().eggVideoAd == null || !window.wxLoadEggVideoAd)
+                return;
+        }
+
+        if(this.m_propBubleList.length < 1){
+
+            // var numIndex = createBoardNumList.length -1;
+            var numIndex = parseInt(Math.random() * createBoardNumList.length);
+            
+            // var numIndex = 0;
+            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            do{
+                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            }while(oldBubble.bubbleType != BubbleTypes.Normal);
+
+            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+            for(var y=0; y<this.m_listBubble.length; y++){
+                if(this.m_listBubble[y] === oldBubble){
+                    this.m_listBubble.splice(y,1);
+                }
+            }
+            oldBubble.destroy();
+
+            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
+            var tempBubble = new Bubble();
+            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
+            tempBubble.skin = "game/jindan_1.png";
+            tempBubble.anchorX  = 0.5;
+            tempBubble.anchorY  = 0.5;
+            tempBubble.width = BUBBLE_RADIUS*2;
+            tempBubble.height = BUBBLE_RADIUS*2;
+            tempBubble.bubbleType = BubbleTypes.Egg;
+            //金蛋动画
+            var eggAnim = new Laya.Animation();
+            eggAnim.interval = 100;
+            tempBubble.addChild(eggAnim);
+            eggAnim.play(0,true,"jindan");
+
+            tempBubble.pos(pos.x,pos.y);
+            bubblePanel.addChild(tempBubble);
+            
+            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
+            this.m_listBubble.push(tempBubble);
+            this.m_propBubleList.push(tempBubble);
+        }
     }
 
     return GameScene;
@@ -53352,20 +53532,8 @@ var GameUILogic = (function(_super){
     
     /**声音开关 */
     _proto.onSoundClick = function(e){
-        // e.stopPropagation();
-        // SceneManager.getInstance().currentScene.gameOver();
         MusicManager.getInstance().playSound("res/music/1.wav");
 
-        // var soundSwitch = LocalStorage.getItem("soundSwitch");
-        // if(soundSwitch == 1){
-        //     this.btn_sound.skin = "game/btn_shengyin_guan.png";
-        //     LocalStorage.setItem("soundSwitch",0);
-        //     SoundManager.stopAll();
-        // }else{
-        //     LocalStorage.setItem("soundSwitch",1);
-        //     this.btn_sound.skin = "game/btn_shengyin_kai.png";
-        //     MusicManager.getInstance().playMusic("res/music/1.mp3");
-        // }
         var soundSwitch = MusicManager.getInstance().managerSwitch;
         if(soundSwitch == 1){
             this.btn_sound.skin = "game/btn_shengyin_guan.png";
@@ -53392,14 +53560,6 @@ var GameUILogic = (function(_super){
         this.showBannerAd();
         // this.createClub();
         wxGame.getInstance().showClubBtn(true);
-
-        // var image = wx.createImage();
-        // image.src = 'game/game.jpg';
-        // var img = image.imagePath;
-        // wx.previewImage({
-        //     current: image.src,
-        //     urls: [image.src],
-        // });
     }
 
     /**游戏倒计时 显示 */
@@ -53535,6 +53695,12 @@ var GameUILogic = (function(_super){
 
     _proto.onRankClick = function(){
         UIManager.getInstance().showUI("GameRankUI");
+    }
+
+    //获得金蛋动画效果
+    _proto.showEggEffect = function(){
+        MusicManager.getInstance().playSound("res/music/18.wav");
+        UIManager.getInstance().showUI("GameEggUI");
     }
 
     
@@ -53963,6 +54129,9 @@ var UIManager = (function(_super){
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
                 break;
+            case "GameEggUI":
+                uiLogic = new GameEggUILogic();
+                break;
 
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -54276,6 +54445,8 @@ function loadingCallback(){
     Laya.Animation.createFrames(["game/img_daiji01.png","game/img_daiji02.png","game/img_daiji03.png","game/img_daiji04.png","game/img_daiji06.png"],"pandaDaiji");
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
+
+    Laya.Animation.createFrames(["game/jindan_1.png","game/jindan_2.png","game/jindan_3.png","game/jindan_4.png","game/jindan_5.png","game/jindan_6.png"],"jindan");
 
     SceneManager.getInstance().currentScene  = new GameScene();
     

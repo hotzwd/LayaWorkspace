@@ -30,7 +30,7 @@ var GameScene = (function(_super){
     var GameTime = 120;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
-    var CreatePropNum = 10;                                                     //发射多少个后创建道具球
+    var CreatePropNum = 20;                                                     //发射多少个后创建道具球
 
     //初始化当前类属性
        
@@ -898,7 +898,7 @@ var GameScene = (function(_super){
         }
        // this.createPlayerBubble(createBoardNumList);
         //----------屏蔽生成金蛋
-        // this.createEggBubble(createBoardNumList);
+        this.createEggBubble(createBoardNumList);
         //生成的最后一行作为顶部
         this.gameTopRow = mapBeginLine;
         //生成一行重置发射个数
@@ -1017,6 +1017,19 @@ var GameScene = (function(_super){
         this.gameOver();
         this.gameUI.gameoverByTime();
     }
+
+    /**
+     * 游戏暂停
+     */
+     _proto.pauseGame = function(){
+         Laya.timer.clear(this,this.animateTimeBased);
+     }
+     /**恢复游戏 */
+     _proto.resumeGame = function(){
+         //游戏倒计时
+        Laya.timer.loop(1000, this, this.animateTimeBased);
+     }
+
     /**游戏结束 */
     _proto.gameOver = function(){
         // Gamelog("----!!!!!!!!!游戏结束-------");
@@ -1367,6 +1380,61 @@ var GameScene = (function(_super){
         }while(sameIndex != samelist.length)
 
         return samelist;
+    }
+
+    /**生成金蛋球 */
+    _proto.createEggBubble = function(createBoardNumList){
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().eggVideoAd == null || !window.wxLoadEggVideoAd)
+                return;
+        }
+
+        if(this.m_propBubleList.length < 1){
+
+            // var numIndex = createBoardNumList.length -1;
+            var numIndex = parseInt(Math.random() * createBoardNumList.length);
+            
+            // var numIndex = 0;
+            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            do{
+                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            }while(oldBubble.bubbleType != BubbleTypes.Normal);
+
+            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+            for(var y=0; y<this.m_listBubble.length; y++){
+                if(this.m_listBubble[y] === oldBubble){
+                    this.m_listBubble.splice(y,1);
+                }
+            }
+            oldBubble.destroy();
+
+            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
+            var tempBubble = new Bubble();
+            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
+            tempBubble.skin = "game/jindan_1.png";
+            tempBubble.anchorX  = 0.5;
+            tempBubble.anchorY  = 0.5;
+            tempBubble.width = BUBBLE_RADIUS*2;
+            tempBubble.height = BUBBLE_RADIUS*2;
+            tempBubble.bubbleType = BubbleTypes.Egg;
+            //金蛋动画
+            var eggAnim = new Laya.Animation();
+            eggAnim.interval = 100;
+            tempBubble.addChild(eggAnim);
+            eggAnim.play(0,true,"jindan");
+
+            tempBubble.pos(pos.x,pos.y);
+            bubblePanel.addChild(tempBubble);
+            
+            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
+            this.m_listBubble.push(tempBubble);
+            this.m_propBubleList.push(tempBubble);
+        }
     }
 
     return GameScene;

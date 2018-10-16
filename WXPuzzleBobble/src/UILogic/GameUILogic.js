@@ -220,20 +220,8 @@ var GameUILogic = (function(_super){
     
     /**声音开关 */
     _proto.onSoundClick = function(e){
-        // e.stopPropagation();
-        // SceneManager.getInstance().currentScene.gameOver();
         MusicManager.getInstance().playSound("res/music/1.wav");
 
-        // var soundSwitch = LocalStorage.getItem("soundSwitch");
-        // if(soundSwitch == 1){
-        //     this.btn_sound.skin = "game/btn_shengyin_guan.png";
-        //     LocalStorage.setItem("soundSwitch",0);
-        //     SoundManager.stopAll();
-        // }else{
-        //     LocalStorage.setItem("soundSwitch",1);
-        //     this.btn_sound.skin = "game/btn_shengyin_kai.png";
-        //     MusicManager.getInstance().playMusic("res/music/1.mp3");
-        // }
         var soundSwitch = MusicManager.getInstance().managerSwitch;
         if(soundSwitch == 1){
             this.btn_sound.skin = "game/btn_shengyin_guan.png";
@@ -260,14 +248,6 @@ var GameUILogic = (function(_super){
         this.showBannerAd();
         // this.createClub();
         wxGame.getInstance().showClubBtn(true);
-
-        // var image = wx.createImage();
-        // image.src = 'game/game.jpg';
-        // var img = image.imagePath;
-        // wx.previewImage({
-        //     current: image.src,
-        //     urls: [image.src],
-        // });
     }
 
     /**游戏倒计时 显示 */
@@ -403,6 +383,12 @@ var GameUILogic = (function(_super){
 
     _proto.onRankClick = function(){
         UIManager.getInstance().showUI("GameRankUI");
+    }
+
+    //获得金蛋动画效果
+    _proto.showEggEffect = function(){
+        MusicManager.getInstance().playSound("res/music/18.wav");
+        UIManager.getInstance().showUI("GameEggUI");
     }
 
     
