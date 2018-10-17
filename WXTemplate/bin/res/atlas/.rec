@@ -1,0 +1,28 @@
+D .
+D bitmapFont
+D game
+R ACF788EC beijing.jpg
+P 336359A8 btn_guanbi.png
+P 6DD5C08F btn_kaishianniu.png
+P 1DC9D16D btn_xuanyao.png
+P C6E0028A btn_xuanyaodefen.png
+P A04FD96C btn_zaiwanyici.png
+P 98B2AE84 fuhuo.png
+P 6B52DC79 high.png
+R 4CF5F507 huodechenghao-di.png
+R 85B3320E img_line.png
+P EA9029BE item_hp.png
+P 2FAB8261 item_speed.png
+P 7A521376 jiantou.png
+P 08232FD8 logo.png
+P 0D5CD876 No.1.png
+R ECF10DCC paohangbang-di.png
+P 84201301 penjian-texiao.png
+P 448CF29D point.png
+P 9E4DD730 progress$bar.png
+P 3FD78E12 progress.png
+P D12662B6 progress_xuetiao$bar.png
+P A8BD7C79 progress_xuetiao.png
+P 793CC8F1 tower.png
+P A3DF852F xunzhang-01.png
+P 9F1BA619 yuandi.png

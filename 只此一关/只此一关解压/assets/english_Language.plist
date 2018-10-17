@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Common</key>
+	<dict>
+		<key>store</key>
+		<string>store</string>
+		<key>no_msg</key>
+		<string>No hint!</string>
+		<key>coin_title</key>
+		<string>Lack of gold coins.</string>
+		<key>tip_coin_msg</key>
+		<string>Lack of gold coins.come on!Adding more!</string>
+		<key>skip_coin_msg</key>
+		<string>Lack of gold coins.come on!Adding more!</string>
+		<key>skip_default</key>
+		<string>Had not passsed?You have been despised！</string>
+		<key>skip</key>
+		<string>Gold coin makes the mare to go!</string>
+	</dict>
+	<key>Level_MobileSigns</key>
+	<dict>
+		<key>scene</key>
+		<string>Stand steadyfast ！</string>
+		<key>prompt</key>
+		<string>If you can&apos;t move，let the goal do it!</string>
+	</dict>
+	<key>Level_FingerPower</key>
+	<dict>
+		<key>scene</key>
+		<string>There is strength in numbers.</string>
+		<key>prompt</key>
+		<string>Fingers&apos; strength.</string>
+	</dict>
+	<key>Level_WeakenedWeight</key>
+	<dict>
+		<key>scene</key>
+		<string>Light as a feather.</string>
+		<key>prompt</key>
+		<string>Stone: there shouldn&apos;t be numbers written on me！</string>
+	</dict>
+	<key>Level_BreakStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Try to annoy the bad-tempered stone</string>
+		<key>prompt</key>
+		<string>Let the stone disappear.</string>
+	</dict>
+	<key>Level_ReverseCover</key>
+	<dict>
+		<key>scene</key>
+		<string>Place upside down</string>
+		<key>prompt</key>
+		<string>Turn things around.</string>
+	</dict>
+	<key>Level_FlyingCar</key>
+	<dict>
+		<key>scene</key>
+		<string>Soar up.</string>
+		<key>prompt</key>
+		<string>Fly over the stone!</string>
+	</dict>
+	<key>Level_DifferentLayer</key>
+	<dict>
+		<key>scene</key>
+		<string>click the car⇒pass the NO.1 stop⇒win</string>
+		<key>prompt</key>
+		<string>Go straight.</string>
+	</dict>
+	<key>Level_RockStone</key>
+	<dict>
+		<key>scene</key>
+		<string>The earth trembled and the mountains swayed.</string>
+		<key>prompt</key>
+		<string>Let the stone go its way.</string>
+	</dict>
+	<key>Level_TiltPhone</key>
+	<dict>
+		<key>scene</key>
+		<string>Universal gravitation.</string>
+		<key>prompt</key>
+		<string>Let the stone free fall.</string>
+	</dict>
+	<key>Level_DragCar</key>
+	<dict>
+		<key>scene</key>
+		<string>Hand of god.</string>
+		<key>prompt</key>
+		<string>The car can be controlled to fly.</string>
+	</dict>
+	<key>Level_BlowUpStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Click it if you don&apos;t like it.</string>
+		<key>prompt</key>
+		<string>Bomb it if you don&apos;t like it.</string>
+	</dict>
+	<key>Level_HoldBack</key>
+	<dict>
+		<key>scene</key>
+		<string>The road is blocked.</string>
+		<key>prompt</key>
+		<string>No way here ,then go there.</string>
+	</dict>
+	<key>Level_CoverStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Out of sight,out of mind!</string>
+		<key>prompt</key>
+		<string>Something can be wiped!</string>
+	</dict>
+	<key>Level_ExplosiveCharge</key>
+	<dict>
+		<key>scene</key>
+		<string>Weapon of terrorist attacks.</string>
+		<key>prompt</key>
+		<string>There is a bomb under the road!</string>
+	</dict>
+	<key>Level_SlopeHill</key>
+	<dict>
+		<key>scene</key>
+		<string>Many things can be created!</string>
+		<key>prompt</key>
+		<string>Road is made by people.</string>
+	</dict>
+	<key>Level_SeparateGround</key>
+	<dict>
+		<key>scene</key>
+		<string>Breaking the ground.</string>
+		<key>prompt</key>
+		<string>The earth can swallow the stone!</string>
+	</dict>
+	<key>Level_LightningStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Nature has magical power.</string>
+		<key>prompt</key>
+		<string>Struck by lightning.</string>
+	</dict>
+	<key>Level_LargerCar</key>
+	<dict>
+		<key>scene</key>
+		<string>Air-filled car</string>
+		<key>prompt</key>
+		<string>Let yourself become powerful.</string>
+	</dict>
+	<key>Level_PushStoneAway</key>
+	<dict>
+		<key>scene</key>
+		<string>To be a man.</string>
+		<key>prompt</key>
+		<string>Face the obstacles, accept the challenge.</string>
+	</dict>
+	<key>Level_Tunnel</key>
+	<dict>
+		<key>scene</key>
+		<string>The road is not suitable for you!</string>
+		<key>prompt</key>
+		<string>Dig a tunnel. </string>
+	</dict>
+	<key>Level_DropHollows</key>
+	<dict>
+		<key>scene</key>
+		<string>PH  &lt;  5.6</string>
+		<key>prompt</key>
+		<string>Little strokes fell great oaks.</string>
+	</dict>
+	<key>Level_BreakGround</key>
+	<dict>
+		<key>scene</key>
+		<string>Solid as bean curd!</string>
+		<key>prompt</key>
+		<string>Drop the stone,make a new road!</string>
+	</dict>
+	<key>Level_RescueMonkey</key>
+	<dict>
+		<key>scene</key>
+		<string>Where is the master?</string>
+		<key>prompt</key>
+		<string>Master was seized by wood sprite.</string>
+	</dict>
+	<key>Level_HitTenTimes</key>
+	<dict>
+		<key>scene</key>
+		<string>Dare you?</string>
+		<key>prompt</key>
+		<string>Fight with the stone!</string>
+	</dict>
+	<key>Level_HitStonesOut</key>
+	<dict>
+		<key>scene</key>
+		<string>Double attack!</string>
+		<key>prompt</key>
+		<string>Weaken the stone by double attack!</string>
+	</dict>
+	<key>Level_FeekGiddy</key>
+	<dict>
+		<key>scene</key>
+		<string>Ride on a cloud.</string>
+		<key>prompt</key>
+		<string>Callthe cloud car.</string>
+	</dict>
+	<key>Level_PauseStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Seize time by the throat</string>
+		<key>prompt</key>
+		<string>Find the time button.</string>
+	</dict>
+	<key>Level_StoneFly</key>
+	<dict>
+		<key>scene</key>
+		<string>Let the stone fly</string>
+		<key>prompt</key>
+		<string>Grasp the time gap.</string>
+	</dict>
+	<key>Level_FoolishOldMan</key>
+	<dict>
+		<key>scene</key>
+		<string>Man with faith will move mountains</string>
+		<key>prompt</key>
+		<string>The man of faith can drive cars.</string>
+	</dict>
+	<key>Level_TreeAndStone</key>
+	<dict>
+		<key>scene</key>
+		<string>Porter of nature</string>
+		<key>prompt</key>
+		<string>Allow to destroy greens.</string>
+	</dict>
+	<key>Guide</key>
+	<dict>
+		<key>guideWord1</key>
+		<string>Click the Car → Driving to Terminal → Win</string>
+	</dict>
+</dict>
+</plist>

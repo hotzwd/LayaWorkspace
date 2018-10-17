@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
         <key>frames</key>
@@ -8,29 +6,156 @@
             <dict>
                 <key>frame</key>
                 <string>{{0,0},{639,890}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
+                <key>sourceSize</key>
+                <string>{639,890}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{639,890}}</string>
-                <key>sourceSize</key>
-                <string>{639,890}</string>
             </dict>
-            <key>lvl1_map2.png</key>
+            <key>credits_back.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,689},{174,249}}</string>
-                <key>offset</key>
-                <string>{-1,1}</string>
+                <string>{{0,891},{638,812}}</string>
+                <key>sourceSize</key>
+                <string>{638,812}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,4},{174,249}}</string>
-                <key>sourceSize</key>
-                <string>{176,259}</string>
+                <string>{{0,0},{638,812}}</string>
             </dict>
-            
+            <key>intro_up.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{640,0},{18,472}}</string>
+                <key>sourceSize</key>
+                <string>{18,472}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{18,472}}</string>
+            </dict>
+            <key>intro_up_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{659,0},{331,243}}</string>
+                <key>sourceSize</key>
+                <string>{331,243}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{331,243}}</string>
+            </dict>
+            <key>intro_up_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{683,244},{340,242}}</string>
+                <key>sourceSize</key>
+                <string>{340,242}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{340,242}}</string>
+            </dict>
+            <key>intro_back_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,1704},{610,212}}</string>
+                <key>sourceSize</key>
+                <string>{610,212}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{610,212}}</string>
+            </dict>
+            <key>intro_back_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{717,487},{306,201}}</string>
+                <key>sourceSize</key>
+                <string>{306,201}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{306,201}}</string>
+            </dict>
+            <key>intro_back_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{726,689},{297,194}}</string>
+                <key>sourceSize</key>
+                <string>{297,194}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{297,194}}</string>
+            </dict>
+            <key>intro_s_1_6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{846,884},{177,192}}</string>
+                <key>sourceSize</key>
+                <string>{177,192}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{177,192}}</string>
+            </dict>
+            <key>intro_s_1_5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{651,884},{194,184}}</string>
+                <key>sourceSize</key>
+                <string>{194,184}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{194,184}}</string>
+            </dict>
+            <key>intro_s_1_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{639,1077},{240,169}}</string>
+                <key>sourceSize</key>
+                <string>{240,169}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{240,169}}</string>
+            </dict>
+            <key>intro_s_1_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{611,1704},{399,145}}</string>
+                <key>sourceSize</key>
+                <string>{399,145}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{399,145}}</string>
+            </dict>
+            <key>intro_s_1_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{639,1247},{351,132}}</string>
+                <key>sourceSize</key>
+                <string>{351,132}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{351,132}}</string>
+            </dict>
+            <key>intro_s_1_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{640,487},{70,80}}</string>
+                <key>sourceSize</key>
+                <string>{70,80}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{70,80}}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -40,10 +165,6 @@
             <string>images_4.png</string>
             <key>size</key>
             <string>{1024,2048}</string>
-            <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:75fa3b17bb1f485ae38e2638ec6da711:1/1$</string>
-            <key>textureFileName</key>
-            <string>images_4.png</string>
         </dict>
     </dict>
 </plist>
