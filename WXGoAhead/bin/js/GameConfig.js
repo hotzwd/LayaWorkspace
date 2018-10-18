@@ -27,8 +27,8 @@ var ResourceVersion = laya.net.ResourceVersion;
 var GameConfig = {
     
     //游戏宽 高
-    GameWidth : 720,
-    GameHeight : 1280,
+    GameWidth : 1136,
+    GameHeight : 640,
 
     //游戏速度
     speed : 8

@@ -231,17 +231,13 @@ var wxGame = (function (_super) {
         var str = "";
         switch (rand) {
             case 1:
-                str = "【好基友@你】人在塔在！快来守护住你们的水晶枢纽吧！";
+                str = "!!!警告!!!内有神作,注意避让!!!";
                 break;
             case 2:
                 str = "以前爱不释手的泡泡龙，我都玩上万分了！";
                 break;
             case 3:
                 str = "这游戏，你能打到上万分算我输！";
-                break;
-
-            default:
-                str = "最经典的泡泡龙，你敢与我一决高下吗？";
                 break;
         }
 

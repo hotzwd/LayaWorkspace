@@ -17,24 +17,13 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
 
-        MusicManager.getInstance().playMusic("res/music/1.mp3");
+        // MusicManager.getInstance().playMusic("res/music/1.mp3");
 
-        // this.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowm);
-        UIManager.getInstance().showUI("GameStartUI");
-        // UIManager.getInstance().showUI("GameOverUI");
+        
+        // UIManager.getInstance().showUI("GameStartUI");
+        
+        this.aniCloud.play(0,true);
 
-        this.t_score.visible = false;
-
-        this.scoreLable = new Laya.Label("0");
-        // var lab = new Laya.Label();
-        this.scoreLable.align = "center";
-        this.scoreLable.font = "shuzi";
-        this.scoreLable.width = 400;
-        this.scoreLable.height = 260;
-        this.scoreLable.pivot(200,130);
-        this.scoreLable.pos(Laya.stage.width/2,Laya.stage.height/2 - 400);
-        this.scoreLable.zOrder = 40;
-        Laya.stage.addChild(this.scoreLable);
     }
     
     _proto.onDestroy = function () {
