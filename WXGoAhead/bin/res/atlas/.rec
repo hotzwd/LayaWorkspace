@@ -1,20 +1,4 @@
 D .
-D bitmapFont
-D game
-P 336359A8 btn_guanbi.png
-P 6DD5C08F btn_kaishianniu.png
-P 1DC9D16D btn_xuanyao.png
-P C6E0028A btn_xuanyaodefen.png
-P A04FD96C btn_zaiwanyici.png
-P 98B2AE84 fuhuo.png
-P 6B52DC79 high.png
-R 4CF5F507 huodechenghao-di.png
-R 85B3320E img_line.png
-P 0D5CD876 No.1.png
-R ECF10DCC paohangbang-di.png
-P 84201301 penjian-texiao.png
-P 448CF29D point.png
-P 9F1BA619 yuandi.png
 D game_resoure
 P 0FAA9E39 AD_animation_1.png
 P F90A5088 AD_animation_2.png

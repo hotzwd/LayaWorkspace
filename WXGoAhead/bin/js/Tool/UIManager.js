@@ -138,18 +138,6 @@ var UIManager = (function(_super){
             case "GameUI":
                 uiLogic = new GameUILogic();
                 break;
-            case "GameOverUI":
-                uiLogic = new GameOverUILogic();
-                break;
-            case "GameRankUI":
-                uiLogic = new GameRankUILogic();
-            break;
-            case "GameStartUI":
-                uiLogic = new GameStartUILogic();
-            break;
-            case "GameEndShareUI":
-                uiLogic = new GameEndShareUILogic();
-            break;
             
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");

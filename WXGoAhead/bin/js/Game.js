@@ -6,7 +6,6 @@ Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
 
 wxGame.getInstance().Init();
 
-
 //FPS
 // Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
@@ -30,12 +29,11 @@ Laya.stage.bgColor = "#000000";//设置画布的背景颜色。
 //加载版本信息文件
 // ResourceVersion.enable("version.json", Handler.create(this, beginLoad));
 
-beginLoad();
-
-function beginLoad() {
+beginLoadGoHead();
+function beginLoadGoHead() {
      var arr = [
                 //图集
-                ["res/atlas/game.atlas",Laya.Loader.ATLAS],
+                // ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/game_resoure.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/monster.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
@@ -64,10 +62,10 @@ function beginLoad() {
 
     //loading 界面需要的图集
     // Laya.loader.load(asset,Laya.Handler.create(this,showLoaded),null);
-    Laya.loader.load(asset, Laya.Handler.create(this, loadingCallback), null);
+    Laya.loader.load(asset, Laya.Handler.create(this, loadingCallbackGO), null);
 }
 
-function loadingCallback() {
+function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
 

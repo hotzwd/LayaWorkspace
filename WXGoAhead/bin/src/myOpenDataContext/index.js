@@ -7,7 +7,7 @@ require('./libs/laya.ani.js');
 require('./libs/laya.ui.js');
 // require('./code.js');
 
-require("./RankItem.js");
+// require("./RankItem.js");
 // require('./Tool/GameDebug.js');
 
 var baseNode = null;

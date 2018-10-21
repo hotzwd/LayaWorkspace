@@ -57,12 +57,11 @@ var wxGame = (function (_super) {
             })
             //监听小游戏回到前台的事件
             wx.onShow(function () {
-                Gamelog("--------------wx.onShow");
                 MusicManager.getInstance().playMusic("res/music/1.mp3")
 
                 //小游戏更新
                 if (typeof wx.getUpdateManager === 'function') {
-                    console.log('支持 wx.getUpdateManager')
+                    // console.log('支持 wx.getUpdateManager')
                     var updateManager = wx.getUpdateManager()
 
                     updateManager.onCheckForUpdate(function (res) {
@@ -81,21 +80,21 @@ var wxGame = (function (_super) {
                 }
             })
 
-            Laya.timer.once(400, this, function () {
-                var sharedSprite = new Laya.Sprite();
-                sharedSprite.zOrder = 400;
-                sharedSprite.name = "OpenDataContext";
-                Laya.stage.addChild(sharedSprite);
-                sharedSprite.visible = false;
+            // Laya.timer.once(400, this, function () {
+            //     var sharedSprite = new Laya.Sprite();
+            //     sharedSprite.zOrder = 400;
+            //     sharedSprite.name = "OpenDataContext";
+            //     Laya.stage.addChild(sharedSprite);
+            //     sharedSprite.visible = false;
 
-                Browser.window.sharedCanvas.width = Laya.stage.width;
-                Browser.window.sharedCanvas.height = Laya.stage.height;
+            //     Browser.window.sharedCanvas.width = Laya.stage.width;
+            //     Browser.window.sharedCanvas.height = Laya.stage.height;
 
-                sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
-                // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
-                Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
-                sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
-            });
+            //     sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
+            //     // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
+            //     Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
+            //     sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
+            // });
         }
     }
 
@@ -233,12 +232,6 @@ var wxGame = (function (_super) {
             case 1:
                 str = "!!!警告!!!内有神作,注意避让!!!";
                 break;
-            case 2:
-                str = "以前爱不释手的泡泡龙，我都玩上万分了！";
-                break;
-            case 3:
-                str = "这游戏，你能打到上万分算我输！";
-                break;
         }
 
         var rand2 = Math.random() * 2 + 1;
@@ -281,241 +274,6 @@ var wxGame = (function (_super) {
         // }
     }
 
-    //显示头像
-    _proto.showFriendAvatar = function (x, y, width, height, isClearOthers) {
-        this.postMessage({
-            act: "showFriendAvatar",
-            x: x,
-            y: y,
-            width: width,
-            height: height,
-            isClearOthers: isClearOthers
-        }, true);
-    }
-
-    //结束界面
-    _proto.showEndFriends = function () {
-        this.postMessage({
-            act: "showEndFriends"
-        }, true);
-    }
-
-    //分享分数
-    _proto.shareScore = function(scoreNum,callback){
-        if (Browser.onMiniGame) {
-
-            if (this.shareSp != null) {
-                this.shareSp.destroy();
-            }
-            this.shareSp = new Laya.Sprite();
-            this.shareSp.loadImage("res/openDataRes/shareScore.png");
-            var scoreTxt = new Laya.Label(scoreNum + "");
-            scoreTxt.font = "shuzi";
-            // scoreTxt.fontSize = 50;
-            scoreTxt.scale(0.8,0.8);
-            scoreTxt.anchorX = 0.5;
-            scoreTxt.anchorY = 0.5;
-            scoreTxt.align = "center";
-            scoreTxt.pos(165, 92);
-            this.shareSp.addChild(scoreTxt);
-
-            var t_titleData = getTitleDataBySocre(scoreNum);
-
-            var scoreTitle = new Laya.Label(t_titleData.name);
-            scoreTitle.fontSize = 35;
-            scoreTitle.anchorX = 0.5;
-            scoreTitle.anchorY = 0.5;
-            scoreTitle.align = "center";
-            scoreTitle.color = t_titleData.color;
-            scoreTitle.pos(155, 203);
-            this.shareSp.addChild(scoreTitle);
-
-
-            
-
-            Laya.timer.frameOnce(20, this, function () {
-                var shareWidth = 500;
-                var shareHeight = 400;
-                // var title = "我得分达到了" + scoreNum + "，你能超越我吗？";
-                var title = "我的得分超过你啦，快来与我一决高下！";
-                var htmlC = this.shareSp.drawToCanvas(shareWidth, shareHeight, 0, 0);
-                var canvas = htmlC.getCanvas();
-                Laya.timer.frameOnce(20, this, function () {
-                    canvas.toTempFilePath({
-                        x: 0,
-                        y: 0,
-                        width: shareWidth,
-                        height: shareHeight,
-                        destWidth: shareWidth,
-                        destHeight: shareHeight,
-                        success: function (res) {
-                            wx.shareAppMessage({
-                                imageUrl: res.tempFilePath,
-                                title: title
-                            })
-                            callback();
-                        }
-                    })
-
-                });
-            });
-
-        }
-    }
-
-    //显示广告
-    _proto.showAD = function (AdIndex) {
-         if (!Browser.onMiniGame) {
-             return;
-         }
-        var adIndex = 0;
-        Gamelog("showAD");
-        // this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
-        // Laya.timer.loop(30000, this, function () {
-        //     Gamelog("adIndex = " + adIndex);
-        //     adIndex++;
-        //     if (adIndex % 2 == 0) {
-        //         // this.bannerAd_1 = this.createAD(this.bannerAd_1, "adunit-ee34510033de8989", this.bannerAd_2);
-        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
-        //     }
-        //     else {
-        //         this.bannerAd_2 = this.createAD(this.bannerAd_2, "adunit-67eeb844f59509d0", this.bannerAd_1);
-        //     }
-        // });
-        var isPass = false;
-        wx.getSystemInfo({
-            success: function (res) {
-                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
-                if(isPassNum >= 0){
-                    isPass = true;
-                }
-            }
-        }); 
-        if(!isPass){
-            return;
-        }
-
-        if (AdIndex == 0) {
-            this.bannerAd_2.hide();
-        }
-        else {
-            var AdID = null;
-            switch (AdIndex) {
-                //开始
-                case 1:
-                    AdID = "adunit-a3b210c4532d1370";
-                    break;
-                //游戏
-                case 2:
-                    AdID = "adunit-a8c6ef7647f7c2a6";
-                    break;
-
-                default:
-                    break;
-            }
-            
-            if(isPass)
-                this.bannerAd_2 = this.createAD(this.bannerAd_2, AdID, this.bannerAd_1);
-        }
-    }
-
-    //创建广告
-    _proto.createAD = function (Ad, AdID, hideAd) {
-        if (Browser.onMiniGame) {
-            
-            if (Ad != null) {
-                Gamelog("destroy");
-                Ad.destroy();
-            }
-
-            Gamelog("create ad " + AdID);
-            if(wx.createBannerAd == null){
-                return;
-            }
-            Ad = wx.createBannerAd({
-                adUnitId: AdID,
-                style: {
-                    left: 0,
-                    top: 0,
-                    width: 300
-                }
-            })
-            Ad.show();
-
-            var sysInfo = wx.getSystemInfoSync();
-
-            // this.bannerAd.style.width = sysInfo.screenWidth;
-
-            // var tempAd = Ad;
-            Ad.onResize(function (res) {
-                // console.log(res.width, res.height);
-                // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
-                Ad.style.top = sysInfo.screenHeight - 86;
-                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
-            })
-
-            Ad.onLoad(function () {
-                // console.log('banner 广告加载成功')
-                if (hideAd != null) {
-                    Gamelog("hideAd destroy");
-                    // hideAd.destroy();
-                    // hideAd.hide();
-                }
-            })
-
-        }
-
-        return Ad;
-    }
-
-     //显示广告
-    _proto.createVideoAD = function () {
-         if (!Browser.onMiniGame) {
-             return;
-         }
-        Gamelog("createVideoAD-----");
-
-        var isPass = false;
-        wx.getSystemInfo({
-            success: function (res) {
-                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
-                if(isPassNum >= 0){
-                    isPass = true;
-                }
-            }
-        }); 
-        if(!isPass){
-            return;
-        }
-        
-        this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-02b50b30ad61154f'
-        });
-
-        var t_videoAd = this.videoAd;
-        this.videoAd.load().then(function () {
-            Gamelog("createVideoAD 拉取成功");
-            // this.videoAd.show();
-        }).catch( function(err){
-            Gamelog("createVideoAD 拉取失败");
-            t_videoAd.load();
-            console.log(err.errMsg)
-        });
-
-        this.videoAd.onError(function () {
-            Gamelog("createVideoAD 拉取失败 = false");
-            wxLoadVideoAd = false;
-        });
-
-        this.videoAd.onLoad(function () {
-            Gamelog("createVideoAD 拉取成功 = true");
-            wxLoadVideoAd = true;
-        });
-
-
-    }
 
     /**微信官方对比版本号 */
     function compareVersion(v1, v2) {
@@ -538,35 +296,6 @@ var wxGame = (function (_super) {
             }
         }
         return 0
-    }
-
-    /**显示微信游戏圈 */
-    _proto.showClubBtn = function(_show){
-        if (Browser.onMiniGame) {
-
-            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
-                return;
-            }
-            if(this.btn_club == null){
-                // this.btn_club.destroy();
-                this.btn_club = wx.createGameClubButton({
-                    icon: 'white',
-                    style: {
-                        left: 10,
-                        top: 50,
-                        width: 40,
-                        height: 40
-                    }
-                })
-            }
-
-            if(_show){
-                this.btn_club.show();
-            }else{
-                this.btn_club.hide();
-            }
-            
-        }
     }
 
     return {
