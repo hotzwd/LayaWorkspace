@@ -107,7 +107,8 @@ function avk_start()
             game.MAIN.txt_log.txt.position.y=0;
         }
     }
-
+	
+	//全局属性
     var GLOBAL=new gl_vars();
 
 
@@ -1581,7 +1582,8 @@ function avk_start()
             }
             return null;
         }
-
+		
+		//初始化关卡
         function init_level()
         {
             tick=0;
