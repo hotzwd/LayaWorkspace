@@ -38,7 +38,7 @@ function beginLoadGoHead() {
                 // ["res/atlas/monster.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
                 // //图片
-                // ["game/beijing.jpg",Laya.Loader.IMAGE],
+                ["game_resoure/background.jpg",Laya.Loader.IMAGE],
                 // ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
                 // ["game/img_line.png",Laya.Loader.IMAGE],
                 // ["game/paohangbang-di.png",Laya.Loader.IMAGE],
