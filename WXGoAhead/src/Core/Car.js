@@ -56,12 +56,32 @@ var Car = (function (_super) {
 
         this.resetCar();
     }
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+
+        switch (t_index) {
+            case 1:
+                // this.m_canRotate = true;
+                break;
+        
+            default:
+                break;
+        }
+    }
 
     /**重置汽车状态 */
     _proto.resetCar = function(){
         this.x = this.m_startPoint.x;
         this.y = this.m_startPoint.y;
         this.m_isArrive = false;
+        this.m_isStartCar = false;
+        this.m_anim.stop();
+    }
+
+    //停止运动
+    _proto.stopCar = function(){
         this.m_isStartCar = false;
         this.m_anim.stop();
     }
@@ -78,6 +98,7 @@ var Car = (function (_super) {
         //到站
         if(this.x >= this.m_stationPoint.x - this.m_carSpeed && this.x <= this.m_stationPoint.x + this.m_carSpeed){
             this.m_isArrive = true;
+            SceneManager.getInstance().currentScene.gameover();
         }
 
         //回到起点

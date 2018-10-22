@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":4,
-    "selecteID":5,
+    "selectedBox":49,
+    "selecteID":31,
     "props":{"width":1136,"sceneColor":"#000000","height":640,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -15,47 +15,20 @@
         {
             "x":15,
             "type":"Box",
-            "props":{"width":1368,"visible":false,"height":640,"centerY":0,"centerX":0},
-            "nodeParent":1,
-            "label":"Box",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":4,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Rect",
-                    "props":{"y":0,"x":0,"width":1386,"lineWidth":1,"height":640,"fillColor":"#f4ff00"},
-                    "nodeParent":4,
-                    "label":"Rect",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":5,
-                    "child":[
-                        ]
-                }],
-            "$HIDDEN":true
-        },
-        {
-            "x":15,
-            "type":"Box",
-            "props":{"width":1136,"var":"moveBox","mouseEnabled":true,"height":640,"centerY":0,"centerX":0},
+            "props":{"width":1386,"var":"moveBox","mouseEnabled":true,"height":640,"centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Box(moveBox)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":9,
+            "compId":49,
             "child":[
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"skin":"game_resoure/background.jpg","centerY":0,"centerX":0},
-                    "nodeParent":9,
+                    "props":{"y":0,"x":0,"width":1386,"skin":"game_resoure/background.jpg","height":640,"centerY":0,"centerX":0},
+                    "nodeParent":49,
                     "label":"Image",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -68,8 +41,8 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":67,"x":226,"width":199,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"},
-                    "nodeParent":9,
+                    "props":{"y":67,"x":351,"width":199,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"},
+                    "nodeParent":49,
                     "label":"Text(t_score)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -82,8 +55,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":200,"x":255,"var":"img_cloud1","skin":"game_resoure/cloud.png","anchorY":0.5,"anchorX":0.5},
-                    "nodeParent":9,
+                    "props":{"y":200,"x":380,"var":"img_cloud1","skin":"game_resoure/cloud.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":49,
                     "label":"Image(img_cloud1)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -95,8 +68,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":175,"x":484,"var":"img_cloud2","skin":"game_resoure/cloudRain.png","anchorY":0.5,"anchorX":0.5},
-                    "nodeParent":9,
+                    "props":{"y":175,"x":609,"var":"img_cloud2","skin":"game_resoure/cloudRain.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":49,
                     "label":"Image(img_cloud2)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -108,8 +81,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":209,"x":731,"var":"img_cloud3","skin":"game_resoure/cloudThunder.png","anchorY":0.5,"anchorX":0.5},
-                    "nodeParent":9,
+                    "props":{"y":209,"x":856,"var":"img_cloud3","skin":"game_resoure/cloudThunder.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":49,
                     "label":"Image(img_cloud3)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -121,8 +94,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":271,"x":276,"var":"img_tree1","skin":"game_resoure/tree1.png"},
-                    "nodeParent":9,
+                    "props":{"y":271,"x":401,"var":"img_tree1","skin":"game_resoure/tree1.png"},
+                    "nodeParent":49,
                     "label":"Image(img_tree1)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -134,8 +107,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":237,"x":415,"var":"img_tree2","skin":"game_resoure/tree0.png"},
-                    "nodeParent":9,
+                    "props":{"y":237,"x":540,"var":"img_tree2","skin":"game_resoure/tree0.png"},
+                    "nodeParent":49,
                     "label":"Image(img_tree2)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -147,8 +120,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":337,"x":759,"var":"img_tree3","skin":"game_resoure/tree2.png"},
-                    "nodeParent":9,
+                    "props":{"y":337,"x":884,"var":"img_tree3","skin":"game_resoure/tree2.png"},
+                    "nodeParent":49,
                     "label":"Image(img_tree3)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -160,8 +133,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":435,"x":247,"visible":false,"var":"img_car","skin":"game_resoure/car0.png","anchorY":0.5,"anchorX":0.5},
-                    "nodeParent":9,
+                    "props":{"y":435,"x":372,"visible":false,"var":"img_car","skin":"game_resoure/car0.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":49,
                     "label":"Image(img_car)",
                     "isOpen":false,
                     "isDirectory":false,
@@ -175,8 +148,8 @@
                 {
                     "x":30,
                     "type":"Animation",
-                    "props":{"y":40,"x":-70,"width":173,"visible":false,"var":"anim_cat","source":"game_resoure/AD_animation_1.png,game_resoure/AD_animation_2.png","interval":200,"height":189,"autoPlay":true},
-                    "nodeParent":9,
+                    "props":{"y":40,"x":55,"width":173,"visible":false,"var":"anim_cat","source":"game_resoure/AD_animation_1.png,game_resoure/AD_animation_2.png","interval":200,"height":189,"autoPlay":true},
+                    "nodeParent":49,
                     "label":"Animation(anim_cat)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -189,8 +162,8 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":478,"x":155,"width":890,"var":"box_floor","height":160},
-                    "nodeParent":9,
+                    "props":{"y":478,"x":280,"width":890,"var":"box_floor","height":160},
+                    "nodeParent":49,
                     "label":"Box(box_floor)",
                     "isOpen":false,
                     "isDirectory":true,
@@ -226,8 +199,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":368,"x":937,"var":"img_station","skin":"game_resoure/signpost.png"},
-                    "nodeParent":9,
+                    "props":{"y":368,"x":1062,"var":"img_station","skin":"game_resoure/signpost.png"},
+                    "nodeParent":49,
                     "label":"Image(img_station)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -239,9 +212,9 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":392,"x":953,"width":34,"text":"1","height":30,"fontSize":30,"font":"SimHei","color":"#000000","bold":true,"align":"center"},
-                    "nodeParent":9,
-                    "label":"Text",
+                    "props":{"y":392,"x":1078,"width":34,"var":"t_id","text":"1","height":30,"fontSize":30,"font":"SimHei","color":"#000000","bold":true,"align":"center"},
+                    "nodeParent":49,
+                    "label":"Text(t_id)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -252,16 +225,17 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":223,"x":823,"var":"img_tip","skin":"game_resoure/tip-bg.png"},
-                    "nodeParent":9,
+                    "props":{"y":223,"x":948,"var":"img_tip","skin":"game_resoure/tip-bg.png"},
+                    "nodeParent":49,
                     "label":"Image(img_tip)",
-                    "isOpen":null,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":39,
                     "child":[
                         {
+                            "x":45,
                             "type":"Text",
                             "props":{"y":11,"x":7,"wordWrap":true,"width":166,"var":"t_name","valign":"middle","text":"点击汽车->车开到1站牌->过关","leading":8,"height":77,"fontSize":20,"font":"SimHei","color":"#000000","bold":true,"align":"center"},
                             "nodeParent":39,
@@ -277,8 +251,8 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":422,"x":664,"var":"img_stone","skin":"game_resoure/stone.png","anchorY":0.5,"anchorX":0.5},
-                    "nodeParent":9,
+                    "props":{"y":422,"x":789,"visible":false,"var":"img_stone","skin":"game_resoure/stone.png","anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":49,
                     "label":"Image(img_stone)",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -286,8 +260,7 @@
                     "compId":41,
                     "child":[
                         ]
-                }],
-            "$HIDDEN":false
+                }]
         }],
     "animations":[
         {
@@ -297,7 +270,7 @@
                     "keyframes":{
                         "x":[
                             {
-                                "value":484,
+                                "value":609,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":33,
@@ -305,7 +278,7 @@
                                 "index":0
                             },
                             {
-                                "value":488,
+                                "value":619,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":33,
@@ -313,7 +286,7 @@
                                 "index":20
                             },
                             {
-                                "value":484,
+                                "value":609,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":33,
@@ -321,7 +294,7 @@
                                 "index":35
                             },
                             {
-                                "value":480,
+                                "value":599,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":33,
@@ -329,7 +302,7 @@
                                 "index":55
                             },
                             {
-                                "value":484,
+                                "value":609,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":33,
@@ -343,7 +316,7 @@
                     "keyframes":{
                         "x":[
                             {
-                                "value":255,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":32,
@@ -351,7 +324,7 @@
                                 "index":0
                             },
                             {
-                                "value":250,
+                                "value":370,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":32,
@@ -359,7 +332,7 @@
                                 "index":30
                             },
                             {
-                                "value":255,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":32,

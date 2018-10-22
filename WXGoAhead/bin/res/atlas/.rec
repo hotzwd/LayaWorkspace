@@ -4,7 +4,6 @@ P 0FAA9E39 AD_animation_1.png
 P F90A5088 AD_animation_2.png
 P 2E1E3B70 back-1.png
 R 9D104B33 background.jpg
-R 193C7A97 background.png
 P D6604984 background_1.png
 P 898DBE83 car0.png
 P DC4DFACC car1.png
@@ -14,7 +13,7 @@ P E9DC08EB cloudRain.png
 P 64F468B2 cloudThunder.png
 P 7233C95D groundLeft.png
 P 2DD3C23A groundRight.png
-R 6595AA40 guidance_c.png
+R 81569A68 guidance_c.png
 P 170385D7 next-1.png
 P BDBAC9B5 over-bg.png
 P A716D0F7 restart-1.png
