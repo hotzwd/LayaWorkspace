@@ -68,7 +68,8 @@ function beginLoadGoHead() {
 function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
-
+    Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
+    
     SceneManager.getInstance().currentScene = new GameScene();
     // wxGame.getInstance().createVideoAD();
 

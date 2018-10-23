@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":49,
-    "selecteID":31,
+    "selecteID":51,
     "props":{"width":1136,"sceneColor":"#000000","height":640,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -162,16 +162,17 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":478,"x":280,"width":890,"var":"box_floor","height":160},
+                    "props":{"y":558,"x":725,"width":890,"visible":false,"var":"box_ground","height":160,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":49,
-                    "label":"Box(box_floor)",
-                    "isOpen":false,
+                    "label":"Box(box_ground)",
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":36,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "props":{"y":3,"var":"img_floorLeft","skin":"game_resoure/groundLeft.png"},
                             "nodeParent":36,
@@ -184,6 +185,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Image",
                             "props":{"x":492,"var":"img_flootRight","skin":"game_resoure/groundRight.png"},
                             "nodeParent":36,
@@ -251,13 +253,26 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":422,"x":789,"visible":false,"var":"img_stone","skin":"game_resoure/stone.png","anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":422,"x":771,"visible":false,"var":"img_stone","skin":"game_resoure/stone.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":49,
                     "label":"Image(img_stone)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":41,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":0,"x":253,"var":"btn_share","stateNum":"1","skin":"game_resoure/share-1.png"},
+                    "nodeParent":49,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":51,
                     "child":[
                         ]
                 }]

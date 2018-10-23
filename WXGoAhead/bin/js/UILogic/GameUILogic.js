@@ -18,11 +18,11 @@ var GameUILogic = (function (_super) {
         this.height = Laya.stage.height;
 
         // MusicManager.getInstance().playMusic("res/music/1.mp3");
-
-        
         // UIManager.getInstance().showUI("GameStartUI");
         
         this.aniCloud.play(0,true);
+        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        
 
     }
     
@@ -30,9 +30,22 @@ var GameUILogic = (function (_super) {
         // MusicManager.getInstance().stopMusic();
     }
 
-    // _proto.addScore = function(p_score){
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+        this.t_id.text = t_leveData.id;
+        this.t_name.text = t_leveData.name;
 
-    // }
+        switch (t_index) {
+            case 0:
+                UIManager.getInstance().showUI("GuidGameUI");
+                break;
+        
+            default:
+                break;
+        }
+    }
 
     //显示分数
     _proto.setScore = function(p_score,p_anim){
@@ -84,6 +97,9 @@ var GameUILogic = (function (_super) {
    
   }
 
+  _proto._shareClickEvent = function(){
+      wxGame.getInstance().shareGame();
+  }
 
     return GameUILogic;
 })(GameUI);

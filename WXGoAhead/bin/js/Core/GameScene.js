@@ -15,6 +15,9 @@ var GameScene = (function (_super) {
     _proto.gameUI = null;                                                    //ui对象
     _proto.curCar = null;                                                    //当前汽车
     _proto.gameBox = null;                                                   //游戏层
+    _proto.curLevelIndex = 0;                                                //当前关卡id
+    _proto.curRock = null;                                                   //当前石头
+    _proto.curGround = null;                                                 //当前地面
   
 
     _proto.Init = function () {
@@ -28,10 +31,12 @@ var GameScene = (function (_super) {
         this.gameBox.height = Laya.stage.height;
         this.gameBox.zOrder = 10;
         this.gameBox.mouseEnabled = true;
+        this.gameBox.mouseThrough = true;
         
         Laya.stage.addChild(this.gameBox);
 
 
+        this.curLevelIndex = 0;
         
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
@@ -40,7 +45,7 @@ var GameScene = (function (_super) {
         Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.startGame();
+        // this.startGame();
        
     }
 
@@ -50,6 +55,16 @@ var GameScene = (function (_super) {
 
     //自动适配完后初始化
      _proto.delayInitShow = function () {
+
+        //创建石头
+        this.curRock = new Rock();
+        var t_rockPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.img_stone.x,this.gameUI.img_stone.y),true);
+        // t_rockPoint.x += 40;
+        this.curRock.pos(t_rockPoint.x,t_rockPoint.y);
+        this.curRock.initRock(t_rockPoint);
+        this.gameBox.addChild(this.curRock);
+        
+        //创建车子
         this.curCar = new Car();
         var t_carPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.img_car.x,this.gameUI.img_car.y),true);
         t_carPoint.x += 40;
@@ -59,13 +74,46 @@ var GameScene = (function (_super) {
         this.curCar.initCar(t_carPoint,t_stationPoint);
 
         this.gameBox.addChild(this.curCar);
+        
+        //创建地面
+        this.curGround = new Ground();
+        var t_groundPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.box_ground.x,this.gameUI.box_ground.y),true);
+        // t_rockPoint.x += 40;
+        this.curGround.pos(t_groundPoint.x,t_groundPoint.y);
+        this.curGround.initGround(t_groundPoint);
+        this.gameBox.addChild(this.curGround);
+
+        // this.initLevelData();
+        this.startGame();
      }
 
+     //初始化关卡数据
+     _proto.initLevelData = function(){
+        this.gameUI.initLevel();
+        this.curCar.initLevel();
+        this.curRock.initLevel();
+        this.curGround.initLevel();
+
+        
+     }
     /**开始游戏 */
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
-
+         Laya.timer.frameOnce(1, this, function(){
+            this.initLevelData();
+         });
+         
         //  wxGame.getInstance().showAD(2);
+    }
+
+    /**下一个游戏 */
+    _proto.nextlevelGame = function(){
+        this.curLevelIndex++;
+        this.curCar.resetCar();
+        this.curRock.resetRock();
+        this.curGround.resetGround();
+
+        this.startGame();
     }
 
     /**重置游戏 */
@@ -75,9 +123,17 @@ var GameScene = (function (_super) {
         
     }
     /**游戏结束 */
-    _proto.gameover = function(){
-        wxGame.getInstance().showAD(0);
-        UIManager.getInstance().showUI("GameOverUI");
+    _proto.gameover = function(_win){
+        // wxGame.getInstance().showAD(0);
+        
+        Laya.timer.clear(this,this.onUpdate);
+        this.curCar.stopCar();
+        this.curRock.stopRock();
+        
+        var overUI = UIManager.getInstance().showUI("GameOverUI");
+        overUI.initUI(_win);
+
+
         
     }
     /**
@@ -87,8 +143,13 @@ var GameScene = (function (_super) {
         if(this.curCar != null){
             this.curCar.onUpdate();
         }
+        if(this.curRock != null){
+            this.curRock.onUpdate();
+        }
 
     }
+
+
 
     
     /**按下监听事件 */

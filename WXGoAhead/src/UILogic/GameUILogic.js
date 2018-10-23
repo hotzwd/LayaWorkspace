@@ -21,6 +21,7 @@ var GameUILogic = (function (_super) {
         // UIManager.getInstance().showUI("GameStartUI");
         
         this.aniCloud.play(0,true);
+        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
         
 
     }
@@ -96,6 +97,9 @@ var GameUILogic = (function (_super) {
    
   }
 
+  _proto._shareClickEvent = function(){
+      wxGame.getInstance().shareGame();
+  }
 
     return GameUILogic;
 })(GameUI);

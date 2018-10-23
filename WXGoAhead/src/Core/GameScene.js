@@ -17,6 +17,7 @@ var GameScene = (function (_super) {
     _proto.gameBox = null;                                                   //游戏层
     _proto.curLevelIndex = 0;                                                //当前关卡id
     _proto.curRock = null;                                                   //当前石头
+    _proto.curGround = null;                                                 //当前地面
   
 
     _proto.Init = function () {
@@ -30,6 +31,7 @@ var GameScene = (function (_super) {
         this.gameBox.height = Laya.stage.height;
         this.gameBox.zOrder = 10;
         this.gameBox.mouseEnabled = true;
+        this.gameBox.mouseThrough = true;
         
         Laya.stage.addChild(this.gameBox);
 
@@ -73,6 +75,14 @@ var GameScene = (function (_super) {
 
         this.gameBox.addChild(this.curCar);
         
+        //创建地面
+        this.curGround = new Ground();
+        var t_groundPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.box_ground.x,this.gameUI.box_ground.y),true);
+        // t_rockPoint.x += 40;
+        this.curGround.pos(t_groundPoint.x,t_groundPoint.y);
+        this.curGround.initGround(t_groundPoint);
+        this.gameBox.addChild(this.curGround);
+
         // this.initLevelData();
         this.startGame();
      }
@@ -82,6 +92,7 @@ var GameScene = (function (_super) {
         this.gameUI.initLevel();
         this.curCar.initLevel();
         this.curRock.initLevel();
+        this.curGround.initLevel();
 
         
      }
@@ -100,6 +111,7 @@ var GameScene = (function (_super) {
         this.curLevelIndex++;
         this.curCar.resetCar();
         this.curRock.resetRock();
+        this.curGround.resetGround();
 
         this.startGame();
     }
@@ -111,13 +123,17 @@ var GameScene = (function (_super) {
         
     }
     /**游戏结束 */
-    _proto.gameover = function(){
+    _proto.gameover = function(_win){
         // wxGame.getInstance().showAD(0);
         
         Laya.timer.clear(this,this.onUpdate);
         this.curCar.stopCar();
         this.curRock.stopRock();
-        UIManager.getInstance().showUI("GameOverUI");
+        
+        var overUI = UIManager.getInstance().showUI("GameOverUI");
+        overUI.initUI(_win);
+
+
         
     }
     /**

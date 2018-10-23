@@ -49659,10 +49659,15 @@ var GameUI=(function(_super){
 		    this.img_tree3=null;
 		    this.img_car=null;
 		    this.anim_cat=null;
-		    this.box_floor=null;
+		    this.box_ground=null;
 		    this.img_floorLeft=null;
 		    this.img_flootRight=null;
 		    this.img_station=null;
+		    this.t_id=null;
+		    this.img_tip=null;
+		    this.t_name=null;
+		    this.img_stone=null;
+		    this.btn_share=null;
 
 			GameUI.__super.call(this);
 		}
@@ -49677,9 +49682,293 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":1136,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1368,"visible":false,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1386,"lineWidth":1,"height":640,"fillColor":"#f4ff00"}}]},{"type":"Box","props":{"width":1136,"var":"moveBox","mouseEnabled":true,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"skin":"game_resoure/background.png","centerY":0,"centerX":0}},{"type":"Text","props":{"y":67,"x":226,"width":199,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":200,"x":255,"var":"img_cloud1","skin":"game_resoure/cloud.png","anchorY":0.5,"anchorX":0.5},"compId":32},{"type":"Image","props":{"y":175,"x":484,"var":"img_cloud2","skin":"game_resoure/cloudRain.png","anchorY":0.5,"anchorX":0.5},"compId":33},{"type":"Image","props":{"y":209,"x":731,"var":"img_cloud3","skin":"game_resoure/cloudThunder.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":271,"x":276,"var":"img_tree1","skin":"game_resoure/tree1.png"}},{"type":"Image","props":{"y":237,"x":415,"var":"img_tree2","skin":"game_resoure/tree0.png"}},{"type":"Image","props":{"y":337,"x":759,"var":"img_tree3","skin":"game_resoure/tree2.png"}},{"type":"Image","props":{"y":435,"x":247,"visible":false,"var":"img_car","skin":"game_resoure/car0.png","anchorY":0.5,"anchorX":0.5}},{"type":"Animation","props":{"y":40,"x":-70,"width":173,"visible":false,"var":"anim_cat","source":"game_resoure/AD_animation_1.png,game_resoure/AD_animation_2.png","interval":200,"height":189,"autoPlay":true}},{"type":"Box","props":{"y":478,"x":155,"width":890,"var":"box_floor","height":160},"child":[{"type":"Image","props":{"y":3,"var":"img_floorLeft","skin":"game_resoure/groundLeft.png"}},{"type":"Image","props":{"x":492,"var":"img_flootRight","skin":"game_resoure/groundRight.png"}}]},{"type":"Image","props":{"y":368,"x":937,"var":"img_station","skin":"game_resoure/signpost.png"}},{"type":"Text","props":{"y":392,"x":957,"text":"底","fontSize":30,"font":"SimHei","color":"#000000"}}]}],"animations":[{"nodes":[{"target":33,"keyframes":{"x":[{"value":484,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":0},{"value":488,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":20},{"value":484,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":35},{"value":480,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":55},{"value":484,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":80}]}},{"target":32,"keyframes":{"x":[{"value":255,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":0},{"value":250,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":30},{"value":255,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":60}]}}],"name":"aniCloud","id":1,"frameRate":24,"action":0}]};
+		GameUI.uiView={"type":"View","props":{"width":1136,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1386,"var":"moveBox","mouseEnabled":true,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"width":1386,"skin":"game_resoure/background.jpg","height":640,"centerY":0,"centerX":0}},{"type":"Text","props":{"y":67,"x":351,"width":199,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"}},{"type":"Image","props":{"y":200,"x":380,"var":"img_cloud1","skin":"game_resoure/cloud.png","anchorY":0.5,"anchorX":0.5},"compId":32},{"type":"Image","props":{"y":175,"x":609,"var":"img_cloud2","skin":"game_resoure/cloudRain.png","anchorY":0.5,"anchorX":0.5},"compId":33},{"type":"Image","props":{"y":209,"x":856,"var":"img_cloud3","skin":"game_resoure/cloudThunder.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":271,"x":401,"var":"img_tree1","skin":"game_resoure/tree1.png"}},{"type":"Image","props":{"y":237,"x":540,"var":"img_tree2","skin":"game_resoure/tree0.png"}},{"type":"Image","props":{"y":337,"x":884,"var":"img_tree3","skin":"game_resoure/tree2.png"}},{"type":"Image","props":{"y":435,"x":372,"visible":false,"var":"img_car","skin":"game_resoure/car0.png","anchorY":0.5,"anchorX":0.5}},{"type":"Animation","props":{"y":40,"x":55,"width":173,"visible":false,"var":"anim_cat","source":"game_resoure/AD_animation_1.png,game_resoure/AD_animation_2.png","interval":200,"height":189,"autoPlay":true}},{"type":"Box","props":{"y":558,"x":725,"width":890,"visible":false,"var":"box_ground","height":160,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"y":3,"var":"img_floorLeft","skin":"game_resoure/groundLeft.png"}},{"type":"Image","props":{"x":492,"var":"img_flootRight","skin":"game_resoure/groundRight.png"}}]},{"type":"Image","props":{"y":368,"x":1062,"var":"img_station","skin":"game_resoure/signpost.png"}},{"type":"Text","props":{"y":392,"x":1078,"width":34,"var":"t_id","text":"1","height":30,"fontSize":30,"font":"SimHei","color":"#000000","bold":true,"align":"center"}},{"type":"Image","props":{"y":223,"x":948,"var":"img_tip","skin":"game_resoure/tip-bg.png"},"child":[{"type":"Text","props":{"y":11,"x":7,"wordWrap":true,"width":166,"var":"t_name","valign":"middle","text":"点击汽车->车开到1站牌->过关","leading":8,"height":77,"fontSize":20,"font":"SimHei","color":"#000000","bold":true,"align":"center"}}]},{"type":"Image","props":{"y":422,"x":771,"visible":false,"var":"img_stone","skin":"game_resoure/stone.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":0,"x":253,"var":"btn_share","stateNum":1,"skin":"game_resoure/share-1.png"}}]}],"animations":[{"nodes":[{"target":33,"keyframes":{"x":[{"value":609,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":0},{"value":619,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":20},{"value":609,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":35},{"value":599,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":55},{"value":609,"tweenMethod":"linearNone","tween":true,"target":33,"key":"x","index":80}]}},{"target":32,"keyframes":{"x":[{"value":380,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":0},{"value":370,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":30},{"value":380,"tweenMethod":"linearNone","tween":true,"target":32,"key":"x","index":60}]}}],"name":"aniCloud","id":1,"frameRate":24,"action":0}]};
 		return GameUI;
 	})(View);
+var GameOverUI=(function(_super){
+		function GameOverUI(){
+			
+		    this.img_result=null;
+		    this.btn_restart=null;
+		    this.btn_next=null;
+		    this.btn_help=null;
+
+			GameOverUI.__super.call(this);
+		}
+
+		CLASS$(GameOverUI,'ui.GameOverUI',_super);
+		var __proto__=GameOverUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameOverUI.uiView);
+
+		}
+
+		GameOverUI.uiView={"type":"View","props":{"width":1136,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":20,"x":20,"width":1386,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1386,"height":640,"centerY":0,"centerX":0,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1386,"lineWidth":1,"height":640,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":140,"x":468,"var":"img_result","skin":"game_resoure/win-bg.png"}},{"type":"Button","props":{"y":210,"x":642,"var":"btn_restart","stateNum":1,"skin":"game_resoure/restart-1.png"}},{"type":"Button","props":{"y":207,"x":761,"var":"btn_next","stateNum":1,"skin":"game_resoure/next-1.png"}},{"type":"Button","props":{"y":211,"x":527,"var":"btn_help","stateNum":1,"skin":"game_resoure/help.png"}}]}]};
+		return GameOverUI;
+	})(View);
+var GuidGameUI=(function(_super){
+		function GuidGameUI(){
+			
+		    this.ani1=null;
+		    this.btn_closeGuid=null;
+
+			GuidGameUI.__super.call(this);
+		}
+
+		CLASS$(GuidGameUI,'ui.GuidGameUI',_super);
+		var __proto__=GuidGameUI.prototype;
+		__proto__.createChildren=function(){
+		    			View.regComponent("Text",laya.display.Text);
+
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GuidGameUI.uiView);
+
+		}
+
+		GuidGameUI.uiView={"type":"View","props":{"width":1136,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":1386,"height":640,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1386,"height":640,"centerY":0,"centerX":0,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1386,"lineWidth":1,"height":640,"fillColor":"#000000"}}]},{"type":"Box","props":{"y":43,"x":316},"child":[{"type":"Image","props":{"skin":"game_resoure/guidance_c.png"}},{"type":"Button","props":{"y":462,"x":40,"var":"btn_closeGuid","stateNum":1,"skin":"game_resoure/back-1.png"}},{"type":"Text","props":{"y":499,"x":401,"width":500,"text":"点击汽车->车开到1站牌->过关","pivotY":20,"pivotX":250,"height":40,"fontSize":35,"font":"SimHei","color":"#000000","bold":true},"compId":8}]}]}],"animations":[{"nodes":[{"target":8,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":30}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}]};
+		return GuidGameUI;
+	})(View);
+/**
+ * 地面类
+ */
+var Ground = (function (_super) {
+
+
+    Laya.class(Ground, "Core.Ground", _super);
+    _proto = Ground.prototype;
+
+    function Ground() {
+        Ground.super(this);
+        this.Init();
+    }
+    //地面宽高
+    var GroundWidth = 890;
+    var GroundHeight = 160;
+
+    _proto.m_left = null;                                                 //左侧地面
+    _proto.m_right = null;                                                //右侧地面
+    _proto.m_anim = null;                                                 //地面动画
+    _proto.m_crackNum = 1;                                                //撞击次数
+    _proto.m_startPoint = null;                                           //起点坐标
+
+
+    _proto.Init = function () {
+        this.width = GroundWidth;
+        this.height = GroundHeight;
+        this.pivotX = GroundWidth / 2;
+        this.pivotY = GroundHeight / 2;  
+
+        this.m_anim = new Laya.Animation();
+        this.m_anim.interval = 100;
+        // this.m_anim.play(0, true, "car_run");
+        // this.m_anim.pivotX = 181;
+        // this.m_anim.pivotY = 55;
+        // this.m_anim.pos(this.pivotX,this.pivotY);
+        // this.addChild(this.m_anim);
+        // this.m_anim.stop();
+
+        this.m_left = new Laya.Image("game_resoure/groundLeft.png");
+        this.m_left.pos(0,3);
+        this.addChild(this.m_left);
+
+        this.m_right = new Laya.Image("game_resoure/groundRight.png");
+        this.m_right.pos(492,0);
+        this.addChild(this.m_right);
+
+        
+    }
+    
+
+    _proto.onDestroy = function () {
+
+    }
+
+    /**初始化石头 */
+    _proto.initGround = function(p_startPoint){
+        this.m_startPoint = p_startPoint;
+
+        this.resetGround();
+    }
+
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+
+        switch (t_index) {
+            case 2:
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    /**重置石头状态 */
+    _proto.resetGround = function(){
+        this.m_left.skin = "game_resoure/groundLeft.png";
+        this.m_right.skin ="game_resoure/groundRight.png";
+
+        this.m_crackNum = 1;
+    }
+
+    
+    /**
+     * update刷新
+     */
+    _proto.onUpdate = function () {
+        // if(this.curCar == null){
+        //     this.curCar = SceneManager.getInstance().currentScene.curCar;
+        // }
+
+        
+    }
+
+    //石头撞击地面
+    _proto.rockCrackGround = function(){
+        if(this.m_crackNum >= 1 && this.m_crackNum <= 4){
+            this.m_left.skin = "game_resoure/sunkenLeft"+this.m_crackNum+".png";
+            this.m_right.skin ="game_resoure/sunkenRight"+this.m_crackNum+".png";
+        }
+        if(this.m_crackNum == 4){
+            return;
+        }
+        this.m_crackNum++;
+    }
+
+    
+
+    return Ground;
+})(Laya.Sprite);
+/**
+ * 游戏结束界面
+ */
+
+var GameOverUILogic = (function (_super) {
+
+    function GameOverUILogic() {
+        GameOverUILogic.super(this);
+    }
+    Laya.class(GameOverUILogic, "GameOverUILogic", _super);
+    _proto = GameOverUILogic.prototype;
+
+    _proto.onInit = function () {
+        this.zOrder = 100;
+
+        this.btn_next.on(Laya.Event.CLICK,this,this._nextLevelEvent);
+        this.btn_restart.on(Laya.Event.CLICK,this,this._researtLevelEvent);
+        this.btn_help.on(Laya.Event.CLICK,this,this._helpClickEvent);
+
+        this.initLevel();
+    }
+    
+    _proto.onDestroy = function () {
+        // MusicManager.getInstance().stopMusic();
+    }
+
+    _proto.initUI = function(_win){
+
+        if(_win){
+            this.img_result.skin = "game_resoure/win-bg.png";
+        }else{
+            this.img_result.skin = "game_resoure/over-bg.png";
+        }
+    }
+
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+
+        switch (t_index) {
+            case 1:
+                // this.m_canRotate = true;
+                break;
+        
+            default:
+                break;
+        }
+
+
+    }
+
+    _proto._nextLevelEvent = function(){
+        UIManager.getInstance().closeUI("GameOverUI");
+        //如果最后一关重头开始
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        if(t_index == GameLevelData.length -1){
+            SceneManager.getInstance().currentScene.curLevelIndex = -1;
+        }
+        SceneManager.getInstance().currentScene.nextlevelGame();
+    }
+
+    _proto._researtLevelEvent = function(){
+        UIManager.getInstance().closeUI("GameOverUI");
+        SceneManager.getInstance().currentScene.curLevelIndex --;
+        SceneManager.getInstance().currentScene.nextlevelGame();
+
+    }
+
+    _proto._helpClickEvent = function(){
+        wxGame.getInstance().shareGame();
+    }
+
+    
+
+    return GameOverUILogic;
+})(GameOverUI);
+/**
+ * 引导游戏界面
+ */
+
+var GuidGameUILogic = (function (_super) {
+
+    function GuidGameUILogic() {
+        GuidGameUILogic.super(this);
+    }
+    Laya.class(GuidGameUILogic, "GuidGameUILogic", _super);
+    _proto = GuidGameUILogic.prototype;
+
+    _proto.onInit = function () {
+        this.zOrder = 100;
+
+        this.btn_closeGuid.on(Laya.Event.CLICK,this,this._closeGuidBoxEvent);
+
+        this.ani1.play(0,true);
+    }
+    
+    _proto.onDestroy = function () {
+        // MusicManager.getInstance().stopMusic();
+    }
+
+    _proto._closeGuidBoxEvent = function(){
+        UIManager.getInstance().closeUI("GuidGameUI");
+    }
+    
+
+    return GuidGameUILogic;
+})(GuidGameUI);
+/**游戏关卡数据 */
+var GameLevelData = [
+    {
+        id:1,
+        name:"点击汽车->车开到1站牌->过关",
+        guid:"点击汽车",
+    },
+    {
+        id:2,
+        name:"狭路相逢勇者胜",
+		guid:"点击汽车",
+    },
+    {
+        id:3,
+        name:"豆腐渣",
+		guid:"点击汽车",
+    }
+    
+];
 /**
  * 石头类
  */
@@ -49694,27 +49983,223 @@ var Rock = (function (_super) {
         this.Init();
     }
     //汽车宽高
-    var RockWidth = 283;
-    var RockHeight = 111;
+    var RockWidth = 128;
+    var RockHeight = 132;
+
+    var rockFallPosX = [422,440,460,490,530];
 
     _proto.m_anim = null;                                                 //汽车动画
-
+    _proto.m_isStartCar = false;                                          //是否发动汽车
+    _proto.m_Speed = 2;                                                   //速度
+    _proto.m_startPoint = null;                                           //起点坐标
+    _proto.m_canRotate = false;                                           //是否旋转
+    _proto.m_isRotate = false;                                            //是否正在旋转
+    _proto.m_isCrack = false;                                             //是否撞击
+    _proto.curCar = null;                                                 //当前汽车
+    _proto.m_canClick = false;                                            //是否可以点击
+    _proto.m_isDrop = false;                                              //是否正在下降
+    _proto.m_canMove = false;                                             //是否按下
+    _proto.curGround = null;                                              //当前地面
 
     _proto.Init = function () {
+        this.width = RockWidth;
+        this.height = RockHeight;
+        this.pivotX = RockWidth / 2;
+        this.pivotY = RockHeight / 2;  
+
+        this.m_anim = new Laya.Animation();
+        this.m_anim.interval = 100;
+        // this.m_anim.play(0, true, "car_run");
+        // this.m_anim.pivotX = 181;
+        // this.m_anim.pivotY = 55;
+        // this.m_anim.pos(this.pivotX,this.pivotY);
+        // this.addChild(this.m_anim);
+        // this.m_anim.stop();
+
+        this.loadImage("game_resoure/stone.png");
+
+        this.m_canRotate = false;
+        this.m_isCrack = false;
+        this.m_isRotate = false;
+        this.m_canClick = false;
+        this.m_isDrop = false;
+        this.setmouseEnabled(false);
         
-       
+        this.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
+        this.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        this.on(Laya.Event.MOUSE_OUT,this,this._mouseUpEvent);
     }
+    
 
     _proto.onDestroy = function () {
 
     }
 
-    /**初始化汽车 */
-    _proto.initRock = function(p_startPoint,p_stationPoint){
+    /**初始化石头 */
+    _proto.initRock = function(p_startPoint){
+        this.m_startPoint = p_startPoint;
+
+        this.resetRock();
+    }
+
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+
+        switch (t_index) {
+            case 1:
+                this.m_canRotate = true;
+                break;
+            case 2:
+                this.setmouseEnabled(true);
+                this.m_canClick = true;
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    /**重置石头状态 */
+    _proto.resetRock = function(){
+        this.x = this.m_startPoint.x;
+        this.y = this.m_startPoint.y;
+        this.rotation = 0;
+
+        this.stopRock();
+
+        this.m_canRotate = false;
+        this.m_isCrack = false;
+        this.m_isRotate = false;
+        this.m_canClick = false;
+        this.m_isDrop = false;
+        this.setmouseEnabled(false);
+    }
+
+    _proto.stopRock = function(){
+        Laya.timer.clearAll(this);
+        this.stopSoundRoll();
+        
+        this.m_anim.stop();
+    }
+
+    /**
+     * update刷新
+     */
+    _proto.onUpdate = function () {
+        if(this.curCar == null){
+            this.curCar = SceneManager.getInstance().currentScene.curCar;
+        }
+        if(this.curGround == null){
+            this.curGround = SceneManager.getInstance().currentScene.curGround;
+        }
+
+        if(!this.m_isCrack){
+            var t_dis = (this.curCar.x + this.curCar.width /2 ) - (this.x -20);
+            if(t_dis >= 0){
+                this.m_isCrack = true;
+            }else{
+                return;
+            }
+
+        }
+
+
+        if(!this.m_canRotate)
+            return;
+        this.pos(this.x + this.m_Speed, this.y);
+        // var t_sp = new Laya.Sprite();
+        // t_sp.mouseThrough
+        this.rotation += this.m_Speed;
+        if(!this.m_isRotate)
+            this.playSoundRoll();
+        this.m_isRotate = true;
         
     }
 
+    _proto.playSoundRoll = function(){
+        MusicManager.getInstance().playSound("res/music/stone_roll.mp3");
+        Laya.timer.loop(2000,this,function(){
+            MusicManager.getInstance().playSound("res/music/stone_roll.mp3");
+        })
+    }
+    _proto.stopSoundRoll = function(){
+        
+        Laya.SoundManager.stopSound("res/music/stone_roll.mp3");
+    }
 
+
+    _proto._mouseDowmEvent = function (_event) {
+        if(!this.m_canClick)
+            return;
+        
+    }
+    _proto._mouseMoveEvent = function (_event) {
+        if(!this.m_canClick)
+            return;
+
+        var tarPos = this.parent.globalToLocal(new Point(_event.stageX,_event.stageY));
+        if(tarPos.y >= this.m_startPoint.y){
+            tarPos.y = this.m_startPoint.y;
+        }
+        this.y = tarPos.y;
+    }
+    _proto._mouseUpEvent = function (_event) {
+        if(!this.m_canClick)
+            return;
+        this.rockDrop();
+    }
+
+    //石头掉落
+    _proto.rockDrop = function(){
+        this.m_canClick = false;
+
+        //最低高度 必须大于高度才能砸凹地面
+        var t_minHeight = 250;
+
+        var t_posY = rockFallPosX[this.curGround.m_crackNum -1];
+        var t_height = t_posY - this.y;
+        if(t_height > t_minHeight){
+            t_posY = rockFallPosX[this.curGround.m_crackNum];
+        }
+        
+        Laya.Tween.to(this,{
+            y:t_posY,
+        },300,Laya.Ease.linearNone,new Laya.Handler(this,function(){
+            this.m_canClick = true;
+            MusicManager.getInstance().playSound("res/music/stone_fall.mp3");
+            if(t_height > t_minHeight){
+                if(this.curGround.m_crackNum == 4){
+                    this.setmouseEnabled(false);
+                    this.curCar.m_canCrack = false;
+                }
+                this.curGround.rockCrackGround();
+            }
+        }));
+    }
+
+    //设置是否可以接受点击事件
+    _proto.setmouseEnabled = function(_visible){
+        this.mouseEnabled = _visible;
+    }
+
+    //石头被撞击
+    _proto.rockCrack = function(){
+        var t_posY = this.m_startPoint.x + 50;
+        var t_rotation = 360;
+        //下陷则不滚动
+        if(this.y > this.m_startPoint.y){
+            t_rotation = 0;
+            t_posY  = this.m_startPoint.x;
+        }
+        Laya.Tween.to(this,{
+            rotation:t_rotation,
+            x:t_posY,
+        },1000,Laya.Ease.linearNone,new Laya.Handler(this,function(){
+            SceneManager.getInstance().currentScene.gameover(false);
+        }));
+    }
 
     return Rock;
 })(Laya.Sprite);
@@ -49742,6 +50227,8 @@ var Car = (function (_super) {
     _proto.m_startPoint = null;                                           //起点坐标
     _proto.m_isArrive = false;                                            //是否到站
     _proto.m_stationPoint = null;                                         //车站坐标
+    _proto.curRock = null;                                                //当前石头
+    _proto.m_canCrack = false;                                            //是否可以撞击
 
     _proto.Init = function () {
         this.width = CarWidth;
@@ -49760,6 +50247,8 @@ var Car = (function (_super) {
 
         this.m_isStartCar = false;
         this.m_isArrive = false;
+        this.m_canCrack = false;
+
         // Laya.timer.frameLoop(1, this, this.onUpdate);
         this.on(Laya.Event.CLICK,this,this._catClickEvent);
        
@@ -49776,12 +50265,37 @@ var Car = (function (_super) {
 
         this.resetCar();
     }
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+
+        switch (t_index) {
+            case 2:
+                this.m_canCrack = true;
+                break;
+        
+            default:
+                break;
+        }
+    }
 
     /**重置汽车状态 */
     _proto.resetCar = function(){
         this.x = this.m_startPoint.x;
         this.y = this.m_startPoint.y;
+
+        this.m_anim.play(0, true, "car_run");
+        this.m_anim.stop();
+        this.m_anim.offAll();
+        
         this.m_isArrive = false;
+        this.m_isStartCar = false;
+        this.m_canCrack = false;
+    }
+
+    //停止运动
+    _proto.stopCar = function(){
         this.m_isStartCar = false;
         this.m_anim.stop();
     }
@@ -49789,6 +50303,10 @@ var Car = (function (_super) {
      * update刷新
      */
     _proto.onUpdate = function () {
+        if(this.curRock == null){
+            this.curRock = SceneManager.getInstance().currentScene.curRock;
+        }
+
         if(!this.m_isStartCar)
             return;
         //出屏幕
@@ -49798,6 +50316,7 @@ var Car = (function (_super) {
         //到站
         if(this.x >= this.m_stationPoint.x - this.m_carSpeed && this.x <= this.m_stationPoint.x + this.m_carSpeed){
             this.m_isArrive = true;
+            SceneManager.getInstance().currentScene.gameover(true);
         }
 
         //回到起点
@@ -49805,8 +50324,27 @@ var Car = (function (_super) {
             this.resetCar();
         }
         this.pos(this.x + this.m_carSpeed, this.y);
+
+        if(this.m_canCrack){
+            var t_dis = (this.x + this.width /2 ) - (this.curRock.x -20);
+            if(t_dis >= 0){
+                this.carCrack();
+            }
+        }
     }
 
+    /**汽车撞击 */
+    _proto.carCrack = function(){
+        this.stopCar();
+        this.m_anim.play(0, false, "car_crack1");
+
+        MusicManager.getInstance().playSound("res/music/collide_stone.mp3");
+        // this.m_anim.on(Laya.Event.COMPLETE,this,function(){
+        //     SceneManager.getInstance().currentScene.gameover();
+        // });
+
+        this.curRock.rockCrack();
+    }
     
     /**按下汽车监听事件 */
     _proto._catClickEvent = function(_event){
@@ -49814,6 +50352,9 @@ var Car = (function (_super) {
             Gamelog("-----点击汽车");
             this.m_isStartCar = true;
             this.m_anim.play(0, true, "car_run");
+            
+            MusicManager.getInstance().playSound("res/music/car_run.mp3");
+            this.curRock.setmouseEnabled(false);
         }
     }
 
@@ -49837,7 +50378,7 @@ var MusicManager = (function (_super) {
                 instantiated = new MusicManager();
                 instantiated.initSound();
                 //声音开关 1开 0关
-                // _proto.managerSwitch = 1;
+                _proto.managerSwitch = 1;
                 // SoundManager.autoStopMusic = false; 
             }
         return instantiated;
@@ -49940,6 +50481,9 @@ var GameScene = (function (_super) {
     _proto.gameUI = null;                                                    //ui对象
     _proto.curCar = null;                                                    //当前汽车
     _proto.gameBox = null;                                                   //游戏层
+    _proto.curLevelIndex = 0;                                                //当前关卡id
+    _proto.curRock = null;                                                   //当前石头
+    _proto.curGround = null;                                                 //当前地面
   
 
     _proto.Init = function () {
@@ -49953,10 +50497,12 @@ var GameScene = (function (_super) {
         this.gameBox.height = Laya.stage.height;
         this.gameBox.zOrder = 10;
         this.gameBox.mouseEnabled = true;
+        this.gameBox.mouseThrough = true;
         
         Laya.stage.addChild(this.gameBox);
 
 
+        this.curLevelIndex = 0;
         
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
@@ -49965,7 +50511,7 @@ var GameScene = (function (_super) {
         Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.startGame();
+        // this.startGame();
        
     }
 
@@ -49975,6 +50521,16 @@ var GameScene = (function (_super) {
 
     //自动适配完后初始化
      _proto.delayInitShow = function () {
+
+        //创建石头
+        this.curRock = new Rock();
+        var t_rockPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.img_stone.x,this.gameUI.img_stone.y),true);
+        // t_rockPoint.x += 40;
+        this.curRock.pos(t_rockPoint.x,t_rockPoint.y);
+        this.curRock.initRock(t_rockPoint);
+        this.gameBox.addChild(this.curRock);
+        
+        //创建车子
         this.curCar = new Car();
         var t_carPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.img_car.x,this.gameUI.img_car.y),true);
         t_carPoint.x += 40;
@@ -49984,13 +50540,46 @@ var GameScene = (function (_super) {
         this.curCar.initCar(t_carPoint,t_stationPoint);
 
         this.gameBox.addChild(this.curCar);
+        
+        //创建地面
+        this.curGround = new Ground();
+        var t_groundPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.box_ground.x,this.gameUI.box_ground.y),true);
+        // t_rockPoint.x += 40;
+        this.curGround.pos(t_groundPoint.x,t_groundPoint.y);
+        this.curGround.initGround(t_groundPoint);
+        this.gameBox.addChild(this.curGround);
+
+        // this.initLevelData();
+        this.startGame();
      }
 
+     //初始化关卡数据
+     _proto.initLevelData = function(){
+        this.gameUI.initLevel();
+        this.curCar.initLevel();
+        this.curRock.initLevel();
+        this.curGround.initLevel();
+
+        
+     }
     /**开始游戏 */
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
-
+         Laya.timer.frameOnce(1, this, function(){
+            this.initLevelData();
+         });
+         
         //  wxGame.getInstance().showAD(2);
+    }
+
+    /**下一个游戏 */
+    _proto.nextlevelGame = function(){
+        this.curLevelIndex++;
+        this.curCar.resetCar();
+        this.curRock.resetRock();
+        this.curGround.resetGround();
+
+        this.startGame();
     }
 
     /**重置游戏 */
@@ -50000,9 +50589,17 @@ var GameScene = (function (_super) {
         
     }
     /**游戏结束 */
-    _proto.gameover = function(){
-        wxGame.getInstance().showAD(0);
-        UIManager.getInstance().showUI("GameOverUI");
+    _proto.gameover = function(_win){
+        // wxGame.getInstance().showAD(0);
+        
+        Laya.timer.clear(this,this.onUpdate);
+        this.curCar.stopCar();
+        this.curRock.stopRock();
+        
+        var overUI = UIManager.getInstance().showUI("GameOverUI");
+        overUI.initUI(_win);
+
+
         
     }
     /**
@@ -50012,8 +50609,13 @@ var GameScene = (function (_super) {
         if(this.curCar != null){
             this.curCar.onUpdate();
         }
+        if(this.curRock != null){
+            this.curRock.onUpdate();
+        }
 
     }
+
+
 
     
     /**按下监听事件 */
@@ -50051,11 +50653,11 @@ var GameUILogic = (function (_super) {
         this.height = Laya.stage.height;
 
         // MusicManager.getInstance().playMusic("res/music/1.mp3");
-
-        
         // UIManager.getInstance().showUI("GameStartUI");
         
         this.aniCloud.play(0,true);
+        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        
 
     }
     
@@ -50063,9 +50665,22 @@ var GameUILogic = (function (_super) {
         // MusicManager.getInstance().stopMusic();
     }
 
-    // _proto.addScore = function(p_score){
+    //初始化关卡
+    _proto.initLevel = function(p_score){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+        this.t_id.text = t_leveData.id;
+        this.t_name.text = t_leveData.name;
 
-    // }
+        switch (t_index) {
+            case 0:
+                UIManager.getInstance().showUI("GuidGameUI");
+                break;
+        
+            default:
+                break;
+        }
+    }
 
     //显示分数
     _proto.setScore = function(p_score,p_anim){
@@ -50117,6 +50732,9 @@ var GameUILogic = (function (_super) {
    
   }
 
+  _proto._shareClickEvent = function(){
+      wxGame.getInstance().shareGame();
+  }
 
     return GameUILogic;
 })(GameUI);
@@ -50293,6 +50911,13 @@ var UIManager = (function(_super){
             case "GameUI":
                 uiLogic = new GameUILogic();
                 break;
+            case "GuidGameUI":
+                uiLogic = new GuidGameUILogic();
+                break;
+            case "GameOverUI":
+                uiLogic = new GameOverUILogic();
+                break;
+                
             
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -50692,7 +51317,7 @@ function beginLoadGoHead() {
                 // ["res/atlas/monster.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
                 // //图片
-                // ["game/beijing.jpg",Laya.Loader.IMAGE],
+                ["game_resoure/background.jpg",Laya.Loader.IMAGE],
                 // ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
                 // ["game/img_line.png",Laya.Loader.IMAGE],
                 // ["game/paohangbang-di.png",Laya.Loader.IMAGE],
@@ -50722,7 +51347,8 @@ function beginLoadGoHead() {
 function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
-
+    Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
+    
     SceneManager.getInstance().currentScene = new GameScene();
     // wxGame.getInstance().createVideoAD();
 
