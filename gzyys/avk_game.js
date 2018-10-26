@@ -47,7 +47,7 @@ function AVK_GAME(y, ea, fa) {
 		a.RENDER.render(a.STAGE);
 		A < J.length + 1 && (requestAnimFrame(I), v += .01)
 	}
-
+	//加载完json
 	function R() {
 		if (GLOB_M && 7E3 > K) {
 			var a = (new Date).getTime();
@@ -57,7 +57,7 @@ function AVK_GAME(y, ea, fa) {
 			0 == GLOB_SND_TO_LOAD ? S() : requestAnimFrame(R)
 		} else S()
 	}
-
+	//初始化各个界面 
 	function S() {
 		H();
 		I();
@@ -86,6 +86,7 @@ function AVK_GAME(y, ea, fa) {
 				align: "left"
 			});
 		u = D = E = 0;
+		//avk_bogy 的init()
 		ha();
 		n = (new Date).getTime();
 		requestAnimFrame(ba)
@@ -478,7 +479,8 @@ function AVK_GAME(y, ea, fa) {
 			this.set_progress(m)
 		}
 	}
-
+	
+	//剧情引导
 	function T() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -566,7 +568,8 @@ function AVK_GAME(y, ea, fa) {
 		this.back_3_into.set_parent(this.back_3);
 		this.s_1_6.set_parent(this.back_3_into)
 	}
-
+	
+	//开始按钮
 	function U() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -584,7 +587,8 @@ function AVK_GAME(y, ea, fa) {
 		this.btn_start = new d("title_btn_start", 255, 705, 140, 144, 1);
 		this.sprite.addChild(this.btn_start.sprite)
 	}
-
+	
+	//创建勇士帧动画
 	function V() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -599,7 +603,8 @@ function AVK_GAME(y, ea, fa) {
 		this.go = new b("hero_s_go", 0, 0, 100, 100, 11);
 		this.sprite.addChild(this.go.sprite)
 	}
-
+	
+	//创建公主动画
 	function W() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -611,7 +616,8 @@ function AVK_GAME(y, ea, fa) {
 		this.prnc = new b("princess_prnc", 0, 0, 100, 150, 30);
 		this.sprite.addChild(this.prnc.sprite)
 	}
-
+	
+	//音效开关
 	function X() {
 		this.sprite =
 			new PIXI.DisplayObjectContainer;
@@ -643,7 +649,8 @@ function AVK_GAME(y, ea, fa) {
 		this.btn_snd = new d("credits_btn_snd", 557, 264, 64, 66, 1);
 		this.sprite.addChild(this.btn_snd.sprite)
 	}
-
+	
+	//开始游戏界面
 	function Y() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -701,7 +708,8 @@ function AVK_GAME(y, ea, fa) {
 		this.btn_snd = new d("main_btn_snd", 557, 264, 64, 66, 1);
 		this.sprite.addChild(this.btn_snd.sprite)
 	}
-
+	
+	//游戏界面
 	function Z() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -1008,7 +1016,8 @@ function AVK_GAME(y, ea, fa) {
 			this.sprite.position.y -= e
 		}
 	}
-
+	
+	//选择关卡界面
 	function $() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {
@@ -1761,7 +1770,8 @@ function AVK_GAME(y, ea, fa) {
 			this.sprite.position.y -= e
 		}
 	}
-
+	
+	//各个滑块
 	function aa() {
 		this.sprite = new PIXI.DisplayObjectContainer;
 		this.add = function(a) {

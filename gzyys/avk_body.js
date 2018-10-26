@@ -122,6 +122,8 @@ function avk_start()
     var that = this;
     var order = [];
     var to_update = [];
+	
+	//游戏对象
     var game = new AVK_GAME(init,update,event);
 
     var actions={   to_left:{pause:0,time:350,changes:{global_x:{beg:0,end:-1,trans:"sqrt"}}},
@@ -189,7 +191,8 @@ function avk_start()
                 GLOBAL.WND_TITLE.level_btn=game.LEVELS["btn_lev_"+i];
         }
     }
-
+	
+	//显示界面从左到右
     function show_wnd_right(wnd) 
     {
         game.GUI_BUSY=true;
@@ -267,7 +270,8 @@ function avk_start()
         
         return s;
     }
-
+	
+	//对象管理
     function AVK_CONTAINER()
     {
         var maked_objects={};
@@ -316,6 +320,7 @@ function avk_start()
             }
         }
     }
+	//容器
     var CONTAINER=new AVK_CONTAINER();
 
     function is_snd() 
@@ -473,6 +478,7 @@ function avk_start()
         
         game.INTRO.up.sprite.scale.x=game.SCREEN_WIDTH/game.INTRO.up.uni_width*1.2;
         game.INTRO.up.sprite.position.x=-5;
+		//光效
         game.GAME.wrays.sprite.scale.x=5;
         game.GAME.wrays.sprite.scale.y=5;
         game.GAME.wrays.sprite.anchor.x=0.5;
@@ -553,14 +559,16 @@ function avk_start()
 
             event("start","GLOBAL","GLOBAL",data.global.x/game.GUI.scale.x,(data.global.y-game.GUI.position.y)/game.GUI.scale.y);
         }
-
+		
+		//勇士 公主动画
         game.GAME.princess_place.add(game.PRINCESS.prnc);
         game.GAME.hero_place.add(game.HERO_S.stay);
         game.HERO_S.go.sprite.visible=false;
         game.HERO_S.stay.time=6000;
         game.HERO_S.go.time=200;
         game.BACK_SPR.addChild(game.MAIN.back.sprite);
-
+	
+		//云
         GLOBAL.CLOUDS.push(game.MAIN.cl_0.sprite);
         game.BACK_SPR.addChild(GLOBAL.CLOUDS[GLOBAL.CLOUDS.length-1]);
         GLOBAL.CLOUDS.push(game.MAIN.cl_0.make_copy().sprite);
@@ -587,6 +595,7 @@ function avk_start()
         load();
         game.GAME.sled.sprite.visible=false;
         
+		//得分星级
         game.GAME.zv1.y=game.GAME.zv1.sprite.position.y;
         game.GAME.zv2.y=game.GAME.zv2.sprite.position.y;
         game.GAME.zv3.y=game.GAME.zv3.sprite.position.y;
@@ -740,7 +749,7 @@ function avk_start()
     {
         to_update.push(f);
     }
-
+	//事件处理
     function event(act,wnd,el,id,tag) 
     {
         if (game.GUI_BUSY)
@@ -1028,7 +1037,8 @@ function avk_start()
             }
         }
     }
-
+	
+	//剧情顺序
     function AVK_WND_INTRO()
     {
         var here=this;
@@ -1301,7 +1311,8 @@ function avk_start()
             }
         }
     }
-    function AVK_WND_TITLE()
+	//开始游戏 按钮动画
+	function AVK_WND_TITLE()
     {//переменные
         var here=this;
         var stop_ui=false;
@@ -1355,7 +1366,8 @@ function avk_start()
 
         finish_scale();
     }
-
+	
+	//游戏控制
     function AVK_WND_GAME()
     {//переменные
         var here=this;
@@ -1608,6 +1620,7 @@ function avk_start()
                 }
 
             var level=GLOBAL.LEVELS[GLOBAL.CURRENT_LEVEL];
+			//步数等级
             GLOBAL.STEP1=level.steps_1;
             GLOBAL.STEP2=level.steps_2;
             GLOBAL.STEP3=level.steps_3;
@@ -1629,7 +1642,8 @@ function avk_start()
             here.tutorial.stop();
             if (GLOBAL.CURRENT_LEVEL==0)
                 here.tutorial.start(2,1,2,2,0);
-
+			
+			//起点 都一样 1 -1
             //game.GAME["start"+GLOBAL.SUFIX].sprite.visible=true;
             game.GAME["start"+GLOBAL.SUFIX].x=level.start_x;
             game.GAME["start"+GLOBAL.SUFIX].y=level.start_y;
@@ -1656,7 +1670,8 @@ function avk_start()
 
             game.GAME["start"+GLOBAL.SUFIX].sprite.position.x=level.start_x*GLOBAL.EL_WIDTH+(GLOBAL.EL_WIDTH-game.GAME["start"+GLOBAL.SUFIX].uni_width)/2;
             game.GAME["start"+GLOBAL.SUFIX].sprite.position.y=level.start_y*GLOBAL.EL_HEIGHT+(GLOBAL.EL_HEIGHT-game.GAME["start"+GLOBAL.SUFIX].uni_height)/2;
-
+			
+			//终点 都一样 2 3
             //game.GAME["finish"+GLOBAL.SUFIX].sprite.visible=true;
             game.GAME["finish"+GLOBAL.SUFIX].x=level.finish_x;
             game.GAME["finish"+GLOBAL.SUFIX].y=level.finish_y;
@@ -1704,6 +1719,7 @@ function avk_start()
                         current_block.old_x=x;
                         current_block.old_y=y;
                         current_block.md=level.blocks[x+y*level.map_width].md;
+						//地图对象
                         local_map[x+y*GLOBAL.MAX_ARRAY]=current_block;
 
                         for (i=0;i<4;i++)
@@ -1721,6 +1737,7 @@ function avk_start()
 
                         var p1=level.blocks[x+y*level.map_width].id;
                         var p2=0;
+						//ch 链条
                         var ch=level.blocks[x+y*level.map_width].ch;
                         if (ch==2)
                         {
@@ -2501,7 +2518,8 @@ function avk_start()
             GLOBAL.RUN=false;
         }
     }
-
+	
+	//音效
     function AVK_WND_CREDITS()
     {
         var here=this;
@@ -2520,7 +2538,8 @@ function avk_start()
             hide_wnd_right();
         }
     }
-
+	
+	//选择关卡
     function AVK_WND_LEVELS()
     {//переменные
         var here=this;
