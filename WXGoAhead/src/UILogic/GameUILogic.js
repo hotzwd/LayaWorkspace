@@ -22,8 +22,14 @@ var GameUILogic = (function (_super) {
         
         this.aniCloud.play(0,true);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.btn_guid.on(Laya.Event.CLICK,this,this._guidClickEvent);
+        this.btn_tip.on(Laya.Event.CLICK,this,this._tipClickEvent);
+        this.btn_getGold.on(Laya.Event.CLICK,this,this._getGoldClickEvent);
         
+        this.updateGoldNum();
+        this.updateLifeNum();
 
+        wxGame.getInstance().showClubBtn();
     }
     
     _proto.onDestroy = function () {
@@ -45,7 +51,9 @@ var GameUILogic = (function (_super) {
             default:
                 break;
         }
+        this.updateVideoAd();
     }
+    
 
     //显示分数
     _proto.setScore = function(p_score,p_anim){
@@ -100,6 +108,97 @@ var GameUILogic = (function (_super) {
   _proto._shareClickEvent = function(){
       wxGame.getInstance().shareGame();
   }
+
+  //更新金币数量
+  _proto.updateGoldNum = function(){
+      this.t_gold.text = GetLocalGoldNum();
+  }
+  //更新生命值
+  _proto.updateLifeNum = function(){
+      this.t_life.text = GetLocalLifeNum();
+  }
+
+  //点击引导
+  _proto._guidClickEvent = function(){
+      UIManager.getInstance().showUI("GuidGameUI");
+  }
+
+  //点击提示
+  _proto._tipClickEvent = function(){
+
+      var t_costNum = 40;
+      if(GetLocalGoldNum() >= t_costNum){
+        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
+        var t_leveData = GameLevelData[t_index];
+        this.t_tip.text = t_leveData.tip;
+
+        SetLocalGoldNum(GetLocalGoldNum() - t_costNum);
+        this.ani_tip.play(0,false);
+        this.updateGoldNum();
+      }
+  }
+  //点击获取金币
+  _proto._getGoldClickEvent = function(){
+      var t_gameUI = SceneManager.getInstance().currentScene.gameUI;
+      if(Browser.onMiniGame){
+          if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            t_gameUI.showRewardAd();
+        }else{
+            t_gameUI.rewardEffect();
+        } 
+
+  }
+
+  //更新视频图标状态
+  _proto.updateVideoAd = function(){
+        this.btn_getGold.visible = false;
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            this.btn_getGold.visible = true;
+        }else{
+            this.btn_getGold.visible = true;
+        }
+    }
+
+    
+  //展示奖励广告
+  _proto.showRewardAd = function () {
+
+        if (!Browser.onMiniGame) {
+            return;
+        }
+        var t_gameUI = SceneManager.getInstance().currentScene.gameUI;
+
+        var t_videoAd = wxGame.getInstance().videoAd;
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                Gamelog("正常播放结束");
+                t_gameUI.rewardEffect();
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                Gamelog("视频中途退出");
+            }
+            t_videoAd.offClose();
+            t_gameUI.updateVideoAd();
+        })
+    }
+
+    //获取奖励效果
+    _proto.rewardEffect = function(){
+        var t_rewardNum = 10;
+        SetLocalGoldNum(GetLocalGoldNum() + t_rewardNum);
+        this.ani_addGold.play(0,false);
+        this.updateGoldNum();
+    }
+  
+
 
     return GameUILogic;
 })(GameUI);

@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":49,
-    "selecteID":51,
+    "selecteID":36,
     "props":{"width":1136,"sceneColor":"#000000","height":640,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -41,16 +41,29 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":67,"x":351,"width":199,"var":"t_score","text":"0","pivotY":40,"pivotX":277,"height":76,"font":"shuzi","align":"center"},
+                    "props":{"y":164,"x":600,"width":113,"var":"t_life","text":"0","pivotY":40,"pivotX":277,"height":33,"fontSize":30,"font":"SimHei","color":"#000000","bold":true,"align":"left"},
                     "nodeParent":49,
-                    "label":"Text(t_score)",
+                    "label":"Text(t_life)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":24,
                     "child":[
                         ],
-                    "$HIDDEN":true
+                    "$HIDDEN":false
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":126,"x":249,"width":79,"text":"生命:","height":30,"fontSize":25,"font":"SimHei","color":"#000000","bold":true,"align":"center"},
+                    "nodeParent":49,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":61,
+                    "child":[
+                        ]
                 },
                 {
                     "x":30,
@@ -165,14 +178,13 @@
                     "props":{"y":558,"x":725,"width":890,"visible":false,"var":"box_ground","height":160,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":49,
                     "label":"Box(box_ground)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":36,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":3,"var":"img_floorLeft","skin":"game_resoure/groundLeft.png"},
                             "nodeParent":36,
@@ -185,7 +197,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"x":492,"var":"img_flootRight","skin":"game_resoure/groundRight.png"},
                             "nodeParent":36,
@@ -266,13 +277,130 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":0,"x":253,"var":"btn_share","stateNum":"1","skin":"game_resoure/share-1.png"},
+                    "props":{"y":1,"x":510,"var":"btn_share","stateNum":"1","skin":"game_resoure/help-1.png"},
                     "nodeParent":49,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":51,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":2,"x":344,"var":"btn_tip","stateNum":"1","skin":"game_resoure/tip-40-money-1.png"},
+                    "nodeParent":49,
+                    "label":"Button(btn_tip)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":54,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":2,"x":254,"var":"img_gold","skin":"game_resoure/shopping-1.png"},
+                    "nodeParent":49,
+                    "label":"Image(img_gold)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":53,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "props":{"y":51,"x":11,"width":59,"var":"t_gold","text":"10","height":24,"fontSize":25,"font":"SimHei","color":"#865428","bold":true,"align":"center"},
+                            "nodeParent":53,
+                            "label":"Text(t_gold)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":59,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "props":{"y":63,"x":43,"width":60,"var":"t_addGold","text":"+10","pivotY":15,"pivotX":30,"height":30,"fontSize":30,"font":"SimHei","color":"#f1d610","bold":true,"alpha":0,"align":"center"},
+                            "nodeParent":53,
+                            "label":"Text(t_addGold)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":63,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1,"x":428,"var":"btn_guid","stateNum":"1","skin":"game_resoure/guide_c_1.png"},
+                    "nodeParent":49,
+                    "label":"Button(btn_guid)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":56,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":188,"x":372,"var":"img_showTip","skin":"game_resoure/tip-bg.png","scaleY":0,"scaleX":0,"anchorY":0.5,"anchorX":0.5,"alpha":0},
+                    "nodeParent":49,
+                    "label":"Image(img_showTip)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":57,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "props":{"y":11,"x":7,"wordWrap":true,"width":166,"var":"t_tip","valign":"middle","text":"点击汽车->车开到1站牌->过关","leading":8,"height":77,"fontSize":20,"font":"SimHei","color":"#000000","bold":true,"align":"center"},
+                            "nodeParent":57,
+                            "label":"Text(t_tip)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":58,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":-1,"x":597,"var":"btn_getGold","stateNum":"1","skin":"game_resoure/add_coin_00.png"},
+                    "nodeParent":49,
+                    "label":"Button(btn_getGold)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":60,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":611,"x":129,"width":66,"text":"V1.1","height":26,"fontSize":20,"font":"SimHei","color":"#865428","bold":true,"align":"center"},
+                    "nodeParent":49,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":64,
                     "child":[
                         ]
                 }]
@@ -358,6 +486,179 @@
                 }],
             "name":"aniCloud",
             "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":57,
+                    "keyframes":{
+                        "scaleY":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleY",
+                                "index":0
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleY",
+                                "index":10
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleY",
+                                "index":60
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleY",
+                                "index":70
+                            }],
+                        "scaleX":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleX",
+                                "index":0
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleX",
+                                "index":10
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleX",
+                                "index":60
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"scaleX",
+                                "index":70
+                            }],
+                        "alpha":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"alpha",
+                                "index":0
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"alpha",
+                                "index":10
+                            },
+                            {
+                                "value":0.8,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"alpha",
+                                "index":60
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":57,
+                                "key":"alpha",
+                                "index":70
+                            }]
+                    }
+                }],
+            "name":"ani_tip",
+            "id":2,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":63,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":63,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":33,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"y",
+                                "index":25
+                            }],
+                        "alpha":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"alpha",
+                                "index":0
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"alpha",
+                                "index":10
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"alpha",
+                                "index":17
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":63,
+                                "key":"alpha",
+                                "index":25
+                            }]
+                    }
+                }],
+            "name":"ani_addGold",
+            "id":3,
             "frameRate":24,
             "action":0
         }]

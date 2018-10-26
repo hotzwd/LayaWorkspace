@@ -358,13 +358,15 @@ var wxGame = (function (_super) {
             adUnitId: 'adunit-0f564afc288f3ccd'
         });
 
+        this.eggVideoAd.load();
+
         this.eggVideoAd.onError(function () {
-            console.log("createVideoAD 拉取失败 = false");
+            console.log("createVideoAD 金蛋 拉取失败 = false");
             wxLoadEggVideoAd = false;
         });
 
         this.eggVideoAd.onLoad(function () {
-            console.log("createVideoAD 拉取成功 = true");
+            console.log("createVideoAD 金蛋 拉取成功 = true");
             wxLoadEggVideoAd = true;
         });
 

@@ -225,12 +225,18 @@ var wxGame = (function (_super) {
         var shareInfoArr = new Array();
         var rand = Math.random() * 3 + 1;
         rand = parseInt(rand, 10);
-        rand = 1;
+        // rand = 1;
         
         var str = "";
         switch (rand) {
             case 1:
                 str = "!!!警告!!!内有神作,注意避让!!!";
+                break;
+            case 2:
+                str = "生命诚可贵，看准再开车";
+                break;
+            case 3:
+                str = "驾照白拿了，这都开不过去";
                 break;
         }
 
@@ -274,6 +280,50 @@ var wxGame = (function (_super) {
         // }
     }
 
+    //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-d3aa6a74dfb773db'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            Gamelog("createVideoAD load 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            console.log("createVideoAD load 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            t_videoAd.load();
+        })
+
+         this.videoAd.onError(function (err) {
+            console.log("createVideoAD 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
+    }
 
     /**微信官方对比版本号 */
     function compareVersion(v1, v2) {

@@ -16,6 +16,7 @@ var GameOverUILogic = (function (_super) {
         this.btn_next.on(Laya.Event.CLICK,this,this._nextLevelEvent);
         this.btn_restart.on(Laya.Event.CLICK,this,this._researtLevelEvent);
         this.btn_help.on(Laya.Event.CLICK,this,this._helpClickEvent);
+        this.btn_earn.on(Laya.Event.CLICK,this,this._getGoldClickEvent);
 
         this.initLevel();
     }
@@ -25,11 +26,14 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto.initUI = function(_win){
-
+        this.btn_earn.visible = false;
         if(_win){
             this.img_result.skin = "game_resoure/win-bg.png";
         }else{
             this.img_result.skin = "game_resoure/over-bg.png";
+            this.btn_earn.visible = true;
+            SetLocalLifeNum(GetLocalLifeNum() - 1);
+            SceneManager.getInstance().currentScene.gameUI.updateLifeNum();
         }
     }
 
@@ -71,6 +75,17 @@ var GameOverUILogic = (function (_super) {
         wxGame.getInstance().shareGame();
     }
 
+    //点击获取金币
+    _proto._getGoldClickEvent = function(){
+        var t_gameUI = SceneManager.getInstance().currentScene.gameUI;
+        if(Browser.onMiniGame){
+          if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            t_gameUI.showRewardAd();
+        }else{
+            t_gameUI.rewardEffect();
+        }
+    }
     
 
     return GameOverUILogic;

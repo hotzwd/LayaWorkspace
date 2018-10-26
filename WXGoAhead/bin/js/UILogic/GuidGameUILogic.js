@@ -14,6 +14,7 @@ var GuidGameUILogic = (function (_super) {
         this.zOrder = 100;
 
         this.btn_closeGuid.on(Laya.Event.CLICK,this,this._closeGuidBoxEvent);
+        this.img_getGold.on(Laya.Event.CLICK,this,this._getGoldClickEvent);
 
         this.ani1.play(0,true);
     }
@@ -24,6 +25,18 @@ var GuidGameUILogic = (function (_super) {
 
     _proto._closeGuidBoxEvent = function(){
         UIManager.getInstance().closeUI("GuidGameUI");
+    }
+
+    //点击获取金币
+    _proto._getGoldClickEvent = function(){
+        var t_gameUI = SceneManager.getInstance().currentScene.gameUI;
+        if(Browser.onMiniGame){
+          if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            t_gameUI.showRewardAd();
+        }else{
+            t_gameUI.rewardEffect();
+        }
     }
     
 

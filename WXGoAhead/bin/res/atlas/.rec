@@ -2,9 +2,15 @@ D .
 D game_resoure
 P ADD9868F AD_animation_1.png
 P 3CA0A906 AD_animation_2.png
+P 30095819 add_coin_00.png
 P 2F1A3F5E back-1.png
 R 9D104B33 background.jpg
 P 69B17337 background_1.png
+P 0E59D191 bomb.png
+P 2D0543D0 bombBlast1.png
+P EFCCCBC8 bombBlast2.png
+P BF4E386B bombIgnite1.png
+P B66BB58B bombIgnite2.png
 P 093C76D2 car0.png
 P A79936C2 car1.png
 P 6F73B030 car2.png
@@ -13,14 +19,19 @@ P 082F7BA6 carCrackUp2.png
 P 8FE6761C cloud.png
 P 0F13D155 cloudRain.png
 P 646DEBE7 cloudThunder.png
+P 85A70607 earn_01.png
 P D06EA5FE groundLeft.png
 P EE262416 groundRight.png
 R 516A0733 guidance_c.png
+P 73B84885 guide_c_1.png
+P 51352A6B hang2.png
+P 0040A8F8 help-1.png
 P D5C282B5 help.png
 P 4D415246 next-1.png
 P C530577A over-bg.png
 P 8ECF64FA restart-1.png
 P F4E4E433 share-1.png
+P 5C77A9BA shopping-1.png
 P 88AC4716 signpost.png
 P E1E516D6 stone.png
 P DA3D3581 sunkenLeft1.png
@@ -31,6 +42,7 @@ P 2316B1A5 sunkenRight1.png
 P 633E0162 sunkenRight2.png
 P 71FA2CDA sunkenRight3.png
 P 8611DBC5 sunkenRight4.png
+P F2643ACE tip-40-money-1.png
 P D65C785B tip-bg.png
 P 4F8AEF69 tree0.png
 P 56B28A39 tree1.png
