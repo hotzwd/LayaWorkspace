@@ -24,6 +24,7 @@ var Car = (function (_super) {
     _proto.m_stationPoint = null;                                         //车站坐标
     _proto.curRock = null;                                                //当前石头
     _proto.m_canCrack = false;                                            //是否可以撞击
+    _proto.m_turnRound = false;                                           //掉头
 
     _proto.Init = function () {
         this.width = CarWidth;
@@ -46,7 +47,11 @@ var Car = (function (_super) {
 
         // Laya.timer.frameLoop(1, this, this.onUpdate);
         this.on(Laya.Event.CLICK,this,this._catClickEvent);
+        this.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
+        this.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        this.on(Laya.Event.MOUSE_OUT,this,this._mouseUpEvent);
        
+        
     }
 
     _proto.onDestroy = function () {
@@ -69,6 +74,19 @@ var Car = (function (_super) {
             case 2:
                 this.m_canCrack = true;
                 break;
+            case 3:
+                this.m_canCrack = true;
+                break;
+            case 4:
+                this.m_canCrack = true;
+                this.m_turnRound = true;
+                break;
+            case 5:
+                this.m_canCrack = true;
+                break;
+            case 6:
+                this.m_canCrack = true;
+                break;
         
             default:
                 break;
@@ -87,6 +105,8 @@ var Car = (function (_super) {
         this.m_isArrive = false;
         this.m_isStartCar = false;
         this.m_canCrack = false;
+        this.m_turnRound = false;
+        this.scaleX = 1;
     }
 
     //停止运动
@@ -108,6 +128,9 @@ var Car = (function (_super) {
         if(this.x > Laya.stage.width+200){
             this.x = -100;
         }
+        if(this.x < -200){
+            this.x = Laya.stage.width+200;
+        }
         //到站
         if(this.x >= this.m_stationPoint.x - this.m_carSpeed && this.x <= this.m_stationPoint.x + this.m_carSpeed){
             this.m_isArrive = true;
@@ -118,11 +141,15 @@ var Car = (function (_super) {
         if(this.m_isArrive && this.x >= this.m_startPoint.x - this.m_carSpeed && this.x <= this.m_startPoint.x + this.m_carSpeed){
             this.resetCar();
         }
-        this.pos(this.x + this.m_carSpeed, this.y);
+        if(this.scaleX == -1){
+            this.pos(this.x - this.m_carSpeed, this.y);
+        }else{
+            this.pos(this.x + this.m_carSpeed, this.y);
+        }
 
         if(this.m_canCrack){
             var t_dis = (this.x + this.width /2 ) - (this.curRock.x -20);
-            if(t_dis >= 0){
+            if(t_dis >= 0 && this.x < this.curRock.x && this.y < this.curRock.y + 100){
                 this.carCrack();
             }
         }
@@ -150,6 +177,26 @@ var Car = (function (_super) {
             
             MusicManager.getInstance().playSound("res/music/car_run.mp3");
             this.curRock.setmouseEnabled(false);
+        }
+    }
+
+    _proto._mouseDowmEvent = function (_event) {
+        if(!this.m_turnRound)
+            return;
+        this.m_mouseDownPoint = new Point(_event.stageX,_event.stageY);
+        
+    }
+    _proto._mouseMoveEvent = function (_event) {
+        if(!this.m_turnRound)
+            return;
+
+    }
+    _proto._mouseUpEvent = function (_event) {
+        if(!this.m_turnRound || this.m_mouseDownPoint == null)
+            return;
+        if(this.m_mouseDownPoint.x - _event.stageX >150){
+            this.scaleX = -1;
+            this._catClickEvent(_event);
         }
     }
 

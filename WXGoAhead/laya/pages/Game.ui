@@ -175,7 +175,7 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":558,"x":725,"width":890,"visible":false,"var":"box_ground","height":160,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":558,"x":725,"width":890,"var":"box_ground","height":160,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":49,
                     "label":"Box(box_ground)",
                     "isOpen":false,
