@@ -159,18 +159,18 @@ var Rock = (function (_super) {
             this.curGround = SceneManager.getInstance().currentScene.curGround;
         }
 
-        if(!this.m_isCrack){
+        if(this.m_canRotate && !this.m_autoRotate){
             var t_dis = (this.curCar.x + this.curCar.width /2 ) - (this.x -20);
-            if(t_dis >= 0 && this.curCar.x < this.x && this.curCar.y < this.y - 100){
+            if(t_dis >= 0 && this.curCar.x < this.x && this.curCar.y < this.y + 100){
                 this.m_isCrack = true;
-            }else if(!this.m_autoRotate){
+                this.m_autoRotate = true;
+            }else{
                 return;
             }
 
         }
 
-
-        if(!this.m_canRotate)
+        if(!this.m_canRotate || !this.m_autoRotate )
             return;
         this.pos(this.x + this.m_Speed, this.y);
         // var t_sp = new Laya.Sprite();

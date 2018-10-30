@@ -20,6 +20,7 @@ var Ground = (function (_super) {
     _proto.m_anim = null;                                                 //地面动画
     _proto.m_crackNum = 1;                                                //撞击次数
     _proto.m_startPoint = null;                                           //起点坐标
+    _proto.curRock = null;                                                //当前石头
 
 
     _proto.Init = function () {
@@ -45,7 +46,7 @@ var Ground = (function (_super) {
         this.m_right.pos(492,0);
         this.addChild(this.m_right);
 
-        
+        this.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
     }
     
 
@@ -66,10 +67,13 @@ var Ground = (function (_super) {
         var t_leveData = GameLevelData[t_index];
 
         switch (t_index) {
-            case 2:
+            case 6:
+                this.mouseEnabled = true;
+                this.mouseEnabled = true;
                 break;
         
             default:
+                this.mouseEnabled = false;
                 break;
         }
     }
@@ -80,6 +84,7 @@ var Ground = (function (_super) {
         this.m_right.skin ="game_resoure/groundRight.png";
 
         this.m_crackNum = 1;
+        this.mouseEnabled = false;
     }
 
     
@@ -87,6 +92,9 @@ var Ground = (function (_super) {
      * update刷新
      */
     _proto.onUpdate = function () {
+        if(this.curRock == null){
+            this.curRock = SceneManager.getInstance().currentScene.curRock;
+        }
         // if(this.curCar == null){
         //     this.curCar = SceneManager.getInstance().currentScene.curCar;
         // }
@@ -106,6 +114,32 @@ var Ground = (function (_super) {
         this.m_crackNum++;
     }
 
+    /**按下移动监听事件 */
+    _proto._mouseMoveEvent = function(_event){
+        if(this.curRock == null)
+            return;
+        
+        var t_scene = SceneManager.getInstance().currentScene;
+
+        // Gamelog("---move x="+_event.stageX+",y="+_event.stageY);
+        // return;
+       
+        var t_rad = Math.atan2(Laya.stage.height - _event.stageY,Laya.stage.width - _event.stageX) / Math.PI * 180;  //注意参数（y,x） Y在前，X在后
+        // Gamelog("---rotation t_rad="+t_rad);
+        t_scene.gameBox.rotation = t_rad; 
+        
+        if(t_rad < 0){
+            t_scene.gameBox.rotation = 0; 
+        }
+
+        if(t_rad >= 6){
+            t_scene.gameBox.rotation = 6; 
+            this.mouseEnabled = false;
+            this.curRock.m_canRotate = true;
+            this.curRock.m_autoRotate = true;
+            
+        }
+    }
     
 
     return Ground;

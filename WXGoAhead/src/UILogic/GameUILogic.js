@@ -29,7 +29,7 @@ var GameUILogic = (function (_super) {
         this.updateGoldNum();
         this.updateLifeNum();
 
-        wxGame.getInstance().showClubBtn();
+        wxGame.getInstance().showClubBtn(true);
     }
     
     _proto.onDestroy = function () {

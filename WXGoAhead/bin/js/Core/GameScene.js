@@ -18,6 +18,7 @@ var GameScene = (function (_super) {
     _proto.curLevelIndex = 0;                                                //当前关卡id
     _proto.curRock = null;                                                   //当前石头
     _proto.curGround = null;                                                 //当前地面
+    _proto.curBomb = null;                                                   //当前炸弹
   
 
     _proto.Init = function () {
@@ -37,9 +38,10 @@ var GameScene = (function (_super) {
 
 
         this.curLevelIndex = 0;
+        // this.curLevelIndex = 1;
         
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
-        // this.gameUI.moveBox.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        // Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
 
         //自动适配完后初始化
         Laya.timer.frameOnce(8, this, this.delayInitShow);
@@ -56,6 +58,7 @@ var GameScene = (function (_super) {
     //自动适配完后初始化
      _proto.delayInitShow = function () {
 
+        this.gameUI.box_ground.visible = false;
         //创建石头
         this.curRock = new Rock();
         var t_rockPoint = this.gameUI.moveBox.localToGlobal(new Point(this.gameUI.img_stone.x,this.gameUI.img_stone.y),true);
@@ -82,17 +85,45 @@ var GameScene = (function (_super) {
         this.curGround.pos(t_groundPoint.x,t_groundPoint.y);
         this.curGround.initGround(t_groundPoint);
         this.gameBox.addChild(this.curGround);
+        // this.curGround.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
 
         // this.initLevelData();
         this.startGame();
+
+        
      }
 
+     //创建炸弹
+     _proto.createBomb = function(_point){
+        this.curBomb = new Bomb();
+        this.curBomb.pos(_point.x,_point.y);
+        this.gameBox.addChild(this.curBomb);
+     }
      //初始化关卡数据
      _proto.initLevelData = function(){
+
         this.gameUI.initLevel();
         this.curCar.initLevel();
         this.curRock.initLevel();
         this.curGround.initLevel();
+
+        switch (this.curLevelIndex) {
+            case 6:
+                this.gameBox.anchorX = 1;
+                this.gameBox.anchorY = 1;
+                this.gameBox.pos(Laya.stage.width,Laya.stage.height);
+                // Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+                this.gameBox.rotation = 0;
+                break;
+        
+            default:
+                this.gameBox.anchorX = 0;
+                this.gameBox.anchorY = 0;
+                this.gameBox.pos(0,0);
+                this.gameBox.rotation = 0;
+                break;
+        }
+
 
         
      }
@@ -146,6 +177,12 @@ var GameScene = (function (_super) {
         if(this.curRock != null){
             this.curRock.onUpdate();
         }
+        if(this.curBomb != null){
+            this.curBomb.onUpdate();
+        }
+        if(this.curGround != null){
+            this.curGround.onUpdate();
+        }
 
     }
 
@@ -158,8 +195,21 @@ var GameScene = (function (_super) {
     }
     /**按下移动监听事件 */
     _proto._mouseMoveEvent = function(_event){
-        var tarPos = this.heroBox.globalToLocal(new Point(_event.stageX,_event.stageY));
-        
+        if(this.curRock == null){
+            return;
+        }
+        // Gamelog("---move x="+_event.stageX+",y="+_event.stageY);
+        var t_rad = Math.atan2(Laya.stage.height - _event.stageY,Laya.stage.width - _event.stageX) / Math.PI * 180;  //注意参数（y,x） Y在前，X在后
+        // Gamelog("---rotation t_rad="+t_rad);
+        this.gameBox.rotation = t_rad; 
+
+        if(t_rad >= 6){
+            this.gameBox.rotation = 6; 
+            this.curGround.off(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+            this.curRock.m_canRotate = true;
+            this.curRock.m_autoRotate = true;
+            
+        }
     }
 
 

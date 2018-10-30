@@ -69,6 +69,9 @@ function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
     Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
+    Laya.Animation.createFrames(["game_resoure/bomb.png","game_resoure/bombIgnite1.png","game_resoure/bombIgnite2.png"], "bombIgnite");
+    Laya.Animation.createFrames(["game_resoure/bombBlast1.png","game_resoure/bombBlast2.png"], "bombBlast");
+    Laya.Animation.createFrames(["game_resoure/stoneShatter1.png","game_resoure/stoneShatter2.png","game_resoure/stoneShatter3.png"], "stoneShatter");
     
     SceneManager.getInstance().currentScene = new GameScene();
     wxGame.getInstance().createVideoAD();

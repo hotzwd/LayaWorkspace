@@ -347,6 +347,34 @@ var wxGame = (function (_super) {
         }
         return 0
     }
+    /**显示微信游戏圈 */
+    _proto.showClubBtn = function(_show){
+        if (Browser.onMiniGame) {
+
+            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
+                return;
+            }
+            if(this.btn_club == null){
+                // this.btn_club.destroy();
+                this.btn_club = wx.createGameClubButton({
+                    icon: 'white',
+                    style: {
+                        left: 10,
+                        top: 50,
+                        width: 40,
+                        height: 40
+                    }
+                })
+            }
+
+            if(_show){
+                this.btn_club.show();
+            }else{
+                this.btn_club.hide();
+            }
+            
+        }
+    }
 
     return {
         getInstance: getInstance

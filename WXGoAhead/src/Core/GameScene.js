@@ -37,8 +37,8 @@ var GameScene = (function (_super) {
         Laya.stage.addChild(this.gameBox);
 
 
-        // this.curLevelIndex = 0;
-        this.curLevelIndex = 6;
+        this.curLevelIndex = 0;
+        // this.curLevelIndex = 1;
         
         // this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
         // Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
