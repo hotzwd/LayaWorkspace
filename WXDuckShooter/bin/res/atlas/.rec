@@ -6,7 +6,6 @@ P 6037C944 audio_icon_02.png
 R 5E4A35C7 bg_game.jpg
 R 24A2BCBC bg_menu.jpg
 P A7A7E50F bg_tile.png
-R 48A835A8 box.png
 P 28666177 btn_play.png
 P 3E16E2CF bullet.png
 P 739AC45A but_exit.png
@@ -15,6 +14,7 @@ P 40585C15 gun_sight.png
 P 1E5E2E8C hit_icon_01.png
 P 0F56B105 hit_icon_02.png
 R 0D10B26D hit_panel.png
+R 48A835A8 img_box.png
 R 4F56659C img_tree.png
 P F94C8219 life_panel.png
 P 7B44AF3D shot_panel.png

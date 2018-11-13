@@ -21,8 +21,29 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":-320,"width":1664,"skin":"Game/bg_tile.png","height":768,"centerY":0,"centerX":0,"sizeGrid":"10,10,10,10"}},{"type":"Image","props":{"width":1366,"skin":"Game/bg_game.jpg","height":768,"centerY":0,"centerX":0}},{"type":"Box","props":{"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]}]},{"type":"Image","props":{"y":108,"x":0,"skin":"Game/img_tree.png"}},{"type":"Box","props":{"y":0,"x":-149,"width":1664,"var":"duckLayer","height":768,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":478,"x":1,"width":1366,"skin":"Game/grass.png","height":373}},{"type":"Box","props":{"y":10,"x":-139,"width":1664,"var":"gameLayer","height":768,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":641,"x":484,"skin":"Game/hit_panel.png"}},{"type":"Image","props":{"y":607,"x":1114,"skin":"Game/shot_panel.png"}},{"type":"Image","props":{"y":601,"x":1114,"skin":"Game/life_panel.png"}},{"type":"Text","props":{"y":651,"x":630,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":651,"x":732,"width":232,"text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"}}]};
+		GameUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1664,"skin":"Game/bg_tile.png","height":768,"centerY":0,"centerX":0,"sizeGrid":"10,10,10,10"}},{"type":"Image","props":{"width":1366,"skin":"Game/bg_game.jpg","height":768,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":76,"x":149,"skin":"Game/img_tree.png"}},{"type":"Box","props":{"x":171,"width":1664,"var":"duckLayer","height":768,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":483,"x":149,"width":1366,"skin":"Game/grass.png","height":373}},{"type":"Box","props":{"y":10,"x":181,"width":1664,"var":"gameLayer","height":768,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":643,"x":629,"skin":"Game/hit_panel.png"}},{"type":"Image","props":{"y":609,"x":1259,"skin":"Game/shot_panel.png"}},{"type":"Image","props":{"y":603,"x":1259,"skin":"Game/life_panel.png"}},{"type":"Text","props":{"y":653,"x":775,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":653,"x":877,"width":232,"text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"}}]}]};
 		return GameUI;
+	})(View);
+var GameOverUI=(function(_super){
+		function GameOverUI(){
+			
+		    this.btn_close=null;
+
+			GameOverUI.__super.call(this);
+		}
+
+		CLASS$(GameOverUI,'ui.GameOverUI',_super);
+		var __proto__=GameOverUI.prototype;
+		__proto__.createChildren=function(){
+		    			View.regComponent("Text",laya.display.Text);
+
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameOverUI.uiView);
+
+		}
+
+		GameOverUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":179,"x":521,"skin":"Game/img_box.png"}},{"type":"Text","props":{"y":222,"x":730,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Image","props":{"y":153,"x":1098,"var":"btn_close","skin":"Game/but_exit.png"}}]}]};
+		return GameOverUI;
 	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
@@ -41,6 +62,6 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":10,"x":-310,"width":1664,"skin":"Game/bg_tile.png","height":768,"centerY":0,"centerX":0,"sizeGrid":"10,10,10,10"}},{"type":"Box","props":{"y":10,"x":10,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]}]},{"type":"Image","props":{"width":1366,"skin":"Game/bg_menu.jpg","centerY":0,"centerX":0}},{"type":"Button","props":{"y":581,"x":568,"var":"btn_start","stateNum":1,"skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始"}}]};
+		GameStartUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]}]},{"type":"Image","props":{"y":0,"x":0,"width":1664,"skin":"Game/bg_tile.png","height":768,"centerY":0,"centerX":0,"sizeGrid":"10,10,10,10"}},{"type":"Image","props":{"y":0,"x":149,"width":1366,"skin":"Game/bg_menu.jpg","centerY":0,"centerX":0}},{"type":"Button","props":{"y":581,"x":717,"var":"btn_start","stateNum":1,"skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始"}}]}]};
 		return GameStartUI;
 	})(View);

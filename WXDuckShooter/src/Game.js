@@ -34,11 +34,11 @@ function beginLoadGoHead() {
      var arr = [
                 //图集
                 // ["res/atlas/game.atlas",Laya.Loader.ATLAS],
-                ["res/atlas/game_resoure.atlas",Laya.Loader.ATLAS],
-                // ["res/atlas/monster.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/Ducks/Duck1.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
                 // //图片
-                ["game_resoure/background.jpg",Laya.Loader.IMAGE],
+                ["Game/bg_game.jpg",Laya.Loader.IMAGE],
                 // ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
                 // ["game/img_line.png",Laya.Loader.IMAGE],
                 // ["game/paohangbang-di.png",Laya.Loader.IMAGE],
@@ -67,13 +67,14 @@ function beginLoadGoHead() {
 
 function loadingCallbackGO() {
 
-    Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
-    Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
-    Laya.Animation.createFrames(["game_resoure/bomb.png","game_resoure/bombIgnite1.png","game_resoure/bombIgnite2.png"], "bombIgnite");
-    Laya.Animation.createFrames(["game_resoure/bombBlast1.png","game_resoure/bombBlast2.png"], "bombBlast");
-    Laya.Animation.createFrames(["game_resoure/stoneShatter1.png","game_resoure/stoneShatter2.png","game_resoure/stoneShatter3.png"], "stoneShatter");
+    // Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
+    // Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
+    // Laya.Animation.createFrames(["game_resoure/bomb.png","game_resoure/bombIgnite1.png","game_resoure/bombIgnite2.png"], "bombIgnite");
+    // Laya.Animation.createFrames(["game_resoure/bombBlast1.png","game_resoure/bombBlast2.png"], "bombBlast");
+    // Laya.Animation.createFrames(["game_resoure/stoneShatter1.png","game_resoure/stoneShatter2.png","game_resoure/stoneShatter3.png"], "stoneShatter");
     
     SceneManager.getInstance().currentScene = new GameScene();
+    UIManager.getInstance().showUI("GameStartUI");
     wxGame.getInstance().createVideoAD();
     // laya.net.LocalStorage.clear();
 
