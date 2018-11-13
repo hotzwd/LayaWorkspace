@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":3,
+    "selectedBox":3,
+    "selecteID":6,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -97,7 +97,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":645,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"},
+                    "props":{"y":645,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"shuzi1Font","color":"#e7f106","bold":true,"align":"center"},
                     "nodeParent":3,
                     "label":"Label(label_overScore)",
                     "isDirectory":false,

@@ -30,7 +30,7 @@ var GameScene = (function(_super){
     var GameTime = 120;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
-    var CreatePropNum = 10;                                                     //发射多少个后创建道具球
+    var CreatePropNum = 20;                                                     //发射多少个后创建道具球
 
     //初始化当前类属性
        
@@ -179,7 +179,7 @@ var GameScene = (function(_super){
         this.shootPropNum++;
         if(this.shootPropNum >= CreatePropNum){
             this.shootPropNum = 0;
-            //this.createPropBubble();
+            this.createPropBubble();
         }
         
 
@@ -348,6 +348,12 @@ var GameScene = (function(_super){
             this.gameUI.anim_panda.play(0,false,"pandaToulan");
             // this.gameUI.anim_panda.stop();
             MusicManager.getInstance().playSound("res/music/4.wav");
+
+            if (this.pointBoard != null) {
+                this.pointBoardPreAngle = this.pointBoard.rotation;
+                this.pointBoard.destroy(true);
+                this.pointBoard = null;
+            }
         }
     }
     /**
@@ -888,149 +894,12 @@ var GameScene = (function(_super){
         }
        // this.createPlayerBubble(createBoardNumList);
         //----------屏蔽生成金蛋
-        // this.createEggBubble(createBoardNumList);
+        this.createEggBubble(createBoardNumList);
         //生成的最后一行作为顶部
         this.gameTopRow = mapBeginLine;
         //生成一行重置发射个数
         // this.shootNum = 0;
 
-    }
-    /**生成玩家头像球 */
-    _proto.createPlayerBubble = function(createBoardNumList){
-        Gamelog("----playerDataList length="+GameModule.getInstance().playerDataList.length+",m_playerBubbleList ="+this.m_playerBubbleList.length);
-        if(this.m_playerBubbleList.length < GameModule.getInstance().playerDataList.length - 1){
-            //获得没有头像的
-            var newPlayerDataList = [];
-            for(var i=0; i<GameModule.getInstance().playerDataList.length;i++){
-                var data = GameModule.getInstance().playerDataList[i];
-                var isHave = false;
-                for(var j=0; j<this.m_playerBubbleList.length; j++){
-                    if(data.playerId == this.m_playerBubbleList[j].playerId)
-                        isHave = true;
-                }
-                if(!isHave && data.hp > 0 && data.playerId != UserModule.getInstance().playerId){
-                    newPlayerDataList.push(data);
-                }
-            }
-
-            if(newPlayerDataList.length >0){
-                var crateIndex = 0;
-                var createPlayerBorder = [];
-                do{
-                    var randomNum = (createBoardNumList.length > 3) ? 3: createBoardNumList.length;
-                    var addNum = ((createBoardNumList.length - 3)>0) ? (createBoardNumList.length - 3) :0;
-                    var numIndex = parseInt(Math.random()*randomNum + addNum, 10);;
-                    var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-                    var isSame = false;
-                    for(var x=0;x<createPlayerBorder.length;x++){
-                        if(numY == createPlayerBorder[x].Col &&
-                        createBoardNumList[numIndex].Line == createPlayerBorder[x].Line){
-                            isSame = true;
-                        }
-                    }
-                    //如果没有重复
-                    if(!isSame){
-                        createPlayerBorder.push({
-                            Line: createBoardNumList[numIndex].Line,
-                            Col: numY
-                        });
-
-                        Gamelog("-------create player line="+createBoardNumList[numIndex].Line+",col="+numY);
-                        var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-                        for(var y=0; y<this.m_listBubble.length; y++){
-                            if(this.m_listBubble[y] === oldBubble){
-                                this.m_listBubble.splice(y,1);
-                            }
-                        }
-                        oldBubble.destroy();
-
-                        var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
-                        var tempBubble = new Bubble();
-                        tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
-                        // tempBubble.skin = newPlayerDataList[crateIndex].icon;
-                        tempBubble.anchorX  = 0.5;
-                        tempBubble.anchorY  = 0.5;
-                        tempBubble.width = BUBBLE_RADIUS*2;
-                        tempBubble.height = BUBBLE_RADIUS*2;
-                        tempBubble.playerData = newPlayerDataList[crateIndex];
-                        tempBubble.bubbleType = BubbleTypes.Player;
-                        //添加一个新图片
-                        var imgBg = new Laya.Image(newPlayerDataList[crateIndex].icon);
-                        imgBg.width = tempBubble.width;
-                        imgBg.height = tempBubble.height;
-                        //遮罩
-                        var maskImg = new Laya.Image("game/img_qiu_1.png");
-                        // maskImg.anchorX  = 0.5;
-                        // maskImg.anchorY  = 0.5;
-                        // tempBubble.mask = maskImg;
-                        imgBg.mask = maskImg;
-                        
-                        tempBubble.addChild(imgBg);
-                        //泡泡透明层
-                        var popImg = new Laya.Image("game/img_qiu_zhezhao.png");
-                        tempBubble.addChild(popImg);
-
-                        bubblePanel.addChild(tempBubble);
-                        tempBubble.pos(pos.x,pos.y);
-
-                        this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
-                        this.m_listBubble.push(tempBubble);
-                        //增加已创建的头像泡泡
-                        this.m_playerBubbleList.push(newPlayerDataList[crateIndex]);
-                        crateIndex++;
-                    }
-                
-
-                }while(createPlayerBorder.length != newPlayerDataList.length)
-            }
-        }
-    }
-    /**生成金蛋球 */
-    _proto.createEggBubble = function(createBoardNumList){
-        if(this.m_propBubleList.length < GameModule.getInstance().eggNum){
-
-            var numIndex = createBoardNumList.length -1;
-            // var numIndex = 0;
-            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-
-            do{
-                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-
-            }while(oldBubble.bubbleType != BubbleTypes.Normal);
-
-            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
-            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-            for(var y=0; y<this.m_listBubble.length; y++){
-                if(this.m_listBubble[y] === oldBubble){
-                    this.m_listBubble.splice(y,1);
-                }
-            }
-            oldBubble.destroy();
-
-            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
-            var tempBubble = new Bubble();
-            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
-            tempBubble.skin = "game/jindan_1.png";
-            tempBubble.anchorX  = 0.5;
-            tempBubble.anchorY  = 0.5;
-            tempBubble.width = BUBBLE_RADIUS*2;
-            tempBubble.height = BUBBLE_RADIUS*2;
-            tempBubble.bubbleType = BubbleTypes.Egg;
-            //金蛋动画
-            var eggAnim = new Laya.Animation();
-            eggAnim.interval = 100;
-            tempBubble.addChild(eggAnim);
-            eggAnim.play(0,true,"jindan");
-
-            tempBubble.pos(pos.x,pos.y);
-            bubblePanel.addChild(tempBubble);
-            
-            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
-            this.m_listBubble.push(tempBubble);
-            this.m_propBubleList.push(tempBubble);
-        }
     }
 
     /**删除人像泡泡 */
@@ -1131,11 +1000,12 @@ var GameScene = (function(_super){
         if(this.currentTime<=0){
                 Laya.timer.clear(this,this.animateTimeBased);
                 this.gameOver();
-                if(!this.isShowShared){
-                    UIManager.getInstance().showUI("GameSharedUI");
-                }else{
-                    this.gameUI.gameoverByTime();
-                }
+                this.gameUI.gameoverByTime();
+                // if(!this.isShowShared){
+                //     UIManager.getInstance().showUI("GameSharedUI");
+                // }else{
+                //     this.gameUI.gameoverByTime();
+                // }
         }
     }
     //接收服务器游戏结束
@@ -1144,6 +1014,19 @@ var GameScene = (function(_super){
         this.gameOver();
         this.gameUI.gameoverByTime();
     }
+
+    /**
+     * 游戏暂停
+     */
+     _proto.pauseGame = function(){
+         Laya.timer.clear(this,this.animateTimeBased);
+     }
+     /**恢复游戏 */
+     _proto.resumeGame = function(){
+         //游戏倒计时
+        Laya.timer.loop(1000, this, this.animateTimeBased);
+     }
+
     /**游戏结束 */
     _proto.gameOver = function(){
         // Gamelog("----!!!!!!!!!游戏结束-------");
@@ -1235,6 +1118,7 @@ var GameScene = (function(_super){
         
         var num = Math.random()*3 + 1;
         num = parseInt(num, 10);
+        // num =1;
         switch(num){
             case 1:
                 this.prepareBubble.skin = "game/img_qiu_fireworks.png";
@@ -1284,6 +1168,7 @@ var GameScene = (function(_super){
                     cleanList.push(curBubble);
                 }
         }
+        
         //礼花弹效果 
         cleanList.push(this.m_curReady);
 
@@ -1489,6 +1374,61 @@ var GameScene = (function(_super){
         }while(sameIndex != samelist.length)
 
         return samelist;
+    }
+
+    /**生成金蛋球 */
+    _proto.createEggBubble = function(createBoardNumList){
+        if(GameInFackBook){
+            if(window.FBRewardAd == null || !window.FBRewardAdLoad)
+                return;
+        }
+
+        if(this.m_propBubleList.length < 1){
+
+            // var numIndex = createBoardNumList.length -1;
+            var numIndex = parseInt(Math.random() * createBoardNumList.length);
+            // numIndex = 0;
+            
+            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            do{
+                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            }while(oldBubble.bubbleType != BubbleTypes.Normal);
+
+            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+            for(var y=0; y<this.m_listBubble.length; y++){
+                if(this.m_listBubble[y] === oldBubble){
+                    this.m_listBubble.splice(y,1);
+                }
+            }
+            oldBubble.destroy();
+
+            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
+            var tempBubble = new Bubble();
+            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
+            tempBubble.skin = "game/jindan_1.png";
+            tempBubble.anchorX  = 0.5;
+            tempBubble.anchorY  = 0.5;
+            tempBubble.width = BUBBLE_RADIUS*2;
+            tempBubble.height = BUBBLE_RADIUS*2;
+            tempBubble.bubbleType = BubbleTypes.Egg;
+            //金蛋动画
+            var eggAnim = new Laya.Animation();
+            eggAnim.interval = 100;
+            tempBubble.addChild(eggAnim);
+            eggAnim.play(0,true,"jindan");
+
+            tempBubble.pos(pos.x,pos.y);
+            bubblePanel.addChild(tempBubble);
+            
+            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
+            this.m_listBubble.push(tempBubble);
+            this.m_propBubleList.push(tempBubble);
+        }
     }
 
     return GameScene;

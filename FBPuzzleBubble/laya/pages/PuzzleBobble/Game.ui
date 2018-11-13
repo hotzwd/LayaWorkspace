@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":73,
-    "selecteID":72,
+    "selecteID":60,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -300,7 +300,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":610,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305},
+                    "props":{"y":742,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305},
                     "nodeParent":73,
                     "label":"Image",
                     "isDirectory":false,
@@ -314,7 +314,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":577,"x":489,"skin":"game/img_youxiguize.png"},
+                    "props":{"y":709,"x":489,"skin":"game/img_youxiguize.png"},
                     "nodeParent":73,
                     "label":"Image",
                     "isDirectory":false,
@@ -327,7 +327,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":839,"x":517,"var":"btn_start","stateNum":"2","skin":"game/btn_kaishi.png"},
+                    "props":{"y":971,"x":517,"var":"btn_start","stateNum":"2","skin":"game/btn_kaishi.png"},
                     "nodeParent":73,
                     "label":"Button(btn_start)",
                     "isDirectory":false,
@@ -340,7 +340,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":698,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"},
+                    "props":{"y":830,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
                     "label":"Label",
                     "isOpen":true,
@@ -354,7 +354,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":738,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"},
+                    "props":{"y":870,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
                     "label":"Label",
                     "isOpen":true,
@@ -368,7 +368,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":779,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"},
+                    "props":{"y":911,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"},
                     "nodeParent":73,
                     "label":"Label",
                     "isOpen":true,
@@ -382,13 +382,40 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":959,"x":549,"width":174,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","label":"世界排行>>","height":50},
+                    "props":{"y":1079,"x":549,"width":174,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","label":"世界排行>>","height":50},
                     "nodeParent":73,
                     "label":"Button(btn_rank)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":110,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":221,"x":384,"skin":"game/logo.png"},
+                    "nodeParent":73,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":111,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":1244,"x":300,"text":"V1.0","fontSize":26,"font":"SimHei","color":"#9db4bc"},
+                    "nodeParent":73,
+                    "label":"Label",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":112,
                     "child":[
                         ]
                 }],

@@ -68,25 +68,6 @@ var GameSharedUILogic = (function(_super){
             }
         );
 
-        // var t_videoAd = wxGame.getInstance().videoAd;
-        // t_videoAd.show();
-        // t_videoAd.onClose( function(res){
-        //     // 用户点击了【关闭广告】按钮
-        //     // 小于 2.1.0 的基础库版本，res 是一个 undefined
-        //     if (res && res.isEnded || res === undefined) {
-        //         // 正常播放结束，可以下发游戏奖励
-        //         UIManager.getInstance().closeUI("GameSharedUI",true);
-        //         var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
-        //         SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
-        //     }
-        //     else {
-        //         // 播放中途退出，不下发游戏奖励
-        //         UIManager.getInstance().closeUI("GameSharedUI",true);
-        //         UIManager.getInstance().showUI("GameoverUI");
-        //         // SceneManager.getInstance().currentScene.gameUI.gameoverByTime();
-        //     }
-        // })
-
     }
 
     return GameSharedUILogic;

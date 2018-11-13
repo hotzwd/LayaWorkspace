@@ -97,16 +97,6 @@ var GameUILogic = (function(_super){
         this.flyAnim.zOrder = 1;
         Laya.stage.addChild(this.flyAnim);
         this.flyAnim.visible = false;
-        // //弹出 开始
-        // var popPos = new Point(this.img_start.width/2,this.img_start.height/2);
-        // popPos =  this.img_start.localToGlobal(popPos);
-        // this.img_pop.skin = this.img_start.skin;
-        // this.img_pop.pos(popPos.x,popPos.y);
-        // this.img_pop.anchorX = 0.5;
-        // this.img_pop.anchorY = 0.5;
-        // Laya.stage.addChild(this.img_pop);
-        // this.img_pop.zOrder = 10;
-        // this.img_pop.visible = false;
 
         //boss动画
         this.bossAnim.interval = 60;
@@ -228,112 +218,6 @@ var GameUILogic = (function(_super){
         }
     }
 
-    //boss伤害
-    _proto.bossHurtEffect = function(_data){
-        this.bossAnim.visible = true;
-        this.bossAnim.width = 869;
-        this.bossAnim.height = 674;
-        this.bossAnim.pos(-500,40);
-        this.bossAnim.autoPlay = false;
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width/2 - 350
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.play(0,false,"bossHurt");
-            this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-        }));
-
-    }
-    //boss伤害人物效果
-    _proto.bossHurtEffectEnd = function(_anim){
-        Gamelog("------造成全部伤害");
-        MusicManager.getInstance().playSound("res/music/17.wav");
-        var tempList = new Array();
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId != UserModule.getInstance().playerId && data.hp > 0){
-                this.playerHurtHp(data.playerId,10);
-            }
-        }
-        GameModule.getInstance().sendHurtPlayer(2,"");
-        // var notify = new Notification(MessageEventName.UpdatePlayerListEvent,this,tempList);
-        // notify.Send();
-
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width + 900
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.visible = false;
-            this.bossAnim.off(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            // this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            
-        }));
-    }
-
-    //获得金蛋动画效果
-    _proto.showEggEffect = function(){
-        MusicManager.getInstance().playSound("res/music/18.wav");
-        var imgGuang = this.imgGuang;
-        var b_point = new Point(imgGuang.x + imgGuang.width /2,imgGuang.y + imgGuang.height /2);
-
-        var eggBox = new Laya.Box();
-        // eggBox.anchorX = 0.5;
-        // eggBox.anchorY = 0.5;
-        eggBox._zOrder = 0.2;
-        eggBox.pos(b_point.x,b_point.y);
-        Laya.stage.addChild(eggBox);
-
-        var eggBg = new Laya.Image("game/img_guangxiao.png");
-        eggBg.anchorX = 0.5;
-        eggBg.anchorY = 0.5;
-        eggBox.addChild(eggBg);
-
-        var eggImg = new Laya.Image("game/img_dajindan.png");
-        eggImg.anchorX = 0.5;
-        eggImg.anchorY = 0.5;
-        eggBox.addChild(eggImg);
-
-        var timeLineBg = new Laya.TimeLine();
-        timeLineBg.addLabel("show",0).to(eggBg,
-        {
-            rotation:360
-        },4000);
-        timeLineBg.play(0,true);
-
-        //动画
-        var timeLineEgg = new Laya.TimeLine();
-        eggBox.scaleX =0;
-        eggBox.scaleY = 0;
-        var playerCell = this.playerList.getCell(0);
-        var playerPoint = playerCell.localToGlobal(new Laya.Point(0,0));
-        timeLineEgg.addLabel("one",0).to(eggBox,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },500).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },500);
-        timeLineEgg.play(0,false);
-        timeLineEgg.on(Laya.Event.COMPLETE,this,function(){
-            timeLineBg.destroy();
-            eggBox.destroy();
-        });
-    }
     /**改变发射球 */
     _proto.onChangeBubble = function(){
         SceneManager.getInstance().currentScene.changeBubble();
@@ -353,20 +237,8 @@ var GameUILogic = (function(_super){
     
     /**声音开关 */
     _proto.onSoundClick = function(e){
-        // e.stopPropagation();
-        // SceneManager.getInstance().currentScene.gameOver();
         MusicManager.getInstance().playSound("res/music/1.wav");
 
-        // var soundSwitch = LocalStorage.getItem("soundSwitch");
-        // if(soundSwitch == 1){
-        //     this.btn_sound.skin = "game/btn_shengyin_guan.png";
-        //     LocalStorage.setItem("soundSwitch",0);
-        //     SoundManager.stopAll();
-        // }else{
-        //     LocalStorage.setItem("soundSwitch",1);
-        //     this.btn_sound.skin = "game/btn_shengyin_kai.png";
-        //     MusicManager.getInstance().playMusic("res/music/1.mp3");
-        // }
         var soundSwitch = MusicManager.getInstance().managerSwitch;
         if(soundSwitch == 1){
             this.btn_sound.skin = "game/btn_shengyin_guan.png";
@@ -389,6 +261,10 @@ var GameUILogic = (function(_super){
         this.anim_panda.play(0,true,"pandaDaiji");
         this.anim_panda.stop();
 
+        if (GameInFackBook) {
+            FBGame.getInstance().loadRewardAd();
+            FBGame.getInstance().loadInterstitialAd();
+        }
         //this.onStartClick();
     }
 
@@ -430,7 +306,7 @@ var GameUILogic = (function(_super){
         SceneManager.getInstance().currentScene.createPointLine(-90);
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
-        if(Laya.Browser.onFacebook){
+        /*if(Laya.Browser.onFacebook){
             console.log("----------share ")
             FBInstant.shareAsync({
                 intent: 'REQUEST',
@@ -440,7 +316,7 @@ var GameUILogic = (function(_super){
                 }).then(function() {
                 // 继续游戏
                 });
-        }
+        }*/
     }
 
     _proto.onTweenFinish = function(){
@@ -456,8 +332,8 @@ var GameUILogic = (function(_super){
     /**时间到结束游戏 */
     _proto.gameoverByTime = function(){
         this.label_time.text = 0;
-        var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
-        gameoverUI.visible = false;
+        // var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
+        // gameoverUI.visible = false;
         if(!this.showImgGameover){
         // if(this.img_pop.alpha <= 1 && !this.img_pop.visible){
             MusicManager.getInstance().playSound("res/music/3.wav");
@@ -495,7 +371,7 @@ var GameUILogic = (function(_super){
         //     scaleX:1,
         //     scaleY:1,
         // },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
-        //     // this.img_pop.visible = false;
+            
         //     this.imgTong.visible = false;
         //     this.img_black.visible = true;
         //     this.showImgGameover = true;
@@ -512,7 +388,8 @@ var GameUILogic = (function(_super){
     _proto.gameoverUI = function(){
         // this.gameoverUI.visible = true;
         this.img_black.visible = false;
-        UIManager.getInstance().getUI("GameoverUI").visible = true;
+        UIManager.getInstance().showUI("GameoverUI");
+        // UIManager.getInstance().getUI("GameoverUI").visible = true;
         this.imgTong.visible = false;
         this.hideAllImgGuang();
         this.anim_panda.stop();
@@ -523,373 +400,19 @@ var GameUILogic = (function(_super){
     /**关闭游戏 */
     _proto.onCloseGame = function(){
         //跳转到玩吧
-        window.location.href=UserModule.getInstance().redirect;
-    }
-
-    //接收服务器返回排行榜
-    _proto.updatePlayerListReceiver = function(notify){
-        //遍历需要修改的玩家hp 获得减掉的hp
-        //调用this.playerHurtHp()
-        // var updateList = notify.Content;
-        var hurtPlayerData = notify.Content;
-        //伤害自己的人物Id
-        if(hurtPlayerData.attackPlayerId != null){
-            this.hurtSelfPlayerId = hurtPlayerData.attackPlayerId;
-        }
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId == hurtPlayerData.playerId){
-                this.playerHurtHp(data.playerId,data.hp - hurtPlayerData.hp);
-            }
-        }
-    }
-    //玩家掉血效果
-    _proto.playerListHurtEffect = function(_playerData,_hp){
-        var isLive = false;
-        var maxHp = 0;
-        var maxIndex = 0;
-        var playerCell;
-        //更新list UI
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            var tempCell = this.playerList.getCell(i);
-
-            //心形图片
-            var bloodImg = tempCell.getChildByName("bloodImg");
-            bloodImg.visible = false;
-            var topImg = tempCell.getChildByName("topImg");
-            topImg.visible = false;
-            //血量数字
-            var bloodLabel = tempCell.getChildByName("bloodLabel");
-            bloodLabel.visible = false;
-            var deadImg = tempCell.getChildByName("deadImg");
-            deadImg.visible = false;
-            //变灰
-            tempCell.gray = false;
-
-            if(data.playerId == _playerData.playerId){
-                playerCell = tempCell;
-                if(data.hp >0){
-                    isLive = true;
-                    data.hp = _playerData.hp;
-                }
-            }
-            //血条
-            var progres_hp = tempCell.getChildByName("progres_hp");
-            var hpValue = data.hp / data.baseHp;
-            if(hpValue > 0.75){
-                progres_hp.skin = "game/progress_green.png";
-            }else if(hpValue > 0.25){
-                progres_hp.skin = "game/progress_yellow.png";
-            }else{
-                progres_hp.skin = "game/progress_red.png";
-            }
-            progres_hp.value  = hpValue;
-
-            //如果血量大于0
-            if(data.hp > 0){
-                bloodImg.visible  = true;
-                bloodLabel.visible = true;
-                bloodLabel.text = data.hp;
-            }else{
-                deadImg.visible = true;
-                tempCell.gray = true;
-                bloodLabel.text = 0;
-            }
-            //比较最大血量
-            if(data.hp > maxHp){
-                maxHp =  data.hp;
-                maxIndex = i;
-            }
-
-        }
-        var topCell = this.playerList.getCell(maxIndex);
-        //设置最大血量
-        if(maxHp > 0){
-            topCell.getChildByName("topImg").visible = true;
-        }
-
-        //可以受伤才执行效果
-        // if(hurtPlayer.isHurt){
-        if(isLive){
-            //减血文字
-            var bloodLabel = playerCell.getChildByName("bloodImg");
-            var bloodPoint = bloodLabel.localToGlobal(new Point(0,0));
-            BubbleScoreAnim(bloodPoint,"-"+_hp,"shuziRed");
-            Gamelog("------------掉血数字="+_hp);
-            //自己受伤
-            if(_playerData.playerId == UserModule.getInstance().playerId){
-                MusicManager.getInstance().playSound("res/music/10.wav");
-                if(_playerData.hp <=0){
-                    this.gameoverByBottom();
-                }
-                this.img_bloodBg.visible = true;
-                this.img_bloodBg.alpha = 1;
-                var timeLineBlood = new Laya.TimeLine();
-                timeLineBlood.addLabel("hide",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200).addLabel("show",0).to(this.img_bloodBg,
-                {
-                    alpha:1
-                },200).addLabel("hide1",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200);
-                timeLineBlood.play(0,false);
-                timeLineBlood.on(Laya.Event.COMPLETE,this,function(){
-                    timeLineBlood.destroy();
-                });
-                //伤害自己的人物展示效果
-                this.showAttackPlayerEffect(_hp);
-            }else{
-                MusicManager.getInstance().playSound("res/music/11.wav");
-            }
-            var img_bloodBgCell = playerCell.getChildByName("img_bloodBg");
-            img_bloodBgCell.visible = true;
-            img_bloodBgCell.alpha  = 1;
-            //闪红
-            var timeLine = new Laya.TimeLine();
-            timeLine.addLabel("hide1",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200).addLabel("show1",0).to(img_bloodBgCell,
-            {
-                alpha:1
-            },200).addLabel("hide11",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200);
-            timeLine.play(0,false);
-            timeLine.on(Laya.Event.COMPLETE,null,function(){
-                timeLine.destroy();
-            });
-        }
-
-    }
-    //人物造成伤害
-    _proto.playerHurtHp = function(_id,_hp){
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == _id){
-                playerData.hp -= _hp;
-                hurtPlayer = playerData;
-                
-            }
-            
-        }
-
-        this.playerListHurtEffect(hurtPlayer,_hp);
-
-    }
-    //初始化人物列表
-    _proto.initPlayerListData = function(){
-        _proto.dataArr = [];
-        _proto.dataArr.push(GameModule.getInstance().playerDataList[0]);
-        for(var i = 0;i < GameModule.getInstance().playerDataList.length;i++){
-            var playerData = GameModule.getInstance().playerDataList[i];
-            var dataTemp = {
-                playerId: playerData.playerId,
-                name: playerData.name,
-                hp: playerData.hp,
-                baseHp:playerData.baseHp,
-                icon: playerData.icon,
-                isTop:false,
-                isHurt:false,
-            };
-            if(playerData.playerId == UserModule.getInstance().playerId){
-                dataTemp.isTop = true;
-                _proto.dataArr[0] = dataTemp;
-            }else{
-                _proto.dataArr.push(dataTemp);
-            }
-        }
-        this.updateList();
-
-    }
-    _proto.updateList = function(e){
-        this.playerList.vScrollBarSkin = '';
-        this.playerList.array = _proto.dataArr;
-        //list渲染函数
-        this.playerList.renderHandler = new Laya.Handler(this,this.onRender);
-    }
-
-     _proto.onRender = function(cell,index){
-
-        if(index > _proto.dataArr.length) return;
-        var data = _proto.dataArr[index];
-        if(data === undefined) return;
-
-        //头像
-        var icon = cell.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = data.icon;
-            icon.visible = true;
-        }
-
-        //心形图片
-        var bloodImg = cell.getChildByName("bloodImg");
-        bloodImg.visible = false;
-        var topImg = cell.getChildByName("topImg");
-        topImg.visible = false;
-        //掉血闪红
-        var img_bloodBg = cell.getChildByName("img_bloodBg");
-        img_bloodBg.visible = false;
-        //血量数字
-        var bloodLabel = cell.getChildByName("bloodLabel");
-        bloodLabel.visible = false;
-        var deadImg = cell.getChildByName("deadImg");
-        deadImg.visible = false;
-        //变灰
-        cell.gray = false;
-
-        //血条
-        var progres_hp = cell.getChildByName("progres_hp");
-        var hpValue = data.hp / data.baseHp;
-        if(hpValue > 0.75){
-            progres_hp.skin = "game/progress_green.png";
-        }else if(hpValue > 0.25){
-            progres_hp.skin = "game/progress_yellow.png";
-        }else{
-            progres_hp.skin = "game/progress_red.png";
-        }
-        progres_hp.value  = hpValue;
-
-        //如果血量大于0
-        if(data.hp > 0){
-            bloodImg.visible  = true;
-            bloodLabel.visible = true;
-            bloodLabel.text = data.hp;
-            //如果是血量最高
-            if(data.isTop){
-                topImg.visible =true;
-            }
-        }else{
-            deadImg.visible = true;
-            cell.gray = true;
-        }
-        //闪红
-        // if(data.isHurt){
-        //     img_bloodBg.visible = true;
-        //     img_bloodBg.alpha = 1;
-        //     var timeLine = new Laya.TimeLine();
-        //     timeLine.addLabel("hide",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200).addLabel("show",0).to(img_bloodBg,
-        //     {
-        //         alpha:1
-        //     },200).addLabel("hide1",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200);
-        //     timeLine.play(0,false);
-        //     timeLine.on(Laya.Event.COMPLETE,null,function(){
-        //         timeLine.destroy();
-        //     });
-        // }
-        
-        
-     }
-
-     //释放技能
-     _proto.onBossBoxClick = function(e){
-         if(this.bossProgress.value >= 1){
-            this.bossProgress.value = 0;
-            this.bossHurtEffect();
-            this.progressAnim.visible = false;
-         }
-     }
-
-     //复制精灵
-    _proto.copySpriteSelf = function(_sprite){
-        var copySprite = new Laya.Sprite();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        for(var i=0; i<_sprite.numChildren; i++){
-            var element = _sprite.getChildAt(i);
-            copySprite.addChild(this.copySprite(element));
-        }
-
-        return copySprite;
-        
-    }
-
-    _proto.copySprite = function(_sprite){
-        var copySprite = new Laya.Node();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        return copySprite;
-    }
-
-    //攻击者头像效果
-    _proto.showAttackPlayerEffect = function(_hp){
-
-        // Gamelog("----------伤害自己的人物Id="+this.hurtSelfPlayerId);
-        var hurtSprite = new HurtPlayerBoxUILogic();
-        var b_point  = new Point(0,0);
-        b_point = this.hurtPlayerBox.localToGlobal(b_point);
-        var globalX = b_point.x;
-        var globaly = b_point.y;
-        hurtSprite.initHurtPlayerBox(this.hurtSelfPlayerId,_hp,globalX,globaly);
-        hurtSprite.zOrder = 1;
-        Laya.stage.addChild(hurtSprite);
-
-        return;
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == this.hurtSelfPlayerId){
-                hurtPlayer = playerData;
-            }
-        }
-        //减血
-        var hurtHp = hurtSprite.getChildByName("hurtHp");
-        hurtHp.text = _hp;
-        //头像
-        var icon = hurtSprite.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = hurtPlayer.icon;
-            icon.visible = true;
-        }
-        
-        var timeLineHurt = new Laya.TimeLine();
-        timeLineHurt.addLabel("one",0).to(hurtSprite,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },800).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },800);
-        timeLineHurt.play(0,false);
-        timeLineHurt.on(Laya.Event.COMPLETE,this,function(){
-            hurtSprite.destroy();
-        });
-        
+        // window.location.href=UserModule.getInstance().redirect;
     }
 
     _proto.onRankClick = function(){
         UIManager.getInstance().showUI("GameRankUI");
     }
+
+    //获得金蛋动画效果
+    _proto.showEggEffect = function(){
+        MusicManager.getInstance().playSound("res/music/18.wav");
+        UIManager.getInstance().showUI("GameEggUI");
+    }
+
+    
     return GameUILogic;
 })(GameUI);

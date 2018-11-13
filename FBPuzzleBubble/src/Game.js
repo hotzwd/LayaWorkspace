@@ -51,7 +51,7 @@ function  beginLoad(){
                 //图集
                 ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/game.atlas",Laya.Loader.ATLAS],
-                // ["res/atlas/bomb.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/paopaol.atlas",Laya.Loader.ATLAS],
                 //图片
                 ["game/bgGame.jpg",Laya.Loader.IMAGE],
                 ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],
@@ -61,7 +61,7 @@ function  beginLoad(){
                 ["game/img_di2.png",Laya.Loader.IMAGE],
                 ["game/img_di3.png",Laya.Loader.IMAGE],
                 //字体
-                // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
+                ["bitmapFont/shuzi1Font.fnt",Laya.Loader.FONT],
                 //声音
                 ["res/music/1.mp3",Laya.Loader.SOUND],
                 ["res/music/1.wav",Laya.Loader.SOUND],
@@ -127,8 +127,11 @@ function loadingCallback(){
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
+    Laya.Animation.createFrames(["game/jindan_1.png","game/jindan_2.png","game/jindan_3.png","game/jindan_4.png","game/jindan_5.png","game/jindan_6.png"],"jindan");
+
     if (GameInFackBook) {
         FBGame.getInstance().loadRewardAd();
+        FBGame.getInstance().loadInterstitialAd();
     }
     SceneManager.getInstance().currentScene = new GameScene();
 

@@ -6,4 +6,5 @@
    <item name="game/img_di1.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="game/img_di2.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="game/img_di3.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="bitmapFont" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

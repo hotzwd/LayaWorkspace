@@ -59,6 +59,7 @@ var GameRankUILogic = (function(_super){
         }
         
         var playerIcon = cell.getChildByName("playerIcon");
+        playerIcon.skin = "";
         playerIcon.skin = t_data.icon;
 
         var playerName = cell.getChildByName("playerName");

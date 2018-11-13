@@ -49,7 +49,7 @@ var GameoverUILogic = (function(_super){
             this.addChild(rankSprite2);
         }
 
-        this.onGetRankList();
+        // this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
         // this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
@@ -59,6 +59,19 @@ var GameoverUILogic = (function(_super){
         //this.updateListData();
 
         //MessageController.getInstance().AddNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+        
+        //插屏广告
+         if (GameInFackBook) {
+            if(window.FBInterstitialAd != null || window.FBInterstitialAdLoad){
+                window.FBInterstitialAd.showAsync().then(
+                    function() {
+                        // Ad watched
+                        FBGame.getInstance().loadInterstitialAd();
+                    }
+                );
+            }   
+         }
+
     }
     _proto.onDestroy = function(){
         //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
@@ -81,56 +94,56 @@ var GameoverUILogic = (function(_super){
         // window.location.href=UserModule.getInstance().redirect;
     }
     /**发送数据 */
-    _proto.sendScore = function(highScore){
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:3,
-                score:highScore,
-            })
-        }
-    }
+    // _proto.sendScore = function(highScore){
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:3,
+    //             score:highScore,
+    //         })
+    //     }
+    // }
     /**获取排行榜 */
-    _proto.onGetRankList = function(){
-        if(Browser.onMiniGame){
+    // _proto.onGetRankList = function(){
+    //     if(Browser.onMiniGame){
 
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:0,
-            })
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:0,
+    //         })
             
-            let sharedCanvas = openDataContext.canvas;
+    //         let sharedCanvas = openDataContext.canvas;
 
-            rankSprite2 = new Laya.Sprite();
-            this.addChild(rankSprite2);
-            Laya.timer.once(1000, this, function () {
-                var rankTexture = new Laya.Texture(sharedCanvas);
-                rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
-                rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
-            });   
-        }
-    }
-    _proto.onRankPageLast = function(){
-        // console.log("--------onRankPageLast");
+    //         rankSprite2 = new Laya.Sprite();
+    //         this.addChild(rankSprite2);
+    //         Laya.timer.once(1000, this, function () {
+    //             var rankTexture = new Laya.Texture(sharedCanvas);
+    //             rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+    //             rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
+    //         });   
+    //     }
+    // }
+    // _proto.onRankPageLast = function(){
+    //     // console.log("--------onRankPageLast");
         
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:-1,
-            })
-        }
-    }
-    _proto.onRankPageNext = function(){
-        // console.log("--------onRankPageNext");
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:1,
-            })
-        }
-    }
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:-1,
+    //         })
+    //     }
+    // }
+    // _proto.onRankPageNext = function(){
+    //     // console.log("--------onRankPageNext");
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:1,
+    //         })
+    //     }
+    // }
     return GameoverUILogic;
 })(GameoverUI);

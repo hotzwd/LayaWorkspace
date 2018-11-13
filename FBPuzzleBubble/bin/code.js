@@ -48374,8 +48374,31 @@ var GameUI=(function(_super){
 
 		}
 
-		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"var":"img_bg","skin":"game/bgGame.jpg","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"width":1280,"var":"gameStartPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556,"centerY":0}},{"type":"Image","props":{"y":610,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":577,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":839,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":698,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":738,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":779,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Button","props":{"y":959,"x":549,"width":174,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","label":"世界排行>>","height":50}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
+		GameUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"var":"img_bg","skin":"game/bgGame.jpg","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"y":113,"x":0,"width":720,"var":"bubblePanel","centerX":0}},{"type":"Box","props":{"y":0,"width":1280,"name":"top","centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"game/img_xinxilan_dikuang.png","name":"topBg","centerX":0}},{"type":"Image","props":{"y":21,"x":409,"skin":"game/img_defen_dikuang72.png","scaleY":1.5,"scaleX":1.5}},{"type":"Image","props":{"y":21,"x":645,"skin":"game/img_defen_dikuang1.png","scaleY":1.5,"scaleX":1.5}},{"type":"Button","props":{"y":-1,"x":291,"var":"btn_sound","stateNum":2,"skin":"game/btn_shengyin_kai.png"}},{"type":"Label","props":{"y":30,"x":489,"width":99,"var":"label_time","text":"99999","height":38,"fontSize":40,"font":"SimHei","color":"#f9f7f3","bold":true,"align":"right"}},{"type":"Label","props":{"y":32,"x":726,"width":99,"var":"label_score","text":"99999","height":36,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}}]},{"type":"Box","props":{"y":0,"width":1280,"name":"center","mouseThrough":true,"height":1280,"centerX":0},"child":[{"type":"Image","props":{"y":1098,"x":422,"var":"img_box_back","skin":"game/img_beiyongqiu_1.png"}},{"type":"Box","props":{"y":1061,"x":422,"var":"changeBubbleBox"},"child":[{"type":"Image","props":{"y":28,"x":46,"var":"prepareBubble","skin":"game/img_qiu_1.png"}},{"type":"Image","props":{"y":37,"var":"img_box_front","skin":"game/img_beiyongqiu_2.png"}}]},{"type":"Animation","props":{"y":934,"x":524,"var":"anim_panda","source":"game/img_daiji01.png,game/img_daiji02.png,game/img_daiji03.png,game/img_daiji04.png,game/img_daiji06.png","interval":100,"autoPlay":false}},{"type":"Image","props":{"y":936,"x":524,"visible":false,"var":"img_panda","skin":"game/img_daiji01.png"}},{"type":"Image","props":{"y":1128,"x":646,"var":"shootBubble","skin":"game/img_qiu_1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":1213,"x":546,"skin":"game/img_tong11.png","name":"img_tong_back"}},{"type":"Image","props":{"y":1211,"x":546,"var":"img_tong_front","skin":"game/img_tong1.png"}},{"type":"Image","props":{"y":1208,"x":641,"visible":true,"var":"img_guang","skin":"game/img_guangxiao1.png","anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"width":1280,"var":"gameStartPanel","height":1556,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556,"centerY":0}},{"type":"Image","props":{"y":742,"x":370,"width":542,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":305}},{"type":"Image","props":{"y":709,"x":489,"skin":"game/img_youxiguize.png"}},{"type":"Button","props":{"y":971,"x":517,"var":"btn_start","stateNum":2,"skin":"game/btn_kaishi.png"}},{"type":"Label","props":{"y":830,"x":445,"text":"1、游戏时间:120秒","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":870,"x":445,"text":"2、连续三个相同颜色球即可消除","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Label","props":{"y":911,"x":445,"text":"3、限定时间内，获取更高分数吧","fontSize":26,"font":"SimHei","color":"#00779e"}},{"type":"Button","props":{"y":1079,"x":549,"width":174,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","label":"世界排行>>","height":50}},{"type":"Image","props":{"y":221,"x":384,"skin":"game/logo.png"}},{"type":"Label","props":{"y":1244,"x":300,"text":"V1.0","fontSize":26,"font":"SimHei","color":"#9db4bc"}}]},{"type":"Image","props":{"width":1280,"visible":false,"var":"img_black","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"var":"img_start","skin":"game/img_kaishi.png","centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5}}]};
 		return GameUI;
+	})(View);
+var GameEggUI=(function(_super){
+		function GameEggUI(){
+			
+		    this.ani1=null;
+		    this.ani2=null;
+		    this.btn_go=null;
+		    this.btn_pass=null;
+
+			GameEggUI.__super.call(this);
+		}
+
+		CLASS$(GameEggUI,'ui.PuzzleBobble.GameEggUI',_super);
+		var __proto__=GameEggUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameEggUI.uiView);
+
+		}
+
+		GameEggUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"visible":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Image","props":{"y":688,"x":631,"skin":"game/img_guangxiao.png","rotation":360,"anchorY":0.5,"anchorX":0.5},"compId":18},{"type":"Button","props":{"y":877,"x":515,"var":"btn_go","stateNum":2,"skin":"game/btn_fangjian_red_164x54.png","labelSize":35,"labelPadding":"-10,0,0,0","labelFont":"SimHei","labelColors":"#ffffff","label":"获取"}},{"type":"Image","props":{"y":704,"x":627,"skin":"game/img_dajindan.png","anchorY":0.5,"anchorX":0.5},"compId":20},{"type":"Button","props":{"y":973,"x":636,"width":78,"var":"btn_pass","mouseEnabled":true,"labelSize":25,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"放弃","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":18,"keyframes":{"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":0},{"value":180,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":30},{"value":360,"tweenMethod":"linearNone","tween":true,"target":18,"key":"rotation","index":60}]}}],"name":"ani1","id":1,"frameRate":24,"action":0},{"nodes":[{"target":20,"keyframes":{"scaleY":[{"value":0,"tweenMethod":"circOut","tween":true,"target":20,"key":"scaleY","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":20,"key":"scaleY","index":10}],"scaleX":[{"value":0,"tweenMethod":"circOut","tween":true,"target":20,"key":"scaleX","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":20,"key":"scaleX","index":10}]}}],"name":"ani2","id":2,"frameRate":24,"action":0}]};
+		return GameEggUI;
 	})(View);
 var GameoverUI=(function(_super){
 		function GameoverUI(){
@@ -48399,7 +48422,7 @@ var GameoverUI=(function(_super){
 
 		}
 
-		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"var":"gameoverPanel","mouseEnabled":true,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"width":1280,"var":"bg","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":430}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":503,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":645,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":500,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":751,"x":507,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":561,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}}]}]};
+		GameoverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"var":"gameoverPanel","mouseEnabled":true,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"x":0,"width":1280,"var":"bg","skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0}},{"type":"Image","props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5}},{"type":"Image","props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":430}},{"type":"Image","props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249}},{"type":"Image","props":{"y":503,"x":488,"skin":"game/img_lishizuigao.png"}},{"type":"Label","props":{"y":645,"x":495,"width":255,"var":"label_overScore","text":"88888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"shuzi1Font","color":"#e7f106","bold":true,"align":"center"}},{"type":"Label","props":{"y":500,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"}},{"type":"Button","props":{"y":751,"x":507,"var":"btn_again","stateNum":2,"skin":"game/btn_zaiwan.png"}},{"type":"Image","props":{"y":561,"x":511,"skin":"game/image_bencidefen.png"}},{"type":"Image","props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"}}]}]};
 		return GameoverUI;
 	})(View);
 var GameRankUI=(function(_super){
@@ -48447,6 +48470,65 @@ var GameSharedUI=(function(_super){
 
 		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556}},{"type":"Image","props":{"y":408,"x":362,"width":546,"visible":false,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":337}},{"type":"Label","props":{"y":486,"x":415,"width":445,"visible":false,"text":"看视频重新获得120秒时间","strokeColor":"#f10c09","stroke":0,"height":87,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":653,"x":640,"var":"btn_shard","stateNum":1,"skin":"game/fuhuo.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":765,"x":640,"width":148,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
 		return GameSharedUI;
+	})(View);
+var PPldaji_ChUI=(function(_super){
+		function PPldaji_ChUI(){
+			
+		    this.Ch_guangxiao=null;
+
+			PPldaji_ChUI.__super.call(this);
+		}
+
+		CLASS$(PPldaji_ChUI,'ui.PuzzleBobble.PPldaji_ChUI',_super);
+		var __proto__=PPldaji_ChUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(PPldaji_ChUI.uiView);
+
+		}
+
+		PPldaji_ChUI.uiView={"type":"View","props":{"width":400,"height":400},"child":[{"type":"Box","props":{"width":128,"scaleY":1,"scaleX":1,"height":128,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"y":64,"x":64,"skin":"paopaol/Caihongqiu01.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5,"alpha":0.2857142857142857},"compId":82},{"type":"Image","props":{"y":64,"x":64,"skin":"paopaol/Caihongqiu01.png","scaleY":1.0666666666666667,"scaleX":1.0666666666666667,"anchorY":0.5,"anchorX":0.5,"alpha":0.6666666666666667},"compId":84},{"type":"Image","props":{"y":64,"x":64,"skin":"paopaol/CHguang003.png","scaleY":2,"scaleX":2,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":1},"compId":85},{"type":"Image","props":{"y":67,"x":69,"skin":"paopaol/CHguang003.png","scaleY":1.3,"scaleX":1.3,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":1},"compId":86},{"type":"Image","props":{"width":240,"skin":"paopaol/lidjizld01.png","scaleY":1.2,"scaleX":1.2,"height":217,"centerY":0,"centerX":0,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":0.6666666666666667},"compId":88}]}],"animations":[{"nodes":[{"target":82,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":82,"key":"x","index":0},{"value":64,"tweenMethod":"linearNone","tween":true,"target":82,"key":"x","index":3},{"value":64,"tweenMethod":"linearNone","tween":true,"target":82,"key":"x","index":10}],"scaleY":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleY","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleY","index":2},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleY","index":3},{"value":1.3,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleY","index":10}],"scaleX":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleX","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleX","index":2},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleX","index":3},{"value":1.3,"tweenMethod":"linearNone","tween":true,"target":82,"key":"scaleX","index":10}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":82,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":82,"key":"alpha","index":2},{"value":1,"tweenMethod":"linearNone","tween":true,"target":82,"key":"alpha","index":3},{"value":0,"tweenMethod":"linearNone","tween":true,"target":82,"key":"alpha","index":10}]}},{"target":84,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":84,"key":"x","index":0},{"value":64,"tweenMethod":"linearNone","tween":true,"target":84,"key":"x","index":3},{"value":64,"tweenMethod":"linearNone","tween":true,"target":84,"key":"x","index":6},{"value":64,"tweenMethod":"linearNone","tween":true,"target":84,"key":"x","index":12}],"scaleY":[{"value":0.3,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleY","index":0},{"value":0.3,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleY","index":3},{"value":1,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleY","index":6},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleY","index":12}],"scaleX":[{"value":0.3,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleX","index":0},{"value":0.3,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleX","index":3},{"value":1,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleX","index":6},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":84,"key":"scaleX","index":12}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":84,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":84,"key":"alpha","index":6},{"value":0,"tweenMethod":"linearNone","tween":true,"target":84,"key":"alpha","index":12}]}},{"target":85,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":85,"key":"x","index":0}],"scaleY":[{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":85,"key":"scaleY","index":0},{"value":3,"tweenMethod":"linearNone","tween":true,"target":85,"key":"scaleY","index":6}],"scaleX":[{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":85,"key":"scaleX","index":0},{"value":3,"tweenMethod":"linearNone","tween":true,"target":85,"key":"scaleX","index":6}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":85,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":85,"key":"alpha","index":2},{"value":1,"tweenMethod":"linearNone","tween":true,"target":85,"key":"alpha","index":6},{"value":1,"tweenMethod":"linearNone","tween":true,"target":85,"key":"alpha","index":9},{"value":0,"tweenMethod":"linearNone","tween":true,"target":85,"key":"alpha","index":12}]}},{"target":86,"keyframes":{"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":86,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":86,"key":"alpha","index":3},{"value":1,"tweenMethod":"linearNone","tween":true,"target":86,"key":"alpha","index":4},{"value":1,"tweenMethod":"linearNone","tween":true,"target":86,"key":"alpha","index":9},{"value":0,"tweenMethod":"linearNone","tween":true,"target":86,"key":"alpha","index":12}]}},{"target":88,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":88,"key":"x","index":0},{"value":64,"tweenMethod":"linearNone","tween":true,"target":88,"key":"x","index":3}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleY","index":0},{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleY","index":6},{"value":1.6,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleY","index":12}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleX","index":0},{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleX","index":6},{"value":1.6,"tweenMethod":"linearNone","tween":true,"target":88,"key":"scaleX","index":12}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":88,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":88,"key":"alpha","index":6},{"value":0,"tweenMethod":"linearNone","tween":true,"target":88,"key":"alpha","index":12}]}}],"name":"Ch_guangxiao","id":4,"frameRate":24,"action":0}]};
+		return PPldaji_ChUI;
+	})(View);
+var PPldaji_LhUI=(function(_super){
+		function PPldaji_LhUI(){
+			
+		    this.Lh_guangxiao=null;
+
+			PPldaji_LhUI.__super.call(this);
+		}
+
+		CLASS$(PPldaji_LhUI,'ui.PuzzleBobble.PPldaji_LhUI',_super);
+		var __proto__=PPldaji_LhUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(PPldaji_LhUI.uiView);
+
+		}
+
+		PPldaji_LhUI.uiView={"type":"View","props":{"width":400,"height":400},"child":[{"type":"Box","props":{"width":128,"height":128,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"x":64,"skin":"paopaol/Kuosanbo04.png","scaleY":1.525,"scaleX":1.525,"centerY":0,"centerX":0,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":0.75},"compId":62},{"type":"Image","props":{"y":64,"x":64,"skin":"paopaol/hongselizi01.png","scaleY":3.4,"scaleX":3.4,"centerY":0,"centerX":0,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":1},"compId":64},{"type":"Image","props":{"y":64,"x":64,"skin":"paopaol/lidjizld01.png","scaleY":1.7000000000000002,"scaleX":1.7000000000000002,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5,"alpha":1},"compId":87},{"type":"Image","props":{"width":400,"skin":"paopaol/Kuosanbo05.png","height":400,"centerY":0,"centerX":0,"blendMode":"lighter","anchorY":0.5,"anchorX":0.5},"compId":93}]}],"animations":[{"nodes":[{"target":62,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":62,"key":"x","index":0}],"scaleY":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleY","index":0},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleY","index":3},{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleY","index":5},{"value":1.6,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleY","index":15}],"scaleX":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleX","index":0},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleX","index":3},{"value":1.5,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleX","index":5},{"value":1.6,"tweenMethod":"linearNone","tween":true,"target":62,"key":"scaleX","index":15}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":62,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":62,"key":"alpha","index":3},{"value":1,"tweenMethod":"linearNone","tween":true,"target":62,"key":"alpha","index":5},{"value":0,"tweenMethod":"linearNone","tween":true,"target":62,"key":"alpha","index":15}]}},{"target":64,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":64,"key":"x","index":0}],"scaleY":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleY","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleY","index":3},{"value":4,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleY","index":8},{"value":4,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleY","index":15}],"scaleX":[{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleX","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleX","index":3},{"value":4,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleX","index":8},{"value":4,"tweenMethod":"linearNone","tween":true,"target":64,"key":"scaleX","index":15}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":64,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":64,"key":"alpha","index":3},{"value":1,"tweenMethod":"linearNone","tween":true,"target":64,"key":"alpha","index":8},{"value":0,"tweenMethod":"linearNone","tween":true,"target":64,"key":"alpha","index":15}]}},{"target":87,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":87,"key":"x","index":0},{"value":64,"tweenMethod":"linearNone","tween":true,"target":87,"key":"x","index":5},{"value":64,"tweenMethod":"linearNone","tween":true,"target":87,"key":"x","index":8},{"value":64,"tweenMethod":"linearNone","tween":true,"target":87,"key":"x","index":15}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleY","index":0},{"value":2,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleY","index":5},{"value":2.3,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleY","index":8},{"value":2.3,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleY","index":15}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleX","index":0},{"value":2,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleX","index":5},{"value":2.3,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleX","index":8},{"value":2.3,"tweenMethod":"linearNone","tween":true,"target":87,"key":"scaleX","index":15}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":87,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":87,"key":"alpha","index":2},{"value":1,"tweenMethod":"linearNone","tween":true,"target":87,"key":"alpha","index":5},{"value":1,"tweenMethod":"linearNone","tween":true,"target":87,"key":"alpha","index":8},{"value":0,"tweenMethod":"linearNone","tween":true,"target":87,"key":"alpha","index":15}]}},{"target":93,"keyframes":{"x":[{"value":64,"tweenMethod":"linearNone","tween":true,"target":93,"key":"x","index":0},{"value":64,"tweenMethod":"linearNone","tween":true,"target":93,"key":"x","index":7},{"value":64,"tweenMethod":"linearNone","tween":true,"target":93,"key":"x","index":10}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleY","index":0},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleY","index":7},{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleY","index":8},{"value":1.1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleY","index":10}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleX","index":0},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleX","index":7},{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleX","index":8},{"value":1.1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"scaleX","index":10}],"alpha":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":93,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":93,"key":"alpha","index":7},{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"alpha","index":8},{"value":1,"tweenMethod":"linearNone","tween":true,"target":93,"key":"alpha","index":10},{"value":0,"tweenMethod":"linearNone","tween":true,"target":93,"key":"alpha","index":15}]}}],"name":"Lh_guangxiao","id":3,"frameRate":24,"action":0}]};
+		return PPldaji_LhUI;
+	})(View);
+var Prop_CarUI=(function(_super){
+		function Prop_CarUI(){
+			
+
+			Prop_CarUI.__super.call(this);
+		}
+
+		CLASS$(Prop_CarUI,'ui.PuzzleBobble.Prop_CarUI',_super);
+		var __proto__=Prop_CarUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(Prop_CarUI.uiView);
+
+		}
+
+		Prop_CarUI.uiView={"type":"View","props":{"width":350,"height":100},"child":[{"type":"Image","props":{"y":2,"x":172,"skin":"paopaol/img_donghua_chanche.png"}}]};
+		return Prop_CarUI;
 	})(View);
 /**
 * matter-js 0.10.0 by @liabru 2016-05-01
@@ -58149,6 +58231,72 @@ var Common = require('../core/Common');
 
 	window.LayaRender = LayaRender;
 })();
+/**
+ * 获得金蛋界面逻辑 by lzq
+ */
+var GameEggUILogic = (function(_super){
+    function GameEggUILogic(){
+        GameEggUILogic.super(this);
+
+    }
+    Laya.class(GameEggUILogic,"UILogic.GameEggUILogic",_super);
+    var _proto = GameEggUILogic.prototype;
+
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+
+        this.ani1.play(0, true);
+        this.ani2.play(0, false);
+        
+        this.btn_go.on(Laya.Event.CLICK,this,this.onShowVidoAd);
+        this.btn_pass.on(Laya.Event.CLICK,this,this.onCancelClick);
+
+        SceneManager.getInstance().currentScene.pauseGame();
+        SceneManager.getInstance().currentScene.m_propBubleList = [];
+
+    }
+    _proto.onDestroy = function(){
+       
+    }
+
+     
+     /**点击跳过 */
+    _proto.onCancelClick = function(){
+        UIManager.getInstance().closeUI("GameEggUI",true);
+        SceneManager.getInstance().currentScene.resumeGame();
+    }
+ 
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+        if (!GameInFackBook) {
+            UIManager.getInstance().closeUI("GameEggUI",true);
+            SceneManager.getInstance().currentScene.resumeGame();
+            SceneManager.getInstance().currentScene.createPropBubble();
+            return;
+        }
+
+        window.FBRewardAd.showAsync().then(
+            function() {
+                // Ad watched
+                // 正常播放结束，可以下发游戏奖励
+                UIManager.getInstance().closeUI("GameEggUI",true);
+                // var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
+                // SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
+                SceneManager.getInstance().currentScene.resumeGame();
+                SceneManager.getInstance().currentScene.createPropBubble();
+
+                FBGame.getInstance().loadRewardAd();
+            }
+        );
+
+    }
+
+    return GameEggUILogic;
+})(GameEggUI);
 /*
 * name;
 */
@@ -58344,6 +58492,7 @@ var GameRankUILogic = (function(_super){
         }
         
         var playerIcon = cell.getChildByName("playerIcon");
+        playerIcon.skin = "";
         playerIcon.skin = t_data.icon;
 
         var playerName = cell.getChildByName("playerName");
@@ -58374,6 +58523,8 @@ var GameRankUILogic = (function(_super){
 window.wxSDKVersion;
 window.FBRewardAd;
 window.FBRewardAdLoad;
+window.FBInterstitialAd;
+window.FBInterstitialAdLoad;
 /**
  * FBGame
  */
@@ -58407,6 +58558,8 @@ var FBGame = (function (_super) {
         contextId = FBInstant.context.getID();
         window.FBRewardAd = null;
         window.FBRewardAdLoad = false;
+        window.FBInterstitialAd = null;
+        window.FBInterstitialAdLoad = false;
 
         
         console.log("base64=" + this.getImgBase64()); 
@@ -58456,14 +58609,35 @@ var FBGame = (function (_super) {
         window.FBRewardAd = null;
         window.FBRewardAdLoad = false;
 
+        console.log("----------loadRewardAd ");
         FBInstant.getRewardedVideoAsync('205023123339716_279713345870693').then(function(rewardedVideo) {
             window.FBRewardAd = rewardedVideo;
             return window.FBRewardAd.loadAsync();
         }).then(function() {
             // Ad loaded
             window.FBRewardAdLoad = true;
+            console.log("----------loadRewardAd load success");
         });
     }
+
+    //加载插屏广告
+    _proto.loadInterstitialAd = function(){
+        if (!GameInFackBook) 
+            return;
+        window.FBInterstitialAd = null;
+        window.FBInterstitialAdLoad = false;
+        console.log("----------loadInterstitialAd ");
+        //插屏
+        FBInstant.getInterstitialAdAsync('205023123339716_279709389204422').then(function(interstitial) {
+            window.FBInterstitialAd = interstitial;
+            return window.FBInterstitialAd.loadAsync();
+        }).then(function() {
+            // Ad loaded
+            window.FBInterstitialAdLoad = true;
+            console.log("----------loadInterstitialAd load success");
+        });
+    }
+
     /**显示奖励广告 */
     _proto.showRewardAD = function(){
         if (!GameInFackBook) 
@@ -58483,18 +58657,18 @@ var FBGame = (function (_super) {
         contextId = FBInstant.context.getID();
         var score = parseInt(_score);
         //好友排行榜
-         if (contextId != null) {
-            FBInstant
-            .getLeaderboardAsync('friendScore.' + contextId)
-            .then(function(leaderboard){
-                console.log("---score name="+leaderboard.getName());
-                console.log("---score id="+leaderboard.getContextID())
-                return leaderboard.setScoreAsync(score);
-            })
-            .then(function(){
-                console.log('Score saved');
-            });
-         }
+        //  if (contextId != null) {
+        //     FBInstant
+        //     .getLeaderboardAsync('friendScore.' + contextId)
+        //     .then(function(leaderboard){
+        //         console.log("---score name="+leaderboard.getName());
+        //         console.log("---score id="+leaderboard.getContextID())
+        //         return leaderboard.setScoreAsync(score);
+        //     })
+        //     .then(function(){
+        //         console.log('Score saved');
+        //     });
+        //  }
 
         //全部排行榜
 
@@ -58526,7 +58700,7 @@ var FBGame = (function (_super) {
             var data = [];
             for (var i = 0; i < entries.length; ++i)
             {
-                var t_entrie = entries[0];
+                var t_entrie = entries[i];
                 data.push({
                     rank:t_entrie.getRank(),
                     score:t_entrie.getScore(),
@@ -58590,7 +58764,6 @@ var FBGame = (function (_super) {
         console.log('-------------shareGame');
        //需要base64编码
        var t_image = this.getImgBase64();
-        //var t_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAIAAABI9cZ8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpEMzNFMjA2NTY3NkFFNjExOTZDM0QwQ0JENTJDMTI3QyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5OTE4RjVGMzZBQzgxMUU2OEJBRkNGMkY3NjgzM0M0MCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5OTE4RjVGMjZBQzgxMUU2OEJBRkNGMkY3NjgzM0M0MCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjEzQjNFRUUzQzA2QUU2MTFBQ0VERTQ0RTQzRTU3RTNFIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkQzM0UyMDY1Njc2QUU2MTE5NkMzRDBDQkQ1MkMxMjdDIi8+IDwvcmRmOkRlc2NyaXB0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";
        
         FBInstant.shareAsync({
             intent: "SHARE",
@@ -59180,25 +59353,6 @@ var GameSharedUILogic = (function(_super){
             }
         );
 
-        // var t_videoAd = wxGame.getInstance().videoAd;
-        // t_videoAd.show();
-        // t_videoAd.onClose( function(res){
-        //     // 用户点击了【关闭广告】按钮
-        //     // 小于 2.1.0 的基础库版本，res 是一个 undefined
-        //     if (res && res.isEnded || res === undefined) {
-        //         // 正常播放结束，可以下发游戏奖励
-        //         UIManager.getInstance().closeUI("GameSharedUI",true);
-        //         var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
-        //         SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
-        //     }
-        //     else {
-        //         // 播放中途退出，不下发游戏奖励
-        //         UIManager.getInstance().closeUI("GameSharedUI",true);
-        //         UIManager.getInstance().showUI("GameoverUI");
-        //         // SceneManager.getInstance().currentScene.gameUI.gameoverByTime();
-        //     }
-        // })
-
     }
 
     return GameSharedUILogic;
@@ -59254,7 +59408,7 @@ var GameoverUILogic = (function(_super){
             this.addChild(rankSprite2);
         }
 
-        this.onGetRankList();
+        // this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
         // this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
@@ -59264,6 +59418,19 @@ var GameoverUILogic = (function(_super){
         //this.updateListData();
 
         //MessageController.getInstance().AddNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+        
+        //插屏广告
+         if (GameInFackBook) {
+            if(window.FBInterstitialAd != null || window.FBInterstitialAdLoad){
+                window.FBInterstitialAd.showAsync().then(
+                    function() {
+                        // Ad watched
+                        FBGame.getInstance().loadInterstitialAd();
+                    }
+                );
+            }   
+         }
+
     }
     _proto.onDestroy = function(){
         //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
@@ -59286,57 +59453,57 @@ var GameoverUILogic = (function(_super){
         // window.location.href=UserModule.getInstance().redirect;
     }
     /**发送数据 */
-    _proto.sendScore = function(highScore){
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:3,
-                score:highScore,
-            })
-        }
-    }
+    // _proto.sendScore = function(highScore){
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:3,
+    //             score:highScore,
+    //         })
+    //     }
+    // }
     /**获取排行榜 */
-    _proto.onGetRankList = function(){
-        if(Browser.onMiniGame){
+    // _proto.onGetRankList = function(){
+    //     if(Browser.onMiniGame){
 
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:0,
-            })
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:0,
+    //         })
             
-            let sharedCanvas = openDataContext.canvas;
+    //         let sharedCanvas = openDataContext.canvas;
 
-            rankSprite2 = new Laya.Sprite();
-            this.addChild(rankSprite2);
-            Laya.timer.once(1000, this, function () {
-                var rankTexture = new Laya.Texture(sharedCanvas);
-                rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
-                rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
-            });   
-        }
-    }
-    _proto.onRankPageLast = function(){
-        // console.log("--------onRankPageLast");
+    //         rankSprite2 = new Laya.Sprite();
+    //         this.addChild(rankSprite2);
+    //         Laya.timer.once(1000, this, function () {
+    //             var rankTexture = new Laya.Texture(sharedCanvas);
+    //             rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
+    //             rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
+    //         });   
+    //     }
+    // }
+    // _proto.onRankPageLast = function(){
+    //     // console.log("--------onRankPageLast");
         
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:-1,
-            })
-        }
-    }
-    _proto.onRankPageNext = function(){
-        // console.log("--------onRankPageNext");
-        if(Browser.onMiniGame){
-            let openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:1,
-            })
-        }
-    }
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:-1,
+    //         })
+    //     }
+    // }
+    // _proto.onRankPageNext = function(){
+    //     // console.log("--------onRankPageNext");
+    //     if(Browser.onMiniGame){
+    //         let openDataContext = wx.getOpenDataContext()
+    //         openDataContext.postMessage({
+    //             msgType:1,
+    //             page:1,
+    //         })
+    //     }
+    // }
     return GameoverUILogic;
 })(GameoverUI);
 
@@ -59427,7 +59594,7 @@ var GameScene = (function(_super){
     var GameTime = 120;                                                         //游戏时间
     var bubblePanel;                                                            //泡泡面板
     var singleBubbleScore = 10;                                                 //一个泡泡的得分
-    var CreatePropNum = 10;                                                     //发射多少个后创建道具球
+    var CreatePropNum = 20;                                                     //发射多少个后创建道具球
 
     //初始化当前类属性
        
@@ -59576,7 +59743,7 @@ var GameScene = (function(_super){
         this.shootPropNum++;
         if(this.shootPropNum >= CreatePropNum){
             this.shootPropNum = 0;
-            //this.createPropBubble();
+            this.createPropBubble();
         }
         
 
@@ -59745,6 +59912,12 @@ var GameScene = (function(_super){
             this.gameUI.anim_panda.play(0,false,"pandaToulan");
             // this.gameUI.anim_panda.stop();
             MusicManager.getInstance().playSound("res/music/4.wav");
+
+            if (this.pointBoard != null) {
+                this.pointBoardPreAngle = this.pointBoard.rotation;
+                this.pointBoard.destroy(true);
+                this.pointBoard = null;
+            }
         }
     }
     /**
@@ -60285,149 +60458,12 @@ var GameScene = (function(_super){
         }
        // this.createPlayerBubble(createBoardNumList);
         //----------屏蔽生成金蛋
-        // this.createEggBubble(createBoardNumList);
+        this.createEggBubble(createBoardNumList);
         //生成的最后一行作为顶部
         this.gameTopRow = mapBeginLine;
         //生成一行重置发射个数
         // this.shootNum = 0;
 
-    }
-    /**生成玩家头像球 */
-    _proto.createPlayerBubble = function(createBoardNumList){
-        Gamelog("----playerDataList length="+GameModule.getInstance().playerDataList.length+",m_playerBubbleList ="+this.m_playerBubbleList.length);
-        if(this.m_playerBubbleList.length < GameModule.getInstance().playerDataList.length - 1){
-            //获得没有头像的
-            var newPlayerDataList = [];
-            for(var i=0; i<GameModule.getInstance().playerDataList.length;i++){
-                var data = GameModule.getInstance().playerDataList[i];
-                var isHave = false;
-                for(var j=0; j<this.m_playerBubbleList.length; j++){
-                    if(data.playerId == this.m_playerBubbleList[j].playerId)
-                        isHave = true;
-                }
-                if(!isHave && data.hp > 0 && data.playerId != UserModule.getInstance().playerId){
-                    newPlayerDataList.push(data);
-                }
-            }
-
-            if(newPlayerDataList.length >0){
-                var crateIndex = 0;
-                var createPlayerBorder = [];
-                do{
-                    var randomNum = (createBoardNumList.length > 3) ? 3: createBoardNumList.length;
-                    var addNum = ((createBoardNumList.length - 3)>0) ? (createBoardNumList.length - 3) :0;
-                    var numIndex = parseInt(Math.random()*randomNum + addNum, 10);;
-                    var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-                    var isSame = false;
-                    for(var x=0;x<createPlayerBorder.length;x++){
-                        if(numY == createPlayerBorder[x].Col &&
-                        createBoardNumList[numIndex].Line == createPlayerBorder[x].Line){
-                            isSame = true;
-                        }
-                    }
-                    //如果没有重复
-                    if(!isSame){
-                        createPlayerBorder.push({
-                            Line: createBoardNumList[numIndex].Line,
-                            Col: numY
-                        });
-
-                        Gamelog("-------create player line="+createBoardNumList[numIndex].Line+",col="+numY);
-                        var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-                        for(var y=0; y<this.m_listBubble.length; y++){
-                            if(this.m_listBubble[y] === oldBubble){
-                                this.m_listBubble.splice(y,1);
-                            }
-                        }
-                        oldBubble.destroy();
-
-                        var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
-                        var tempBubble = new Bubble();
-                        tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
-                        // tempBubble.skin = newPlayerDataList[crateIndex].icon;
-                        tempBubble.anchorX  = 0.5;
-                        tempBubble.anchorY  = 0.5;
-                        tempBubble.width = BUBBLE_RADIUS*2;
-                        tempBubble.height = BUBBLE_RADIUS*2;
-                        tempBubble.playerData = newPlayerDataList[crateIndex];
-                        tempBubble.bubbleType = BubbleTypes.Player;
-                        //添加一个新图片
-                        var imgBg = new Laya.Image(newPlayerDataList[crateIndex].icon);
-                        imgBg.width = tempBubble.width;
-                        imgBg.height = tempBubble.height;
-                        //遮罩
-                        var maskImg = new Laya.Image("game/img_qiu_1.png");
-                        // maskImg.anchorX  = 0.5;
-                        // maskImg.anchorY  = 0.5;
-                        // tempBubble.mask = maskImg;
-                        imgBg.mask = maskImg;
-                        
-                        tempBubble.addChild(imgBg);
-                        //泡泡透明层
-                        var popImg = new Laya.Image("game/img_qiu_zhezhao.png");
-                        tempBubble.addChild(popImg);
-
-                        bubblePanel.addChild(tempBubble);
-                        tempBubble.pos(pos.x,pos.y);
-
-                        this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
-                        this.m_listBubble.push(tempBubble);
-                        //增加已创建的头像泡泡
-                        this.m_playerBubbleList.push(newPlayerDataList[crateIndex]);
-                        crateIndex++;
-                    }
-                
-
-                }while(createPlayerBorder.length != newPlayerDataList.length)
-            }
-        }
-    }
-    /**生成金蛋球 */
-    _proto.createEggBubble = function(createBoardNumList){
-        if(this.m_propBubleList.length < GameModule.getInstance().eggNum){
-
-            var numIndex = createBoardNumList.length -1;
-            // var numIndex = 0;
-            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-
-            do{
-                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
-                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-
-            }while(oldBubble.bubbleType != BubbleTypes.Normal);
-
-            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
-            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
-            for(var y=0; y<this.m_listBubble.length; y++){
-                if(this.m_listBubble[y] === oldBubble){
-                    this.m_listBubble.splice(y,1);
-                }
-            }
-            oldBubble.destroy();
-
-            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
-            var tempBubble = new Bubble();
-            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
-            tempBubble.skin = "game/jindan_1.png";
-            tempBubble.anchorX  = 0.5;
-            tempBubble.anchorY  = 0.5;
-            tempBubble.width = BUBBLE_RADIUS*2;
-            tempBubble.height = BUBBLE_RADIUS*2;
-            tempBubble.bubbleType = BubbleTypes.Egg;
-            //金蛋动画
-            var eggAnim = new Laya.Animation();
-            eggAnim.interval = 100;
-            tempBubble.addChild(eggAnim);
-            eggAnim.play(0,true,"jindan");
-
-            tempBubble.pos(pos.x,pos.y);
-            bubblePanel.addChild(tempBubble);
-            
-            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
-            this.m_listBubble.push(tempBubble);
-            this.m_propBubleList.push(tempBubble);
-        }
     }
 
     /**删除人像泡泡 */
@@ -60528,11 +60564,12 @@ var GameScene = (function(_super){
         if(this.currentTime<=0){
                 Laya.timer.clear(this,this.animateTimeBased);
                 this.gameOver();
-                if(!this.isShowShared){
-                    UIManager.getInstance().showUI("GameSharedUI");
-                }else{
-                    this.gameUI.gameoverByTime();
-                }
+                this.gameUI.gameoverByTime();
+                // if(!this.isShowShared){
+                //     UIManager.getInstance().showUI("GameSharedUI");
+                // }else{
+                //     this.gameUI.gameoverByTime();
+                // }
         }
     }
     //接收服务器游戏结束
@@ -60541,6 +60578,19 @@ var GameScene = (function(_super){
         this.gameOver();
         this.gameUI.gameoverByTime();
     }
+
+    /**
+     * 游戏暂停
+     */
+     _proto.pauseGame = function(){
+         Laya.timer.clear(this,this.animateTimeBased);
+     }
+     /**恢复游戏 */
+     _proto.resumeGame = function(){
+         //游戏倒计时
+        Laya.timer.loop(1000, this, this.animateTimeBased);
+     }
+
     /**游戏结束 */
     _proto.gameOver = function(){
         // Gamelog("----!!!!!!!!!游戏结束-------");
@@ -60632,6 +60682,7 @@ var GameScene = (function(_super){
         
         var num = Math.random()*3 + 1;
         num = parseInt(num, 10);
+        // num =1;
         switch(num){
             case 1:
                 this.prepareBubble.skin = "game/img_qiu_fireworks.png";
@@ -60681,6 +60732,7 @@ var GameScene = (function(_super){
                     cleanList.push(curBubble);
                 }
         }
+        
         //礼花弹效果 
         cleanList.push(this.m_curReady);
 
@@ -60886,6 +60938,61 @@ var GameScene = (function(_super){
         }while(sameIndex != samelist.length)
 
         return samelist;
+    }
+
+    /**生成金蛋球 */
+    _proto.createEggBubble = function(createBoardNumList){
+        if(GameInFackBook){
+            if(window.FBRewardAd == null || !window.FBRewardAdLoad)
+                return;
+        }
+
+        if(this.m_propBubleList.length < 1){
+
+            // var numIndex = createBoardNumList.length -1;
+            var numIndex = parseInt(Math.random() * createBoardNumList.length);
+            // numIndex = 0;
+            
+            var numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            do{
+                numY = parseInt(Math.random()* createBoardNumList[numIndex].Col,10);
+                oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+
+            }while(oldBubble.bubbleType != BubbleTypes.Normal);
+
+            Gamelog("---------egg line="+createBoardNumList[numIndex].Line+",col="+numY);
+            var oldBubble = this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)];
+            for(var y=0; y<this.m_listBubble.length; y++){
+                if(this.m_listBubble[y] === oldBubble){
+                    this.m_listBubble.splice(y,1);
+                }
+            }
+            oldBubble.destroy();
+
+            var pos = getPosByRowAndCol(createBoardNumList[numIndex].Line,numY);
+            var tempBubble = new Bubble();
+            tempBubble.setRowColIndex(createBoardNumList[numIndex].Line,numY);
+            tempBubble.skin = "game/jindan_1.png";
+            tempBubble.anchorX  = 0.5;
+            tempBubble.anchorY  = 0.5;
+            tempBubble.width = BUBBLE_RADIUS*2;
+            tempBubble.height = BUBBLE_RADIUS*2;
+            tempBubble.bubbleType = BubbleTypes.Egg;
+            //金蛋动画
+            var eggAnim = new Laya.Animation();
+            eggAnim.interval = 100;
+            tempBubble.addChild(eggAnim);
+            eggAnim.play(0,true,"jindan");
+
+            tempBubble.pos(pos.x,pos.y);
+            bubblePanel.addChild(tempBubble);
+            
+            this.m_board[Number(createBoardNumList[numIndex].Line)][Number(numY)] = tempBubble;
+            this.m_listBubble.push(tempBubble);
+            this.m_propBubleList.push(tempBubble);
+        }
     }
 
     return GameScene;
@@ -61117,16 +61224,6 @@ var GameUILogic = (function(_super){
         this.flyAnim.zOrder = 1;
         Laya.stage.addChild(this.flyAnim);
         this.flyAnim.visible = false;
-        // //弹出 开始
-        // var popPos = new Point(this.img_start.width/2,this.img_start.height/2);
-        // popPos =  this.img_start.localToGlobal(popPos);
-        // this.img_pop.skin = this.img_start.skin;
-        // this.img_pop.pos(popPos.x,popPos.y);
-        // this.img_pop.anchorX = 0.5;
-        // this.img_pop.anchorY = 0.5;
-        // Laya.stage.addChild(this.img_pop);
-        // this.img_pop.zOrder = 10;
-        // this.img_pop.visible = false;
 
         //boss动画
         this.bossAnim.interval = 60;
@@ -61248,112 +61345,6 @@ var GameUILogic = (function(_super){
         }
     }
 
-    //boss伤害
-    _proto.bossHurtEffect = function(_data){
-        this.bossAnim.visible = true;
-        this.bossAnim.width = 869;
-        this.bossAnim.height = 674;
-        this.bossAnim.pos(-500,40);
-        this.bossAnim.autoPlay = false;
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width/2 - 350
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.play(0,false,"bossHurt");
-            this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-        }));
-
-    }
-    //boss伤害人物效果
-    _proto.bossHurtEffectEnd = function(_anim){
-        Gamelog("------造成全部伤害");
-        MusicManager.getInstance().playSound("res/music/17.wav");
-        var tempList = new Array();
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId != UserModule.getInstance().playerId && data.hp > 0){
-                this.playerHurtHp(data.playerId,10);
-            }
-        }
-        GameModule.getInstance().sendHurtPlayer(2,"");
-        // var notify = new Notification(MessageEventName.UpdatePlayerListEvent,this,tempList);
-        // notify.Send();
-
-        this.bossAnim.play(0,false,"bossMove");
-
-        MusicManager.getInstance().playSound("res/music/15.wav");
-        Laya.Tween.to(this.bossAnim,
-        {
-            x:Laya.stage.width + 900
-        },300,null,new Laya.Handler(this,function(){
-            this.bossAnim.visible = false;
-            this.bossAnim.off(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            // this.bossAnim.once(Laya.Event.COMPLETE,this,this.bossHurtEffectEnd);
-            
-        }));
-    }
-
-    //获得金蛋动画效果
-    _proto.showEggEffect = function(){
-        MusicManager.getInstance().playSound("res/music/18.wav");
-        var imgGuang = this.imgGuang;
-        var b_point = new Point(imgGuang.x + imgGuang.width /2,imgGuang.y + imgGuang.height /2);
-
-        var eggBox = new Laya.Box();
-        // eggBox.anchorX = 0.5;
-        // eggBox.anchorY = 0.5;
-        eggBox._zOrder = 0.2;
-        eggBox.pos(b_point.x,b_point.y);
-        Laya.stage.addChild(eggBox);
-
-        var eggBg = new Laya.Image("game/img_guangxiao.png");
-        eggBg.anchorX = 0.5;
-        eggBg.anchorY = 0.5;
-        eggBox.addChild(eggBg);
-
-        var eggImg = new Laya.Image("game/img_dajindan.png");
-        eggImg.anchorX = 0.5;
-        eggImg.anchorY = 0.5;
-        eggBox.addChild(eggImg);
-
-        var timeLineBg = new Laya.TimeLine();
-        timeLineBg.addLabel("show",0).to(eggBg,
-        {
-            rotation:360
-        },4000);
-        timeLineBg.play(0,true);
-
-        //动画
-        var timeLineEgg = new Laya.TimeLine();
-        eggBox.scaleX =0;
-        eggBox.scaleY = 0;
-        var playerCell = this.playerList.getCell(0);
-        var playerPoint = playerCell.localToGlobal(new Laya.Point(0,0));
-        timeLineEgg.addLabel("one",0).to(eggBox,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },500).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },500);
-        timeLineEgg.play(0,false);
-        timeLineEgg.on(Laya.Event.COMPLETE,this,function(){
-            timeLineBg.destroy();
-            eggBox.destroy();
-        });
-    }
     /**改变发射球 */
     _proto.onChangeBubble = function(){
         SceneManager.getInstance().currentScene.changeBubble();
@@ -61373,20 +61364,8 @@ var GameUILogic = (function(_super){
     
     /**声音开关 */
     _proto.onSoundClick = function(e){
-        // e.stopPropagation();
-        // SceneManager.getInstance().currentScene.gameOver();
         MusicManager.getInstance().playSound("res/music/1.wav");
 
-        // var soundSwitch = LocalStorage.getItem("soundSwitch");
-        // if(soundSwitch == 1){
-        //     this.btn_sound.skin = "game/btn_shengyin_guan.png";
-        //     LocalStorage.setItem("soundSwitch",0);
-        //     SoundManager.stopAll();
-        // }else{
-        //     LocalStorage.setItem("soundSwitch",1);
-        //     this.btn_sound.skin = "game/btn_shengyin_kai.png";
-        //     MusicManager.getInstance().playMusic("res/music/1.mp3");
-        // }
         var soundSwitch = MusicManager.getInstance().managerSwitch;
         if(soundSwitch == 1){
             this.btn_sound.skin = "game/btn_shengyin_guan.png";
@@ -61409,6 +61388,10 @@ var GameUILogic = (function(_super){
         this.anim_panda.play(0,true,"pandaDaiji");
         this.anim_panda.stop();
 
+        if (GameInFackBook) {
+            FBGame.getInstance().loadRewardAd();
+            FBGame.getInstance().loadInterstitialAd();
+        }
         //this.onStartClick();
     }
 
@@ -61450,7 +61433,7 @@ var GameUILogic = (function(_super){
         SceneManager.getInstance().currentScene.createPointLine(-90);
         //游戏倒计时
         // Laya.timer.loop(1000, this, this.animateTimeBased);
-        if(Laya.Browser.onFacebook){
+        /*if(Laya.Browser.onFacebook){
             console.log("----------share ")
             FBInstant.shareAsync({
                 intent: 'REQUEST',
@@ -61460,7 +61443,7 @@ var GameUILogic = (function(_super){
                 }).then(function() {
                 // 继续游戏
                 });
-        }
+        }*/
     }
 
     _proto.onTweenFinish = function(){
@@ -61476,8 +61459,8 @@ var GameUILogic = (function(_super){
     /**时间到结束游戏 */
     _proto.gameoverByTime = function(){
         this.label_time.text = 0;
-        var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
-        gameoverUI.visible = false;
+        // var gameoverUI = UIManager.getInstance().showUI("GameoverUI");
+        // gameoverUI.visible = false;
         if(!this.showImgGameover){
         // if(this.img_pop.alpha <= 1 && !this.img_pop.visible){
             MusicManager.getInstance().playSound("res/music/3.wav");
@@ -61515,7 +61498,7 @@ var GameUILogic = (function(_super){
         //     scaleX:1,
         //     scaleY:1,
         // },900,Laya.Ease.expoOut,new Laya.Handler(this,function(){
-        //     // this.img_pop.visible = false;
+            
         //     this.imgTong.visible = false;
         //     this.img_black.visible = true;
         //     this.showImgGameover = true;
@@ -61532,7 +61515,8 @@ var GameUILogic = (function(_super){
     _proto.gameoverUI = function(){
         // this.gameoverUI.visible = true;
         this.img_black.visible = false;
-        UIManager.getInstance().getUI("GameoverUI").visible = true;
+        UIManager.getInstance().showUI("GameoverUI");
+        // UIManager.getInstance().getUI("GameoverUI").visible = true;
         this.imgTong.visible = false;
         this.hideAllImgGuang();
         this.anim_panda.stop();
@@ -61543,374 +61527,20 @@ var GameUILogic = (function(_super){
     /**关闭游戏 */
     _proto.onCloseGame = function(){
         //跳转到玩吧
-        window.location.href=UserModule.getInstance().redirect;
-    }
-
-    //接收服务器返回排行榜
-    _proto.updatePlayerListReceiver = function(notify){
-        //遍历需要修改的玩家hp 获得减掉的hp
-        //调用this.playerHurtHp()
-        // var updateList = notify.Content;
-        var hurtPlayerData = notify.Content;
-        //伤害自己的人物Id
-        if(hurtPlayerData.attackPlayerId != null){
-            this.hurtSelfPlayerId = hurtPlayerData.attackPlayerId;
-        }
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            if(data.playerId == hurtPlayerData.playerId){
-                this.playerHurtHp(data.playerId,data.hp - hurtPlayerData.hp);
-            }
-        }
-    }
-    //玩家掉血效果
-    _proto.playerListHurtEffect = function(_playerData,_hp){
-        var isLive = false;
-        var maxHp = 0;
-        var maxIndex = 0;
-        var playerCell;
-        //更新list UI
-        for(var i = 0;i < this.dataArr.length;i++){
-            var data = this.dataArr[i];
-            var tempCell = this.playerList.getCell(i);
-
-            //心形图片
-            var bloodImg = tempCell.getChildByName("bloodImg");
-            bloodImg.visible = false;
-            var topImg = tempCell.getChildByName("topImg");
-            topImg.visible = false;
-            //血量数字
-            var bloodLabel = tempCell.getChildByName("bloodLabel");
-            bloodLabel.visible = false;
-            var deadImg = tempCell.getChildByName("deadImg");
-            deadImg.visible = false;
-            //变灰
-            tempCell.gray = false;
-
-            if(data.playerId == _playerData.playerId){
-                playerCell = tempCell;
-                if(data.hp >0){
-                    isLive = true;
-                    data.hp = _playerData.hp;
-                }
-            }
-            //血条
-            var progres_hp = tempCell.getChildByName("progres_hp");
-            var hpValue = data.hp / data.baseHp;
-            if(hpValue > 0.75){
-                progres_hp.skin = "game/progress_green.png";
-            }else if(hpValue > 0.25){
-                progres_hp.skin = "game/progress_yellow.png";
-            }else{
-                progres_hp.skin = "game/progress_red.png";
-            }
-            progres_hp.value  = hpValue;
-
-            //如果血量大于0
-            if(data.hp > 0){
-                bloodImg.visible  = true;
-                bloodLabel.visible = true;
-                bloodLabel.text = data.hp;
-            }else{
-                deadImg.visible = true;
-                tempCell.gray = true;
-                bloodLabel.text = 0;
-            }
-            //比较最大血量
-            if(data.hp > maxHp){
-                maxHp =  data.hp;
-                maxIndex = i;
-            }
-
-        }
-        var topCell = this.playerList.getCell(maxIndex);
-        //设置最大血量
-        if(maxHp > 0){
-            topCell.getChildByName("topImg").visible = true;
-        }
-
-        //可以受伤才执行效果
-        // if(hurtPlayer.isHurt){
-        if(isLive){
-            //减血文字
-            var bloodLabel = playerCell.getChildByName("bloodImg");
-            var bloodPoint = bloodLabel.localToGlobal(new Point(0,0));
-            BubbleScoreAnim(bloodPoint,"-"+_hp,"shuziRed");
-            Gamelog("------------掉血数字="+_hp);
-            //自己受伤
-            if(_playerData.playerId == UserModule.getInstance().playerId){
-                MusicManager.getInstance().playSound("res/music/10.wav");
-                if(_playerData.hp <=0){
-                    this.gameoverByBottom();
-                }
-                this.img_bloodBg.visible = true;
-                this.img_bloodBg.alpha = 1;
-                var timeLineBlood = new Laya.TimeLine();
-                timeLineBlood.addLabel("hide",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200).addLabel("show",0).to(this.img_bloodBg,
-                {
-                    alpha:1
-                },200).addLabel("hide1",0).to(this.img_bloodBg,
-                {
-                    alpha:0
-                },200);
-                timeLineBlood.play(0,false);
-                timeLineBlood.on(Laya.Event.COMPLETE,this,function(){
-                    timeLineBlood.destroy();
-                });
-                //伤害自己的人物展示效果
-                this.showAttackPlayerEffect(_hp);
-            }else{
-                MusicManager.getInstance().playSound("res/music/11.wav");
-            }
-            var img_bloodBgCell = playerCell.getChildByName("img_bloodBg");
-            img_bloodBgCell.visible = true;
-            img_bloodBgCell.alpha  = 1;
-            //闪红
-            var timeLine = new Laya.TimeLine();
-            timeLine.addLabel("hide1",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200).addLabel("show1",0).to(img_bloodBgCell,
-            {
-                alpha:1
-            },200).addLabel("hide11",0).to(img_bloodBgCell,
-            {
-                alpha:0
-            },200);
-            timeLine.play(0,false);
-            timeLine.on(Laya.Event.COMPLETE,null,function(){
-                timeLine.destroy();
-            });
-        }
-
-    }
-    //人物造成伤害
-    _proto.playerHurtHp = function(_id,_hp){
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == _id){
-                playerData.hp -= _hp;
-                hurtPlayer = playerData;
-                
-            }
-            
-        }
-
-        this.playerListHurtEffect(hurtPlayer,_hp);
-
-    }
-    //初始化人物列表
-    _proto.initPlayerListData = function(){
-        _proto.dataArr = [];
-        _proto.dataArr.push(GameModule.getInstance().playerDataList[0]);
-        for(var i = 0;i < GameModule.getInstance().playerDataList.length;i++){
-            var playerData = GameModule.getInstance().playerDataList[i];
-            var dataTemp = {
-                playerId: playerData.playerId,
-                name: playerData.name,
-                hp: playerData.hp,
-                baseHp:playerData.baseHp,
-                icon: playerData.icon,
-                isTop:false,
-                isHurt:false,
-            };
-            if(playerData.playerId == UserModule.getInstance().playerId){
-                dataTemp.isTop = true;
-                _proto.dataArr[0] = dataTemp;
-            }else{
-                _proto.dataArr.push(dataTemp);
-            }
-        }
-        this.updateList();
-
-    }
-    _proto.updateList = function(e){
-        this.playerList.vScrollBarSkin = '';
-        this.playerList.array = _proto.dataArr;
-        //list渲染函数
-        this.playerList.renderHandler = new Laya.Handler(this,this.onRender);
-    }
-
-     _proto.onRender = function(cell,index){
-
-        if(index > _proto.dataArr.length) return;
-        var data = _proto.dataArr[index];
-        if(data === undefined) return;
-
-        //头像
-        var icon = cell.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = data.icon;
-            icon.visible = true;
-        }
-
-        //心形图片
-        var bloodImg = cell.getChildByName("bloodImg");
-        bloodImg.visible = false;
-        var topImg = cell.getChildByName("topImg");
-        topImg.visible = false;
-        //掉血闪红
-        var img_bloodBg = cell.getChildByName("img_bloodBg");
-        img_bloodBg.visible = false;
-        //血量数字
-        var bloodLabel = cell.getChildByName("bloodLabel");
-        bloodLabel.visible = false;
-        var deadImg = cell.getChildByName("deadImg");
-        deadImg.visible = false;
-        //变灰
-        cell.gray = false;
-
-        //血条
-        var progres_hp = cell.getChildByName("progres_hp");
-        var hpValue = data.hp / data.baseHp;
-        if(hpValue > 0.75){
-            progres_hp.skin = "game/progress_green.png";
-        }else if(hpValue > 0.25){
-            progres_hp.skin = "game/progress_yellow.png";
-        }else{
-            progres_hp.skin = "game/progress_red.png";
-        }
-        progres_hp.value  = hpValue;
-
-        //如果血量大于0
-        if(data.hp > 0){
-            bloodImg.visible  = true;
-            bloodLabel.visible = true;
-            bloodLabel.text = data.hp;
-            //如果是血量最高
-            if(data.isTop){
-                topImg.visible =true;
-            }
-        }else{
-            deadImg.visible = true;
-            cell.gray = true;
-        }
-        //闪红
-        // if(data.isHurt){
-        //     img_bloodBg.visible = true;
-        //     img_bloodBg.alpha = 1;
-        //     var timeLine = new Laya.TimeLine();
-        //     timeLine.addLabel("hide",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200).addLabel("show",0).to(img_bloodBg,
-        //     {
-        //         alpha:1
-        //     },200).addLabel("hide1",0).to(img_bloodBg,
-        //     {
-        //         alpha:0
-        //     },200);
-        //     timeLine.play(0,false);
-        //     timeLine.on(Laya.Event.COMPLETE,null,function(){
-        //         timeLine.destroy();
-        //     });
-        // }
-        
-        
-     }
-
-     //释放技能
-     _proto.onBossBoxClick = function(e){
-         if(this.bossProgress.value >= 1){
-            this.bossProgress.value = 0;
-            this.bossHurtEffect();
-            this.progressAnim.visible = false;
-         }
-     }
-
-     //复制精灵
-    _proto.copySpriteSelf = function(_sprite){
-        var copySprite = new Laya.Sprite();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        for(var i=0; i<_sprite.numChildren; i++){
-            var element = _sprite.getChildAt(i);
-            copySprite.addChild(this.copySprite(element));
-        }
-
-        return copySprite;
-        
-    }
-
-    _proto.copySprite = function(_sprite){
-        var copySprite = new Laya.Node();
-        copySprite.width = _sprite.width;
-        copySprite.height = _sprite.height;
-        copySprite.x = _sprite.x;
-        copySprite.y = _sprite.y;
-
-        return copySprite;
-    }
-
-    //攻击者头像效果
-    _proto.showAttackPlayerEffect = function(_hp){
-
-        // Gamelog("----------伤害自己的人物Id="+this.hurtSelfPlayerId);
-        var hurtSprite = new HurtPlayerBoxUILogic();
-        var b_point  = new Point(0,0);
-        b_point = this.hurtPlayerBox.localToGlobal(b_point);
-        var globalX = b_point.x;
-        var globaly = b_point.y;
-        hurtSprite.initHurtPlayerBox(this.hurtSelfPlayerId,_hp,globalX,globaly);
-        hurtSprite.zOrder = 1;
-        Laya.stage.addChild(hurtSprite);
-
-        return;
-        var hurtPlayer;
-        //更新GameModule 数组
-        for(var x=0; x<GameModule.getInstance().playerDataList.length; x++){
-            var playerData = GameModule.getInstance().playerDataList[x];
-            if(playerData.playerId == this.hurtSelfPlayerId){
-                hurtPlayer = playerData;
-            }
-        }
-        //减血
-        var hurtHp = hurtSprite.getChildByName("hurtHp");
-        hurtHp.text = _hp;
-        //头像
-        var icon = hurtSprite.getChildByName("icon");
-        icon.visible = false;
-        if(icon != null){
-            icon.skin = hurtPlayer.icon;
-            icon.visible = true;
-        }
-        
-        var timeLineHurt = new Laya.TimeLine();
-        timeLineHurt.addLabel("one",0).to(hurtSprite,
-        {
-            scaleX:1,
-            scaleY:1,
-            x:Laya.stage.width/2,
-            y:Laya.stage.height/2,
-        },800).addLabel("two",0).to(eggBox,{
-            scaleX:1,
-            scaleY:1,
-        },500).addLabel("three",0).to(eggBox,{
-            scaleX:0,
-            scaleY:0,
-            x:playerPoint.x + playerCell.width/2,
-            y:playerPoint.y + playerCell.height/2,
-            
-        },800);
-        timeLineHurt.play(0,false);
-        timeLineHurt.on(Laya.Event.COMPLETE,this,function(){
-            hurtSprite.destroy();
-        });
-        
+        // window.location.href=UserModule.getInstance().redirect;
     }
 
     _proto.onRankClick = function(){
         UIManager.getInstance().showUI("GameRankUI");
     }
+
+    //获得金蛋动画效果
+    _proto.showEggEffect = function(){
+        MusicManager.getInstance().playSound("res/music/18.wav");
+        UIManager.getInstance().showUI("GameEggUI");
+    }
+
+    
     return GameUILogic;
 })(GameUI);
 /**
@@ -62333,6 +61963,9 @@ var UIManager = (function(_super){
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
                 break;
+            case "GameEggUI":
+                uiLogic = new GameEggUILogic();
+                break;
 
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -62489,7 +62122,7 @@ var Handler = laya.utils.Handler;
 var SoundManager = laya.media.SoundManager;
 // var Pool = laya.utils.Pool;
 // var Point = laya.maths.Point;
-// var Tween = laya.utils.Tween;
+var Tween = laya.utils.Tween;
 var LocalStorage = laya.net.LocalStorage;
 // var HttpRequest = laya.net.HttpRequest;
 // var Loader = Laya.Loader;
@@ -62573,7 +62206,7 @@ function  beginLoad(){
                 //图集
                 ["res/atlas/bubbles.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/game.atlas",Laya.Loader.ATLAS],
-                // ["res/atlas/bomb.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/paopaol.atlas",Laya.Loader.ATLAS],
                 //图片
                 ["game/bgGame.jpg",Laya.Loader.IMAGE],
                 ["game/img_dangqiandefen.png",Laya.Loader.IMAGE],
@@ -62583,7 +62216,7 @@ function  beginLoad(){
                 ["game/img_di2.png",Laya.Loader.IMAGE],
                 ["game/img_di3.png",Laya.Loader.IMAGE],
                 //字体
-                // ["bitmapFont/shuziRed.fnt",Laya.Loader.FONT],
+                ["bitmapFont/shuzi1Font.fnt",Laya.Loader.FONT],
                 //声音
                 ["res/music/1.mp3",Laya.Loader.SOUND],
                 ["res/music/1.wav",Laya.Loader.SOUND],
@@ -62649,8 +62282,11 @@ function loadingCallback(){
 
     Laya.Animation.createFrames(["game/img_toulan01.png","game/img_toulan02.png"],"pandaToulan");
 
+    Laya.Animation.createFrames(["game/jindan_1.png","game/jindan_2.png","game/jindan_3.png","game/jindan_4.png","game/jindan_5.png","game/jindan_6.png"],"jindan");
+
     if (GameInFackBook) {
         FBGame.getInstance().loadRewardAd();
+        FBGame.getInstance().loadInterstitialAd();
     }
     SceneManager.getInstance().currentScene = new GameScene();
 
