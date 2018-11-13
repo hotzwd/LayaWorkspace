@@ -1,0 +1,45 @@
+D .
+D Ducks
+D Game
+P 6E526E1A audio_icon_01.png
+P 6037C944 audio_icon_02.png
+R 5E4A35C7 bg_game.jpg
+R 24A2BCBC bg_menu.jpg
+P A7A7E50F bg_tile.png
+R 48A835A8 box.png
+P 28666177 btn_play.png
+P 3E16E2CF bullet.png
+P 739AC45A but_exit.png
+R FADA94F1 grass.png
+P 40585C15 gun_sight.png
+P 1E5E2E8C hit_icon_01.png
+P 0F56B105 hit_icon_02.png
+R 0D10B26D hit_panel.png
+R 4F56659C img_tree.png
+P F94C8219 life_panel.png
+P 7B44AF3D shot_panel.png
+D Ducks/Duck1
+P 877770D6 duck_1_01.png
+P FEE2B05F duck_1_02.png
+P F8511F48 duck_1_03.png
+P 3047E884 duck_1_04.png
+P 65AD5367 duck_1_05.png
+P 39B8865D duck_1_06.png
+P B6430DB4 duck_1_07.png
+P 8458F8CB duck_1_08.png
+P 11194F68 duck_1_09.png
+P 5184DBC8 duck_1_10.png
+P 4B87F26F duck_1_11.png
+P C10AE643 duck_1_12.png
+P 21500224 duck_1_13.png
+P 8B2BA57A duck_1_14.png
+P 72FD4A2D duck_1_15.png
+P 34253163 duck_1_16.png
+P 93871974 duck_1_17.png
+P 7783A519 duck_1_18.png
+P A475BB20 duck_1_19.png
+P 56FA7268 duck_1_20.png
+P FF406916 duck_1_21.png
+P 599B17D0 duck_1_22.png
+P FA7C1086 duck_1_23.png
+P 8E238F17 duck_1_24.png
