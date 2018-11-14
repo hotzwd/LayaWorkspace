@@ -32,7 +32,22 @@ var DuckGenerator = (function(_super){
 
         DuckFactory.getInstance().initFactory(this.duckBox);
 
-        
+        birthPosArray = [];
+        for (var t_x = 300; t_x < GameConfig.GameWidth; ) {
+            var t_pos = new Point(t_x,700);
+            t_x += 50;
+            birthPosArray.push(t_pos);
+        }
+
+        endPosArray = [];
+        endPosArray.push(new Point(-120,400));
+        endPosArray.push(new Point(-120,200));
+        endPosArray.push(new Point(Laya.stage.width + 120,200));
+        endPosArray.push(new Point(Laya.stage.width + 120,200));
+        endPosArray.push(new Point(500,-120));
+        endPosArray.push(new Point(1200,-120));
+        endPosArray.push(new Point(250,-120));
+        endPosArray.push(new Point(750,-120));
     }
 
     /**初始化对象池 */
@@ -51,26 +66,18 @@ var DuckGenerator = (function(_super){
 
      _proto.randomduckPos = function(_mos){
 
-
-        //  var posTypeId = Math.random()*1 + 1;
-        //  posTypeId = parseInt(posTypeId, 10);
-        //  posTypeId = 3;
-
         var duckRanomNum = parseInt(Math.random()*10, 10);
         duckRanomNum =1;
         var typeId = parseInt(Math.random()*1 +1, 10);
 
-        var birthPos;
+        var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
+        var birthPos = birthPosArray[birthIndex];
 
-         birthPos = new Point(500,200);
-         //左上
-        //  if(posTypeId == 1){
-        //     birthPos = new Point(-50 - Math.random()*200, Math.random()*200); // 180 -270度
-        //  }
+        var endIndex = parseInt(Math.random()*endPosArray.length,10);
+        var endPos = endPosArray[endIndex];
 
-        //  Gamelog("----生成怪物 pos="+birthPos +",角度="+t_anlge);
         //初始
-        _mos.initDuck(typeId,birthPos);
+        _mos.initDuck(typeId,birthPos,endPos);
 
      }
     

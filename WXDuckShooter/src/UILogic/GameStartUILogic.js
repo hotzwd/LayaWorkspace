@@ -30,6 +30,8 @@ var GameStartUiLogic = (function (_super) {
 
         UIManager.getInstance().closeUI("GameStartUI");
         UIManager.getInstance().showUI("GameUI");
+
+        SceneManager.getInstance().currentScene.startGame();
     }
   
 

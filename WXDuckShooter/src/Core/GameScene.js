@@ -65,7 +65,7 @@ var GameScene = (function (_super) {
         this.gameLayer.addChild(this.curSight);
         this.gameUI.img_sight.visible =false;
 
-        this.startGame();
+        // this.startGame();
 
         
      }
@@ -74,7 +74,9 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
          
-         DuckGenerator.getInstance().createduck(1);
+         this.duckList = [];
+         var t_list =DuckGenerator.getInstance().createduck(1);
+         this.duckList = this.duckList.concat(t_list);
     }
 
 
@@ -101,9 +103,12 @@ var GameScene = (function (_super) {
      * update刷新
      */
     _proto.onUpdate = function () {
-        // if(this.curCar != null){
-        //     this.curCar.onUpdate();
-        // }
+        if(this.duckList.length != 0){
+            for (var i = 0; i < this.duckList.length; i++) {
+                var t_duck = this.duckList[i];
+                t_duck.onUpdate();
+            }
+        }
        
     }
 

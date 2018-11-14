@@ -19,6 +19,10 @@ var Duck = (function (_super) {
     _proto.m_anim = null;                                                 //动画
     _proto.m_startPoint = null;                                           //起点坐标
     _proto.m_type = 1;                                                    //种类
+    _proto.m_endPoint = null;                                             //结束坐标
+    _proto.m_isHit = false;                                               //是否被击中
+    _proto.m_speed = 3;                                                   //移动速度
+    _proto.targetVector = null;                                           //目标向量
 
 
     _proto.Init = function () {
@@ -45,11 +49,21 @@ var Duck = (function (_super) {
     }
 
     /**初始化 */
-    _proto.initDuck = function(p_type,p_startPoint){
+    _proto.initDuck = function(p_type,p_startPoint,p_endPoint){
         this.m_startPoint = p_startPoint;
+        this.m_endPoint = p_endPoint;
         this.m_type = p_type;
 
-        this.m_anim.scaleX = -1;
+        //方向
+        if(p_endPoint.x > p_startPoint.x){
+            this.m_anim.scaleX = -1;
+        }else{
+            this.m_anim.scaleX = 1;
+        }
+
+        var tempVector = new Point(p_endPoint.x - p_startPoint.x, p_endPoint.y - p_startPoint.y);
+        tempVector.normalize();
+        this.targetVector = tempVector;
         
         this.resetDuck();
     }
@@ -59,6 +73,9 @@ var Duck = (function (_super) {
     _proto.resetDuck = function(){
         this.x = this.m_startPoint.x;
         this.y = this.m_startPoint.y;
+
+        this.m_isHit = false;
+        // this.y -= 300;
     }
 
     
@@ -66,13 +83,11 @@ var Duck = (function (_super) {
      * update刷新
      */
     _proto.onUpdate = function () {
-        if(this.curRock == null){
-            this.curRock = SceneManager.getInstance().currentScene.curRock;
-        }
-        // if(this.curCar == null){
-        //     this.curCar = SceneManager.getInstance().currentScene.curCar;
-        // }
-
+        if(this.m_isHit)
+            return;
+        
+        this.pos(this.x + this.targetVector.x * this.m_speed, this.y + this.targetVector.y * this.m_speed);
+        // Gamelog("----duck pos="+this.y)
         
     }
 
