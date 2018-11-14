@@ -13,7 +13,10 @@ var GameScene = (function (_super) {
     }
 
     _proto.gameUI = null;                                                    //ui对象
-    _proto.gameBox = null;                                                   //游戏层
+    _proto.duckLayer = null;                                                 //鸭子层
+    _proto.gameLayer = null;                                                 //游戏层
+    _proto.curSight = null;                                                  //当前瞄准镜
+    _proto.duckList = null;                                                  //所有鸭子列表
   
 
     _proto.Init = function () {
@@ -23,21 +26,22 @@ var GameScene = (function (_super) {
             this.gameUI.visible = false;
         }
 
-        this.gameBox = new Laya.Box();
-        this.gameBox.width = Laya.stage.width;
-        this.gameBox.height = Laya.stage.height;
-        this.gameBox.zOrder = 10;
-        this.gameBox.mouseEnabled = true;
-        this.gameBox.mouseThrough = true;
+        // this.gameBox = new Laya.Box();
+        // this.gameBox.width = Laya.stage.width;
+        // this.gameBox.height = Laya.stage.height;
+        // this.gameBox.zOrder = 10;
+        // this.gameBox.mouseEnabled = true;
+        // this.gameBox.mouseThrough = true;
         
-        Laya.stage.addChild(this.gameBox);
-
-
-        this.curLevelIndex = 0;
-        // this.curLevelIndex = 1;
+        // Laya.stage.addChild(this.gameBox);
+        this.gameLayer = this.gameUI.gameLayer;
+        this.duckLayer = this.gameUI.duckLayer;
+        //初始化生成器
+        DuckGenerator.getInstance().initGenerator(this.duckLayer);
         
-        // this.gameUI.moveBox.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
-        // Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        this.gameLayer.on(Laya.Event.MOUSE_DOWN,this,this._mouseDowmEvent);
+        this.gameLayer.on(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
+        this.gameLayer.on(Laya.Event.MOUSE_UP,this,this._mouseUpEvent);
 
         //自动适配完后初始化
         Laya.timer.frameOnce(8, this, this.delayInitShow);
@@ -54,7 +58,13 @@ var GameScene = (function (_super) {
     //自动适配完后初始化
      _proto.delayInitShow = function () {
 
-        
+        //初始化瞄准镜
+        this.curSight = new Sight();
+        var t_sightPoint = new Point(this.gameUI.img_sight.x,this.gameUI.img_sight.y);
+        this.curSight.initSight(t_sightPoint);
+        this.gameLayer.addChild(this.curSight);
+        this.gameUI.img_sight.visible =false;
+
         this.startGame();
 
         
@@ -64,12 +74,13 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
          Laya.timer.frameLoop(1, this, this.onUpdate);
          
+         DuckGenerator.getInstance().createduck(1);
     }
 
 
     /**重置游戏 */
     _proto.restartGame = function(_score){
-       
+        this.duckList = [];
 
         
     }
@@ -101,26 +112,24 @@ var GameScene = (function (_super) {
     
     /**按下监听事件 */
     _proto._mouseDowmEvent = function(_event){
-        var tarPos = this.heroBox.globalToLocal(new Point(_event.stageX,_event.stageY));
-    }
-    /**按下移动监听事件 */
-    _proto._mouseMoveEvent = function(_event){
-        if(this.curRock == null){
-            return;
-        }
-        // Gamelog("---move x="+_event.stageX+",y="+_event.stageY);
-        var t_rad = Math.atan2(Laya.stage.height - _event.stageY,Laya.stage.width - _event.stageX) / Math.PI * 180;  //注意参数（y,x） Y在前，X在后
-        // Gamelog("---rotation t_rad="+t_rad);
-        this.gameBox.rotation = t_rad; 
+        var m_mouseDownPoint = new Point(_event.stageX,_event.stageY);
+        this.gameLayer.globalToLocal(m_mouseDownPoint);
+        this.curSight.pos(m_mouseDownPoint.x,m_mouseDownPoint.y);
 
-        if(t_rad >= 6){
-            this.gameBox.rotation = 6; 
-            this.curGround.off(Laya.Event.MOUSE_MOVE,this,this._mouseMoveEvent);
-            this.curRock.m_canRotate = true;
-            this.curRock.m_autoRotate = true;
-            
-        }
+
     }
+     /**按下移动监听事件 */
+    _proto._mouseMoveEvent = function (_event) {
+        var m_mouseDownPoint = new Point(_event.stageX,_event.stageY);
+        this.gameLayer.globalToLocal(m_mouseDownPoint);
+        this.curSight.pos(m_mouseDownPoint.x,m_mouseDownPoint.y);
+
+    }
+     /**抬起监听事件 */
+    _proto._mouseUpEvent = function (_event) {
+        
+    }
+    
 
 
   

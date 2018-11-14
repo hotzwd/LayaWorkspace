@@ -21,34 +21,15 @@ var GameUILogic = (function (_super) {
         // this.btn_guid.on(Laya.Event.CLICK,this,this._guidClickEvent);
         // this.btn_tip.on(Laya.Event.CLICK,this,this._tipClickEvent);
         // this.btn_getGold.on(Laya.Event.CLICK,this,this._getGoldClickEvent);
-        
-        // this.updateGoldNum();
-        // this.updateLifeNum();
 
-        wxGame.getInstance().showClubBtn(true);
+        wxGame.getInstance().showClubBtn(false);
+        
     }
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
     }
 
-    //初始化关卡
-    _proto.initLevel = function(p_score){
-        var t_index= SceneManager.getInstance().currentScene.curLevelIndex;
-        var t_leveData = GameLevelData[t_index];
-        this.t_id.text = t_leveData.id;
-        this.t_name.text = t_leveData.name;
-
-        switch (t_index) {
-            case 0:
-                UIManager.getInstance().showUI("GuidGameUI");
-                break;
-        
-            default:
-                break;
-        }
-        this.updateVideoAd();
-    }
     
 
     //显示分数
@@ -82,19 +63,6 @@ var GameUILogic = (function (_super) {
   //点击引导
   _proto._guidClickEvent = function(){
       UIManager.getInstance().showUI("GuidGameUI");
-  }
-
-  //点击获取金币
-  _proto._getGoldClickEvent = function(){
-      var t_gameUI = SceneManager.getInstance().currentScene.gameUI;
-      if(Browser.onMiniGame){
-          if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
-                return;
-            t_gameUI.showRewardAd();
-        }else{
-            t_gameUI.rewardEffect();
-        } 
-
   }
 
   //更新视频图标状态

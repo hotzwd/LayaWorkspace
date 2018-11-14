@@ -36,12 +36,14 @@ function beginLoadGoHead() {
                 // ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/Ducks/Duck1.atlas",Laya.Loader.ATLAS],
-                // ["res/atlas/tower.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/Shot.atlas",Laya.Loader.ATLAS],
                 // //图片
                 ["Game/bg_game.jpg",Laya.Loader.IMAGE],
-                // ["game/huodechenghao-di.png",Laya.Loader.IMAGE],
-                // ["game/img_line.png",Laya.Loader.IMAGE],
-                // ["game/paohangbang-di.png",Laya.Loader.IMAGE],
+                ["Game/bg_menu.jpg",Laya.Loader.IMAGE],
+                ["Game/grass.png",Laya.Loader.IMAGE],
+                ["Game/hit_panel.png",Laya.Loader.IMAGE],
+                ["Game/img_box.png",Laya.Loader.IMAGE],
+                ["Game/img_tree.png",Laya.Loader.IMAGE],
                 // //字体
                 // ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
@@ -67,11 +69,17 @@ function beginLoadGoHead() {
 
 function loadingCallbackGO() {
 
-    // Laya.Animation.createFrames(["game_resoure/car0.png","game_resoure/car1.png","game_resoure/car2.png"], "car_run");
-    // Laya.Animation.createFrames(["game_resoure/carCrackUp1.png","game_resoure/carCrackUp2.png"], "car_crack1");
+    Laya.Animation.createFrames(["Ducks/Duck1/duck_1_01.png","Ducks/Duck1/duck_1_02.png","Ducks/Duck1/duck_1_03.png","Ducks/Duck1/duck_1_04.png"
+        ,"Ducks/Duck1/duck_1_05.png","Ducks/Duck1/duck_1_06.png","Ducks/Duck1/duck_1_07.png"], "duck_1_fly");
+    Laya.Animation.createFrames(["Ducks/Duck1/duck_1_08.png","Ducks/Duck1/duck_1_09.png","Ducks/Duck1/duck_1_10.png","Ducks/Duck1/duck_1_11.png","Ducks/Duck1/duck_1_12.png"
+        ,"Ducks/Duck1/duck_1_13.png","Ducks/Duck1/duck_1_14.png","Ducks/Duck1/duck_1_15.png","Ducks/Duck1/duck_1_16.png"], "duck_1_hurt");
+    Laya.Animation.createFrames(["Ducks/Duck1/duck_1_17.png","Ducks/Duck1/duck_1_18.png","Ducks/Duck1/duck_1_19.png","Ducks/Duck1/duck_1_20.png"
+        ,"Ducks/Duck1/duck_1_21.png","Ducks/Duck1/duck_1_22.png","Ducks/Duck1/duck_1_23.png","Ducks/Duck1/duck_1_24.png"], "duck_1_fall");
+
+    Laya.Animation.createFrames(["Shot/tap_shot_01.png","Shot/tap_shot_02.png","Shot/tap_shot_03.png","Shot/tap_shot_04.png","Shot/tap_shot_05.png"
+        ,"Shot/tap_shot_06.png","Shot/tap_shot_07.png","Shot/tap_shot_08.png","Shot/tap_shot_09.png","Shot/tap_shot_10.png","Shot/tap_shot_11.png"
+        ,"Shot/tap_shot_12.png","Shot/tap_shot_13.png","Shot/tap_shot_14.png","Shot/tap_shot_15.png","Shot/tap_shot_16.png","Shot/tap_shot_17.png"], "tap_shot");
     // Laya.Animation.createFrames(["game_resoure/bomb.png","game_resoure/bombIgnite1.png","game_resoure/bombIgnite2.png"], "bombIgnite");
-    // Laya.Animation.createFrames(["game_resoure/bombBlast1.png","game_resoure/bombBlast2.png"], "bombBlast");
-    // Laya.Animation.createFrames(["game_resoure/stoneShatter1.png","game_resoure/stoneShatter2.png","game_resoure/stoneShatter3.png"], "stoneShatter");
     
     SceneManager.getInstance().currentScene = new GameScene();
     UIManager.getInstance().showUI("GameStartUI");

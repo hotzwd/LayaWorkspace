@@ -17,7 +17,7 @@ var GameStartUiLogic = (function (_super) {
         
 
         this.btn_start.on(Laya.Event.CLICK,this,this._startClickEvent);
-
+        wxGame.getInstance().showClubBtn(true);
     }
     
     _proto.onDestroy = function () {
@@ -25,6 +25,9 @@ var GameStartUiLogic = (function (_super) {
     }
 
     _proto._startClickEvent = function(){
+        wxGame.getInstance().showClubBtn(false);
+        wxGame.getInstance().createVideoAD();
+
         UIManager.getInstance().closeUI("GameStartUI");
         UIManager.getInstance().showUI("GameUI");
     }
