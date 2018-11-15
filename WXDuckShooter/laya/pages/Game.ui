@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":17,
-    "selecteID":19,
+    "selecteID":24,
     "props":{"width":1366,"sceneColor":"#000000","height":768,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -132,7 +132,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":609,"x":1259,"visible":false,"skin":"Game/shot_panel.png"},
+                    "props":{"y":609,"x":1259,"skin":"Game/shot_panel.png"},
                     "nodeParent":17,
                     "label":"Image",
                     "isDirectory":false,
@@ -146,7 +146,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":603,"x":1259,"visible":false,"skin":"Game/life_panel.png"},
+                    "props":{"y":603,"x":1259,"skin":"Game/life_panel.png"},
                     "nodeParent":17,
                     "label":"Image",
                     "isDirectory":false,
@@ -173,13 +173,117 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":653,"x":877,"width":232,"text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"},
+                    "props":{"y":653,"x":877,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"},
+                    "nodeParent":17,
+                    "label":"Text(t_gamescore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":16,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":609,"x":1333,"width":64,"var":"t_life","text":"X1","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"},
+                    "nodeParent":17,
+                    "label":"Text(t_life)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":19,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":657,"x":651,"text":"提示","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":17,
                     "label":"Text",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":16,
+                    "compId":24,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":710,"x":648,"width":520,"var":"hitDucktList","repeatY":1,"repeatX":10,"height":42},
+                    "nodeParent":17,
+                    "label":"List(hitDucktList)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":20,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "props":{"y":0,"x":0,"renderType":"render"},
+                            "nodeParent":20,
+                            "label":"Box",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":false,
+                            "hasChild":true,
+                            "compId":26,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Image",
+                                    "props":{"y":0,"x":0,"skin":"Game/hit_icon_02.png","name":"img_duck"},
+                                    "nodeParent":26,
+                                    "label":"Image(img_duck)",
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":21,
+                                    "child":[
+                                        ]
+                                }]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":684,"x":1278,"width":70,"var":"bulletList","spaceX":5,"repeatY":1,"repeatX":3,"height":66},
+                    "nodeParent":17,
+                    "label":"List(bulletList)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":22,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":0,"x":0,"skin":"Game/bullet.png","renderType":"render","name":"img_bullet"},
+                            "nodeParent":22,
+                            "label":"Image(img_bullet)",
+                            "isDirectory":false,
+                            "isAniNode":false,
+                            "hasChild":false,
+                            "compId":23,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":697,"x":1273,"visible":false,"var":"t_noBullet","text":"没有子弹","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "nodeParent":17,
+                    "label":"Text(t_noBullet)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":25,
                     "child":[
                         ]
                 }]
