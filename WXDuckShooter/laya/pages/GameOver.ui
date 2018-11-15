@@ -1,7 +1,7 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
+    "selectedBox":2,
     "selecteID":11,
     "props":{"width":1366,"sceneColor":"#000000","height":768,"centerY":0,"centerX":0},
     "nodeParent":-1,
@@ -52,7 +52,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":179,"x":521,"skin":"Game/img_box.png"},
+                    "props":{"y":179,"x":521,"width":621,"skin":"Game/img_box.png","height":441},
                     "nodeParent":2,
                     "label":"Image",
                     "isDirectory":false,
@@ -117,7 +117,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":628,"x":733,"width":221,"var":"btn_share","stateNum":"1","skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
+                    "props":{"y":634,"x":721,"width":221,"var":"btn_share","stateNum":"1","skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_share)",
                     "isDirectory":false,

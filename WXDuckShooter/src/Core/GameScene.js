@@ -25,7 +25,7 @@ var GameScene = (function (_super) {
     _proto.duckLayer = null;                                                 //鸭子层
     _proto.gameLayer = null;                                                 //游戏层
     _proto.curSight = null;                                                  //当前瞄准镜
-    _proto.duckList = null;                                                  //所有鸭子列表
+    _proto.duckList = [];                                                  //所有鸭子列表
     _proto.gameScore = 0;                                                    //游戏得分
     _proto.curGameWaveIndex = 0;                                             //当前游戏波次
     _proto.duckSpeed = 3;                                                    //鸭子速度
@@ -96,6 +96,12 @@ var GameScene = (function (_super) {
 
     /**重置游戏 */
     _proto.restartGame = function(_score){
+
+        for (var i = 0; i < this.duckList.length; i++) {
+            var t_duck = this.duckList[i];
+            DuckFactory.getInstance().recoveryduckToPool(t_duck);
+        }
+
         this.duckList = [];
         this.gameScore = 0;
         this.gameUI.t_gamescore.text = this.gameScore;
