@@ -16,20 +16,29 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
         
-        // this.aniCloud.play(0,true);
-        // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.aniLife.play(0,true);
+        // this.btn_addLife.visible= true;
+
+        this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
+        this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
+
         this.bulletList.renderHandler = new Laya.Handler(this, this.updateBulletItem);
         this.hitDucktList.renderHandler = new Laya.Handler(this, this.updateHitDucktItem);
 
+
         wxGame.getInstance().showClubBtn(false);
-        
+        this.guidBox.visible = true;
     }
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
     }
 
-    
+    //引导
+    _proto.guidBoxClickEvent = function(){
+        this.guidBox.visible = false;
+        SceneManager.getInstance().currentScene.resumeGame();
+    }
 
     //显示分数
     _proto.setScore = function(p_score,p_anim){
@@ -83,6 +92,29 @@ var GameUILogic = (function (_super) {
 
         var duckImg = cell.getChildByName("img_duck");
         duckImg.skin ="Game/hit_icon_0"+ (t_isHit+1)+".png";
+    }
+
+    //点击增加生命
+    _proto.addLifeClick = function(){
+        this.btn_addLife.visible= false;
+        SceneManager.getInstance().currentScene.pauseGame();
+        //播放广告
+        if (!Browser.onMiniGame) {
+            SceneManager.getInstance().currentScene.addLife(true);
+         }else{
+             wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
+         }
+    }
+
+    //刷新是否可以显示增加生命
+    _proto.updateAddLifeState = function(){
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            this.btn_addLife.visible = true;
+        }else{
+            this.btn_addLife.visible = true;
+        }
     }
 
 

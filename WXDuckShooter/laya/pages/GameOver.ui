@@ -30,13 +30,14 @@
                     "props":{"width":1664,"height":768,"alpha":0.8},
                     "nodeParent":2,
                     "label":"Sprite",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":3,
                     "child":[
                         {
+                            "x":45,
                             "type":"Rect",
                             "props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"},
                             "nodeParent":3,
@@ -52,7 +53,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":179,"x":521,"width":621,"skin":"Game/img_box.png","height":441},
+                    "props":{"y":179,"x":521,"width":621,"skin":"Game/img_box.png","height":445},
                     "nodeParent":2,
                     "label":"Image",
                     "isDirectory":false,
@@ -91,7 +92,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":310,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "props":{"y":348,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -104,7 +105,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":310,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"left"},
+                    "props":{"y":348,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":2,
                     "label":"Text(t_gamescore)",
                     "isDirectory":false,
@@ -117,13 +118,39 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":634,"x":721,"width":221,"var":"btn_share","stateNum":"1","skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
+                    "props":{"y":652,"x":721,"width":221,"var":"btn_share","stateNum":"1","skin":"Game/btn_play.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":11,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":292,"x":678,"text":"历史最高分数:","fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "nodeParent":2,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":12,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":292,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"},
+                    "nodeParent":2,
+                    "label":"Text(t_highScore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":13,
                     "child":[
                         ]
                 }],

@@ -10,11 +10,14 @@ P 28666177 btn_play.png
 P 3E16E2CF bullet.png
 P 739AC45A but_exit.png
 R FADA94F1 grass.png
+P 87E7DEB3 guide1.png
+P D1CDFF06 guide2.png
 P 40585C15 gun_sight.png
 P 1E5E2E8C hit_icon_01.png
 P 91956DCE hit_icon_02.png
 R 0D10B26D hit_panel.png
 R 48A835A8 img_box.png
+P D42964BC img_light.png
 R 4F56659C img_tree.png
 P F94C8219 life_panel.png
 R ED1D647F share1.png

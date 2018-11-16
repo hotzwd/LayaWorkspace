@@ -327,6 +327,33 @@ var wxGame = (function (_super) {
         });
     }
 
+    /**展示视频广告 */
+    _proto.showVideoAD = function (_call,_callback) {
+        if (!Browser.onMiniGame) {
+             return;
+         }
+        var t_videoAd = wxGame.getInstance().videoAd;
+        //没有加载完播放失败
+        if(t_videoAd == null || !window.wxLoadVideoAd)
+            return;
+
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            t_videoAd.offClose();
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                _call._callback(true);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                _call._callback(false);
+            }
+        });
+    }
+
+
     /**微信官方对比版本号 */
     function compareVersion(v1, v2) {
         v1 = v1.split('.')
