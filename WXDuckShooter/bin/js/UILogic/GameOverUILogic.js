@@ -20,17 +20,27 @@ var GameOverUILogic = (function (_super) {
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
-        this.t_gamescore.text = SceneManager.getInstance().currentScene.gameScore;
+        // this.t_gamescore.text = SceneManager.getInstance().currentScene.gameScore;
+
+        var scoreNum = SceneManager.getInstance().currentScene.gameScore;
+        this.t_gamescore.text = scoreNum;
+        this.t_highScore.text = scoreNum;
+
+        //存储在本地并上传
+        var highscoreNum = SetLocalMaxScore(scoreNum);
+        wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
+        wxGame.getInstance().showOpenDataContext(false);
     }
 
     _proto._closeClickEvent = function(){
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
+        wxGame.getInstance().showOpenDataContext(false);
     }
   
      _proto._shareClickEvent = function(){

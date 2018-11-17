@@ -1,5 +1,16 @@
 D .
-D GameUI
+D BeginUI
+R 43BFEA28 1.png
+R 7143871B 2.png
+R A04F51DA 3.png
+R 92ED02E2 4.png
+R 69629890 5.png
+P A0897746 btn_play.png
+P 2310B2BE btn_rank.png
+P B183B4EB btn_share.png
+R 00CEE0AA img_xinshouyindao.png
+R 67D37954 logo.png
+D WXGameUI
 P D3A369F0 btn_fanhui.png
 P BDEC19F3 btn_guan.png
 P 4D8AC60A btn_guanbi.png
@@ -81,14 +92,3 @@ P 771217C8 img_zhouweileishu-8.png
 P 7EDA2FC8 jiesuan_biaoti_shengli.png
 P 8522A064 jiesuan_biaoti_shibai.png
 R 543297C7 shard.png
-D StartUI
-R 43BFEA28 1.png
-R 7143871B 2.png
-R A04F51DA 3.png
-R 92ED02E2 4.png
-R 69629890 5.png
-P A0897746 btn_play.png
-P 2310B2BE btn_rank.png
-P B183B4EB btn_share.png
-R 00CEE0AA img_xinshouyindao.png
-R 67D37954 logo.png

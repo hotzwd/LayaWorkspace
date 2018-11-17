@@ -39,4 +39,4 @@ var GameRankUILogic = (function(_super){
         MusicManager.getInstance().playSound("res/music/1.wav");
     }
     return GameRankUILogic;
-})(GameRankUI);
+})(GameRankNewUI);

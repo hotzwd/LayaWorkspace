@@ -25,13 +25,14 @@ var GameScene = (function (_super) {
     _proto.duckLayer = null;                                                 //鸭子层
     _proto.gameLayer = null;                                                 //游戏层
     _proto.curSight = null;                                                  //当前瞄准镜
-    _proto.duckList = null;                                                  //所有鸭子列表
+    _proto.duckList = [];                                                  //所有鸭子列表
     _proto.gameScore = 0;                                                    //游戏得分
     _proto.curGameWaveIndex = 0;                                             //当前游戏波次
     _proto.duckSpeed = 3;                                                    //鸭子速度
     _proto.bulletNum = 3;                                                    //子弹个数
     _proto.hitDuckList = null;                                               //击中鸭子状态列表
     _proto.gamelife = 4;                                                     //游戏生命数
+    _proto.m_sightPoint = null;                                              //瞄准镜位置
   
 
     _proto.Init = function () {
@@ -40,15 +41,7 @@ var GameScene = (function (_super) {
             this.gameUI = UIManager.getInstance().showUI("GameUI");
             this.gameUI.visible = false;
         }
-
-        // this.gameBox = new Laya.Box();
-        // this.gameBox.width = Laya.stage.width;
-        // this.gameBox.height = Laya.stage.height;
-        // this.gameBox.zOrder = 10;
-        // this.gameBox.mouseEnabled = true;
-        // this.gameBox.mouseThrough = true;
         
-        // Laya.stage.addChild(this.gameBox);
         this.gameLayer = this.gameUI.gameLayer;
         this.duckLayer = this.gameUI.duckLayer;
         //初始化生成器
@@ -76,6 +69,7 @@ var GameScene = (function (_super) {
         //初始化瞄准镜
         this.curSight = new Sight();
         var t_sightPoint = new Point(this.gameUI.img_sight.x,this.gameUI.img_sight.y);
+        this.m_sightPoint = t_sightPoint;
         this.curSight.initSight(t_sightPoint);
         this.gameLayer.addChild(this.curSight);
         this.gameUI.img_sight.visible =false;
@@ -89,13 +83,27 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
 
         this.restartGame();
-        Laya.timer.frameLoop(1, this, this.onUpdate);
+        // Laya.timer.frameLoop(1, this, this.onUpdate);
         
     }
+    /**暂停游戏 */
+    _proto.pauseGame = function(){
+        Laya.timer.clear(this,this.onUpdate);
+    }
 
+    /**恢复游戏 */
+    _proto.resumeGame = function(){
+        Laya.timer.frameLoop(1, this, this.onUpdate);
+    }
 
     /**重置游戏 */
     _proto.restartGame = function(_score){
+
+        for (var i = 0; i < this.duckList.length; i++) {
+            var t_duck = this.duckList[i];
+            DuckFactory.getInstance().recoveryduckToPool(t_duck);
+        }
+
         this.duckList = [];
         this.gameScore = 0;
         this.gameUI.t_gamescore.text = this.gameScore;
@@ -109,6 +117,10 @@ var GameScene = (function (_super) {
         this.gameUI.updateHitDuckData();
         this.gamelife = 4;
         this.gameUI.t_life.text = "x"+this.gamelife;
+
+        if(this.m_sightPoint != null){
+            this.curSight.initSight(this.m_sightPoint);
+        }
         
     }
     /**游戏结束 */
@@ -141,6 +153,7 @@ var GameScene = (function (_super) {
             }
             this.bulletNum = 3;
             this.gameUI.updateBulletData();
+            this.gameUI.updateAddLifeState();
         }
        
     }
@@ -205,6 +218,15 @@ var GameScene = (function (_super) {
                 //游戏结束
                 this.gameover();
             }
+        }
+    }
+
+    /**增加生命 */
+    _proto.addLife = function(_success){
+        this.resumeGame();
+        if(_success){
+            this.gamelife ++;
+            this.gameUI.t_life.text = "x"+this.gamelife;
         }
     }
 

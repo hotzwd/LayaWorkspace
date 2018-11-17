@@ -32,12 +32,12 @@ var GameoverUILogic = (function(_super){
         this.label_time.text = GetTimeFormat(scoreNum);
 
         if(_isWin  && scoreNum > 0){
-            this.img_result.skin = "GameUI/jiesuan_biaoti_shengli.png";
+            this.img_result.skin = "WXGameUI/jiesuan_biaoti_shengli.png";
             //存储在本地并上传
             var highscoreNum = SetLocalMaxScore(scoreNum);
             wxGame.getInstance().uploadUserScore(highscoreNum);
         }else{
-            this.img_result.skin = "GameUI/jiesuan_biaoti_shibai.png";
+            this.img_result.skin = "WXGameUI/jiesuan_biaoti_shibai.png";
             wxGame.getInstance().showFriends();
         }
 
@@ -64,4 +64,4 @@ var GameoverUILogic = (function(_super){
     }
 
     return GameoverUILogic;
-})(GameoverUI);
+})(GameoverNewUI);

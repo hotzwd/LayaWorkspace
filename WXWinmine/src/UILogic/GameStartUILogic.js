@@ -76,4 +76,4 @@ var GameStartUILogic = (function(_super){
     
 
     return GameStartUILogic;
-})(GameStartUI);
+})(GameStartNewUI);

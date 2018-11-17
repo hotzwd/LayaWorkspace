@@ -80,21 +80,21 @@ var wxGame = (function (_super) {
                 }
             })
 
-            // Laya.timer.once(400, this, function () {
-            //     var sharedSprite = new Laya.Sprite();
-            //     sharedSprite.zOrder = 400;
-            //     sharedSprite.name = "OpenDataContext";
-            //     Laya.stage.addChild(sharedSprite);
-            //     sharedSprite.visible = false;
+            Laya.timer.once(400, this, function () {
+                var sharedSprite = new Laya.Sprite();
+                sharedSprite.zOrder = 400;
+                sharedSprite.name = "OpenDataContext";
+                Laya.stage.addChild(sharedSprite);
+                sharedSprite.visible = false;
 
-            //     Browser.window.sharedCanvas.width = Laya.stage.width;
-            //     Browser.window.sharedCanvas.height = Laya.stage.height;
+                Browser.window.sharedCanvas.width = Laya.stage.width;
+                Browser.window.sharedCanvas.height = Laya.stage.height;
 
-            //     sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
-            //     // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
-            //     Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
-            //     sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
-            // });
+                sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
+                // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
+                Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
+                sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
+            });
         }
     }
 
@@ -326,6 +326,33 @@ var wxGame = (function (_super) {
             wxLoadVideoAd = true;
         });
     }
+
+    /**展示视频广告 */
+    _proto.showVideoAD = function (_call,_callback) {
+        if (!Browser.onMiniGame) {
+             return;
+         }
+        var t_videoAd = wxGame.getInstance().videoAd;
+        //没有加载完播放失败
+        if(t_videoAd == null || !window.wxLoadVideoAd)
+            return;
+
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            t_videoAd.offClose();
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                _call._callback(true);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                _call._callback(false);
+            }
+        });
+    }
+
 
     /**微信官方对比版本号 */
     function compareVersion(v1, v2) {

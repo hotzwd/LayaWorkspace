@@ -98,4 +98,4 @@ var GameUILogic = (function(_super){
     
    
     return GameUILogic;
-})(GameUI);
+})(GameNewUI);

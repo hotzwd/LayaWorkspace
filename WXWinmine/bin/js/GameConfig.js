@@ -39,4 +39,4 @@ var GameLogVisible = true;
 /**物理边框显示 */
 var GameMatterBody = false;
 /**物理模式 */
-var GameMatterModle = true;
+// var GameMatterModle = true;

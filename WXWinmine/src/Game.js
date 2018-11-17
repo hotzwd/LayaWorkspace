@@ -31,17 +31,17 @@ ResourceVersion.enable("version.json", Handler.create(this, beginLoad));
 function  beginLoad(){
     var arr = [
                 //图集
-                ["res/atlas/GameUI.atlas",Laya.Loader.ATLAS],
-                ["res/atlas/StartUI.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/WXGameUI.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/BeginUI.atlas",Laya.Loader.ATLAS],
                 //图片
-                ["GameUI/img_beijing.jpg",Laya.Loader.IMAGE],
-                ["GameUI/img_diban.jpg",Laya.Loader.IMAGE],
-                ["GameUI/img_dikuang.jpg",Laya.Loader.IMAGE],
-                ["StartUI/1.png",Laya.Loader.IMAGE],
-                ["StartUI/2.png",Laya.Loader.IMAGE],
-                ["StartUI/3.png",Laya.Loader.IMAGE],
-                ["StartUI/4.png",Laya.Loader.IMAGE],
-                ["StartUI/5.png",Laya.Loader.IMAGE],
+                ["WXGameUI/img_beijing.jpg",Laya.Loader.IMAGE],
+                ["WXGameUI/img_diban.jpg",Laya.Loader.IMAGE],
+                ["WXGameUI/img_dikuang.jpg",Laya.Loader.IMAGE],
+                ["BeginUI/1.png",Laya.Loader.IMAGE],
+                ["BeginUI/2.png",Laya.Loader.IMAGE],
+                ["BeginUI/3.png",Laya.Loader.IMAGE],
+                ["BeginUI/4.png",Laya.Loader.IMAGE],
+                ["BeginUI/5.png",Laya.Loader.IMAGE],
                 //字体
                 // ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
@@ -65,19 +65,19 @@ function  beginLoad(){
 
 function loadingCallback(){
 
-    Laya.Animation.createFrames(["GameUI/img_suilie1.png","GameUI/img_suilie2.png","GameUI/img_suilie3.png","GameUI/img_suilie4.png","GameUI/img_suilie5.png","GameUI/img_suilie6.png"],"suilie");
-    Laya.Animation.createFrames(["GameUI/img_penhuo1.png","GameUI/img_penhuo2.png","GameUI/img_penhuo3.png","GameUI/img_penhuo4.png","GameUI/img_penhuo5.png",
-    "GameUI/img_penhuo6.png","GameUI/img_penhuo7.png","GameUI/img_penhuo8.png","GameUI/img_penhuo9.png"],"mineAnim1");
-    Laya.Animation.createFrames(["GameUI/img_guaiwu1.png","GameUI/img_guaiwu2.png","GameUI/img_guaiwu3.png","GameUI/img_guaiwu4.png","GameUI/img_guaiwu5.png",
-    "GameUI/img_guaiwu6.png","GameUI/img_guaiwu7.png","GameUI/img_guaiwu8.png"],"mineAnim2");
-    Laya.Animation.createFrames(["GameUI/img_luoshi1.png","GameUI/img_luoshi2.png","GameUI/img_luoshi3.png","GameUI/img_luoshi4.png","GameUI/img_luoshi5.png",
-    "GameUI/img_luoshi6.png","GameUI/img_luoshi7.png","GameUI/img_luoshi8.png","GameUI/img_luoshi9.png","GameUI/img_luoshi10.png"],"mineAnim3");
-    Laya.Animation.createFrames(["GameUI/img_zhadan1.png","GameUI/img_zhadan2.png","GameUI/img_zhadan3.png","GameUI/img_zhadan4.png","GameUI/img_zhadan5.png",
-    "GameUI/img_zhadan6.png","GameUI/img_zhadan7.png","GameUI/img_zhadan8.png","GameUI/img_zhadan10.png"],"mineAnim4");
+    Laya.Animation.createFrames(["WXGameUI/img_suilie1.png","WXGameUI/img_suilie2.png","WXGameUI/img_suilie3.png","WXGameUI/img_suilie4.png","WXGameUI/img_suilie5.png","WXGameUI/img_suilie6.png"],"suilie");
+    Laya.Animation.createFrames(["WXGameUI/img_penhuo1.png","WXGameUI/img_penhuo2.png","WXGameUI/img_penhuo3.png","WXGameUI/img_penhuo4.png","WXGameUI/img_penhuo5.png",
+    "WXGameUI/img_penhuo6.png","WXGameUI/img_penhuo7.png","WXGameUI/img_penhuo8.png","WXGameUI/img_penhuo9.png"],"mineAnim1");
+    Laya.Animation.createFrames(["WXGameUI/img_guaiwu1.png","WXGameUI/img_guaiwu2.png","WXGameUI/img_guaiwu3.png","WXGameUI/img_guaiwu4.png","WXGameUI/img_guaiwu5.png",
+    "WXGameUI/img_guaiwu6.png","WXGameUI/img_guaiwu7.png","WXGameUI/img_guaiwu8.png"],"mineAnim2");
+    Laya.Animation.createFrames(["WXGameUI/img_luoshi1.png","WXGameUI/img_luoshi2.png","WXGameUI/img_luoshi3.png","WXGameUI/img_luoshi4.png","WXGameUI/img_luoshi5.png",
+    "WXGameUI/img_luoshi6.png","WXGameUI/img_luoshi7.png","WXGameUI/img_luoshi8.png","WXGameUI/img_luoshi9.png","WXGameUI/img_luoshi10.png"],"mineAnim3");
+    Laya.Animation.createFrames(["WXGameUI/img_zhadan1.png","WXGameUI/img_zhadan2.png","WXGameUI/img_zhadan3.png","WXGameUI/img_zhadan4.png","WXGameUI/img_zhadan5.png",
+    "WXGameUI/img_zhadan6.png","WXGameUI/img_zhadan7.png","WXGameUI/img_zhadan8.png","WXGameUI/img_zhadan10.png"],"mineAnim4");
 
-    Laya.Animation.createFrames(["GameUI/img_chaqi1.png","GameUI/img_chaqi2.png","GameUI/img_chaqi3.png","GameUI/img_chaqi4.png","GameUI/img_chaqi5.png",
-    "GameUI/img_chaqi6.png","GameUI/img_chaqi7.png"],"chaqi");
+    Laya.Animation.createFrames(["WXGameUI/img_chaqi1.png","WXGameUI/img_chaqi2.png","WXGameUI/img_chaqi3.png","WXGameUI/img_chaqi4.png","WXGameUI/img_chaqi5.png",
+    "WXGameUI/img_chaqi6.png","WXGameUI/img_chaqi7.png"],"chaqi");
 
-    SceneManager.getInstance().currentScene  = new GameScene();
+    SceneManager.getInstance().currentScene  = new GameSceneMain();
     
 }

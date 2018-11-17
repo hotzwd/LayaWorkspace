@@ -250,7 +250,7 @@ var wxGame = (function (_super) {
 
         var rand2 = Math.random() * 2 + 1;
         rand2 = parseInt(rand2, 10);
-        var strImage = "GameUI/shard.png";
+        var strImage = "WXGameUI/shard.png";
 
         shareInfoArr.push(str);
         shareInfoArr.push(strImage);
