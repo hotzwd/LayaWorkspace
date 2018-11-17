@@ -80,21 +80,21 @@ var wxGame = (function (_super) {
                 }
             })
 
-            // Laya.timer.once(400, this, function () {
-            //     var sharedSprite = new Laya.Sprite();
-            //     sharedSprite.zOrder = 400;
-            //     sharedSprite.name = "OpenDataContext";
-            //     Laya.stage.addChild(sharedSprite);
-            //     sharedSprite.visible = false;
+            Laya.timer.once(400, this, function () {
+                var sharedSprite = new Laya.Sprite();
+                sharedSprite.zOrder = 400;
+                sharedSprite.name = "OpenDataContext";
+                Laya.stage.addChild(sharedSprite);
+                sharedSprite.visible = false;
 
-            //     Browser.window.sharedCanvas.width = Laya.stage.width;
-            //     Browser.window.sharedCanvas.height = Laya.stage.height;
+                Browser.window.sharedCanvas.width = Laya.stage.width;
+                Browser.window.sharedCanvas.height = Laya.stage.height;
 
-            //     sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
-            //     // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
-            //     Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
-            //     sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
-            // });
+                sharedCanvasTexture = new Laya.Texture(Browser.window.sharedCanvas);
+                // sharedCanvasTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新
+                Gamelog("sharedCanvasTexture.width = " + sharedCanvasTexture.width + "\nsharedCanvasTexture.height = " + sharedCanvasTexture.height);
+                sharedSprite.graphics.drawTexture(sharedCanvasTexture, 0, 0, sharedCanvasTexture.width, sharedCanvasTexture.height);
+            });
         }
     }
 
@@ -389,7 +389,7 @@ var wxGame = (function (_super) {
                     icon: 'white',
                     style: {
                         left: 10,
-                        top: 50,
+                        top: 40,
                         width: 40,
                         height: 40
                     }

@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":11,
+    "selecteID":9,
     "props":{"width":1366,"sceneColor":"#000000","height":768,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -53,7 +53,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":179,"x":521,"width":621,"skin":"Game/img_box.png","height":445},
+                    "props":{"y":138,"x":521,"width":621,"skin":"Game/img_box.png","height":486},
                     "nodeParent":2,
                     "label":"Image",
                     "isDirectory":false,
@@ -66,7 +66,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":222,"x":730,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true},
+                    "props":{"y":176,"x":730,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -79,7 +79,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":153,"x":1098,"var":"btn_close","skin":"Game/but_exit.png"},
+                    "props":{"y":117,"x":1097,"var":"btn_close","skin":"Game/but_exit.png"},
                     "nodeParent":2,
                     "label":"Image(btn_close)",
                     "isDirectory":false,
@@ -92,7 +92,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":348,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "props":{"y":300,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -105,7 +105,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":348,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
+                    "props":{"y":300,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":2,
                     "label":"Text(t_gamescore)",
                     "isDirectory":false,
@@ -131,7 +131,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":292,"x":678,"text":"历史最高分数:","fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":243,"x":678,"text":"历史最高分数:","fontSize":25,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -144,7 +144,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":292,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"},
+                    "props":{"y":243,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"},
                     "nodeParent":2,
                     "label":"Text(t_highScore)",
                     "isDirectory":false,
