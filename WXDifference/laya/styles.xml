@@ -1,0 +1,7 @@
+<res>
+   <item name="Game/item_find.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=16,17,16,65" picType="0" scale="0"/>
+   <item name="Game/button_cancel.png" type="Button" compress="0" pack="0" quality="80" props="sizeGrid=20,20,20,80" picType="0" scale="0"/>
+   <item name="Game/img_green.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=24,13,10,35" picType="0" scale="0"/>
+   <item name="Game/img_red.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=31,32,26,76" picType="0" scale="0"/>
+   <item name="Game/share1.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+</res>
