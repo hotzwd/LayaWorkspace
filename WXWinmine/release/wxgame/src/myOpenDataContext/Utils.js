@@ -1,1 +1,161 @@
-function Utils(){RankItem.super(this)}Laya.class(Utils,"Utils",null),Utils.isChinese=function(e){return!!/^[\u3220-\uFA29]+$/.test(e)},Utils.labelTransform=function(e,t,r){for(var n=0,a="",s=0;s<e.length;s++){var l=e.charAt(s);if((n+=Utils.isChinese(l)?t:t/2)>r-t){a+="..";break}a+=l}return a},Utils.GameLogObject=function(e){var t="";for(var r in e)t+=r+" = "+e[r]+"\n";console.log(t)},Utils.scoreOrder=function(e){return e.length<=1?e:(e.sort(function(e,t){return e.KVDataList[0].value-t.KVDataList[0].value}),e)},Utils.getValidData=function(e){for(var t=new Array,r=0;r<e.length;r++)e[r].KVDataList.length>0&&t.push(e[r]);return t},Utils.getWeekNum=function(){var e=new Date,t=new Date;t.setFullYear(2018,4,20),t.setHours(0,0,0);var r=Utils.DateDiff("d",t,e),n=Math.ceil(r/7);return console.log("weekNum = "+n),n},Utils.DateDiff=function(e,t,r){var n=r.getTime()-t.getTime();switch(e.toLowerCase()){case"y":return parseInt(r.getFullYear()-t.getFullYear());case"m":return parseInt(12*(r.getFullYear()-t.getFullYear())+(r.getMonth()-t.getMonth()));case"d":return parseInt(n/1e3/60/60/24);case"w":return parseInt(n/1e3/60/60/24/7);case"h":return parseInt(n/1e3/60/60);case"n":return parseInt(n/1e3/60);case"s":return parseInt(n/1e3);case"l":return parseInt(n)}},Utils.setLocalScore=function(e){console.log("Utils.setLocalScore");var t=wx.getStorageSync("localHighScore");null==t||""==t?wx.setStorageSync("localHighScore",e.toString()):e<(t=parseInt(t,10))&&wx.setStorageSync("localHighScore",e.toString())},Utils.getLocalScore=function(){var e=null,t=LocalStorage.getItem("localHighScore");return null==t||""==t||(e=parseInt(t,10)),e},Utils.GetTimeFormat=function(e){var t=parseInt(e),r=parseInt(t/60),n=t%60;r<10&&(r="0"+r),n<10&&(n="0"+n);return r+":"+n};
+function Utils() {
+  RankItem.super(this);
+}
+
+Laya.class(Utils, "Utils", null);
+
+
+//检测是否为中文，true表示是中文，false表示非中文
+Utils.isChinese = function (str){
+  if (/^[\u3220-\uFA29]+$/.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Utils.labelTransform = function (strOld, fontSize, width) {
+  var strLen = 0;
+  var strNew = "";
+  for (var i = 0; i < strOld.length; i++) {
+    var char = strOld.charAt(i);
+    var isChin = Utils.isChinese(char);
+    // Gamelog(char + ":" + isChin);
+    if (isChin) {
+      strLen = strLen + fontSize;
+    }
+    else {
+      strLen = strLen + fontSize / 2;
+    }
+
+    if (strLen > width - fontSize) {
+      strNew = strNew + "..";
+      break;
+    }
+    else {
+      strNew = strNew + char;
+    }
+  }
+
+  return strNew;
+}
+
+
+Utils.GameLogObject = function(obj) {
+  var description = "";
+  for (var i in obj) {
+    description += i + " = " + obj[i] + "\n";
+  }
+  console.log(description);
+}
+
+/**
+ * 根据成绩排序
+ */
+Utils.scoreOrder = function(arr) {
+  if (arr.length <= 1)
+  {
+    return arr;
+  }
+  arr.sort(function (a, b) {
+    return a.KVDataList[0].value - b.KVDataList[0].value;
+  });
+
+  return arr;
+}
+
+Utils.getValidData = function(arr){
+  //有效数据--res.data里返回当前同玩好友KVDataList 没有当前key 则为长度为0
+  var dataArr = new Array();
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].KVDataList.length > 0) {
+      dataArr.push(arr[i]);
+    }
+  }
+
+  return dataArr;
+}
+
+//获取第几周
+Utils.getWeekNum = function(){
+  var myDate = new Date();
+  // myDate.setFullYear(2018, 10, 28);
+  // myDate.setHours(0, 0, 0);
+  // var curDay = myDate.toLocaleString();
+  // console.log("curDay:" + myDate);
+
+  var dateBase = new Date();
+  dateBase.setFullYear(2018, 4, 20);
+  dateBase.setHours(0,0,0);
+  // console.log(dateBase);
+  var dayDiff = Utils.DateDiff("d", dateBase, myDate);
+  // console.log("dayDiff = " + dayDiff);
+  var weekNum = Math.ceil(dayDiff / 7);
+  console.log("weekNum = " + weekNum);
+
+  return weekNum;
+}
+
+Utils.DateDiff = function (interval, date1, date2) {
+  var long = date2.getTime() - date1.getTime(); //相差毫秒
+  // console.log("Difflong = " + long);
+  switch (interval.toLowerCase()) {
+    case "y": return parseInt(date2.getFullYear() - date1.getFullYear());
+    case "m": return parseInt((date2.getFullYear() - date1.getFullYear()) * 12 + (date2.getMonth() - date1.getMonth()));
+    case "d": return parseInt(long / 1000 / 60 / 60 / 24);
+    case "w": return parseInt(long / 1000 / 60 / 60 / 24 / 7);
+    case "h": return parseInt(long / 1000 / 60 / 60);
+    case "n": return parseInt(long / 1000 / 60);
+    case "s": return parseInt(long / 1000);
+    case "l": return parseInt(long);
+  }
+}
+
+Utils.setLocalScore = function(newScore){
+  console.log("Utils.setLocalScore");
+  // var score = laya.net.LocalStorage.getItem("localHighScore");
+  var score = wx.getStorageSync("localHighScore");
+  if (score == null || score == "") {
+    // LocalStorage.setItem("localHighScore", newScore);
+    wx.setStorageSync("localHighScore", newScore.toString());
+  }
+  else{
+    score = parseInt(score, 10);
+    if (newScore < score){
+      // LocalStorage.setItem("localHighScore", newScore);
+      wx.setStorageSync("localHighScore", newScore.toString());
+    }
+  }
+}
+
+Utils.getLocalScore = function () {
+  var res = null;
+  var score = LocalStorage.getItem("localHighScore");
+  if (score == null || score == "") {
+
+  }
+  else {
+    res = parseInt(score, 10);
+  }
+
+  return res;
+}
+
+/**
+ * 获得时间格式化 00:00
+ */
+Utils.GetTimeFormat = function(_secondNum){
+    var secondNum = parseInt(_secondNum);
+    var t_minute = parseInt(secondNum / 60);
+    var t_second = secondNum % 60;
+    if(t_minute < 10){
+        t_minute = "0"+t_minute;
+    }
+    if(t_second < 10){
+        t_second = "0"+t_second;
+    }
+    
+    var t_str = t_minute + ":" + t_second;
+    return t_str;
+}
+

@@ -205,7 +205,8 @@ var AutoBitmap=(function(_super){
 		var sw=source.sourceWidth;
 		var sh=source.sourceHeight;
 		if (!sizeGrid || (sw===width && sh===height)){
-			this.cleanByTexture(source,this._offset ? this._offset[0] :0,this._offset ? this._offset[1] :0,width,height);
+			this.clear();
+			this.drawTexture(source,this._offset ? this._offset[0] :0,this._offset ? this._offset[1] :0,width,height);
 			}else {
 			source.$_GID || (source.$_GID=Utils.getGID());
 			var key=source.$_GID+"."+width+"."+height+"."+sizeGrid.join(".");
@@ -345,7 +346,7 @@ var AutoBitmap=(function(_super){
 		tex.$_GID || (tex.$_GID=Utils.getGID())
 		var key=tex.$_GID+"."+x+"."+y+"."+width+"."+height;
 		var texture=WeakObject.I.get(key);
-		if (!texture||!texture.source){
+		if (!texture || !texture.source){
 			texture=Texture.createFromTexture(tex,x,y,width,height);
 			WeakObject.I.set(key,texture);
 		}
@@ -461,6 +462,10 @@ var Component=(function(_super){
 	*/
 	__proto.changeSize=function(){
 		this.event(/*laya.events.Event.RESIZE*/"resize");
+		if (this._layout.enable){
+			this.resetLayoutX();
+			this.resetLayoutY();
+		}
 	}
 
 	/**
@@ -571,6 +576,11 @@ var Component=(function(_super){
 	*/
 	__proto.onMouseOut=function(e){
 		Laya.stage.event(/*laya.ui.UIEvent.HIDE_TIP*/"hidetip",this._toolTip);
+	}
+
+	__proto._childChanged=function(child){
+		this.callLater(this.changeSize);
+		_super.prototype._childChanged.call(this,child);
 	}
 
 	/**
@@ -1066,6 +1076,216 @@ var DialogManager=(function(_super){
 
 	return DialogManager;
 })(Sprite)
+
+
+/**
+*<code>Image</code> 类是用于表示位图图像或绘制图形的显示对象。
+*Image和Clip组件是唯一支持异步加载的两个组件，比如img.skin="abc/xxx.png"，其他UI组件均不支持异步加载。
+*
+*@example <caption>以下示例代码，创建了一个新的 <code>Image</code> 实例，设置了它的皮肤、位置信息，并添加到舞台上。</caption>
+*package
+*{
+	*import laya.ui.Image;
+	*public class Image_Example
+	*{
+		*public function Image_Example()
+		*{
+			*Laya.init(640,800);//设置游戏画布宽高。
+			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+			*onInit();
+			*}
+		*private function onInit():void
+		*{
+			*var bg:Image=new Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+			*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+			*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+			*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+			*bg.width=150;//设置 bg 对象的宽度。
+			*bg.height=250;//设置 bg 对象的高度。
+			*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+			*var image:Image=new Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+			*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+			*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+			*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+			*}
+		*}
+	*}
+*@example
+*Laya.init(640,800);//设置游戏画布宽高
+*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
+*onInit();
+*function onInit(){
+	*var bg=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+	*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+	*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+	*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+	*bg.width=150;//设置 bg 对象的宽度。
+	*bg.height=250;//设置 bg 对象的高度。
+	*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+	*var image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+	*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+	*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+	*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+	*}
+*@example
+*class Image_Example {
+	*constructor(){
+		*Laya.init(640,800);//设置游戏画布宽高。
+		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+		*this.onInit();
+		*}
+	*private onInit():void {
+		*var bg:laya.ui.Image=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+		*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+		*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+		*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+		*bg.width=150;//设置 bg 对象的宽度。
+		*bg.height=250;//设置 bg 对象的高度。
+		*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+		*var image:laya.ui.Image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+		*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+		*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+		*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+		*}
+	*}
+*@see laya.ui.AutoBitmap
+*/
+//class laya.ui.Image extends laya.ui.Component
+var Image=(function(_super){
+	function Image(skin){
+		/**@private */
+		this._bitmap=null;
+		/**@private */
+		this._skin=null;
+		/**@private */
+		this._group=null;
+		Image.__super.call(this);
+		this.skin=skin;
+	}
+
+	__class(Image,'laya.ui.Image',_super);
+	var __proto=Image.prototype;
+	/**@inheritDoc */
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,true);
+		this._bitmap && this._bitmap.destroy();
+		this._bitmap=null;
+	}
+
+	/**
+	*销毁对象并释放加载的皮肤资源。
+	*/
+	__proto.dispose=function(){
+		this.destroy(true);
+		Laya.loader.clearRes(this._skin);
+	}
+
+	/**@inheritDoc */
+	__proto.createChildren=function(){
+		this.graphics=this._bitmap=new AutoBitmap();
+		this._bitmap.autoCacheCmd=false;
+	}
+
+	/**
+	*@private
+	*设置皮肤资源。
+	*/
+	__proto.setSource=function(url,img){
+		if (url===this._skin && img){
+			this.source=img
+			this.onCompResize();
+		}
+	}
+
+	/**
+	*@copy laya.ui.AutoBitmap#source
+	*/
+	__getset(0,__proto,'source',function(){
+		return this._bitmap.source;
+		},function(value){
+		if (!this._bitmap)return;
+		this._bitmap.source=value;
+		this.event(/*laya.events.Event.LOADED*/"loaded");
+		this.repaint();
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'dataSource',_super.prototype._$get_dataSource,function(value){
+		this._dataSource=value;
+		if ((typeof value=='string'))this.skin=value;
+		else Laya.superSet(Component,this,'dataSource',value);
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'measureHeight',function(){
+		return this._bitmap.height;
+	});
+
+	/**
+	*<p>对象的皮肤地址，以字符串表示。</p>
+	*<p>如果资源未加载，则先加载资源，加载完成后应用于此对象。</p>
+	*<b>注意：</b>资源加载完成后，会自动缓存至资源库中。
+	*/
+	__getset(0,__proto,'skin',function(){
+		return this._skin;
+		},function(value){
+		if (this._skin !=value){
+			this._skin=value;
+			if (value){
+				var source=Loader.getRes(value);
+				if (source){
+					this.source=source;
+					this.onCompResize();
+				}else Laya.loader.load(this._skin,Handler.create(this,this.setSource,[this._skin]),null,/*laya.net.Loader.IMAGE*/"image",1,true,this._group);
+				}else {
+				this.source=null;
+			}
+		}
+	});
+
+	/**
+	*资源分组。
+	*/
+	__getset(0,__proto,'group',function(){
+		return this._group;
+		},function(value){
+		if (value && this._skin)Loader.setGroup(this._skin,value);
+		this._group=value;
+	});
+
+	/**
+	*<p>当前实例的位图 <code>AutoImage</code> 实例的有效缩放网格数据。</p>
+	*<p>数据格式："上边距,右边距,下边距,左边距,是否重复填充(值为0：不重复填充，1：重复填充)"，以逗号分隔。
+	*<ul><li>例如："4,4,4,4,1"。</li></ul></p>
+	*@see laya.ui.AutoBitmap#sizeGrid
+	*/
+	__getset(0,__proto,'sizeGrid',function(){
+		if (this._bitmap.sizeGrid)return this._bitmap.sizeGrid.join(",");
+		return null;
+		},function(value){
+		this._bitmap.sizeGrid=UIUtils.fillArray(Styles.defaultSizeGrid,value,Number);
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'measureWidth',function(){
+		return this._bitmap.width;
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'width',_super.prototype._$get_width,function(value){
+		Laya.superSet(Component,this,'width',value);
+		this._bitmap.width=value==0 ? 0.0000001 :value;
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'height',_super.prototype._$get_height,function(value){
+		Laya.superSet(Component,this,'height',value);
+		this._bitmap.height=value==0 ? 0.0000001 :value;
+	});
+
+	return Image;
+})(Component)
 
 
 /**
@@ -3596,6 +3816,7 @@ var ScrollBar=(function(_super){
 		return this._mouseWheelEnable;
 		},function(value){
 		this._mouseWheelEnable=value;
+		this.target=this._target;
 	});
 
 	/**
@@ -3982,216 +4203,6 @@ var Slider=(function(_super){
 	['label',function(){return this.label=new Label();}
 	]);
 	return Slider;
-})(Component)
-
-
-/**
-*<code>Image</code> 类是用于表示位图图像或绘制图形的显示对象。
-*Image和Clip组件是唯一支持异步加载的两个组件，比如img.skin="abc/xxx.png"，其他UI组件均不支持异步加载。
-*
-*@example <caption>以下示例代码，创建了一个新的 <code>Image</code> 实例，设置了它的皮肤、位置信息，并添加到舞台上。</caption>
-*package
-*{
-	*import laya.ui.Image;
-	*public class Image_Example
-	*{
-		*public function Image_Example()
-		*{
-			*Laya.init(640,800);//设置游戏画布宽高。
-			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-			*onInit();
-			*}
-		*private function onInit():void
-		*{
-			*var bg:Image=new Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-			*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-			*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-			*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-			*bg.width=150;//设置 bg 对象的宽度。
-			*bg.height=250;//设置 bg 对象的高度。
-			*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-			*var image:Image=new Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-			*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-			*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-			*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-			*}
-		*}
-	*}
-*@example
-*Laya.init(640,800);//设置游戏画布宽高
-*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
-*onInit();
-*function onInit(){
-	*var bg=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-	*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-	*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-	*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-	*bg.width=150;//设置 bg 对象的宽度。
-	*bg.height=250;//设置 bg 对象的高度。
-	*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-	*var image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-	*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-	*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-	*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-	*}
-*@example
-*class Image_Example {
-	*constructor(){
-		*Laya.init(640,800);//设置游戏画布宽高。
-		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-		*this.onInit();
-		*}
-	*private onInit():void {
-		*var bg:laya.ui.Image=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-		*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-		*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-		*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-		*bg.width=150;//设置 bg 对象的宽度。
-		*bg.height=250;//设置 bg 对象的高度。
-		*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-		*var image:laya.ui.Image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-		*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-		*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-		*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-		*}
-	*}
-*@see laya.ui.AutoBitmap
-*/
-//class laya.ui.Image extends laya.ui.Component
-var Image=(function(_super){
-	function Image(skin){
-		/**@private */
-		this._bitmap=null;
-		/**@private */
-		this._skin=null;
-		/**@private */
-		this._group=null;
-		Image.__super.call(this);
-		this.skin=skin;
-	}
-
-	__class(Image,'laya.ui.Image',_super);
-	var __proto=Image.prototype;
-	/**@inheritDoc */
-	__proto.destroy=function(destroyChild){
-		(destroyChild===void 0)&& (destroyChild=true);
-		_super.prototype.destroy.call(this,true);
-		this._bitmap && this._bitmap.destroy();
-		this._bitmap=null;
-	}
-
-	/**
-	*销毁对象并释放加载的皮肤资源。
-	*/
-	__proto.dispose=function(){
-		this.destroy(true);
-		Laya.loader.clearRes(this._skin);
-	}
-
-	/**@inheritDoc */
-	__proto.createChildren=function(){
-		this.graphics=this._bitmap=new AutoBitmap();
-		this._bitmap.autoCacheCmd=false;
-	}
-
-	/**
-	*@private
-	*设置皮肤资源。
-	*/
-	__proto.setSource=function(url,img){
-		if (url===this._skin && img){
-			this.source=img
-			this.onCompResize();
-		}
-	}
-
-	/**
-	*@copy laya.ui.AutoBitmap#source
-	*/
-	__getset(0,__proto,'source',function(){
-		return this._bitmap.source;
-		},function(value){
-		if (!this._bitmap)return;
-		this._bitmap.source=value;
-		this.event(/*laya.events.Event.LOADED*/"loaded");
-		this.repaint();
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'dataSource',_super.prototype._$get_dataSource,function(value){
-		this._dataSource=value;
-		if ((typeof value=='string'))this.skin=value;
-		else Laya.superSet(Component,this,'dataSource',value);
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'measureHeight',function(){
-		return this._bitmap.height;
-	});
-
-	/**
-	*<p>对象的皮肤地址，以字符串表示。</p>
-	*<p>如果资源未加载，则先加载资源，加载完成后应用于此对象。</p>
-	*<b>注意：</b>资源加载完成后，会自动缓存至资源库中。
-	*/
-	__getset(0,__proto,'skin',function(){
-		return this._skin;
-		},function(value){
-		if (this._skin !=value){
-			this._skin=value;
-			if (value){
-				var source=Loader.getRes(value);
-				if (source){
-					this.source=source;
-					this.onCompResize();
-				}else Laya.loader.load(this._skin,Handler.create(this,this.setSource,[this._skin]),null,/*laya.net.Loader.IMAGE*/"image",1,true,this._group);
-				}else {
-				this.source=null;
-			}
-		}
-	});
-
-	/**
-	*资源分组。
-	*/
-	__getset(0,__proto,'group',function(){
-		return this._group;
-		},function(value){
-		if (value && this._skin)Loader.setGroup(this._skin,value);
-		this._group=value;
-	});
-
-	/**
-	*<p>当前实例的位图 <code>AutoImage</code> 实例的有效缩放网格数据。</p>
-	*<p>数据格式："上边距,右边距,下边距,左边距,是否重复填充(值为0：不重复填充，1：重复填充)"，以逗号分隔。
-	*<ul><li>例如："4,4,4,4,1"。</li></ul></p>
-	*@see laya.ui.AutoBitmap#sizeGrid
-	*/
-	__getset(0,__proto,'sizeGrid',function(){
-		if (this._bitmap.sizeGrid)return this._bitmap.sizeGrid.join(",");
-		return null;
-		},function(value){
-		this._bitmap.sizeGrid=UIUtils.fillArray(Styles.defaultSizeGrid,value,Number);
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'measureWidth',function(){
-		return this._bitmap.width;
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'width',_super.prototype._$get_width,function(value){
-		Laya.superSet(Component,this,'width',value);
-		this._bitmap.width=value==0 ? 0.0000001 :value;
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'height',_super.prototype._$get_height,function(value){
-		Laya.superSet(Component,this,'height',value);
-		this._bitmap.height=value==0 ? 0.0000001 :value;
-	});
-
-	return Image;
 })(Component)
 
 
@@ -4958,6 +4969,225 @@ var TipManager=(function(_super){
 
 
 /**
+*广告插件
+*@author 小松
+*@date-2018-09-19
+*/
+//class laya.ui.AdvImage extends laya.ui.Image
+var AdvImage=(function(_super){
+	function AdvImage(skin){
+		/**广告列表数据**/
+		this.advsListArr=[];
+		/**资源列表请求地址**/
+		this.resUrl="https://unioncdn.layabox.com/config/iconlist.json";
+		/**广告列表信息**/
+		this._data=[];
+		/**每6分钟重新请求一次新广告列表**/
+		this._resquestTime=360000;
+		/**微信跳转appid**/
+		this._appid=null;
+		/**二维码图片地址**/
+		this._appCodeImgStr=null;
+		/**播放索引**/
+		this._playIndex=0;
+		/**轮播间隔时间**/
+		this._lunboTime=5000;
+		AdvImage.__super.call(this);
+		this._http=new Browser.window.XMLHttpRequest();
+		this.skin=skin;
+		this.init();
+		this.size(120,120);
+	}
+
+	__class(AdvImage,'laya.ui.AdvImage',_super);
+	var __proto=AdvImage.prototype;
+	__proto.init=function(){
+		if(Browser.onMiniGame && this.isSupportJump){
+			Laya.timer.loop(this._resquestTime,this,this.onGetAdvsListData);
+			this.onGetAdvsListData();
+			this.initEvent();
+			}else{
+			this.visible=false;
+		}
+	}
+
+	__proto.initEvent=function(){
+		this.on(/*laya.events.Event.CLICK*/"click",this,this.onAdvsImgClick);
+	}
+
+	__proto.onAdvsImgClick=function(){
+		var currentJumpUrl=this.getCurrentAppidObj();
+		if(currentJumpUrl)
+			this.jumptoGame();
+	}
+
+	__proto.revertAdvsData=function(){
+		if(this.advsListArr[this._playIndex]){
+			this.visible=true;
+			this.skin=this.advsListArr[this._playIndex];
+		}
+	}
+
+	/**
+	*跳转游戏
+	*@param callBack Function 回调参数说明：type 0 跳转成功；1跳转失败；2跳转接口调用成功
+	*/
+	__proto.jumptoGame=function(){
+		var _$this=this;
+		if(!Browser.onMiniGame)
+			return;
+		if(this.isSupportJump){
+			/*__JS__ */wx.navigateToMiniProgram({
+				appId:this._appid,
+				path:"",
+				extraData:"",
+				envVersion:"release",
+				success:function success (){
+					console.log("-------------跳转成功--------------");
+				},
+				fail:function fail (){
+					console.log("-------------跳转失败--------------");
+				},
+				complete:function complete (){
+					console.log("-------------跳转接口调用成功--------------");
+					_$this.updateAdvsInfo();
+				}.bind(this)
+			});
+		}
+	}
+
+	__proto.updateAdvsInfo=function(){
+		this.visible=false;
+		this.onLunbo();
+		Laya.timer.loop(this._lunboTime,this,this.onLunbo);
+	}
+
+	__proto.onLunbo=function(){
+		if(this._playIndex >=this.advsListArr.length-1)
+			this._playIndex=0;
+		else
+		this._playIndex+=1;
+		this.visible=true;
+		this.revertAdvsData();
+	}
+
+	/**获取轮播数据**/
+	__proto.getCurrentAppidObj=function(){
+		return this.advsListArr[this._playIndex];
+	}
+
+	/**
+	*获取广告列表数据信息
+	*/
+	__proto.onGetAdvsListData=function(){
+		var _this=this;
+		var random=this.randRange(10000,1000000);
+		var url=this.resUrl+"?"+random;
+		this._http.open("get",url,true);
+		this._http.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		this._http.responseType="text";
+		this._http.onerror=function (e){
+			_this._onError(e);
+		}
+		this._http.onload=function (e){
+			_this._onLoad(e);
+		}
+		this._http.send(null);
+	}
+
+	/**
+	*生成指定范围的随机数
+	*@param minNum 最小值
+	*@param maxNum 最大值
+	*/
+	__proto.randRange=function(minNum,maxNum){
+		return (Math.floor(Math.random()*(maxNum-minNum+1))+minNum);
+	}
+
+	/**
+	*@private
+	*请求出错侦的听处理函数。
+	*@param e 事件对象。
+	*/
+	__proto._onError=function(e){
+		this.error("Request failed Status:"+this._http.status+" text:"+this._http.statusText);
+	}
+
+	/**
+	*@private
+	*请求消息返回的侦听处理函数。
+	*@param e 事件对象。
+	*/
+	__proto._onLoad=function(e){
+		var http=this._http;
+		var status=http.status!==undefined ? http.status :200;
+		if (status===200 || status===204 || status===0){
+			this.complete();
+			}else {
+			this.error("["+http.status+"]"+http.statusText+":"+http.responseURL);
+		}
+	}
+
+	/**
+	*@private
+	*请求错误的处理函数。
+	*@param message 错误信息。
+	*/
+	__proto.error=function(message){
+		this.event(/*laya.events.Event.ERROR*/"error",message);
+	}
+
+	/**
+	*@private
+	*请求成功完成的处理函数。
+	*/
+	__proto.complete=function(){
+		var flag=true;
+		try {
+			this._data=this._http.response || this._http.responseText;
+			this._data=JSON.parse(this._data);
+			this.advsListArr=this._data.list;
+			this._appid=this._data.appid;
+			this._appCodeImgStr=this._data.qrcode;
+			this.updateAdvsInfo();
+			this.revertAdvsData();
+			}catch (e){
+			flag=false;
+			this.error(e.message);
+		}
+	}
+
+	/**
+	*@private
+	*清除当前请求。
+	*/
+	__proto.clear=function(){
+		var http=this._http;
+		http.onerror=http.onabort=http.onprogress=http.onload=null;
+	}
+
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,true);
+		Laya.timer.clear(this,this.onLunbo);
+		Laya.timer.clear(this,this.onGetAdvsListData);
+		this.clear();
+	}
+
+	/**当前小游戏环境是否支持游戏跳转功能**/
+	__getset(0,__proto,'isSupportJump',function(){
+		if(Browser.onMiniGame){
+			var isSupperJump=(typeof /*__JS__ */wx.navigateToMiniProgram=='function');
+			return isSupperJump;
+		}
+		return false;
+	});
+
+	return AdvImage;
+})(Image)
+
+
+/**
 *<code>View</code> 是一个视图类。
 *@internal <p><code>View</code></p>
 */
@@ -5348,13 +5578,6 @@ var LayoutBox=(function(_super){
 		child.on(/*laya.events.Event.RESIZE*/"resize",this,this.onResize);
 		this._setItemChanged();
 		return laya.display.Node.prototype.addChildAt.call(this,child,index);
-	}
-
-	/**@inheritDoc */
-	__proto.removeChild=function(child){
-		child.off(/*laya.events.Event.RESIZE*/"resize",this,this.onResize);
-		this._setItemChanged();
-		return laya.display.Node.prototype.removeChild.call(this,child);
 	}
 
 	/**@inheritDoc */
@@ -5795,9 +6018,9 @@ var List=(function(_super){
 		this._createdLine=0;
 		/**@private */
 		this._cellChanged=false;
-		List.__super.call(this);
 		this._cells=[];
 		this._offset=new Point();
+		List.__super.call(this);
 	}
 
 	__class(List,'laya.ui.List',_super);
@@ -6710,9 +6933,7 @@ var Panel=(function(_super){
 	__proto.removeChildren=function(beginIndex,endIndex){
 		(beginIndex===void 0)&& (beginIndex=0);
 		(endIndex===void 0)&& (endIndex=0x7fffffff);
-		for (var i=this._content.numChildren-1;i >-1;i--){
-			this._content.removeChildAt(i);
-		}
+		this._content.removeChildren(beginIndex,endIndex);
 		this._setScrollChanged();
 		return this;
 	}
@@ -6946,6 +7167,67 @@ var Panel=(function(_super){
 
 	return Panel;
 })(Box)
+
+
+/**
+*<code>Radio</code> 控件使用户可在一组互相排斥的选择中做出一种选择。
+*用户一次只能选择 <code>Radio</code> 组中的一个成员。选择未选中的组成员将取消选择该组中当前所选的 <code>Radio</code> 控件。
+*@see laya.ui.RadioGroup
+*/
+//class laya.ui.Radio extends laya.ui.Button
+var Radio=(function(_super){
+	function Radio(skin,label){
+		/**@private */
+		this._value=null;
+		(label===void 0)&& (label="");
+		Radio.__super.call(this,skin,label);
+	}
+
+	__class(Radio,'laya.ui.Radio',_super);
+	var __proto=Radio.prototype;
+	/**@inheritDoc */
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,destroyChild);
+		this._value=null;
+	}
+
+	/**@inheritDoc */
+	__proto.preinitialize=function(){
+		laya.ui.Component.prototype.preinitialize.call(this);
+		this.toggle=false;
+		this._autoSize=false;
+	}
+
+	/**@inheritDoc */
+	__proto.initialize=function(){
+		_super.prototype.initialize.call(this);
+		this.createText();
+		this._text.align="left";
+		this._text.valign="top";
+		this._text.width=0;
+		this.on(/*laya.events.Event.CLICK*/"click",this,this.onClick);
+	}
+
+	/**
+	*@private
+	*对象的<code>Event.CLICK</code>事件侦听处理函数。
+	*/
+	__proto.onClick=function(e){
+		this.selected=true;
+	}
+
+	/**
+	*获取或设置 <code>Radio</code> 关联的可选用户定义值。
+	*/
+	__getset(0,__proto,'value',function(){
+		return this._value !=null ? this._value :this.label;
+		},function(obj){
+		this._value=obj;
+	});
+
+	return Radio;
+})(Button)
 
 
 /**
@@ -7491,67 +7773,6 @@ var UIGroup=(function(_super){
 
 	return UIGroup;
 })(Box)
-
-
-/**
-*<code>Radio</code> 控件使用户可在一组互相排斥的选择中做出一种选择。
-*用户一次只能选择 <code>Radio</code> 组中的一个成员。选择未选中的组成员将取消选择该组中当前所选的 <code>Radio</code> 控件。
-*@see laya.ui.RadioGroup
-*/
-//class laya.ui.Radio extends laya.ui.Button
-var Radio=(function(_super){
-	function Radio(skin,label){
-		/**@private */
-		this._value=null;
-		(label===void 0)&& (label="");
-		Radio.__super.call(this,skin,label);
-	}
-
-	__class(Radio,'laya.ui.Radio',_super);
-	var __proto=Radio.prototype;
-	/**@inheritDoc */
-	__proto.destroy=function(destroyChild){
-		(destroyChild===void 0)&& (destroyChild=true);
-		_super.prototype.destroy.call(this,destroyChild);
-		this._value=null;
-	}
-
-	/**@inheritDoc */
-	__proto.preinitialize=function(){
-		laya.ui.Component.prototype.preinitialize.call(this);
-		this.toggle=false;
-		this._autoSize=false;
-	}
-
-	/**@inheritDoc */
-	__proto.initialize=function(){
-		_super.prototype.initialize.call(this);
-		this.createText();
-		this._text.align="left";
-		this._text.valign="top";
-		this._text.width=0;
-		this.on(/*laya.events.Event.CLICK*/"click",this,this.onClick);
-	}
-
-	/**
-	*@private
-	*对象的<code>Event.CLICK</code>事件侦听处理函数。
-	*/
-	__proto.onClick=function(e){
-		this.selected=true;
-	}
-
-	/**
-	*获取或设置 <code>Radio</code> 关联的可选用户定义值。
-	*/
-	__getset(0,__proto,'value',function(){
-		return this._value !=null ? this._value :this.label;
-		},function(obj){
-		this._value=obj;
-	});
-
-	return Radio;
-})(Button)
 
 
 /**

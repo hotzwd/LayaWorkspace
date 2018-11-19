@@ -4332,8 +4332,7 @@ var WebGL=(function(){
 			if (canvasWidth <=0 || canvasHeight <=0){
 				console.log("[error] canvasWidth and canvasHeight should greater than zero");
 			}
-			offsetX-=sprite.x;
-			offsetY-=sprite.y;
+			canvasWidth |=0;canvasHeight |=0;offsetX |=0;offsetY |=0;
 			var renderTarget=RenderTarget2D.create(canvasWidth,canvasHeight,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,0,false);
 			renderTarget.start();
 			renderTarget.clear(0,0,0,0);
@@ -4341,8 +4340,12 @@ var WebGL=(function(){
 			RenderSprite.renders[_renderType]._fun(sprite,Render.context,offsetX,RenderState2D.height-canvasHeight+offsetY);
 			Render.context.flush();
 			renderTarget.end();
-			var pixels=renderTarget.getData(0,0,renderTarget.width,renderTarget.height);
+			var pixels=renderTarget.getData(0,0,canvasWidth,canvasHeight);
 			renderTarget.recycle();
+			if (pixels.byteLength !=canvasWidth *canvasHeight *4){
+				console.log('drawToCanvas error: w:'+canvasWidth+',h:'+canvasHeight+',datalen:'+pixels.byteLength);
+				return;
+			};
 			var htmlCanvas=new WebGLCanvas();
 			htmlCanvas._canvas=Browser.createElement("canvas");
 			htmlCanvas.size(canvasWidth,canvasHeight);
@@ -5384,6 +5387,36 @@ var WebGLContext2D=(function(_super){
 							}
 						}
 						other.height=height;
+						break ;
+					case "no-repeat":
+						if (ox < 0){
+							if (texture.width+ox > width){
+								other.width=width;
+								}else {
+								other.width=texture.width+ox;
+							}
+							}else {
+							other.ox=ox;
+							if (texture.width+ox > width){
+								other.width=width-ox;
+								}else {
+								other.width=texture.width;
+							}
+						}
+						if (oy < 0){
+							if (texture.height+oy > height){
+								other.height=height;
+								}else {
+								other.height=texture.height+oy;
+							}
+							}else {
+							other.oy=oy;
+							if (texture.height+oy > height){
+								other.height=height-oy;
+								}else {
+								other.height=texture.height;
+							}
+						}
 						break ;
 					default :
 						other.width=width;
@@ -6842,7 +6875,7 @@ var Atlaser=(function(_super){
 			this._InAtlasWebGLImagesKey[sUrl?sUrl:webImage.id]={bitmap:mergeAtlasBitmap,offsetInfoID:this._InAtlasWebGLImagesOffsetValue.length};
 			this._InAtlasWebGLImagesOffsetValue.push([offsetX,offsetY]);
 		}
-		this._atlasCanvas.texSubImage2D(offsetX,offsetY,mergeAtlasBitmap.atlasSource);
+		this._atlasCanvas.texSubImage2D(offsetX,offsetY,/*__JS__ */mergeAtlasBitmap.atlasImgData || mergeAtlasBitmap.atlasSource);
 		mergeAtlasBitmap.clearAtlasSource();
 	}
 
@@ -7427,12 +7460,12 @@ var MeshTexture=(function(_super){
 	__class(MeshTexture,'laya.webgl.utils.MeshTexture',_super);
 	var __proto=MeshTexture.prototype;
 	__proto.addData=function(vertices,uvs,idx,matrix,rgba,ctx){
-		var sz=vertices.length / 2;
-		var startpos=this._vb.needSize(sz *MeshTexture.const_stride);
+		var vertsz=vertices.length / 2;
+		var startpos=this._vb.needSize(vertsz *MeshTexture.const_stride);
 		var f32pos=startpos >> 2;
 		var vbdata=this._vb.getFloat32Array();
 		var ci=0;
-		for (var i=0;i < sz;i++){
+		for (var i=0;i < vertsz;i++){
 			var x=vertices[ci],y=vertices[ci+1];
 			var x1=x *matrix.a+y *matrix.c+matrix.tx;
 			var y1=x *matrix.b+y *matrix.d+matrix.ty;
@@ -7443,7 +7476,7 @@ var MeshTexture=(function(_super){
 		this._vb.setNeedUpload();
 		var vertN=this.vertNum;
 		if (vertN > 0){
-			sz=idx.length;
+			var sz=idx.length;
 			if (sz > MeshTexture.tmpIdx.length)MeshTexture.tmpIdx=new Uint16Array(sz);
 			for (var ii=0;ii < sz;ii++){
 				MeshTexture.tmpIdx[ii]=idx[ii]+vertN;
@@ -7453,7 +7486,7 @@ var MeshTexture=(function(_super){
 			this._ib.append(idx);
 		}
 		this._ib.setNeedUpload();
-		this.vertNum+=sz;
+		this.vertNum+=vertsz;
 		this.indexNum+=idx.length;
 	}
 
@@ -7952,10 +7985,12 @@ var AtlasWebGLCanvas=(function(_super){
 			var preTexture=WebGLContext.curBindTexValue;
 			WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,this._source);
 			if (Render.isConchWebGL){
-				(xoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset-1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(xoffset+1 <=this._w)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset+1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(yoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset-1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(yoffset+1 <=this._h)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset+1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+				if (/*__JS__ */bitmap !==ConchTextCanvas){
+					(xoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset-1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(xoffset+1 <=this._w)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset+1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(yoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset-1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(yoffset+1 <=this._h)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset+1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+				}
 				gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap);
 			}
 			else {
@@ -8022,8 +8057,6 @@ var AtlasWebGLCanvas=(function(_super){
 var WebGLCanvas=(function(_super){
 	function WebGLCanvas(){
 		this.flipY=true;
-		//上传的时候是否上下颠倒
-		this.premulAlpha=false;
 		//上传的时候是否预乘alpha
 		//this._ctx=null;
 		/**HTML Canvas*/
@@ -8049,6 +8082,7 @@ var WebGLCanvas=(function(_super){
 	__proto.destroy=function(){
 		this._ctx && this._ctx.destroy();
 		this._ctx=null;
+		laya.resource.Resource.prototype.destroy.call(this);
 	}
 
 	__proto._setContext=function(context){
@@ -8113,13 +8147,13 @@ __proto.createWebGlTexture=function(){
 	WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,glTex);
 	gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_FLIP_Y_WEBGL*/0x9240,this.flipY?1:0);
 	if (Render.isConchWebGL){
-		gl.texImage2DEx(this.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
+		gl.texImage2DEx(WebGLCanvas.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
 	}
 
 	else {
-		this.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
+		WebGLCanvas.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
 		gl.texImage2D(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
-		this.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
+		WebGLCanvas.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
 	}
 
 	gl.texParameteri(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,/*laya.webgl.WebGLContext.TEXTURE_MAG_FILTER*/0x2800,/*laya.webgl.WebGLContext.LINEAR*/0x2601);
@@ -8143,13 +8177,13 @@ __proto.reloadCanvasData=function(){
 	var preTexture=WebGLContext.curBindTexValue;
 	WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,this._source);
 	if (Render.isConchWebGL){
-		gl.texImage2DEx(this.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
+		gl.texImage2DEx(WebGLCanvas.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
 	}
 
 	else {
-		this.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
+		WebGLCanvas.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
 		gl.texImage2D(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
-		this.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
+		WebGLCanvas.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
 	}
 
 	gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_FLIP_Y_WEBGL*/0x9240,0);
@@ -8187,6 +8221,7 @@ __proto.toBase64=function(type,encoderOptions,callBack){
 }
 
 
+//由于resource的dispose被郭磊改成了destroy，这里会重载父类的destroy，所以必须调用这个，否则会有泄露。
 __getset(0,__proto,'context',function(){
 	return this._ctx;
 });
@@ -8204,6 +8239,7 @@ __getset(0,__proto,'asBitmap',null,function(value){
 
 
 WebGLCanvas._createContext=null;
+WebGLCanvas.premulAlpha=false;
 return WebGLCanvas;
 })(Bitmap)
 
@@ -8285,7 +8321,8 @@ var WebGLCharImage=(function(_super){
 			if (this.xs !=1 || this.ys !=1){
 				nFontSize=parseInt(nFontSize *((this.xs > this.ys)? this.xs :this.ys)+"");
 			};
-			var sFont="normal 100 "+nFontSize+"px Arial";
+			var sFont="normal 100 "+this.font;
+			sFont=sFont.replace(WebGLCharImage._fontSizeReg,nFontSize);
 			if (this.borderColor){
 				sFont+=" 1 "+this.borderColor;
 			}
@@ -8295,6 +8332,7 @@ var WebGLCharImage=(function(_super){
 			this._ctx.fillText(this.char,this.CborderSize,this.CborderSize,null,null,null);
 			}else {
 			this._ctx.save();
+			this._ctx.lineJoin="round";
 			(this._ctx).clearRect(0,0,this.cw+this.CborderSize *2,this.ch+this.CborderSize *2);
 			this._ctx.font=this.font;
 			if (Text.RightToLeft){
@@ -8355,6 +8393,14 @@ var WebGLCharImage=(function(_super){
 		return this.canvas;
 	});
 
+	__getset(0,__proto,'atlasImgData',function(){
+		if (!WebGLCharImage.canUseCanvas){
+			if(this._ctx.getImageData)
+				return this._ctx.getImageData(0,0,this._w,this._h);
+		}
+		return null;
+	});
+
 	/**
 	*是否创建私有Source,通常禁止修改
 	*@param value 是否创建
@@ -8374,6 +8420,8 @@ var WebGLCharImage=(function(_super){
 		return char;
 	}
 
+	WebGLCharImage.canUseCanvas=true;
+	WebGLCharImage._fontSizeReg=new RegExp("\\d+(?=px)","g");
 	return WebGLCharImage;
 })(Bitmap)
 
@@ -9600,6 +9648,7 @@ var VertexBuffer2D=(function(_super){
 
 	__proto.disposeResource=function(){
 		_super.prototype.disposeResource.call(this);
+		return;
 		var enableAtributes=Buffer._enableAtributes;
 		if (!Render.isConchWebGL){
 			for (var i=0;i < 10;i++){

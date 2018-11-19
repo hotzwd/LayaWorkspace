@@ -33,19 +33,24 @@ var GameSceneMain = (function(_super){
             this.gameUI = UIManager.getInstance().showUI("GameUI");
             this.panel_diban = this.gameUI.panel_diban;
         }
-        this.m_listSquare = [];
-        this.m_board = [];
-        this.m_listMine = [];
-        this.isGameover = false;
 
-        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        // this.mineNum = 16;
-        Gamelog("------minenum ="+this.mineNum);
-        // this.mineNum = 8;
+        Laya.Animation.createFrames(["WXGameUI/img_suilie1.png","WXGameUI/img_suilie2.png","WXGameUI/img_suilie3.png","WXGameUI/img_suilie4.png","WXGameUI/img_suilie5.png","WXGameUI/img_suilie6.png"],"suilie");
+        Laya.Animation.createFrames(["WXGameUI/img_penhuo1.png","WXGameUI/img_penhuo2.png","WXGameUI/img_penhuo3.png","WXGameUI/img_penhuo4.png","WXGameUI/img_penhuo5.png",
+        "WXGameUI/img_penhuo6.png","WXGameUI/img_penhuo7.png","WXGameUI/img_penhuo8.png","WXGameUI/img_penhuo9.png"],"mineAnim1");
+        // Laya.Animation.createFrames(["WXGameUI/img_guaiwu1.png","WXGameUI/img_guaiwu2.png","WXGameUI/img_guaiwu3.png","WXGameUI/img_guaiwu4.png","WXGameUI/img_guaiwu5.png",
+        // "WXGameUI/img_guaiwu6.png","WXGameUI/img_guaiwu7.png","WXGameUI/img_guaiwu8.png"],"mineAnim2");
+        // Laya.Animation.createFrames(["WXGameUI/img_luoshi1.png","WXGameUI/img_luoshi2.png","WXGameUI/img_luoshi3.png","WXGameUI/img_luoshi4.png","WXGameUI/img_luoshi5.png",
+        // "WXGameUI/img_luoshi6.png","WXGameUI/img_luoshi7.png","WXGameUI/img_luoshi8.png","WXGameUI/img_luoshi9.png","WXGameUI/img_luoshi10.png"],"mineAnim3");
+        // Laya.Animation.createFrames(["WXGameUI/img_zhadan1.png","WXGameUI/img_zhadan2.png","WXGameUI/img_zhadan3.png","WXGameUI/img_zhadan4.png","WXGameUI/img_zhadan5.png",
+        // "WXGameUI/img_zhadan6.png","WXGameUI/img_zhadan7.png","WXGameUI/img_zhadan8.png","WXGameUI/img_zhadan10.png"],"mineAnim4");
 
-        // this.startGame();
-        
+        Laya.Animation.createFrames(["WXGameUI/img_chaqi1.png","WXGameUI/img_chaqi2.png","WXGameUI/img_chaqi3.png","WXGameUI/img_chaqi4.png","WXGameUI/img_chaqi5.png",
+        "WXGameUI/img_chaqi6.png","WXGameUI/img_chaqi7.png"],"chaqi");
+
         MessageController.getInstance().AddNotification("square_dead",this,this._squareDeadEvent);
+
+        this.resetGame();
+        
     }
 
     /**开始游戏 */
@@ -62,21 +67,25 @@ var GameSceneMain = (function(_super){
     /**重置游戏 */
     _proto.resetGame = function(){
 
-        // var sp = new Laya.Sprite();
-        this.isGameover = false;
         for (var i = 0; i < this.m_listSquare.length; i++) {
             var t_square = this.m_listSquare[i];
             t_square.onDestroy();
             t_square.destroy();
         }
         this.panel_diban.destroyChildren();
-        this.m_listSquare = [];
         this.m_board = [];
         this.m_listMine = [];
+        this.m_listSquare = [];
 
+        this.isGameover = false;
         this.gameTime = 0;
         this.leftGameTime = 0;
         this.gameUI.label_time.text = "00:00";
+
+        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
+        // this.mineNum = 16;
+        // Gamelog("------minenum ="+this.mineNum);
+        // this.mineNum = 8;
     }
 
     /**游戏结束 */
@@ -97,7 +106,7 @@ var GameSceneMain = (function(_super){
     }
     /**踩到地雷 */
     _proto.mineGameover = function(){
-        Gamelog("-----踩雷结束");
+        // Gamelog("-----踩雷结束");
         this.gameOver();
     }
 
@@ -165,7 +174,7 @@ var GameSceneMain = (function(_super){
         }while (createMineNum < this.mineNum)
 
         this.gameUI.label_mineNum.text = "0/"+this.m_listMine.length;
-        Gamelog("---minenum="+this.m_listMine.length);
+        // Gamelog("---minenum="+this.m_listMine.length);
 
     }
 

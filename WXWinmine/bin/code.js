@@ -362,7 +362,7 @@ var ___Laya=(function(){
 		if (value){
 			Browser.window.onerror=function (msg,url,line,column,detail){
 				if (erralert++< 5 && detail)
-					alert("出错啦，请把此信息截图给研发商\n"+msg+"\n"+detail.stack||detail);
+					alert("出错啦，请把此信息截图给研发商\n"+msg+"\n"+detail.stack || detail);
 			}
 			}else {
 			Browser.window.onerror=null;
@@ -390,7 +390,7 @@ var ___Laya=(function(){
 		CacheManager.beginCheck();
 		Laya._currentStage=Laya.stage=new Stage();
 		Laya.stage.conchModel && Laya.stage.conchModel.setRootNode();
-		Laya.getUrlPath();
+		Laya._getUrlPath();
 		Laya.render=new Render(0,0);
 		Laya.stage.size(width,height);
 		RenderSprite.__init__();
@@ -402,7 +402,7 @@ var ___Laya=(function(){
 		return Render.canvas;
 	}
 
-	Laya.getUrlPath=function(){
+	Laya._getUrlPath=function(){
 		var location=Browser.window.location;
 		var pathName=location.pathname;
 		pathName=pathName.charAt(2)==':' ? pathName.substring(1):pathName;
@@ -418,20 +418,20 @@ var ___Laya=(function(){
 	}
 
 	Laya._runScript=function(script){
-		return Browser.window["e"+String.fromCharCode(100+10+8)+"a"+"l"](script);
+		return Browser.window[Laya._evcode](script);
 	}
 
 	Laya.stage=null;
 	Laya.timer=null;
 	Laya.scaleTimer=null;
 	Laya.loader=null;
-	Laya.version="1.7.18";
+	Laya.version="1.7.21";
 	Laya.render=null;
 	Laya._currentStage=null;
 	Laya._isinit=false;
 	Laya.MiniAdpter=/*__JS__ */{init:function(){if (window.navigator && window.navigator.userAgent && window.navigator.userAgent.indexOf("MiniGame")>-1)console.error("请先引用小游戏适配库laya.wxmini.js,详细教程：https://ldc.layabox.com/doc/?nav=zh-ts-5-0-0")}};
 	__static(Laya,
-	['conchMarket',function(){return this.conchMarket=/*__JS__ */window.conch?conchMarket:null;},'PlatformClass',function(){return this.PlatformClass=/*__JS__ */window.PlatformClass;}
+	['conchMarket',function(){return this.conchMarket=/*__JS__ */window.conch?conchMarket:null;},'PlatformClass',function(){return this.PlatformClass=/*__JS__ */window.PlatformClass;},'_evcode',function(){return this._evcode="e"+String.fromCharCode(100+10+8)+"a"+"l";}
 	]);
 	return Laya;
 })()
@@ -570,6 +570,10 @@ var EventDispatcher=(function(){
 				var count=0;
 				for (var i=0,n=listeners.length;i < n;i++){
 					var item=listeners[i];
+					if (!item){
+						count++;
+						continue ;
+					}
 					if (item && (!caller || item.caller===caller)&& item.method===listener && (!onceOnly || item.once)){
 						count++;
 						listeners[i]=null;
@@ -1287,7 +1291,7 @@ var Font=(function(){
 	*规定添加到文本的修饰。
 	*/
 	__getset(0,__proto,'decoration',function(){
-		return this._decoration ? this._decoration.value :"none";
+		return this._decoration ? this._decoration.value :null;
 		},function(value){
 		var strs=value.split(' ');
 		this._decoration || (this._decoration={});
@@ -1566,6 +1570,7 @@ var Graphics=(function(){
 			this._one[2]=y;
 			this._one[3]=width;
 			this._one[4]=height;
+			this._repaint();
 			}else {
 			this.clear();
 			tex && this.drawTexture(tex,x,y,width,height);
@@ -2157,7 +2162,12 @@ var Graphics=(function(){
 				x+=tex.offsetX;
 				y+=tex.offsetY;
 				var uv=tex.uv,w=tex.bitmap.width,h=tex.bitmap.height;
-				this.drawImageM(tex.bitmap.source,uv[0] *w,uv[1] *h,(uv[2]-uv[0])*w,(uv[5]-uv[3])*h,x,y,width,height,m,alpha);
+				if (uv[4] < uv[0] && uv[5] < uv[1]){
+					this.drawImageM(tex.bitmap.source,uv[4] *w,uv[5] *h,(uv[0]-uv[4])*w,(uv[1]-uv[5])*h,x,y,width,height,m,alpha);
+				}
+				else {
+					this.drawImageM(tex.bitmap.source,uv[0] *w,uv[1] *h,(uv[2]-uv[0])*w,(uv[5]-uv[3])*h,x,y,width,height,m,alpha);
+				}
 				this._repaint();
 			}
 			from.fillTexture=function (tex,x,y,width,height,type,offset){
@@ -3301,7 +3311,7 @@ var TouchManager=(function(){
 			preO.tar=ele;
 		}
 		if (Browser.onMobile)
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 		var preDowns;
 		preDowns=isLeft ? this.preDowns :this.preRightDowns;
 		preO=this.getTouchFromArr(touchID,preDowns);
@@ -3311,7 +3321,7 @@ var TouchManager=(function(){
 			}else {
 			preO.tar=ele;
 		}
-		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_DOWN*/"mousedown" :/*laya.events.Event.RIGHT_MOUSE_DOWN*/"rightmousedown",touchID);
+		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_DOWN*/"mousedown" :/*laya.events.Event.RIGHT_MOUSE_DOWN*/"rightmousedown");
 		this._clearTempArrs();
 	}
 
@@ -3319,10 +3329,8 @@ var TouchManager=(function(){
 	*派发事件。
 	*@param eles 对象列表。
 	*@param type 事件类型。
-	*@param touchID （可选）touchID，默认为0。
 	*/
-	__proto.sendEvents=function(eles,type,touchID){
-		(touchID===void 0)&& (touchID=0);
+	__proto.sendEvents=function(eles,type){
 		var i=0,len=0;
 		len=eles.length;
 		this._event._stoped=false;
@@ -3373,10 +3381,10 @@ var TouchManager=(function(){
 		var i=0,len=0;
 		if (elePre.contains(eleNew)){
 			arrs=this.getEles(eleNew,elePre,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			}else if (eleNew.contains(elePre)){
 			arrs=this.getEles(elePre,eleNew,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 			}else {
 			arrs=TouchManager._tEleArr;
 			arrs.length=0;
@@ -3397,10 +3405,10 @@ var TouchManager=(function(){
 				}
 			}
 			if (arrs.length > 0){
-				this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+				this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 			}
 			if (newArr.length > 0){
-				this.sendEvents(newArr,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+				this.sendEvents(newArr,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			}
 		}
 	}
@@ -3420,14 +3428,14 @@ var TouchManager=(function(){
 		var tO;
 		if (!preO){
 			arrs=this.getEles(ele,null,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			this.preOvers.push(this.createTouchO(ele,touchID));
 			}else {
 			this.checkMouseOutAndOverOfMove(ele,preO.tar);
 			preO.tar=ele;
 			arrs=this.getEles(ele,null,TouchManager._tEleArr);
 		}
-		this.sendEvents(arrs,/*laya.events.Event.MOUSE_MOVE*/"mousemove",touchID);
+		this.sendEvents(arrs,/*laya.events.Event.MOUSE_MOVE*/"mousemove");
 		this._clearTempArrs();
 	}
 
@@ -3444,7 +3452,7 @@ var TouchManager=(function(){
 		var lastOvers;
 		lastOvers=this.getLastOvers();
 		this.preOvers.length=0;
-		this.sendEvents(lastOvers,/*laya.events.Event.MOUSE_OUT*/"mouseout",0);
+		this.sendEvents(lastOvers,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 	}
 
 	/**
@@ -3466,7 +3474,7 @@ var TouchManager=(function(){
 		var sendArr;
 		var onMobile=Browser.onMobile;
 		arrs=this.getEles(ele,null,TouchManager._tEleArr);
-		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_UP*/"mouseup" :/*laya.events.Event.RIGHT_MOUSE_UP*/"rightmouseup",touchID);
+		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_UP*/"mouseup" :/*laya.events.Event.RIGHT_MOUSE_UP*/"rightmouseup");
 		var preDowns;
 		preDowns=isLeft ? this.preDowns :this.preRightDowns;
 		preO=this.getTouchFromArr(touchID,preDowns);
@@ -3491,10 +3499,10 @@ var TouchManager=(function(){
 				}
 			}
 			if (sendArr.length > 0){
-				this.sendEvents(sendArr,isLeft ? /*laya.events.Event.CLICK*/"click" :/*laya.events.Event.RIGHT_CLICK*/"rightclick",touchID);
+				this.sendEvents(sendArr,isLeft ? /*laya.events.Event.CLICK*/"click" :/*laya.events.Event.RIGHT_CLICK*/"rightclick");
 			}
 			if (isLeft && isDouble){
-				this.sendEvents(sendArr,/*laya.events.Event.DOUBLE_CLICK*/"doubleclick",touchID);
+				this.sendEvents(sendArr,/*laya.events.Event.DOUBLE_CLICK*/"doubleclick");
 			}
 			this.removeTouchFromArr(touchID,preDowns);
 			preO.tar=null;
@@ -3506,7 +3514,7 @@ var TouchManager=(function(){
 			if (onMobile){
 				sendArr=this.getEles(preO.tar,null,sendArr);
 				if (sendArr && sendArr.length > 0){
-					this.sendEvents(sendArr,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+					this.sendEvents(sendArr,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 				}
 				this.removeTouchFromArr(touchID,this.preOvers);
 				preO.tar=null;
@@ -4917,7 +4925,7 @@ var SoundManager=(function(){
 	}
 
 	SoundManager._recoverWebAudio=function(){
-		if(WebAudioSound.ctx&&WebAudioSound.ctx.state!="running")
+		if(WebAudioSound.ctx&&WebAudioSound.ctx.state!="running"&&WebAudioSound.ctx.resume)
 			WebAudioSound.ctx.resume();
 	}
 
@@ -4953,15 +4961,16 @@ var SoundManager=(function(){
 			if (SoundManager._soundMuted)return null;
 		};
 		var tSound;
-		// if (!Browser.onMiniGame){
-		// 	tSound=Laya.loader.getRes(url);
-		// }
-		tSound=Laya.loader.getRes(url);
+		if (!Browser.onMiniGame){
+			tSound=Laya.loader.getRes(url);
+		}
 		if (!soundClass)soundClass=SoundManager._soundClass;
 		if (!tSound){
 			tSound=new soundClass();
 			tSound.load(url);
-			Loader.cacheRes(url,tSound);
+			if (!Browser.onMiniGame){
+				Loader.cacheRes(url,tSound);
+			}
 		};
 		var channel;
 		channel=tSound.play(startTime,loops);
@@ -5131,7 +5140,7 @@ var LocalStorage=(function(){
 			function Storage(){}
 			__class(Storage,'');
 			Storage.init=function(){
-				/*__JS__ */try{Storage.items=window.localStorage;Storage.setItem('laya','1');Storage.removeItem('laya');Storage.support=true;}catch(e){}if(!Storage.support)console.log('LocalStorage is not supprot or browser is private mode.');
+				/*__JS__ */try{Storage.support=true;Storage.items=window.localStorage;Storage.setItem('laya','1');Storage.removeItem('laya');}catch(e){Storage.support=false;}if(!Storage.support)console.log('LocalStorage is not supprot or browser is private mode.');
 			}
 			Storage.setItem=function(key,value){
 				try {
@@ -5434,7 +5443,7 @@ var Render=(function(){
 		Render._context=new RenderContext(width,height,isWebGl ? null :Render._mainCanvas);
 		Render._context.ctx.setIsMainContext();
 		Browser.window.requestAnimationFrame(loop);
-		function loop (){
+		function loop (stamp){
 			Laya.stage._loop();
 			Browser.window.requestAnimationFrame(loop);
 		}
@@ -6167,7 +6176,7 @@ var RenderSprite=(function(){
 					if (tStyle.stroke){
 						context.fillBorderWords(words,x,y,tStyle.font,tStyle.color,tStyle.strokeColor,tStyle.stroke);
 						}else{
-						context.fillWords(words,x,y,tStyle.font,tStyle.color,tStyle.underLine);
+						context.fillWords(words,x,y,tStyle.font,tStyle.color,(tStyle.textDecoration!="none"&&tStyle.underLine)?1:0);
 					}
 				}
 			}
@@ -7108,6 +7117,7 @@ var Browser=(function(){
 		},false);
 		/*__JS__ */Browser.document.__createElement=Browser.document.createElement;
 		/*__JS__ */window.requestAnimationFrame=window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (c){return window.setTimeout(c,1000 / 60);};;
+		/*__JS__ */var $BS=window.document.body.style;$BS['-webkit-user-select']='none';$BS['-webkit-tap-highlight-color']='rgba(200,200,200,0)';;
 		Browser.userAgent=/*[SAFE]*/ Browser.window.navigator.userAgent;
 		Browser.u=/*[SAFE]*/ Browser.userAgent;
 		Browser.onIOS=/*[SAFE]*/ !!Browser.u.match(/\(i[^;]+;(U;)? CPU.+Mac OS X/);
@@ -7115,7 +7125,7 @@ var Browser=(function(){
 		Browser.onIPhone=/*[SAFE]*/ Browser.u.indexOf("iPhone")>-1;
 		Browser.onMac=/*[SAFE]*/ Browser.u.indexOf("Mac OS X")>-1;
 		Browser.onIPad=/*[SAFE]*/ Browser.u.indexOf("iPad")>-1;
-		Browser.onAndriod=/*[SAFE]*/ Browser.u.indexOf('Android')>-1 || Browser.u.indexOf('Adr')>-1;
+		Browser.onAndroid=/*[SAFE]*/ Browser.u.indexOf('Android')>-1 || Browser.u.indexOf('Adr')>-1;
 		Browser.onWP=/*[SAFE]*/ Browser.u.indexOf("Windows Phone")>-1;
 		Browser.onQQBrowser=/*[SAFE]*/ Browser.u.indexOf("QQBrowser")>-1;
 		Browser.onMQQBrowser=/*[SAFE]*/ Browser.u.indexOf("MQQBrowser")>-1 || (Browser.u.indexOf("Mobile")>-1 && Browser.u.indexOf("QQ")>-1);
@@ -7191,7 +7201,6 @@ var Browser=(function(){
 	Browser.onMobile=false;
 	Browser.onIPhone=false;
 	Browser.onIPad=false;
-	Browser.onAndriod=false;
 	Browser.onAndroid=false;
 	Browser.onWP=false;
 	Browser.onQQBrowser=false;
@@ -8343,11 +8352,7 @@ var Dragging=(function(){
 		this.data=data;
 		this._disableMouseEvent=disableMouseEvent;
 		this.ratio=ratio;
-		if (target.globalScaleX !=1 || target.globalScaleY !=1){
-			this._parent=target.parent;
-			}else {
-			this._parent=Laya.stage;
-		}
+		this._parent=target.parent;
 		this._clickOnly=true;
 		this._dragging=true;
 		this._elasticRateX=this._elasticRateY=1;
@@ -9125,9 +9130,9 @@ var Pool=(function(){
 		return rst;
 	}
 
-	Pool.getItemByCreateFun=function(sign,createFun){
+	Pool.getItemByCreateFun=function(sign,createFun,caller){
 		var pool=Pool.getPoolBySign(sign);
-		var rst=pool.length ? pool.pop():createFun();
+		var rst=pool.length ? pool.pop():createFun.call(caller);
 		rst["__InPool"]=false;
 		return rst;
 	}
@@ -12298,6 +12303,19 @@ var WebAudioSound=(function(_super){
 		this._removeLoadEvents();
 		WebAudioSound.__loadingSound[this.url]=false;
 		this.event(/*laya.events.Event.ERROR*/"error");
+		if (!this.__toPlays)return;
+		var i=0,len=0;
+		var toPlays;
+		toPlays=this.__toPlays;
+		len=toPlays.length;
+		var tParams;
+		for (i=0;i < len;i++){
+			tParams=toPlays[i];
+			if (tParams[2] && !(tParams [2]).isStopped){
+				(tParams [2]).event(/*laya.events.Event.ERROR*/"error");
+			}
+		}
+		this.__toPlays.length=0;
 	}
 
 	__proto._loaded=function(audioBuffer){
@@ -12415,6 +12433,7 @@ var WebAudioSound=(function(_super){
 		if (WebAudioSound.ctx.state=="running"){
 			Browser.document.removeEventListener("mousedown",WebAudioSound._unlock,true);
 			Browser.document.removeEventListener("touchend",WebAudioSound._unlock,true);
+			Browser.document.removeEventListener("touchstart",WebAudioSound._unlock,true);
 			WebAudioSound._unlocked=true;
 		}
 	}
@@ -12424,6 +12443,7 @@ var WebAudioSound=(function(_super){
 			WebAudioSound._unlock();
 			Browser.document.addEventListener("mousedown",WebAudioSound._unlock,true);
 			Browser.document.addEventListener("touchend",WebAudioSound._unlock,true);
+			Browser.document.addEventListener("touchstart",WebAudioSound._unlock,true);
 		}
 	}
 
@@ -12664,6 +12684,7 @@ var Loader=(function(_super){
 		var contentType;
 		switch (type){
 			case "atlas":
+			case "plf":
 				contentType="json";
 				break ;
 			case "font":
@@ -12791,6 +12812,10 @@ var Loader=(function(_super){
 	*/
 	__proto.onLoaded=function(data){
 		var type=this._type;
+		if (type=="plf"){
+			this.parsePLFData(data);
+			this.complete(data);
+		}else
 		if (type==="image"){
 			var tex=new Texture(data);
 			tex.url=this._url;
@@ -12839,8 +12864,10 @@ var Loader=(function(_super){
 						var tPic=pics[obj.frame.idx ? obj.frame.idx :0];
 						var url=URL.formatURL(directory+name);
 						tPic.scaleRate=scaleRate;
-						Loader.cacheRes(url,Texture.create(tPic,obj.frame.x,obj.frame.y,obj.frame.w,obj.frame.h,obj.spriteSourceSize.x,obj.spriteSourceSize.y,obj.sourceSize.w,obj.sourceSize.h));
-						Loader.loadedMap[url].url=url;
+						var tTexture;
+						tTexture=Texture.create(tPic,obj.frame.x,obj.frame.y,obj.frame.w,obj.frame.h,obj.spriteSourceSize.x,obj.spriteSourceSize.y,obj.sourceSize.w,obj.sourceSize.h);
+						Loader.cacheRes(url,tTexture);
+						tTexture.url=url;
 						map.push(url);
 					}
 					}else{
@@ -12861,10 +12888,7 @@ var Loader=(function(_super){
 				this._data=data;
 				this.event(/*laya.events.Event.PROGRESS*/"progress",0.5);
 				return this._loadImage(this._url.replace(".fnt",".png"));
-			}else {
-				if (Browser.onMiniGame) {
-					this._data = Utils.parseXMLFromString(this._data);
-				}
+				}else {
 				var bFont=new BitmapFont();
 				bFont.parseFont(this._data,data);
 				var tArr=this._url.split(".fnt")[0].split("/");
@@ -12880,6 +12904,27 @@ var Loader=(function(_super){
 			this.complete(tex1);
 			}else {
 			this.complete(data);
+		}
+	}
+
+	__proto.parsePLFData=function(plfData){
+		var type;
+		var filePath;
+		var fileDic;
+		for (type in plfData){
+			fileDic=plfData[type];
+			switch(type){
+				case "json":
+				case "text":
+					for (filePath in fileDic){
+						Loader.preLoadedMap[URL.formatURL(filePath)]=fileDic[filePath]
+					}
+					break ;
+				default :
+					for (filePath in fileDic){
+						Loader.preLoadedMap[URL.formatURL(filePath)]=fileDic[filePath]
+					}
+				}
 		}
 	}
 
@@ -12975,7 +13020,7 @@ var Loader=(function(_super){
 		var arr=laya.net.Loader.getAtlas(url);
 		var res=(arr && arr.length>0)? laya.net.Loader.getRes(arr[0]):laya.net.Loader.getRes(url);
 		if (res && res.bitmap){
-			if (Render.isConchApp){
+			if (Render.isConchApp && !Render.isConchWebGL){
 				if (res.bitmap.source.releaseTexture){
 					res.bitmap.source.releaseTexture();
 				}
@@ -13025,8 +13070,9 @@ var Loader=(function(_super){
 	Loader.ATLAS="atlas";
 	Loader.FONT="font";
 	Loader.TTF="ttf";
+	Loader.PLF="plf";
 	Loader.PKM="pkm";
-	Loader.typeMap={"png":"image","jpg":"image","jpeg":"image","txt":"text","json":"json","xml":"xml","als":"atlas","atlas":"atlas","mp3":"sound","ogg":"sound","wav":"sound","part":"json","fnt":"font","pkm":"pkm","ttf":"ttf"};
+	Loader.typeMap={"png":"image","jpg":"image","jpeg":"image","txt":"text","json":"json","xml":"xml","als":"atlas","atlas":"atlas","mp3":"sound","ogg":"sound","wav":"sound","part":"json","fnt":"font","pkm":"pkm","ttf":"ttf","plf":"plf","ani":"json","sk":"arraybuffer"};
 	Loader.parserMap={};
 	Loader.groupMap={};
 	Loader.maxTimeOut=100;
@@ -14368,7 +14414,7 @@ var Texture=(function(_super){
 		/**@private */
 		this.scaleRate=1;
 		Texture.__super.call(this);
-		if (bitmap&& bitmap._addReference){
+		if (bitmap && bitmap._addReference!=null){
 			bitmap._addReference();
 		}
 		this.setTo(bitmap,uv);
@@ -16659,7 +16705,8 @@ var AudioSoundChannel=(function(_super){
 	}
 
 	__proto.__resumePlay=function(){
-		if(this._audio)this._audio.removeEventListener("canplay",this._resumePlay);
+		if (this._audio)this._audio.removeEventListener("canplay",this._resumePlay);
+		if (this.isStopped)return;
 		try {
 			this._audio.currentTime=this.startTime;
 			Browser.container.appendChild(this._audio);
@@ -16674,6 +16721,7 @@ var AudioSoundChannel=(function(_super){
 	*/
 	__proto.play=function(){
 		this.isStopped=false;
+		if (!this._audio)return;
 		try {
 			this._audio.playbackRate=SoundManager.playbackRate;
 			this._audio.currentTime=this.startTime;
@@ -16836,10 +16884,16 @@ var WebAudioSoundChannel=(function(_super){
 		bufferSource.onended=this._onPlayEnd;
 		if (this.startTime >=this.duration)this.startTime=0;
 		this._startTime=Browser.now();
+		if (this.gain.gain.setTargetAtTime){
+			this.gain.gain.setTargetAtTime(this._volume,this.context.currentTime,0.001);
+		}else
 		this.gain.gain.value=this._volume;
 		if (this.loops==0){
 			bufferSource.loop=true;
 		}
+		if (bufferSource.playbackRate.setTargetAtTime){
+			bufferSource.playbackRate.setTargetAtTime(SoundManager.playbackRate,this.context.currentTime,0.001)
+		}else
 		bufferSource.playbackRate.value=SoundManager.playbackRate;
 		bufferSource.start(0,this.startTime);
 		this._currentTime=0;
@@ -16952,10 +17006,14 @@ var WebAudioSoundChannel=(function(_super){
 			return;
 		}
 		this._volume=v;
+		if (this.gain.gain.setTargetAtTime){
+			this.gain.gain.setTargetAtTime(v,this.context.currentTime,0.001);
+		}else
 		this.gain.gain.value=v;
 	});
 
 	WebAudioSoundChannel._tryCleanFailed=false;
+	WebAudioSoundChannel.SetTargetDelay=0.001;
 	return WebAudioSoundChannel;
 })(SoundChannel)
 
@@ -17555,6 +17613,7 @@ var Text=(function(_super){
 					word+="●";
 				}
 			}
+			if (word===undefined)word="";
 			x=startX-(this._clipPoint ? this._clipPoint.x :0);
 			y=startY+lineHeight *i-(this._clipPoint ? this._clipPoint.y :0);
 			this.underline && this.drawUnderline(textAlgin,x,y,i);
@@ -17690,6 +17749,9 @@ var Text=(function(_super){
 			this._charSize.height=this._currBitmapFont.getMaxHeight();
 			}else {
 			var measureResult=Browser.context.measureText(Text._testWord);
+			if (Render.isConchApp && measureResult.width===0 && measureResult.height===0){
+				measureResult=Browser.context.measureText('W');
+			}
 			this._charSize.width=measureResult.width;
 			this._charSize.height=(measureResult.height || this.fontSize);
 		};
@@ -17858,7 +17920,7 @@ var Text=(function(_super){
 	*/
 	__getset(0,__proto,'height',function(){
 		if (this._height)return this._height;
-		return this.textHeight+this.padding[0]+this.padding[2];
+		return this.textHeight;
 		},function(value){
 		if (value !=this._height){
 			Laya.superSet(Sprite,this,'height',value);
@@ -18214,7 +18276,7 @@ var Stage=(function(_super){
 		this.canvasDegree=0;
 		/**
 		*<p>设置是否渲染，设置为false，可以停止渲染，画面会停留到最后一次渲染上，减少cpu消耗，此设置不影响时钟。</p>
-		*<p>比如非激活状态，可以设置renderingEnabled=true以节省消耗。</p>
+		*<p>比如非激活状态，可以设置renderingEnabled=false以节省消耗。</p>
 		**/
 		this.renderingEnabled=true;
 		/**是否启用屏幕适配，可以适配后，在某个时候关闭屏幕适配，防止某些操作导致的屏幕以外改变*/
@@ -18546,7 +18608,7 @@ var Stage=(function(_super){
 			}
 		}
 		if (Render.isConchNode)return;
-		if (this.renderingEnabled && (isFastMode || !isDoubleLoop)){
+		if (this.renderingEnabled && (isFastMode || !isDoubleLoop || Render.isConchWebGL)){
 			if (Render.isWebGL){
 				context.clear();
 				_super.prototype.render.call(this,context,x,y);
@@ -19391,7 +19453,7 @@ var Animation=(function(_super){
 		this._url=url;
 		var _this_=this;
 		if (!this._actionName)this._actionName="";
-		if (!_this_._setFramesFromCache("")){
+		if (!_this_._setFramesFromCache(this._actionName)){
 			if (!atlas || Loader.getAtlas(atlas)){
 				this._loadAnimationData(url,loaded,atlas);
 				}else {
@@ -19727,7 +19789,7 @@ var FrameAnimation=(function(_super){
 			this._calculateFrameValues(keyframes[i],keyframes[i+1],frames);
 		}
 		if (len==0){
-			frames[0]=keyframes[0].value;
+			frames[keyframes[0].index]=keyframes[0].value;
 			if (this._animationNewFrames)
 				this._animationNewFrames[keyframes[0].index]=true;
 		}
@@ -20842,7 +20904,8 @@ var GraphicAnimation=(function(_super){
 			var vArr=obj[key];
 			if (frame >=vArr.length)
 				frame=vArr.length-1;
-			return obj[key][frame];
+			if(obj[key][frame]!=undefined)
+				return obj[key][frame];
 		}
 		if (obj2.hasOwnProperty(key)){
 			return obj2[key];
@@ -21171,14 +21234,24 @@ var MiniAdpter=(function(){
 		MiniAdpter.isZiYu=isSon;
 		MiniAdpter.isPosMsgYu=isPosMsg;
 		MiniAdpter.EnvConfig={};
+		try{
+			/*__JS__ */laya.webgl.resource.WebGLCanvas.premulAlpha=true;
+			}catch(e){
+		}
 		if(!MiniAdpter.isZiYu){
 			MiniFileMgr.setNativeFileDir("/layaairGame");
 			MiniFileMgr.existDir(MiniFileMgr.fileNativeDir,Handler.create(MiniAdpter,MiniAdpter.onMkdirCallBack));
 		}
 		MiniAdpter.systemInfo=/*__JS__ */wx.getSystemInfoSync();
+		if (MiniAdpter.systemInfo.system.toLowerCase()==='ios 10.1.1'){
+			try{
+				/*__JS__ */laya.webgl.resource.WebGLCharImage.canUseCanvas=false;
+				}catch(e){
+			}
+		}
 		MiniAdpter.window.focus=function (){
 		};
-		Laya['getUrlPath']=function (){
+		Laya['_getUrlPath']=function (){
 		};
 		MiniAdpter.window.logtime=function (str){
 		};
@@ -21201,8 +21274,37 @@ var MiniAdpter=(function(){
 		MiniAdpter.EnvConfig.load=Loader.prototype.load;
 		Loader.prototype.load=MiniLoader.prototype.load;
 		Loader.prototype._loadImage=MiniImage.prototype._loadImage;
-		MiniLocalStorage.__init__();
 		LocalStorage._baseClass=MiniLocalStorage;
+		MiniLocalStorage.__init__();
+		MiniAdpter.onReciveData();
+	}
+
+	MiniAdpter.onReciveData=function(){
+		if(laya.wx.mini.MiniAdpter.isZiYu){
+			/*__JS__ */wx.onMessage(function(message){
+				if(message['isLoad']=="opendatacontext"){
+					if(message.url){
+						MiniFileMgr.ziyuFileData[message.url]=message.atlasdata;
+						MiniFileMgr.ziyuFileTextureData[message.imgReadyUrl]=message.imgNativeUrl;
+					}
+					}else if(message['isLoad']=="openJsondatacontext"){
+					if(message.url){
+						MiniFileMgr.ziyuFileData[message.url]=message.atlasdata;
+					}
+					}else if(message['isLoad']=="openJsondatacontextPic"){
+					MiniFileMgr.ziyuFileTextureData[message.imgReadyUrl]=message.imgNativeUrl;
+				}
+			});
+		}
+	}
+
+	MiniAdpter.measureText=function(str){
+		var tempObj=MiniAdpter._measureText(str);
+		if(!tempObj){
+			tempObj={width:16};
+			console.warn("-------微信获取文字宽度失败----等待修复---------");
+		}
+		return tempObj;
 	}
 
 	MiniAdpter.getUrlEncode=function(url,type){
@@ -21327,6 +21429,77 @@ var MiniAdpter=(function(){
 		return func;
 	}
 
+	MiniAdpter.sendAtlasToOpenDataContext=function(url){
+		if(!laya.wx.mini.MiniAdpter.isZiYu){
+			var atlasJson=Loader.getRes(URL.formatURL(url));
+			if(atlasJson){
+				var textureArr=(atlasJson.meta.image).split(",");
+				if (atlasJson.meta && atlasJson.meta.image){
+					var toloadPics=atlasJson.meta.image.split(",");
+					var split=url.indexOf("/")>=0 ? "/" :"\\";
+					var idx=url.lastIndexOf(split);
+					var folderPath=idx >=0 ? url.substr(0,idx+1):"";
+					for (var i=0,len=toloadPics.length;i < len;i++){
+						toloadPics[i]=folderPath+toloadPics[i];
+					}
+					}else {
+					toloadPics=[url.replace(".json",".png")];
+				}
+				for(i=0;i<toloadPics.length;i++){
+					var tempAtlasPngUrl=toloadPics[i];
+					MiniAdpter.postInfoToContext(url,tempAtlasPngUrl,atlasJson);
+				}
+				}else{
+				throw "传递的url没有获取到对应的图集数据信息，请确保图集已经过！";
+			}
+		}
+	}
+
+	MiniAdpter.postInfoToContext=function(url,atlaspngUrl,atlasJson){
+		var postData={"frames":atlasJson.frames,"meta":atlasJson.meta};
+		var textureUrl=atlaspngUrl;
+		var fileObj=MiniFileMgr.getFileInfo(URL.formatURL(atlaspngUrl));
+		if(fileObj){
+			var fileMd5Name=fileObj.md5;
+			var fileNativeUrl=MiniFileMgr.getFileNativePath(fileMd5Name);
+			}else{
+			fileNativeUrl=textureUrl;
+		}
+		if(fileNativeUrl){
+			/*__JS__ */wx.postMessage({url:url,atlasdata:postData,imgNativeUrl:fileNativeUrl,imgReadyUrl:textureUrl,isLoad:"opendatacontext"});
+			}else{
+			throw "获取图集的磁盘url路径不存在！";
+		}
+	}
+
+	MiniAdpter.sendSinglePicToOpenDataContext=function(url){
+		var tempTextureUrl=URL.formatURL(url);
+		var fileObj=MiniFileMgr.getFileInfo(tempTextureUrl);
+		if(fileObj){
+			var fileMd5Name=fileObj.md5;
+			var fileNativeUrl=MiniFileMgr.getFileNativePath(fileMd5Name);
+			url=tempTextureUrl;
+			}else{
+			fileNativeUrl=url;
+		}
+		if(fileNativeUrl){
+			/*__JS__ */wx.postMessage({url:url,imgNativeUrl:fileNativeUrl,imgReadyUrl:url,isLoad:"openJsondatacontextPic"});
+			}else{
+			throw "获取图集的磁盘url路径不存在！";
+		}
+	}
+
+	MiniAdpter.sendJsonDataToDataContext=function(url){
+		if(!laya.wx.mini.MiniAdpter.isZiYu){
+			var atlasJson=Loader.getRes(url);
+			if(atlasJson){
+				/*__JS__ */wx.postMessage({url:url,atlasdata:atlasJson,isLoad:"openJsondatacontext"});
+				}else{
+				throw "传递的url没有获取到对应的图集数据信息，请确保图集已经过！";
+			}
+		}
+	}
+
 	MiniAdpter.EnvConfig=null;
 	MiniAdpter.window=null;
 	MiniAdpter._preCreateElement=null;
@@ -21336,6 +21509,11 @@ var MiniAdpter=(function(){
 	MiniAdpter.isPosMsgYu=false;
 	MiniAdpter.autoCacheFile=true;
 	MiniAdpter.minClearSize=(5 *1024 *1024);
+	MiniAdpter.subNativeFiles=null;
+	MiniAdpter.subNativeheads=[];
+	MiniAdpter.subMaps=[];
+	MiniAdpter.AutoCacheDownFile=false;
+	MiniAdpter._measureText=null;
 	MiniAdpter.parseXMLFromString=function(value){
 		var rst;
 		var Parser;
@@ -21370,7 +21548,7 @@ var MiniFileMgr=(function(){
 	}
 
 	MiniFileMgr.getFileInfo=function(fileUrl){
-		var fileNativePath=fileUrl.split("?")[0];
+		var fileNativePath=fileUrl;
 		var fileObj=MiniFileMgr.filesListObj[fileNativePath];
 		if (fileObj==null)
 			return null;
@@ -21400,14 +21578,21 @@ var MiniFileMgr=(function(){
 		}});
 	}
 
-	MiniFileMgr.downFiles=function(fileUrl,encoding,callBack,readyUrl,isSaveFile,fileType){
+	MiniFileMgr.downFiles=function(fileUrl,encoding,callBack,readyUrl,isSaveFile,fileType,isAutoClear){
 		(encoding===void 0)&& (encoding="ascii");
 		(readyUrl===void 0)&& (readyUrl="");
 		(isSaveFile===void 0)&& (isSaveFile=false);
 		(fileType===void 0)&& (fileType="");
+		(isAutoClear===void 0)&& (isAutoClear=true);
 		var downloadTask=MiniFileMgr.wxdown({url:fileUrl,success:function (data){
 				if (data.statusCode===200)
-					MiniFileMgr.readFile(data.tempFilePath,encoding,callBack,readyUrl,isSaveFile,fileType);
+					MiniFileMgr.readFile(data.tempFilePath,encoding,callBack,readyUrl,isSaveFile,fileType,isAutoClear);
+				else
+				if(data.statusCode===403){
+					callBack !=null && callBack.runWith([0,fileUrl]);
+					}else{
+					callBack !=null && callBack.runWith([1,data]);
+				}
 				},fail:function (data){
 				callBack !=null && callBack.runWith([1,data]);
 		}});
@@ -21416,15 +21601,16 @@ var MiniFileMgr=(function(){
 		});
 	}
 
-	MiniFileMgr.readFile=function(filePath,encoding,callBack,readyUrl,isSaveFile,fileType){
+	MiniFileMgr.readFile=function(filePath,encoding,callBack,readyUrl,isSaveFile,fileType,isAutoClear){
 		(encoding===void 0)&& (encoding="ascill");
 		(readyUrl===void 0)&& (readyUrl="");
 		(isSaveFile===void 0)&& (isSaveFile=false);
 		(fileType===void 0)&& (fileType="");
+		(isAutoClear===void 0)&& (isAutoClear=true);
 		MiniFileMgr.fs.readFile({filePath:filePath,encoding:encoding,success:function (data){
 				if (filePath.indexOf("http://")!=-1 || filePath.indexOf("https://")!=-1){
 					if(MiniAdpter.autoCacheFile || isSaveFile){
-						MiniFileMgr.copyFile(filePath,readyUrl,callBack,encoding);
+						MiniFileMgr.copyFile(filePath,readyUrl,callBack,encoding,isAutoClear);
 					}
 				}
 				else
@@ -21435,15 +21621,18 @@ var MiniFileMgr=(function(){
 		}});
 	}
 
-	MiniFileMgr.downOtherFiles=function(fileUrl,callBack,readyUrl,isSaveFile){
+	MiniFileMgr.downOtherFiles=function(fileUrl,callBack,readyUrl,isSaveFile,isAutoClear){
 		(readyUrl===void 0)&& (readyUrl="");
 		(isSaveFile===void 0)&& (isSaveFile=false);
+		(isAutoClear===void 0)&& (isAutoClear=true);
 		MiniFileMgr.wxdown({url:fileUrl,success:function (data){
 				if (data.statusCode===200){
-					if((MiniAdpter.autoCacheFile || isSaveFile)&& readyUrl.indexOf("wx.qlogo.cn")==-1)
-						MiniFileMgr.copyFile(data.tempFilePath,readyUrl,callBack);
+					if((MiniAdpter.autoCacheFile || isSaveFile)&& readyUrl.indexOf("wx.qlogo.cn")==-1 && readyUrl.indexOf(".php")==-1)
+						MiniFileMgr.copyFile(data.tempFilePath,readyUrl,callBack,"",isAutoClear);
 					else
 					callBack !=null && callBack.runWith([0,data.tempFilePath]);
+					}else{
+					callBack !=null && callBack.runWith([1,data]);
 				}
 				},fail:function (data){
 				callBack !=null && callBack.runWith([1,data]);
@@ -21453,17 +21642,22 @@ var MiniFileMgr=(function(){
 	MiniFileMgr.downLoadFile=function(fileUrl,fileType,callBack,encoding){
 		(fileType===void 0)&& (fileType="");
 		(encoding===void 0)&& (encoding="ascii");
-		if(fileType==/*laya.net.Loader.IMAGE*/"image" || fileType==/*laya.net.Loader.SOUND*/"sound")
-			MiniFileMgr.downOtherFiles(fileUrl,callBack,fileUrl,true);
-		else
-		MiniFileMgr.downFiles(fileUrl,encoding,callBack,fileUrl,true,fileType);
+		if(/*__JS__ */window.navigator.userAgent.indexOf('MiniGame')<0){
+			Laya.loader.load(fileUrl,callBack);
+			}else{
+			if(fileType==/*laya.net.Loader.IMAGE*/"image" || fileType==/*laya.net.Loader.SOUND*/"sound")
+				MiniFileMgr.downOtherFiles(fileUrl,callBack,fileUrl,true,false);
+			else
+			MiniFileMgr.downFiles(fileUrl,encoding,callBack,fileUrl,true,fileType,false);
+		}
 	}
 
-	MiniFileMgr.copyFile=function(tempFilePath,readyUrl,callBack,encoding){
+	MiniFileMgr.copyFile=function(tempFilePath,readyUrl,callBack,encoding,isAutoClear){
 		(encoding===void 0)&& (encoding="");
+		(isAutoClear===void 0)&& (isAutoClear=true);
 		var temp=tempFilePath.split("/");
 		var tempFileName=temp[temp.length-1];
-		var fileurlkey=readyUrl.split("?")[0];
+		var fileurlkey=readyUrl;
 		var fileObj=MiniFileMgr.getFileInfo(readyUrl);
 		var saveFilePath=MiniFileMgr.getFileNativePath(tempFileName);
 		var totalSize=50 *1024 *1024;
@@ -21474,7 +21668,7 @@ var MiniFileMgr=(function(){
 				MiniFileMgr.fs.getFileInfo({
 					filePath:tempFilePath,
 					success:function (data){
-						if((fileUseSize+chaSize+data.size)>=totalSize){
+						if((isAutoClear && (fileUseSize+chaSize+data.size)>=totalSize)){
 							if(data.size > MiniAdpter.minClearSize)
 								MiniAdpter.minClearSize=data.size;
 							MiniFileMgr.onClearCacheRes();
@@ -21492,7 +21686,7 @@ var MiniFileMgr=(function(){
 			MiniFileMgr.fs.getFileInfo({
 				filePath:tempFilePath,
 				success:function (data){
-					if((fileUseSize+chaSize+data.size)>=totalSize){
+					if((isAutoClear && (fileUseSize+chaSize+data.size)>=totalSize)){
 						if(data.size > MiniAdpter.minClearSize)
 							MiniAdpter.minClearSize=data.size;
 						MiniFileMgr.onClearCacheRes();
@@ -21516,7 +21710,7 @@ var MiniFileMgr=(function(){
 		for(var key in MiniFileMgr.filesListObj){
 			tempFileListArr.push(MiniFileMgr.filesListObj[key]);
 		}
-		MiniFileMgr.sortOn(tempFileListArr,"time",16);
+		MiniFileMgr.sortOn(tempFileListArr,"times",16);
 		var clearSize=0;
 		for(var i=1,sz=tempFileListArr.length;i<sz;i++){
 			var fileObj=tempFileListArr[i];
@@ -21569,13 +21763,17 @@ var MiniFileMgr=(function(){
 			var fileObj=tempFileListArr[i];
 			MiniFileMgr.deleteFile("",fileObj.readyUrl);
 		}
+		if(laya.wx.mini.MiniFileMgr.filesListObj && laya.wx.mini.MiniFileMgr.filesListObj.fileUsedSize){
+			laya.wx.mini.MiniFileMgr.filesListObj.fileUsedSize=0;
+		}
+		laya.wx.mini.MiniFileMgr.writeFilesList("",JSON.stringify({}),false);
 	}
 
 	MiniFileMgr.onSaveFile=function(readyUrl,md5Name,isAdd,encoding,callBack,fileSize){
 		(isAdd===void 0)&& (isAdd=true);
 		(encoding===void 0)&& (encoding="");
 		(fileSize===void 0)&& (fileSize=0);
-		var fileurlkey=readyUrl.split("?")[0];
+		var fileurlkey=readyUrl;
 		if(MiniFileMgr.filesListObj['fileUsedSize']==null)
 			MiniFileMgr.filesListObj['fileUsedSize']=0;
 		if(isAdd){
@@ -21644,6 +21842,7 @@ var MiniFileMgr=(function(){
 	MiniFileMgr.fileNativeDir=null;
 	MiniFileMgr.fileListName="layaairfiles.txt";
 	MiniFileMgr.ziyuFileData={};
+	MiniFileMgr.ziyuFileTextureData={};
 	MiniFileMgr.loadPath="";
 	MiniFileMgr.DESCENDING=2;
 	MiniFileMgr.NUMERIC=16;
@@ -21677,8 +21876,28 @@ var MiniImage=(function(){
 					url=url.split(MiniFileMgr.loadPath)[1];
 					}else{
 					var tempStr=URL.rootPath !="" ? URL.rootPath :URL.basePath;
+					var tempUrl=url;
 					if(tempStr !="")
 						url=url.split(tempStr)[1];
+					if(!url){
+						url=tempUrl;
+					}
+				}
+			}
+			if (MiniAdpter.subNativeFiles && MiniAdpter.subNativeheads.length==0){
+				for (var key in MiniAdpter.subNativeFiles){
+					var tempArr=MiniAdpter.subNativeFiles[key];
+					MiniAdpter.subNativeheads=MiniAdpter.subNativeheads.concat(tempArr);
+					for (var aa=0;aa < tempArr.length;aa++){
+						MiniAdpter.subMaps[tempArr[aa]]=key+"/"+tempArr[aa];
+					}
+				}
+			}
+			if(MiniAdpter.subNativeFiles && url.indexOf("/")!=-1){
+				var curfileHead=url.split("/")[0]+"/";
+				if(curfileHead && MiniAdpter.subNativeheads.indexOf(curfileHead)!=-1){
+					var newfileHead=MiniAdpter.subMaps[curfileHead];
+					url=url.replace(curfileHead,newfileHead);
 				}
 			}
 		}
@@ -21719,6 +21938,13 @@ var MiniImage=(function(){
 					var fileMd5Name=fileObj.md5;
 					fileNativeUrl=MiniFileMgr.getFileNativePath(fileMd5Name);
 				}
+			}else
+			if(MiniAdpter.isZiYu){
+				var tempUrl=URL.formatURL(sourceUrl);
+				if(MiniFileMgr.ziyuFileTextureData[tempUrl]){
+					fileNativeUrl=MiniFileMgr.ziyuFileTextureData[tempUrl];
+				}else
+				fileNativeUrl=sourceUrl;
 			}else
 			fileNativeUrl=sourceUrl;
 			}else{
@@ -21788,10 +22014,10 @@ var MiniInput=(function(){
 			Browser.onIPhone=true;
 			Browser.onIOS=true;
 			Browser.onIPad=true;
-			Browser.onAndriod=false;
+			Browser.onAndroid=false;
 		}
 		if(system.indexOf("Android")!=-1 || system.indexOf("Adr")!=-1){
-			Browser.onAndriod=true;
+			Browser.onAndroid=true;
 			Browser.onIPhone=false;
 			Browser.onIOS=false;
 			Browser.onIPad=false;
@@ -21864,7 +22090,15 @@ var MiniLocalStorage=(function(){
 	}
 
 	MiniLocalStorage.setItem=function(key,value){
-		/*__JS__ */wx.setStorageSync(key,value);
+		try{
+			/*__JS__ */wx.setStorageSync(key,value);
+		}
+		catch(error){
+			/*__JS__ */wx.setStorage({
+				key:key,
+				data:value
+			});
+		}
 	}
 
 	MiniLocalStorage.getItem=function(key){
@@ -22104,6 +22338,9 @@ var MiniLoader=(function(_super){
 		if ((MiniLoader._fileTypeArr.indexOf(urlType)!=-1)){
 			MiniAdpter.EnvConfig.load.call(this,url,type,cache,group,ignoreCache);
 			}else {
+			if(MiniAdpter.isZiYu && !MiniFileMgr.ziyuFileData[url]){
+				url=URL.formatURL(url);
+			}
 			if(MiniAdpter.isZiYu && MiniFileMgr.ziyuFileData[url]){
 				var tempData=MiniFileMgr.ziyuFileData[url];
 				thisLoader.onLoaded(tempData);
@@ -22111,6 +22348,22 @@ var MiniLoader=(function(_super){
 			}
 			if (!MiniFileMgr.getFileInfo(url)){
 				if (MiniFileMgr.isLocalNativeFile(url)){
+					if (MiniAdpter.subNativeFiles && MiniAdpter.subNativeheads.length==0){
+						for (var key in MiniAdpter.subNativeFiles){
+							var tempArr=MiniAdpter.subNativeFiles[key];
+							MiniAdpter.subNativeheads=MiniAdpter.subNativeheads.concat(tempArr);
+							for (var aa=0;aa < tempArr.length;aa++){
+								MiniAdpter.subMaps[tempArr[aa]]=key+"/"+tempArr[aa];
+							}
+						}
+					}
+					if(MiniAdpter.subNativeFiles && url.indexOf("/")!=-1){
+						var curfileHead=url.split("/")[0]+"/";
+						if(curfileHead && MiniAdpter.subNativeheads.indexOf(curfileHead)!=-1){
+							var newfileHead=MiniAdpter.subMaps[curfileHead];
+							url=url.replace(curfileHead,newfileHead);
+						}
+					}
 					MiniFileMgr.read(url,encoding,new Handler(MiniLoader,MiniLoader.onReadNativeCallBack,[encoding,url,type,cache,group,ignoreCache,thisLoader]));
 					return;
 				};
@@ -22147,6 +22400,7 @@ var MiniLoader=(function(_super){
 			}
 			thisLoader.onLoaded(tempData);
 			}else if (errorCode==1){
+			console.log("-----------本地加载失败，尝试外网加载----");
 			MiniAdpter.EnvConfig.load.call(thisLoader,url,type,cache,group,ignoreCache);
 		}
 	}
@@ -22188,7 +22442,19 @@ var MiniSound=(function(_super){
 	*
 	*/
 	__proto.load=function(url){
-		url=URL.formatURL(url);
+		if (!MiniFileMgr.isLocalNativeFile(url)){
+			url=URL.formatURL(url);
+			}else{
+			if (url.indexOf("http://")!=-1 || url.indexOf("https://")!=-1){
+				if(MiniFileMgr.loadPath !=""){
+					url=url.split(MiniFileMgr.loadPath)[1];
+					}else{
+					var tempStr=URL.rootPath !="" ? URL.rootPath :URL.basePath;
+					if(tempStr !="")
+						url=url.split(tempStr)[1];
+				}
+			}
+		}
 		this.url=url;
 		this.readyUrl=url;
 		if (MiniSound._audioCache[this.readyUrl]){
@@ -22201,7 +22467,34 @@ var MiniSound=(function(_super){
 			if(!MiniAdpter.autoCacheFile){
 				this.onDownLoadCallBack(url,0);
 				}else{
-				MiniFileMgr.downOtherFiles(url,Handler.create(this,this.onDownLoadCallBack,[url]),url);
+				if (MiniFileMgr.isLocalNativeFile(url)){
+					tempStr=URL.rootPath !="" ? URL.rootPath :URL.basePath;
+					var tempUrl=url;
+					if(tempStr !="")
+						url=url.split(tempStr)[1];
+					if (!url){
+						url=tempUrl;
+					}
+					if (MiniAdpter.subNativeFiles && MiniAdpter.subNativeheads.length==0){
+						for (var key in MiniAdpter.subNativeFiles){
+							var tempArr=MiniAdpter.subNativeFiles[key];
+							MiniAdpter.subNativeheads=MiniAdpter.subNativeheads.concat(tempArr);
+							for (var aa=0;aa < tempArr.length;aa++){
+								MiniAdpter.subMaps[tempArr[aa]]=key+"/"+tempArr[aa];
+							}
+						}
+					}
+					if(MiniAdpter.subNativeFiles && url.indexOf("/")!=-1){
+						var curfileHead=url.split("/")[0]+"/";
+						if(curfileHead && MiniAdpter.subNativeheads.indexOf(curfileHead)!=-1){
+							var newfileHead=MiniAdpter.subMaps[curfileHead];
+							url=url.replace(curfileHead,newfileHead);
+						}
+					}
+					this.onDownLoadCallBack(url,0);
+					}else{
+					MiniFileMgr.downOtherFiles(url,Handler.create(this,this.onDownLoadCallBack,[url]),url);
+				}
 			}
 		}
 	}
@@ -22212,8 +22505,12 @@ var MiniSound=(function(_super){
 			var fileNativeUrl;
 			if(MiniAdpter.autoCacheFile){
 				var fileObj=MiniFileMgr.getFileInfo(sourceUrl);
-				var fileMd5Name=fileObj.md5;
-				fileNativeUrl=MiniFileMgr.getFileNativePath(fileMd5Name);
+				if(fileObj && fileObj.md5){
+					var fileMd5Name=fileObj.md5;
+					fileNativeUrl=MiniFileMgr.getFileNativePath(fileMd5Name);
+					}else{
+					fileNativeUrl=sourceUrl;
+				}
 				this._sound=MiniSound._createSound();
 				this._sound.src=this.url=fileNativeUrl;
 				}else{
@@ -22245,7 +22542,6 @@ var MiniSound=(function(_super){
 	__proto.onCanPlay=function(){
 		this.loaded=true;
 		this.event(/*laya.events.Event.COMPLETE*/"complete");
-		MiniSound._audioCache[this.readyUrl]=this;
 		this._sound.offCanplay(null);
 	}
 
@@ -22412,6 +22708,16 @@ var MiniSoundChannel=(function(_super){
 		SoundManager.addChannel(this);
 		this._audio.play();
 	}
+
+	/**
+	*设置开始时间
+	*@param time
+	*/
+	__getset(0,__proto,'startTime',null,function(time){
+		if(this._audio){
+			this._audio.startTime=time;
+		}
+	});
 
 	/**@private **/
 	/**
@@ -26831,8 +27137,7 @@ var WebGL=(function(){
 			if (canvasWidth <=0 || canvasHeight <=0){
 				console.log("[error] canvasWidth and canvasHeight should greater than zero");
 			}
-			offsetX-=sprite.x;
-			offsetY-=sprite.y;
+			canvasWidth |=0;canvasHeight |=0;offsetX |=0;offsetY |=0;
 			var renderTarget=RenderTarget2D.create(canvasWidth,canvasHeight,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,0,false);
 			renderTarget.start();
 			renderTarget.clear(0,0,0,0);
@@ -26840,8 +27145,12 @@ var WebGL=(function(){
 			RenderSprite.renders[_renderType]._fun(sprite,Render.context,offsetX,RenderState2D.height-canvasHeight+offsetY);
 			Render.context.flush();
 			renderTarget.end();
-			var pixels=renderTarget.getData(0,0,renderTarget.width,renderTarget.height);
+			var pixels=renderTarget.getData(0,0,canvasWidth,canvasHeight);
 			renderTarget.recycle();
+			if (pixels.byteLength !=canvasWidth *canvasHeight *4){
+				console.log('drawToCanvas error: w:'+canvasWidth+',h:'+canvasHeight+',datalen:'+pixels.byteLength);
+				return;
+			};
 			var htmlCanvas=new WebGLCanvas();
 			htmlCanvas._canvas=Browser.createElement("canvas");
 			htmlCanvas.size(canvasWidth,canvasHeight);
@@ -27883,6 +28192,36 @@ var WebGLContext2D=(function(_super){
 							}
 						}
 						other.height=height;
+						break ;
+					case "no-repeat":
+						if (ox < 0){
+							if (texture.width+ox > width){
+								other.width=width;
+								}else {
+								other.width=texture.width+ox;
+							}
+							}else {
+							other.ox=ox;
+							if (texture.width+ox > width){
+								other.width=width-ox;
+								}else {
+								other.width=texture.width;
+							}
+						}
+						if (oy < 0){
+							if (texture.height+oy > height){
+								other.height=height;
+								}else {
+								other.height=texture.height+oy;
+							}
+							}else {
+							other.oy=oy;
+							if (texture.height+oy > height){
+								other.height=height-oy;
+								}else {
+								other.height=texture.height;
+							}
+						}
 						break ;
 					default :
 						other.width=width;
@@ -29341,7 +29680,7 @@ var Atlaser=(function(_super){
 			this._InAtlasWebGLImagesKey[sUrl?sUrl:webImage.id]={bitmap:mergeAtlasBitmap,offsetInfoID:this._InAtlasWebGLImagesOffsetValue.length};
 			this._InAtlasWebGLImagesOffsetValue.push([offsetX,offsetY]);
 		}
-		this._atlasCanvas.texSubImage2D(offsetX,offsetY,mergeAtlasBitmap.atlasSource);
+		this._atlasCanvas.texSubImage2D(offsetX,offsetY,/*__JS__ */mergeAtlasBitmap.atlasImgData || mergeAtlasBitmap.atlasSource);
 		mergeAtlasBitmap.clearAtlasSource();
 	}
 
@@ -29926,12 +30265,12 @@ var MeshTexture=(function(_super){
 	__class(MeshTexture,'laya.webgl.utils.MeshTexture',_super);
 	var __proto=MeshTexture.prototype;
 	__proto.addData=function(vertices,uvs,idx,matrix,rgba,ctx){
-		var sz=vertices.length / 2;
-		var startpos=this._vb.needSize(sz *MeshTexture.const_stride);
+		var vertsz=vertices.length / 2;
+		var startpos=this._vb.needSize(vertsz *MeshTexture.const_stride);
 		var f32pos=startpos >> 2;
 		var vbdata=this._vb.getFloat32Array();
 		var ci=0;
-		for (var i=0;i < sz;i++){
+		for (var i=0;i < vertsz;i++){
 			var x=vertices[ci],y=vertices[ci+1];
 			var x1=x *matrix.a+y *matrix.c+matrix.tx;
 			var y1=x *matrix.b+y *matrix.d+matrix.ty;
@@ -29942,7 +30281,7 @@ var MeshTexture=(function(_super){
 		this._vb.setNeedUpload();
 		var vertN=this.vertNum;
 		if (vertN > 0){
-			sz=idx.length;
+			var sz=idx.length;
 			if (sz > MeshTexture.tmpIdx.length)MeshTexture.tmpIdx=new Uint16Array(sz);
 			for (var ii=0;ii < sz;ii++){
 				MeshTexture.tmpIdx[ii]=idx[ii]+vertN;
@@ -29952,7 +30291,7 @@ var MeshTexture=(function(_super){
 			this._ib.append(idx);
 		}
 		this._ib.setNeedUpload();
-		this.vertNum+=sz;
+		this.vertNum+=vertsz;
 		this.indexNum+=idx.length;
 	}
 
@@ -30451,10 +30790,12 @@ var AtlasWebGLCanvas=(function(_super){
 			var preTexture=WebGLContext.curBindTexValue;
 			WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,this._source);
 			if (Render.isConchWebGL){
-				(xoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset-1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(xoffset+1 <=this._w)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset+1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(yoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset-1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
-				(yoffset+1 <=this._h)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset+1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+				if (/*__JS__ */bitmap !==ConchTextCanvas){
+					(xoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset-1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(xoffset+1 <=this._w)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset+1,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(yoffset-1 >=0)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset-1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+					(yoffset+1 <=this._h)&& (gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset+1,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap));
+				}
 				gl.texSubImage2DEx(true,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,xoffset,yoffset,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,bitmap);
 			}
 			else {
@@ -30521,8 +30862,6 @@ var AtlasWebGLCanvas=(function(_super){
 var WebGLCanvas=(function(_super){
 	function WebGLCanvas(){
 		this.flipY=true;
-		//上传的时候是否上下颠倒
-		this.premulAlpha=false;
 		//上传的时候是否预乘alpha
 		//this._ctx=null;
 		/**HTML Canvas*/
@@ -30548,6 +30887,7 @@ var WebGLCanvas=(function(_super){
 	__proto.destroy=function(){
 		this._ctx && this._ctx.destroy();
 		this._ctx=null;
+		laya.resource.Resource.prototype.destroy.call(this);
 	}
 
 	__proto._setContext=function(context){
@@ -30612,13 +30952,13 @@ __proto.createWebGlTexture=function(){
 	WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,glTex);
 	gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_FLIP_Y_WEBGL*/0x9240,this.flipY?1:0);
 	if (Render.isConchWebGL){
-		gl.texImage2DEx(this.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
+		gl.texImage2DEx(WebGLCanvas.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
 	}
 
 	else {
-		this.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
+		WebGLCanvas.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
 		gl.texImage2D(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
-		this.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
+		WebGLCanvas.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
 	}
 
 	gl.texParameteri(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,/*laya.webgl.WebGLContext.TEXTURE_MAG_FILTER*/0x2800,/*laya.webgl.WebGLContext.LINEAR*/0x2601);
@@ -30642,13 +30982,13 @@ __proto.reloadCanvasData=function(){
 	var preTexture=WebGLContext.curBindTexValue;
 	WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,this._source);
 	if (Render.isConchWebGL){
-		gl.texImage2DEx(this.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
+		gl.texImage2DEx(WebGLCanvas.premulAlpha,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
 	}
 
 	else {
-		this.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
+		WebGLCanvas.premulAlpha&&gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,true);
 		gl.texImage2D(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,this._imgData);
-		this.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
+		WebGLCanvas.premulAlpha && gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_PREMULTIPLY_ALPHA_WEBGL*/0x9241,false);
 	}
 
 	gl.pixelStorei(/*laya.webgl.WebGLContext.UNPACK_FLIP_Y_WEBGL*/0x9240,0);
@@ -30686,6 +31026,7 @@ __proto.toBase64=function(type,encoderOptions,callBack){
 }
 
 
+//由于resource的dispose被郭磊改成了destroy，这里会重载父类的destroy，所以必须调用这个，否则会有泄露。
 __getset(0,__proto,'context',function(){
 	return this._ctx;
 });
@@ -30703,6 +31044,7 @@ __getset(0,__proto,'asBitmap',null,function(value){
 
 
 WebGLCanvas._createContext=null;
+WebGLCanvas.premulAlpha=false;
 return WebGLCanvas;
 })(Bitmap)
 
@@ -30784,7 +31126,8 @@ var WebGLCharImage=(function(_super){
 			if (this.xs !=1 || this.ys !=1){
 				nFontSize=parseInt(nFontSize *((this.xs > this.ys)? this.xs :this.ys)+"");
 			};
-			var sFont="normal 100 "+nFontSize+"px Arial";
+			var sFont="normal 100 "+this.font;
+			sFont=sFont.replace(WebGLCharImage._fontSizeReg,nFontSize);
 			if (this.borderColor){
 				sFont+=" 1 "+this.borderColor;
 			}
@@ -30794,6 +31137,7 @@ var WebGLCharImage=(function(_super){
 			this._ctx.fillText(this.char,this.CborderSize,this.CborderSize,null,null,null);
 			}else {
 			this._ctx.save();
+			this._ctx.lineJoin="round";
 			(this._ctx).clearRect(0,0,this.cw+this.CborderSize *2,this.ch+this.CborderSize *2);
 			this._ctx.font=this.font;
 			if (Text.RightToLeft){
@@ -30854,6 +31198,14 @@ var WebGLCharImage=(function(_super){
 		return this.canvas;
 	});
 
+	__getset(0,__proto,'atlasImgData',function(){
+		if (!WebGLCharImage.canUseCanvas){
+			if(this._ctx.getImageData)
+				return this._ctx.getImageData(0,0,this._w,this._h);
+		}
+		return null;
+	});
+
 	/**
 	*是否创建私有Source,通常禁止修改
 	*@param value 是否创建
@@ -30873,6 +31225,8 @@ var WebGLCharImage=(function(_super){
 		return char;
 	}
 
+	WebGLCharImage.canUseCanvas=true;
+	WebGLCharImage._fontSizeReg=new RegExp("\\d+(?=px)","g");
 	return WebGLCharImage;
 })(Bitmap)
 
@@ -32099,6 +32453,7 @@ var VertexBuffer2D=(function(_super){
 
 	__proto.disposeResource=function(){
 		_super.prototype.disposeResource.call(this);
+		return;
 		var enableAtributes=Buffer._enableAtributes;
 		if (!Render.isConchWebGL){
 			for (var i=0;i < 10;i++){
@@ -32988,7 +33343,7 @@ var BoneSlot=(function(){
 			if (this.currDisplayData){
 				var tName=this.currDisplayData.name;
 				this.currTexture=this.templet.getTexture(tName);
-				if (this.currTexture && !Render.isConchApp && this.currDisplayData.type==0 && this.currDisplayData.uvs){
+				if (this.currTexture && this.currDisplayData.type==0 && this.currDisplayData.uvs && (!Render.isConchApp || (Render.isConchApp && Sprite.RUNTIMEVERION > "0.9.15"))){
 					this.currTexture=this.currDisplayData.createTexture(this.currTexture);
 				}
 			}
@@ -36490,7 +36845,6 @@ var Skeleton=(function(_super){
 				}
 			}
 		}
-		this._eventIndex=0;
 		this._drawOrder=null;
 		this.event(/*laya.events.Event.STOPPED*/"stopped");
 	}
@@ -37631,7 +37985,7 @@ var MovieClip=(function(_super){
 	*/
 	__proto.load=function(url,atlas,atlasPath){
 		(atlas===void 0)&& (atlas=false);
-		this._url=url=URL.formatURL(url);
+		this._url=url;
 		if(atlas)this._atlasPath=atlasPath?atlasPath:url.split(".swf")[0]+".json";
 		this.stop();
 		this._clear();
@@ -37650,6 +38004,10 @@ var MovieClip=(function(_super){
 		data=Loader.getRes(this._url);
 		if (!data){
 			this.event(/*laya.events.Event.ERROR*/"error","file not find");
+			return;
+		}
+		if (this._atlasPath && !Loader.getAtlas(this._atlasPath)){
+			this.event(/*laya.events.Event.ERROR*/"error","Atlas not find");
 			return;
 		}
 		this.basePath=this._atlasPath?Loader.getAtlas(this._atlasPath).dir:this._url.split(".swf")[0]+"/image/";
@@ -38377,7 +38735,10 @@ var Templet=(function(_super){
 	*@return
 	*/
 	__proto.getGrahicsDataWithCache=function(aniIndex,frameIndex){
-		return this._graphicsCache[aniIndex][frameIndex];
+		if (this._graphicsCache[aniIndex] && this._graphicsCache[aniIndex][frameIndex]){
+			return this._graphicsCache[aniIndex][frameIndex];
+		}
+		return null;
 	}
 
 	/**
@@ -38663,7 +39024,8 @@ var AutoBitmap=(function(_super){
 		var sw=source.sourceWidth;
 		var sh=source.sourceHeight;
 		if (!sizeGrid || (sw===width && sh===height)){
-			this.cleanByTexture(source,this._offset ? this._offset[0] :0,this._offset ? this._offset[1] :0,width,height);
+			this.clear();
+			this.drawTexture(source,this._offset ? this._offset[0] :0,this._offset ? this._offset[1] :0,width,height);
 			}else {
 			source.$_GID || (source.$_GID=Utils.getGID());
 			var key=source.$_GID+"."+width+"."+height+"."+sizeGrid.join(".");
@@ -38803,7 +39165,7 @@ var AutoBitmap=(function(_super){
 		tex.$_GID || (tex.$_GID=Utils.getGID())
 		var key=tex.$_GID+"."+x+"."+y+"."+width+"."+height;
 		var texture=WeakObject.I.get(key);
-		if (!texture||!texture.source){
+		if (!texture || !texture.source){
 			texture=Texture.createFromTexture(tex,x,y,width,height);
 			WeakObject.I.set(key,texture);
 		}
@@ -38919,6 +39281,10 @@ var Component=(function(_super){
 	*/
 	__proto.changeSize=function(){
 		this.event(/*laya.events.Event.RESIZE*/"resize");
+		if (this._layout.enable){
+			this.resetLayoutX();
+			this.resetLayoutY();
+		}
 	}
 
 	/**
@@ -39029,6 +39395,11 @@ var Component=(function(_super){
 	*/
 	__proto.onMouseOut=function(e){
 		Laya.stage.event(/*laya.ui.UIEvent.HIDE_TIP*/"hidetip",this._toolTip);
+	}
+
+	__proto._childChanged=function(child){
+		this.callLater(this.changeSize);
+		_super.prototype._childChanged.call(this,child);
 	}
 
 	/**
@@ -39524,6 +39895,216 @@ var DialogManager=(function(_super){
 
 	return DialogManager;
 })(Sprite)
+
+
+/**
+*<code>Image</code> 类是用于表示位图图像或绘制图形的显示对象。
+*Image和Clip组件是唯一支持异步加载的两个组件，比如img.skin="abc/xxx.png"，其他UI组件均不支持异步加载。
+*
+*@example <caption>以下示例代码，创建了一个新的 <code>Image</code> 实例，设置了它的皮肤、位置信息，并添加到舞台上。</caption>
+*package
+*{
+	*import laya.ui.Image;
+	*public class Image_Example
+	*{
+		*public function Image_Example()
+		*{
+			*Laya.init(640,800);//设置游戏画布宽高。
+			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+			*onInit();
+			*}
+		*private function onInit():void
+		*{
+			*var bg:Image=new Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+			*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+			*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+			*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+			*bg.width=150;//设置 bg 对象的宽度。
+			*bg.height=250;//设置 bg 对象的高度。
+			*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+			*var image:Image=new Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+			*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+			*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+			*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+			*}
+		*}
+	*}
+*@example
+*Laya.init(640,800);//设置游戏画布宽高
+*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
+*onInit();
+*function onInit(){
+	*var bg=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+	*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+	*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+	*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+	*bg.width=150;//设置 bg 对象的宽度。
+	*bg.height=250;//设置 bg 对象的高度。
+	*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+	*var image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+	*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+	*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+	*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+	*}
+*@example
+*class Image_Example {
+	*constructor(){
+		*Laya.init(640,800);//设置游戏画布宽高。
+		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+		*this.onInit();
+		*}
+	*private onInit():void {
+		*var bg:laya.ui.Image=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
+		*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
+		*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
+		*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
+		*bg.width=150;//设置 bg 对象的宽度。
+		*bg.height=250;//设置 bg 对象的高度。
+		*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
+		*var image:laya.ui.Image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
+		*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
+		*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
+		*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
+		*}
+	*}
+*@see laya.ui.AutoBitmap
+*/
+//class laya.ui.Image extends laya.ui.Component
+var Image=(function(_super){
+	function Image(skin){
+		/**@private */
+		this._bitmap=null;
+		/**@private */
+		this._skin=null;
+		/**@private */
+		this._group=null;
+		Image.__super.call(this);
+		this.skin=skin;
+	}
+
+	__class(Image,'laya.ui.Image',_super);
+	var __proto=Image.prototype;
+	/**@inheritDoc */
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,true);
+		this._bitmap && this._bitmap.destroy();
+		this._bitmap=null;
+	}
+
+	/**
+	*销毁对象并释放加载的皮肤资源。
+	*/
+	__proto.dispose=function(){
+		this.destroy(true);
+		Laya.loader.clearRes(this._skin);
+	}
+
+	/**@inheritDoc */
+	__proto.createChildren=function(){
+		this.graphics=this._bitmap=new AutoBitmap();
+		this._bitmap.autoCacheCmd=false;
+	}
+
+	/**
+	*@private
+	*设置皮肤资源。
+	*/
+	__proto.setSource=function(url,img){
+		if (url===this._skin && img){
+			this.source=img
+			this.onCompResize();
+		}
+	}
+
+	/**
+	*@copy laya.ui.AutoBitmap#source
+	*/
+	__getset(0,__proto,'source',function(){
+		return this._bitmap.source;
+		},function(value){
+		if (!this._bitmap)return;
+		this._bitmap.source=value;
+		this.event(/*laya.events.Event.LOADED*/"loaded");
+		this.repaint();
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'dataSource',_super.prototype._$get_dataSource,function(value){
+		this._dataSource=value;
+		if ((typeof value=='string'))this.skin=value;
+		else Laya.superSet(Component,this,'dataSource',value);
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'measureHeight',function(){
+		return this._bitmap.height;
+	});
+
+	/**
+	*<p>对象的皮肤地址，以字符串表示。</p>
+	*<p>如果资源未加载，则先加载资源，加载完成后应用于此对象。</p>
+	*<b>注意：</b>资源加载完成后，会自动缓存至资源库中。
+	*/
+	__getset(0,__proto,'skin',function(){
+		return this._skin;
+		},function(value){
+		if (this._skin !=value){
+			this._skin=value;
+			if (value){
+				var source=Loader.getRes(value);
+				if (source){
+					this.source=source;
+					this.onCompResize();
+				}else Laya.loader.load(this._skin,Handler.create(this,this.setSource,[this._skin]),null,/*laya.net.Loader.IMAGE*/"image",1,true,this._group);
+				}else {
+				this.source=null;
+			}
+		}
+	});
+
+	/**
+	*资源分组。
+	*/
+	__getset(0,__proto,'group',function(){
+		return this._group;
+		},function(value){
+		if (value && this._skin)Loader.setGroup(this._skin,value);
+		this._group=value;
+	});
+
+	/**
+	*<p>当前实例的位图 <code>AutoImage</code> 实例的有效缩放网格数据。</p>
+	*<p>数据格式："上边距,右边距,下边距,左边距,是否重复填充(值为0：不重复填充，1：重复填充)"，以逗号分隔。
+	*<ul><li>例如："4,4,4,4,1"。</li></ul></p>
+	*@see laya.ui.AutoBitmap#sizeGrid
+	*/
+	__getset(0,__proto,'sizeGrid',function(){
+		if (this._bitmap.sizeGrid)return this._bitmap.sizeGrid.join(",");
+		return null;
+		},function(value){
+		this._bitmap.sizeGrid=UIUtils.fillArray(Styles.defaultSizeGrid,value,Number);
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'measureWidth',function(){
+		return this._bitmap.width;
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'width',_super.prototype._$get_width,function(value){
+		Laya.superSet(Component,this,'width',value);
+		this._bitmap.width=value==0 ? 0.0000001 :value;
+	});
+
+	/**@inheritDoc */
+	__getset(0,__proto,'height',_super.prototype._$get_height,function(value){
+		Laya.superSet(Component,this,'height',value);
+		this._bitmap.height=value==0 ? 0.0000001 :value;
+	});
+
+	return Image;
+})(Component)
 
 
 /**
@@ -42054,6 +42635,7 @@ var ScrollBar=(function(_super){
 		return this._mouseWheelEnable;
 		},function(value){
 		this._mouseWheelEnable=value;
+		this.target=this._target;
 	});
 
 	/**
@@ -42440,216 +43022,6 @@ var Slider=(function(_super){
 	['label',function(){return this.label=new Label();}
 	]);
 	return Slider;
-})(Component)
-
-
-/**
-*<code>Image</code> 类是用于表示位图图像或绘制图形的显示对象。
-*Image和Clip组件是唯一支持异步加载的两个组件，比如img.skin="abc/xxx.png"，其他UI组件均不支持异步加载。
-*
-*@example <caption>以下示例代码，创建了一个新的 <code>Image</code> 实例，设置了它的皮肤、位置信息，并添加到舞台上。</caption>
-*package
-*{
-	*import laya.ui.Image;
-	*public class Image_Example
-	*{
-		*public function Image_Example()
-		*{
-			*Laya.init(640,800);//设置游戏画布宽高。
-			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-			*onInit();
-			*}
-		*private function onInit():void
-		*{
-			*var bg:Image=new Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-			*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-			*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-			*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-			*bg.width=150;//设置 bg 对象的宽度。
-			*bg.height=250;//设置 bg 对象的高度。
-			*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-			*var image:Image=new Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-			*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-			*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-			*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-			*}
-		*}
-	*}
-*@example
-*Laya.init(640,800);//设置游戏画布宽高
-*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
-*onInit();
-*function onInit(){
-	*var bg=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-	*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-	*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-	*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-	*bg.width=150;//设置 bg 对象的宽度。
-	*bg.height=250;//设置 bg 对象的高度。
-	*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-	*var image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-	*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-	*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-	*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-	*}
-*@example
-*class Image_Example {
-	*constructor(){
-		*Laya.init(640,800);//设置游戏画布宽高。
-		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-		*this.onInit();
-		*}
-	*private onInit():void {
-		*var bg:laya.ui.Image=new laya.ui.Image("resource/ui/bg.png");//创建一个 Image 类的实例对象 bg ,并传入它的皮肤。
-		*bg.x=100;//设置 bg 对象的属性 x 的值，用于控制 bg 对象的显示位置。
-		*bg.y=100;//设置 bg 对象的属性 y 的值，用于控制 bg 对象的显示位置。
-		*bg.sizeGrid="40,10,5,10";//设置 bg 对象的网格信息。
-		*bg.width=150;//设置 bg 对象的宽度。
-		*bg.height=250;//设置 bg 对象的高度。
-		*Laya.stage.addChild(bg);//将此 bg 对象添加到显示列表。
-		*var image:laya.ui.Image=new laya.ui.Image("resource/ui/image.png");//创建一个 Image 类的实例对象 image ,并传入它的皮肤。
-		*image.x=100;//设置 image 对象的属性 x 的值，用于控制 image 对象的显示位置。
-		*image.y=100;//设置 image 对象的属性 y 的值，用于控制 image 对象的显示位置。
-		*Laya.stage.addChild(image);//将此 image 对象添加到显示列表。
-		*}
-	*}
-*@see laya.ui.AutoBitmap
-*/
-//class laya.ui.Image extends laya.ui.Component
-var Image=(function(_super){
-	function Image(skin){
-		/**@private */
-		this._bitmap=null;
-		/**@private */
-		this._skin=null;
-		/**@private */
-		this._group=null;
-		Image.__super.call(this);
-		this.skin=skin;
-	}
-
-	__class(Image,'laya.ui.Image',_super);
-	var __proto=Image.prototype;
-	/**@inheritDoc */
-	__proto.destroy=function(destroyChild){
-		(destroyChild===void 0)&& (destroyChild=true);
-		_super.prototype.destroy.call(this,true);
-		this._bitmap && this._bitmap.destroy();
-		this._bitmap=null;
-	}
-
-	/**
-	*销毁对象并释放加载的皮肤资源。
-	*/
-	__proto.dispose=function(){
-		this.destroy(true);
-		Laya.loader.clearRes(this._skin);
-	}
-
-	/**@inheritDoc */
-	__proto.createChildren=function(){
-		this.graphics=this._bitmap=new AutoBitmap();
-		this._bitmap.autoCacheCmd=false;
-	}
-
-	/**
-	*@private
-	*设置皮肤资源。
-	*/
-	__proto.setSource=function(url,img){
-		if (url===this._skin && img){
-			this.source=img
-			this.onCompResize();
-		}
-	}
-
-	/**
-	*@copy laya.ui.AutoBitmap#source
-	*/
-	__getset(0,__proto,'source',function(){
-		return this._bitmap.source;
-		},function(value){
-		if (!this._bitmap)return;
-		this._bitmap.source=value;
-		this.event(/*laya.events.Event.LOADED*/"loaded");
-		this.repaint();
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'dataSource',_super.prototype._$get_dataSource,function(value){
-		this._dataSource=value;
-		if ((typeof value=='string'))this.skin=value;
-		else Laya.superSet(Component,this,'dataSource',value);
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'measureHeight',function(){
-		return this._bitmap.height;
-	});
-
-	/**
-	*<p>对象的皮肤地址，以字符串表示。</p>
-	*<p>如果资源未加载，则先加载资源，加载完成后应用于此对象。</p>
-	*<b>注意：</b>资源加载完成后，会自动缓存至资源库中。
-	*/
-	__getset(0,__proto,'skin',function(){
-		return this._skin;
-		},function(value){
-		if (this._skin !=value){
-			this._skin=value;
-			if (value){
-				var source=Loader.getRes(value);
-				if (source){
-					this.source=source;
-					this.onCompResize();
-				}else Laya.loader.load(this._skin,Handler.create(this,this.setSource,[this._skin]),null,/*laya.net.Loader.IMAGE*/"image",1,true,this._group);
-				}else {
-				this.source=null;
-			}
-		}
-	});
-
-	/**
-	*资源分组。
-	*/
-	__getset(0,__proto,'group',function(){
-		return this._group;
-		},function(value){
-		if (value && this._skin)Loader.setGroup(this._skin,value);
-		this._group=value;
-	});
-
-	/**
-	*<p>当前实例的位图 <code>AutoImage</code> 实例的有效缩放网格数据。</p>
-	*<p>数据格式："上边距,右边距,下边距,左边距,是否重复填充(值为0：不重复填充，1：重复填充)"，以逗号分隔。
-	*<ul><li>例如："4,4,4,4,1"。</li></ul></p>
-	*@see laya.ui.AutoBitmap#sizeGrid
-	*/
-	__getset(0,__proto,'sizeGrid',function(){
-		if (this._bitmap.sizeGrid)return this._bitmap.sizeGrid.join(",");
-		return null;
-		},function(value){
-		this._bitmap.sizeGrid=UIUtils.fillArray(Styles.defaultSizeGrid,value,Number);
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'measureWidth',function(){
-		return this._bitmap.width;
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'width',_super.prototype._$get_width,function(value){
-		Laya.superSet(Component,this,'width',value);
-		this._bitmap.width=value==0 ? 0.0000001 :value;
-	});
-
-	/**@inheritDoc */
-	__getset(0,__proto,'height',_super.prototype._$get_height,function(value){
-		Laya.superSet(Component,this,'height',value);
-		this._bitmap.height=value==0 ? 0.0000001 :value;
-	});
-
-	return Image;
 })(Component)
 
 
@@ -43416,6 +43788,225 @@ var TipManager=(function(_super){
 
 
 /**
+*广告插件
+*@author 小松
+*@date-2018-09-19
+*/
+//class laya.ui.AdvImage extends laya.ui.Image
+var AdvImage=(function(_super){
+	function AdvImage(skin){
+		/**广告列表数据**/
+		this.advsListArr=[];
+		/**资源列表请求地址**/
+		this.resUrl="https://unioncdn.layabox.com/config/iconlist.json";
+		/**广告列表信息**/
+		this._data=[];
+		/**每6分钟重新请求一次新广告列表**/
+		this._resquestTime=360000;
+		/**微信跳转appid**/
+		this._appid=null;
+		/**二维码图片地址**/
+		this._appCodeImgStr=null;
+		/**播放索引**/
+		this._playIndex=0;
+		/**轮播间隔时间**/
+		this._lunboTime=5000;
+		AdvImage.__super.call(this);
+		this._http=new Browser.window.XMLHttpRequest();
+		this.skin=skin;
+		this.init();
+		this.size(120,120);
+	}
+
+	__class(AdvImage,'laya.ui.AdvImage',_super);
+	var __proto=AdvImage.prototype;
+	__proto.init=function(){
+		if(Browser.onMiniGame && this.isSupportJump){
+			Laya.timer.loop(this._resquestTime,this,this.onGetAdvsListData);
+			this.onGetAdvsListData();
+			this.initEvent();
+			}else{
+			this.visible=false;
+		}
+	}
+
+	__proto.initEvent=function(){
+		this.on(/*laya.events.Event.CLICK*/"click",this,this.onAdvsImgClick);
+	}
+
+	__proto.onAdvsImgClick=function(){
+		var currentJumpUrl=this.getCurrentAppidObj();
+		if(currentJumpUrl)
+			this.jumptoGame();
+	}
+
+	__proto.revertAdvsData=function(){
+		if(this.advsListArr[this._playIndex]){
+			this.visible=true;
+			this.skin=this.advsListArr[this._playIndex];
+		}
+	}
+
+	/**
+	*跳转游戏
+	*@param callBack Function 回调参数说明：type 0 跳转成功；1跳转失败；2跳转接口调用成功
+	*/
+	__proto.jumptoGame=function(){
+		var _$this=this;
+		if(!Browser.onMiniGame)
+			return;
+		if(this.isSupportJump){
+			/*__JS__ */wx.navigateToMiniProgram({
+				appId:this._appid,
+				path:"",
+				extraData:"",
+				envVersion:"release",
+				success:function success (){
+					console.log("-------------跳转成功--------------");
+				},
+				fail:function fail (){
+					console.log("-------------跳转失败--------------");
+				},
+				complete:function complete (){
+					console.log("-------------跳转接口调用成功--------------");
+					_$this.updateAdvsInfo();
+				}.bind(this)
+			});
+		}
+	}
+
+	__proto.updateAdvsInfo=function(){
+		this.visible=false;
+		this.onLunbo();
+		Laya.timer.loop(this._lunboTime,this,this.onLunbo);
+	}
+
+	__proto.onLunbo=function(){
+		if(this._playIndex >=this.advsListArr.length-1)
+			this._playIndex=0;
+		else
+		this._playIndex+=1;
+		this.visible=true;
+		this.revertAdvsData();
+	}
+
+	/**获取轮播数据**/
+	__proto.getCurrentAppidObj=function(){
+		return this.advsListArr[this._playIndex];
+	}
+
+	/**
+	*获取广告列表数据信息
+	*/
+	__proto.onGetAdvsListData=function(){
+		var _this=this;
+		var random=this.randRange(10000,1000000);
+		var url=this.resUrl+"?"+random;
+		this._http.open("get",url,true);
+		this._http.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		this._http.responseType="text";
+		this._http.onerror=function (e){
+			_this._onError(e);
+		}
+		this._http.onload=function (e){
+			_this._onLoad(e);
+		}
+		this._http.send(null);
+	}
+
+	/**
+	*生成指定范围的随机数
+	*@param minNum 最小值
+	*@param maxNum 最大值
+	*/
+	__proto.randRange=function(minNum,maxNum){
+		return (Math.floor(Math.random()*(maxNum-minNum+1))+minNum);
+	}
+
+	/**
+	*@private
+	*请求出错侦的听处理函数。
+	*@param e 事件对象。
+	*/
+	__proto._onError=function(e){
+		this.error("Request failed Status:"+this._http.status+" text:"+this._http.statusText);
+	}
+
+	/**
+	*@private
+	*请求消息返回的侦听处理函数。
+	*@param e 事件对象。
+	*/
+	__proto._onLoad=function(e){
+		var http=this._http;
+		var status=http.status!==undefined ? http.status :200;
+		if (status===200 || status===204 || status===0){
+			this.complete();
+			}else {
+			this.error("["+http.status+"]"+http.statusText+":"+http.responseURL);
+		}
+	}
+
+	/**
+	*@private
+	*请求错误的处理函数。
+	*@param message 错误信息。
+	*/
+	__proto.error=function(message){
+		this.event(/*laya.events.Event.ERROR*/"error",message);
+	}
+
+	/**
+	*@private
+	*请求成功完成的处理函数。
+	*/
+	__proto.complete=function(){
+		var flag=true;
+		try {
+			this._data=this._http.response || this._http.responseText;
+			this._data=JSON.parse(this._data);
+			this.advsListArr=this._data.list;
+			this._appid=this._data.appid;
+			this._appCodeImgStr=this._data.qrcode;
+			this.updateAdvsInfo();
+			this.revertAdvsData();
+			}catch (e){
+			flag=false;
+			this.error(e.message);
+		}
+	}
+
+	/**
+	*@private
+	*清除当前请求。
+	*/
+	__proto.clear=function(){
+		var http=this._http;
+		http.onerror=http.onabort=http.onprogress=http.onload=null;
+	}
+
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,true);
+		Laya.timer.clear(this,this.onLunbo);
+		Laya.timer.clear(this,this.onGetAdvsListData);
+		this.clear();
+	}
+
+	/**当前小游戏环境是否支持游戏跳转功能**/
+	__getset(0,__proto,'isSupportJump',function(){
+		if(Browser.onMiniGame){
+			var isSupperJump=(typeof /*__JS__ */wx.navigateToMiniProgram=='function');
+			return isSupperJump;
+		}
+		return false;
+	});
+
+	return AdvImage;
+})(Image)
+
+
+/**
 *<code>View</code> 是一个视图类。
 *@internal <p><code>View</code></p>
 */
@@ -43806,13 +44397,6 @@ var LayoutBox=(function(_super){
 		child.on(/*laya.events.Event.RESIZE*/"resize",this,this.onResize);
 		this._setItemChanged();
 		return laya.display.Node.prototype.addChildAt.call(this,child,index);
-	}
-
-	/**@inheritDoc */
-	__proto.removeChild=function(child){
-		child.off(/*laya.events.Event.RESIZE*/"resize",this,this.onResize);
-		this._setItemChanged();
-		return laya.display.Node.prototype.removeChild.call(this,child);
 	}
 
 	/**@inheritDoc */
@@ -44253,9 +44837,9 @@ var List=(function(_super){
 		this._createdLine=0;
 		/**@private */
 		this._cellChanged=false;
-		List.__super.call(this);
 		this._cells=[];
 		this._offset=new Point();
+		List.__super.call(this);
 	}
 
 	__class(List,'laya.ui.List',_super);
@@ -45168,9 +45752,7 @@ var Panel=(function(_super){
 	__proto.removeChildren=function(beginIndex,endIndex){
 		(beginIndex===void 0)&& (beginIndex=0);
 		(endIndex===void 0)&& (endIndex=0x7fffffff);
-		for (var i=this._content.numChildren-1;i >-1;i--){
-			this._content.removeChildAt(i);
-		}
+		this._content.removeChildren(beginIndex,endIndex);
 		this._setScrollChanged();
 		return this;
 	}
@@ -45404,6 +45986,67 @@ var Panel=(function(_super){
 
 	return Panel;
 })(Box)
+
+
+/**
+*<code>Radio</code> 控件使用户可在一组互相排斥的选择中做出一种选择。
+*用户一次只能选择 <code>Radio</code> 组中的一个成员。选择未选中的组成员将取消选择该组中当前所选的 <code>Radio</code> 控件。
+*@see laya.ui.RadioGroup
+*/
+//class laya.ui.Radio extends laya.ui.Button
+var Radio=(function(_super){
+	function Radio(skin,label){
+		/**@private */
+		this._value=null;
+		(label===void 0)&& (label="");
+		Radio.__super.call(this,skin,label);
+	}
+
+	__class(Radio,'laya.ui.Radio',_super);
+	var __proto=Radio.prototype;
+	/**@inheritDoc */
+	__proto.destroy=function(destroyChild){
+		(destroyChild===void 0)&& (destroyChild=true);
+		_super.prototype.destroy.call(this,destroyChild);
+		this._value=null;
+	}
+
+	/**@inheritDoc */
+	__proto.preinitialize=function(){
+		laya.ui.Component.prototype.preinitialize.call(this);
+		this.toggle=false;
+		this._autoSize=false;
+	}
+
+	/**@inheritDoc */
+	__proto.initialize=function(){
+		_super.prototype.initialize.call(this);
+		this.createText();
+		this._text.align="left";
+		this._text.valign="top";
+		this._text.width=0;
+		this.on(/*laya.events.Event.CLICK*/"click",this,this.onClick);
+	}
+
+	/**
+	*@private
+	*对象的<code>Event.CLICK</code>事件侦听处理函数。
+	*/
+	__proto.onClick=function(e){
+		this.selected=true;
+	}
+
+	/**
+	*获取或设置 <code>Radio</code> 关联的可选用户定义值。
+	*/
+	__getset(0,__proto,'value',function(){
+		return this._value !=null ? this._value :this.label;
+		},function(obj){
+		this._value=obj;
+	});
+
+	return Radio;
+})(Button)
 
 
 /**
@@ -45949,67 +46592,6 @@ var UIGroup=(function(_super){
 
 	return UIGroup;
 })(Box)
-
-
-/**
-*<code>Radio</code> 控件使用户可在一组互相排斥的选择中做出一种选择。
-*用户一次只能选择 <code>Radio</code> 组中的一个成员。选择未选中的组成员将取消选择该组中当前所选的 <code>Radio</code> 控件。
-*@see laya.ui.RadioGroup
-*/
-//class laya.ui.Radio extends laya.ui.Button
-var Radio=(function(_super){
-	function Radio(skin,label){
-		/**@private */
-		this._value=null;
-		(label===void 0)&& (label="");
-		Radio.__super.call(this,skin,label);
-	}
-
-	__class(Radio,'laya.ui.Radio',_super);
-	var __proto=Radio.prototype;
-	/**@inheritDoc */
-	__proto.destroy=function(destroyChild){
-		(destroyChild===void 0)&& (destroyChild=true);
-		_super.prototype.destroy.call(this,destroyChild);
-		this._value=null;
-	}
-
-	/**@inheritDoc */
-	__proto.preinitialize=function(){
-		laya.ui.Component.prototype.preinitialize.call(this);
-		this.toggle=false;
-		this._autoSize=false;
-	}
-
-	/**@inheritDoc */
-	__proto.initialize=function(){
-		_super.prototype.initialize.call(this);
-		this.createText();
-		this._text.align="left";
-		this._text.valign="top";
-		this._text.width=0;
-		this.on(/*laya.events.Event.CLICK*/"click",this,this.onClick);
-	}
-
-	/**
-	*@private
-	*对象的<code>Event.CLICK</code>事件侦听处理函数。
-	*/
-	__proto.onClick=function(e){
-		this.selected=true;
-	}
-
-	/**
-	*获取或设置 <code>Radio</code> 关联的可选用户定义值。
-	*/
-	__getset(0,__proto,'value',function(){
-		return this._value !=null ? this._value :this.label;
-		},function(obj){
-		this._value=obj;
-	});
-
-	return Radio;
-})(Button)
 
 
 /**
@@ -48226,17 +48808,8 @@ var GameNewUI=(function(_super){
 		    this.contentBox=null;
 		    this.label_time=null;
 		    this.label_mineNum=null;
-		    this.btn_setting=null;
 		    this.panel_diban=null;
 		    this.blockBox=null;
-		    this.setBox=null;
-		    this.setMainBox=null;
-		    this.btn_setClose=null;
-		    this.btn_setSound=null;
-		    this.btn_rule=null;
-		    this.rulesBox=null;
-		    this.btn_rulesBox=null;
-		    this.label_rules=null;
 
 			GameNewUI.__super.call(this);
 		}
@@ -48250,17 +48823,15 @@ var GameNewUI=(function(_super){
 
 		}
 
-		GameNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"width":814,"skin":"WXGameUI/img_beijing.jpg","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"width":1280,"name":"center","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"contentBox","height":1280,"centerX":0},"child":[{"type":"Box","props":{"y":16,"x":278,"name":"top"},"child":[{"type":"Image","props":{"y":43,"x":297,"width":217,"skin":"WXGameUI/img_shijian.png","height":70,"sizeGrid":"22,24,23,76"}},{"type":"Label","props":{"y":57,"x":361,"width":129,"var":"label_time","text":"00:00","height":42,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Image","props":{"y":45,"x":91,"width":187,"skin":"WXGameUI/img_leishu.png","height":70,"sizeGrid":"20,23,24,84"}},{"type":"Label","props":{"y":61,"x":152,"width":119,"var":"label_mineNum","text":"00/00","height":37,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}},{"type":"Button","props":{"y":38,"x":0,"var":"btn_setting","stateNum":2,"skin":"WXGameUI/btn_shzhi.png"}}]},{"type":"Image","props":{"y":225,"x":280,"skin":"WXGameUI/img_diban.jpg"}},{"type":"Panel","props":{"y":247,"x":302,"width":675,"var":"panel_diban","height":673}},{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"blockBox","height":1280,"centerX":0}}]}]},{"type":"Box","props":{"width":1280,"visible":false,"var":"setBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"width":1280,"alpha":0.7},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":508,"x":382,"width":530,"skin":"WXGameUI/img_dikuang.jpg","height":486}},{"type":"Box","props":{"y":471,"x":405,"var":"setMainBox","cacheAs":"bitmap"},"child":[{"type":"Image","props":{"skin":"WXGameUI/img_shezhi.png"}},{"type":"Button","props":{"y":13,"x":444,"var":"btn_setClose","stateNum":2,"skin":"WXGameUI/btn_guanbi.png"}},{"type":"Image","props":{"y":184,"x":64,"skin":"WXGameUI/img_yinxiao.png"}},{"type":"Button","props":{"y":167,"x":302,"var":"btn_setSound","stateNum":2,"skin":"WXGameUI/btn_kai.png"}},{"type":"Image","props":{"y":330,"x":64,"skin":"WXGameUI/img_youxiguize.png"}},{"type":"Box","props":{"y":328,"x":69,"width":347,"var":"btn_rule","mouseEnabled":true,"height":52},"child":[{"type":"Button","props":{"stateNum":2,"skin":"WXGameUI/btn_jiantou.png","right":0}}]}]},{"type":"Box","props":{"y":488,"x":360,"visible":false,"var":"rulesBox","cacheAs":"bitmap"},"child":[{"type":"Button","props":{"var":"btn_rulesBox","stateNum":2,"skin":"WXGameUI/btn_fanhui.png"}},{"type":"Label","props":{"y":99,"x":62,"wordWrap":true,"width":444,"var":"label_rules","text":"1、数字表示周围有几个雷\\n2、单击扫雷\\n3、长按插旗或者取消插旗\\n4、标记正确全部的雷即可获得胜利","height":476,"fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]}]};
+		GameNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"name":"center","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"contentBox","height":1280,"centerX":0},"child":[{"type":"Box","props":{"y":16,"x":278,"name":"top"},"child":[{"type":"Image","props":{"y":43,"x":297,"width":217,"skin":"WXGameUI/img_shijian.png","height":70,"sizeGrid":"22,24,23,76"}},{"type":"Label","props":{"y":57,"x":361,"width":129,"var":"label_time","text":"00:00","height":42,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"right"}},{"type":"Image","props":{"y":45,"x":91,"width":187,"skin":"WXGameUI/img_leishu.png","height":70,"sizeGrid":"20,23,24,84"}},{"type":"Label","props":{"y":61,"x":152,"width":119,"var":"label_mineNum","text":"00/00","height":37,"fontSize":40,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}}]},{"type":"Image","props":{"y":225,"x":280,"skin":"WXGameUI/img_diban.jpg"}},{"type":"Panel","props":{"y":247,"x":302,"width":675,"var":"panel_diban","height":673}},{"type":"Box","props":{"y":0,"x":0,"width":1280,"var":"blockBox","height":1280,"centerX":0}}]}]}]};
 		return GameNewUI;
 	})(View);
 var GameoverNewUI=(function(_super){
 		function GameoverNewUI(){
 			
-		    this.aniShare=null;
 		    this.img_result=null;
 		    this.label_time=null;
 		    this.btn_playAgain=null;
-		    this.btn_shared=null;
 
 			GameoverNewUI.__super.call(this);
 		}
@@ -48274,41 +48845,13 @@ var GameoverNewUI=(function(_super){
 
 		}
 
-		GameoverNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":464,"x":375,"width":530,"skin":"WXGameUI/img_dikuang.jpg","height":638}},{"type":"Image","props":{"y":396,"x":499,"var":"img_result","skin":"WXGameUI/jiesuan_biaoti_shengli.png"}},{"type":"Label","props":{"y":565,"x":516,"width":271,"var":"label_time","text":"00:00","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Button","props":{"y":948.75,"x":642,"var":"btn_playAgain","stateNum":1,"skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8}},{"type":"Button","props":{"y":995.75,"x":512,"var":"btn_shared","stateNum":1,"skin":"WXGameUI/btn_shareScore.png","scaleY":0.8,"scaleX":0.8,"anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Label","props":{"y":515,"x":548,"width":199,"text":"游戏用时","strokeColor":"#0d0d0d","stroke":2,"height":48,"fontSize":40,"font":"SimHei","color":"#fcfdf4","bold":true,"align":"center"}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"x":[{"value":512,"tweenMethod":"linearNone","tween":true,"target":78,"key":"x","index":0}],"scaleY":[{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.7,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":20},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":40}],"scaleX":[{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.7,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":20},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":40}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		GameoverNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.8},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":464,"x":375,"width":530,"skin":"WXGameUI/img_dikuang.jpg","height":638}},{"type":"Image","props":{"y":396,"x":499,"var":"img_result","skin":"WXGameUI/jiesuan_biaoti_shengli.png"}},{"type":"Label","props":{"y":565,"x":516,"width":271,"var":"label_time","text":"00:00","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"}},{"type":"Button","props":{"y":949,"x":555,"var":"btn_playAgain","stateNum":1,"skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8}},{"type":"Label","props":{"y":515,"x":548,"width":199,"text":"游戏用时","strokeColor":"#0d0d0d","stroke":2,"height":48,"fontSize":40,"font":"SimHei","color":"#fcfdf4","bold":true,"align":"center"}}]}]};
 		return GameoverNewUI;
-	})(View);
-var GameRankNewUI=(function(_super){
-		function GameRankNewUI(){
-			
-		    this.RankList=null;
-		    this.playerItem=null;
-		    this.listName=null;
-		    this.close=null;
-
-			GameRankNewUI.__super.call(this);
-		}
-
-		CLASS$(GameRankNewUI,'ui.GameRankNewUI',_super);
-		var __proto__=GameRankNewUI.prototype;
-		__proto__.createChildren=function(){
-		    
-			laya.ui.Component.prototype.createChildren.call(this);
-			this.createView(GameRankNewUI.uiView);
-
-		}
-
-		GameRankNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"visible":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Box","props":{"y":367,"centerX":0},"child":[{"type":"Image","props":{"y":12,"x":0,"width":618,"skin":"WXGameUI/img_dikuang.jpg","height":728},"child":[{"type":"List","props":{"y":89,"x":6,"width":610,"visible":false,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":6,"repeatX":1,"height":536},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"var":"playerItem","renderType":"render","height":85},"child":[{"type":"Label","props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":30,"font":"SimHei","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":23,"x":135,"width":205,"text":"玩家名字七个字","name":"playerName","height":40,"fontSize":25,"font":"SimHei"}},{"type":"Label","props":{"y":25,"x":350,"width":116,"text":"9999999","name":"playerScore","height":30,"fontSize":25,"font":"SimHei","color":"#ff0000","align":"center"}},{"type":"Label","props":{"y":26,"x":471,"width":116,"text":"青铜卫士","name":"playerTitle","height":30,"fontSize":25,"font":"SimHei","color":"#010101","align":"center"}}]}]},{"type":"Label","props":{"y":42,"x":239,"var":"listName","text":"好友排行","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":-7}},{"type":"Label","props":{"y":662,"x":309,"text":"每周一更新排名","fontSize":26,"font":"SimHei","color":"#ffffff","bold":true,"anchorY":0.5,"anchorX":0.5}}]},{"type":"Button","props":{"y":-18,"x":557,"var":"close","stateNum":2,"skin":"WXGameUI/btn_guanbi.png"}}]}]}]};
-		return GameRankNewUI;
 	})(View);
 var GameStartNewUI=(function(_super){
 		function GameStartNewUI(){
 			
-		    this.aniStart=null;
 		    this.guidBox=null;
-		    this.startBox=null;
-		    this.btn_rank=null;
-		    this.btn_share=null;
-		    this.btn_startGame=null;
 
 			GameStartNewUI.__super.call(this);
 		}
@@ -48322,7 +48865,7 @@ var GameStartNewUI=(function(_super){
 
 		}
 
-		GameStartNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"var":"guidBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":1},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":138,"x":0,"skin":"BeginUI/img_xinshouyindao.png","centerY":0,"centerX":0}}]},{"type":"Box","props":{"width":814,"var":"startBox","height":1556,"centerY":0,"centerX":0,"alpha":1},"child":[{"type":"Image","props":{"x":0,"skin":"BeginUI/5.png","name":"5","alpha":0.9928888888888889},"compId":7},{"type":"Image","props":{"x":0,"skin":"BeginUI/4.png","name":"4","alpha":1},"compId":8},{"type":"Image","props":{"x":0,"skin":"BeginUI/3.png","name":"3","alpha":1},"compId":9},{"type":"Image","props":{"x":0,"skin":"BeginUI/2.png","name":"2","alpha":1},"compId":10},{"type":"Image","props":{"y":0,"x":0,"skin":"BeginUI/1.png","name":"1","alpha":1},"compId":11},{"type":"Box","props":{"y":159,"x":289,"alpha":1},"compId":16,"child":[{"type":"Button","props":{"y":861,"x":139,"var":"btn_rank","stateNum":1,"skin":"BeginUI/btn_rank.png"}},{"type":"Button","props":{"y":857,"var":"btn_share","stateNum":1,"skin":"BeginUI/btn_share.png"}},{"type":"Image","props":{"y":149,"x":75,"skin":"BeginUI/logo.png","scaleY":0.8,"scaleX":0.8,"name":"logo"}},{"type":"Button","props":{"y":746,"x":19,"var":"btn_startGame","stateNum":1,"skin":"BeginUI/btn_play.png"}},{"type":"Label","props":{"y":1190,"x":-211,"text":"V1.0","fontSize":30,"font":"SimHei","color":"#ada7a7"}}]}]}],"animations":[{"nodes":[{"target":16,"keyframes":{"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":16,"key":"alpha","index":20}]}},{"target":10,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":20},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":10,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":20},{"value":1,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":10,"key":"alpha","index":60}]}},{"target":11,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":20},{"value":200,"tweenMethod":"linearNone","tween":true,"target":11,"key":"x","index":30}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":11,"key":"alpha","index":60}]}},{"target":8,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":30},{"value":-200,"tweenMethod":"linearNone","tween":true,"target":8,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":30},{"value":0.5,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":8,"key":"alpha","index":60}]}},{"target":9,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":30},{"value":200,"tweenMethod":"linearNone","tween":true,"target":9,"key":"x","index":40}],"alpha":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":30},{"value":1,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"alpha","index":60}]}},{"target":7,"keyframes":{"x":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"x","index":40}],"alpha":[{"value":0.9928888888888889,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":0},{"value":1,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":40},{"value":0,"tweenMethod":"linearNone","tween":true,"target":7,"key":"alpha","index":60}]}}],"name":"aniStart","id":1,"frameRate":24,"action":0}]};
+		GameStartNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"var":"guidBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":1},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":138,"x":0,"skin":"BeginUI/img_yindao.png","centerY":0,"centerX":0}}]}]};
 		return GameStartNewUI;
 	})(View);
  /**
@@ -48455,7 +48998,7 @@ var SquareBlock = (function(_super){
         }
         if(this.type == SquareTypes.Mine){
             var animNum = parseInt(Math.random()*4+1,10);
-            // var animNum =4;
+            var animNum =1;
             var mineAnim = this.playAnimation("mineAnim"+animNum,true,function(e){
                 e[0].icon.visible = true;
                 e[0].icon.skin = "WXGameUI/img_kulou.png";
@@ -48475,15 +49018,15 @@ var SquareBlock = (function(_super){
                 case 1:
                     MusicManager.getInstance().playSound("res/music/7.wav");
                     break;
-                case 2:
-                    MusicManager.getInstance().playSound("res/music/8.wav");
-                    break;
-                case 3:
-                    MusicManager.getInstance().playSound("res/music/9.wav");
-                    break;
-                case 4:
-                    MusicManager.getInstance().playSound("res/music/6.wav");
-                    break;
+                // case 2:
+                //     MusicManager.getInstance().playSound("res/music/8.wav");
+                //     break;
+                // case 3:
+                //     MusicManager.getInstance().playSound("res/music/9.wav");
+                //     break;
+                // case 4:
+                //     MusicManager.getInstance().playSound("res/music/6.wav");
+                //     break;
             }
 
         }
@@ -48559,19 +49102,24 @@ var GameSceneMain = (function(_super){
             this.gameUI = UIManager.getInstance().showUI("GameUI");
             this.panel_diban = this.gameUI.panel_diban;
         }
-        this.m_listSquare = [];
-        this.m_board = [];
-        this.m_listMine = [];
-        this.isGameover = false;
 
-        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        // this.mineNum = 16;
-        Gamelog("------minenum ="+this.mineNum);
-        // this.mineNum = 8;
+        Laya.Animation.createFrames(["WXGameUI/img_suilie1.png","WXGameUI/img_suilie2.png","WXGameUI/img_suilie3.png","WXGameUI/img_suilie4.png","WXGameUI/img_suilie5.png","WXGameUI/img_suilie6.png"],"suilie");
+        Laya.Animation.createFrames(["WXGameUI/img_penhuo1.png","WXGameUI/img_penhuo2.png","WXGameUI/img_penhuo3.png","WXGameUI/img_penhuo4.png","WXGameUI/img_penhuo5.png",
+        "WXGameUI/img_penhuo6.png","WXGameUI/img_penhuo7.png","WXGameUI/img_penhuo8.png","WXGameUI/img_penhuo9.png"],"mineAnim1");
+        // Laya.Animation.createFrames(["WXGameUI/img_guaiwu1.png","WXGameUI/img_guaiwu2.png","WXGameUI/img_guaiwu3.png","WXGameUI/img_guaiwu4.png","WXGameUI/img_guaiwu5.png",
+        // "WXGameUI/img_guaiwu6.png","WXGameUI/img_guaiwu7.png","WXGameUI/img_guaiwu8.png"],"mineAnim2");
+        // Laya.Animation.createFrames(["WXGameUI/img_luoshi1.png","WXGameUI/img_luoshi2.png","WXGameUI/img_luoshi3.png","WXGameUI/img_luoshi4.png","WXGameUI/img_luoshi5.png",
+        // "WXGameUI/img_luoshi6.png","WXGameUI/img_luoshi7.png","WXGameUI/img_luoshi8.png","WXGameUI/img_luoshi9.png","WXGameUI/img_luoshi10.png"],"mineAnim3");
+        // Laya.Animation.createFrames(["WXGameUI/img_zhadan1.png","WXGameUI/img_zhadan2.png","WXGameUI/img_zhadan3.png","WXGameUI/img_zhadan4.png","WXGameUI/img_zhadan5.png",
+        // "WXGameUI/img_zhadan6.png","WXGameUI/img_zhadan7.png","WXGameUI/img_zhadan8.png","WXGameUI/img_zhadan10.png"],"mineAnim4");
 
-        // this.startGame();
-        
+        Laya.Animation.createFrames(["WXGameUI/img_chaqi1.png","WXGameUI/img_chaqi2.png","WXGameUI/img_chaqi3.png","WXGameUI/img_chaqi4.png","WXGameUI/img_chaqi5.png",
+        "WXGameUI/img_chaqi6.png","WXGameUI/img_chaqi7.png"],"chaqi");
+
         MessageController.getInstance().AddNotification("square_dead",this,this._squareDeadEvent);
+
+        this.resetGame();
+        
     }
 
     /**开始游戏 */
@@ -48588,21 +49136,25 @@ var GameSceneMain = (function(_super){
     /**重置游戏 */
     _proto.resetGame = function(){
 
-        // var sp = new Laya.Sprite();
-        this.isGameover = false;
         for (var i = 0; i < this.m_listSquare.length; i++) {
             var t_square = this.m_listSquare[i];
             t_square.onDestroy();
             t_square.destroy();
         }
         this.panel_diban.destroyChildren();
-        this.m_listSquare = [];
         this.m_board = [];
         this.m_listMine = [];
+        this.m_listSquare = [];
 
+        this.isGameover = false;
         this.gameTime = 0;
         this.leftGameTime = 0;
         this.gameUI.label_time.text = "00:00";
+
+        this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
+        // this.mineNum = 16;
+        // Gamelog("------minenum ="+this.mineNum);
+        // this.mineNum = 8;
     }
 
     /**游戏结束 */
@@ -48623,7 +49175,7 @@ var GameSceneMain = (function(_super){
     }
     /**踩到地雷 */
     _proto.mineGameover = function(){
-        Gamelog("-----踩雷结束");
+        // Gamelog("-----踩雷结束");
         this.gameOver();
     }
 
@@ -48691,7 +49243,7 @@ var GameSceneMain = (function(_super){
         }while (createMineNum < this.mineNum)
 
         this.gameUI.label_mineNum.text = "0/"+this.m_listMine.length;
-        Gamelog("---minenum="+this.m_listMine.length);
+        // Gamelog("---minenum="+this.m_listMine.length);
 
     }
 
@@ -49150,48 +49702,6 @@ var wxGame = (function (_super) {
     }
 })();
 /**
- * 结算界面逻辑 by lzq
- */
-var GameRankUILogic = (function(_super){
-    function GameRankUILogic(){
-        GameRankUILogic.super(this);
-
-    }
-    Laya.class(GameRankUILogic,"UILogic.GameRankUILogic",_super);
-    var _proto = GameRankUILogic.prototype;
-    
-    _proto.onInit = function(){
-        this.width = Laya.stage.width;
-        this.height = Laya.stage.height;
-        //设置层级 相对于stage
-        this.zOrder = 100;
-
-        wxGame.getInstance().postMessage({
-                act: "showRank"
-            }, true);
-
-
-        this.close.on(Laya.Event.CLICK,this,this.onCloseRank);
-    }
-    _proto.onDestroy = function(){
-        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
-    }
-
-    _proto.updateItem = function(cell, index) {
-
-    }
-
-    /**关闭排行 */
-    _proto.onCloseRank = function(){
-        
-        wxGame.getInstance().showOpenDataContext(false);
-        UIManager.getInstance().closeUI("GameRankUI");
-        
-        MusicManager.getInstance().playSound("res/music/1.wav");
-    }
-    return GameRankUILogic;
-})(GameRankNewUI);
-/**
  * 游戏结束逻辑 by lzq
  */
 var GameoverUILogic = (function(_super){
@@ -49208,10 +49718,10 @@ var GameoverUILogic = (function(_super){
 
         this.zOrder = 10;
 
-        this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
+        // this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
 
-        this.aniShare.play(0, true);
+        // this.aniShare.play(0, true);
         
     }
 
@@ -49237,14 +49747,14 @@ var GameoverUILogic = (function(_super){
 
     }
      /**分享游戏 */
-    _proto._sharedClickEvent = function () {
-        MusicManager.getInstance().playSound("res/music/1.wav");
-        wxGame.getInstance().shareGame();
-        if(!this.isSharing){
-            this.isSharing = true;
-            // wxGame.getInstance().shareScore(SceneManager.getInstance().currentScene.gameScore,this._shareEnd)
-        }
-    }
+    // _proto._sharedClickEvent = function () {
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     wxGame.getInstance().shareGame();
+    //     if(!this.isSharing){
+    //         this.isSharing = true;
+    //         // wxGame.getInstance().shareScore(SceneManager.getInstance().currentScene.gameScore,this._shareEnd)
+    //     }
+    // }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
         MusicManager.getInstance().playSound("res/music/1.wav");
@@ -49274,21 +49784,17 @@ var GameStartUILogic = (function(_super){
     _proto.onInit = function(){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
-
         this.zOrder = 10;
 
-         wxGame.getInstance().showClubBtn(true);
-        // this.guidBox.visible = false;
-        this.startBox.visible = true;
+        // this.startBox.visible = true;
         this.isStart = false;
 
         this.guidBox.on(Laya.Event.CLICK,this,this._guidBoxClickEvent);
-        this.btn_startGame.on(Laya.Event.CLICK,this,this._startGameClickEvent);
-        this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
-        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        // this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
+        // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        // this.btn_startGame.on(Laya.Event.CLICK,this,this._startGameClickEvent);
 
-        
-
+         wxGame.getInstance().showClubBtn(true);
         
     }
 
@@ -49298,106 +49804,104 @@ var GameStartUILogic = (function(_super){
 
     /**点击引导结束 */
     _proto._guidBoxClickEvent = function(){
-        
         UIManager.getInstance().closeUI("GameStartUI",true);
         SceneManager.getInstance().currentScene.startGame();
-
-        // UIManager.getInstance().showUI("GameRankUI");
     }
 
-    /**点击开始游戏 */
-    _proto._startGameClickEvent = function(){
-        if(!this.isStart){
-            MusicManager.getInstance().playSound("res/music/1.wav");
-            this.isStart = true;
-            wxGame.getInstance().showClubBtn(false);
-            this.aniStart.play(0, false);
-            this.aniStart.on(Laya.Event.COMPLETE,this,this.onAniStartComplete);
-        }
-    }
+    // /**点击开始游戏 */
+    // _proto._startGameClickEvent = function(){
+    //     if(this.isStart)
+    //         return;
+        
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     this.isStart = true;
+    //     wxGame.getInstance().showClubBtn(false);
+    //     this.aniStart.play(0, false);
+    //     this.aniStart.on(Laya.Event.COMPLETE,this,this.onAniStartComplete);
+        
+    // }
    
-    _proto.onAniStartComplete = function(){
-       this.startBox.visible = false;
-    }
-    /**点击排行榜 */
-    _proto._rankClickEvent = function(){
-       if(!this.isStart){
-           MusicManager.getInstance().playSound("res/music/1.wav");
-            UIManager.getInstance().showUI("GameRankUI");
-       }
-    }
-    /**点击分享游戏 */
-    _proto._shareClickEvent = function(){
-        if(!this.isStart){
-            MusicManager.getInstance().playSound("res/music/1.wav");
-           wxGame.getInstance().shareGame();
-       }
-    }
-    
+    // _proto.onAniStartComplete = function(){
+    //    this.startBox.visible = false;
+    // }
+    // /**点击排行榜 */
+    // _proto._rankClickEvent = function(){
+    //     if(this.isStart)
+    //         return;
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     UIManager.getInstance().showUI("GameRankUI");
+       
+    // }
+    // /**点击分享游戏 */
+    // _proto._shareClickEvent = function(){
+    //     if(this.isStart)
+    //         return;
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     wxGame.getInstance().shareGame();
+       
+    // }
 
     return GameStartUILogic;
 })(GameStartNewUI);
      /**
-      * 方块宽度
+      * 最大列数
       */
-      var SQUAREWIDTH = 84;
+     var MAX_COLS = 8;
      /**
       * 最大行数
       */
      var MAX_ROWS = 8;
      /**
-      * 最大列数
+      * 方块宽度
       */
-     var MAX_COLS = 8;
+      var SQUAREWIDTH = 84;
      
     /**
      * 获得周围停靠位置的列表nRow,nCol为要计算的停靠位置，vecPos返回它周围的位置
      */
     function GetAround(nRow, nCol, vecPos )
     {
-        if (!IsValidPos(nRow, nCol))
+        if (IsValidPos(nRow, nCol))
         {
-            return;
+            //同一行
+            if (IsValidPos(nRow, nCol - 1))
+            {
+                vecPos.push(new Point(nRow, nCol - 1));
+            }
+            if (IsValidPos(nRow, nCol + 1))
+            {
+                vecPos.push(new Point(nRow, nCol + 1));
+            }
+
+            //下面一行
+            if (IsValidPos(nRow + 1, nCol-1))
+            {
+                vecPos.push(new Point(nRow + 1, nCol - 1));
+            }
+            if (IsValidPos(nRow + 1, nCol))
+            {
+                vecPos.push(new Point(nRow + 1, nCol));
+            }
+            if (IsValidPos(nRow + 1, nCol + 1))
+            {
+                vecPos.push(new Point(nRow + 1, nCol + 1));
+            }
+
+            //上面一行
+            if (IsValidPos(nRow - 1, nCol -1))
+            {
+                vecPos.push(new Point(nRow - 1, nCol -1));
+            }
+            if (IsValidPos(nRow - 1, nCol))
+            {
+                vecPos.push(new Point(nRow - 1, nCol));
+            }
+            if (IsValidPos(nRow - 1, nCol +1))
+            {
+                vecPos.push(new Point(nRow - 1, nCol+1));
+            }
         }
 
-        //同一行
-        if (IsValidPos(nRow, nCol - 1))
-        {
-            vecPos.push(new Point(nRow, nCol - 1));
-        }
-        if (IsValidPos(nRow, nCol + 1))
-        {
-            vecPos.push(new Point(nRow, nCol + 1));
-        }
-
-        //上面一行
-        if (IsValidPos(nRow - 1, nCol -1))
-        {
-            vecPos.push(new Point(nRow - 1, nCol -1));
-        }
-        if (IsValidPos(nRow - 1, nCol))
-        {
-            vecPos.push(new Point(nRow - 1, nCol));
-        }
-        if (IsValidPos(nRow - 1, nCol +1))
-        {
-            vecPos.push(new Point(nRow - 1, nCol+1));
-        }
-
-
-        //下面一行
-        if (IsValidPos(nRow + 1, nCol-1))
-        {
-            vecPos.push(new Point(nRow + 1, nCol - 1));
-        }
-        if (IsValidPos(nRow + 1, nCol))
-        {
-            vecPos.push(new Point(nRow + 1, nCol));
-        }
-        if (IsValidPos(nRow + 1, nCol + 1))
-        {
-            vecPos.push(new Point(nRow + 1, nCol + 1));
-        }
 
     }
 
@@ -49406,17 +49910,16 @@ var GameStartUILogic = (function(_super){
      */
     function IsValidPos(nRow, nCol )
     {
+        var t_isValid = true;
         if (nRow < 0 || nCol < 0)
         {
-            return false;
+            t_isValid = false;
         }
         if (nRow >= MAX_ROWS || nCol >= MAX_COLS)
-        // if (nCol >= MAX_COLS - nRow % 2)
         {
-            return false;
+            t_isValid = false;
         }
-
-        return true;
+        return t_isValid;
     }
 /**
  * 游戏界面逻辑 by lzq
@@ -49428,122 +49931,89 @@ var GameUILogic = (function(_super){
     }
     Laya.class(GameUILogic,"UILogic.GameUILogic",_super);
     var _proto = GameUILogic.prototype;
-    
-    var GAME_TIME = 10;                                        //一局游戏的时间
-
-    _proto.dataArr = [];                                      //list数据
-    this.msgTotalHeight = 0;                                  //当前聊天记录位置
-    this.eShopBotBoxPosY = 0;                                 //底部电商坐标
 
     _proto.onInit = function(){
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
 
-        UIManager.getInstance().showUI("GameStartUI");
-        
         
         //存放UI效果
-        this.blockBox.width = Laya.stage.width;
-        this.blockBox.height = Laya.stage.height;
-        this.bottomPosY = 0;
+        // this.blockBox.width = Laya.stage.width;
+        // this.blockBox.height = Laya.stage.height;
+        // this.bottomPosY = 0;
 
         MusicManager.getInstance().playMusic("res/music/1.mp3");
-        // MusicManager.getInstance().playSound("res/music/15.wav");
-        _proto.dataArr = [];
 
 
-        this.btn_setting.on(Laya.Event.CLICK,this,this._settingClickEvent);
-        this.btn_setClose.on(Laya.Event.CLICK,this,this._settingCloseClickEvent);
-        this.btn_setSound.on(Laya.Event.CLICK,this,this._soundClickEvent);
-        this.btn_rule.on(Laya.Event.CLICK,this,this._ruleClickEvent);
-        this.btn_rulesBox.on(Laya.Event.CLICK,this,this._ruleCloseClickEvent);
-        //等界面适配完成后调用
-        // Laya.timer.frameOnce(5, this, function () {
+        // this.btn_setting.on(Laya.Event.CLICK,this,this._settingClickEvent);
+        // this.btn_setClose.on(Laya.Event.CLICK,this,this._settingCloseClickEvent);
+        // this.btn_setSound.on(Laya.Event.CLICK,this,this._soundClickEvent);
+        // this.btn_rule.on(Laya.Event.CLICK,this,this._ruleClickEvent);
+        // this.btn_rulesBox.on(Laya.Event.CLICK,this,this._ruleCloseClickEvent);
+        
 
-        // });
+        UIManager.getInstance().showUI("GameStartUI");
     }
 
     _proto.onDestroy = function(){
 
     }
-    //初始化界面
-    _proto.onEnterGameInit = function(){
-
-    }
     
-     /**开启设置界面 */
-     _proto._settingClickEvent = function(){
-         SceneManager.getInstance().currentScene.pauseGame();
-         this.setBox.visible = true;
-         MusicManager.getInstance().playSound("res/music/1.wav");
-     }
+    //  /**开启设置界面 */
+    //  _proto._settingClickEvent = function(){
+    //      SceneManager.getInstance().currentScene.pauseGame();
+    //      this.setBox.visible = true;
+    //      MusicManager.getInstance().playSound("res/music/1.wav");
+    //  }
 
-     /**关闭设置 */
-     _proto._settingCloseClickEvent = function(){
-        SceneManager.getInstance().currentScene.resuemGame();
-         this.setBox.visible = false;
-         MusicManager.getInstance().playSound("res/music/1.wav");
-     }
-     /**点击音效 */
-     _proto._soundClickEvent = function(){
-        Gamelog("------点击音效");
-        MusicManager.getInstance().playSound("res/music/1.wav");
-        var soundSwitch = MusicManager.getInstance().managerSwitch;
-        if(soundSwitch == 1){
-            this.btn_setSound.skin = "GameUI/btn_guan.png";
-            MusicManager.getInstance().managerSwitch = 0;
-            // LocalStorage.setItem("soundSwitch",0);
-            SoundManager.stopAll();
-        }else{
-            MusicManager.getInstance().managerSwitch = 1;
-            // LocalStorage.setItem("soundSwitch",1);
-            this.btn_setSound.skin = "GameUI/btn_kai.png";
-            MusicManager.getInstance().playMusic("res/music/1.mp3");
-        }
-     }
+    //  /**关闭设置 */
+    //  _proto._settingCloseClickEvent = function(){
+    //     SceneManager.getInstance().currentScene.resuemGame();
+    //      this.setBox.visible = false;
+    //      MusicManager.getInstance().playSound("res/music/1.wav");
+    //  }
+    //  /**点击音效 */
+    //  _proto._soundClickEvent = function(){
+    //     Gamelog("------点击音效");
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     var soundSwitch = MusicManager.getInstance().managerSwitch;
+    //     if(soundSwitch == 1){
+    //         this.btn_setSound.skin = "GameUI/btn_guan.png";
+    //         MusicManager.getInstance().managerSwitch = 0;
+    //         // LocalStorage.setItem("soundSwitch",0);
+    //         SoundManager.stopAll();
+    //     }else{
+    //         MusicManager.getInstance().managerSwitch = 1;
+    //         // LocalStorage.setItem("soundSwitch",1);
+    //         this.btn_setSound.skin = "GameUI/btn_kai.png";
+    //         MusicManager.getInstance().playMusic("res/music/1.mp3");
+    //     }
+    //  }
 
-     /**点击规则 */
-     _proto._ruleClickEvent = function(){
-         this.rulesBox.visible = true;
-         this.setMainBox.visible = false;
-     }
+    //  /**点击规则 */
+    //  _proto._ruleClickEvent = function(){
+    //      this.rulesBox.visible = true;
+    //      this.setMainBox.visible = false;
+    //  }
 
-     /**点击规则关闭 */
-     _proto._ruleCloseClickEvent = function(){
-         MusicManager.getInstance().playSound("res/music/1.wav");
-         this.rulesBox.visible = false;
-         this.setMainBox.visible = true;
+    //  /**点击规则关闭 */
+    //  _proto._ruleCloseClickEvent = function(){
+    //      MusicManager.getInstance().playSound("res/music/1.wav");
+    //      this.rulesBox.visible = false;
+    //      this.setMainBox.visible = true;
 
-     }
+    //  }
     
    
     return GameUILogic;
 })(GameNewUI);
-var Sprite = laya.display.Sprite;
-var Text = laya.display.Text;
-var Bitmap = laya.resource.Bitmap;
-var Texture = laya.resource.Texture;
-var Handler = laya.utils.Handler;
-var Loader = laya.net.Loader;
-var Animation = laya.display.Animation;
-var Rectangle = laya.maths.Rectangle;
-var Event = laya.events.Event;
-var Pool = laya.utils.Pool;
-var Browser = laya.utils.Browser;
-var Stat = laya.utils.Stat;
 var SoundManager = laya.media.SoundManager;
-var Pool = laya.utils.Pool;
-var Point = laya.maths.Point;
-var Tween = laya.utils.Tween;
 var LocalStorage = laya.net.LocalStorage;
-var HttpRequest = laya.net.HttpRequest;
-var Loader = Laya.Loader;
+var Point = laya.maths.Point;
+var Sprite = laya.display.Sprite;
 var Browser = Laya.Browser;
-var Handler = Laya.Handler;
-var Socket = Laya.Socket;
-var BitmapFont = Laya.BitmapFont;
-var Text = Laya.Text;
-var ResourceVersion = laya.net.ResourceVersion;
+// var ResourceVersion = laya.net.ResourceVersion;
+// var Handler = Laya.Handler;
 
 var GameConfig = {
     
@@ -49557,10 +50027,6 @@ var GameConfig = {
 };
 /**是否显示Log */
 var GameLogVisible = true;
-/**物理边框显示 */
-var GameMatterBody = false;
-/**物理模式 */
-// var GameMatterModle = true;
 
 /**
  * 打印普通日志
@@ -50205,7 +50671,7 @@ Laya.stage.alignH = "center";
 //垂直居中对齐
 Laya.stage.alignV = "middle";
 
-Laya.stage.bgColor = "#7a75a9";//设置画布的背景颜色。
+Laya.stage.bgColor = "#dadd8e";//设置画布的背景颜色。
 //使用WebWorker加载并解码图片，把耗费cpu的工作放到worker中执行，防止js主线程卡死，从而能大大减少游戏中加载卡顿现象。
 //指定worker.js所在的路径,比如放在libs目录下
 //Laya.WorkerLoader.workerPath = "libs/worker.js";
@@ -50213,24 +50679,25 @@ Laya.stage.bgColor = "#7a75a9";//设置画布的背景颜色。
 //Laya.WorkerLoader.enable = true;
 
 //设置版本控制类型为使用文件名映射的方式
-ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
-//加载版本信息文件
-ResourceVersion.enable("version.json", Handler.create(this, beginLoad));   
+// ResourceVersion.type = ResourceVersion.FILENAME_VERSION;
+// //加载版本信息文件
+// ResourceVersion.enable("version.json", Handler.create(this, beginLoad));   
 
+beginLoad();
 function  beginLoad(){
     var arr = [
                 //图集
                 ["res/atlas/WXGameUI.atlas",Laya.Loader.ATLAS],
-                ["res/atlas/BeginUI.atlas",Laya.Loader.ATLAS],
+                // ["res/atlas/BeginUI.atlas",Laya.Loader.ATLAS],
                 //图片
-                ["WXGameUI/img_beijing.jpg",Laya.Loader.IMAGE],
+                // ["WXGameUI/img_beijing.jpg",Laya.Loader.IMAGE],
                 ["WXGameUI/img_diban.jpg",Laya.Loader.IMAGE],
                 ["WXGameUI/img_dikuang.jpg",Laya.Loader.IMAGE],
-                ["BeginUI/1.png",Laya.Loader.IMAGE],
-                ["BeginUI/2.png",Laya.Loader.IMAGE],
-                ["BeginUI/3.png",Laya.Loader.IMAGE],
-                ["BeginUI/4.png",Laya.Loader.IMAGE],
-                ["BeginUI/5.png",Laya.Loader.IMAGE],
+                ["BeginUI/img_yindao.png",Laya.Loader.IMAGE],
+                // ["BeginUI/2.png",Laya.Loader.IMAGE],
+                // ["BeginUI/3.png",Laya.Loader.IMAGE],
+                // ["BeginUI/4.png",Laya.Loader.IMAGE],
+                // ["BeginUI/5.png",Laya.Loader.IMAGE],
                 //字体
                 // ["bitmapFont/shuzi.fnt",Laya.Loader.FONT],
                 //声音
@@ -50254,18 +50721,7 @@ function  beginLoad(){
 
 function loadingCallback(){
 
-    Laya.Animation.createFrames(["WXGameUI/img_suilie1.png","WXGameUI/img_suilie2.png","WXGameUI/img_suilie3.png","WXGameUI/img_suilie4.png","WXGameUI/img_suilie5.png","WXGameUI/img_suilie6.png"],"suilie");
-    Laya.Animation.createFrames(["WXGameUI/img_penhuo1.png","WXGameUI/img_penhuo2.png","WXGameUI/img_penhuo3.png","WXGameUI/img_penhuo4.png","WXGameUI/img_penhuo5.png",
-    "WXGameUI/img_penhuo6.png","WXGameUI/img_penhuo7.png","WXGameUI/img_penhuo8.png","WXGameUI/img_penhuo9.png"],"mineAnim1");
-    Laya.Animation.createFrames(["WXGameUI/img_guaiwu1.png","WXGameUI/img_guaiwu2.png","WXGameUI/img_guaiwu3.png","WXGameUI/img_guaiwu4.png","WXGameUI/img_guaiwu5.png",
-    "WXGameUI/img_guaiwu6.png","WXGameUI/img_guaiwu7.png","WXGameUI/img_guaiwu8.png"],"mineAnim2");
-    Laya.Animation.createFrames(["WXGameUI/img_luoshi1.png","WXGameUI/img_luoshi2.png","WXGameUI/img_luoshi3.png","WXGameUI/img_luoshi4.png","WXGameUI/img_luoshi5.png",
-    "WXGameUI/img_luoshi6.png","WXGameUI/img_luoshi7.png","WXGameUI/img_luoshi8.png","WXGameUI/img_luoshi9.png","WXGameUI/img_luoshi10.png"],"mineAnim3");
-    Laya.Animation.createFrames(["WXGameUI/img_zhadan1.png","WXGameUI/img_zhadan2.png","WXGameUI/img_zhadan3.png","WXGameUI/img_zhadan4.png","WXGameUI/img_zhadan5.png",
-    "WXGameUI/img_zhadan6.png","WXGameUI/img_zhadan7.png","WXGameUI/img_zhadan8.png","WXGameUI/img_zhadan10.png"],"mineAnim4");
-
-    Laya.Animation.createFrames(["WXGameUI/img_chaqi1.png","WXGameUI/img_chaqi2.png","WXGameUI/img_chaqi3.png","WXGameUI/img_chaqi4.png","WXGameUI/img_chaqi5.png",
-    "WXGameUI/img_chaqi6.png","WXGameUI/img_chaqi7.png"],"chaqi");
+    
 
     SceneManager.getInstance().currentScene  = new GameSceneMain();
     

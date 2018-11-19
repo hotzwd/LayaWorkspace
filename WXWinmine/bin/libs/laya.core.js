@@ -362,7 +362,7 @@ var ___Laya=(function(){
 		if (value){
 			Browser.window.onerror=function (msg,url,line,column,detail){
 				if (erralert++< 5 && detail)
-					alert("出错啦，请把此信息截图给研发商\n"+msg+"\n"+detail.stack||detail);
+					alert("出错啦，请把此信息截图给研发商\n"+msg+"\n"+detail.stack || detail);
 			}
 			}else {
 			Browser.window.onerror=null;
@@ -390,7 +390,7 @@ var ___Laya=(function(){
 		CacheManager.beginCheck();
 		Laya._currentStage=Laya.stage=new Stage();
 		Laya.stage.conchModel && Laya.stage.conchModel.setRootNode();
-		Laya.getUrlPath();
+		Laya._getUrlPath();
 		Laya.render=new Render(0,0);
 		Laya.stage.size(width,height);
 		RenderSprite.__init__();
@@ -402,7 +402,7 @@ var ___Laya=(function(){
 		return Render.canvas;
 	}
 
-	Laya.getUrlPath=function(){
+	Laya._getUrlPath=function(){
 		var location=Browser.window.location;
 		var pathName=location.pathname;
 		pathName=pathName.charAt(2)==':' ? pathName.substring(1):pathName;
@@ -418,20 +418,20 @@ var ___Laya=(function(){
 	}
 
 	Laya._runScript=function(script){
-		return Browser.window["e"+String.fromCharCode(100+10+8)+"a"+"l"](script);
+		return Browser.window[Laya._evcode](script);
 	}
 
 	Laya.stage=null;
 	Laya.timer=null;
 	Laya.scaleTimer=null;
 	Laya.loader=null;
-	Laya.version="1.7.18";
+	Laya.version="1.7.21";
 	Laya.render=null;
 	Laya._currentStage=null;
 	Laya._isinit=false;
 	Laya.MiniAdpter=/*__JS__ */{init:function(){if (window.navigator && window.navigator.userAgent && window.navigator.userAgent.indexOf("MiniGame")>-1)console.error("请先引用小游戏适配库laya.wxmini.js,详细教程：https://ldc.layabox.com/doc/?nav=zh-ts-5-0-0")}};
 	__static(Laya,
-	['conchMarket',function(){return this.conchMarket=/*__JS__ */window.conch?conchMarket:null;},'PlatformClass',function(){return this.PlatformClass=/*__JS__ */window.PlatformClass;}
+	['conchMarket',function(){return this.conchMarket=/*__JS__ */window.conch?conchMarket:null;},'PlatformClass',function(){return this.PlatformClass=/*__JS__ */window.PlatformClass;},'_evcode',function(){return this._evcode="e"+String.fromCharCode(100+10+8)+"a"+"l";}
 	]);
 	return Laya;
 })()
@@ -570,6 +570,10 @@ var EventDispatcher=(function(){
 				var count=0;
 				for (var i=0,n=listeners.length;i < n;i++){
 					var item=listeners[i];
+					if (!item){
+						count++;
+						continue ;
+					}
 					if (item && (!caller || item.caller===caller)&& item.method===listener && (!onceOnly || item.once)){
 						count++;
 						listeners[i]=null;
@@ -1287,7 +1291,7 @@ var Font=(function(){
 	*规定添加到文本的修饰。
 	*/
 	__getset(0,__proto,'decoration',function(){
-		return this._decoration ? this._decoration.value :"none";
+		return this._decoration ? this._decoration.value :null;
 		},function(value){
 		var strs=value.split(' ');
 		this._decoration || (this._decoration={});
@@ -1566,6 +1570,7 @@ var Graphics=(function(){
 			this._one[2]=y;
 			this._one[3]=width;
 			this._one[4]=height;
+			this._repaint();
 			}else {
 			this.clear();
 			tex && this.drawTexture(tex,x,y,width,height);
@@ -2157,7 +2162,12 @@ var Graphics=(function(){
 				x+=tex.offsetX;
 				y+=tex.offsetY;
 				var uv=tex.uv,w=tex.bitmap.width,h=tex.bitmap.height;
-				this.drawImageM(tex.bitmap.source,uv[0] *w,uv[1] *h,(uv[2]-uv[0])*w,(uv[5]-uv[3])*h,x,y,width,height,m,alpha);
+				if (uv[4] < uv[0] && uv[5] < uv[1]){
+					this.drawImageM(tex.bitmap.source,uv[4] *w,uv[5] *h,(uv[0]-uv[4])*w,(uv[1]-uv[5])*h,x,y,width,height,m,alpha);
+				}
+				else {
+					this.drawImageM(tex.bitmap.source,uv[0] *w,uv[1] *h,(uv[2]-uv[0])*w,(uv[5]-uv[3])*h,x,y,width,height,m,alpha);
+				}
 				this._repaint();
 			}
 			from.fillTexture=function (tex,x,y,width,height,type,offset){
@@ -3301,7 +3311,7 @@ var TouchManager=(function(){
 			preO.tar=ele;
 		}
 		if (Browser.onMobile)
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 		var preDowns;
 		preDowns=isLeft ? this.preDowns :this.preRightDowns;
 		preO=this.getTouchFromArr(touchID,preDowns);
@@ -3311,7 +3321,7 @@ var TouchManager=(function(){
 			}else {
 			preO.tar=ele;
 		}
-		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_DOWN*/"mousedown" :/*laya.events.Event.RIGHT_MOUSE_DOWN*/"rightmousedown",touchID);
+		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_DOWN*/"mousedown" :/*laya.events.Event.RIGHT_MOUSE_DOWN*/"rightmousedown");
 		this._clearTempArrs();
 	}
 
@@ -3319,10 +3329,8 @@ var TouchManager=(function(){
 	*派发事件。
 	*@param eles 对象列表。
 	*@param type 事件类型。
-	*@param touchID （可选）touchID，默认为0。
 	*/
-	__proto.sendEvents=function(eles,type,touchID){
-		(touchID===void 0)&& (touchID=0);
+	__proto.sendEvents=function(eles,type){
 		var i=0,len=0;
 		len=eles.length;
 		this._event._stoped=false;
@@ -3373,10 +3381,10 @@ var TouchManager=(function(){
 		var i=0,len=0;
 		if (elePre.contains(eleNew)){
 			arrs=this.getEles(eleNew,elePre,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			}else if (eleNew.contains(elePre)){
 			arrs=this.getEles(elePre,eleNew,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 			}else {
 			arrs=TouchManager._tEleArr;
 			arrs.length=0;
@@ -3397,10 +3405,10 @@ var TouchManager=(function(){
 				}
 			}
 			if (arrs.length > 0){
-				this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+				this.sendEvents(arrs,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 			}
 			if (newArr.length > 0){
-				this.sendEvents(newArr,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+				this.sendEvents(newArr,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			}
 		}
 	}
@@ -3420,14 +3428,14 @@ var TouchManager=(function(){
 		var tO;
 		if (!preO){
 			arrs=this.getEles(ele,null,TouchManager._tEleArr);
-			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover",touchID);
+			this.sendEvents(arrs,/*laya.events.Event.MOUSE_OVER*/"mouseover");
 			this.preOvers.push(this.createTouchO(ele,touchID));
 			}else {
 			this.checkMouseOutAndOverOfMove(ele,preO.tar);
 			preO.tar=ele;
 			arrs=this.getEles(ele,null,TouchManager._tEleArr);
 		}
-		this.sendEvents(arrs,/*laya.events.Event.MOUSE_MOVE*/"mousemove",touchID);
+		this.sendEvents(arrs,/*laya.events.Event.MOUSE_MOVE*/"mousemove");
 		this._clearTempArrs();
 	}
 
@@ -3444,7 +3452,7 @@ var TouchManager=(function(){
 		var lastOvers;
 		lastOvers=this.getLastOvers();
 		this.preOvers.length=0;
-		this.sendEvents(lastOvers,/*laya.events.Event.MOUSE_OUT*/"mouseout",0);
+		this.sendEvents(lastOvers,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 	}
 
 	/**
@@ -3466,7 +3474,7 @@ var TouchManager=(function(){
 		var sendArr;
 		var onMobile=Browser.onMobile;
 		arrs=this.getEles(ele,null,TouchManager._tEleArr);
-		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_UP*/"mouseup" :/*laya.events.Event.RIGHT_MOUSE_UP*/"rightmouseup",touchID);
+		this.sendEvents(arrs,isLeft ? /*laya.events.Event.MOUSE_UP*/"mouseup" :/*laya.events.Event.RIGHT_MOUSE_UP*/"rightmouseup");
 		var preDowns;
 		preDowns=isLeft ? this.preDowns :this.preRightDowns;
 		preO=this.getTouchFromArr(touchID,preDowns);
@@ -3491,10 +3499,10 @@ var TouchManager=(function(){
 				}
 			}
 			if (sendArr.length > 0){
-				this.sendEvents(sendArr,isLeft ? /*laya.events.Event.CLICK*/"click" :/*laya.events.Event.RIGHT_CLICK*/"rightclick",touchID);
+				this.sendEvents(sendArr,isLeft ? /*laya.events.Event.CLICK*/"click" :/*laya.events.Event.RIGHT_CLICK*/"rightclick");
 			}
 			if (isLeft && isDouble){
-				this.sendEvents(sendArr,/*laya.events.Event.DOUBLE_CLICK*/"doubleclick",touchID);
+				this.sendEvents(sendArr,/*laya.events.Event.DOUBLE_CLICK*/"doubleclick");
 			}
 			this.removeTouchFromArr(touchID,preDowns);
 			preO.tar=null;
@@ -3506,7 +3514,7 @@ var TouchManager=(function(){
 			if (onMobile){
 				sendArr=this.getEles(preO.tar,null,sendArr);
 				if (sendArr && sendArr.length > 0){
-					this.sendEvents(sendArr,/*laya.events.Event.MOUSE_OUT*/"mouseout",touchID);
+					this.sendEvents(sendArr,/*laya.events.Event.MOUSE_OUT*/"mouseout");
 				}
 				this.removeTouchFromArr(touchID,this.preOvers);
 				preO.tar=null;
@@ -4917,7 +4925,7 @@ var SoundManager=(function(){
 	}
 
 	SoundManager._recoverWebAudio=function(){
-		if(WebAudioSound.ctx&&WebAudioSound.ctx.state!="running")
+		if(WebAudioSound.ctx&&WebAudioSound.ctx.state!="running"&&WebAudioSound.ctx.resume)
 			WebAudioSound.ctx.resume();
 	}
 
@@ -4953,15 +4961,16 @@ var SoundManager=(function(){
 			if (SoundManager._soundMuted)return null;
 		};
 		var tSound;
-		// if (!Browser.onMiniGame){
-		// 	tSound=Laya.loader.getRes(url);
-		// }
-		tSound=Laya.loader.getRes(url);
+		if (!Browser.onMiniGame){
+			tSound=Laya.loader.getRes(url);
+		}
 		if (!soundClass)soundClass=SoundManager._soundClass;
 		if (!tSound){
 			tSound=new soundClass();
 			tSound.load(url);
-			Loader.cacheRes(url,tSound);
+			if (!Browser.onMiniGame){
+				Loader.cacheRes(url,tSound);
+			}
 		};
 		var channel;
 		channel=tSound.play(startTime,loops);
@@ -5131,7 +5140,7 @@ var LocalStorage=(function(){
 			function Storage(){}
 			__class(Storage,'');
 			Storage.init=function(){
-				/*__JS__ */try{Storage.items=window.localStorage;Storage.setItem('laya','1');Storage.removeItem('laya');Storage.support=true;}catch(e){}if(!Storage.support)console.log('LocalStorage is not supprot or browser is private mode.');
+				/*__JS__ */try{Storage.support=true;Storage.items=window.localStorage;Storage.setItem('laya','1');Storage.removeItem('laya');}catch(e){Storage.support=false;}if(!Storage.support)console.log('LocalStorage is not supprot or browser is private mode.');
 			}
 			Storage.setItem=function(key,value){
 				try {
@@ -5434,7 +5443,7 @@ var Render=(function(){
 		Render._context=new RenderContext(width,height,isWebGl ? null :Render._mainCanvas);
 		Render._context.ctx.setIsMainContext();
 		Browser.window.requestAnimationFrame(loop);
-		function loop (){
+		function loop (stamp){
 			Laya.stage._loop();
 			Browser.window.requestAnimationFrame(loop);
 		}
@@ -6167,7 +6176,7 @@ var RenderSprite=(function(){
 					if (tStyle.stroke){
 						context.fillBorderWords(words,x,y,tStyle.font,tStyle.color,tStyle.strokeColor,tStyle.stroke);
 						}else{
-						context.fillWords(words,x,y,tStyle.font,tStyle.color,tStyle.underLine);
+						context.fillWords(words,x,y,tStyle.font,tStyle.color,(tStyle.textDecoration!="none"&&tStyle.underLine)?1:0);
 					}
 				}
 			}
@@ -7108,6 +7117,7 @@ var Browser=(function(){
 		},false);
 		/*__JS__ */Browser.document.__createElement=Browser.document.createElement;
 		/*__JS__ */window.requestAnimationFrame=window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (c){return window.setTimeout(c,1000 / 60);};;
+		/*__JS__ */var $BS=window.document.body.style;$BS['-webkit-user-select']='none';$BS['-webkit-tap-highlight-color']='rgba(200,200,200,0)';;
 		Browser.userAgent=/*[SAFE]*/ Browser.window.navigator.userAgent;
 		Browser.u=/*[SAFE]*/ Browser.userAgent;
 		Browser.onIOS=/*[SAFE]*/ !!Browser.u.match(/\(i[^;]+;(U;)? CPU.+Mac OS X/);
@@ -7115,7 +7125,7 @@ var Browser=(function(){
 		Browser.onIPhone=/*[SAFE]*/ Browser.u.indexOf("iPhone")>-1;
 		Browser.onMac=/*[SAFE]*/ Browser.u.indexOf("Mac OS X")>-1;
 		Browser.onIPad=/*[SAFE]*/ Browser.u.indexOf("iPad")>-1;
-		Browser.onAndriod=/*[SAFE]*/ Browser.u.indexOf('Android')>-1 || Browser.u.indexOf('Adr')>-1;
+		Browser.onAndroid=/*[SAFE]*/ Browser.u.indexOf('Android')>-1 || Browser.u.indexOf('Adr')>-1;
 		Browser.onWP=/*[SAFE]*/ Browser.u.indexOf("Windows Phone")>-1;
 		Browser.onQQBrowser=/*[SAFE]*/ Browser.u.indexOf("QQBrowser")>-1;
 		Browser.onMQQBrowser=/*[SAFE]*/ Browser.u.indexOf("MQQBrowser")>-1 || (Browser.u.indexOf("Mobile")>-1 && Browser.u.indexOf("QQ")>-1);
@@ -7191,7 +7201,6 @@ var Browser=(function(){
 	Browser.onMobile=false;
 	Browser.onIPhone=false;
 	Browser.onIPad=false;
-	Browser.onAndriod=false;
 	Browser.onAndroid=false;
 	Browser.onWP=false;
 	Browser.onQQBrowser=false;
@@ -8343,11 +8352,7 @@ var Dragging=(function(){
 		this.data=data;
 		this._disableMouseEvent=disableMouseEvent;
 		this.ratio=ratio;
-		if (target.globalScaleX !=1 || target.globalScaleY !=1){
-			this._parent=target.parent;
-			}else {
-			this._parent=Laya.stage;
-		}
+		this._parent=target.parent;
 		this._clickOnly=true;
 		this._dragging=true;
 		this._elasticRateX=this._elasticRateY=1;
@@ -9125,9 +9130,9 @@ var Pool=(function(){
 		return rst;
 	}
 
-	Pool.getItemByCreateFun=function(sign,createFun){
+	Pool.getItemByCreateFun=function(sign,createFun,caller){
 		var pool=Pool.getPoolBySign(sign);
-		var rst=pool.length ? pool.pop():createFun();
+		var rst=pool.length ? pool.pop():createFun.call(caller);
 		rst["__InPool"]=false;
 		return rst;
 	}
@@ -12298,6 +12303,19 @@ var WebAudioSound=(function(_super){
 		this._removeLoadEvents();
 		WebAudioSound.__loadingSound[this.url]=false;
 		this.event(/*laya.events.Event.ERROR*/"error");
+		if (!this.__toPlays)return;
+		var i=0,len=0;
+		var toPlays;
+		toPlays=this.__toPlays;
+		len=toPlays.length;
+		var tParams;
+		for (i=0;i < len;i++){
+			tParams=toPlays[i];
+			if (tParams[2] && !(tParams [2]).isStopped){
+				(tParams [2]).event(/*laya.events.Event.ERROR*/"error");
+			}
+		}
+		this.__toPlays.length=0;
 	}
 
 	__proto._loaded=function(audioBuffer){
@@ -12415,6 +12433,7 @@ var WebAudioSound=(function(_super){
 		if (WebAudioSound.ctx.state=="running"){
 			Browser.document.removeEventListener("mousedown",WebAudioSound._unlock,true);
 			Browser.document.removeEventListener("touchend",WebAudioSound._unlock,true);
+			Browser.document.removeEventListener("touchstart",WebAudioSound._unlock,true);
 			WebAudioSound._unlocked=true;
 		}
 	}
@@ -12424,6 +12443,7 @@ var WebAudioSound=(function(_super){
 			WebAudioSound._unlock();
 			Browser.document.addEventListener("mousedown",WebAudioSound._unlock,true);
 			Browser.document.addEventListener("touchend",WebAudioSound._unlock,true);
+			Browser.document.addEventListener("touchstart",WebAudioSound._unlock,true);
 		}
 	}
 
@@ -12664,6 +12684,7 @@ var Loader=(function(_super){
 		var contentType;
 		switch (type){
 			case "atlas":
+			case "plf":
 				contentType="json";
 				break ;
 			case "font":
@@ -12791,6 +12812,10 @@ var Loader=(function(_super){
 	*/
 	__proto.onLoaded=function(data){
 		var type=this._type;
+		if (type=="plf"){
+			this.parsePLFData(data);
+			this.complete(data);
+		}else
 		if (type==="image"){
 			var tex=new Texture(data);
 			tex.url=this._url;
@@ -12839,8 +12864,10 @@ var Loader=(function(_super){
 						var tPic=pics[obj.frame.idx ? obj.frame.idx :0];
 						var url=URL.formatURL(directory+name);
 						tPic.scaleRate=scaleRate;
-						Loader.cacheRes(url,Texture.create(tPic,obj.frame.x,obj.frame.y,obj.frame.w,obj.frame.h,obj.spriteSourceSize.x,obj.spriteSourceSize.y,obj.sourceSize.w,obj.sourceSize.h));
-						Loader.loadedMap[url].url=url;
+						var tTexture;
+						tTexture=Texture.create(tPic,obj.frame.x,obj.frame.y,obj.frame.w,obj.frame.h,obj.spriteSourceSize.x,obj.spriteSourceSize.y,obj.sourceSize.w,obj.sourceSize.h);
+						Loader.cacheRes(url,tTexture);
+						tTexture.url=url;
 						map.push(url);
 					}
 					}else{
@@ -12861,10 +12888,7 @@ var Loader=(function(_super){
 				this._data=data;
 				this.event(/*laya.events.Event.PROGRESS*/"progress",0.5);
 				return this._loadImage(this._url.replace(".fnt",".png"));
-			}else {
-				if (Browser.onMiniGame) {
-					this._data = Utils.parseXMLFromString(this._data);
-				}
+				}else {
 				var bFont=new BitmapFont();
 				bFont.parseFont(this._data,data);
 				var tArr=this._url.split(".fnt")[0].split("/");
@@ -12880,6 +12904,27 @@ var Loader=(function(_super){
 			this.complete(tex1);
 			}else {
 			this.complete(data);
+		}
+	}
+
+	__proto.parsePLFData=function(plfData){
+		var type;
+		var filePath;
+		var fileDic;
+		for (type in plfData){
+			fileDic=plfData[type];
+			switch(type){
+				case "json":
+				case "text":
+					for (filePath in fileDic){
+						Loader.preLoadedMap[URL.formatURL(filePath)]=fileDic[filePath]
+					}
+					break ;
+				default :
+					for (filePath in fileDic){
+						Loader.preLoadedMap[URL.formatURL(filePath)]=fileDic[filePath]
+					}
+				}
 		}
 	}
 
@@ -12975,7 +13020,7 @@ var Loader=(function(_super){
 		var arr=laya.net.Loader.getAtlas(url);
 		var res=(arr && arr.length>0)? laya.net.Loader.getRes(arr[0]):laya.net.Loader.getRes(url);
 		if (res && res.bitmap){
-			if (Render.isConchApp){
+			if (Render.isConchApp && !Render.isConchWebGL){
 				if (res.bitmap.source.releaseTexture){
 					res.bitmap.source.releaseTexture();
 				}
@@ -13025,8 +13070,9 @@ var Loader=(function(_super){
 	Loader.ATLAS="atlas";
 	Loader.FONT="font";
 	Loader.TTF="ttf";
+	Loader.PLF="plf";
 	Loader.PKM="pkm";
-	Loader.typeMap={"png":"image","jpg":"image","jpeg":"image","txt":"text","json":"json","xml":"xml","als":"atlas","atlas":"atlas","mp3":"sound","ogg":"sound","wav":"sound","part":"json","fnt":"font","pkm":"pkm","ttf":"ttf"};
+	Loader.typeMap={"png":"image","jpg":"image","jpeg":"image","txt":"text","json":"json","xml":"xml","als":"atlas","atlas":"atlas","mp3":"sound","ogg":"sound","wav":"sound","part":"json","fnt":"font","pkm":"pkm","ttf":"ttf","plf":"plf","ani":"json","sk":"arraybuffer"};
 	Loader.parserMap={};
 	Loader.groupMap={};
 	Loader.maxTimeOut=100;
@@ -14368,7 +14414,7 @@ var Texture=(function(_super){
 		/**@private */
 		this.scaleRate=1;
 		Texture.__super.call(this);
-		if (bitmap&& bitmap._addReference){
+		if (bitmap && bitmap._addReference!=null){
 			bitmap._addReference();
 		}
 		this.setTo(bitmap,uv);
@@ -16659,7 +16705,8 @@ var AudioSoundChannel=(function(_super){
 	}
 
 	__proto.__resumePlay=function(){
-		if(this._audio)this._audio.removeEventListener("canplay",this._resumePlay);
+		if (this._audio)this._audio.removeEventListener("canplay",this._resumePlay);
+		if (this.isStopped)return;
 		try {
 			this._audio.currentTime=this.startTime;
 			Browser.container.appendChild(this._audio);
@@ -16674,6 +16721,7 @@ var AudioSoundChannel=(function(_super){
 	*/
 	__proto.play=function(){
 		this.isStopped=false;
+		if (!this._audio)return;
 		try {
 			this._audio.playbackRate=SoundManager.playbackRate;
 			this._audio.currentTime=this.startTime;
@@ -16836,10 +16884,16 @@ var WebAudioSoundChannel=(function(_super){
 		bufferSource.onended=this._onPlayEnd;
 		if (this.startTime >=this.duration)this.startTime=0;
 		this._startTime=Browser.now();
+		if (this.gain.gain.setTargetAtTime){
+			this.gain.gain.setTargetAtTime(this._volume,this.context.currentTime,0.001);
+		}else
 		this.gain.gain.value=this._volume;
 		if (this.loops==0){
 			bufferSource.loop=true;
 		}
+		if (bufferSource.playbackRate.setTargetAtTime){
+			bufferSource.playbackRate.setTargetAtTime(SoundManager.playbackRate,this.context.currentTime,0.001)
+		}else
 		bufferSource.playbackRate.value=SoundManager.playbackRate;
 		bufferSource.start(0,this.startTime);
 		this._currentTime=0;
@@ -16952,10 +17006,14 @@ var WebAudioSoundChannel=(function(_super){
 			return;
 		}
 		this._volume=v;
+		if (this.gain.gain.setTargetAtTime){
+			this.gain.gain.setTargetAtTime(v,this.context.currentTime,0.001);
+		}else
 		this.gain.gain.value=v;
 	});
 
 	WebAudioSoundChannel._tryCleanFailed=false;
+	WebAudioSoundChannel.SetTargetDelay=0.001;
 	return WebAudioSoundChannel;
 })(SoundChannel)
 
@@ -17555,6 +17613,7 @@ var Text=(function(_super){
 					word+="●";
 				}
 			}
+			if (word===undefined)word="";
 			x=startX-(this._clipPoint ? this._clipPoint.x :0);
 			y=startY+lineHeight *i-(this._clipPoint ? this._clipPoint.y :0);
 			this.underline && this.drawUnderline(textAlgin,x,y,i);
@@ -17690,6 +17749,9 @@ var Text=(function(_super){
 			this._charSize.height=this._currBitmapFont.getMaxHeight();
 			}else {
 			var measureResult=Browser.context.measureText(Text._testWord);
+			if (Render.isConchApp && measureResult.width===0 && measureResult.height===0){
+				measureResult=Browser.context.measureText('W');
+			}
 			this._charSize.width=measureResult.width;
 			this._charSize.height=(measureResult.height || this.fontSize);
 		};
@@ -17858,7 +17920,7 @@ var Text=(function(_super){
 	*/
 	__getset(0,__proto,'height',function(){
 		if (this._height)return this._height;
-		return this.textHeight+this.padding[0]+this.padding[2];
+		return this.textHeight;
 		},function(value){
 		if (value !=this._height){
 			Laya.superSet(Sprite,this,'height',value);
@@ -18214,7 +18276,7 @@ var Stage=(function(_super){
 		this.canvasDegree=0;
 		/**
 		*<p>设置是否渲染，设置为false，可以停止渲染，画面会停留到最后一次渲染上，减少cpu消耗，此设置不影响时钟。</p>
-		*<p>比如非激活状态，可以设置renderingEnabled=true以节省消耗。</p>
+		*<p>比如非激活状态，可以设置renderingEnabled=false以节省消耗。</p>
 		**/
 		this.renderingEnabled=true;
 		/**是否启用屏幕适配，可以适配后，在某个时候关闭屏幕适配，防止某些操作导致的屏幕以外改变*/
@@ -18546,7 +18608,7 @@ var Stage=(function(_super){
 			}
 		}
 		if (Render.isConchNode)return;
-		if (this.renderingEnabled && (isFastMode || !isDoubleLoop)){
+		if (this.renderingEnabled && (isFastMode || !isDoubleLoop || Render.isConchWebGL)){
 			if (Render.isWebGL){
 				context.clear();
 				_super.prototype.render.call(this,context,x,y);
@@ -19391,7 +19453,7 @@ var Animation=(function(_super){
 		this._url=url;
 		var _this_=this;
 		if (!this._actionName)this._actionName="";
-		if (!_this_._setFramesFromCache("")){
+		if (!_this_._setFramesFromCache(this._actionName)){
 			if (!atlas || Loader.getAtlas(atlas)){
 				this._loadAnimationData(url,loaded,atlas);
 				}else {
@@ -19727,7 +19789,7 @@ var FrameAnimation=(function(_super){
 			this._calculateFrameValues(keyframes[i],keyframes[i+1],frames);
 		}
 		if (len==0){
-			frames[0]=keyframes[0].value;
+			frames[keyframes[0].index]=keyframes[0].value;
 			if (this._animationNewFrames)
 				this._animationNewFrames[keyframes[0].index]=true;
 		}
@@ -20842,7 +20904,8 @@ var GraphicAnimation=(function(_super){
 			var vArr=obj[key];
 			if (frame >=vArr.length)
 				frame=vArr.length-1;
-			return obj[key][frame];
+			if(obj[key][frame]!=undefined)
+				return obj[key][frame];
 		}
 		if (obj2.hasOwnProperty(key)){
 			return obj2[key];

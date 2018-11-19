@@ -15,10 +15,10 @@ var GameoverUILogic = (function(_super){
 
         this.zOrder = 10;
 
-        this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
+        // this.btn_shared.on(Laya.Event.CLICK,this,this._sharedClickEvent);
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
 
-        this.aniShare.play(0, true);
+        // this.aniShare.play(0, true);
         
     }
 
@@ -44,14 +44,14 @@ var GameoverUILogic = (function(_super){
 
     }
      /**分享游戏 */
-    _proto._sharedClickEvent = function () {
-        MusicManager.getInstance().playSound("res/music/1.wav");
-        wxGame.getInstance().shareGame();
-        if(!this.isSharing){
-            this.isSharing = true;
-            // wxGame.getInstance().shareScore(SceneManager.getInstance().currentScene.gameScore,this._shareEnd)
-        }
-    }
+    // _proto._sharedClickEvent = function () {
+    //     MusicManager.getInstance().playSound("res/music/1.wav");
+    //     wxGame.getInstance().shareGame();
+    //     if(!this.isSharing){
+    //         this.isSharing = true;
+    //         // wxGame.getInstance().shareScore(SceneManager.getInstance().currentScene.gameScore,this._shareEnd)
+    //     }
+    // }
     /**重新开始 */
     _proto._playAgainClickEvent = function () {
         MusicManager.getInstance().playSound("res/music/1.wav");

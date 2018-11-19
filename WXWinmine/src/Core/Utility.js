@@ -1,64 +1,62 @@
      /**
-      * 方块宽度
+      * 最大列数
       */
-      var SQUAREWIDTH = 84;
+     var MAX_COLS = 8;
      /**
       * 最大行数
       */
      var MAX_ROWS = 8;
      /**
-      * 最大列数
+      * 方块宽度
       */
-     var MAX_COLS = 8;
+      var SQUAREWIDTH = 84;
      
     /**
      * 获得周围停靠位置的列表nRow,nCol为要计算的停靠位置，vecPos返回它周围的位置
      */
     function GetAround(nRow, nCol, vecPos )
     {
-        if (!IsValidPos(nRow, nCol))
+        if (IsValidPos(nRow, nCol))
         {
-            return;
+            //同一行
+            if (IsValidPos(nRow, nCol - 1))
+            {
+                vecPos.push(new Point(nRow, nCol - 1));
+            }
+            if (IsValidPos(nRow, nCol + 1))
+            {
+                vecPos.push(new Point(nRow, nCol + 1));
+            }
+
+            //下面一行
+            if (IsValidPos(nRow + 1, nCol-1))
+            {
+                vecPos.push(new Point(nRow + 1, nCol - 1));
+            }
+            if (IsValidPos(nRow + 1, nCol))
+            {
+                vecPos.push(new Point(nRow + 1, nCol));
+            }
+            if (IsValidPos(nRow + 1, nCol + 1))
+            {
+                vecPos.push(new Point(nRow + 1, nCol + 1));
+            }
+
+            //上面一行
+            if (IsValidPos(nRow - 1, nCol -1))
+            {
+                vecPos.push(new Point(nRow - 1, nCol -1));
+            }
+            if (IsValidPos(nRow - 1, nCol))
+            {
+                vecPos.push(new Point(nRow - 1, nCol));
+            }
+            if (IsValidPos(nRow - 1, nCol +1))
+            {
+                vecPos.push(new Point(nRow - 1, nCol+1));
+            }
         }
 
-        //同一行
-        if (IsValidPos(nRow, nCol - 1))
-        {
-            vecPos.push(new Point(nRow, nCol - 1));
-        }
-        if (IsValidPos(nRow, nCol + 1))
-        {
-            vecPos.push(new Point(nRow, nCol + 1));
-        }
-
-        //上面一行
-        if (IsValidPos(nRow - 1, nCol -1))
-        {
-            vecPos.push(new Point(nRow - 1, nCol -1));
-        }
-        if (IsValidPos(nRow - 1, nCol))
-        {
-            vecPos.push(new Point(nRow - 1, nCol));
-        }
-        if (IsValidPos(nRow - 1, nCol +1))
-        {
-            vecPos.push(new Point(nRow - 1, nCol+1));
-        }
-
-
-        //下面一行
-        if (IsValidPos(nRow + 1, nCol-1))
-        {
-            vecPos.push(new Point(nRow + 1, nCol - 1));
-        }
-        if (IsValidPos(nRow + 1, nCol))
-        {
-            vecPos.push(new Point(nRow + 1, nCol));
-        }
-        if (IsValidPos(nRow + 1, nCol + 1))
-        {
-            vecPos.push(new Point(nRow + 1, nCol + 1));
-        }
 
     }
 
@@ -67,15 +65,14 @@
      */
     function IsValidPos(nRow, nCol )
     {
+        var t_isValid = true;
         if (nRow < 0 || nCol < 0)
         {
-            return false;
+            t_isValid = false;
         }
         if (nRow >= MAX_ROWS || nCol >= MAX_COLS)
-        // if (nCol >= MAX_COLS - nRow % 2)
         {
-            return false;
+            t_isValid = false;
         }
-
-        return true;
+        return t_isValid;
     }
