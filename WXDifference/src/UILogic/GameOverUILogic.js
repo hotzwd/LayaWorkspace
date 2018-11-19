@@ -28,7 +28,7 @@ var GameOverUILogic = (function (_super) {
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
         this.t_highScore.text = highscoreNum;
-        wxGame.getInstance().uploadUserScore(highscoreNum);
+        // wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }
     
