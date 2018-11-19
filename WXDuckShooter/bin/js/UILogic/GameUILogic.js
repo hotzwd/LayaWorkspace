@@ -100,7 +100,8 @@ var GameUILogic = (function (_super) {
         SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
-            SceneManager.getInstance().currentScene.addLife(true);
+            // SceneManager.getInstance().currentScene.addLife(true);
+            wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }else{
              wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }

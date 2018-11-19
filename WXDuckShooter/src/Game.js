@@ -91,7 +91,7 @@ function loadingCallbackGO() {
     
     SceneManager.getInstance().currentScene = new GameScene();
     UIManager.getInstance().showUI("GameStartUI");
-    // wxGame.getInstance().createVideoAD();
+    wxGame.getInstance().createVideoAD();
     // laya.net.LocalStorage.clear();
 
 }

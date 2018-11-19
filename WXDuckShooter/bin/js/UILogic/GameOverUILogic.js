@@ -24,10 +24,10 @@ var GameOverUILogic = (function (_super) {
 
         var scoreNum = SceneManager.getInstance().currentScene.gameScore;
         this.t_gamescore.text = scoreNum;
-        this.t_highScore.text = scoreNum;
 
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
+        this.t_highScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }

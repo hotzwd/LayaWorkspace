@@ -48865,10 +48865,10 @@ var GameOverUILogic = (function (_super) {
 
         var scoreNum = SceneManager.getInstance().currentScene.gameScore;
         this.t_gamescore.text = scoreNum;
-        this.t_highScore.text = scoreNum;
 
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
+        this.t_highScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }
@@ -49999,7 +49999,6 @@ var wxGame = (function (_super) {
              return;
          }
 
-        return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -50017,7 +50016,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-d3aa6a74dfb773db'
+            adUnitId: 'adunit-1351ddaaab383f9f'
         });
 
         var t_videoAd = this.videoAd;
@@ -50041,11 +50040,13 @@ var wxGame = (function (_super) {
     }
 
     /**展示视频广告 */
-    _proto.showVideoAD = function (_call,_callback) {
+    _proto.showVideoAD = function (_call,_callbackFun) {
         if (!Browser.onMiniGame) {
+            _callbackFun.call(_call,true);
              return;
          }
-        var t_videoAd = wxGame.getInstance().videoAd;
+        // var t_videoAd = wxGame.getInstance().videoAd;
+        var t_videoAd = this.videoAd;
         //没有加载完播放失败
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
@@ -50057,11 +50058,11 @@ var wxGame = (function (_super) {
             // 小于 2.1.0 的基础库版本，res 是一个 undefined
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
-                _call._callback(true);
+                _callbackFun.call(_call,true);
             }
             else {
                 // 播放中途退出，不下发游戏奖励
-                _call._callback(false);
+                _callbackFun.call(_call,false);
             }
         });
     }
@@ -50102,7 +50103,7 @@ var wxGame = (function (_super) {
                     icon: 'white',
                     style: {
                         left: 10,
-                        top: 50,
+                        top: 40,
                         width: 40,
                         height: 40
                     }
@@ -50224,7 +50225,8 @@ var GameUILogic = (function (_super) {
         SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
-            SceneManager.getInstance().currentScene.addLife(true);
+            // SceneManager.getInstance().currentScene.addLife(true);
+            wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }else{
              wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }
@@ -50381,7 +50383,7 @@ function loadingCallbackGO() {
     
     SceneManager.getInstance().currentScene = new GameScene();
     UIManager.getInstance().showUI("GameStartUI");
-    // wxGame.getInstance().createVideoAD();
+    wxGame.getInstance().createVideoAD();
     // laya.net.LocalStorage.clear();
 
 }
