@@ -3,6 +3,7 @@ D BeginUI
 R 00CEE0AA img_yindao.png
 D WXGameUI
 P C4694B11 btn_playAgain.png
+P 98B2AE84 fuhuo.png
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
 P EE919311 img_chaqi3.png

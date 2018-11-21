@@ -34,6 +34,8 @@ var GameStartUILogic = (function(_super){
 
     /**点击引导结束 */
     _proto._guidBoxClickEvent = function(){
+        wxGame.getInstance().showClubBtn(false);
+        wxGame.getInstance().createVideoAD();
         UIManager.getInstance().closeUI("GameStartUI",true);
         SceneManager.getInstance().currentScene.startGame();
     }

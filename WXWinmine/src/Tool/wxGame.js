@@ -1,4 +1,6 @@
-
+/**当前微信版本 */
+window.wxSDKVersion;
+window.wxLoadVideoAd = false;
 /**
  * wxGame
  */
@@ -22,7 +24,9 @@ var wxGame = (function (_super) {
 
     _proto.sharedCanvasTexture = null;
     /**当前微信版本 */
-    var wxSDKVersion;
+    // var wxSDKVersion;
+    //视频广告
+    _proto.videoAd = null;
     //游戏圈按钮
     _proto.btn_club = null;
 
@@ -311,6 +315,80 @@ var wxGame = (function (_super) {
             }
             
         }
+    }
+
+    //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-e83681d5e75c5b23'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            Gamelog("createVideoAD load 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            console.log("createVideoAD load 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            t_videoAd.load();
+        })
+
+         this.videoAd.onError(function (err) {
+            console.log("createVideoAD 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
+    }
+
+    /**展示视频广告 */
+    _proto.showVideoAD = function (_call,_callbackFun) {
+        if (!Browser.onMiniGame) {
+            _callbackFun.call(_call,true);
+             return;
+         }
+        // var t_videoAd = wxGame.getInstance().videoAd;
+        var t_videoAd = this.videoAd;
+        //没有加载完播放失败
+        if(t_videoAd == null || !window.wxLoadVideoAd)
+            return;
+
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            t_videoAd.offClose();
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                _callbackFun.call(_call,true);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                _callbackFun.call(_call,false);
+            }
+        });
     }
 
     return {

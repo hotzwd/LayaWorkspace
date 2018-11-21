@@ -90,19 +90,40 @@ var GameSceneMain = (function(_super){
 
     /**游戏结束 */
     _proto.gameOver = function(){
-        this.isGameover = true;
 
-        for (var i = 0; i < this.m_listSquare.length; i++) {
-            var t_square = this.m_listSquare[i];
-            t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
-            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd != null && window.wxLoadVideoAd){
+                return;
+            }
+            
+            this.isGameover = true;
+
+            for (var i = 0; i < this.m_listSquare.length; i++) {
+                var t_square = this.m_listSquare[i];
+                t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
+                t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
+            }
+            Laya.timer.clear(this,this.updateGameTime);
+        }else{
+            
         }
-        Laya.timer.clear(this,this.updateGameTime);
     }
 
     /**接受到踩雷事件 */
     _proto._squareDeadEvent = function(){
-        UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd != null && window.wxLoadVideoAd){
+                this.pauseGame();
+                UIManager.getInstance().showUI("GameEndShareUI");
+                return;
+            }
+            
+            UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        }else{
+            this.pauseGame();
+            UIManager.getInstance().showUI("GameEndShareUI");
+            // UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        }
     }
     /**踩到地雷 */
     _proto.mineGameover = function(){
@@ -113,6 +134,10 @@ var GameSceneMain = (function(_super){
     /**扫雷完成 游戏胜利 */
     _proto.gameWin = function(){
         this.gameOver();
+        // if(UIManager.getInstance().getUI("GameEndShareUI")!= null){
+        //     UIManager.getInstance().closeUI("GameEndShareUI",true);
+        // }
+
         Laya.timer.once(1000,this,function(){
             UIManager.getInstance().showUI("GameoverUI").initGameover(true);
         });
@@ -135,6 +160,7 @@ var GameSceneMain = (function(_super){
     _proto.resuemGame =function(){
         Laya.timer.loop(1000,this,this.updateGameTime);
         this.startTime = new Date().getTime();
+        this.updateMineListFun();
     }
     /**初始化地图面板 */
     _proto.initMapPanelFun = function(){
@@ -253,7 +279,7 @@ var GameSceneMain = (function(_super){
             // Gamelog("--------------长按  插旗");
             // square.UpdateFlag();
         }else{
-            // Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
+            Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
             if(!square.isFlag){
                 if(square.type != SquareTypes.Mine){
                     this.seachAroundBlankSquare(square.m_nRowIndex,square.m_nColIndex);

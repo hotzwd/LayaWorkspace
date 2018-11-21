@@ -48802,6 +48802,31 @@ var CLASS$=Laya.class;
 var STATICATTR$=Laya.static;
 var View=laya.ui.View;
 var Dialog=laya.ui.Dialog;
+var GameEndShareUI=(function(_super){
+		function GameEndShareUI(){
+			
+		    this.aniShare=null;
+		    this.gameoverPanel=null;
+		    this.cancleBtn=null;
+		    this.shareBtn=null;
+		    this.endTimer=null;
+		    this.score=null;
+
+			GameEndShareUI.__super.call(this);
+		}
+
+		CLASS$(GameEndShareUI,'ui.GameEndShareUI',_super);
+		var __proto__=GameEndShareUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameEndShareUI.uiView);
+
+		}
+
+		GameEndShareUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":0,"x":0,"width":1280,"mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-3,"alpha":0.9},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]}]},{"type":"Label","props":{"y":1031,"x":564,"visible":true,"var":"cancleBtn","underlineColor":"#ffffff","underline":true,"text":"点击跳过","fontSize":32,"font":"SimHei","color":"#ffffff","align":"center"}},{"type":"Button","props":{"y":941,"x":634,"var":"shareBtn","stateNum":1,"skin":"WXGameUI/fuhuo.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5},"compId":116},{"type":"Label","props":{"y":653,"x":630,"visible":true,"var":"endTimer","underlineColor":"#ffffff","underline":false,"text":"10","fontSize":150,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":336,"x":628,"visible":true,"underlineColor":"#ffffff","underline":false,"text":"当前时间","fontSize":22,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":388,"x":630,"visible":true,"var":"score","underlineColor":"#ffffff","underline":false,"text":"9999","fontSize":50,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":841,"x":640,"visible":false,"underlineColor":"#ffffff","text":"每局限1次复活机会","fontSize":25,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}}]}],"animations":[{"nodes":[{"target":116,"keyframes":{"x":[{"value":634,"tweenMethod":"linearNone","tween":true,"target":116,"key":"x","index":0}],"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":116,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		return GameEndShareUI;
+	})(View);
 var GameNewUI=(function(_super){
 		function GameNewUI(){
 			
@@ -48868,6 +48893,103 @@ var GameStartNewUI=(function(_super){
 		GameStartNewUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1280,"var":"guidBox","mouseEnabled":true,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":1},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":138,"x":0,"skin":"BeginUI/img_yindao.png","centerY":0,"centerX":0}}]}]};
 		return GameStartNewUI;
 	})(View);
+/**
+ * 结算界面逻辑 by lzq
+ */
+var GameEndShareUILogic = (function (_super) {
+    function GameEndShareUILogic() {
+        GameEndShareUILogic.super(this);
+
+    }
+    Laya.class(GameEndShareUILogic, "UILogic.GameEndShareUILogic", _super);
+    var _proto = GameEndShareUILogic.prototype;
+
+    this.timerNum = 10;
+
+    _proto.onInit = function () {
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+        this.timerNum = 10;
+
+        var scoreNum = GetTimeFormat(SceneManager.getInstance().currentScene.gameTime);
+        this.score.text = scoreNum;
+        this.endTimer.text = this.timerNum + "s";
+
+
+        // this.shareBtn.on(Laya.Event.CLICK, this, this.onShare);
+        this.shareBtn.on(Laya.Event.CLICK, this, this.onShowVidoAd);
+        this.cancleBtn.on(Laya.Event.CLICK, this, this.onCloseShare);
+
+        Laya.timer.loop(1000, this, this.onEndTimer);
+        this.aniShare.play(0, true);
+
+        // wxGame.getInstance().hideAd();
+    }
+    _proto.onDestroy = function () {
+        Laya.timer.clear(this, this.onEndTimer);
+    }
+
+    /**
+     * 结束倒计时
+     */
+    _proto.onEndTimer = function () {
+        this.timerNum -= 1;
+        this.endTimer.text = this.timerNum + "s";
+
+        if (this.timerNum <= 0) {
+            this.onCloseShare();
+            return;
+        }
+    }
+
+
+    /**跳过 */
+    _proto.onCloseShare = function () {
+        // UIManager.getInstance().closeUI("GameEndShareUI",true);
+        // SceneManager.getInstance().currentScene.gameOver();
+        // UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+
+        this.showAdResult(false);
+        
+    }
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+
+        Laya.timer.clear(this, this.onEndTimer);
+        //播放广告
+        if (!Browser.onMiniGame) {
+            // SceneManager.getInstance().currentScene.addLife(true);
+            wxGame.getInstance().showVideoAD(this,this.showAdResult);
+         }else{
+             wxGame.getInstance().showVideoAD(this,this.showAdResult);
+         }
+
+
+    }
+
+    //观看结果
+    _proto.showAdResult = function(p_isWatch){
+        if (p_isWatch) {
+            Gamelog("看广告成功");
+
+            UIManager.getInstance().closeUI("GameEndShareUI",true);
+            SceneManager.getInstance().currentScene.resuemGame();
+
+            wxGame.getInstance().createVideoAD();
+        } else {
+            Gamelog("看广告失败");
+            SceneManager.getInstance().currentScene.gameOver();
+            UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+            UIManager.getInstance().closeUI("GameEndShareUI",true);
+            
+        }
+    }
+
+    return GameEndShareUILogic;
+})(GameEndShareUI);
  /**
  * 方块类型
  */
@@ -49159,19 +49281,40 @@ var GameSceneMain = (function(_super){
 
     /**游戏结束 */
     _proto.gameOver = function(){
-        this.isGameover = true;
 
-        for (var i = 0; i < this.m_listSquare.length; i++) {
-            var t_square = this.m_listSquare[i];
-            t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
-            t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd != null && window.wxLoadVideoAd){
+                return;
+            }
+            
+            this.isGameover = true;
+
+            for (var i = 0; i < this.m_listSquare.length; i++) {
+                var t_square = this.m_listSquare[i];
+                t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
+                t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
+            }
+            Laya.timer.clear(this,this.updateGameTime);
+        }else{
+            
         }
-        Laya.timer.clear(this,this.updateGameTime);
     }
 
     /**接受到踩雷事件 */
     _proto._squareDeadEvent = function(){
-        UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd != null && window.wxLoadVideoAd){
+                this.pauseGame();
+                UIManager.getInstance().showUI("GameEndShareUI");
+                return;
+            }
+            
+            UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        }else{
+            this.pauseGame();
+            UIManager.getInstance().showUI("GameEndShareUI");
+            // UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        }
     }
     /**踩到地雷 */
     _proto.mineGameover = function(){
@@ -49182,6 +49325,10 @@ var GameSceneMain = (function(_super){
     /**扫雷完成 游戏胜利 */
     _proto.gameWin = function(){
         this.gameOver();
+        // if(UIManager.getInstance().getUI("GameEndShareUI")!= null){
+        //     UIManager.getInstance().closeUI("GameEndShareUI",true);
+        // }
+
         Laya.timer.once(1000,this,function(){
             UIManager.getInstance().showUI("GameoverUI").initGameover(true);
         });
@@ -49204,6 +49351,7 @@ var GameSceneMain = (function(_super){
     _proto.resuemGame =function(){
         Laya.timer.loop(1000,this,this.updateGameTime);
         this.startTime = new Date().getTime();
+        this.updateMineListFun();
     }
     /**初始化地图面板 */
     _proto.initMapPanelFun = function(){
@@ -49322,7 +49470,7 @@ var GameSceneMain = (function(_super){
             // Gamelog("--------------长按  插旗");
             // square.UpdateFlag();
         }else{
-            // Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
+            Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
             if(!square.isFlag){
                 if(square.type != SquareTypes.Mine){
                     this.seachAroundBlankSquare(square.m_nRowIndex,square.m_nColIndex);
@@ -49382,7 +49530,9 @@ var GameSceneMain = (function(_super){
     }
     return GameSceneMain;
 })();
-
+/**当前微信版本 */
+window.wxSDKVersion;
+window.wxLoadVideoAd = false;
 /**
  * wxGame
  */
@@ -49406,7 +49556,9 @@ var wxGame = (function (_super) {
 
     _proto.sharedCanvasTexture = null;
     /**当前微信版本 */
-    var wxSDKVersion;
+    // var wxSDKVersion;
+    //视频广告
+    _proto.videoAd = null;
     //游戏圈按钮
     _proto.btn_club = null;
 
@@ -49697,6 +49849,80 @@ var wxGame = (function (_super) {
         }
     }
 
+    //显示广告
+    _proto.createVideoAD = function () {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+
+        Gamelog("createVideoAD-----");
+
+        var isPass = false;
+        wx.getSystemInfo({
+            success: function (res) {
+                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+                if(isPassNum >= 0){
+                    isPass = true;
+                }
+            }
+        }); 
+        if(!isPass){
+            return;
+        }
+        
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-e83681d5e75c5b23'
+        });
+
+        var t_videoAd = this.videoAd;
+        this.videoAd.load().then(function () {
+            Gamelog("createVideoAD load 拉取成功");
+            // this.videoAd.show();
+        }).catch( function(err){
+            console.log("createVideoAD load 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            t_videoAd.load();
+        })
+
+         this.videoAd.onError(function (err) {
+            console.log("createVideoAD 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
+            wxLoadVideoAd = false;
+        });
+
+        this.videoAd.onLoad(function () {
+            console.log("createVideoAD 拉取成功 = true");
+            wxLoadVideoAd = true;
+        });
+    }
+
+    /**展示视频广告 */
+    _proto.showVideoAD = function (_call,_callbackFun) {
+        if (!Browser.onMiniGame) {
+            _callbackFun.call(_call,true);
+             return;
+         }
+        // var t_videoAd = wxGame.getInstance().videoAd;
+        var t_videoAd = this.videoAd;
+        //没有加载完播放失败
+        if(t_videoAd == null || !window.wxLoadVideoAd)
+            return;
+
+        t_videoAd.show();
+        t_videoAd.onClose( function(res){
+            t_videoAd.offClose();
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                _callbackFun.call(_call,true);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                _callbackFun.call(_call,false);
+            }
+        });
+    }
+
     return {
         getInstance: getInstance
     }
@@ -49804,6 +50030,8 @@ var GameStartUILogic = (function(_super){
 
     /**点击引导结束 */
     _proto._guidBoxClickEvent = function(){
+        wxGame.getInstance().showClubBtn(false);
+        wxGame.getInstance().createVideoAD();
         UIManager.getInstance().closeUI("GameStartUI",true);
         SceneManager.getInstance().currentScene.startGame();
     }
@@ -50449,6 +50677,9 @@ var UIManager = (function(_super){
             case "GameStartUI":
                 uiLogic = new GameStartUILogic();
                 break;
+            case "GameEndShareUI":
+                uiLogic = new GameEndShareUILogic();
+                break;
 
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -50724,5 +50955,6 @@ function loadingCallback(){
     
 
     SceneManager.getInstance().currentScene  = new GameSceneMain();
+    wxGame.getInstance().createVideoAD();
     
 }
