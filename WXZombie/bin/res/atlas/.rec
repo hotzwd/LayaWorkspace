@@ -1,0 +1,42 @@
+D .
+D Game
+R 851CD8AE bggame-sheet0.png
+P 0B9E05D8 btnclose-sheet0.png
+P A066C3CF gameover-sheet0.png
+P 87E7DEB3 guide1.png
+P 884D6AB2 img_blue.png
+P 94662DAC live0.png
+P 0E8F72B2 live1.png
+P 788AD71C menuplay-sheet0.png
+R F044BAFC menutitulo-sheet0.png
+P C383C914 sheet0.png
+P C4F089D6 sheet1.png
+P D4E8983A sheet2.png
+P 73AEEAC0 sheet3.png
+P 7718DC51 sheet4.png
+P AEA3CEE6 sheet5.png
+D Hurt
+P 6A67526E cortar-sheet0_01.png
+P D10E2E8F cortar-sheet0_02.png
+P 623DB6D3 cortar-sheet0_03.png
+P A9E94F32 cortar-sheet0_04.png
+R 070C753B garra-sheet0.png
+R D6173651 garra-sheet1.png
+R 771244EE garra-sheet2.png
+D Zombie
+P 3BAA286C humano-sheet0_01.png
+P B2098106 humano-sheet0_02.png
+P A2FDA68C humano-sheet0_03.png
+P FC439406 humano-sheet0_04.png
+P AB2CA77B zombie1-sheet0_01.png
+P 6982D763 zombie1-sheet0_02.png
+P 2483EC4B zombie1-sheet0_03.png
+P 5ACFA0ED zombie1-sheet0_04.png
+P 8F74BFEA zombie2-sheet0_01.png
+P 643C39CA zombie2-sheet0_02.png
+P E148B5C9 zombie2-sheet0_03.png
+P 22274E4F zombie2-sheet0_04.png
+P A315ABF2 zombie3-sheet0_01.png
+P 0E930E58 zombie3-sheet0_02.png
+P 567F2A0B zombie3-sheet0_03.png
+P 7D7605E5 zombie3-sheet0_04.png

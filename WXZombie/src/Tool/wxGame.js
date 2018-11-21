@@ -230,13 +230,13 @@ var wxGame = (function (_super) {
         var str = "";
         switch (rand) {
             case 1:
-                str = "囤积我的卡路里！";
+                str = "我的妈鸭！差点打到本鸭！";
                 break;
             case 2:
-                str = "胖子养成记！";
+                str = "冒着枪林弹雨，冲鸭~！";
                 break;
             case 3:
-                str = "我是一个灵活的胖子！";
+                str = "may the 鸭力 be with you！";
                 break;
         }
 
