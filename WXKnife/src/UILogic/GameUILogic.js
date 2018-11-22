@@ -19,7 +19,7 @@ var GameUILogic = (function (_super) {
         
         // this.btn_addLife.visible= true;
 
-        this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
+        // this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
         // this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
 
         // this.ani_num.on(Laya.Event.COMPLETE,this,this.onAniNumComplete);

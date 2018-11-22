@@ -46,4 +46,4 @@ var GameOverUILogic = (function (_super) {
     }
 
     return GameOverUILogic;
-})(GameOverUI);
+})();

@@ -33,7 +33,7 @@ beginLoadGoHead();
 function beginLoadGoHead() {
      var arr = [
                 //图集
-                // ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/Hurt.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/Zombie.atlas",Laya.Loader.ATLAS],
                 // ["res/atlas/Right.atlas",Laya.Loader.ATLAS],
@@ -66,7 +66,7 @@ function beginLoadGoHead() {
 
 function loadingCallbackGO() {
 
-    Laya.Animation.createFrames(["Zombie/humano-sheet0_01.png","Zombie/humano-sheet0_02.png","Zombie/humano-sheet0_03.png","Zombie/humano-sheet0_04.png"], "zombie_human");
+    // Laya.Animation.createFrames(["Zombie/humano-sheet0_01.png","Zombie/humano-sheet0_02.png","Zombie/humano-sheet0_03.png","Zombie/humano-sheet0_04.png"], "zombie_human");
 
     
     SceneManager.getInstance().currentScene = new GameScene();

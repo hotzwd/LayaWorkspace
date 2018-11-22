@@ -48,4 +48,4 @@ var GameStartUiLogic = (function (_super) {
 
 
     return GameStartUiLogic;
-})(GameStartUI);
+})();
