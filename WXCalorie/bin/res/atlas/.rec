@@ -32,6 +32,7 @@ P 7A4ABC72 human_face_Spritesheet6x5_29.png
 P 6B9B8744 human_face_Spritesheet6x5_30.png
 D Game
 R A48BB4A6 background.jpg
+P 2D7B03CE close.png
 P 80673C26 food1.png
 P 3EE7C6C4 food10.png
 P E0C0B7B6 food2.png
@@ -42,6 +43,8 @@ P C9729998 food6.png
 P F1F11FCA food7.png
 P 78857B3A food8.png
 P 5D8683C7 food9.png
+P 87E7DEB3 guide1.png
+P D1CDFF06 guide2.png
 R 604E0E22 human0001.png
 R D2A72D13 human0002.png
 R 330EA041 human0003.png
@@ -65,6 +68,7 @@ R C154351B human0020.png
 P 6C743F57 leftover.png
 P 0E7263E1 numberBackground.png
 P 781BCDFE plate.png
+P 7987DC8E rankBg.png
 P 9A55B84B roll.png
 R 48549D07 table.png
 D Left

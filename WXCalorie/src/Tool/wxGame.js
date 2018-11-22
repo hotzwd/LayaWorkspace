@@ -285,7 +285,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -303,7 +303,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-f31105dd107dde54'
         });
 
         var t_videoAd = this.videoAd;
@@ -351,6 +351,7 @@ var wxGame = (function (_super) {
                 // 播放中途退出，不下发游戏奖励
                 _callbackFun.call(_call,false);
             }
+            
         });
     }
 

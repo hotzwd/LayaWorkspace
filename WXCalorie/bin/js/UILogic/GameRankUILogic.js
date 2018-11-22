@@ -38,4 +38,4 @@ var GameRankUILogic = (function(_super){
         
     }
     return GameRankUILogic;
-})();
+})(GameRankUI);

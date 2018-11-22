@@ -64,6 +64,7 @@ var Plate = (function (_super) {
 
             SceneManager.getInstance().currentScene.onPlateClickEvent(this);
         }
+        MusicManager.getInstance().playSound("res/music/plate1.wav");
     }
     
 

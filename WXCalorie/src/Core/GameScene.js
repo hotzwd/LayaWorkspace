@@ -90,8 +90,16 @@ var GameScene = (function (_super) {
         this.gameSpeed = 1;
         this.clickPlate = true;
         this.isRight = false;
-        this.selectPlate1 = null;
-        this.selectPlate2 = null;
+        if(this.selectPlate1 != null){
+            this.gameUI.plate1.visible = false;
+            this.resetPlate(1);
+        }
+        if(this.selectPlate2 != null){
+            this.gameUI.plate2.visible = false;
+            this.resetPlate(2);
+        }
+        // this.selectPlate1 = null;
+        // this.selectPlate2 = null;
 
         this.updateFoodList();
 
@@ -102,9 +110,10 @@ var GameScene = (function (_super) {
     _proto.startGame = function () {
 
         this.gameUI.box_human.visible = true;
-        // this.restartGame();
-        Laya.timer.frameLoop(1, this, this.onUpdate);
-        Laya.timer.loop(1000,this,this.updateGameTime);
+        this.gameUI.guidBox.visible = true;
+        
+        // Laya.timer.frameLoop(1, this, this.onUpdate);
+        // Laya.timer.loop(1000,this,this.updateGameTime);
         
     }
 
@@ -250,6 +259,9 @@ var GameScene = (function (_super) {
         }
 
         this.gameLevel ++;
+        //是否显示广告
+        this.gameUI.updateAddLifeState();
+        MusicManager.getInstance().playSound("res/music/reset.wav");
 
     }
 
@@ -326,6 +338,16 @@ var GameScene = (function (_super) {
         this.gameSpeed = t_data.speed;
         this.gameTime = t_data.time;
 
+    }
+
+    /**增加生命 */
+    _proto.addLife = function(_success){
+        this.resumeGame();
+        if(_success){
+            this.gameTime += 61;
+            this.updateGameTime();
+        }
+        wxGame.getInstance().createVideoAD();
     }
   
 

@@ -230,13 +230,13 @@ var wxGame = (function (_super) {
         var str = "";
         switch (rand) {
             case 1:
-                str = "我的妈鸭！差点打到本鸭！";
+                str = "囤积我的卡路里！";
                 break;
             case 2:
-                str = "冒着枪林弹雨，冲鸭~！";
+                str = "胖子养成记！";
                 break;
             case 3:
-                str = "may the 鸭力 be with you！";
+                str = "我是一个灵活的胖子！";
                 break;
         }
 
@@ -285,7 +285,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -303,7 +303,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-f31105dd107dde54'
         });
 
         var t_videoAd = this.videoAd;
@@ -351,6 +351,7 @@ var wxGame = (function (_super) {
                 // 播放中途退出，不下发游戏奖励
                 _callbackFun.call(_call,false);
             }
+            
         });
     }
 

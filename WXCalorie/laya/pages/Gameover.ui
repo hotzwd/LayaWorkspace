@@ -92,7 +92,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":564,"x":643,"width":157,"visible":false,"var":"btn_share","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
+                    "props":{"y":417,"x":779,"width":106,"var":"btn_share","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
@@ -131,7 +131,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":345,"x":727,"width":209,"var":"btn_close","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90},
+                    "props":{"y":332,"x":735,"width":193,"var":"btn_close","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_close)",
                     "isDirectory":false,

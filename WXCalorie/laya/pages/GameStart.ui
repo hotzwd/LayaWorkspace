@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":11,
+    "selecteID":13,
     "props":{"width":1366,"sceneColor":"#000000","height":768,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -65,13 +65,39 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":325,"x":727,"width":209,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90},
+                    "props":{"y":325,"x":734,"width":195,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_start)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":11,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":404,"x":748,"width":167,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"好友排行榜","height":90},
+                    "nodeParent":2,
+                    "label":"Button(btn_rank)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":12,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":718,"x":188,"text":"v1.1","fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "nodeParent":2,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":13,
                     "child":[
                         ]
                 }],

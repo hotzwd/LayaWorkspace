@@ -19,9 +19,10 @@ var GameUILogic = (function (_super) {
         // this.aniLife.play(0,true);
         // this.btn_addLife.visible= true;
 
+        this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
         this.plate1.on(Laya.Event.CLICK,this,this.onPlate1ClickEvent);
         this.plate2.on(Laya.Event.CLICK,this,this.onPlate2ClickEvent);
-        // this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
+        this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
 
         // this.ani_num.on(Laya.Event.COMPLETE,this,this.onAniNumComplete);
         this.anim_face.on(Laya.Event.COMPLETE,this,this.onAniNumComplete);
@@ -71,7 +72,8 @@ var GameUILogic = (function (_super) {
         for (var i = 0; i < p_str.length; i++) {
             
             Laya.timer.once(200*i,this,function(_num){
-                this.t_calculate.text = p_str.substring(0,_num);;
+                this.t_calculate.text = p_str.substring(0,_num);
+                MusicManager.getInstance().playSound("res/music/type.wav");
             },[i+1]);
         }
 
@@ -79,6 +81,7 @@ var GameUILogic = (function (_super) {
         Laya.timer.once(t_time,this,function(){
             
             if(p_isRight){
+                MusicManager.getInstance().playSound("res/music/score.wav");
                 this.t_num.color = "#2db200";
                 SceneManager.getInstance().currentScene.addGameScore();
 
@@ -87,12 +90,14 @@ var GameUILogic = (function (_super) {
                 this.plate1.img_food.visible = false;
                 this.plate2.img_food.visible = false;
 
+                MusicManager.getInstance().playSound("res/music/eat.wav");
                 //播放动画
                 this.anim_face.play(0, false, "face_eat");
                 this.anim_left.play(0,false,"human_left");
                 this.anim_right.play(0,false,"human_right");
 
             }else{
+                MusicManager.getInstance().playSound("res/music/result.wav");
                 this.t_num.color = "#d90000";
                 //播放动画
                 this.anim_face.play(0, false, "face_fail");
@@ -155,6 +160,7 @@ var GameUILogic = (function (_super) {
 
     //点击盘子1
     _proto.onPlate1ClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/plate2.wav");
         if(SceneManager.getInstance().currentScene.clickPlate){
             this.plate1.visible = false;
             SceneManager.getInstance().currentScene.resetPlate(1);
@@ -163,7 +169,7 @@ var GameUILogic = (function (_super) {
 
     //点击盘子2
     _proto.onPlate2ClickEvent = function(){
-        
+        MusicManager.getInstance().playSound("res/music/plate2.wav");
         if(SceneManager.getInstance().currentScene.clickPlate){
             this.plate2.visible = false;
             SceneManager.getInstance().currentScene.resetPlate(2);
@@ -178,13 +184,18 @@ var GameUILogic = (function (_super) {
 
     //点击增加生命
     _proto.addLifeClick = function(){
+        MusicManager.getInstance().playSound("res/music/click.wav");
         this.btn_addLife.visible= false;
-        SceneManager.getInstance().currentScene.pauseGame();
+        // SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
-            // SceneManager.getInstance().currentScene.addLife(true);
+            SceneManager.getInstance().currentScene.pauseGame();
             wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }else{
+             //点击广告
+             if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+             SceneManager.getInstance().currentScene.pauseGame();
              wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }
     }
