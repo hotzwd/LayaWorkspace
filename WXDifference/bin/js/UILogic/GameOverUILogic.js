@@ -18,7 +18,7 @@ var GameOverUILogic = (function (_super) {
         MusicManager.getInstance().playSound("res/music/complete.wav");
 
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
-        // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
         // this.t_gamescore.text = SceneManager.getInstance().currentScene.gameScore;
 
@@ -28,7 +28,7 @@ var GameOverUILogic = (function (_super) {
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
         this.t_highScore.text = highscoreNum;
-        // wxGame.getInstance().uploadUserScore(highscoreNum);
+        wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }
     

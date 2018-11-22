@@ -286,7 +286,6 @@ var wxGame = (function (_super) {
              return;
          }
 
-        return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -304,7 +303,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-d3aa6a74dfb773db'
+            adUnitId: 'adunit-9cd46af0aa707aac'
         });
 
         var t_videoAd = this.videoAd;
@@ -328,11 +327,13 @@ var wxGame = (function (_super) {
     }
 
     /**展示视频广告 */
-    _proto.showVideoAD = function (_call,_callback) {
+    _proto.showVideoAD = function (_call,_callbackFun) {
         if (!Browser.onMiniGame) {
+            _callbackFun.call(_call,true);
              return;
          }
-        var t_videoAd = wxGame.getInstance().videoAd;
+        // var t_videoAd = wxGame.getInstance().videoAd;
+        var t_videoAd = this.videoAd;
         //没有加载完播放失败
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
@@ -344,12 +345,13 @@ var wxGame = (function (_super) {
             // 小于 2.1.0 的基础库版本，res 是一个 undefined
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
-                _call._callback(true);
+                _callbackFun.call(_call,true);
             }
             else {
                 // 播放中途退出，不下发游戏奖励
-                _call._callback(false);
+                _callbackFun.call(_call,false);
             }
+            
         });
     }
 

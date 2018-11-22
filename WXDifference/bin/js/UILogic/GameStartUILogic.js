@@ -17,7 +17,7 @@ var GameStartUiLogic = (function (_super) {
         
 
         this.btn_start.on(Laya.Event.CLICK,this,this._startClickEvent);
-        // this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
+        this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
         wxGame.getInstance().showClubBtn(true);

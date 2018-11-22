@@ -16,12 +16,12 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
         
-        // this.aniLife.play(0,true);
+        this.ani1.play(0,true);
         // this.btn_addLife.visible= true;
 
 
         this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
-        // this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
+        this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
 
         // this.blockList.renderHandler = new Laya.Handler(this, this.updateBlockItem);
 
@@ -140,6 +140,34 @@ var GameUILogic = (function (_super) {
         this.updateBlockData();
     }
 
+    //点击增加生命
+    _proto.addLifeClick = function(){
+        MusicManager.getInstance().playSound("res/music/click.wav");
+        this.btn_addLife.visible= false;
+        // SceneManager.getInstance().currentScene.pauseGame();
+        //播放广告
+        if (!Browser.onMiniGame) {
+            SceneManager.getInstance().currentScene.pauseGame();
+            wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
+         }else{
+             //点击广告
+             if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+             SceneManager.getInstance().currentScene.pauseGame();
+             wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
+         }
+    }
+
+    //刷新是否可以显示增加生命
+    _proto.updateAddLifeState = function(){
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
+                return;
+            this.btn_addLife.visible = true;
+        }else{
+            this.btn_addLife.visible = true;
+        }
+    }
     
 
 

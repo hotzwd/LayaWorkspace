@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":2,
+    "selectedBox":6,
+    "selecteID":16,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -151,6 +151,19 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":15,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1057,"x":220,"width":280,"var":"btn_share","stateNum":"1","skin":"Game/img_red.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"分享游戏","height":92},
+                    "nodeParent":6,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":16,
                     "child":[
                         ]
                 }],

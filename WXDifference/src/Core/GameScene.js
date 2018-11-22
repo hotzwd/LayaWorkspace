@@ -185,6 +185,9 @@ var GameScene = (function (_super) {
         if(this.m_curLevel == LevelData.length){
             this.m_curLevel = LevelData.length -1;
         }
+
+        //是否显示广告
+        this.gameUI.updateAddLifeState();
     }
     /**游戏结束 */
     _proto.gameover = function(_win){
@@ -227,7 +230,16 @@ var GameScene = (function (_super) {
         this.gameUI.label_time.text = "00:"+t_timeStr;
     }
 
-  
+    
+    /**增加生命 */
+    _proto.addLife = function(_success){
+        this.resumeGame();
+        if(_success){
+            this.gameTime += 11;
+            this.updateGameTime();
+        }
+        wxGame.getInstance().createVideoAD();
+    }
 
     return GameScene;
 })();
