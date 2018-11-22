@@ -72,7 +72,7 @@ function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["Zombie/zombie1-sheet0_01.png","Zombie/zombie1-sheet0_02.png","Zombie/zombie1-sheet0_03.png","Zombie/zombie1-sheet0_04.png"], "zombie_1");
     Laya.Animation.createFrames(["Zombie/zombie2-sheet0_01.png","Zombie/zombie2-sheet0_02.png","Zombie/zombie2-sheet0_03.png","Zombie/zombie2-sheet0_04.png"], "zombie_2");
-    Laya.Animation.createFrames(["Zombie/zombie3-sheet0_01.png","Zombie/zombie3-sheet0_02.png","Zombie/zombie3-sheet0_03.png","Zombie/zombie3-sheet0_04.png"], "zombie_3");
+    // Laya.Animation.createFrames(["Zombie/zombie3-sheet0_01.png","Zombie/zombie3-sheet0_02.png","Zombie/zombie3-sheet0_03.png","Zombie/zombie3-sheet0_04.png"], "zombie_3");
 
     Laya.Animation.createFrames(["Zombie/humano-sheet0_01.png","Zombie/humano-sheet0_02.png","Zombie/humano-sheet0_03.png","Zombie/humano-sheet0_04.png"], "zombie_human");
 

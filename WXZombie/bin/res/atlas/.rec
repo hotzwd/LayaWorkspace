@@ -2,13 +2,13 @@ D .
 D Game
 R 851CD8AE bggame-sheet0.png
 P 0B9E05D8 btnclose-sheet0.png
-P A066C3CF gameover-sheet0.png
+P 2900479A gameover-sheet0.png
 P 87E7DEB3 guide1.png
 P 884D6AB2 img_blue.png
 P 94662DAC live0.png
 P 0E8F72B2 live1.png
 P 788AD71C menuplay-sheet0.png
-R F044BAFC menutitulo-sheet0.png
+R DB3BDC49 menutitulo-sheet0.png
 P C383C914 sheet0.png
 P C4F089D6 sheet1.png
 P D4E8983A sheet2.png
@@ -36,7 +36,3 @@ P 2DE3CCE6 zombie2-sheet0_01.png
 P F28A8488 zombie2-sheet0_02.png
 P 1F294A52 zombie2-sheet0_03.png
 P 6C36C01E zombie2-sheet0_04.png
-P A315ABF2 zombie3-sheet0_01.png
-P 0E930E58 zombie3-sheet0_02.png
-P 567F2A0B zombie3-sheet0_03.png
-P 7D7605E5 zombie3-sheet0_04.png

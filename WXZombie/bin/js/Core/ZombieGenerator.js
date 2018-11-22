@@ -81,9 +81,15 @@ var ZombieGenerator = (function(_super){
      _proto.randomZombiePos = function(_mos,_pos){
 
         var t_levelData = SceneManager.getInstance().currentScene.levelData;
-        var typeId = parseInt(Math.random()*2, 10);
+        var typeId = parseInt(Math.random()*100, 10);
         if(t_levelData.level == 1){
             typeId = 1;
+        }else{
+            if(typeId < 90){
+                typeId = 1;
+            }else{
+                typeId = 0;
+            }
         }
 
         // var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
@@ -91,6 +97,7 @@ var ZombieGenerator = (function(_super){
 
         var t_time = t_levelData.time;
         //初始
+
         _mos.initZombie(typeId,birthPos,t_time);
 
      }

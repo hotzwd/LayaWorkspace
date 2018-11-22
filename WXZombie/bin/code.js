@@ -49088,9 +49088,15 @@ var ZombieGenerator = (function(_super){
      _proto.randomZombiePos = function(_mos,_pos){
 
         var t_levelData = SceneManager.getInstance().currentScene.levelData;
-        var typeId = parseInt(Math.random()*2, 10);
+        var typeId = parseInt(Math.random()*100, 10);
         if(t_levelData.level == 1){
             typeId = 1;
+        }else{
+            if(typeId < 90){
+                typeId = 1;
+            }else{
+                typeId = 0;
+            }
         }
 
         // var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
@@ -49098,6 +49104,7 @@ var ZombieGenerator = (function(_super){
 
         var t_time = t_levelData.time;
         //初始
+
         _mos.initZombie(typeId,birthPos,t_time);
 
      }
@@ -49166,7 +49173,7 @@ var Zombie = (function (_super) {
         if(this.m_type == 0){
             this.m_anim.play(0, false, "zombie_human");
         }else{
-            var t_anim = parseInt(Math.random()* 3 +1);
+            var t_anim = parseInt(Math.random()* 2 +1);
             this.m_anim.play(0, false, "zombie_"+ t_anim);
         }
 
@@ -50787,7 +50794,7 @@ function loadingCallbackGO() {
 
     Laya.Animation.createFrames(["Zombie/zombie1-sheet0_01.png","Zombie/zombie1-sheet0_02.png","Zombie/zombie1-sheet0_03.png","Zombie/zombie1-sheet0_04.png"], "zombie_1");
     Laya.Animation.createFrames(["Zombie/zombie2-sheet0_01.png","Zombie/zombie2-sheet0_02.png","Zombie/zombie2-sheet0_03.png","Zombie/zombie2-sheet0_04.png"], "zombie_2");
-    Laya.Animation.createFrames(["Zombie/zombie3-sheet0_01.png","Zombie/zombie3-sheet0_02.png","Zombie/zombie3-sheet0_03.png","Zombie/zombie3-sheet0_04.png"], "zombie_3");
+    // Laya.Animation.createFrames(["Zombie/zombie3-sheet0_01.png","Zombie/zombie3-sheet0_02.png","Zombie/zombie3-sheet0_03.png","Zombie/zombie3-sheet0_04.png"], "zombie_3");
 
     Laya.Animation.createFrames(["Zombie/humano-sheet0_01.png","Zombie/humano-sheet0_02.png","Zombie/humano-sheet0_03.png","Zombie/humano-sheet0_04.png"], "zombie_human");
 

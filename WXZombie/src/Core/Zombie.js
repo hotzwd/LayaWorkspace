@@ -57,7 +57,7 @@ var Zombie = (function (_super) {
         if(this.m_type == 0){
             this.m_anim.play(0, false, "zombie_human");
         }else{
-            var t_anim = parseInt(Math.random()* 3 +1);
+            var t_anim = parseInt(Math.random()* 2 +1);
             this.m_anim.play(0, false, "zombie_"+ t_anim);
         }
 
