@@ -53,16 +53,21 @@ var Step = (function (_super) {
 
         // var sp = new Sprite();
 
-        // 1 终点  2 起点
-        if(this.m_type == 1){
-            this.x = this.m_startPoint.x;
-            this.y = this.m_startPoint.y;
-        }else{
+        // 0 起点 1 终点 
+        if(this.m_type == 0){
             this.img_shadow.visible = true;
-            this.x = this.m_startPoint.x;
-            this.y = this.m_startPoint.y;
+            // this.x = this.m_startPoint.x;
+            // this.y = this.m_startPoint.y;
+            if(p_level == 0){
+                this.t_level.visible = false;
+                this.img_step.skin = "Game/columna-sheet0.png";
+            }
+        }else{
+            // this.x = this.m_startPoint.x;
+            // this.y = this.m_startPoint.y;
         }
-       
+        
+        
         
     }
 
@@ -86,6 +91,10 @@ var Step = (function (_super) {
         
     }
 
+    //设置阴影
+    _proto.setShadow =function(p_visible){
+        this.img_shadow.visible = p_visible;
+    }
   
     
 

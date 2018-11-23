@@ -23,6 +23,7 @@ var GameScene = (function (_super) {
     _proto.m_knife = null;                                                   //刀子
     _proto.m_progress = null;                                                //进度条
     _proto.m_progressValue = 0;                                              //进度条值
+    _proto.m_stepBoxPoint = null;                                            //台阶盒子坐标
     
 
     
@@ -61,14 +62,20 @@ var GameScene = (function (_super) {
 
          //创建对象
         this.m_endStep = new Step();
+        this.m_endStep.zOrder = 10;
         this.gameLayer.addChild(this.m_endStep);
         this.m_startStep = new Step();
+        this.m_startStep.zOrder = 10;
         this.gameLayer.addChild(this.m_startStep);
 
         this.m_knife = new Knife();
+        this.m_knife.zOrder = 20;
         this.gameLayer.addChild(this.m_knife);
 
-        
+        this.m_progress.zOrder = 100;
+
+        this.m_stepBoxPoint = new Point(this.gameUI.stepBox.x,this.gameUI.stepBox.y);
+
         this.updateStep();    
         this.startGame();
      }
@@ -98,14 +105,77 @@ var GameScene = (function (_super) {
         var t_startLevel = this.gameLevel;
         //初始位置
         if(this.gameLevel == 0){
+            this.gameUI.cloudBox.zOrder = 20;
+            this.gameLayer.zOrder = 10;
+
             t_endPoint = new Point(this.gameUI.end_step.x,this.gameUI.end_step.y);
             t_startPoint = new Point(this.gameUI.start_step.x,this.gameUI.start_step.y);
-        }
-        this.m_endStep.initStep(1,t_endPoint,t_endLevel);
-        this.m_startStep.initStep(0,t_startPoint,t_startLevel);
+            this.gameUI.stepBox.pos(this.m_stepBoxPoint.x,this.m_stepBoxPoint.y);
+            this.gameUI.stepBox.visible = true;
 
+            this.m_startStep.pos(t_startPoint.x,t_startPoint.y);
+            this.m_endStep.pos(t_endPoint.x,t_endPoint.y);
+
+            this.m_endStep.initStep(1,t_endPoint,t_endLevel);
+            this.m_startStep.initStep(0,t_startPoint,t_startLevel);
+        }else{
+
+            this.gameLayer.zOrder = 20;
+            this.gameUI.cloudBox.zOrder = 10;
+
+            var t_step = this.m_startStep;
+            this.m_startStep = this.m_endStep;
+            this.m_endStep = t_step;
+
+            t_endPoint = new Point(this.m_endStep.x,200);
+            t_startPoint = new Point(this.m_startStep.x,800);
+
+
+            // var t_startTargetY = 600;
+
+            this.m_startStep.initStep(0,t_startPoint,t_startLevel);
+            //开始面板往下移动
+            Laya.Tween.to(this.m_startStep,{
+                y:t_startPoint.y
+            },1000,null,new Laya.Handler(this,function(){
+                this.m_knife.initKnife(1,this.m_startStep,this.m_endStep);
+            }));
+
+            var t_knifeY = this.m_knife.y + (t_startPoint.y - this.m_startStep.y);
+            Laya.Tween.to(this.m_knife,{
+                y:t_knifeY
+            },1000);
+
+            //结束面板先往下，再下落
+            Laya.Tween.to(this.m_endStep,{
+                y:Laya.stage.height + 100
+            },500,null,new Laya.Handler(this,function(){
+                this.m_endStep.y = -100;
+                this.m_endStep.initStep(1,t_endPoint,t_endLevel);
+                Laya.Tween.to(this.m_endStep,{
+                    y:t_endPoint.y
+                },500);
+            }));
+
+            //隐藏台阶
+            if(this.gameLevel == 1){
+                Laya.Tween.to(this.gameUI.stepBox,{
+                    y:Laya.stage.height +100
+                },500,null,new Laya.Handler(this,function(){
+                    this.gameUI.stepBox.visible = false;
+                }));
+                
+            }
+
+        }
+
+        // this.m_endStep.initStep(1,t_endPoint,t_endLevel);
+        // this.m_startStep.initStep(0,t_startPoint,t_startLevel);
+
+        this.m_startStep.setShadow(true);
+        this.m_endStep.setShadow(false);
         //刀
-        this.m_knife.initKnife(1,new Point(this.m_startStep.x - 20 ,this.m_startStep.y -46));
+        this.m_knife.initKnife(1,this.m_startStep,this.m_endStep);
         //进度条
         // this.m_progress.pos(this.m_startStep.x ,this.m_startStep.y + 50);
         // this.m_progress.value = 0;
@@ -193,7 +263,7 @@ var GameScene = (function (_super) {
         this.m_progress.visible = true;
         this.m_progressValue = 0;
         this.m_progress.value = this.m_progressValue;
-        Laya.timer.loop(100,this,this.pushProgress);
+        Laya.timer.loop(40,this,this.pushProgress);
     }
 
      /**抬起监听事件 */
@@ -202,13 +272,30 @@ var GameScene = (function (_super) {
         // this.curSight._tapShot(new Point(_event.stageX,_event.stageY));
         Laya.timer.clear(this,this.pushProgress);
         this.m_knife.setState(1);
+        this.m_progress.visible = false;
     }
     
     //按压进度
     _proto.pushProgress = function(){
-        this.m_progressValue += 0.1;
+        this.m_progressValue += 0.04;
+        if(this.m_progressValue >= 1){
+            this.m_progressValue = 1;
+        }
         this.m_progress.value = this.m_progressValue;
     }
+
+
+    /**
+     * 刀子跳跃
+     */
+    _proto.jumpKnife = function(p_suc){
+        //跳跃成功
+        if(p_suc){
+            this.gameLevel++;
+            this.updateStep();
+        }
+    }
+
 
     return GameScene;
 })();
