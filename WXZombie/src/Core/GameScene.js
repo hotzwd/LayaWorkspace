@@ -93,12 +93,20 @@ var GameScene = (function (_super) {
     _proto.pauseGame = function(){
         Laya.timer.clear(this,this.onUpdate);
         // Laya.timer.clear(this,this.updateGameTime);
+        for (var i = 0; i < this.zombieList.length; i++) {
+            var t_zombie = this.zombieList[i];
+            t_zombie.zombiePause();
+        }
     }
 
     /**恢复游戏 */
     _proto.resumeGame = function(){
         Laya.timer.frameLoop(1, this, this.onUpdate);
         // Laya.timer.loop(1000,this,this.updateGameTime);
+        for (var i = 0; i < this.zombieList.length; i++) {
+            var t_zombie = this.zombieList[i];
+            t_zombie.zombieResume();
+        }
     }
 
     /**游戏结束 */

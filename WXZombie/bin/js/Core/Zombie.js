@@ -92,6 +92,17 @@ var Zombie = (function (_super) {
         SceneManager.getInstance().currentScene.killZombie(this,false);
     }
 
+    _proto.zombiePause = function(){
+        if(this.visible &&  this.m_time >0){
+            Laya.timer.clear(this,this.updateGameTime);
+        }
+    }
+    _proto.zombieResume =function(){
+        if(this.visible && this.m_time >0){
+            Laya.timer.loop(1000,this,this.updateGameTime);
+        }
+    }
+
     /**
      * update刷新
      */

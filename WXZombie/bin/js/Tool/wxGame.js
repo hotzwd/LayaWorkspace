@@ -285,7 +285,6 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -303,7 +302,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-87711549b6ab3c3a'
         });
 
         var t_videoAd = this.videoAd;
@@ -329,6 +328,7 @@ var wxGame = (function (_super) {
     /**展示视频广告 */
     _proto.showVideoAD = function (_call,_callbackFun) {
         if (!Browser.onMiniGame) {
+            SceneManager.getInstance().currentScene.pauseGame();
             _callbackFun.call(_call,true);
              return;
          }
@@ -338,9 +338,10 @@ var wxGame = (function (_super) {
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
 
-        t_videoAd.show(function(){
-            SceneManager.getInstance().currentScene.pauseGame();
-        });
+        //暂停游戏
+        SceneManager.getInstance().currentScene.pauseGame();
+
+        t_videoAd.show();
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
             // 用户点击了【关闭广告】按钮

@@ -48914,7 +48914,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-185,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":854,"x":480,"var":"btn_start","skin":"Game/menuplay-sheet0.png","anchorY":0.5,"anchorX":0.5},"compId":8},{"type":"Image","props":{"y":269,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Button","props":{"y":1128,"x":311,"width":337,"var":"btn_share","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"分享","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Button","props":{"y":1275,"x":311,"width":337,"var":"btn_rank","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"排行榜","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Label","props":{"y":1633,"x":55,"text":"v1.0","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}],"animations":[{"nodes":[{"target":8,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":30}]}}],"name":"ani_play","id":1,"frameRate":24,"action":0}]};
+		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-185,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":854,"x":480,"var":"btn_start","skin":"Game/menuplay-sheet0.png","anchorY":0.5,"anchorX":0.5},"compId":8},{"type":"Image","props":{"y":269,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Button","props":{"y":1128,"x":311,"width":337,"var":"btn_share","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"分享","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Button","props":{"y":1275,"x":311,"width":337,"var":"btn_rank","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"排行榜","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Label","props":{"y":1633,"x":55,"text":"v1.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}],"animations":[{"nodes":[{"target":8,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":30}]}}],"name":"ani_play","id":1,"frameRate":24,"action":0}]};
 		return GameStartUI;
 	})(View);
 /**
@@ -49277,6 +49277,17 @@ var Zombie = (function (_super) {
         SceneManager.getInstance().currentScene.killZombie(this,false);
     }
 
+    _proto.zombiePause = function(){
+        if(this.visible &&  this.m_time >0){
+            Laya.timer.clear(this,this.updateGameTime);
+        }
+    }
+    _proto.zombieResume =function(){
+        if(this.visible && this.m_time >0){
+            Laya.timer.loop(1000,this,this.updateGameTime);
+        }
+    }
+
     /**
      * update刷新
      */
@@ -49393,12 +49404,20 @@ var GameScene = (function (_super) {
     _proto.pauseGame = function(){
         Laya.timer.clear(this,this.onUpdate);
         // Laya.timer.clear(this,this.updateGameTime);
+        for (var i = 0; i < this.zombieList.length; i++) {
+            var t_zombie = this.zombieList[i];
+            t_zombie.zombiePause();
+        }
     }
 
     /**恢复游戏 */
     _proto.resumeGame = function(){
         Laya.timer.frameLoop(1, this, this.onUpdate);
         // Laya.timer.loop(1000,this,this.updateGameTime);
+        for (var i = 0; i < this.zombieList.length; i++) {
+            var t_zombie = this.zombieList[i];
+            t_zombie.zombieResume();
+        }
     }
 
     /**游戏结束 */
@@ -50461,7 +50480,6 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -50479,7 +50497,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-87711549b6ab3c3a'
         });
 
         var t_videoAd = this.videoAd;
@@ -50505,6 +50523,7 @@ var wxGame = (function (_super) {
     /**展示视频广告 */
     _proto.showVideoAD = function (_call,_callbackFun) {
         if (!Browser.onMiniGame) {
+            SceneManager.getInstance().currentScene.pauseGame();
             _callbackFun.call(_call,true);
              return;
          }
@@ -50514,9 +50533,10 @@ var wxGame = (function (_super) {
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
 
-        t_videoAd.show(function(){
-            SceneManager.getInstance().currentScene.pauseGame();
-        });
+        //暂停游戏
+        SceneManager.getInstance().currentScene.pauseGame();
+
+        t_videoAd.show();
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
             // 用户点击了【关闭广告】按钮
