@@ -94,7 +94,7 @@ var ZombieGenerator = (function(_super){
 
         // var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
         var birthPos = birthPosArray[_pos];
-
+        Gamelog("----cretate pos ="+ birthPos.x+",y="+birthPos.y);
         var t_time = t_levelData.time;
         //初始
 

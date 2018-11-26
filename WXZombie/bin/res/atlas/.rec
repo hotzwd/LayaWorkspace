@@ -1,20 +1,22 @@
 D .
 D Game
-R 851CD8AE bggame-sheet0.png
-P 0B9E05D8 btnclose-sheet0.png
-P 2900479A gameover-sheet0.png
+R 76D918C2 bggame-sheet0.png
+P AE798B1D btnclose-sheet0.png
+P 2D7B03CE close.png
+P 4B76C02B gameover-sheet0.png
 P 87E7DEB3 guide1.png
-P 884D6AB2 img_blue.png
-P 94662DAC live0.png
-P 0E8F72B2 live1.png
-P 788AD71C menuplay-sheet0.png
+P 57CC5894 img_blue.png
+P 48C9ACFB live0.png
+P B0CA2BFE live1.png
+P 6D4D75F6 menuplay-sheet0.png
 R DB3BDC49 menutitulo-sheet0.png
-P C383C914 sheet0.png
-P C4F089D6 sheet1.png
-P D4E8983A sheet2.png
-P 73AEEAC0 sheet3.png
-P 7718DC51 sheet4.png
-P AEA3CEE6 sheet5.png
+P A6AD3640 rankBg.png
+P 2FE169BE sheet0.png
+P 4046FEA7 sheet1.png
+P 6A3A7243 sheet2.png
+P 6B87C113 sheet3.png
+P 0BF70686 sheet4.png
+P 8F2CDFC2 sheet5.png
 D Hurt
 P 6A67526E cortar-sheet0_01.png
 P D10E2E8F cortar-sheet0_02.png

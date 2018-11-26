@@ -31,6 +31,8 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
         
+        MusicManager.getInstance().playMusic("res/music/1.mp3")
+
         this.gameLayer = this.gameUI.gameLayer;
         //初始化生成器
         ZombieGenerator.getInstance().initGenerator(this.gameLayer);
@@ -69,6 +71,7 @@ var GameScene = (function (_super) {
         for (var i = 0; i < this.zombieList.length; i++) {
             var t_zombie = this.zombieList[i];
             ZombieFactory.getInstance().recoveryZombieToPool(t_zombie);
+            this.zombieList.splice(i, 1);
         }
         this.zombieList = [];
         
@@ -106,6 +109,7 @@ var GameScene = (function (_super) {
         for (var i = 0; i < this.zombieList.length; i++) {
             var t_zombie = this.zombieList[i];
             ZombieFactory.getInstance().recoveryZombieToPool(t_zombie);
+            this.zombieList.splice(i, 1);
         }
 
         UIManager.getInstance().showUI("GameOverUI");
@@ -149,6 +153,7 @@ var GameScene = (function (_super) {
         var t_list =ZombieGenerator.getInstance().createZombie(t_createNum);
         this.zombieList = this.zombieList.concat(t_list);
         
+        this.gameUI.updateAddLifeState();
 
     }
 
@@ -196,7 +201,7 @@ var GameScene = (function (_super) {
      */
     _proto.killZombie = function(p_zombie,p_isKiss){
         Gamelog("-----killzombie type="+ p_zombie.m_type);
-
+        Gamelog("----killzombie pos ="+ p_zombie.x+",y="+p_zombie.y);
     
         //杀死
         if(p_isKiss){
@@ -206,11 +211,13 @@ var GameScene = (function (_super) {
             if(p_zombie.m_type == 0){
                 //杀死人类
                 this.killLive();
+                MusicManager.getInstance().playSound("res/music/humano.ogg");
             }else{
 
                 //杀死僵尸
                 this.addScoreAnim(new Point(p_zombie.x +80,p_zombie.y),50);
                 this.addGameScore();
+                MusicManager.getInstance().playSound("res/music/dead"+p_zombie.m_zombieType+".ogg");
             }
         }else{
             if(p_zombie.m_type == 1){
@@ -226,12 +233,14 @@ var GameScene = (function (_super) {
                 this.zombieList.splice(i, 1);
             }
         }
+        Gamelog("-----剩余僵尸数量 ="+ this.zombieList.length);
 
 
     }
 
     //杀死生命
     _proto.killLive = function(){
+         MusicManager.getInstance().playSound("res/music/killplayer.ogg");
         var t_anim = new Laya.Animation();
         // t_anim.interval = 50;
         t_anim.play(0, false, "hurt_hurt");
@@ -317,7 +326,16 @@ var GameScene = (function (_super) {
             arg.destroy();
         },[scoreLabel]);
     }
-  
+    
+     /**增加生命 */
+    _proto.addLife = function(_success){
+        this.resumeGame();
+        if(_success){
+            this.gameLive ++;
+            this.gameUI.t_life.text = "x"+this.gameLive;
+            wxGame.getInstance().createVideoAD();
+        }
+    }
 
     return GameScene;
 })();

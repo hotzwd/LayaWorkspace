@@ -14,7 +14,7 @@ var ZombieFactory = (function(_super){
         }
         return instance;
     }
-    var ZombiePoolNum = 10;                                                 //对象池大小
+    var ZombiePoolNum = 1;                                                 //对象池大小
 
     _proto.ZombiePool = null;                                               //对象池
     _proto.ZombieBox;                                                      //父元素

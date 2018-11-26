@@ -338,7 +338,9 @@ var wxGame = (function (_super) {
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
 
-        t_videoAd.show();
+        t_videoAd.show(function(){
+            SceneManager.getInstance().currentScene.pauseGame();
+        });
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
             // 用户点击了【关闭广告】按钮

@@ -16,11 +16,11 @@ var GameUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
         
-        
+        this.ani1.play(0,true);
         // this.btn_addLife.visible= true;
 
         this.guidBox.on(Laya.Event.CLICK,this,this.guidBoxClickEvent);
-        // this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
+        this.btn_addLife.on(Laya.Event.CLICK,this,this.addLifeClick);
 
         // this.ani_num.on(Laya.Event.COMPLETE,this,this.onAniNumComplete);
         
@@ -62,7 +62,7 @@ var GameUILogic = (function (_super) {
     //点击增加生命
     _proto.addLifeClick = function(){
         this.btn_addLife.visible= false;
-        SceneManager.getInstance().currentScene.pauseGame();
+        // SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
             // SceneManager.getInstance().currentScene.addLife(true);

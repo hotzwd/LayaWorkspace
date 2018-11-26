@@ -58,7 +58,9 @@ var Zombie = (function (_super) {
             this.m_anim.play(0, false, "zombie_human");
         }else{
             var t_anim = parseInt(Math.random()* 2 +1);
+            this.m_zombieType = t_anim;
             this.m_anim.play(0, false, "zombie_"+ t_anim);
+            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".ogg");
         }
 
         //第一关不
@@ -86,6 +88,7 @@ var Zombie = (function (_super) {
 
     //消失
     _proto.zombieDisappear = function(){
+        Gamelog("------zombieDisappear m_type="+this.m_type);
         SceneManager.getInstance().currentScene.killZombie(this,false);
     }
 
@@ -98,7 +101,7 @@ var Zombie = (function (_super) {
 
     //点击盘子
     _proto.ZombieClickEvent = function(){
-        Gamelog("------ZombieClickEvent m_type="+this.m_type);
+        // Gamelog("------ZombieClickEvent m_type="+this.m_type);
         
     }
 

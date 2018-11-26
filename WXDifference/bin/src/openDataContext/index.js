@@ -247,8 +247,8 @@ function showEndFriends(data){
             var index = friends[i];
             var t_item = res.data[index];
 
-            var item_start = 0;
-            var item_heigh = 10;
+            var item_start = 100;
+            var item_heigh = -80;
 
             // 奖杯
             // if (index <= 2) {
