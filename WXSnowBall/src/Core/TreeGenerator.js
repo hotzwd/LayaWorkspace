@@ -35,8 +35,9 @@ var TreeGenerator = (function(_super){
     }
 
     /**初始化对象池 */
-     _proto.createTree = function(p_num){
+     _proto.createTree = function(p_num,p_birthY){
 
+        this.m_birthY = p_birthY;
          var t_TreeList = [];
          for (var i = 0; i < p_num; i++) {
             var tempTree = TreeFactory.getInstance().getObjectFromPool();
@@ -50,17 +51,13 @@ var TreeGenerator = (function(_super){
 
      _proto.randomBlcok = function(_Tree){
 
-        
-        // var typeId = parseInt(Math.random()*2 +1, 10);
+        var t_birthX = parseInt(Math.random()*(GameConfig.GameWidth - 40) +20,10);
+        var birthPos = new Point(t_birthX,this.m_birthY);
 
-        // var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
-        // var birthPos = birthPosArray[birthIndex];
-
-        // var endIndex = parseInt(Math.random()*endPosArray.length,10);
-        // var endPos = endPosArray[endIndex];
+        var t_scale = parseInt(Math.random()*5 + 10,10) / 10;
 
         // //初始
-        // _Tree.initTree(typeId,birthPos,endPos);
+        _Tree.initTree(1,birthPos,t_scale);
 
      }
     

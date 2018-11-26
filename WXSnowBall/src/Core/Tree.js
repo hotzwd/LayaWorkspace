@@ -14,8 +14,8 @@ var Tree = (function (_super) {
         this.Init();
     }
     //宽高
-    var TreeWidth = 200;
-    var TreeHeight = 204;
+    var TreeWidth = 52;
+    var TreeHeight = 44;
 
     _proto.m_bgSp = null;                                                 //色块底图
     _proto.m_icon = null;                                                 //图标
@@ -25,12 +25,12 @@ var Tree = (function (_super) {
 
 
     _proto.Init = function () {
-        // this.width = TreeWidth;
-        // this.height = TreeHeight;
+        this.width = TreeWidth;
+        this.height = TreeHeight;
         // this.pivotX = TreeWidth / 2;
         // this.pivotY = TreeHeight / 2;  
 
-        this.m_icon = new Laya.Image();
+        this.m_icon = new Laya.Image("Game/img_tree.png");
         this.m_icon.centerX = 0;
         this.m_icon.centerY = 0;
 
@@ -48,29 +48,104 @@ var Tree = (function (_super) {
     }
 
     /**初始化 */
-    _proto.initTree = function(p_type,p_icon,p_startPoint,p_levelData){
+    _proto.initTree = function(p_type,p_startPoint,p_scale){
 
-        var t_width = p_levelData.width;
-        var t_height = p_levelData.height;
+        this.resetTree();
+        // var t_width = p_levelData.width;
+        // var t_height = p_levelData.height;
 
         this.m_type = p_type;
 
         this.x = p_startPoint.x;
         this.y = p_startPoint.y;
+
+        this.m_scale = p_scale;
+        this.scaleX = this.m_scale;
+        this.scaleY = this.m_scale;
+
+        // Gamelog("-----tree width="+this.width);
         
     }
 
 
     /**重置状态 */
     _proto.resetTree = function(){
-        this.x = this.m_startPoint.x;
-        this.y = this.m_startPoint.y;
+        // this.x = this.m_startPoint.x;
+        // this.y = this.m_startPoint.y;
 
-        // this.m_isHit = false;
-        // this.m_anim.play(0, true, "Tree_"+this.m_type+"_fly");
-        // this.y -= 300;
+        this.m_isNear = false;
+    }  
+
+    //是否撞到树
+    _proto.hitTree = function(p_ballPoint){
+        var t_isHit = false;
+        if(p_ballPoint.x >= this.x && p_ballPoint.x <= this.x+this.width /2 *this.m_scale 
+            && p_ballPoint.y >= this.y+ this.height/3 * this.m_scale && p_ballPoint.y <= this.y + this.height * this.m_scale){
+                t_isHit = true;
+            } 
+        return t_isHit;
     }
 
+    //与树擦肩而过
+    _proto.nearTree = function(p_ballPoint){
+        if(this.m_isNear)
+            return;
+        var t_isNear = false;
+        if(p_ballPoint.y >= this.y + this.height * this.m_scale && p_ballPoint.y <= this.y + this.height * this.m_scale + this.height/2 * this.m_scale){
+            if((p_ballPoint.x >= this.x- this.width /2 *this.m_scale && p_ballPoint.x <= this.x )
+                || ( p_ballPoint.x >= this.x+this.width /2 *this.m_scale && p_ballPoint.x <= this.x+this.width *this.m_scale)
+                ){
+                    t_isNear = true;
+                    this.m_isNear = true;
+                    this.scaleX = 1.5;
+                    this.scaleY = 1.5;
+                    this.showScore();
+                } 
+        }
+        return t_isNear;
+    }
+    //显示增加分数
+    _proto.showScore = function(){
+        var _point =this.localToGlobal(new Point(0,0));
+        var _score = 10;
+        SceneManager.getInstance().currentScene.addGameScore(_score);
+
+         var scoreLabel = new Laya.Label("+"+_score);
+        // scoreLabel.font = _fontName !=  null ? _fontName :"shuzi5Font";
+        scoreLabel.font = "SimHei";
+        scoreLabel.fontSize = 45;
+        scoreLabel.bold = true;
+        scoreLabel.color = "#000000";
+        // scoreLabel.stroke = 5;
+        // scoreLabel.strokeColor = "#7d10f4";
+        scoreLabel.align = "center";
+        // scoreLabel.anchorX = 0.5;
+        // scoreLabel.anchorY = 0.5;
+        scoreLabel.pos(_point.x,_point.y);
+        Laya.stage.addChild(scoreLabel);
+        // UIManager.getInstance().getUI("GameUI").addChild(scoreLabel);
+        scoreLabel.alpha = 0;
+        scoreLabel.scaleX = 0;
+        scoreLabel.scaleY = 0;
+        scoreLabel.zOrder = 5;
+
+        var timeLine = new Laya.TimeLine();
+        timeLine.addLabel("show",0).to(scoreLabel,
+        {
+            alpha:1,
+            scaleX:1,
+            scaleY:1,
+        },200).addLabel("go",0).to(scoreLabel,
+        {
+            y:_point.y - 200,
+            alpha:0,
+        },500);
+        // this.moveOtherBubbleFinish = false;
+        timeLine.play(0,false);
+        timeLine.on(Laya.Event.COMPLETE,this,function(arg){
+            arg.destroy();
+        },[scoreLabel]);
+    }
     
     /**
      * update刷新

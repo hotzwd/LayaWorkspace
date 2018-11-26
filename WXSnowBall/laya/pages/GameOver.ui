@@ -1,9 +1,9 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":6,
-    "props":{"width":720,"sceneColor":"#000000","height":1280},
+    "selectedBox":1,
+    "selecteID":2,
+    "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -73,6 +73,58 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":6,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":518,"x":194,"width":332,"text":"当前得分","height":47,"fontSize":35,"font":"SimHei","color":"#4d9e9f","align":"center"},
+                    "nodeParent":2,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":8,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":570,"x":194,"width":332,"var":"t_gamescore","text":"9999999","height":71,"fontSize":65,"font":"SimHei","color":"#4d9e9f","align":"center"},
+                    "nodeParent":2,
+                    "label":"Text(t_gamescore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":7,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":387,"x":194,"width":332,"text":"历史最高","height":49,"fontSize":35,"font":"SimHei","color":"#ffffff","align":"center"},
+                    "nodeParent":2,
+                    "label":"Text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":9,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "props":{"y":430,"x":194,"width":332,"var":"t_highScore","text":"9999999","height":71,"fontSize":65,"font":"SimHei","color":"#ffffff","align":"center"},
+                    "nodeParent":2,
+                    "label":"Text(t_highScore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
                     "child":[
                         ]
                 }]
