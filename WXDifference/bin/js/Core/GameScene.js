@@ -172,7 +172,7 @@ var GameScene = (function (_super) {
                     t_type = BlockType.Difference;
                     t_icon = this.m_iconList[1];
                 }
-
+                // Gamelog("---t_block x= "+t_point.x+",y="+t_point.y);
                 t_block.initBlock(t_type,t_icon,t_point,t_levelData);
             }        
         }

@@ -42,8 +42,8 @@ var Block = (function (_super) {
         this.addChild(this.m_bgSp);
 
         this.m_icon = new Laya.Image();
-        this.m_icon.centerX = 0;
-        this.m_icon.centerY = 0;
+        // this.m_icon.centerX = 0;
+        // this.m_icon.centerY = 0;
 
         this.addChild(this.m_icon);
 
@@ -75,7 +75,7 @@ var Block = (function (_super) {
         this.m_bgSp.graphics.drawRect(0,0,t_width,t_height,GetRandomColor());
 
 
-        this.m_icon.skin = p_icon;
+        
         if(t_width >= 220){
             this.m_icon.width = 220;
         }else{
@@ -86,6 +86,15 @@ var Block = (function (_super) {
         }else{
             this.m_icon.height = t_height;
         }
+
+        this.m_icon.skin = p_icon;
+        this.m_icon.x = (this.width - this.m_icon.width) / 2;
+        this.m_icon.y = (this.height - this.m_icon.height) / 2;
+        // Laya.timer.frameOnce(8,this,function(){
+        //     this.m_icon.skin = p_icon;
+        //     this.m_icon.x = (this.width - this.m_icon.width) / 2;
+        //     this.m_icon.y = (this.height - this.m_icon.height) / 2;
+        // });
 
         this.x = p_startPoint.x;
         this.y = p_startPoint.y;
@@ -98,9 +107,6 @@ var Block = (function (_super) {
         this.x = this.m_startPoint.x;
         this.y = this.m_startPoint.y;
 
-        this.m_isHit = false;
-        this.m_anim.play(0, true, "Block_"+this.m_type+"_fly");
-        // this.y -= 300;
     }
 
     

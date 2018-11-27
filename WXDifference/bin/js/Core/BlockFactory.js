@@ -14,7 +14,7 @@ var BlockFactory = (function(_super){
         }
         return instance;
     }
-    var objectPoolNum = 30;                                                 //对象池大小
+    var objectPoolNum = 100;                                                 //对象池大小
 
     _proto.objectPool = null;                                               //对象池
     _proto.objectBox;                                                      //父元素
