@@ -35,6 +35,7 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
         
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         this.gameLayer = this.gameUI.gameLayer;
         this.m_progress = this.gameUI.pro_push;
 
@@ -298,6 +299,9 @@ var GameScene = (function (_super) {
         if(this.m_knife.m_state != 0 || !this.m_progress.visible || this.m_gameover)
             return;
         
+        var t_sound = parseInt(Math.random()*3 +1);
+        MusicManager.getInstance().playSound("res/music/fire"+t_sound+".ogg");
+
         //跳跃
         Laya.timer.clear(this,this.pushProgress);
         this.m_knife.setState(1);
@@ -333,8 +337,11 @@ var GameScene = (function (_super) {
         if(p_suc){
             this.gameLevel++;
             this.updateStep();
+            MusicManager.getInstance().playSound("res/music/score.ogg");
+            MusicManager.getInstance().playSound("res/music/hitsuelo.ogg");
         }else{
             this.gameover();
+            MusicManager.getInstance().playSound("res/music/pincho.ogg");
         }
     }
 
