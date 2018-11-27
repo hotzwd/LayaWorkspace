@@ -26,7 +26,7 @@ var GameOverUILogic = (function (_super) {
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
         this.t_highScore.text = highscoreNum;
-        // wxGame.getInstance().uploadUserScore(highscoreNum);
+        wxGame.getInstance().uploadUserScore(highscoreNum);
 
     }
     
@@ -36,7 +36,7 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto._closeClickEvent = function(){
-        SceneManager.getInstance().currentScene.restartGame();
+        SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
         // wxGame.getInstance().showOpenDataContext(false);
