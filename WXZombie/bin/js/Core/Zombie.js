@@ -60,7 +60,7 @@ var Zombie = (function (_super) {
             var t_anim = parseInt(Math.random()* 2 +1);
             this.m_zombieType = t_anim;
             this.m_anim.play(0, false, "zombie_"+ t_anim);
-            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".ogg");
+            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".wav");
         }
 
         //第一关不

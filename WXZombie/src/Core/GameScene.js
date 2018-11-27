@@ -219,13 +219,13 @@ var GameScene = (function (_super) {
             if(p_zombie.m_type == 0){
                 //杀死人类
                 this.killLive();
-                MusicManager.getInstance().playSound("res/music/humano.ogg");
+                MusicManager.getInstance().playSound("res/music/humano.wav");
             }else{
 
                 //杀死僵尸
                 this.addScoreAnim(new Point(p_zombie.x +80,p_zombie.y),50);
                 this.addGameScore();
-                MusicManager.getInstance().playSound("res/music/dead"+p_zombie.m_zombieType+".ogg");
+                MusicManager.getInstance().playSound("res/music/dead"+p_zombie.m_zombieType+".wav");
             }
         }else{
             if(p_zombie.m_type == 1){
@@ -248,7 +248,7 @@ var GameScene = (function (_super) {
 
     //杀死生命
     _proto.killLive = function(){
-         MusicManager.getInstance().playSound("res/music/killplayer.ogg");
+         MusicManager.getInstance().playSound("res/music/killplayer.wav");
         var t_anim = new Laya.Animation();
         // t_anim.interval = 50;
         t_anim.play(0, false, "hurt_hurt");

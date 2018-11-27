@@ -48914,7 +48914,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-185,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":854,"x":480,"var":"btn_start","skin":"Game/menuplay-sheet0.png","anchorY":0.5,"anchorX":0.5},"compId":8},{"type":"Image","props":{"y":269,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Button","props":{"y":1128,"x":311,"width":337,"var":"btn_share","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"分享","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Button","props":{"y":1275,"x":311,"width":337,"var":"btn_rank","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"排行榜","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Label","props":{"y":1633,"x":55,"text":"v1.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}],"animations":[{"nodes":[{"target":8,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":30}]}}],"name":"ani_play","id":1,"frameRate":24,"action":0}]};
+		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-185,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":854,"x":480,"var":"btn_start","skin":"Game/menuplay-sheet0.png","anchorY":0.5,"anchorX":0.5},"compId":8},{"type":"Image","props":{"y":269,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Button","props":{"y":1128,"x":311,"width":337,"var":"btn_share","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"分享","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Button","props":{"y":1275,"x":311,"width":337,"var":"btn_rank","stateNum":1,"skin":"Game/img_blue.png","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","label":"排行榜","height":113,"sizeGrid":"22,35,35,30"}},{"type":"Label","props":{"y":1633,"x":55,"text":"v1.1.1","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}],"animations":[{"nodes":[{"target":8,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":8,"key":"scaleX","index":30}]}}],"name":"ani_play","id":1,"frameRate":24,"action":0}]};
 		return GameStartUI;
 	})(View);
 /**
@@ -49245,7 +49245,7 @@ var Zombie = (function (_super) {
             var t_anim = parseInt(Math.random()* 2 +1);
             this.m_zombieType = t_anim;
             this.m_anim.play(0, false, "zombie_"+ t_anim);
-            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".ogg");
+            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".wav");
         }
 
         //第一关不
@@ -49530,13 +49530,13 @@ var GameScene = (function (_super) {
             if(p_zombie.m_type == 0){
                 //杀死人类
                 this.killLive();
-                MusicManager.getInstance().playSound("res/music/humano.ogg");
+                MusicManager.getInstance().playSound("res/music/humano.wav");
             }else{
 
                 //杀死僵尸
                 this.addScoreAnim(new Point(p_zombie.x +80,p_zombie.y),50);
                 this.addGameScore();
-                MusicManager.getInstance().playSound("res/music/dead"+p_zombie.m_zombieType+".ogg");
+                MusicManager.getInstance().playSound("res/music/dead"+p_zombie.m_zombieType+".wav");
             }
         }else{
             if(p_zombie.m_type == 1){
@@ -49559,7 +49559,7 @@ var GameScene = (function (_super) {
 
     //杀死生命
     _proto.killLive = function(){
-         MusicManager.getInstance().playSound("res/music/killplayer.ogg");
+         MusicManager.getInstance().playSound("res/music/killplayer.wav");
         var t_anim = new Laya.Animation();
         // t_anim.interval = 50;
         t_anim.play(0, false, "hurt_hurt");
@@ -50625,7 +50625,7 @@ var GameOverUILogic = (function (_super) {
         this.width = Laya.stage.width;
         this.height = Laya.stage.height;
         
-         MusicManager.getInstance().playSound("res/music/gameover.ogg");
+         MusicManager.getInstance().playSound("res/music/gameover.wav");
 
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
@@ -50646,7 +50646,7 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto._closeClickEvent = function(){
-         MusicManager.getInstance().playSound("res/music/click.ogg");
+         MusicManager.getInstance().playSound("res/music/click.wav");
         SceneManager.getInstance().currentScene.restartGame();
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
@@ -50654,7 +50654,7 @@ var GameOverUILogic = (function (_super) {
     }
   
      _proto._shareClickEvent = function(){
-          MusicManager.getInstance().playSound("res/music/click.ogg");
+          MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().shareGame();
     }
 
@@ -50691,7 +50691,7 @@ var GameStartUiLogic = (function (_super) {
     }
 
     _proto._startClickEvent = function(){
-        MusicManager.getInstance().playSound("res/music/click.ogg");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().showClubBtn(false);
         wxGame.getInstance().createVideoAD();
 
@@ -50703,11 +50703,11 @@ var GameStartUiLogic = (function (_super) {
     }
     
     _proto._shareClickEvent = function(){
-         MusicManager.getInstance().playSound("res/music/click.ogg");
+         MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().shareGame();
     }
     _proto._rankClickEvent = function(){
-         MusicManager.getInstance().playSound("res/music/click.ogg");
+         MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().showUI("GameRankUI");
     }
 

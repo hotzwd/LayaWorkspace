@@ -105,7 +105,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1633,"x":55,"text":"v1.1","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1633,"x":55,"text":"v1.1.1","fontSize":30,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Label",
                     "isDirectory":false,
