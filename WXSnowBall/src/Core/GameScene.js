@@ -41,7 +41,7 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
 
-        // MusicManager.getInstance().playMusic("res/music/1.mp3");
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         
         this.gameLayer = this.gameUI.gameLayer;
         this.treeLayer = this.gameUI.treeLayer;
@@ -60,7 +60,7 @@ var GameScene = (function (_super) {
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.restartGame();
+        this.restartGame(true);
         // this.startGame();
        
     }
@@ -102,17 +102,20 @@ var GameScene = (function (_super) {
     }
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
+    _proto.restartGame = function(_gameover,_score){
 
-        this.m_curLevel = 0; 
+        
         this.snowBallDir = 1;
         this.snowBallSpeed = 3;
         this.treeLayerSpeed = 6;
         
-
-        this.gameScore = 0;
+        if(_gameover){
+            this.gameScore = 0;
+        }else{
+            this.gameScore = _score;
+        }
         this.gameUI.t_gamescore.text = this.gameScore;
-        this.gameTime = 0;
+        // this.gameTime = 0;
         // this.leftGameTime = 0;
         // this.gameUI.label_time.text = "00:00";
 
@@ -141,7 +144,17 @@ var GameScene = (function (_super) {
         Laya.timer.clear(this,this.onUpdate);
         Laya.timer.clear(this,this.updateGameTime);
         this.isGameover = true;
-        UIManager.getInstance().showUI("GameOverUI");
+
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                UIManager.getInstance().showUI("GameOverUI");
+                return;
+            }
+            UIManager.getInstance().showUI("GameSharedUI");
+        }else{
+            // this.btn_addLife.visible = true;
+            UIManager.getInstance().showUI("GameSharedUI");
+        }
 
         
     }
@@ -298,6 +311,8 @@ var GameScene = (function (_super) {
     }
     //显示增加分数
     _proto.showScore = function(_point){
+        var t_sound = parseInt(Math.random()*2 +1);
+        MusicManager.getInstance().playSound("res/music/score"+t_sound+".ogg");
         // var _point =this.localToGlobal(new Point(0,0));
         var _score = 10;
         this.addGameScore(_score);
@@ -363,6 +378,7 @@ var GameScene = (function (_super) {
 
     //点击界面
     _proto._clickLayerEvent = function(){
+        MusicManager.getInstance().playSound("res/music/snow.ogg");
         if(this.snowBallDir == 1){
             // this.snowBallDir = -1;
             var t_num = (this.snowBallDir + 1) / 0.1;

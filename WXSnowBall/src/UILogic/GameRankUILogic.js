@@ -32,10 +32,10 @@ var GameRankUILogic = (function(_super){
 
     /**关闭排行 */
     _proto.onCloseRank = function(){
-        
+        MusicManager.getInstance().playSound("res/music/click.ogg");
         wxGame.getInstance().showOpenDataContext(false);
         UIManager.getInstance().closeUI("GameRankUI");
         
     }
     return GameRankUILogic;
-})();
+})(GameRankUI);
