@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":2,
+    "selectedBox":4,
+    "selecteID":91,
     "referenceLines":[
         {
             "value":-7128,
@@ -40,6 +40,19 @@
             "hasChild":true,
             "compId":4,
             "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"skin":"WXGameUI/img_bg.jpg","centerY":0,"centerX":0},
+                    "nodeParent":4,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":128,
+                    "child":[
+                        ]
+                },
                 {
                     "x":30,
                     "type":"Box",

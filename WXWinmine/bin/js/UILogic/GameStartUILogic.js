@@ -16,13 +16,13 @@ var GameStartUILogic = (function(_super){
         this.height = Laya.stage.height;
         this.zOrder = 10;
 
-        // this.startBox.visible = true;
+        this.startBox.visible = true;
         this.isStart = false;
 
         this.guidBox.on(Laya.Event.CLICK,this,this._guidBoxClickEvent);
         // this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
-        // this.btn_startGame.on(Laya.Event.CLICK,this,this._startGameClickEvent);
+        this.btn_startGame.on(Laya.Event.CLICK,this,this._startClickEvent);
 
          wxGame.getInstance().showClubBtn(true);
         
@@ -41,21 +41,21 @@ var GameStartUILogic = (function(_super){
     }
 
     // /**点击开始游戏 */
-    // _proto._startGameClickEvent = function(){
-    //     if(this.isStart)
-    //         return;
+    _proto._startClickEvent = function(){
+        if(this.isStart)
+            return;
         
-    //     MusicManager.getInstance().playSound("res/music/1.wav");
-    //     this.isStart = true;
-    //     wxGame.getInstance().showClubBtn(false);
-    //     this.aniStart.play(0, false);
-    //     this.aniStart.on(Laya.Event.COMPLETE,this,this.onAniStartComplete);
+        MusicManager.getInstance().playSound("res/music/1.wav");
+        this.isStart = true;
+        wxGame.getInstance().showClubBtn(false);
+        this.aniBegin.play(0, false);
+        this.aniBegin.on(Laya.Event.COMPLETE,this,this.onAniStartComplete);
         
-    // }
+    }
    
-    // _proto.onAniStartComplete = function(){
-    //    this.startBox.visible = false;
-    // }
+    _proto.onAniStartComplete = function(){
+       this.startBox.visible = false;
+    }
     // /**点击排行榜 */
     // _proto._rankClickEvent = function(){
     //     if(this.isStart)

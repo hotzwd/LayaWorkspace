@@ -1,9 +1,17 @@
 D .
 D BeginUI
+P A0897746 btn_playGame.png
+R 43BFEA28 img_1.png
+R 7143871B img_2.png
+R A04F51DA img_3.png
+R 92ED02E2 img_4.png
+R 69629890 img_5.png
+R 67D37954 img_logo.png
 R 00CEE0AA img_yindao.png
 D WXGameUI
 P C4694B11 btn_playAgain.png
 P 98B2AE84 fuhuo.png
+R 88811BE6 img_bg.jpg
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
 P EE919311 img_chaqi3.png

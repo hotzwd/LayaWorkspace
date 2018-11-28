@@ -33,7 +33,7 @@ function  beginLoad(){
     var arr = [
                 //图集
                 ["res/atlas/WXGameUI.atlas",Laya.Loader.ATLAS],
-                // ["res/atlas/BeginUI.atlas",Laya.Loader.ATLAS],
+                ["res/atlas/BeginUI.atlas",Laya.Loader.ATLAS],
                 //图片
                 // ["WXGameUI/img_beijing.jpg",Laya.Loader.IMAGE],
                 ["WXGameUI/img_diban.jpg",Laya.Loader.IMAGE],
