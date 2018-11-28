@@ -29,7 +29,7 @@ var GameSharedUILogic = (function(_super){
      
      /**点击跳过 */
     _proto.onCancelClick = function(){
-        MusicManager.getInstance().playSound("res/music/click.ogg");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().closeUI("GameSharedUI");
         UIManager.getInstance().showUI("GameOverUI");
     }
@@ -41,7 +41,7 @@ var GameSharedUILogic = (function(_super){
     }
     //复活
     _proto.reviveGame = function(_success){
-        MusicManager.getInstance().playSound("res/music/click.ogg");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().closeUI("GameSharedUI");
         if(_success){
             var scoreNum = SceneManager.getInstance().currentScene.gameScore;

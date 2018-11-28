@@ -300,7 +300,7 @@ var GameScene = (function (_super) {
             return;
         
         var t_sound = parseInt(Math.random()*3 +1);
-        MusicManager.getInstance().playSound("res/music/fire"+t_sound+".ogg");
+        MusicManager.getInstance().playSound("res/music/fire"+t_sound+".wav");
 
         //跳跃
         Laya.timer.clear(this,this.pushProgress);
@@ -337,11 +337,11 @@ var GameScene = (function (_super) {
         if(p_suc){
             this.gameLevel++;
             this.updateStep();
-            MusicManager.getInstance().playSound("res/music/score.ogg");
-            MusicManager.getInstance().playSound("res/music/hitsuelo.ogg");
+            MusicManager.getInstance().playSound("res/music/score.wav");
+            MusicManager.getInstance().playSound("res/music/hitsuelo.wav");
         }else{
             this.gameover();
-            MusicManager.getInstance().playSound("res/music/pincho.ogg");
+            MusicManager.getInstance().playSound("res/music/pincho.wav");
         }
     }
 

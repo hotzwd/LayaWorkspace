@@ -36,7 +36,7 @@ var GameUILogic = (function (_super) {
 
     //引导
     _proto.guidBoxClickEvent = function(){
-        MusicManager.getInstance().playSound("res/music/btnclick.ogg");
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         this.guidBox.visible = false;
         // SceneManager.getInstance().currentScene.resumeGame();
         SceneManager.getInstance().currentScene.startGame();

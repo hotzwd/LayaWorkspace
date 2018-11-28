@@ -16,7 +16,7 @@ var GameOverUILogic = (function (_super) {
         this.height = Laya.stage.height;
         
         this.zOrder = 10;
-        MusicManager.getInstance().playSound("res/music/gameover.ogg");
+        
 
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
@@ -39,7 +39,7 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto._closeClickEvent = function(){
-        MusicManager.getInstance().playSound("res/music/click.ogg");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
@@ -47,7 +47,7 @@ var GameOverUILogic = (function (_super) {
     }
   
      _proto._shareClickEvent = function(){
-        MusicManager.getInstance().playSound("res/music/click.ogg");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().shareGame();
     }
 

@@ -160,6 +160,8 @@ var GameScene = (function (_super) {
     }
     //雪球消失效果
     _proto.snowBallDead = function(){
+        MusicManager.getInstance().playSound("res/music/gameover.wav");
+        
         this.snowBall.visible = false;
         this.lineGraphics.clear();
 
@@ -312,7 +314,7 @@ var GameScene = (function (_super) {
     //显示增加分数
     _proto.showScore = function(_point){
         var t_sound = parseInt(Math.random()*2 +1);
-        MusicManager.getInstance().playSound("res/music/score"+t_sound+".ogg");
+        MusicManager.getInstance().playSound("res/music/score"+t_sound+".wav");
         // var _point =this.localToGlobal(new Point(0,0));
         var _score = 10;
         this.addGameScore(_score);
@@ -378,7 +380,7 @@ var GameScene = (function (_super) {
 
     //点击界面
     _proto._clickLayerEvent = function(){
-        MusicManager.getInstance().playSound("res/music/snow.ogg");
+        MusicManager.getInstance().playSound("res/music/snow.wav");
         if(this.snowBallDir == 1){
             // this.snowBallDir = -1;
             var t_num = (this.snowBallDir + 1) / 0.1;
