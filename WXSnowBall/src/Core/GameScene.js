@@ -32,6 +32,7 @@ var GameScene = (function (_super) {
     _proto.isGameover = false;                                               //是否游戏结束
     _proto.treeList = [];                                                    //树木层
     _proto.treeLayerDis = 0;                                                 //树木层移动距离
+    _proto.pointList = [];                                                   //路径点
   
 
     _proto.Init = function () {
@@ -126,6 +127,7 @@ var GameScene = (function (_super) {
         this.treeLayerDis = 0;
         this.treeLayer.pos(0,0);
         this.lineGraphics.clear();
+        this.pointList = [];
 
         for (var i = 0; i < this.treeList.length; i++) {
             var t_tree = this.treeList[i];
@@ -208,7 +210,16 @@ var GameScene = (function (_super) {
                 // Gamelog("------createTree x="+t_treePoint.x+",y="+t_treePoint.y);
                 this.createTreeList(t_treePoint.y);
             }
-
+            // Gamelog("-------this.treeLayerDis="+this.treeLayerDis);
+            for (var i = 0; i < this.pointList.length; i++) {
+                var t_point = this.pointList[i];
+                var t_gamePoint = this.treeLayer.localToGlobal(t_point,true);
+                // Gamelog("----t_gamePoint x="+t_gamePoint.x+",y="+t_gamePoint.y);
+                if(t_gamePoint.y - this.treeLayerDis < -200){
+                    this.pointList.splice(i,1);
+                }
+            }
+            // Gamelog("-------this.pointList  length="+this.pointList.length);
             //更新球的位置
             this.updateBall();
             //更新树木位置
@@ -232,21 +243,30 @@ var GameScene = (function (_super) {
 
         // Gamelog("------t_ballPoint x="+t_ballPoint.x+",y="+t_ballPoint.y);
         this.treeLayer.globalToLocal(t_ballPoint);
+        this.pointList.push(t_ballPoint);
         // Gamelog("------draw x="+t_ballPoint.x+",y="+t_ballPoint.y);
-        this.drawLine(t_ballPoint);
+
+        // this.drawLine(t_ballPoint);
+        this.lineGraphics.clear();
+        var points = [];
+        for (var i = 0; i < this.pointList.length; i++) {
+            var t_point = this.pointList[i];
+            points.push(t_point.x);
+            points.push(t_point.y);
+            // this.drawLine(t_point);
+        }
+        this.drawLines(points);
 
 
+    }
+    //画轨迹点集合
+    _proto.drawLines = function(_points){
+        this.lineGraphics.save();
+        this.lineGraphics.drawLines(10,8,_points,"#dddbdb",10);
     }
     //画轨迹
     _proto.drawLine = function(_point){
         this.lineGraphics.save();
-        // this.lineGraphics.alpha(0.5);
-        var t_gr = new Sprite().graphics;
-        // if(this.snowBallDir > 0){
-        //     _point = new Point(_point.x +6,_point.y);
-        // }else{
-        //     _point = new Point(_point.x + 20,_point.y);
-        // }
         this.lineGraphics.drawCircle(_point.x +10,_point.y,8,"#dddbdb");
         // this.lineGraphics.restore();
     }

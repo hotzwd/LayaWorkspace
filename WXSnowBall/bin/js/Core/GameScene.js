@@ -32,6 +32,7 @@ var GameScene = (function (_super) {
     _proto.isGameover = false;                                               //是否游戏结束
     _proto.treeList = [];                                                    //树木层
     _proto.treeLayerDis = 0;                                                 //树木层移动距离
+    _proto.pointList = [];                                                   //路径点
   
 
     _proto.Init = function () {
@@ -41,7 +42,7 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
 
-        // MusicManager.getInstance().playMusic("res/music/1.mp3");
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         
         this.gameLayer = this.gameUI.gameLayer;
         this.treeLayer = this.gameUI.treeLayer;
@@ -60,7 +61,7 @@ var GameScene = (function (_super) {
         // Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.restartGame();
+        this.restartGame(true);
         // this.startGame();
        
     }
@@ -102,17 +103,20 @@ var GameScene = (function (_super) {
     }
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
+    _proto.restartGame = function(_gameover,_score){
 
-        this.m_curLevel = 0; 
+        
         this.snowBallDir = 1;
         this.snowBallSpeed = 3;
         this.treeLayerSpeed = 6;
         
-
-        this.gameScore = 0;
+        if(_gameover){
+            this.gameScore = 0;
+        }else{
+            this.gameScore = _score;
+        }
         this.gameUI.t_gamescore.text = this.gameScore;
-        this.gameTime = 0;
+        // this.gameTime = 0;
         // this.leftGameTime = 0;
         // this.gameUI.label_time.text = "00:00";
 
@@ -123,6 +127,7 @@ var GameScene = (function (_super) {
         this.treeLayerDis = 0;
         this.treeLayer.pos(0,0);
         this.lineGraphics.clear();
+        this.pointList = [];
 
         for (var i = 0; i < this.treeList.length; i++) {
             var t_tree = this.treeList[i];
@@ -141,12 +146,24 @@ var GameScene = (function (_super) {
         Laya.timer.clear(this,this.onUpdate);
         Laya.timer.clear(this,this.updateGameTime);
         this.isGameover = true;
-        UIManager.getInstance().showUI("GameOverUI");
+
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                UIManager.getInstance().showUI("GameOverUI");
+                return;
+            }
+            UIManager.getInstance().showUI("GameSharedUI");
+        }else{
+            // this.btn_addLife.visible = true;
+            UIManager.getInstance().showUI("GameSharedUI");
+        }
 
         
     }
     //雪球消失效果
     _proto.snowBallDead = function(){
+        MusicManager.getInstance().playSound("res/music/gameover.wav");
+        
         this.snowBall.visible = false;
         this.lineGraphics.clear();
 
@@ -193,7 +210,16 @@ var GameScene = (function (_super) {
                 // Gamelog("------createTree x="+t_treePoint.x+",y="+t_treePoint.y);
                 this.createTreeList(t_treePoint.y);
             }
-
+            // Gamelog("-------this.treeLayerDis="+this.treeLayerDis);
+            for (var i = 0; i < this.pointList.length; i++) {
+                var t_point = this.pointList[i];
+                var t_gamePoint = this.treeLayer.localToGlobal(t_point,true);
+                // Gamelog("----t_gamePoint x="+t_gamePoint.x+",y="+t_gamePoint.y);
+                if(t_gamePoint.y - this.treeLayerDis < -200){
+                    this.pointList.splice(i,1);
+                }
+            }
+            // Gamelog("-------this.pointList  length="+this.pointList.length);
             //更新球的位置
             this.updateBall();
             //更新树木位置
@@ -217,21 +243,30 @@ var GameScene = (function (_super) {
 
         // Gamelog("------t_ballPoint x="+t_ballPoint.x+",y="+t_ballPoint.y);
         this.treeLayer.globalToLocal(t_ballPoint);
+        this.pointList.push(t_ballPoint);
         // Gamelog("------draw x="+t_ballPoint.x+",y="+t_ballPoint.y);
-        this.drawLine(t_ballPoint);
+
+        // this.drawLine(t_ballPoint);
+        this.lineGraphics.clear();
+        var points = [];
+        for (var i = 0; i < this.pointList.length; i++) {
+            var t_point = this.pointList[i];
+            points.push(t_point.x);
+            points.push(t_point.y);
+            // this.drawLine(t_point);
+        }
+        this.drawLines(points);
 
 
+    }
+    //画轨迹点集合
+    _proto.drawLines = function(_points){
+        this.lineGraphics.save();
+        this.lineGraphics.drawLines(10,8,_points,"#dddbdb",10);
     }
     //画轨迹
     _proto.drawLine = function(_point){
         this.lineGraphics.save();
-        // this.lineGraphics.alpha(0.5);
-        var t_gr = new Sprite().graphics;
-        // if(this.snowBallDir > 0){
-        //     _point = new Point(_point.x +6,_point.y);
-        // }else{
-        //     _point = new Point(_point.x + 20,_point.y);
-        // }
         this.lineGraphics.drawCircle(_point.x +10,_point.y,8,"#dddbdb");
         // this.lineGraphics.restore();
     }
@@ -298,6 +333,8 @@ var GameScene = (function (_super) {
     }
     //显示增加分数
     _proto.showScore = function(_point){
+        var t_sound = parseInt(Math.random()*2 +1);
+        MusicManager.getInstance().playSound("res/music/score"+t_sound+".wav");
         // var _point =this.localToGlobal(new Point(0,0));
         var _score = 10;
         this.addGameScore(_score);
@@ -363,6 +400,7 @@ var GameScene = (function (_super) {
 
     //点击界面
     _proto._clickLayerEvent = function(){
+        MusicManager.getInstance().playSound("res/music/snow.wav");
         if(this.snowBallDir == 1){
             // this.snowBallDir = -1;
             var t_num = (this.snowBallDir + 1) / 0.1;

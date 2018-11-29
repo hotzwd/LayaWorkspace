@@ -17,8 +17,8 @@ var GameStartUiLogic = (function (_super) {
         
 
         this.btn_start.on(Laya.Event.CLICK,this,this._startClickEvent);
-        // this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
-        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
+        // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
         wxGame.getInstance().showClubBtn(true);
     }
@@ -28,7 +28,7 @@ var GameStartUiLogic = (function (_super) {
     }
 
     _proto._startClickEvent = function(){
-        // MusicManager.getInstance().playSound("res/music/click.wav");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().showClubBtn(false);
         wxGame.getInstance().createVideoAD();
 
@@ -40,11 +40,11 @@ var GameStartUiLogic = (function (_super) {
     }
     
     _proto._shareClickEvent = function(){
-        // MusicManager.getInstance().playSound("res/music/click.wav");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().shareGame();
     }
     _proto._rankClickEvent = function(){
-        // MusicManager.getInstance().playSound("res/music/click.wav");
+        MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().showUI("GameRankUI");
     }
 
