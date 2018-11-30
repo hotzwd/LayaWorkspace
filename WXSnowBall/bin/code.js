@@ -54068,7 +54068,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":536,"x":193,"skin":"Game/logo.png"}},{"type":"Button","props":{"y":903,"x":235,"var":"btn_start","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"开始游戏"}},{"type":"Button","props":{"y":1032,"x":235,"var":"btn_rank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"好友排行"}},{"type":"Text","props":{"y":1351,"x":30,"text":"v1.0.1","fontSize":35,"font":"SimHei"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":536,"x":193,"skin":"Game/logo.png"}},{"type":"Button","props":{"y":903,"x":235,"var":"btn_start","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"开始游戏"}},{"type":"Button","props":{"y":1032,"x":235,"var":"btn_rank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"好友排行"}},{"type":"Text","props":{"y":1354,"x":23,"text":"v2.0","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
 /**
@@ -55689,7 +55689,6 @@ var wxGame = (function (_super) {
              return;
          }
         
-        return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -55707,7 +55706,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-9cd46af0aa707aac'
+            adUnitId: 'adunit-68792ad4e658d32f'
         });
 
         var t_videoAd = this.videoAd;
