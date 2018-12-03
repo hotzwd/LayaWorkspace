@@ -30,6 +30,7 @@ var GameStartUiLogic = (function (_super) {
     }
 
     _proto._startClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().showClubBtn(false);
         wxGame.getInstance().createVideoAD();
 
@@ -41,9 +42,11 @@ var GameStartUiLogic = (function (_super) {
     }
     
     _proto._shareClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().shareGame();
     }
     _proto._rankClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         UIManager.getInstance().showUI("GameRankUI");
     }
 

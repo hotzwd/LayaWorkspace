@@ -48883,6 +48883,28 @@ var GameRankUI=(function(_super){
 		GameRankUI.uiView={"type":"View","props":{"width":480,"height":845,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":480,"visible":true,"var":"gameoverPanel","height":1040,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":480,"lineWidth":1,"height":1040,"fillColor":"#050505"}}]},{"type":"Box","props":{"scaleY":0.6,"scaleX":0.6,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"y":12,"x":0,"width":618,"skin":"Game/rankBg.png","sizeGrid":"10,10,10,10","height":728},"child":[{"type":"List","props":{"y":89,"x":6,"width":610,"visible":false,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":6,"repeatX":1,"height":536},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"var":"playerItem","renderType":"render","height":85},"child":[{"type":"Label","props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":30,"font":"SimHei","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":23,"x":135,"width":205,"text":"玩家名字七个字","name":"playerName","height":40,"fontSize":25,"font":"SimHei"}},{"type":"Label","props":{"y":25,"x":350,"width":116,"text":"9999999","name":"playerScore","height":30,"fontSize":25,"font":"SimHei","color":"#ff0000","align":"center"}},{"type":"Label","props":{"y":26,"x":471,"width":116,"text":"青铜卫士","name":"playerTitle","height":30,"fontSize":25,"font":"SimHei","color":"#010101","align":"center"}}]}]},{"type":"Label","props":{"y":21,"var":"listName","text":"好友排行","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":-7}},{"type":"Label","props":{"y":669,"x":306,"text":"每周一更新排名","fontSize":26,"font":"SimHei","color":"#ffffff","bold":true,"anchorY":0.5,"anchorX":0.5}}]},{"type":"Image","props":{"y":-2,"x":577,"var":"close","skin":"Game/close.png"}}]}]}]};
 		return GameRankUI;
 	})(View);
+var GameSharedUI=(function(_super){
+		function GameSharedUI(){
+			
+		    this.aniShare=null;
+		    this.btn_shard=null;
+		    this.btn_cancel=null;
+
+			GameSharedUI.__super.call(this);
+		}
+
+		CLASS$(GameSharedUI,'ui.GameSharedUI',_super);
+		var __proto__=GameSharedUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameSharedUI.uiView);
+
+		}
+
+		GameSharedUI.uiView={"type":"View","props":{"width":480,"height":845,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":480,"visible":true,"height":1040,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":480,"lineWidth":1,"height":1040,"fillColor":"#050505"}}]},{"type":"Button","props":{"y":487,"x":242,"var":"btn_shard","stateNum":1,"skin":"Game/fuhuo.png","scaleY":0.6,"scaleX":0.6,"labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":564,"x":243,"width":148,"var":"btn_cancel","scaleY":0.6,"scaleX":0.6,"mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":0.6,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":0.6,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":0.6,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":0.6,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		return GameSharedUI;
+	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
 			
@@ -48932,6 +48954,61 @@ var StepUI=(function(_super){
 		return StepUI;
 	})(View);
 /**
+ * 分享界面逻辑 by lzq
+ */
+var GameSharedUILogic = (function(_super){
+    function GameSharedUILogic(){
+        GameSharedUILogic.super(this);
+
+    }
+    Laya.class(GameSharedUILogic,"UILogic.GameSharedUILogic",_super);
+    var _proto = GameSharedUILogic.prototype;
+
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+
+        this.aniShare.play(0, true);
+        
+        this.btn_shard.on(Laya.Event.CLICK,this,this.onShowVidoAd);
+        this.btn_cancel.on(Laya.Event.CLICK,this,this.onCancelClick);
+
+
+    }
+    _proto.onDestroy = function(){
+       
+    }
+
+     
+     /**点击跳过 */
+    _proto.onCancelClick = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        UIManager.getInstance().closeUI("GameSharedUI");
+        UIManager.getInstance().showUI("GameOverUI");
+    }
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+       wxGame.getInstance().showVideoAD(this,this.reviveGame);
+
+    }
+    //复活
+    _proto.reviveGame = function(_success){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        UIManager.getInstance().closeUI("GameSharedUI");
+        if(_success){
+            var scoreNum = SceneManager.getInstance().currentScene.gameLevel;
+            SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
+            SceneManager.getInstance().currentScene.resumeGame();
+            wxGame.getInstance().createVideoAD();
+        }
+    }
+
+    return GameSharedUILogic;
+})(GameSharedUI);
+/**
  * 好友界面逻辑 by lzq
  */
 var GameRankUILogic = (function(_super){
@@ -48965,7 +49042,7 @@ var GameRankUILogic = (function(_super){
 
     /**关闭排行 */
     _proto.onCloseRank = function(){
-        
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().showOpenDataContext(false);
         UIManager.getInstance().closeUI("GameRankUI");
         
@@ -49285,6 +49362,7 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
         
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         this.gameLayer = this.gameUI.gameLayer;
         this.m_progress = this.gameUI.pro_push;
 
@@ -49300,7 +49378,7 @@ var GameScene = (function (_super) {
         Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.restartGame();
+        this.restartGame(true);
        
     }
 
@@ -49334,16 +49412,28 @@ var GameScene = (function (_super) {
      
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
+    _proto.restartGame = function(_gameover,_gameLevel){
 
-        this.gameLevel = 0;
+        if(_gameover){
+            this.gameLevel = 0;
+        }else{
+            this.gameLevel = _gameLevel;
+            if(this.m_endStep != null){
+                var t_endPoint = new Point(this.gameUI.end_step.x,this.gameUI.end_step.y);
+                var t_startPoint = new Point(this.gameUI.start_step.x,this.gameUI.start_step.y);
+                this.m_startStep.pos(t_startPoint.x,t_startPoint.y);
+                this.m_endStep.pos(t_endPoint.x,t_endPoint.y);
+                //刀
+                this.m_knife.initKnife(1,this.m_startStep,this.m_endStep);
+                this.m_knife.setState(0);
+            }
+        }
+        this.m_gameover = false;
+
         this.gameUI.t_level.text = this.gameLevel;
-        // this.gameScore = 0;
-        // this.gameUI.t_gamescore.text = this.gameScore;
         var highscoreNum = SetLocalMaxScore(0);
         this.gameUI.t_gamescore.text = highscoreNum;
 
-        this.m_gameover = false;
         if(this.m_startStep != null){
             this.updateStep();
         }
@@ -49472,7 +49562,17 @@ var GameScene = (function (_super) {
         this.m_gameover = true;
         Laya.timer.clear(this,this.onUpdate);
 
-        UIManager.getInstance().showUI("GameOverUI");
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                UIManager.getInstance().showUI("GameOverUI");
+                return;
+            }
+            UIManager.getInstance().showUI("GameSharedUI");
+        }else{
+            // this.btn_addLife.visible = true;
+            UIManager.getInstance().showUI("GameSharedUI");
+        }
+        
         
     }
 
@@ -49526,6 +49626,9 @@ var GameScene = (function (_super) {
         if(this.m_knife.m_state != 0 || !this.m_progress.visible || this.m_gameover)
             return;
         
+        var t_sound = parseInt(Math.random()*3 +1);
+        MusicManager.getInstance().playSound("res/music/fire"+t_sound+".wav");
+
         //跳跃
         Laya.timer.clear(this,this.pushProgress);
         this.m_knife.setState(1);
@@ -49561,8 +49664,11 @@ var GameScene = (function (_super) {
         if(p_suc){
             this.gameLevel++;
             this.updateStep();
+            MusicManager.getInstance().playSound("res/music/score.wav");
+            MusicManager.getInstance().playSound("res/music/hitsuelo.wav");
         }else{
             this.gameover();
+            MusicManager.getInstance().playSound("res/music/pincho.wav");
         }
     }
 
@@ -49854,7 +49960,10 @@ var UIManager = (function(_super){
                 break;
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
-                break;    
+                break;
+            case "GameSharedUI":    
+                uiLogic = new GameSharedUILogic();
+                break;
             
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -50391,7 +50500,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -50409,7 +50518,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-7bddbadfad6175db'
         });
 
         var t_videoAd = this.videoAd;
@@ -50445,6 +50554,7 @@ var wxGame = (function (_super) {
             return;
 
         t_videoAd.show();
+        SceneManager.getInstance().currentScene.pauseGame();
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
             // 用户点击了【关闭广告】按钮
@@ -50535,6 +50645,8 @@ var GameOverUILogic = (function (_super) {
         
         this.ani1.play(0,true);
 
+        MusicManager.getInstance().playSound("res/music/gameover.wav");
+
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
@@ -50554,13 +50666,15 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto._closeClickEvent = function(){
-        SceneManager.getInstance().currentScene.restartGame();
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
         // wxGame.getInstance().showOpenDataContext(false);
     }
   
      _proto._shareClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().shareGame();
     }
 
@@ -50598,6 +50712,7 @@ var GameStartUiLogic = (function (_super) {
     }
 
     _proto._startClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().showClubBtn(false);
         wxGame.getInstance().createVideoAD();
 
@@ -50609,9 +50724,11 @@ var GameStartUiLogic = (function (_super) {
     }
     
     _proto._shareClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().shareGame();
     }
     _proto._rankClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         UIManager.getInstance().showUI("GameRankUI");
     }
 
@@ -50656,6 +50773,7 @@ var GameUILogic = (function (_super) {
 
     //引导
     _proto.guidBoxClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         this.guidBox.visible = false;
         // SceneManager.getInstance().currentScene.resumeGame();
         SceneManager.getInstance().currentScene.startGame();
@@ -50685,7 +50803,7 @@ var GameUILogic = (function (_super) {
     //点击增加生命
     _proto.addLifeClick = function(){
         this.btn_addLife.visible= false;
-        SceneManager.getInstance().currentScene.pauseGame();
+        // SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
             // SceneManager.getInstance().currentScene.addLife(true);
@@ -50764,7 +50882,7 @@ Laya.stage.alignH = "center";
 //垂直居中对齐
 Laya.stage.alignV = "middle";
 
-Laya.stage.bgColor = "#15174a";//设置画布的背景颜色。
+Laya.stage.bgColor = "#003b41";//设置画布的背景颜色。
 //使用WebWorker加载并解码图片，把耗费cpu的工作放到worker中执行，防止js主线程卡死，从而能大大减少游戏中加载卡顿现象。
 //指定worker.js所在的路径,比如放在libs目录下
 //Laya.WorkerLoader.workerPath = "libs/worker.js";
