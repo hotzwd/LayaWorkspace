@@ -66,7 +66,7 @@ var GameUILogic = (function (_super) {
     //点击增加生命
     _proto.addLifeClick = function(){
         this.btn_addLife.visible= false;
-        SceneManager.getInstance().currentScene.pauseGame();
+        // SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
             // SceneManager.getInstance().currentScene.addLife(true);

@@ -17,6 +17,8 @@ var GameOverUILogic = (function (_super) {
         
         this.ani1.play(0,true);
 
+        MusicManager.getInstance().playSound("res/music/gameover.wav");
+
         this.btn_close.on(Laya.Event.CLICK,this,this._closeClickEvent);
         this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
 
@@ -36,13 +38,15 @@ var GameOverUILogic = (function (_super) {
     }
 
     _proto._closeClickEvent = function(){
-        SceneManager.getInstance().currentScene.restartGame();
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
         // wxGame.getInstance().showOpenDataContext(false);
     }
   
      _proto._shareClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/btnclick.wav");
         wxGame.getInstance().shareGame();
     }
 

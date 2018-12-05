@@ -285,7 +285,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -303,7 +303,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-1351ddaaab383f9f'
+            adUnitId: 'adunit-7bddbadfad6175db'
         });
 
         var t_videoAd = this.videoAd;
@@ -339,6 +339,7 @@ var wxGame = (function (_super) {
             return;
 
         t_videoAd.show();
+        SceneManager.getInstance().currentScene.pauseGame();
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
             // 用户点击了【关闭广告】按钮

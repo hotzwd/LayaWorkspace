@@ -35,6 +35,7 @@ var GameScene = (function (_super) {
             // this.gameUI.visible = false;
         }
         
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         this.gameLayer = this.gameUI.gameLayer;
         this.m_progress = this.gameUI.pro_push;
 
@@ -50,7 +51,7 @@ var GameScene = (function (_super) {
         Laya.timer.frameOnce(8, this, this.delayInitShow);
         // this.delayInitShow();
 
-        this.restartGame();
+        this.restartGame(true);
        
     }
 
@@ -84,16 +85,28 @@ var GameScene = (function (_super) {
      
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
+    _proto.restartGame = function(_gameover,_gameLevel){
 
-        this.gameLevel = 0;
+        if(_gameover){
+            this.gameLevel = 0;
+        }else{
+            this.gameLevel = _gameLevel;
+            if(this.m_endStep != null){
+                var t_endPoint = new Point(this.gameUI.end_step.x,this.gameUI.end_step.y);
+                var t_startPoint = new Point(this.gameUI.start_step.x,this.gameUI.start_step.y);
+                this.m_startStep.pos(t_startPoint.x,t_startPoint.y);
+                this.m_endStep.pos(t_endPoint.x,t_endPoint.y);
+                //刀
+                this.m_knife.initKnife(1,this.m_startStep,this.m_endStep);
+                this.m_knife.setState(0);
+            }
+        }
+        this.m_gameover = false;
+
         this.gameUI.t_level.text = this.gameLevel;
-        // this.gameScore = 0;
-        // this.gameUI.t_gamescore.text = this.gameScore;
         var highscoreNum = SetLocalMaxScore(0);
         this.gameUI.t_gamescore.text = highscoreNum;
 
-        this.m_gameover = false;
         if(this.m_startStep != null){
             this.updateStep();
         }
@@ -222,7 +235,17 @@ var GameScene = (function (_super) {
         this.m_gameover = true;
         Laya.timer.clear(this,this.onUpdate);
 
-        UIManager.getInstance().showUI("GameOverUI");
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                UIManager.getInstance().showUI("GameOverUI");
+                return;
+            }
+            UIManager.getInstance().showUI("GameSharedUI");
+        }else{
+            // this.btn_addLife.visible = true;
+            UIManager.getInstance().showUI("GameSharedUI");
+        }
+        
         
     }
 
@@ -276,6 +299,9 @@ var GameScene = (function (_super) {
         if(this.m_knife.m_state != 0 || !this.m_progress.visible || this.m_gameover)
             return;
         
+        var t_sound = parseInt(Math.random()*3 +1);
+        MusicManager.getInstance().playSound("res/music/fire"+t_sound+".wav");
+
         //跳跃
         Laya.timer.clear(this,this.pushProgress);
         this.m_knife.setState(1);
@@ -311,8 +337,11 @@ var GameScene = (function (_super) {
         if(p_suc){
             this.gameLevel++;
             this.updateStep();
+            MusicManager.getInstance().playSound("res/music/score.wav");
+            MusicManager.getInstance().playSound("res/music/hitsuelo.wav");
         }else{
             this.gameover();
+            MusicManager.getInstance().playSound("res/music/pincho.wav");
         }
     }
 
