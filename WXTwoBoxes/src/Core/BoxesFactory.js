@@ -14,7 +14,7 @@ var BoxesFactory = (function(_super){
         }
         return instance;
     }
-    var BoxesPoolNum = 1;                                                 //对象池大小
+    var BoxesPoolNum = 10;                                                 //对象池大小
 
     _proto.BoxesPool = null;                                               //对象池
     _proto.BoxesBox;                                                      //父元素

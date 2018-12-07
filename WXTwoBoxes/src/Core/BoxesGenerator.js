@@ -36,38 +36,12 @@ var BoxesGenerator = (function(_super){
     /**初始化对象池 */
      _proto.createBoxes = function(p_num){
 
-        var t_indexList = [];
-        for (var x = 0; x < p_num; x++) {
-            t_indexList.push(parseInt(Math.random()* 9));       
-        }
-
-        //产生扰乱数字
-        for (i = 0; i < t_indexList.length; i++) {
-            // var t_num = t_indexList[i];
-            // Gamelog("-----list num="+t_num);
-            var isSame = false;
-            var t_Index = 0;
-            do {
-                isSame = false;
-                t_Index =  parseInt(Math.random()*9);
-                for (var j = 0; j < t_indexList.length; j++) {
-                    var t_Index2 =t_indexList[j];
-                    if(t_Index == t_Index2){
-                        isSame = true;
-                        break;
-                    }
-                }
-            } while (isSame == true);
-            t_indexList[i] = t_Index;
-            Gamelog("-----list t_Index="+t_Index);
-        }
-
          var t_BoxesList = [];
          for (var i = 0; i < p_num; i++) {
             var tempBoxes = BoxesFactory.getInstance().getBoxesFromPool();
             tempBoxes.visible = true;
             
-            this.randomBoxesPos(tempBoxes,t_indexList[i]);
+            this.randomBoxesPos(tempBoxes);
             t_BoxesList.push(tempBoxes);
             // MusicManager.getInstance().playSound("res/music/ds_Boxes_intro.wav");
          }
@@ -76,25 +50,28 @@ var BoxesGenerator = (function(_super){
 
      _proto.randomBoxesPos = function(_mos,_pos){
 
-        var t_levelData = SceneManager.getInstance().currentScene.levelData;
-        var typeId = parseInt(Math.random()*100, 10);
-        if(t_levelData.level == 1){
-            typeId = 1;
-        }else{
-            if(typeId < 90){
-                typeId = 1;
+       
+        // Gamelog("----cretate pos ="+ birthPos.x+",y="+birthPos.y);
+        var typeId = parseInt(Math.random()*2 + 1); //1方形 2三角形
+        var birthPos = new Laya.Point(238,800);
+        var t_dir = parseInt(Math.random()*2 + 1);;//1左边 2右边
+ 
+        if(typeId == 1){
+            if(t_dir == 1){
+                birthPos = new Laya.Point(238,-100);
             }else{
-                typeId = 0;
+                birthPos = new Laya.Point(504,-100);
+            }
+        }else{
+            if(t_dir == 1){
+                birthPos = new Laya.Point(347,-100);
+            }else{
+                birthPos = new Laya.Point(517,-100);
             }
         }
 
-        // var birthIndex = parseInt(Math.random()*birthPosArray.length,10);
-        var birthPos = birthPosArray[_pos];
-        Gamelog("----cretate pos ="+ birthPos.x+",y="+birthPos.y);
-        var t_time = t_levelData.time;
         //初始
-
-        _mos.initBoxes(typeId,birthPos,t_time);
+        _mos.initBoxes(typeId,t_dir,birthPos);
 
      }
     

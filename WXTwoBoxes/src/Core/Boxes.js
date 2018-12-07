@@ -11,31 +11,28 @@ var Boxes = (function (_super) {
         Boxes.super(this);
         this.Init();
     }
- 
+    
+    _proto.m_icon = null;                                                 //图标
     _proto.m_anim = null;                                                 //动画
     _proto.m_startPoint = null;                                           //起点坐标
     _proto.m_num = 0;                                                     //当前数字
     _proto.m_move = true;                                                 //是否移动
     _proto.m_type = 1;                                                    //类型
     _proto.m_time = 0;                                                    //时间
+    _proto.boxLeft = null;
+    _proto.boxRight = null;
     
 
 
     _proto.Init = function () {
 
-        this.width = 151;
-        this.height = 171;
+        this.width = 218;
+        this.height = 92;
 
-        this.on(Laya.Event.CLICK,this,this.BoxesClickEvent);
+        // this.on(Laya.Event.CLICK,this,this.BoxesClickEvent);
 
-        this.m_anim = new Laya.Animation();
-        // this.m_anim.interval = 50;
-        this.m_anim.play(0, false, "Boxes_human");
-        // this.m_anim.pivotX = 75;
-        // this.m_anim.pivotY = 85;
-        // this.m_anim.pos(this.pivotX,this.pivotY);
-        this.addChild(this.m_anim);
-        // this.m_anim.stop();
+        this.m_icon = new Laya.Image();
+        this.addChild(this.m_icon);
     }
     
 
@@ -44,28 +41,28 @@ var Boxes = (function (_super) {
     }
 
     /**初始化 */
-    _proto.initBoxes = function(p_type,p_startPoint,p_time){
+    _proto.initBoxes = function(p_type,p_dir,p_startPoint){
         
         this.resetBoxes();
 
         this.m_type = p_type;
-        this.m_time = p_time;
+        this.m_dir = p_dir;
         this.m_startPoint = p_startPoint;
         this.x = p_startPoint.x;
         this.y = p_startPoint.y;
 
-        if(this.m_type == 0){
-            this.m_anim.play(0, false, "Boxes_human");
-        }else{
-            var t_anim = parseInt(Math.random()* 2 +1);
-            this.m_BoxesType = t_anim;
-            this.m_anim.play(0, false, "Boxes_"+ t_anim);
-            MusicManager.getInstance().playSound("res/music/crear"+t_anim+".wav");
-        }
+        this.boxLeft = SceneManager.getInstance().currentScene.m_boxLeft;
+        this.boxRight = SceneManager.getInstance().currentScene.m_boxRight;
+        //方形
+        if(this.m_type == 1){
+            this.m_icon.skin = "Game/fang"+p_dir+".png";
+            this.width = 218;
+            this.height = 92;
 
-        //第一关不
-        if(this.m_time != -1){
-            Laya.timer.loop(1000,this,this.updateGameTime);
+        }else{
+            this.m_icon.skin = "Game/san"+p_dir+".png";
+            this.width = 112;
+            this.height =122;
         }
         
     }
@@ -75,39 +72,24 @@ var Boxes = (function (_super) {
     _proto.resetBoxes = function(){
     }
 
-    
-    /**更新游戏时间 */
-    _proto.updateGameTime = function(){
-        this.m_time --;
-        if(this.m_time <= 0){
-            this.m_time = 0;
-            this.BoxesDisappear();
-        }
-
-    }
-
-    //消失
-    _proto.BoxesDisappear = function(){
-        Gamelog("------BoxesDisappear m_type="+this.m_type);
-        SceneManager.getInstance().currentScene.killBoxes(this,false);
-    }
-
-    _proto.BoxesPause = function(){
-        if(this.visible &&  this.m_time >0){
-            Laya.timer.clear(this,this.updateGameTime);
-        }
-    }
-    _proto.BoxesResume =function(){
-        if(this.visible && this.m_time >0){
-            Laya.timer.loop(1000,this,this.updateGameTime);
-        }
-    }
-
     /**
      * update刷新
      */
     _proto.onUpdate = function () {
-        
+        this.y += 10;
+        //左边
+        if(this.m_dir == 1){
+            if(this.boxLeft.x + this.boxLeft.width /2 >= this.x && this.y + this.height >= this.boxLeft.y - this.boxLeft.height / 2 && this.y <= this.boxLeft.y + this.boxLeft.height/2){
+                Gamelog("----撞到左边")
+                SceneManager.getInstance().currentScene.gameover();
+            }
+        }else{
+            if( this.x + this.width >= this.boxRight.x - this.boxRight.width /2 && this.y + this.height >= this.boxRight.y - this.boxRight.height / 2 && this.y <= this.boxRight.y + this.boxRight.height/2){
+                Gamelog("----撞到右边")
+                SceneManager.getInstance().currentScene.gameover();
+            }
+        }
+       
     }
 
     //点击盘子

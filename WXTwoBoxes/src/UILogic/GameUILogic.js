@@ -97,6 +97,41 @@ var GameUILogic = (function (_super) {
         }
     }
 
+    /**
+   * 震动屏幕 
+   * @param callBack
+   * @param times
+   * @param offset
+   * @param speed
+   *
+   */  
+    _proto.stageShake = function(){
+        if(this._isShake)
+             return;
+        var times = 1;
+        var offset = 3;
+        var speed = 15;
+
+        this._isShake = true;
+        var num = 0;
+        var offsetArr = [0, 0];
+        var point = new Laya.Point(Laya.stage.x, Laya.stage.y);
+        Laya.stage.timerLoop(speed, this, shakeObject);
+        
+        function shakeObject(){
+            var count = (num++) % 4;
+            offsetArr[num % 2] = count < 2 ? 0 : offset;
+            Laya.stage.x = offsetArr[0] + point.x;
+            Laya.stage.y = offsetArr[1] + point.y;
+            if(num > (times * 4 + 1)){
+                Laya.stage.clearTimer(this, shakeObject);
+                num = 0;
+                this._isShake = false;
+            }
+        }
+   
+  }
+
     
     return GameUILogic;
 })(GameUI);
