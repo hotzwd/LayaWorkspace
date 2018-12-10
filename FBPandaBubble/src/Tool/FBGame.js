@@ -89,7 +89,7 @@ var FBGame = (function (_super) {
         window.FBRewardAdLoad = false;
 
         console.log("----------loadRewardAd ");
-        FBInstant.getRewardedVideoAsync('205023123339716_279713345870693').then(function(rewardedVideo) {
+        FBInstant.getRewardedVideoAsync('306539786860916_306552303526331').then(function(rewardedVideo) {
             window.FBRewardAd = rewardedVideo;
             return window.FBRewardAd.loadAsync();
         }).then(function() {
@@ -107,7 +107,7 @@ var FBGame = (function (_super) {
         window.FBInterstitialAdLoad = false;
         console.log("----------loadInterstitialAd ");
         //插屏
-        FBInstant.getInterstitialAdAsync('205023123339716_279709389204422').then(function(interstitial) {
+        FBInstant.getInterstitialAdAsync('306539786860916_306552213526340').then(function(interstitial) {
             window.FBInterstitialAd = interstitial;
             return window.FBInterstitialAd.loadAsync();
         }).then(function() {
