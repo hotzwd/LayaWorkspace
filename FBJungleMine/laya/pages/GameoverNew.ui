@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":3,
-    "selecteID":83,
+    "selecteID":21,
     "props":{"width":720,"sceneColor":"#d2413f","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -67,7 +67,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":396,"x":499,"var":"img_result","skin":"WXGameUI/jiesuan_biaoti_shengli.png"},
+                    "props":{"y":522,"x":499,"var":"img_result","skin":"WXGameUI/jiesuan_biaoti_shengli.png"},
                     "nodeParent":3,
                     "label":"Image(img_result)",
                     "isDirectory":false,
@@ -80,7 +80,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":565,"x":516,"width":271,"var":"label_time","text":"00:00","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"},
+                    "props":{"y":738,"x":516,"width":271,"var":"label_time","text":"00:00","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"SimHei","color":"#e7f106","bold":true,"align":"center"},
                     "nodeParent":3,
                     "label":"Label(label_time)",
                     "isDirectory":false,
@@ -94,7 +94,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":949,"x":555,"var":"btn_playAgain","stateNum":"1","skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8},
+                    "props":{"y":949,"x":538,"var":"btn_playAgain","stateNum":"1","skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8},
                     "nodeParent":3,
                     "label":"Button(btn_playAgain)",
                     "isOpen":false,
@@ -108,7 +108,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":515,"x":548,"width":199,"text":"游戏用时","strokeColor":"#0d0d0d","stroke":2,"height":48,"fontSize":40,"font":"SimHei","color":"#fcfdf4","bold":true,"align":"center"},
+                    "props":{"y":688,"x":548,"width":199,"text":"Game Time","strokeColor":"#0d0d0d","stroke":2,"height":48,"fontSize":40,"font":"SimHei","color":"#fcfdf4","bold":true,"align":"center"},
                     "nodeParent":3,
                     "label":"Label",
                     "isDirectory":false,

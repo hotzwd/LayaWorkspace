@@ -20,5 +20,5 @@ var GameConfig = {
 var GameLogVisible = true;
 
 /**是否运行在FB */
-// var GameInFackBook = true;
-var GameInFackBook = false;
+var GameInFackBook = true;
+// var GameInFackBook = false;

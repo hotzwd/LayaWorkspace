@@ -64,7 +64,7 @@ var GameRankUILogic = (function(_super){
 
         var playerName = cell.getChildByName("playerName");
         var str = t_data.name;
-        var strNew = labelTransform(str,playerName.fontSize,playerName.width);
+        var strNew = GetFormtName(str);
 
         // Gamelog(strNew+":"+strNew);
         playerName.text = strNew;
@@ -72,7 +72,7 @@ var GameRankUILogic = (function(_super){
 
 
         var playerScore = cell.getChildByName("playerScore");
-        playerScore.text = t_data.score;
+        playerScore.text = GetTimeFormat(t_data.score);
     }
 
     /**关闭排行 */

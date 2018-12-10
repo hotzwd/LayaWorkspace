@@ -6,15 +6,15 @@ R 7143871B img_2.png
 R A04F51DA img_3.png
 R 92ED02E2 img_4.png
 R 69629890 img_5.png
-R 26FEEADE img_logo.png
-R 595D1E0B img_yindao.png
+R B598AF9E img_logo.png
+R CEA80499 img_yindao.png
 D WXGameUI
 P 34D4C79B bg_heise.png
 P 7E5C1977 btn_guanbi.png
 P BE05E08C btn_playAgain.png
 P C668874D btn_rank.png
 P D5526427 btn_share.png
-P 98B2AE84 fuhuo.png
+P 0CB5AAB0 fuhuo.png
 R 88811BE6 img_bg.jpg
 P B403EB88 img_chaqi1.png
 P C512F948 img_chaqi2.png
@@ -60,4 +60,4 @@ P B85585BF img_zhouweileishu-7.png
 P 771217C8 img_zhouweileishu-8.png
 P A2368493 jiesuan_biaoti_shengli.png
 P F0FAEB2E jiesuan_biaoti_shibai.png
-R 543297C7 shard.png
+R 8820192F shard.png

@@ -52,11 +52,9 @@ var GameEndShareUILogic = (function (_super) {
 
     /**跳过 */
     _proto.onCloseShare = function () {
-        // UIManager.getInstance().closeUI("GameEndShareUI",true);
         // SceneManager.getInstance().currentScene.gameOver();
-        // UIManager.getInstance().showUI("GameoverUI").initGameover(false);
-
-        this.showAdResult(false);
+        UIManager.getInstance().showUI("GameoverUI").initGameover(false);
+        UIManager.getInstance().closeUI("GameEndShareUI",true);
         
     }
 
@@ -64,33 +62,26 @@ var GameEndShareUILogic = (function (_super) {
     _proto.onShowVidoAd = function () {
 
         Laya.timer.clear(this, this.onEndTimer);
-        //播放广告
-        if (!Browser.onMiniGame) {
-            // SceneManager.getInstance().currentScene.addLife(true);
-            wxGame.getInstance().showVideoAD(this,this.showAdResult);
-         }else{
-             wxGame.getInstance().showVideoAD(this,this.showAdResult);
-         }
 
-
-    }
-
-    //观看结果
-    _proto.showAdResult = function(p_isWatch){
-        if (p_isWatch) {
-            Gamelog("看广告成功");
-
+        if (!GameInFackBook) {
             UIManager.getInstance().closeUI("GameEndShareUI",true);
             SceneManager.getInstance().currentScene.resuemGame();
-
-            wxGame.getInstance().createVideoAD();
-        } else {
-            Gamelog("看广告失败");
-            SceneManager.getInstance().currentScene.gameOver();
-            UIManager.getInstance().showUI("GameoverUI").initGameover(false);
-            UIManager.getInstance().closeUI("GameEndShareUI",true);
-            
+            return;
         }
+
+        window.FBRewardAd.showAsync().then(
+            function() {
+                // 正常播放结束，可以下发游戏奖励
+                UIManager.getInstance().closeUI("GameEndShareUI",true);
+                SceneManager.getInstance().currentScene.resuemGame();
+
+                FBGame.getInstance().loadRewardAd();
+            }
+        );
+
+
+
+
     }
 
     return GameEndShareUILogic;

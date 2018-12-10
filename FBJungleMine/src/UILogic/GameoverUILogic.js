@@ -19,6 +19,8 @@ var GameoverUILogic = (function(_super){
         this.btn_playAgain.on(Laya.Event.CLICK,this,this._playAgainClickEvent);
 
         // this.aniShare.play(0, true);
+
+        
         
     }
 
@@ -35,11 +37,24 @@ var GameoverUILogic = (function(_super){
             this.img_result.skin = "WXGameUI/jiesuan_biaoti_shengli.png";
             //存储在本地并上传
             var highscoreNum = SetLocalMaxScore(scoreNum);
+            FBGame.getInstance().uploadUserScore(highscoreNum);
             // wxGame.getInstance().uploadUserScore(highscoreNum);
         }else{
             this.img_result.skin = "WXGameUI/jiesuan_biaoti_shibai.png";
             // wxGame.getInstance().showFriends();
         }
+
+        //插屏广告
+         if (GameInFackBook) {
+            if(window.FBInterstitialAd != null || window.FBInterstitialAdLoad){
+                window.FBInterstitialAd.showAsync().then(
+                    function() {
+                        // Ad watched
+                        FBGame.getInstance().loadInterstitialAd();
+                    }
+                );
+            }   
+         }
 
 
     }

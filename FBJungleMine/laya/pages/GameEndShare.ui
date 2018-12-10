@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":3,
-    "selecteID":124,
+    "selecteID":117,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -65,7 +65,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1031,"x":564,"visible":true,"var":"cancleBtn","underlineColor":"#ffffff","underline":true,"text":"点击跳过","fontSize":32,"font":"SimHei","color":"#ffffff","align":"center"},
+                    "props":{"y":1027,"x":600,"visible":true,"var":"cancleBtn","underlineColor":"#ffffff","underline":true,"text":"Skip","fontSize":32,"font":"SimHei","color":"#ffffff","align":"center"},
                     "nodeParent":3,
                     "label":"Label(cancleBtn)",
                     "isDirectory":false,
@@ -78,7 +78,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":941,"x":634,"var":"shareBtn","stateNum":"1","skin":"WXGameUI/fuhuo.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":941,"x":634,"var":"shareBtn","stateNum":"2","skin":"WXGameUI/fuhuo.png","scaleY":1,"scaleX":1,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":3,
                     "label":"Button(shareBtn)",
                     "isDirectory":false,
@@ -104,7 +104,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":336,"x":628,"visible":true,"underlineColor":"#ffffff","underline":false,"text":"当前时间","fontSize":22,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
+                    "props":{"y":336,"x":628,"visible":true,"underlineColor":"#ffffff","underline":false,"text":"Game Time","fontSize":22,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
                     "nodeParent":3,
                     "label":"Label",
                     "isDirectory":false,
@@ -124,19 +124,6 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":121,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Label",
-                    "props":{"y":841,"x":640,"visible":false,"underlineColor":"#ffffff","text":"每局限1次复活机会","fontSize":25,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
-                    "nodeParent":3,
-                    "label":"Label",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":124,
                     "child":[
                         ]
                 }],

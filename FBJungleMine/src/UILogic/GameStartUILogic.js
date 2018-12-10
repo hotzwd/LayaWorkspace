@@ -70,7 +70,9 @@ var GameStartUILogic = (function(_super){
         if(this.isStart)
             return;
         MusicManager.getInstance().playSound("res/music/1.wav");
-        // wxGame.getInstance().shareGame();
+        if (GameInFackBook) {
+            FBGame.getInstance().shareGame();
+        }
        
     }
 
