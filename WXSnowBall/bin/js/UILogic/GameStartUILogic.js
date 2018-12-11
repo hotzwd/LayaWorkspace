@@ -19,6 +19,11 @@ var GameStartUiLogic = (function (_super) {
         this.btn_start.on(Laya.Event.CLICK,this,this._startClickEvent);
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.btn_appRank.on(Laya.Event.CLICK,this,this._appRankClickEvent);
+
+        this.ani1.play(0, true);
+        var t_randomAppId = parseInt(Math.random()* MiniGameData.length);
+        this.btn_appRank.skin = MiniGameData[t_randomAppId].icon;
 
         wxGame.getInstance().showClubBtn(true);
     }
@@ -46,6 +51,11 @@ var GameStartUiLogic = (function (_super) {
     _proto._rankClickEvent = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().showUI("GameRankUI");
+    }
+
+    _proto._appRankClickEvent = function(){
+        MusicManager.getInstance().playSound("res/music/click.wav");
+        UIManager.getInstance().showUI("GameRecommendUI");
     }
 
 
