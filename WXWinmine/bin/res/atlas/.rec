@@ -1,6 +1,8 @@
 D .
 D BeginUI
 P A0897746 btn_playGame.png
+P 2310B2BE btn_rank.png
+P B183B4EB btn_share.png
 R 43BFEA28 img_1.png
 R 7143871B img_2.png
 R A04F51DA img_3.png
@@ -9,7 +11,9 @@ R 69629890 img_5.png
 R 67D37954 img_logo.png
 R 00CEE0AA img_yindao.png
 D WXGameUI
+P 4D8AC60A btn_guanbi.png
 P C4694B11 btn_playAgain.png
+P 406437FA btn_shareScore.png
 P 98B2AE84 fuhuo.png
 R 88811BE6 img_bg.jpg
 P B403EB88 img_chaqi1.png
@@ -21,8 +25,26 @@ P AE376BCB img_chaqi6.png
 P E08C2C3B img_chaqi7.png
 R A59A3EA6 img_diban.jpg
 R 9EE36BA7 img_dikuang.jpg
+P 0B3A7ED2 img_guaiwu1.png
+P 06BAE7E0 img_guaiwu2.png
+P 664F2E77 img_guaiwu3.png
+P 664F2E77 img_guaiwu4.png
+P 664F2E77 img_guaiwu5.png
+P D8207A7A img_guaiwu6.png
+P 18717367 img_guaiwu7.png
+P 18717367 img_guaiwu8.png
 P C04C2370 img_kulou.png
 P 68E7E58B img_leishu.png
+P F229F549 img_luoshi1.png
+P FE967C49 img_luoshi10.png
+P B0AF3EB9 img_luoshi2.png
+P AA50A32F img_luoshi3.png
+P AA50A32F img_luoshi4.png
+P BDCB3F4C img_luoshi5.png
+P BDCB3F4C img_luoshi6.png
+P 8436CC6F img_luoshi7.png
+P A505074A img_luoshi8.png
+P 0E3A8138 img_luoshi9.png
 P 2D628B4E img_penhuo1.png
 P E191C939 img_penhuo2.png
 P A92862F2 img_penhuo3.png
@@ -43,6 +65,15 @@ P FE359DF8 img_suilie3.png
 P 688B7907 img_suilie4.png
 P 930CDB2C img_suilie5.png
 P DC362CB5 img_suilie6.png
+P CF22DB2B img_zhadan1.png
+P C0FB05DE img_zhadan10.png
+P E4668885 img_zhadan2.png
+P 8DB5ED9C img_zhadan3.png
+P B8CC1FE4 img_zhadan4.png
+P EB2CA1F0 img_zhadan5.png
+P C3BE87B9 img_zhadan6.png
+P 48C3F58D img_zhadan7.png
+P 9D61EE0D img_zhadan8.png
 P C225CE77 img_zhouweileishu-1.png
 P 7531E0CC img_zhouweileishu-2.png
 P EFDDDFAF img_zhouweileishu-3.png

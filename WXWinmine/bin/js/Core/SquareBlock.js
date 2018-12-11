@@ -128,7 +128,7 @@ var SquareBlock = (function(_super){
         }
         if(this.type == SquareTypes.Mine){
             var animNum = parseInt(Math.random()*4+1,10);
-            var animNum =1;
+            // var animNum = 4;
             var mineAnim = this.playAnimation("mineAnim"+animNum,true,function(e){
                 e[0].icon.visible = true;
                 e[0].icon.skin = "WXGameUI/img_kulou.png";
@@ -148,15 +148,15 @@ var SquareBlock = (function(_super){
                 case 1:
                     MusicManager.getInstance().playSound("res/music/7.wav");
                     break;
-                // case 2:
-                //     MusicManager.getInstance().playSound("res/music/8.wav");
-                //     break;
-                // case 3:
-                //     MusicManager.getInstance().playSound("res/music/9.wav");
-                //     break;
-                // case 4:
-                //     MusicManager.getInstance().playSound("res/music/6.wav");
-                //     break;
+                case 2:
+                    MusicManager.getInstance().playSound("res/music/8.wav");
+                    break;
+                case 3:
+                    MusicManager.getInstance().playSound("res/music/9.wav");
+                    break;
+                case 4:
+                    MusicManager.getInstance().playSound("res/music/6.wav");
+                    break;
             }
 
         }

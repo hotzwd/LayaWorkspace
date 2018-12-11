@@ -242,7 +242,7 @@ var wxGame = (function (_super) {
                 str = "重温windows经典扫雷，快来试一下吧！";
                 break;
             case 2:
-                str = "[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？";
+                str = "[有人@我]你能超越我吗？";
                 break;
             case 3:
                 str = "[有人@我]小哥哥，小哥哥，我有个游戏你玩吗？";

@@ -94,7 +94,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":949,"x":555,"var":"btn_playAgain","stateNum":"1","skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8},
+                    "props":{"y":962,"x":424,"var":"btn_playAgain","stateNum":"1","skin":"WXGameUI/btn_playAgain.png","scaleY":0.8,"scaleX":0.8},
                     "nodeParent":3,
                     "label":"Button(btn_playAgain)",
                     "isOpen":false,
@@ -118,6 +118,19 @@
                     "child":[
                         ],
                     "$HIDDEN":false
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":962,"x":656,"var":"btn_shared","stateNum":"1","skin":"WXGameUI/btn_shareScore.png","scaleY":0.8,"scaleX":0.8},
+                    "nodeParent":3,
+                    "label":"Button(btn_shared)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":84,
+                    "child":[
+                        ]
                 }],
             "$HIDDEN":false
         }],

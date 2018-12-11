@@ -34,18 +34,7 @@ var GameSceneMain = (function(_super){
             this.panel_diban = this.gameUI.panel_diban;
         }
 
-        Laya.Animation.createFrames(["WXGameUI/img_suilie1.png","WXGameUI/img_suilie2.png","WXGameUI/img_suilie3.png","WXGameUI/img_suilie4.png","WXGameUI/img_suilie5.png","WXGameUI/img_suilie6.png"],"suilie");
-        Laya.Animation.createFrames(["WXGameUI/img_penhuo1.png","WXGameUI/img_penhuo2.png","WXGameUI/img_penhuo3.png","WXGameUI/img_penhuo4.png","WXGameUI/img_penhuo5.png",
-        "WXGameUI/img_penhuo6.png","WXGameUI/img_penhuo7.png","WXGameUI/img_penhuo8.png","WXGameUI/img_penhuo9.png"],"mineAnim1");
-        // Laya.Animation.createFrames(["WXGameUI/img_guaiwu1.png","WXGameUI/img_guaiwu2.png","WXGameUI/img_guaiwu3.png","WXGameUI/img_guaiwu4.png","WXGameUI/img_guaiwu5.png",
-        // "WXGameUI/img_guaiwu6.png","WXGameUI/img_guaiwu7.png","WXGameUI/img_guaiwu8.png"],"mineAnim2");
-        // Laya.Animation.createFrames(["WXGameUI/img_luoshi1.png","WXGameUI/img_luoshi2.png","WXGameUI/img_luoshi3.png","WXGameUI/img_luoshi4.png","WXGameUI/img_luoshi5.png",
-        // "WXGameUI/img_luoshi6.png","WXGameUI/img_luoshi7.png","WXGameUI/img_luoshi8.png","WXGameUI/img_luoshi9.png","WXGameUI/img_luoshi10.png"],"mineAnim3");
-        // Laya.Animation.createFrames(["WXGameUI/img_zhadan1.png","WXGameUI/img_zhadan2.png","WXGameUI/img_zhadan3.png","WXGameUI/img_zhadan4.png","WXGameUI/img_zhadan5.png",
-        // "WXGameUI/img_zhadan6.png","WXGameUI/img_zhadan7.png","WXGameUI/img_zhadan8.png","WXGameUI/img_zhadan10.png"],"mineAnim4");
-
-        Laya.Animation.createFrames(["WXGameUI/img_chaqi1.png","WXGameUI/img_chaqi2.png","WXGameUI/img_chaqi3.png","WXGameUI/img_chaqi4.png","WXGameUI/img_chaqi5.png",
-        "WXGameUI/img_chaqi6.png","WXGameUI/img_chaqi7.png"],"chaqi");
+        
 
         MessageController.getInstance().AddNotification("square_dead",this,this._squareDeadEvent);
 
@@ -57,7 +46,7 @@ var GameSceneMain = (function(_super){
     _proto.startGame = function(){
 
         this.mineNum = parseInt(Math.random()*RANDOMEMINEMIN + RANDOMMINEMAX,10);
-        
+        // this.mineNum = 3;
         this.initMapPanelFun();
         this.createSquareMapList();
 
@@ -91,22 +80,6 @@ var GameSceneMain = (function(_super){
     /**游戏结束 */
     _proto.gameOver = function(){
 
-        if(Browser.onMiniGame){
-            if(wxGame.getInstance().videoAd != null && window.wxLoadVideoAd){
-                return;
-            }
-            
-            this.isGameover = true;
-
-            for (var i = 0; i < this.m_listSquare.length; i++) {
-                var t_square = this.m_listSquare[i];
-                t_square.off(Laya.Event.MOUSE_DOWN,this,this.onSquareMouseDown);
-                t_square.off(Laya.Event.MOUSE_UP,this,this.onSquareMouseUp);
-            }
-            Laya.timer.clear(this,this.updateGameTime);
-        }else{
-            
-        }
     }
 
     /**接受到踩雷事件 */
@@ -128,17 +101,15 @@ var GameSceneMain = (function(_super){
     /**踩到地雷 */
     _proto.mineGameover = function(){
         // Gamelog("-----踩雷结束");
-        this.gameOver();
+        this.pauseGame();
+        // this.gameOver();
     }
 
     /**扫雷完成 游戏胜利 */
     _proto.gameWin = function(){
-        this.gameOver();
-        // if(UIManager.getInstance().getUI("GameEndShareUI")!= null){
-        //     UIManager.getInstance().closeUI("GameEndShareUI",true);
-        // }
-
-        Laya.timer.once(1000,this,function(){
+        // this.gameOver();
+        this.pauseGame();
+        Laya.timer.once(500,this,function(){
             UIManager.getInstance().showUI("GameoverUI").initGameover(true);
         });
     }
@@ -268,6 +239,7 @@ var GameSceneMain = (function(_super){
     _proto.onSquareUpdateFlag = function(square){
         //  Gamelog("--------------长按  插旗");
          square.UpdateFlag();
+         this.updateMineListFun();
     }
 
     /**方块鼠标抬起 */
@@ -277,7 +249,6 @@ var GameSceneMain = (function(_super){
 
         if(Laya.timer.currTimer - square.mouseDownTime > 500){
             // Gamelog("--------------长按  插旗");
-            // square.UpdateFlag();
         }else{
             Gamelog("_-----点击 row="+e.target.m_nRowIndex+",col="+e.target.m_nColIndex);
             if(!square.isFlag){
@@ -292,7 +263,8 @@ var GameSceneMain = (function(_super){
                 }
             }
         }
-        this.updateMineListFun();
+       
+        // this.updateMineListFun();
     }
 
     /**寻找周围空白方块*/

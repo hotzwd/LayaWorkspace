@@ -20,8 +20,8 @@ var GameStartUILogic = (function(_super){
         this.isStart = false;
 
         this.guidBox.on(Laya.Event.CLICK,this,this._guidBoxClickEvent);
-        // this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
-        // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
+        this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
+        this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
         this.btn_startGame.on(Laya.Event.CLICK,this,this._startClickEvent);
 
          wxGame.getInstance().showClubBtn(true);
@@ -56,22 +56,22 @@ var GameStartUILogic = (function(_super){
     _proto.onAniStartComplete = function(){
        this.startBox.visible = false;
     }
-    // /**点击排行榜 */
-    // _proto._rankClickEvent = function(){
-    //     if(this.isStart)
-    //         return;
-    //     MusicManager.getInstance().playSound("res/music/1.wav");
-    //     UIManager.getInstance().showUI("GameRankUI");
+    /**点击排行榜 */
+    _proto._rankClickEvent = function(){
+        if(this.isStart)
+            return;
+        MusicManager.getInstance().playSound("res/music/1.wav");
+        UIManager.getInstance().showUI("GameRankUI");
        
-    // }
-    // /**点击分享游戏 */
-    // _proto._shareClickEvent = function(){
-    //     if(this.isStart)
-    //         return;
-    //     MusicManager.getInstance().playSound("res/music/1.wav");
-    //     wxGame.getInstance().shareGame();
+    }
+    /**点击分享游戏 */
+    _proto._shareClickEvent = function(){
+        if(this.isStart)
+            return;
+        MusicManager.getInstance().playSound("res/music/1.wav");
+        wxGame.getInstance().shareGame();
        
-    // }
+    }
 
     return GameStartUILogic;
 })(GameStartNewUI);
