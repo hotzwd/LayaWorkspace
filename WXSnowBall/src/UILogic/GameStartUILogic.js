@@ -23,7 +23,7 @@ var GameStartUiLogic = (function (_super) {
 
         this.ani1.play(0, true);
         var t_randomAppId = parseInt(Math.random()* MiniGameData.length);
-        this.btn_appRank.skin = MiniGameData[t_randomAppId].icon;
+        this.img_app.skin = MiniGameData[t_randomAppId].icon;
 
         wxGame.getInstance().showClubBtn(true);
     }
