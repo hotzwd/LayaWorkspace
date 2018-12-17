@@ -65,7 +65,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":325,"x":734,"width":195,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90},
+                    "props":{"y":291,"x":734,"width":195,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_start)",
                     "isDirectory":false,
@@ -78,7 +78,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":404,"x":748,"width":167,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"好友排行榜","height":90},
+                    "props":{"y":410,"x":591,"width":208,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"体重排行榜","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_rank)",
                     "isDirectory":false,
@@ -90,8 +90,21 @@
                 },
                 {
                     "x":30,
+                    "type":"Button",
+                    "props":{"y":410,"x":879,"width":183,"var":"btn_share","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"邀请养膘","height":90},
+                    "nodeParent":2,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":17,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
                     "type":"Text",
-                    "props":{"y":718,"x":188,"text":"v1.1","fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":718,"x":188,"text":"v1.2","fontSize":25,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -100,13 +113,129 @@
                     "compId":13,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":327,"x":300,"var":"btn_appRank"},
+                    "nodeParent":2,
+                    "label":"Box(btn_appRank)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":16,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":84,"x":79,"var":"img_app","skin":"Game/app_1.png","rotation":0,"anchorY":0.5,"anchorX":0.5},
+                            "nodeParent":16,
+                            "label":"Image(img_app)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":14,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"text":"游戏热玩榜","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                            "nodeParent":16,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":15,
+                            "child":[
+                                ]
+                        }]
                 }],
             "$HIDDEN":false
         }],
     "animations":[
         {
             "nodes":[
-                ],
+                {
+                    "target":14,
+                    "keyframes":{
+                        "rotation":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":0
+                            },
+                            {
+                                "value":10,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":10
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":20
+                            },
+                            {
+                                "value":-10,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":30
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":40
+                            },
+                            {
+                                "value":15,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":45
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":50
+                            },
+                            {
+                                "value":-15,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":55
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":14,
+                                "key":"rotation",
+                                "index":60
+                            }]
+                    }
+                }],
             "name":"ani1",
             "id":1,
             "frameRate":24,

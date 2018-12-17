@@ -34,7 +34,7 @@ var GameOverUILogic = (function (_super) {
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
-        // wxGame.getInstance().showOpenDataContext(false);
+        wxGame.getInstance().showOpenDataContext(false);
     }
 
     _proto._closeClickEvent = function(){
@@ -42,7 +42,7 @@ var GameOverUILogic = (function (_super) {
         SceneManager.getInstance().currentScene.restartGame();
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
-        // wxGame.getInstance().showOpenDataContext(false);
+        wxGame.getInstance().showOpenDataContext(false);
     }
   
      _proto._shareClickEvent = function(){

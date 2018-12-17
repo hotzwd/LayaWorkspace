@@ -184,7 +184,7 @@ function updateScore(data){
 }
 
 function showEndFriends(data){
-  return;
+  //return;
   console.log("showEndFriends");
   wx.getFriendCloudStorage({
     keyList: ['score_' + Utils.getWeekNum()],
@@ -248,7 +248,7 @@ function showEndFriends(data){
             var index = friends[i];
             var t_item = res.data[index];
 
-            var item_start = 100;
+            var item_start = -30;
             var item_heigh = -80;
 
             // 奖杯

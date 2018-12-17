@@ -146,7 +146,11 @@ var UIManager = (function(_super){
                 break;
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
-                break;    
+                break;
+            case "GameRecommendUI":
+                uiLogic = new GameRecommendUILogic();
+                break;
+
             
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");

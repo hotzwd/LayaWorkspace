@@ -61,7 +61,7 @@ var GameoverUI=(function(_super){
 
 		}
 
-		GameoverUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.5},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Text","props":{"y":88,"x":730,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":240,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":240,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}},{"type":"Button","props":{"y":417,"x":779,"width":106,"var":"btn_share","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90}},{"type":"Text","props":{"y":183,"x":678,"text":"历史最高分数:","fontSize":25,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":183,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"}},{"type":"Button","props":{"y":332,"x":735,"width":193,"var":"btn_close","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90}}]}]};
+		GameoverUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.7},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Text","props":{"y":59,"x":698,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":177,"x":663,"text":"体重:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Text","props":{"y":177,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"}},{"type":"Button","props":{"y":472,"x":842,"width":176,"var":"btn_share","labelSize":40,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"炫耀体重","height":90}},{"type":"Text","props":{"y":131,"x":678,"text":"历史最高体重:","fontSize":25,"font":"SimHei","color":"#ffffff"}},{"type":"Text","props":{"y":131,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"}},{"type":"Button","props":{"y":472,"x":609,"width":177,"var":"btn_close","labelSize":40,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90}}]}]};
 		return GameoverUI;
 	})(View);
 var GameRankUI=(function(_super){
@@ -88,11 +88,36 @@ var GameRankUI=(function(_super){
 		GameRankUI.uiView={"type":"View","props":{"width":1366,"height":768},"child":[{"type":"Box","props":{"width":1366,"visible":true,"var":"gameoverPanel","height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"x":-149,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1664,"lineWidth":1,"height":768,"fillColor":"#050505"}}]},{"type":"Box","props":{"y":16,"centerX":0},"child":[{"type":"Image","props":{"y":12,"x":0,"width":618,"skin":"Game/rankBg.png","sizeGrid":"10,10,10,10","height":728},"child":[{"type":"List","props":{"y":89,"x":6,"width":610,"visible":false,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":6,"repeatX":1,"height":536},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"var":"playerItem","renderType":"render","height":85},"child":[{"type":"Label","props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":30,"font":"SimHei","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":23,"x":135,"width":205,"text":"玩家名字七个字","name":"playerName","height":40,"fontSize":25,"font":"SimHei"}},{"type":"Label","props":{"y":25,"x":350,"width":116,"text":"9999999","name":"playerScore","height":30,"fontSize":25,"font":"SimHei","color":"#ff0000","align":"center"}},{"type":"Label","props":{"y":26,"x":471,"width":116,"text":"青铜卫士","name":"playerTitle","height":30,"fontSize":25,"font":"SimHei","color":"#010101","align":"center"}}]}]},{"type":"Label","props":{"y":21,"var":"listName","text":"好友排行","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":-7}},{"type":"Label","props":{"y":669,"x":306,"text":"每周一更新排名","fontSize":26,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5}}]},{"type":"Image","props":{"y":-2,"x":577,"var":"close","skin":"Game/close.png"}}]}]}]};
 		return GameRankUI;
 	})(View);
+var GameRecommendUI=(function(_super){
+		function GameRecommendUI(){
+			
+		    this.appList=null;
+		    this.btn_close=null;
+
+			GameRecommendUI.__super.call(this);
+		}
+
+		CLASS$(GameRecommendUI,'ui.GameRecommendUI',_super);
+		var __proto__=GameRecommendUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameRecommendUI.uiView);
+
+		}
+
+		GameRecommendUI.uiView={"type":"View","props":{"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":1664,"visible":true,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"width":1664,"height":768,"alpha":0.7},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Box","props":{"y":14,"centerX":0},"child":[{"type":"Image","props":{"y":12,"x":0,"width":618,"skin":"Game/rank_bg.png","sizeGrid":"10,10,10,10","height":728},"child":[{"type":"List","props":{"y":89,"x":6,"width":610,"var":"appList","spaceY":10,"repeatY":6,"repeatX":1,"height":569},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"renderType":"render","height":85},"child":[{"type":"Label","props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":35,"font":"SimHei","color":"#b4b4b4","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Image","props":{"y":0,"x":84,"skin":"Game/app_1.png","name":"appIcon"}},{"type":"Label","props":{"y":5,"x":193,"width":366,"text":"玩家名字七个字","name":"appName","height":31,"fontSize":25,"font":"SimHei","color":"#2e2e2e"}},{"type":"Label","props":{"y":43,"x":193,"wordWrap":true,"width":384,"text":"青铜卫士青铜卫士青铜卫士青铜卫士青铜卫士青铜卫士青铜卫士","name":"appDic","height":45,"fontSize":20,"font":"SimHei","color":"#808080","align":"left"}}]}]},{"type":"Label","props":{"y":21,"x":221,"text":"热门游戏榜","fontSize":35,"font":"SimHei","color":"#373737","centerX":-7}}]},{"type":"Image","props":{"y":-2,"x":577,"var":"btn_close","skin":"Game/close.png"}}]}]}]};
+		return GameRecommendUI;
+	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
 			
+		    this.ani1=null;
 		    this.btn_start=null;
 		    this.btn_rank=null;
+		    this.btn_share=null;
+		    this.btn_appRank=null;
+		    this.img_app=null;
 
 			GameStartUI.__super.call(this);
 		}
@@ -107,7 +132,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.5},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Text","props":{"y":151,"x":668,"text":"全民养膘","fontSize":80,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":325,"x":734,"width":195,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90}},{"type":"Button","props":{"y":404,"x":748,"width":167,"var":"btn_rank","labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"好友排行榜","height":90}},{"type":"Text","props":{"y":718,"x":188,"text":"v1.1","fontSize":25,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":1366,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"y":10,"x":10,"width":1664,"height":768,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"width":1664,"height":768,"alpha":0.5},"child":[{"type":"Rect","props":{"width":1664,"lineWidth":1,"height":768,"fillColor":"#000000"}}]},{"type":"Text","props":{"y":151,"x":668,"text":"全民养膘","fontSize":80,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Button","props":{"y":291,"x":734,"width":195,"var":"btn_start","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"开始游戏","height":90}},{"type":"Button","props":{"y":410,"x":591,"width":208,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"体重排行榜","height":90}},{"type":"Button","props":{"y":410,"x":879,"width":183,"var":"btn_share","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"邀请养膘","height":90}},{"type":"Text","props":{"y":718,"x":188,"text":"v1.2","fontSize":25,"font":"SimHei","color":"#ffffff"}},{"type":"Box","props":{"y":327,"x":300,"var":"btn_appRank"},"child":[{"type":"Image","props":{"y":84,"x":79,"var":"img_app","skin":"Game/app_1.png","rotation":0,"anchorY":0.5,"anchorX":0.5},"compId":14},{"type":"Label","props":{"text":"游戏热玩榜","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]}],"animations":[{"nodes":[{"target":14,"keyframes":{"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":0},{"value":10,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":10},{"value":0,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":20},{"value":-10,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":40},{"value":15,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":45},{"value":0,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":50},{"value":-15,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":55},{"value":0,"tweenMethod":"linearNone","tween":true,"target":14,"key":"rotation","index":60}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}]};
 		return GameStartUI;
 	})(View);
 var PlateUI=(function(_super){

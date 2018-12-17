@@ -338,6 +338,9 @@ var wxGame = (function (_super) {
         if(t_videoAd == null || !window.wxLoadVideoAd)
             return;
 
+        //暂停游戏
+        SceneManager.getInstance().currentScene.pauseGame();
+
         t_videoAd.show();
         t_videoAd.onClose( function(res){
             t_videoAd.offClose();
@@ -404,6 +407,32 @@ var wxGame = (function (_super) {
                 this.btn_club.hide();
             }
             
+        }
+    }
+    //跳转其他app
+    _proto.jumpToMiniProgram = function (_appId) {
+        if (Browser.onMiniGame) {
+            if(compareVersion(wxSDKVersion,"2.2.0") < 0){
+                return;
+            }
+            Gamelog("----- jumpToMiniProgram 跳转");
+            wx.navigateToMiniProgram({
+                appId: _appId,
+                path:"",
+                extraData:"",
+                
+                success: function (res) {
+                    Gamelog("jumpToMiniProgram 跳转成功");
+                },
+                fail: function (msg) {
+                    console.log('jumpToMiniProgram fail', msg)
+                },
+                complete: function (msg) {
+                    console.log('jumpToMiniProgram complete', msg)
+                }
+
+            });
+
         }
     }
 

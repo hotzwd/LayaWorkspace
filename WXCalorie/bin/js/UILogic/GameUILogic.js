@@ -186,22 +186,22 @@ var GameUILogic = (function (_super) {
     _proto.addLifeClick = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
         this.btn_addLife.visible= false;
-        // SceneManager.getInstance().currentScene.pauseGame();
         //播放广告
         if (!Browser.onMiniGame) {
-            SceneManager.getInstance().currentScene.pauseGame();
+            // SceneManager.getInstance().currentScene.pauseGame();
             wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }else{
              //点击广告
              if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
                 return;
-             SceneManager.getInstance().currentScene.pauseGame();
+            //  SceneManager.getInstance().currentScene.pauseGame();
              wxGame.getInstance().showVideoAD(SceneManager.getInstance().currentScene,SceneManager.getInstance().currentScene.addLife);
          }
     }
 
     //刷新是否可以显示增加生命
     _proto.updateAddLifeState = function(){
+        this.btn_addLife.visible = false;
         if(Browser.onMiniGame){
             if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd)
                 return;

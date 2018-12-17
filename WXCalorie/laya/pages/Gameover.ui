@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":14,
+    "selecteID":3,
     "props":{"width":1366,"sceneColor":"#000000","height":768,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -27,7 +27,7 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "props":{"width":1664,"height":768,"alpha":0.5},
+                    "props":{"width":1664,"height":768,"alpha":0.7},
                     "nodeParent":2,
                     "label":"Sprite",
                     "isOpen":true,
@@ -53,7 +53,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":88,"x":730,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true},
+                    "props":{"y":59,"x":698,"text":"游戏结束","fontSize":50,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -66,7 +66,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":240,"x":663,"text":"分数:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "props":{"y":177,"x":663,"text":"体重:","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -79,7 +79,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":240,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
+                    "props":{"y":177,"x":765,"width":232,"var":"t_gamescore","text":"9999999","height":35,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":2,
                     "label":"Text(t_gamescore)",
                     "isDirectory":false,
@@ -92,7 +92,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":417,"x":779,"width":106,"var":"btn_share","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"分享","height":90},
+                    "props":{"y":472,"x":842,"width":176,"var":"btn_share","labelSize":40,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"炫耀体重","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
@@ -105,7 +105,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":183,"x":678,"text":"历史最高分数:","fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":131,"x":678,"text":"历史最高体重:","fontSize":25,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -118,7 +118,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":183,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"},
+                    "props":{"y":131,"x":849,"width":232,"var":"t_highScore","text":"9999999","height":28,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"left"},
                     "nodeParent":2,
                     "label":"Text(t_highScore)",
                     "isDirectory":false,
@@ -131,7 +131,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":332,"x":735,"width":193,"var":"btn_close","labelSize":45,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90},
+                    "props":{"y":472,"x":609,"width":177,"var":"btn_close","labelSize":40,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"labelAlign":"center","label":"再玩一次","height":90},
                     "nodeParent":2,
                     "label":"Button(btn_close)",
                     "isDirectory":false,
