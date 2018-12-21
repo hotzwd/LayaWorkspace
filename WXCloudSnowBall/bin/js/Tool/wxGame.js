@@ -1,3 +1,4 @@
+window.loginParams = {};
 /**当前微信版本 */
 window.wxSDKVersion;
 window.wxLoadVideoAd = false;
@@ -42,6 +43,8 @@ var wxGame = (function (_super) {
                     wxSDKVersion = res.SDKVersion;
                 }
             });
+
+            this.login();
 
             wx.showShareMenu({
                 withShareTicket: false
@@ -97,11 +100,10 @@ var wxGame = (function (_super) {
             });
         }
     }
-
     /**
      * 登陆并返回用户数据
      */
-    _proto.login = function (callback) {
+    _proto.login = function () {
         if (Browser.onMiniGame) {
             wx.getSetting({
                 success: function (res) {
@@ -109,20 +111,24 @@ var wxGame = (function (_super) {
                     if (authSetting['scope.userInfo'] === true) {
                         // 用户已授权，可以直接调用相关 API
                         Gamelog("用户已授权");
-                        // wxGame.getInstance().wxLogin(callback);
-                        wxLogin(callback);
+                        wxLogin();
                     } else if (authSetting['scope.userInfo'] === false) {
                         // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
                         Gamelog("用户已拒绝授权");
-                        // wx.openSetting({
-                        //     success:function (params) {}
-                        // })
                         showUserInfoButton();
                     } else {
                         // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
                         Gamelog("未询问过用户授权");
                         wx.authorize({
-                            scope: 'scope.userInfo'
+                            scope: 'scope.userInfo',
+                            success: function (e) {
+                                Gamelog("authorize code=" + e.code);
+                                wxLogin();
+                            },
+                            fail: function (e) {
+                                Gamelog("authorize code=" + e.code);
+                                showUserInfoButton();
+                            },
                         })
                     }
                 }
@@ -130,10 +136,13 @@ var wxGame = (function (_super) {
         }
     }
 
-    wxLogin = function (callback) {
+    wxLogin = function () {
         wx.login({
-            success: function () {
-                Gamelog("login success");
+            success: function (e) {
+                Gamelog("login success code="+e.code);
+                var jscode = e.code;
+                loginParams["jscode"] = jscode;
+                
                 wx.getUserInfo({
                     success: function (res) {
                         GameLogObject(res);
@@ -146,7 +155,9 @@ var wxGame = (function (_super) {
                         var city = userInfo.city
                         var country = userInfo.country
                         Gamelog("userInfo.nickName" + userInfo.nickName);
-                        callback(userInfo);
+                        loginParams["userInfo"] = userInfo;
+                        //获取服务器openid
+                        // getOpenId();
                     }
                 })
             },
@@ -156,16 +167,17 @@ var wxGame = (function (_super) {
         })
     }
 
+
     showUserInfoButton = function () {
         var button = wx.createUserInfoButton({
             type: 'text',
-            text: '获取用户信息',
-            image: "images/huangguan.png",
+            text: '',
+            image: "",
             style: {
-                left: 10,
-                top: 76,
-                width: 200,
-                height: 40,
+                left: 0,
+                top: 0,
+                width: 720,
+                height: 1556,
                 lineHeight: 40,
                 // backgroundColor: '#ff0000',
                 color: '#ffffff',
@@ -176,7 +188,18 @@ var wxGame = (function (_super) {
         });
 
         button.onTap(function (res) {
-            console.log(res)
+            console.log(res);
+            wx.authorize({
+            scope: 'scope.userInfo',
+            success: function (e) {
+              Gamelog("authorize code=" + e.code);
+              button.destroy();
+              wxLogin();
+            },
+            fail: function (e) {
+              Gamelog("authorize code=" + e.code);
+            },
+          })
         })
     }
 
