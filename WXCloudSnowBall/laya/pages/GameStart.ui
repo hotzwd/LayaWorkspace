@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":12,
+    "selecteID":3,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -91,8 +91,21 @@
                 },
                 {
                     "x":30,
+                    "type":"Button",
+                    "props":{"y":1155,"x":235,"var":"btn_worldRank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"世界排行"},
+                    "nodeParent":2,
+                    "label":"Button(btn_worldRank)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":13,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
                     "type":"Text",
-                    "props":{"y":1354,"x":23,"text":"v2.1","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1354,"x":23,"text":"v2.2","fontSize":30,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,

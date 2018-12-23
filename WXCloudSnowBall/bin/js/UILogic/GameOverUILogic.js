@@ -31,6 +31,18 @@ var GameOverUILogic = (function (_super) {
         this.t_highScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 
+        var maxScoreNum = highscoreNum;
+        //是否重新上传
+        var uploadScore = LocalStorage.getItem("uploadScore");
+        var uploadScoreNum = 0;
+        if(uploadScore != null && uploadScore != ""){
+            uploadScoreNum = parseInt(uploadScore, 10);
+        }
+        var maxWorldScoreNum = SetLocalWorldMaxScore(maxScoreNum);
+        //上传世界排行
+        if(maxScoreNum == maxWorldScoreNum || uploadScoreNum == 0){
+            wxGame.getInstance().sendGameScoreOnWorld(maxWorldScoreNum);
+        }
     }
     
     _proto.onDestroy = function () {

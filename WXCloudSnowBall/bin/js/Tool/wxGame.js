@@ -2,6 +2,8 @@ window.loginParams = {};
 /**当前微信版本 */
 window.wxSDKVersion;
 window.wxLoadVideoAd = false;
+//用户openid
+window.openid = null;
 /**
  * wxGame
  */
@@ -32,6 +34,8 @@ var wxGame = (function (_super) {
     _proto.videoAd = null;
     //游戏圈按钮
     _proto.btn_club = null;
+    //游戏云开发数据库
+    _proto.db = null;
 
     _proto.Init = function () {
 
@@ -45,6 +49,12 @@ var wxGame = (function (_super) {
             });
 
             this.login();
+            //初始化云开发
+            // wx.cloud.init()
+            wx.cloud.init({
+                env: 'snowball-release-b953cc'
+            })
+            this.db = wx.cloud.database();
 
             wx.showShareMenu({
                 withShareTicket: false
@@ -157,7 +167,7 @@ var wxGame = (function (_super) {
                         Gamelog("userInfo.nickName" + userInfo.nickName);
                         loginParams["userInfo"] = userInfo;
                         //获取服务器openid
-                        // getOpenId();
+                        getOpenId();
                     }
                 })
             },
@@ -203,7 +213,87 @@ var wxGame = (function (_super) {
         })
     }
 
+    /**获取openId */
+    getOpenId = function(){
+        // 获取 openid
+        wx.cloud.callFunction({
+            name: 'login',
+            success: function(res) {
+                window.openid = res.result.openid
+                // this.prefetchHighScore()
+            },
+            fail: function(res){
+                console.error('get openid failed with error=', res)
+            }
+        });
+    }
 
+    /**发送分数 */
+    _proto.sendGameScoreOnWorld = function(_score){
+        if (!Browser.onMiniGame) 
+            return;
+        var userInfo = loginParams["userInfo"];
+
+        if(window.openid == null || userInfo == null){
+            console.log("发送世界排行分数失败 信息缺失");
+            LocalStorage.setItem("uploadScore",0);
+            return;
+        }
+
+        // 上传结果
+        // 调用 uploadScore 云函数
+        wx.cloud.callFunction({
+            name: 'uploadScore',
+            // data 字段的值为传入云函数的第一个参数 event
+            data: {
+                score: _score,
+                nickname: userInfo.nickName,
+                iconurl: userInfo.avatarUrl,
+            },
+            //请求成功返回
+            success:function(res){	
+                console.log("请求服务器返回成功：",res);
+                LocalStorage.setItem("uploadScore",1);		
+            },
+            //请求失败返回
+            fail:function(res){
+                console.log("请求服务器返回失败："+res);
+                LocalStorage.setItem("uploadScore",0);
+            }
+        })
+
+    }
+
+    /**显示世界排行 */
+    _proto.showWorldRank = function(_page){
+        if (!Browser.onMiniGame) 
+            return;
+         var userInfo = loginParams["userInfo"];
+
+        if(window.openid == null || userInfo == null){
+            console.log("请求世界排行失败 信息缺失");
+            return;
+        }
+
+        // 调用 getRank 云函数
+        wx.cloud.callFunction({
+            name: 'getRank',
+            // data 字段的值为传入云函数的第一个参数 event
+            data: {
+                pagenum: _page
+            },
+            //请求成功返回
+            success:function(res){	
+                console.log("请求服务器时间排行榜 返回成功：",res);
+                var worldRankUI = UIManager.getInstance().getUI("GameWorldRankUI");
+                worldRankUI.updateRankData(res.result);	
+            },
+            //请求失败返回
+            fail:function(res){
+                console.log("请求服务器时间排行榜 返回失败："+res);
+            }
+        })
+    }
     /**
      * 发送数据
      */

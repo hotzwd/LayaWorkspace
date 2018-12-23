@@ -36,8 +36,8 @@ function beginLoadGoHead() {
                 // ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
                 // //图片
-                // ["Game/background.png",Laya.Loader.IMAGE],
-                // ["Game/bg_menu.jpg",Laya.Loader.IMAGE],
+                ["Game/img_rankblue.png",Laya.Loader.IMAGE],
+                ["Game/rank_bg.png",Laya.Loader.IMAGE],
                 // ["Game/grass.png",Laya.Loader.IMAGE],
                 // ["Game/hit_panel.png",Laya.Loader.IMAGE],
                 // ["Game/img_box.png",Laya.Loader.IMAGE],

@@ -54067,7 +54067,7 @@ var GameSharedUI=(function(_super){
 
 		}
 
-		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.7},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Button","props":{"y":654,"x":360,"var":"btn_shard","stateNum":1,"skin":"Game/fuhuo.png","scaleY":1,"scaleX":1,"labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":765,"x":360,"width":148,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.7},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Button","props":{"y":654,"x":360,"var":"btn_shard","stateNum":1,"skin":"Game/fuhuo.png","scaleY":1,"scaleX":1,"labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":1256,"x":360,"width":147,"var":"btn_cancel","mouseEnabled":true,"labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":false,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
 		return GameSharedUI;
 	})(View);
 var GameStartUI=(function(_super){
@@ -54076,6 +54076,7 @@ var GameStartUI=(function(_super){
 		    this.ani1=null;
 		    this.btn_start=null;
 		    this.btn_rank=null;
+		    this.btn_worldRank=null;
 		    this.btn_appRank=null;
 		    this.img_app=null;
 
@@ -54092,9 +54093,206 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":536,"x":193,"skin":"Game/logo.png"}},{"type":"Button","props":{"y":903,"x":235,"var":"btn_start","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"开始游戏"}},{"type":"Button","props":{"y":1032,"x":235,"var":"btn_rank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"好友排行"}},{"type":"Text","props":{"y":1354,"x":23,"text":"v2.1","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Box","props":{"y":1074,"x":39,"var":"btn_appRank"},"child":[{"type":"Image","props":{"y":86,"x":75,"var":"img_app","skin":"Game/app_1.png","rotation":0,"anchorY":0.5,"anchorX":0.5},"compId":9},{"type":"Label","props":{"text":"游戏热玩榜","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]}],"animations":[{"nodes":[{"target":9,"keyframes":{"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":0},{"value":10,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":10},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":20},{"value":-10,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":40},{"value":15,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":45},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":50},{"value":-15,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":55},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":60}]}}],"name":"ani1","id":2,"frameRate":24,"action":0}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":536,"x":193,"skin":"Game/logo.png"}},{"type":"Button","props":{"y":903,"x":235,"var":"btn_start","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"开始游戏"}},{"type":"Button","props":{"y":1032,"x":235,"var":"btn_rank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"好友排行"}},{"type":"Button","props":{"y":1155,"x":235,"var":"btn_worldRank","skin":"Game/flash-sheet0.png","labelSize":35,"labelFont":"SimHei","labelColors":"#000000","label":"世界排行"}},{"type":"Text","props":{"y":1354,"x":23,"text":"v2.2","fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Box","props":{"y":1074,"x":39,"var":"btn_appRank"},"child":[{"type":"Image","props":{"y":86,"x":75,"var":"img_app","skin":"Game/app_1.png","rotation":0,"anchorY":0.5,"anchorX":0.5},"compId":9},{"type":"Label","props":{"text":"游戏热玩榜","fontSize":30,"font":"SimHei","color":"#ffffff"}}]}]}],"animations":[{"nodes":[{"target":9,"keyframes":{"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":0},{"value":10,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":10},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":20},{"value":-10,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":30},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":40},{"value":15,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":45},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":50},{"value":-15,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":55},{"value":0,"tweenMethod":"linearNone","tween":true,"target":9,"key":"rotation","index":60}]}}],"name":"ani1","id":2,"frameRate":24,"action":0}]};
 		return GameStartUI;
 	})(View);
+var GameWorldRankUI=(function(_super){
+		function GameWorldRankUI(){
+			
+		    this.gameoverPanel=null;
+		    this.RankList=null;
+		    this.playerItem=null;
+		    this.listName=null;
+		    this.close=null;
+		    this.selfBox=null;
+		    this.btn_left=null;
+		    this.btn_right=null;
+
+			GameWorldRankUI.__super.call(this);
+		}
+
+		CLASS$(GameWorldRankUI,'ui.GameWorldRankUI',_super);
+		var __proto__=GameWorldRankUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameWorldRankUI.uiView);
+
+		}
+
+		GameWorldRankUI.uiView={"type":"View","props":{"width":720,"height":1280},"child":[{"type":"Box","props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1280,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-138,"x":0,"alpha":0.7},"child":[{"type":"Rect","props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"}}]},{"type":"Box","props":{"y":212,"x":334},"child":[{"type":"Image","props":{"y":8,"x":-2,"width":618,"skin":"Game/rankBg.png","sizeGrid":"10,10,10,10","height":728},"child":[{"type":"List","props":{"y":77,"x":20,"width":577,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":5,"repeatX":1,"height":456},"child":[{"type":"Box","props":{"y":0,"x":0,"width":574,"var":"playerItem","renderType":"render","height":85},"child":[{"type":"Line","props":{"y":83,"x":0,"toY":0,"toX":574,"lineWidth":3,"lineColor":"#999595"}},{"type":"Image","props":{"y":10,"x":98,"width":70,"name":"playerIcon","height":65}},{"type":"Label","props":{"y":37,"x":37,"text":"1","name":"rankIndex","fontSize":30,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":23,"x":189,"width":239,"text":"玩家名字100000","name":"playerName","height":40,"fontSize":30,"font":"SimHei","color":"#ffffff"}},{"type":"Label","props":{"y":23,"x":447,"width":116,"text":"9999","name":"playerScore","height":36,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"right"}}]}]},{"type":"Label","props":{"y":16,"var":"listName","text":"世界排行","fontSize":40,"font":"SimHei","color":"#ffffff","centerX":0,"bold":true}},{"type":"Label","props":{"y":701,"x":306,"text":"世界排行每月一日更新","fontSize":24,"font":"SimHei","color":"#ffffff","bold":true,"anchorY":0.5,"anchorX":0.5}}]},{"type":"Image","props":{"x":572,"var":"close","skin":"Game/btn_guanbi.png"}}]},{"type":"Image","props":{"y":818,"x":357,"width":572,"skin":"Game/img_rankblue.png","height":70}},{"type":"Box","props":{"y":813,"x":366,"width":574,"var":"selfBox","height":85},"child":[{"type":"Image","props":{"y":8,"x":97,"width":70,"name":"playerIcon","height":65}},{"type":"Label","props":{"y":40,"x":42,"text":"未上榜","name":"rankIndex","fontSize":24,"font":"SimHei","color":"#000000","anchorY":0.5,"anchorX":0.5,"align":"center"}},{"type":"Label","props":{"y":26,"x":187,"width":239,"text":"玩家名字100000","name":"playerName","height":40,"fontSize":24,"font":"SimHei","color":"#000000"}},{"type":"Label","props":{"y":26,"x":447,"width":102,"text":"9999","name":"playerScore","height":36,"fontSize":24,"font":"SimHei","color":"#000000","align":"right"}},{"type":"Button","props":{"y":-59,"x":13,"width":114,"var":"btn_left","labelSize":24,"labelFont":"SimHei","labelColors":"#ffffff","label":"<<上一页","height":54}},{"type":"Button","props":{"y":-56,"x":431,"width":114,"var":"btn_right","labelSize":24,"labelFont":"SimHei","labelColors":"#ffffff","label":"下一页>>","height":54}}]}]}]};
+		return GameWorldRankUI;
+	})(View);
+/**
+ * 结算界面逻辑 by lzq
+ */
+var GameWorldRankUILogic = (function(_super){
+    function GameWorldRankUILogic(){
+        GameWorldRankUILogic.super(this);
+
+    }
+    Laya.class(GameWorldRankUILogic,"UILogic.GameWorldRankUILogic",_super);
+    var _proto = GameWorldRankUILogic.prototype;
+    
+    _proto.curpage = 0;  //当前页数
+    _proto.maxpage = 0;  //最大页数
+
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 51;
+
+        this.curpage = 0;
+        this.maxpage = 0;
+
+        this.RankList.vScrollBarSkin = '';
+        this.RankList.renderHandler = new Laya.Handler(this, this.updateItem);
+        
+        this.btn_left.on(Laya.Event.CLICK,this,this.onLeftRank);
+        this.btn_right.on(Laya.Event.CLICK,this,this.onRightRank);
+
+        this.close.on(Laya.Event.CLICK,this,this.onCloseRank);
+
+        this.RankList.visible = false;
+        this.selfBox.visible = false;
+
+        this.selfBox.getChildByName("playerIcon").skin = "";
+        this.selfBox.getChildByName("playerName").text = "";
+
+    }
+    _proto.onDestroy = function(){
+        
+    }
+    /**初始化数据 */
+    _proto.updateRankData = function(_data){
+        this.RankList.visible = true;
+        this.selfBox.visible = true;
+
+        this.RankList.scrollTo(0);
+        this.RankList.array = _data.info;
+        this.curpage = _data.curpage;
+        this.maxpage = _data.maxpage;
+
+        this.updateSelfData(parseInt(_data.ownrank),_data.ownscore);
+        
+    }
+
+    /**更新个人数据 */
+    _proto.updateSelfData =function(_rank,_score){
+
+        var cell = this.selfBox;
+        var userInfo = loginParams["userInfo"];
+
+        // var rankIcon = cell.getChildByName("rankIcon");
+        var rankIndex = cell.getChildByName("rankIndex");
+
+        rankIndex.visible = true;
+        rankIndex.text = (_rank + 1) + "";
+
+        if(_rank == -1){
+            rankIndex.text = "未上榜";
+        }
+
+        // if (_rank > 3) {
+        //     rankIcon.visible = false;
+        //     rankIndex.visible = true;
+        //     rankIndex.text = _rank + "";
+        // }
+        // else
+        // {
+        //     if(_rank == -1){
+        //         rankIcon.visible = false;
+        //         rankIndex.visible = true;
+        //         rankIndex.text = "未上榜";
+        //     }else{
+        //         rankIcon.skin ="game/No." + _rank + ".png";
+        //         rankIcon.visible = true;
+        //         rankIndex.visible = false;
+        //     }
+            
+        // }
+
+
+        var playerIcon = cell.getChildByName("playerIcon");
+        playerIcon.skin = userInfo.avatarUrl;
+        // playerIcon.loadImage(userInfo.avatarUrl);
+        
+
+        var playerName = cell.getChildByName("playerName");
+        var str = userInfo.nickName;
+        
+        var strNew = labelTransform(str,playerName.fontSize,playerName.width);
+        playerName.text = strNew;
+        
+        //显示本地存储世界最高分
+        var maxWorldScoreNum = SetLocalWorldMaxScore(_score);
+        var playerScore = cell.getChildByName("playerScore");
+        // playerScore.text = maxWorldScoreNum + "";
+        playerScore.text = _score + "";
+    }
+
+    _proto.updateItem = function(cell, index) {
+        // Gamelog("index = " + index);
+        var rankData = cell._dataSource;
+
+        var rank = rankData.rank + 1;
+
+        // var rankIcon = cell.getChildByName("rankIcon");
+        var rankIndex = cell.getChildByName("rankIndex");
+
+        rankIndex.visible = true
+        rankIndex.text = rank + "";
+
+        // if (rank > 3) {
+        //     rankIcon.visible = false;
+        //     rankIndex.visible = true
+        //     rankIndex.text = rank + "";
+        // }
+        // else
+        // {
+        //     rankIcon.skin ="game/No." + rank + ".png";
+        //     rankIcon.visible = true;
+        //     rankIndex.visible = false;
+        // }
+
+        var playerIcon = cell.getChildByName("playerIcon");
+        playerIcon.skin = rankData.iconurl;
+        // playerIcon.loadImage(rankData.iconurl);
+
+        var playerName = cell.getChildByName("playerName");
+        var str = rankData.nickname;
+        
+        var strNew = labelTransform(str,playerName.fontSize,playerName.width);
+        playerName.text = strNew;
+        
+        var playerScore = cell.getChildByName("playerScore");
+        playerScore.text = rankData.max;
+    }
+
+    /**关闭排行 */
+    _proto.onCloseRank = function(){
+        
+        UIManager.getInstance().closeUI("GameWorldRankUI",true);
+        MusicManager.getInstance().playSound("res/music/click.wav");
+    }
+
+    /**上一页 */
+    _proto.onLeftRank = function(){
+
+        if(this.curpage > 1){
+            wxGame.getInstance().showWorldRank(this.curpage - 1);
+        }
+    }
+    /**下一页 */
+    _proto.onRightRank = function(){
+        if(this.curpage < this.maxpage){
+            wxGame.getInstance().showWorldRank(this.curpage + 1);
+        }
+    }
+
+    return GameWorldRankUILogic;
+})(GameWorldRankUI);
 /**小游戏跳转数据 */
 var MiniGameData = [
     {
@@ -55282,6 +55480,9 @@ var UIManager = (function(_super){
             case "GameRecommendUI":
                 uiLogic = new GameRecommendUILogic();
                 break;  
+            case "GameWorldRankUI":
+                uiLogic = new GameWorldRankUILogic();
+                break;
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
             break;
@@ -55582,6 +55783,8 @@ window.loginParams = {};
 /**当前微信版本 */
 window.wxSDKVersion;
 window.wxLoadVideoAd = false;
+//用户openid
+window.openid = null;
 /**
  * wxGame
  */
@@ -55612,6 +55815,8 @@ var wxGame = (function (_super) {
     _proto.videoAd = null;
     //游戏圈按钮
     _proto.btn_club = null;
+    //游戏云开发数据库
+    _proto.db = null;
 
     _proto.Init = function () {
 
@@ -55625,6 +55830,12 @@ var wxGame = (function (_super) {
             });
 
             this.login();
+            //初始化云开发
+            // wx.cloud.init()
+            wx.cloud.init({
+                env: 'snowball-release-b953cc'
+            })
+            this.db = wx.cloud.database();
 
             wx.showShareMenu({
                 withShareTicket: false
@@ -55737,7 +55948,7 @@ var wxGame = (function (_super) {
                         Gamelog("userInfo.nickName" + userInfo.nickName);
                         loginParams["userInfo"] = userInfo;
                         //获取服务器openid
-                        // getOpenId();
+                        getOpenId();
                     }
                 })
             },
@@ -55783,7 +55994,87 @@ var wxGame = (function (_super) {
         })
     }
 
+    /**获取openId */
+    getOpenId = function(){
+        // 获取 openid
+        wx.cloud.callFunction({
+            name: 'login',
+            success: function(res) {
+                window.openid = res.result.openid
+                // this.prefetchHighScore()
+            },
+            fail: function(res){
+                console.error('get openid failed with error=', res)
+            }
+        });
+    }
 
+    /**发送分数 */
+    _proto.sendGameScoreOnWorld = function(_score){
+        if (!Browser.onMiniGame) 
+            return;
+        var userInfo = loginParams["userInfo"];
+
+        if(window.openid == null || userInfo == null){
+            console.log("发送世界排行分数失败 信息缺失");
+            LocalStorage.setItem("uploadScore",0);
+            return;
+        }
+
+        // 上传结果
+        // 调用 uploadScore 云函数
+        wx.cloud.callFunction({
+            name: 'uploadScore',
+            // data 字段的值为传入云函数的第一个参数 event
+            data: {
+                score: _score,
+                nickname: userInfo.nickName,
+                iconurl: userInfo.avatarUrl,
+            },
+            //请求成功返回
+            success:function(res){	
+                console.log("请求服务器返回成功：",res);
+                LocalStorage.setItem("uploadScore",1);		
+            },
+            //请求失败返回
+            fail:function(res){
+                console.log("请求服务器返回失败："+res);
+                LocalStorage.setItem("uploadScore",0);
+            }
+        })
+
+    }
+
+    /**显示世界排行 */
+    _proto.showWorldRank = function(_page){
+        if (!Browser.onMiniGame) 
+            return;
+         var userInfo = loginParams["userInfo"];
+
+        if(window.openid == null || userInfo == null){
+            console.log("请求世界排行失败 信息缺失");
+            return;
+        }
+
+        // 调用 getRank 云函数
+        wx.cloud.callFunction({
+            name: 'getRank',
+            // data 字段的值为传入云函数的第一个参数 event
+            data: {
+                pagenum: _page
+            },
+            //请求成功返回
+            success:function(res){	
+                console.log("请求服务器时间排行榜 返回成功：",res);
+                var worldRankUI = UIManager.getInstance().getUI("GameWorldRankUI");
+                worldRankUI.updateRankData(res.result);	
+            },
+            //请求失败返回
+            fail:function(res){
+                console.log("请求服务器时间排行榜 返回失败："+res);
+            }
+        })
+    }
     /**
      * 发送数据
      */
@@ -56073,6 +56364,18 @@ var GameOverUILogic = (function (_super) {
         this.t_highScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
 
+        var maxScoreNum = highscoreNum;
+        //是否重新上传
+        var uploadScore = LocalStorage.getItem("uploadScore");
+        var uploadScoreNum = 0;
+        if(uploadScore != null && uploadScore != ""){
+            uploadScoreNum = parseInt(uploadScore, 10);
+        }
+        var maxWorldScoreNum = SetLocalWorldMaxScore(maxScoreNum);
+        //上传世界排行
+        if(maxScoreNum == maxWorldScoreNum || uploadScoreNum == 0){
+            wxGame.getInstance().sendGameScoreOnWorld(maxWorldScoreNum);
+        }
     }
     
     _proto.onDestroy = function () {
@@ -56158,6 +56461,7 @@ var GameStartUiLogic = (function (_super) {
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
         this.btn_appRank.on(Laya.Event.CLICK,this,this._appRankClickEvent);
+        this.btn_worldRank.on(Laya.Event.CLICK, this, this.OnBtnWorldRankClick);
 
         this.ani1.play(0, true);
         var t_randomAppId = parseInt(Math.random()* MiniGameData.length);
@@ -56196,6 +56500,15 @@ var GameStartUiLogic = (function (_super) {
         UIManager.getInstance().showUI("GameRecommendUI");
     }
 
+    /**世界排行 */
+    _proto.OnBtnWorldRankClick = function () {
+        MusicManager.getInstance().playSound("res/music/click.wav");
+        // wxGame.getInstance().sendGameScoreOnLine(250);
+        UIManager.getInstance().showUI("GameWorldRankUI");
+        if (Browser.onMiniGame){
+            wxGame.getInstance().showWorldRank(1);
+        }
+    }
 
     return GameStartUiLogic;
 })(GameStartUI);
@@ -56456,8 +56769,8 @@ function beginLoadGoHead() {
                 // ["res/atlas/game.atlas",Laya.Loader.ATLAS],
                 ["res/atlas/Game.atlas",Laya.Loader.ATLAS],
                 // //图片
-                // ["Game/background.png",Laya.Loader.IMAGE],
-                // ["Game/bg_menu.jpg",Laya.Loader.IMAGE],
+                ["Game/img_rankblue.png",Laya.Loader.IMAGE],
+                ["Game/rank_bg.png",Laya.Loader.IMAGE],
                 // ["Game/grass.png",Laya.Loader.IMAGE],
                 // ["Game/hit_panel.png",Laya.Loader.IMAGE],
                 // ["Game/img_box.png",Laya.Loader.IMAGE],

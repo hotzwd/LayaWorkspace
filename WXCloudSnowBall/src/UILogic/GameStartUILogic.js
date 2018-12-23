@@ -20,6 +20,7 @@ var GameStartUiLogic = (function (_super) {
         this.btn_rank.on(Laya.Event.CLICK,this,this._rankClickEvent);
         // this.btn_share.on(Laya.Event.CLICK,this,this._shareClickEvent);
         this.btn_appRank.on(Laya.Event.CLICK,this,this._appRankClickEvent);
+        this.btn_worldRank.on(Laya.Event.CLICK, this, this.OnBtnWorldRankClick);
 
         this.ani1.play(0, true);
         var t_randomAppId = parseInt(Math.random()* MiniGameData.length);
@@ -58,6 +59,15 @@ var GameStartUiLogic = (function (_super) {
         UIManager.getInstance().showUI("GameRecommendUI");
     }
 
+    /**世界排行 */
+    _proto.OnBtnWorldRankClick = function () {
+        MusicManager.getInstance().playSound("res/music/click.wav");
+        // wxGame.getInstance().sendGameScoreOnLine(250);
+        UIManager.getInstance().showUI("GameWorldRankUI");
+        if (Browser.onMiniGame){
+            wxGame.getInstance().showWorldRank(1);
+        }
+    }
 
     return GameStartUiLogic;
 })(GameStartUI);

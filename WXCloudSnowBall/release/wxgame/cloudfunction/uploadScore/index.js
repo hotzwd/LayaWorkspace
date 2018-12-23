@@ -2,7 +2,9 @@
 const cloud = require('wx-server-sdk')
 
 // 与小程序端一致，均需调用 init 方法初始化
-cloud.init()
+cloud.init({
+  env: 'snowball-release-b953cc'
+})
 
 // 可在入口函数外缓存 db 对象
 const db = cloud.database()
@@ -29,20 +31,23 @@ exports.main = async (event, context) => {
   if (userRecord) {
     // 更新用户分数
 
-    const maxScore = userRecord.scores.concat([event.score]).reduce((acc, cur) => cur > acc ? cur : acc)
+    // const maxScore = userRecord.scores.concat([event.score]).reduce((acc, cur) => cur > acc ? cur : acc)
 
-    const updateResult = await db.collection('score').doc(docId).update({
-      data: {
-        // _.push 指往 scores 数组字段尾部添加一个记录，该操作为原子操作
-        scores: _.push(event.score),
-        max: maxScore,
-      }
-    })
+    if(event.score > userRecord.max){
+      const maxScore = event.score;
+      const updateResult = await db.collection('score').doc(docId).update({
+        data: {
+          // _.push 指往 scores 数组字段尾部添加一个记录，该操作为原子操作
+          // scores: _.push(event.score),
+          max: maxScore,
+        }
+      })
 
-    if (updateResult.stats.updated === 0) {
-      // 没有更新成功，更新数为 0
-      return {
-        success: false
+      if (updateResult.stats.updated === 0) {
+        // 没有更新成功，更新数为 0
+        return {
+          success: false
+        }
       }
     }
 
@@ -61,9 +66,13 @@ exports.main = async (event, context) => {
         // 这里指定了 _openid，因在云函数端创建的记录不会默认插入用户 openid，如果是在小程序端创建的记录，会默认插入 _openid 字段
         _openid: event.userInfo.openId,
         // 分数历史
-        scores: [event.score],
+        // scores: [event.score],
         // 缓存最大值
         max: event.score,
+        //用户名
+        nickname: event.nickname,
+        //用户头像地址
+        iconurl: event.iconurl
       }
     })
 
