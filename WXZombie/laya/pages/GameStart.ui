@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":13,
+    "selectedBox":17,
+    "selecteID":16,
     "props":{"width":960,"sceneColor":"#000000","height":1708,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -105,7 +105,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1633,"x":55,"text":"v1.1.1","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1633,"x":55,"text":"v1.2","fontSize":30,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Label",
                     "isDirectory":false,
@@ -114,6 +114,45 @@
                     "compId":14,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":1280,"x":71,"var":"btn_appRank"},
+                    "nodeParent":2,
+                    "label":"Box(btn_appRank)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":17,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"text":"游戏热玩榜","fontSize":30,"font":"SimHei","color":"#ffffff"},
+                            "nodeParent":17,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":16,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":92,"x":73,"var":"img_app","skin":"Game/app_1.png","rotation":0,"anchorY":0.5,"anchorX":0.5},
+                            "nodeParent":17,
+                            "label":"Image(img_app)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":15,
+                            "child":[
+                                ]
+                        }]
                 }]
         }],
     "animations":[
@@ -176,6 +215,91 @@
                 }],
             "name":"ani_play",
             "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":15,
+                    "keyframes":{
+                        "rotation":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":0
+                            },
+                            {
+                                "value":10,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":10
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":20
+                            },
+                            {
+                                "value":-10,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":30
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":40
+                            },
+                            {
+                                "value":15,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":45
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":50
+                            },
+                            {
+                                "value":-15,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":55
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":15,
+                                "key":"rotation",
+                                "index":60
+                            }]
+                    }
+                }],
+            "name":"ani1",
+            "id":2,
             "frameRate":24,
             "action":0
         }]

@@ -1,5 +1,14 @@
 D .
 D Game
+P 5AC3682B app_1.png
+P D66382C4 app_2.png
+P F901E384 app_3.png
+P 4C2CC178 app_4.png
+P F5970651 app_5.png
+P 3A419E51 app_6.png
+P F841734E app_7.png
+P 6B08D848 app_8.png
+P 016EFF17 app_9.png
 R 76D918C2 bggame-sheet0.png
 P AE798B1D btnclose-sheet0.png
 P 2D7B03CE close.png
@@ -10,6 +19,7 @@ P 48C9ACFB live0.png
 P B0CA2BFE live1.png
 P 6D4D75F6 menuplay-sheet0.png
 R DB3BDC49 menutitulo-sheet0.png
+R 4F627580 rank_bg.png
 P A6AD3640 rankBg.png
 P 2FE169BE sheet0.png
 P 4046FEA7 sheet1.png

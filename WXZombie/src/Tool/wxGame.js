@@ -408,6 +408,32 @@ var wxGame = (function (_super) {
             
         }
     }
+    //跳转其他app
+    _proto.jumpToMiniProgram = function (_appId) {
+        if (Browser.onMiniGame) {
+            if(compareVersion(wxSDKVersion,"2.2.0") < 0){
+                return;
+            }
+            Gamelog("----- jumpToMiniProgram 跳转");
+            wx.navigateToMiniProgram({
+                appId: _appId,
+                path:"",
+                extraData:"",
+                
+                success: function (res) {
+                    Gamelog("jumpToMiniProgram 跳转成功");
+                },
+                fail: function (msg) {
+                    console.log('jumpToMiniProgram fail', msg)
+                },
+                complete: function (msg) {
+                    console.log('jumpToMiniProgram complete', msg)
+                }
+
+            });
+
+        }
+    }
 
     return {
         getInstance: getInstance
