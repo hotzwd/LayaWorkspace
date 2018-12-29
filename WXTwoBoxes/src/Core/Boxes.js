@@ -76,7 +76,7 @@ var Boxes = (function (_super) {
      * update刷新
      */
     _proto.onUpdate = function () {
-        this.y += 10;
+        this.y += 12;
         //左边
         if(this.m_dir == 1){
             if(this.boxLeft.x + this.boxLeft.width /2 >= this.x && this.y + this.height >= this.boxLeft.y - this.boxLeft.height / 2 && this.y <= this.boxLeft.y + this.boxLeft.height/2){

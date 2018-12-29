@@ -193,16 +193,16 @@ var GameScene = (function (_super) {
         var t_pox = t_box.x;
         Laya.Tween.to(t_box,{
             rotation:90*t_dir
-        },800);
+        },600);
         timeLine.addLabel("go",0).to(t_box,
         {
-            x:t_pox-300*t_dir,
+            x:t_pox-350*t_dir,
             // rotation:45,
-        },400,Laya.Ease.quadOut).addLabel("back",0).to(t_box,
+        },300,Laya.Ease.quadOut).addLabel("back",0).to(t_box,
         {
             x:t_pox,
             // rotation:90,
-        },400,Laya.Ease.quadIn);
+        },300,Laya.Ease.quadIn);
         
         timeLine.play(0,false);
         timeLine.on(Laya.Event.COMPLETE,this,function(){
