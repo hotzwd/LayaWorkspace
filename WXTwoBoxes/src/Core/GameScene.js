@@ -23,6 +23,9 @@ var GameScene = (function (_super) {
     _proto.m_boxRight = null;                                               //右边的盒子
     _proto.m_boxLeftX = 0;                                                 //左边盒子坐标
     _proto.m_boxRightX = 0;                                                //右边盒子坐标
+    _proto.m_jump_left =false;                                             //左边跳起
+    _proto.m_jump_right =false;                                            //右边跳起
+    _proto.levelData = null;                                               //关卡数据
     
 
     
@@ -75,17 +78,22 @@ var GameScene = (function (_super) {
         // this.gameLive = 3;
         // this.gameUI.t_life.text = "x"+this.gameLive;
 
-        for (var i = 0; i < this.BoxesList.length; i++) {
-            var t_Boxes = this.BoxesList[i];
-            BoxesFactory.getInstance().recoveryBoxesToPool(t_Boxes);
-            this.BoxesList.splice(i, 1);
-        }
-        this.BoxesList = [];
+        // for (var i = 0; i < this.BoxesList.length; i++) {
+        //     var t_Boxes = this.BoxesList[i];
+        //     BoxesFactory.getInstance().recoveryBoxesToPool(t_Boxes);
+        //     this.BoxesList.splice(i, 1);
+        // }
+        // this.BoxesList = [];
 
-        this.m_boxLeft.x =  this.m_boxLeft.x;
+        this.m_boxLeft.visible = true;
+        this.m_boxRight.visible = true;
+        this.m_boxLeft.x =  this.m_boxLeftX;
         this.m_boxRight.x = this.m_boxRightX;
         this.m_boxLeft.rotation = 0;
         this.m_boxRight.rotation = 0;
+
+        this.m_jump_left = false;
+        this.m_jump_right = false;
         
         
     }
@@ -116,20 +124,63 @@ var GameScene = (function (_super) {
     }
 
     /**游戏结束 */
-    _proto.gameover = function(_win){
+    _proto.gameover = function(){
         Gamelog("------------游戏结束");
         Laya.timer.clear(this,this.onUpdate);
         // Laya.timer.clear(this,this.updateGameTime);
-        // for (var i = 0; i < this.BoxesList.length; i++) {
-        //     var t_Boxes = this.BoxesList[i];
-        //     BoxesFactory.getInstance().recoveryBoxesToPool(t_Boxes);
-        //     this.BoxesList.splice(i, 1);
-        // }
+        for (var i = 0; i < this.BoxesList.length; i++) {
+            var t_Boxes = this.BoxesList[i];
+            BoxesFactory.getInstance().recoveryBoxesToPool(t_Boxes);
+        }
+        this.BoxesList = [];
 
-        // UIManager.getInstance().showUI("GameOverUI");
+        //播放死亡动画
+        this.boxDead(this.m_boxLeft,1);
+        this.boxDead(this.m_boxRight,2);
+
+        Laya.timer.once(1000,this,function(){
+            UIManager.getInstance().showUI("GameOverUI");
+        })
         
     }
 
+    //盒子消失效果
+    _proto.boxDead = function(p_box,p_dir){
+        // MusicManager.getInstance().playSound("res/music/gameover.wav");
+        
+        p_box.visible = false;
+
+        // var t_ballPoint = new Point(0,0);
+        // p_box.localToGlobal(t_ballPoint);
+        var t_ballPoint = new Point(p_box.x,p_box.y);
+
+        var t_img = new Laya.Image("Game/yuan"+p_dir+".png");
+        t_img.anchorX = 0.5;
+        t_img.anchorY = 0.5;
+        t_img.pos(t_ballPoint.x,t_ballPoint.y);
+        // Laya.stage.addChild(t_img);
+        this.gameLayer.addChild(t_img);
+        
+        t_img.alpha = 0;
+        t_img.scaleX = 0;
+        t_img.scaleY = 0;
+
+
+        var timeLine = new Laya.TimeLine();
+        timeLine.addLabel("show",0).to(t_img,
+        {
+            alpha:1,
+            scaleX:1.0,
+            scaleY:1.0,
+        },300).addLabel("go",0).to(t_img,
+        {
+            alpha:0,
+        },500);
+        timeLine.play(0,false);
+        timeLine.on(Laya.Event.COMPLETE,this,function(arg){
+            arg.destroy();
+        },[t_img]);
+    }
 
     /**
      * update刷新
@@ -148,16 +199,40 @@ var GameScene = (function (_super) {
 
     //创建盒子
     _proto.createBoxesList = function(){
+
+        this.levelData = null;
+        for (var i = LevelData.length -1 ; i >=0; i--) {
+            this.levelData = LevelData[i];
+            if(this.gameScore >= this.levelData.score){
+                break;
+            }
+        }
+
         var t_list = BoxesGenerator.getInstance().createBoxes(1);
         this.BoxesList = this.BoxesList.concat(t_list);
 
-        this.createTime = 100;
+        // this.createTime = 45;
+        this.createTime = this.levelData.time;
+
     }
 
+    //删除箱子
+    _proto.deleteBox = function(p_box){
+
+        for (var i = 0; i < this.BoxesList.length; i++) {
+            var t_box = this.BoxesList[i];
+            if(t_box == p_box){
+                BoxesFactory.getInstance().recoveryBoxesToPool(t_box);
+                Gamelog("------删除箱子");
+                this.BoxesList.splice(i, 1);
+            }
+        }
+        this.addGameScore();
+    }
    
     //增加分数
     _proto.addGameScore = function(){
-        this.gameScore += 50;
+        this.gameScore += 1;
         this.gameUI.t_gamescore.text = this.gameScore;
 
 
@@ -182,11 +257,22 @@ var GameScene = (function (_super) {
      * 箱子跳跃
      */
     _proto.boxJump = function(_left){
+
+        if(_left && this.m_jump_left){
+            return;
+        }
+        if(!_left && this.m_jump_right){
+            return;
+        }
+
         var t_box = this.m_boxLeft;
         var t_dir = 1;
         if(!_left){
             t_box = this.m_boxRight;
             t_dir = -1;
+            this.m_jump_right = true;
+        }else{
+            this.m_jump_left = true;
         }
 
         var timeLine = new Laya.TimeLine();
@@ -205,10 +291,15 @@ var GameScene = (function (_super) {
         },300,Laya.Ease.quadIn);
         
         timeLine.play(0,false);
-        timeLine.on(Laya.Event.COMPLETE,this,function(){
+        timeLine.on(Laya.Event.COMPLETE,this,function(p_dir){
             t_box.rotation = 0;
+            if(p_dir == 1){
+                this.m_jump_left = false;
+            }else{
+                this.m_jump_right = false;
+            }
             this.gameUI.stageShake();
-        });
+        },[t_dir]);
     }
    
 

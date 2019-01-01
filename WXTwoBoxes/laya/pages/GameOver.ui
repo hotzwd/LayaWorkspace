@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":2,
+    "selectedBox":2,
+    "selecteID":11,
     "props":{"width":960,"sceneColor":"#000000","height":1708,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -30,14 +30,13 @@
                     "props":{"alpha":0.5},
                     "nodeParent":2,
                     "label":"Sprite",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":3,
                     "child":[
                         {
-                            "x":45,
                             "type":"Rect",
                             "props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"},
                             "nodeParent":3,
@@ -60,6 +59,84 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":5,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1326,"x":321,"var":"btn_close","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "nodeParent":2,
+                    "label":"Button(btn_close)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":6,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1439,"x":328,"var":"btn_share","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "nodeParent":2,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":7,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":930,"x":538,"width":192,"var":"t_gamescore","text":"99999","height":50,"fontSize":50,"font":"SimHei","color":"#ffff00","bold":true},
+                    "nodeParent":2,
+                    "label":"Label(t_gamescore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":8,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":864,"x":538,"width":182,"var":"t_highScore","text":"99999","height":57,"fontSize":50,"font":"SimHei","color":"#00ff00","bold":true},
+                    "nodeParent":2,
+                    "label":"Label(t_highScore)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":9,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":870,"x":275,"width":168,"text":"最高分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "nodeParent":2,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "props":{"y":938,"x":277,"width":168,"text":"当前分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
+                    "nodeParent":2,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":11,
                     "child":[
                         ]
                 }]

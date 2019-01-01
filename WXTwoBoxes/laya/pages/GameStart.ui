@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":4,
-    "selecteID":2,
+    "selecteID":8,
     "props":{"width":960,"sceneColor":"#000000","height":1708,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -66,13 +66,40 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":1226,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":4,
                     "label":"Image(btn_start)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":6,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1362,"x":314,"var":"btn_share","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "nodeParent":4,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":7,
+                    "child":[
+                        ],
+                    "$HIDDEN":false
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1480,"x":312,"var":"btn_rank","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "nodeParent":4,
+                    "label":"Button(btn_rank)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":8,
                     "child":[
                         ]
                 }]

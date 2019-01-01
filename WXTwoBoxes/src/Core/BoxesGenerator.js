@@ -55,7 +55,10 @@ var BoxesGenerator = (function(_super){
         var typeId = parseInt(Math.random()*2 + 1); //1方形 2三角形
         var birthPos = new Laya.Point(238,800);
         var t_dir = parseInt(Math.random()*2 + 1);;//1左边 2右边
- 
+        
+        // typeId =2;
+        // t_dir = 2;
+        
         if(typeId == 1){
             if(t_dir == 1){
                 birthPos = new Laya.Point(238,-100);
@@ -66,7 +69,7 @@ var BoxesGenerator = (function(_super){
             if(t_dir == 1){
                 birthPos = new Laya.Point(347,-100);
             }else{
-                birthPos = new Laya.Point(517,-100);
+                birthPos = new Laya.Point(504,-100);
             }
         }
 

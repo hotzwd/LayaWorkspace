@@ -30,6 +30,10 @@ var GameUI=(function(_super){
 var GameOverUI=(function(_super){
 		function GameOverUI(){
 			
+		    this.btn_close=null;
+		    this.btn_share=null;
+		    this.t_gamescore=null;
+		    this.t_highScore=null;
 
 			GameOverUI.__super.call(this);
 		}
@@ -43,13 +47,15 @@ var GameOverUI=(function(_super){
 
 		}
 
-		GameOverUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":562,"x":243,"skin":"Game/gameover_titulo-sheet0.png"}}]}]};
+		GameOverUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":562,"x":243,"skin":"Game/gameover_titulo-sheet0.png"}},{"type":"Button","props":{"y":1326,"x":321,"var":"btn_close","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Button","props":{"y":1439,"x":328,"var":"btn_share","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Label","props":{"y":930,"x":538,"width":192,"var":"t_gamescore","text":"99999","height":50,"fontSize":50,"font":"SimHei","color":"#ffff00","bold":true}},{"type":"Label","props":{"y":864,"x":538,"width":182,"var":"t_highScore","text":"99999","height":57,"fontSize":50,"font":"SimHei","color":"#00ff00","bold":true}},{"type":"Label","props":{"y":870,"x":275,"width":168,"text":"最高分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Label","props":{"y":938,"x":277,"width":168,"text":"当前分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}}]}]};
 		return GameOverUI;
 	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
 			
 		    this.btn_start=null;
+		    this.btn_share=null;
+		    this.btn_rank=null;
 
 			GameStartUI.__super.call(this);
 		}
@@ -63,6 +69,6 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1226,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1362,"x":314,"var":"btn_share","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Button","props":{"y":1480,"x":312,"var":"btn_rank","stateNum":1,"skin":"Game/newbest-sheet0.png"}}]}]};
 		return GameStartUI;
 	})(View);
