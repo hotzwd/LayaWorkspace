@@ -147,8 +147,8 @@ var GameScene = (function (_super) {
         Laya.timer.clear(this,this.updateGameTime);
         this.isGameover = true;
 
-        if(Browser.onMiniGame){
-            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+        if(GameInQQ){
+            if(qqGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
                 UIManager.getInstance().showUI("GameOverUI");
                 return;
             }
@@ -395,7 +395,7 @@ var GameScene = (function (_super) {
             this.gameTime += 11;
             // this.updateGameTime();
         }
-        wxGame.getInstance().createVideoAD();
+        qqGame.getInstance().createVideoAD();
     }
 
     //点击界面

@@ -18,5 +18,5 @@ var GameConfig = {
 /**是否显示Log */
 var GameLogVisible = true;
 /**是否运行在QQ */
-var GameInQQ = true;
-// var GameInQQ = false;
+// var GameInQQ = true;
+var GameInQQ = false;

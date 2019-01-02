@@ -1,9 +1,9 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":101,
-    "selecteID":104,
-    "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
+    "selectedBox":3,
+    "selecteID":128,
+    "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"Box",
-            "props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1556,"centerY":0,"centerX":0},
+            "props":{"width":1280,"visible":true,"var":"gameoverPanel","height":1280,"centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Box(gameoverPanel)",
             "isOpen":true,
@@ -27,25 +27,25 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "props":{"alpha":0.7},
+                    "props":{"y":-138,"x":0,"alpha":0.7},
                     "nodeParent":3,
                     "label":"Sprite",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":120,
+                    "compId":128,
                     "child":[
                         {
                             "x":45,
                             "type":"Rect",
                             "props":{"y":0,"x":0,"width":1280,"lineWidth":1,"height":1556,"fillColor":"#050505"},
-                            "nodeParent":120,
+                            "nodeParent":128,
                             "label":"Rect",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":121,
+                            "compId":129,
                             "child":[
                                 ]
                         }]
@@ -53,7 +53,7 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":367,"centerX":0},
+                    "props":{"y":212,"x":334},
                     "nodeParent":3,
                     "label":"Box",
                     "isOpen":true,
@@ -65,7 +65,7 @@
                         {
                             "x":45,
                             "type":"Image",
-                            "props":{"y":12,"x":0,"width":618,"skin":"Game/rankBg.png","sizeGrid":"10,10,10,10","height":728},
+                            "props":{"y":8,"x":-2,"width":618,"skin":"Game/rankBg.png","sizeGrid":"10,10,10,10","height":728},
                             "nodeParent":103,
                             "label":"Image",
                             "isOpen":true,
@@ -77,7 +77,7 @@
                                 {
                                     "x":60,
                                     "type":"List",
-                                    "props":{"y":89,"x":6,"width":610,"var":"RankList","spaceY":5,"repeatY":6,"repeatX":1,"height":536},
+                                    "props":{"y":77,"x":20,"width":577,"var":"RankList","spaceY":5,"selectEnable":false,"repeatY":5,"repeatX":1,"height":456},
                                     "nodeParent":101,
                                     "label":"List(RankList)",
                                     "isOpen":true,
@@ -100,8 +100,34 @@
                                             "child":[
                                                 {
                                                     "x":90,
+                                                    "type":"Line",
+                                                    "props":{"y":83,"x":0,"toY":0,"toX":574,"lineWidth":3,"lineColor":"#999595"},
+                                                    "nodeParent":105,
+                                                    "label":"Line",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":115,
+                                                    "child":[
+                                                        ]
+                                                },
+                                                {
+                                                    "x":90,
+                                                    "type":"Image",
+                                                    "props":{"y":10,"x":98,"width":70,"name":"playerIcon","height":65},
+                                                    "nodeParent":105,
+                                                    "label":"Image(playerIcon)",
+                                                    "isDirectory":false,
+                                                    "isAniNode":false,
+                                                    "hasChild":false,
+                                                    "compId":110,
+                                                    "child":[
+                                                        ]
+                                                },
+                                                {
+                                                    "x":90,
                                                     "type":"Label",
-                                                    "props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":30,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
+                                                    "props":{"y":37,"x":37,"text":"1","name":"rankIndex","fontSize":30,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
                                                     "nodeParent":105,
                                                     "label":"Label(rankIndex)",
                                                     "isDirectory":false,
@@ -113,21 +139,8 @@
                                                 },
                                                 {
                                                     "x":90,
-                                                    "type":"Image",
-                                                    "props":{"y":6,"x":102,"width":70,"name":"playerIcon","height":65},
-                                                    "nodeParent":105,
-                                                    "label":"Image(playerIcon)",
-                                                    "isDirectory":false,
-                                                    "isAniNode":false,
-                                                    "hasChild":false,
-                                                    "compId":122,
-                                                    "child":[
-                                                        ]
-                                                },
-                                                {
-                                                    "x":90,
                                                     "type":"Label",
-                                                    "props":{"y":22,"x":219,"width":205,"text":"玩家名字七个字","name":"playerName","height":40,"fontSize":25,"font":"SimHei","color":"#ffffff"},
+                                                    "props":{"y":23,"x":189,"width":239,"text":"玩家名字100000","name":"playerName","height":40,"fontSize":30,"font":"SimHei","color":"#ffffff"},
                                                     "nodeParent":105,
                                                     "label":"Label(playerName)",
                                                     "isOpen":false,
@@ -141,7 +154,7 @@
                                                 {
                                                     "x":90,
                                                     "type":"Label",
-                                                    "props":{"y":25,"x":459,"width":116,"text":"9999999","name":"playerScore","height":30,"fontSize":25,"font":"SimHei","color":"#ffffff","align":"right"},
+                                                    "props":{"y":23,"x":447,"width":116,"text":"9999","name":"playerScore","height":36,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"right"},
                                                     "nodeParent":105,
                                                     "label":"Label(playerScore)",
                                                     "isOpen":true,
@@ -149,19 +162,6 @@
                                                     "isAniNode":false,
                                                     "hasChild":false,
                                                     "compId":111,
-                                                    "child":[
-                                                        ]
-                                                },
-                                                {
-                                                    "x":90,
-                                                    "type":"Line",
-                                                    "props":{"y":79,"x":10,"toY":0,"toX":574,"lineWidth":3,"lineColor":"#999595"},
-                                                    "nodeParent":105,
-                                                    "label":"Line",
-                                                    "isDirectory":false,
-                                                    "isAniNode":false,
-                                                    "hasChild":false,
-                                                    "compId":123,
                                                     "child":[
                                                         ]
                                                 }],
@@ -172,7 +172,7 @@
                                 {
                                     "x":60,
                                     "type":"Label",
-                                    "props":{"y":21,"var":"listName","text":"好友排行","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":-7},
+                                    "props":{"y":16,"var":"listName","text":"世界排行","fontSize":40,"font":"SimHei","color":"#ffffff","centerX":0,"bold":true},
                                     "nodeParent":101,
                                     "label":"Label(listName)",
                                     "isDirectory":false,
@@ -186,7 +186,7 @@
                                 {
                                     "x":60,
                                     "type":"Label",
-                                    "props":{"y":669,"x":306,"text":"每周一更新排名","fontSize":26,"font":"SimHei","color":"#ffffff","bold":true,"anchorY":0.5,"anchorX":0.5},
+                                    "props":{"y":701,"x":306,"text":"世界排行每月一日更新","fontSize":24,"font":"SimHei","color":"#ffffff","bold":true,"anchorY":0.5,"anchorX":0.5},
                                     "nodeParent":101,
                                     "label":"Label",
                                     "isDirectory":false,
@@ -202,13 +202,120 @@
                         {
                             "x":45,
                             "type":"Image",
-                            "props":{"y":-2,"x":577,"var":"close","skin":"Game/btn_guanbi.png"},
+                            "props":{"x":572,"var":"close","skin":"Game/btn_guanbi.png"},
                             "nodeParent":103,
                             "label":"Image(close)",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":102,
+                            "child":[
+                                ]
+                        }],
+                    "$HIDDEN":false
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":818,"x":357,"width":572,"skin":"Game/img_rankblue.png","height":70},
+                    "nodeParent":3,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":118,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "props":{"y":813,"x":366,"width":574,"var":"selfBox","height":85},
+                    "nodeParent":3,
+                    "label":"Box(selfBox)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":121,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":8,"x":97,"width":70,"name":"playerIcon","height":65},
+                            "nodeParent":121,
+                            "label":"Image(playerIcon)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":124,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"y":40,"x":42,"text":"未上榜","name":"rankIndex","fontSize":24,"font":"SimHei","color":"#000000","anchorY":0.5,"anchorX":0.5,"align":"center"},
+                            "nodeParent":121,
+                            "label":"Label(rankIndex)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":125,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"y":26,"x":187,"width":239,"text":"玩家名字100000","name":"playerName","height":40,"fontSize":24,"font":"SimHei","color":"#000000"},
+                            "nodeParent":121,
+                            "label":"Label(playerName)",
+                            "isOpen":false,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":126,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "props":{"y":26,"x":447,"width":102,"text":"9999","name":"playerScore","height":36,"fontSize":24,"font":"SimHei","color":"#000000","align":"right"},
+                            "nodeParent":121,
+                            "label":"Label(playerScore)",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":127,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Button",
+                            "props":{"y":-59,"x":13,"width":114,"var":"btn_left","labelSize":24,"labelFont":"SimHei","labelColors":"#ffffff","label":"<<上一页","height":54},
+                            "nodeParent":121,
+                            "label":"Button(btn_left)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":119,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Button",
+                            "props":{"y":-56,"x":431,"width":114,"var":"btn_right","labelSize":24,"labelFont":"SimHei","labelColors":"#ffffff","label":"下一页>>","height":54},
+                            "nodeParent":121,
+                            "label":"Button(btn_right)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":120,
                             "child":[
                                 ]
                         }],

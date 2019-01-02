@@ -1,7 +1,10 @@
 @echo off
 echo QQ  push bat
 
-copy qqPlayerCore.js qqwanyiwan\layaforqq
+del  qqwanyiwan\code.js
+
+copy qqPlayCore.js qqwanyiwan\layaforqq
+copy GameConfig.js qqwanyiwan\js
 
 cd qqwanyiwan
 

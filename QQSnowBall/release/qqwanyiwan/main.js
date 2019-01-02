@@ -8,6 +8,8 @@ BK.Script.loadlib("GameRes://libs/laya.html.js");
 BK.Script.loadlib("GameRes://libs/laya.ui.js");
 BK.Script.loadlib("GameRes://layaforqq/laya.bkadpter.js");
 BK.Script.loadlib("GameRes://js/ui/layaUI.max.all.js");
+BK.Script.loadlib("GameRes://js/UILogic/GameWorldRankUILogic.js");
+BK.Script.loadlib("GameRes://js/Tool/qqGame.js");
 BK.Script.loadlib("GameRes://js/Data/MiniGameData.js");
 BK.Script.loadlib("GameRes://js/UILogic/GameRecommendUILogic.js");
 BK.Script.loadlib("GameRes://js/UILogic/GameSharedUILogic.js");

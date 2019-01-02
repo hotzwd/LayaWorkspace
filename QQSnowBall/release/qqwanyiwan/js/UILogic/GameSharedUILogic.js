@@ -36,18 +36,20 @@ var GameSharedUILogic = (function(_super){
 
     /**显示视频广告 */
     _proto.onShowVidoAd = function () {
-       wxGame.getInstance().showVideoAD(this,this.reviveGame);
+       qqGame.getInstance().showVideoAD(this,this.reviveGame);
 
     }
     //复活
     _proto.reviveGame = function(_success){
-        MusicManager.getInstance().playSound("res/music/click.wav");
+        // MusicManager.getInstance().playSound("res/music/click.wav");
         UIManager.getInstance().closeUI("GameSharedUI");
         if(_success){
             var scoreNum = SceneManager.getInstance().currentScene.gameScore;
             SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
             SceneManager.getInstance().currentScene.resumeGame();
-            wxGame.getInstance().createVideoAD();
+            qqGame.getInstance().createVideoAD();
+        }else{
+             UIManager.getInstance().showUI("GameOverUI");
         }
     }
 

@@ -29,26 +29,41 @@ var GameOverUILogic = (function (_super) {
         //存储在本地并上传
         var highscoreNum = SetLocalMaxScore(scoreNum);
         this.t_highScore.text = highscoreNum;
-        wxGame.getInstance().uploadUserScore(highscoreNum);
+        qqGame.getInstance().uploadUserScore(highscoreNum);
 
+        // var maxScoreNum = highscoreNum;
+        // //是否重新上传
+        // var uploadScore = LocalStorage.getItem("uploadScore");
+        // var uploadScoreNum = 0;
+        // if(uploadScore != null && uploadScore != ""){
+        //     uploadScoreNum = parseInt(uploadScore, 10);
+        // }
+        // var maxWorldScoreNum = SetLocalWorldMaxScore(maxScoreNum);
+        // //上传世界排行
+        // if(maxScoreNum == maxWorldScoreNum || uploadScoreNum == 0){
+        //     qqGame.getInstance().sendGameScoreOnWorld(maxWorldScoreNum);
+        // }
+
+        qqGame.getInstance().showBannerAD(true);
     }
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
-        wxGame.getInstance().showOpenDataContext(false);
+        // wxGame.getInstance().showOpenDataContext(false);
+        qqGame.getInstance().showBannerAD(false);
     }
 
     _proto._closeClickEvent = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
         SceneManager.getInstance().currentScene.restartGame(true);
-        UIManager.getInstance().closeUI("GameOverUI");
+        UIManager.getInstance().closeUI("GameOverUI",true);
         UIManager.getInstance().showUI("GameStartUI");
         wxGame.getInstance().showOpenDataContext(false);
     }
   
      _proto._shareClickEvent = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
-        wxGame.getInstance().shareGame();
+        qqGame.getInstance().shareGame();
     }
 
     return GameOverUILogic;

@@ -4,7 +4,8 @@ Laya.MiniAdpter.init(true);
 //laya初始化
 Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
 
-wxGame.getInstance().Init();
+// wxGame.getInstance().Init();
+qqGame.getInstance().Init();
 
 //FPS
 // Laya.Stat.show(0,0);
@@ -74,8 +75,8 @@ function loadingCallbackGO() {
     SceneManager.getInstance().currentScene = new GameScene();
     UIManager.getInstance().showUI("GameStartUI");
 
-    // wxGame.getInstance().createVideoAD();
-    // laya.net.LocalStorage.clear();
+    // qqGame.getInstance().createVideoAD();
+    // qqGame.getInstance().showBannerAD(true);
 
-    GameLogError("-----------测试错误！！");
+    // laya.net.LocalStorage.clear();
 }
