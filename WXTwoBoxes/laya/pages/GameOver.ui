@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":11,
+    "selecteID":3,
     "props":{"width":960,"sceneColor":"#000000","height":1708,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -65,7 +65,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1326,"x":321,"var":"btn_close","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "props":{"y":1326,"x":310,"var":"btn_close","stateNum":"1","skin":"Game/img_replay.png"},
                     "nodeParent":2,
                     "label":"Button(btn_close)",
                     "isDirectory":false,
@@ -78,7 +78,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1439,"x":328,"var":"btn_share","stateNum":"1","skin":"Game/newbest-sheet0.png"},
+                    "props":{"y":1456,"x":310,"var":"btn_share","stateNum":"1","skin":"Game/img_yaoqing.png"},
                     "nodeParent":2,
                     "label":"Button(btn_share)",
                     "isDirectory":false,

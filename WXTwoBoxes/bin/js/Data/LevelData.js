@@ -1,0 +1,54 @@
+ /**关卡数据 */
+var LevelData = [
+    {
+        level:1,
+        name:"",
+        score:0,
+        speed:10,
+        time:100,
+    },
+    {
+        level:2,
+        name:"",
+        score:10,
+        speed:15,
+        time:90,
+    },
+    {
+        level:3,
+        name:"",
+        score:50,
+        speed:20,
+        time:80,
+    },
+    {
+        level:4,
+        name:"",
+        score:100,
+        speed:25,
+        time:70,
+    },
+    {
+        level:5,
+        name:"",
+        score:200,
+        speed:30,
+        time:60,
+    },
+    {
+        level:6,
+        name:"",
+        score:400,
+        speed:35,
+        time:50,
+    },
+    {
+        level:7,
+        name:"",
+        score:500,
+        speed:35,
+        time:40,
+    },
+    
+    
+];
