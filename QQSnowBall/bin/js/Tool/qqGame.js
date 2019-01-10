@@ -138,9 +138,26 @@ var qqGame = (function (_super) {
             // qqImgUrl: 'http://hudong.qq.com/docs/engine/img/848B76B5530AA7EE7B38E9A1267D7086.png',
             qqImgUrl: "http://staticmaterial-1251316161.cosgz.myqcloud.com/5639/bigIcon.1546400352597.png",
             // msgUrl: 'http://hudong.qq.com',
+            isToFriend: true,
             socialPicPath: 'GameRes://Game/share1.png',
             title: '全民滑雪球',
-            summary: '一起来滑雪，看谁滑的远！'
+            summary: '一起来滑雪，看谁滑的远！',
+            success: function (succObj) {
+                BK.Console.log('分享成功', succObj.code, JSON.stringify(succObj.data));
+            },
+            fail: function (failObj) {
+                BK.Console.log('分享失败', failObj.code, JSON.stringify(failObj.msg));
+            },
+            complete: function() {
+                BK.Console.log('------分享完成，不论成功失败');
+                //监听分享结束事件
+                MusicManager.getInstance().playMusic("res/music/1.mp3");
+            }
+            // complete :function (res) {
+            //     BK.Script.log(1,1,"----- 分享完成，不论成功失败")
+            //     //监听分享结束事件
+            //     MusicManager.getInstance().playMusic("res/music/1.mp3");
+            // }
         });
     }
 

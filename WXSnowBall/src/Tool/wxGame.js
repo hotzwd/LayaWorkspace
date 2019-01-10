@@ -303,7 +303,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-68792ad4e658d32f'
+            adUnitId: 'adunit-21935fac02b0497e'
         });
 
         var t_videoAd = this.videoAd;

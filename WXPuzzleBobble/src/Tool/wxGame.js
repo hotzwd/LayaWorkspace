@@ -329,8 +329,12 @@ var wxGame = (function (_super) {
             return;
         }
         
+        // this.videoAd = wx.createRewardedVideoAd({
+        //     adUnitId: 'adunit-04783191a572fddf'
+        // });
+
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-04783191a572fddf'
+            adUnitId: 'adunit-0f564afc288f3ccd'
         });
 
         var t_videoAd = this.videoAd;

@@ -185,7 +185,7 @@
                         {
                             "x":45,
                             "type":"Label",
-                            "props":{"y":1190,"x":-211,"visible":false,"text":"V2.0","fontSize":30,"font":"SimHei","color":"#ada7a7"},
+                            "props":{"y":1190,"x":-211,"text":"V2.0.1","fontSize":30,"font":"SimHei","color":"#ada7a7"},
                             "nodeParent":16,
                             "label":"Label",
                             "isDirectory":false,

@@ -329,8 +329,12 @@ var wxGame = (function (_super) {
             return;
         }
         
+        // this.videoAd = wx.createRewardedVideoAd({
+        //     adUnitId: 'adunit-04783191a572fddf'
+        // });
+
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-04783191a572fddf'
+            adUnitId: 'adunit-0f564afc288f3ccd'
         });
 
         var t_videoAd = this.videoAd;
@@ -358,13 +362,15 @@ var wxGame = (function (_super) {
             adUnitId: 'adunit-0f564afc288f3ccd'
         });
 
+        this.eggVideoAd.load();
+
         this.eggVideoAd.onError(function () {
-            console.log("createVideoAD 拉取失败 = false");
+            console.log("createVideoAD 金蛋 拉取失败 = false");
             wxLoadEggVideoAd = false;
         });
 
         this.eggVideoAd.onLoad(function () {
-            console.log("createVideoAD 拉取成功 = true");
+            console.log("createVideoAD 金蛋 拉取成功 = true");
             wxLoadEggVideoAd = true;
         });
 

@@ -35,6 +35,7 @@ var GameStartUiLogic = (function (_super) {
 
     _proto._startClickEvent = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
+        MusicManager.getInstance().playMusic("res/music/1.mp3");
         // wxGame.getInstance().showClubBtn(false);
         qqGame.getInstance().createVideoAD();
 
