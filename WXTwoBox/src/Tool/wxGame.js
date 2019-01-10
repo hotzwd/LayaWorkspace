@@ -285,7 +285,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;

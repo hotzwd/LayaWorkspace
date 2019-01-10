@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":4,
-    "selecteID":2,
+    "selecteID":9,
     "props":{"width":960,"sceneColor":"#000000","height":1708,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -30,13 +30,14 @@
                     "props":{"y":0,"x":-2,"alpha":0.5},
                     "nodeParent":4,
                     "label":"Sprite",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":2,
                     "child":[
                         {
+                            "x":45,
                             "type":"Rect",
                             "props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"},
                             "nodeParent":2,
@@ -106,7 +107,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1778,"x":54,"text":"v1.0","fontSize":35,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1778,"x":54,"text":"v1.1","fontSize":35,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":4,
                     "label":"Label",
                     "isDirectory":false,

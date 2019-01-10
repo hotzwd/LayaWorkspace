@@ -38,7 +38,7 @@ var GameOverUILogic = (function (_super) {
 
     _proto.bengbeng_closeClickEvent = function(){
         //  MusicManager.getInstance().playSound("res/music/click.wav");
-        SceneManager.getInstance().currentScene.restartGame();
+        SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
         wxGame.getInstance().showOpenDataContext(false);

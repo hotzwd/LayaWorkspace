@@ -50275,6 +50275,28 @@ var GameOverUI=(function(_super){
 		GameOverUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":562,"x":243,"skin":"Game/gameover_titulo-sheet0.png"}},{"type":"Button","props":{"y":1326,"x":310,"var":"btn_close","stateNum":1,"skin":"Game/img_replay.png"}},{"type":"Button","props":{"y":1456,"x":310,"var":"btn_share","stateNum":1,"skin":"Game/img_yaoqing.png"}},{"type":"Label","props":{"y":930,"x":538,"width":192,"var":"t_gamescore","text":"99999","height":50,"fontSize":50,"font":"SimHei","color":"#ffff00","bold":true}},{"type":"Label","props":{"y":864,"x":538,"width":182,"var":"t_highScore","text":"99999","height":57,"fontSize":50,"font":"SimHei","color":"#00ff00","bold":true}},{"type":"Label","props":{"y":870,"x":275,"width":168,"text":"最高分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}},{"type":"Label","props":{"y":938,"x":277,"width":168,"text":"当前分数:","height":45,"fontSize":35,"font":"SimHei","color":"#ffffff","bold":true}}]}]};
 		return GameOverUI;
 	})(View);
+var GameSharedUI=(function(_super){
+		function GameSharedUI(){
+			
+		    this.aniShare=null;
+		    this.btn_shard=null;
+		    this.btn_cancel=null;
+
+			GameSharedUI.__super.call(this);
+		}
+
+		CLASS$(GameSharedUI,'ui.GameSharedUI',_super);
+		var __proto__=GameSharedUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameSharedUI.uiView);
+
+		}
+
+		GameSharedUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2076,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":0,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Button","props":{"y":833,"x":480,"var":"btn_shard","stateNum":1,"skin":"Game/fuhuo.png","labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":1415,"x":480,"width":141,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		return GameSharedUI;
+	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
 			
@@ -50294,9 +50316,64 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-2,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1362,"x":314,"var":"btn_share","stateNum":1,"skin":"Game/img_yaoqing.png"}},{"type":"Button","props":{"y":1480,"x":312,"visible":false,"var":"btn_rank","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Label","props":{"y":1778,"x":54,"text":"v1.0","fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-2,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1362,"x":314,"var":"btn_share","stateNum":1,"skin":"Game/img_yaoqing.png"}},{"type":"Button","props":{"y":1480,"x":312,"visible":false,"var":"btn_rank","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Label","props":{"y":1778,"x":54,"text":"v1.1","fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
+/**
+ * 分享界面逻辑 by lzq
+ */
+var GameSharedUILogic = (function(_super){
+    function GameSharedUILogic(){
+        GameSharedUILogic.super(this);
+
+    }
+    Laya.class(GameSharedUILogic,"UILogic.GameSharedUILogic",_super);
+    var _proto = GameSharedUILogic.prototype;
+
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 50;
+
+        this.aniShare.play(0, true);
+        
+        this.btn_shard.on(Laya.Event.CLICK,this,this.onShowVidoAd);
+        this.btn_cancel.on(Laya.Event.CLICK,this,this.onCancelClick);
+
+
+    }
+    _proto.onDestroy = function(){
+       
+    }
+
+     
+     /**点击跳过 */
+    _proto.onCancelClick = function(){
+        // MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        UIManager.getInstance().closeUI("GameSharedUI");
+        UIManager.getInstance().showUI("GameOverUI");
+    }
+
+    /**显示视频广告 */
+    _proto.onShowVidoAd = function () {
+       wxGame.getInstance().showVideoAD(this,this.reviveGame);
+
+    }
+    //复活
+    _proto.reviveGame = function(_success){
+        // MusicManager.getInstance().playSound("res/music/btnclick.wav");
+        UIManager.getInstance().closeUI("GameSharedUI");
+        if(_success){
+            var scoreNum = SceneManager.getInstance().currentScene.gameScore;
+            SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
+            SceneManager.getInstance().currentScene.resumeGame();
+            wxGame.getInstance().createVideoAD();
+        }
+    }
+
+    return GameSharedUILogic;
+})(GameSharedUI);
 /**
  * 箱子类
  */
@@ -50620,7 +50697,7 @@ var GameScene = (function (_super) {
         // this.delayInitShow();
 
 
-        this.restartGame();
+        this.restartGame(true);
        
     }
 
@@ -50634,10 +50711,13 @@ var GameScene = (function (_super) {
      }
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
-
-        this.gameLevel = 0;
-        this.gameScore = 0;
+    _proto.restartGame = function(_gameover,_score){
+        if(_gameover){
+            this.gameLevel = 0;
+            this.gameScore = 0;
+        }else{
+            this.gameScore = _score;
+        }
         this.gameUI.t_gamescore.text = this.gameScore;
         // this.gameLive = 3;
         // this.gameUI.t_life.text = "x"+this.gameLive;
@@ -50703,7 +50783,17 @@ var GameScene = (function (_super) {
         this.boxDead(this.m_boxRight,2);
 
         Laya.timer.once(1000,this,function(){
-            UIManager.getInstance().showUI("GameOverUI");
+            if(Browser.onMiniGame){
+                if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                    UIManager.getInstance().showUI("GameOverUI");
+                    return;
+                }
+                    UIManager.getInstance().showUI("GameSharedUI");
+            }else{
+                // this.btn_addLife.visible = true;
+                UIManager.getInstance().showUI("GameSharedUI");
+            }
+            // UIManager.getInstance().showUI("GameOverUI");
         })
         
     }
@@ -51209,7 +51299,10 @@ var UIManager = (function(_super){
                 break;
             case "GameRankUI":
                 uiLogic = new GameRankUILogic();
-                break;    
+                break;
+            case "GameSharedUI":
+                uiLogic = new GameSharedUILogic();
+                break;
             
             default:
                 console.error("-------UIManager UIname="+_name+"没有注册或不存在");
@@ -51703,7 +51796,7 @@ var wxGame = (function (_super) {
          if (!Browser.onMiniGame) {
              return;
          }
-         return;
+         
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -51721,7 +51814,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-87711549b6ab3c3a'
+            adUnitId: 'adunit-6f8f25c6772b4b61'
         });
 
         var t_videoAd = this.videoAd;
@@ -51872,7 +51965,7 @@ var GameOverUILogic = (function (_super) {
 
     _proto.bengbeng_closeClickEvent = function(){
         //  MusicManager.getInstance().playSound("res/music/click.wav");
-        SceneManager.getInstance().currentScene.restartGame();
+        SceneManager.getInstance().currentScene.restartGame(true);
         UIManager.getInstance().closeUI("GameOverUI");
         UIManager.getInstance().showUI("GameStartUI");
         wxGame.getInstance().showOpenDataContext(false);

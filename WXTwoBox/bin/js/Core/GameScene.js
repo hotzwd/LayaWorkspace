@@ -56,7 +56,7 @@ var GameScene = (function (_super) {
         // this.delayInitShow();
 
 
-        this.restartGame();
+        this.restartGame(true);
        
     }
 
@@ -70,10 +70,13 @@ var GameScene = (function (_super) {
      }
 
     /**重置游戏 */
-    _proto.restartGame = function(_score){
-
-        this.gameLevel = 0;
-        this.gameScore = 0;
+    _proto.restartGame = function(_gameover,_score){
+        if(_gameover){
+            this.gameLevel = 0;
+            this.gameScore = 0;
+        }else{
+            this.gameScore = _score;
+        }
         this.gameUI.t_gamescore.text = this.gameScore;
         // this.gameLive = 3;
         // this.gameUI.t_life.text = "x"+this.gameLive;
@@ -139,7 +142,17 @@ var GameScene = (function (_super) {
         this.boxDead(this.m_boxRight,2);
 
         Laya.timer.once(1000,this,function(){
-            UIManager.getInstance().showUI("GameOverUI");
+            if(Browser.onMiniGame){
+                if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                    UIManager.getInstance().showUI("GameOverUI");
+                    return;
+                }
+                    UIManager.getInstance().showUI("GameSharedUI");
+            }else{
+                // this.btn_addLife.visible = true;
+                UIManager.getInstance().showUI("GameSharedUI");
+            }
+            // UIManager.getInstance().showUI("GameOverUI");
         })
         
     }
