@@ -38,12 +38,12 @@ var GameConfig = {
     
 };
 /**是否显示Log */
-var GameLogVisible = false;
+var GameLogVisible = true;
 /**物理边框显示 */
 var GameMatterBody = false;
 /**物理模式 */
-var GameMatterModle = true;
+var GameMatterModle = false;
 
 /**是否运行在QQ */
-var GameInQQ = true;
-//var GameInQQ = false;
+// var GameInQQ = true;
+var GameInQQ = false;

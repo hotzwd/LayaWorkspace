@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":77,
+    "selectedBox":3,
+    "selecteID":4,
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
     "label":"View",
@@ -82,7 +82,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":765,"x":640,"width":148,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":1138,"x":640,"width":151,"var":"btn_cancel","mouseEnabled":true,"labelSize":30,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":3,
                     "label":"Button(btn_cancel)",
                     "isDirectory":false,

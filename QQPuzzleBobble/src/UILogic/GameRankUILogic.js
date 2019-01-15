@@ -43,6 +43,7 @@ var GameRankUILogic = (function(_super){
         // Gamelog("index = " + index);
         var rankData = cell._dataSource;
 
+        //  Gamelog("rankData = " + rankData.nick);
         // var rank = rankData.rank + 1;
         var rank = index + 1;
 
@@ -72,7 +73,8 @@ var GameRankUILogic = (function(_super){
         var playerName = cell.getChildByName("playerName");
         var str = rankData.nick;
         
-        var strNew = labelTransform(str,playerName.fontSize,playerName.width);
+        var strNew = str;
+        // var strNew = labelTransform(str,playerName.fontSize,playerName.width);
         playerName.text = strNew;
         
         var playerScore = cell.getChildByName("playerScore");

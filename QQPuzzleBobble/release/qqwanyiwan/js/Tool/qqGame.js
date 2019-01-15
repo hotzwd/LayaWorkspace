@@ -104,11 +104,13 @@ var qqGame = (function (_super) {
         // 必须配置好周期规则后，才能使用数据上报和排行榜功能
         BK.QQ.getRankListWithoutRoom(attr, order, rankType, function(errCode, cmd, data) {
             BK.Script.log(1,1,"getRankListWithoutRoom callback  cmd" + cmd + " errCode:" + errCode + "  data:" + JSON.stringify(data));
+            
             // 返回错误码信息
             if (errCode !== 0) {
                 BK.Script.log(1,1,'获取排行榜数据失败!错误码：' + errCode);
                 return;
             }
+            
             // 解析数据
             if (data) {
                 for(var i=0; i < data.data.ranking_list.length; ++i) {
@@ -123,6 +125,7 @@ var qqGame = (function (_super) {
                     //};
                 }
 
+                
                 var rankUI = UIManager.getInstance().getUI("GameRankUI");
                 rankUI.updateRankData(data.data.ranking_list);	
             }
@@ -136,7 +139,7 @@ var qqGame = (function (_super) {
          }
         BK.Share.share({
             // qqImgUrl: 'http://hudong.qq.com/docs/engine/img/848B76B5530AA7EE7B38E9A1267D7086.png',
-            qqImgUrl: "http://staticmaterial-1251316161.cosgz.myqcloud.com/5639/bigIcon.1546400352597.png",
+            qqImgUrl: "http://staticmaterial-1251316161.cosgz.myqcloud.com/5774/bigIcon.1547458259934.png",
             // msgUrl: 'http://hudong.qq.com',
             isToFriend: true,
             socialPicPath: 'GameRes://Game/share.png',

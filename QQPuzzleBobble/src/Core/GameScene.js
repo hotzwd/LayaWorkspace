@@ -79,6 +79,8 @@ var GameScene = (function(_super){
                 _proto.matterScene = new MatterSceneMonster();
             }
         }
+
+        MusicManager.getInstance().playMusic("res/music/1.mp3")
         this.m_board = [];
         this.m_listBubble = [];
         this.m_mapBubbleList = [];
@@ -898,7 +900,8 @@ var GameScene = (function(_super){
         }
        // this.createPlayerBubble(createBoardNumList);
         //----------屏蔽生成金蛋
-        this.createEggBubble(createBoardNumList);
+        if(GameMatterModle)
+            this.createEggBubble(createBoardNumList);
         //生成的最后一行作为顶部
         this.gameTopRow = mapBeginLine;
         //生成一行重置发射个数

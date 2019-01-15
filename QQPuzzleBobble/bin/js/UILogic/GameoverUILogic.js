@@ -25,7 +25,6 @@ var GameoverUILogic = (function(_super){
         },4000);
         timeLine.play(0,true);
 
-
         var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
         this.label_overScore.text = scoreNum;
 
@@ -193,7 +192,7 @@ var GameoverUILogic = (function(_super){
         }
     }
     _proto.onShareGame = function(){
-        wxGame.getInstance().shareGame();
+        qqGame.getInstance().shareGame();
         // if(Browser.onMiniGame){
         //     wx.shareAppMessage({
         //             title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',

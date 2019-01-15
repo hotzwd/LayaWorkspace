@@ -30,7 +30,7 @@ var UIManager = (function(_super){
      * 显示UI
      */
     _proto.showUI = function(_name,_index){
-        console.debug("------UIManager showUI="+_name);
+        Gamelog("------UIManager showUI="+_name);
         var uiLogic= _proto.UIArry[_name];
 
         if(uiLogic != null){
@@ -48,7 +48,7 @@ var UIManager = (function(_super){
         if(uiLogic.onInit != null){
                 uiLogic.onInit();
         }else{
-            console.warn("----UIManager showUI warn:"+_name+"没有定义onInit()!");
+            GameLogError("----UIManager showUI warn:"+_name+"没有定义onInit()!");
         }
         //指定UI层级
         if(_index != null){
@@ -86,7 +86,7 @@ var UIManager = (function(_super){
             }
         }
         if(uiLogic === undefined ){
-            console.error("--------UIManager getUI name="+_name+"在列表中不存在");
+            GameLogError("--------UIManager getUI name="+_name+"在列表中不存在");
         }
         return uiLogic;
     }
@@ -94,7 +94,7 @@ var UIManager = (function(_super){
      * 关闭UI
      */
     _proto.closeUI = function(_name,_destory){
-        console.debug("------UIManager closeUI="+_name);
+        Gamelog("------UIManager closeUI="+_name);
         if(_destory === undefined){
             //设置默认值
             _destory = false;
@@ -104,12 +104,12 @@ var UIManager = (function(_super){
         if(uiLogic != null){
             uiLogic.visible = false;
         }else{
-            console.error("UIManager error: closeUI name="+_name+"is not find!");
+            GameLogError("UIManager error: closeUI name="+_name+"is not find!");
         }
         if(uiLogic.onDestroy != null){
                 uiLogic.onDestroy();
         }else{
-            console.warn("----UIManager showUI warn:"+_name+"没有定义onDestroy()!");
+            GameLogError("----UIManager showUI warn:"+_name+"没有定义onDestroy()!");
         }
         //从舞台删除UI
         if(_destory === true){
@@ -155,7 +155,7 @@ var UIManager = (function(_super){
                 break;
 
             default:
-                console.error("-------UIManager UIname="+_name+"没有注册或不存在");
+                GameLogError("-------UIManager UIname="+_name+"没有注册或不存在");
             break;
         }
         return uiLogic;

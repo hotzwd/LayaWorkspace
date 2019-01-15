@@ -50,6 +50,32 @@ function GetFormtName(name){
     }
     return newName;
 }
+//名字太长转换...
+function labelTransform(strOld, fontSize, width) {
+    var strLen = 0;
+    var strNew = "";
+    for (var i = 0; i < strOld.length; i++) {
+        var char = strOld.charAt(i);
+        var isChin = isChinese(char);
+        Gamelog(char + ":" + isChin);
+        if (isChin) {
+            strLen = strLen + fontSize;
+        }
+        else {
+            strLen = strLen + fontSize / 2;
+        }
+
+        if (strLen > width - fontSize) {
+            strNew = strNew + "..";
+            break;
+        }
+        else {
+            strNew = strNew + char;
+        }
+    }
+
+    return strNew;
+}
 
 /** 分数文字*/
 function BubbleScoreAnim(_point,_score,_fontName){

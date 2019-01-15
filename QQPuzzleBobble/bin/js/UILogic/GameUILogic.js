@@ -382,6 +382,7 @@ var GameUILogic = (function(_super){
     }
 
     _proto.onRankClick = function(){
+        Gamelog("-------点击排行榜");
         UIManager.getInstance().showUI("GameRankUI");
     }
 
