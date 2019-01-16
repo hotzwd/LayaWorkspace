@@ -45,5 +45,5 @@ var GameMatterBody = false;
 var GameMatterModle = false;
 
 /**是否运行在QQ */
-// var GameInQQ = true;
-var GameInQQ = false;
+var GameInQQ = true;
+//var GameInQQ = false;
