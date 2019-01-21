@@ -132,6 +132,107 @@ var qqGame = (function (_super) {
         });
     }
 
+
+    /**显示游戏结束好友排行 */
+    _proto.showEndFriendRank = function(){
+        if (!GameInQQ) 
+            return;
+         // 当前不支持一次同时拉取多个排行榜，需要拉取多次，而且必须等上一个拉取回来后才能拉取另外一个排行榜
+        // 先拉 score 排行榜
+        var attr = "score";//使用哪一种上报数据做排行，可传入score，a1，a2等
+        var order = 1;     //排序的方法：[ 1: 从大到小(单局)，2: 从小到大(单局)，3: 由大到小(累积)]
+        var rankType = 0; //要查询的排行榜类型，0: 好友排行榜
+        // 必须配置好周期规则后，才能使用数据上报和排行榜功能
+        BK.QQ.getRankListWithoutRoom(attr, order, rankType, function(errCode, cmd, data) {
+            BK.Script.log(1,1,"getRankListWithoutRoom callback  cmd" + cmd + " errCode:" + errCode + "  data:" + JSON.stringify(data));
+            
+            // 返回错误码信息
+            if (errCode !== 0) {
+                BK.Script.log(1,1,'获取排行榜数据失败!错误码：' + errCode);
+                return;
+            }
+            
+            // 解析数据
+            if (data) {
+
+                var t_rankList = [];
+                for(var i=0; i < data.data.ranking_list.length; ++i) {
+                    var rd = data.data.ranking_list[i];
+                    Gamelog("-------排行榜--name="+rd.nick+",score="+rd.score);
+                    // rd 的字段如下:
+                    //var rd = {
+                    //    url: '',            // 头像的 url
+                    //    nick: '',           // 昵称
+                    //    score: 1,           // 分数
+                    //    selfFlag: false,    // 是否是自己
+                    //};
+                    //如果是自己
+                    if(rd.selfFlag){
+                        //上一个
+                        var friends = new Array();
+                        //第一名
+                        if(i == 0){
+                            for (var j = 0; j < 3; j++) {
+                                //条件
+                                var result = false;
+                                //数组下标
+                                var index = 0;
+
+                                if (j == 0) {
+                                    index = i;
+                                    friends.push(index);
+                                }
+                                else if (i + j < data.data.ranking_list.length) {
+                                    index = i + j;
+                                    friends.push(index);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (var j = 0; j < 3; j++) {
+                                //条件
+                                var result = false;
+                                //数组下标
+                                var index = 0;
+                                if (j == 0 && i - 1 >= 0) {
+                                    result = true;
+                                    index = i - 1;
+                                    friends.push(index);
+                                }
+
+                                if (j == 1) {
+                                    index = i;
+                                    friends.push(index);
+                                }
+
+                                if (j == 2 && i + 1 < data.data.ranking_list.length) {
+                                    index = i + 1;
+                                    friends.push(index);
+                                }
+                            }
+                        }
+                        
+                        for (var x = 0; x < friends.length; x++) {
+                            var index = friends[x];
+                            var t_data = data.data.ranking_list[index];
+                            t_data.rank = index;
+                            t_rankList.push(t_data);
+
+                        }
+
+                    }
+                }
+
+                if(t_rankList.length >0){
+                    var rankUI = UIManager.getInstance().getUI("GameoverUI");
+                    rankUI.updateRankData(t_rankList);	
+                }
+            }
+        });
+    }
+
+
     //分享游戏
     _proto.shareGame = function () {
         if (!GameInQQ) {
@@ -201,17 +302,20 @@ var qqGame = (function (_super) {
         
         this.videoAd = BK.Advertisement.createVideoAd();
 
-        // var t_videoAd = this.videoAd;
+        var t_videoAd = this.videoAd;
+
         this.videoAd.onLoad(function () {
             //加载成功
             BK.Script.log(1,1,"createVideoAD----- onLoad")
             Gamelog("createVideoAD 拉取成功 = true");
             window.wxLoadVideoAd = true;
+            t_videoAd.offLoad(this);
         });
 
          this.videoAd.onError(function (err) {
             Gamelog("createVideoAD 拉取失败 err.errMsg="+err.msg+" errCode="+err.code);
             window.wxLoadVideoAd = false;
+            t_videoAd.offError(this);
         });
 
     }
@@ -224,7 +328,7 @@ var qqGame = (function (_super) {
          }
          Gamelog("showVideoAD-----this.videoAd="+this.videoAd+",window.wxLoadVideoAd="+window.wxLoadVideoAd);
         // var t_videoAd = wxGame.getInstance().videoAd;
-        // var t_videoAd = this.videoAd;
+        var t_videoAd = this.videoAd;
         //没有加载完播放失败
         if(this.videoAd == null || !window.wxLoadVideoAd)
             return;
@@ -236,22 +340,23 @@ var qqGame = (function (_super) {
             BK.Script.log(1,1,"------------showVideoAD  onPlayStart")
             //QQ玩一玩或者是引擎的bug 播放广告时没有关闭背景音效需要手动处理
             MusicManager.getInstance().stopMusic();
-            
+            t_videoAd.offPlayStart(this);
         });
 
         this.videoAd.onPlayFinish(function () {
             //播放结束
             BK.Script.log(1,1,"------------showVideoAD onPlayFinish")
             window.qqPlayFinish = true;
+            t_videoAd.offPlayFinish(this);
         });
     
         
         this.videoAd.onClose( function(){
-            // t_videoAd.offClose(this);
             Gamelog("------------showVideoAD onClose  window.qqPlayFinish="+window.qqPlayFinish);
             //监听视频界面关闭事件
             MusicManager.getInstance().playMusic("res/music/1.mp3");
             _callbackFun.call(_call,window.qqPlayFinish);
+            t_videoAd.offClose(this);
         });
 
         this.videoAd.show();

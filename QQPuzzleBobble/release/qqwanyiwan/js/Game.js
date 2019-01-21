@@ -83,5 +83,6 @@ function loadingCallback(){
     
     // wxGame.getInstance().createVideoAD();
     qqGame.getInstance().createVideoAD();
+    // qqGame.getInstance().showBannerAD(true);
     
 }

@@ -1,7 +1,8 @@
 {
+    "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":24,
+    "selectedBox":3,
+    "selecteID":75,
     "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
     "label":"View",
@@ -12,6 +13,7 @@
     "compId":1,
     "child":[
         {
+            "x":15,
             "type":"Box",
             "props":{"var":"gameoverPanel","centerY":0,"centerX":0},
             "nodeParent":1,
@@ -23,6 +25,7 @@
             "compId":3,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":0,"width":1280,"skin":"game/bg_heise.png","sizeGrid":"5,5,5,5","height":1556},
                     "nodeParent":3,
@@ -36,6 +39,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":402,"x":630,"var":"img_light","skin":"game/img_guangxiao.png","anchorY":0.5,"anchorX":0.5},
                     "nodeParent":3,
@@ -49,6 +53,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":408,"x":362,"width":546,"skin":"game/img_diban.png","sizeGrid":"60,60,60,60","height":586},
                     "nodeParent":3,
@@ -62,6 +67,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":264,"x":355,"width":550,"skin":"game/img_dangqiandefen.png","height":249},
                     "nodeParent":3,
@@ -75,6 +81,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":452,"x":488,"skin":"game/img_lishizuigao.png"},
                     "nodeParent":3,
@@ -88,6 +95,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":559,"x":427,"width":415,"var":"label_overScore","text":"888888","strokeColor":"#0d0d0d","stroke":2,"height":60,"fontSize":55,"font":"shuzi1Font","color":"#e7f106","bold":true,"align":"center"},
                     "nodeParent":3,
@@ -101,6 +109,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":449,"x":631,"width":151,"var":"label_heightScore","text":"88888","strokeColor":"#9003ff","stroke":3,"height":43,"fontSize":40,"font":"SimHei","color":"#fbf8fd","bold":true,"align":"left"},
                     "nodeParent":3,
@@ -114,8 +123,9 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Button",
-                    "props":{"y":937.75,"x":640,"var":"btn_again","stateNum":"2","skin":"game/btn_zaiwan.png"},
+                    "props":{"y":937.75,"x":654,"var":"btn_again","stateNum":"2","skin":"game/btn_zaiwan.png"},
                     "nodeParent":3,
                     "label":"Button(btn_again)",
                     "isOpen":false,
@@ -127,6 +137,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":490,"x":511,"skin":"game/image_bencidefen.png"},
                     "nodeParent":3,
@@ -139,6 +150,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":367,"x":516,"skin":"game/image_youxijieshu-.png"},
                     "nodeParent":3,
@@ -151,19 +163,7 @@
                         ]
                 },
                 {
-                    "type":"Image",
-                    "props":{"y":629,"x":421,"width":434,"visible":false,"skin":"game/img_rankBg.png","height":282},
-                    "nodeParent":3,
-                    "label":"Image",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":76,
-                    "child":[
-                        ],
-                    "$HIDDEN":true
-                },
-                {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":626,"x":534,"visible":false,"text":"好友排行榜","fontSize":35,"font":"SimHei","color":"#ffffff","bold":true},
                     "nodeParent":3,
@@ -177,35 +177,9 @@
                     "$HIDDEN":true
                 },
                 {
+                    "x":30,
                     "type":"Button",
-                    "props":{"y":964,"x":634,"width":150,"visible":false,"var":"btn_next","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"下一页","height":50},
-                    "nodeParent":3,
-                    "label":"Button(btn_next)",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":74,
-                    "child":[
-                        ],
-                    "$HIDDEN":true
-                },
-                {
-                    "type":"Button",
-                    "props":{"y":964,"x":487,"width":150,"visible":false,"var":"btn_last","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","labelBold":true,"label":"上一页","height":50},
-                    "nodeParent":3,
-                    "label":"Button(btn_last)",
-                    "isOpen":false,
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":75,
-                    "child":[
-                        ],
-                    "$HIDDEN":true
-                },
-                {
-                    "type":"Button",
-                    "props":{"y":982.75,"x":512,"var":"btn_share","stateNum":"2","skin":"game/xuanyaodefen.png","scaleY":0.97,"scaleX":0.97,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"y":982.75,"x":507,"var":"btn_share","stateNum":"2","skin":"game/xuanyaodefen.png","scaleY":0.97,"scaleX":0.97,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":3,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
@@ -214,6 +188,83 @@
                     "compId":78,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"List",
+                    "props":{"y":647,"x":392,"width":478,"var":"RankList","spaceY":5,"repeatY":3,"repeatX":1,"height":261},
+                    "nodeParent":3,
+                    "label":"List(RankList)",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":79,
+                    "child":[
+                        {
+                            "type":"Box",
+                            "props":{"y":0,"x":0,"width":477,"renderType":"render","height":85},
+                            "nodeParent":79,
+                            "label":"Box",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":false,
+                            "hasChild":true,
+                            "compId":80,
+                            "child":[
+                                {
+                                    "type":"Label",
+                                    "props":{"y":40,"x":36,"width":35,"text":"99","name":"rankIndex","height":36,"fontSize":35,"font":"SimHei","color":"#ffffff","anchorY":0.5,"anchorX":0.5,"align":"center"},
+                                    "nodeParent":80,
+                                    "label":"Label(rankIndex)",
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":81,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Image",
+                                    "props":{"y":6,"x":79,"width":70,"name":"playerIcon","height":65},
+                                    "nodeParent":80,
+                                    "label":"Image(playerIcon)",
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":82,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Label",
+                                    "props":{"y":22,"x":161,"width":205,"text":"玩家名字七个字","overflow":"hidden","name":"playerName","height":40,"fontSize":30,"font":"SimHei","color":"#ffffff"},
+                                    "nodeParent":80,
+                                    "label":"Label(playerName)",
+                                    "isOpen":false,
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":83,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Label",
+                                    "props":{"y":25,"x":353,"width":116,"text":"99999","name":"playerScore","height":30,"fontSize":30,"font":"SimHei","color":"#ffffff","align":"right"},
+                                    "nodeParent":80,
+                                    "label":"Label(playerScore)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":false,
+                                    "hasChild":false,
+                                    "compId":84,
+                                    "child":[
+                                        ]
+                                }],
+                            "$HIDDEN":false
+                        }],
+                    "$HIDDEN":false
                 }],
             "$HIDDEN":false
         }],

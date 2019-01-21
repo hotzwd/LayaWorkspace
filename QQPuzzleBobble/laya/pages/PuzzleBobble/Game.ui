@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":73,
-    "selecteID":60,
+    "selecteID":111,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -419,20 +419,21 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1019,"x":544,"width":192,"var":"btn_rank","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":35},
+                    "props":{"y":1019,"x":544,"width":192,"visible":false,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":35},
                     "nodeParent":73,
-                    "label":"Button(btn_rank)",
+                    "label":"Button",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":111,
                     "child":[
-                        ]
+                        ],
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":1239,"x":290,"text":"v1.0","fontSize":26,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1239,"x":290,"text":"v1.0.1","fontSize":26,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":73,
                     "label":"Label",
                     "isOpen":true,
@@ -440,6 +441,32 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":110,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1008,"x":417,"var":"btn_share","stateNum":"2","skin":"game/btn_inviteFriend.png"},
+                    "nodeParent":73,
+                    "label":"Button(btn_share)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":117,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "props":{"y":1008,"x":660,"var":"btn_rank","stateNum":"2","skin":"game/btn_friendRank.png"},
+                    "nodeParent":73,
+                    "label":"Button(btn_rank)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":118,
                     "child":[
                         ]
                 }],

@@ -970,7 +970,7 @@ var GameScene = (function(_super){
 
                     if(GameInQQ){
                         if(qqGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
-                            UIManager.getInstance().showUI("GameOverUI");
+                            UIManager.getInstance().showUI("GameoverUI");
                             return;
                         }
                         UIManager.getInstance().showUI("GameSharedUI");

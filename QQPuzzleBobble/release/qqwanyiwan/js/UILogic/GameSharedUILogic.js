@@ -30,7 +30,8 @@ var GameSharedUILogic = (function(_super){
      /**点击跳过 */
     _proto.onCancelClick = function(){
         UIManager.getInstance().closeUI("GameSharedUI");
-        SceneManager.getInstance().currentScene.gameUI.gameoverByTime();
+        // SceneManager.getInstance().currentScene.gameUI.gameoverByTime();
+        UIManager.getInstance().showUI("GameoverUI");
     }
     /**分享游戏 */
     _proto.onShardClick = function(){
@@ -90,8 +91,10 @@ var GameSharedUILogic = (function(_super){
             var scoreNum = SceneManager.getInstance().currentScene.scoreNum;
             SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
         }else{
-             UIManager.getInstance().showUI("GameOverUI");
+             UIManager.getInstance().showUI("GameoverUI");
         }
+
+        qqGame.getInstance().createVideoAD();
     }
 
     return GameSharedUILogic;

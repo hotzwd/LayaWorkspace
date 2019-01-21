@@ -58,10 +58,10 @@ var GameoverUILogic = (function(_super){
         // this.onGetRankList();
 
         this.btn_again.on(Laya.Event.CLICK,this,this.onGameAgain);
-        this.btn_last.on(Laya.Event.CLICK,this,this.onRankPageLast);
-        this.btn_next.on(Laya.Event.CLICK,this,this.onRankPageNext);
         this.btn_share.on(Laya.Event.CLICK,this,this.onShareGame);
-       // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
+        // this.btn_closeOver.on(Laya.Event.CLICK,this,this.onCloseGame);
+        this.RankList.renderHandler = new Laya.Handler(this, this.updateItem);
+        this.RankList.visible = false;
 
         //this.updateListData();
 
@@ -69,6 +69,7 @@ var GameoverUILogic = (function(_super){
 
         // this.showBannerAd();
         qqGame.getInstance().showBannerAD(true);
+        qqGame.getInstance().showEndFriendRank();
     }
 
 
@@ -78,47 +79,6 @@ var GameoverUILogic = (function(_super){
         if(this.bannerAd != null){
             this.bannerAd.destroy();
         }
-    }
-
-    //显示广告
-    _proto.showBannerAd = function(){
-        if (Browser.onMiniGame) {
-            var isPass = false;
-            wx.getSystemInfo({
-                success: function (res) {
-                    Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                    var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
-                    if(isPassNum >= 0){
-                        isPass = true;
-                    }
-                }
-            }); 
-            if(!isPass){
-                return;
-            }
-            if(this.bannerAd != null){
-                this.bannerAd.destroy();
-            }
-            this.bannerAd = wx.createBannerAd({
-                    adUnitId: 'adunit-1fcd79ff1d1dcbec',
-                    style: {
-                        left: 0,
-                        top: 0,
-                        width: 300
-                    }
-                })
-            this.bannerAd.show();
-
-            var sysInfo = wx.getSystemInfoSync();
-            var Ad = this.bannerAd;         
-            var sysInfo = wx.getSystemInfoSync();
-            this.bannerAd.onResize(function (res) {
-                Ad.style.top = sysInfo.screenHeight - 86;
-                Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
-            });
-
-        }
-
     }
      
      /**重新开始 */
@@ -133,72 +93,75 @@ var GameoverUILogic = (function(_super){
     }
     /**关闭游戏 */
     _proto.onCloseGame = function(){
-        //跳转到玩吧
-        // window.location.href=UserModule.getInstance().redirect;
+        
     }
     /**发送数据 */
     _proto.sendScore = function(highScore){
         wxGame.getInstance().uploadUserScore(highScore);
-        // if(Browser.onMiniGame){
-        //     var openDataContext = wx.getOpenDataContext()
-        //     openDataContext.postMessage({
-        //         msgType:3,
-        //         score:highScore,
-        //     })
-        // }
-    }
-    /**获取排行榜 */
-    _proto.onGetRankList = function(){
-        if(Browser.onMiniGame){
-
-            var openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:0,
-            })
-            if(rankSprite2 != null){
-                rankSprite2.destroy();
-            }
-            rankSprite2 = new Laya.Sprite();
-            this.addChild(rankSprite2);
-
-            var sharedCanvas = openDataContext.canvas;
-            Laya.timer.once(200, this, function () {
-                var rankTexture = new Laya.Texture(sharedCanvas);
-                rankTexture.bitmap.alwaysChange = true;//小游戏使用，非常费，每帧刷新  
-                rankSprite2.graphics.drawTexture(rankTexture, 0, 0,Laya.stage.width,Laya.stage.height);
-            });   
-        }
-    }
-    _proto.onRankPageLast = function(){
-        // console.log("--------onRankPageLast");
         
-        if(Browser.onMiniGame){
-            var openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:-1,
-            })
-        }
     }
-    _proto.onRankPageNext = function(){
-        // console.log("--------onRankPageNext");
-        if(Browser.onMiniGame){
-            var openDataContext = wx.getOpenDataContext()
-            openDataContext.postMessage({
-                msgType:1,
-                page:1,
-            })
-        }
+
+   
+
+    /**初始化数据 */
+    _proto.updateRankData = function(_data){
+        this.RankList.visible = true;
+
+        this.RankList.scrollTo(0);
+        this.RankList.array = _data;
+        
     }
+
+    _proto.updateItem = function(cell, index) {
+        // Gamelog("index = " + index);
+        var rankData = cell._dataSource;
+
+
+        var rank = index + 1;
+        // var rank = rankData.rank + 1;
+        if(rankData.rank != null){
+            Gamelog("------rankData.rank = " + rankData.rank);
+            rank = rankData.rank + 1;
+        }
+
+        // var rankIcon = cell.getChildByName("rankIcon");
+        var rankIndex = cell.getChildByName("rankIndex");
+
+        rankIndex.visible = true
+        rankIndex.text = rank + "";
+
+        // if (rank > 3) {
+        //     rankIcon.visible = false;
+        //     rankIndex.visible = true
+        //     rankIndex.text = rank + "";
+        // }
+        // else
+        // {
+        //     rankIcon.skin ="game/No." + rank + ".png";
+        //     rankIcon.visible = true;
+        //     rankIndex.visible = false;
+        // }
+
+        var playerIcon = cell.getChildByName("playerIcon");
+        playerIcon.skin = "";
+        playerIcon.skin = rankData.url;
+        // playerIcon.loadImage(rankData.iconurl);
+
+        var playerName = cell.getChildByName("playerName");
+        var str = rankData.nick;
+        
+        var strNew = str;
+        // var strNew = labelTransform(str,playerName.fontSize,playerName.width);
+        playerName.text = strNew;
+        
+        var playerScore = cell.getChildByName("playerScore");
+        playerScore.text = rankData.score;
+
+    }
+
     _proto.onShareGame = function(){
         qqGame.getInstance().shareGame();
-        // if(Browser.onMiniGame){
-        //     wx.shareAppMessage({
-        //             title: '[有人@我]小姐姐，小姐姐，我有个游戏你玩吗？',
-        //             imageUrl:"game/shard.png"
-        //         })
-        // }
+        
     }
     return GameoverUILogic;
 })(GameoverUI);

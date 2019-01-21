@@ -10,7 +10,9 @@ P 34D4C79B bg_heise.png
 R 09B37443 bgGame.jpg
 P B3ABBC4B btn_fangjian_red_164x54.png
 P C7EB612B btn_fenxiangyouxi.png
+P E1285D7F btn_friendRank.png
 P 336359A8 btn_guanbi.png
+P CA6B0226 btn_inviteFriend.png
 P 1FD45519 btn_kaishi.png
 P 8CB7517E btn_shengyin_guan.png
 P D2C5B424 btn_shengyin_kai.png
@@ -65,7 +67,7 @@ P 625F81D0 jindan_6.png
 P 934F90F9 logo.png
 P 7DDCB054 point.png
 R 08DD90CA rank_bg.png
-P B944DEDD rankBg.png
+P 1BC1A1FB rankBg.png
 R 19CDF67D shard.png
 P 1DC9D16D xuanyaodefen.png
 D paopaol

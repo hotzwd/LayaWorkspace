@@ -55,6 +55,7 @@ var GameUILogic = (function(_super){
         this.btn_sound.on(Laya.Event.CLICK,this,this.onSoundClick);
         this.btn_start.on(Laya.Event.CLICK,this,this.onStartClick);
         this.btn_rank.on(Laya.Event.CLICK,this,this.onRankClick);
+        this.btn_share.on(Laya.Event.CLICK,this,this.onShareGame);
 
         this.changeBubbleBox.on(Laya.Event.CLICK,this,this.onChangeBubble);
         //this.bossBox.on(Laya.Event.CLICK,this,this.onBossBoxClick);
@@ -392,6 +393,10 @@ var GameUILogic = (function(_super){
         UIManager.getInstance().showUI("GameEggUI");
     }
 
+    _proto.onShareGame = function(){
+        qqGame.getInstance().shareGame();
+        
+    }
     
     return GameUILogic;
 })(GameUI);
