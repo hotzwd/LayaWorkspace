@@ -42304,7 +42304,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"skin":"Game/background.png","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"skin":"Game/img_startBg.png"}},{"type":"Button","props":{"y":794,"x":220,"width":280,"var":"btn_start","stateNum":1,"skin":"Game/img_red.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"开始游戏","height":92,"sizeGrid":"31,32,26,76"}},{"type":"Button","props":{"y":920,"x":220,"width":280,"var":"btn_rank","stateNum":1,"skin":"Game/img_red.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":92,"sizeGrid":"31,32,26,76"}},{"type":"Text","props":{"y":1209,"x":20,"width":180,"text":"v1.2","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"skin":"Game/background.png","height":1556,"centerY":0,"centerX":0}},{"type":"Box","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Image","props":{"skin":"Game/img_startBg.png"}},{"type":"Button","props":{"y":794,"x":220,"width":280,"var":"btn_start","stateNum":1,"skin":"Game/img_red.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"开始游戏","height":92,"sizeGrid":"31,32,26,76"}},{"type":"Button","props":{"y":920,"x":220,"width":280,"var":"btn_rank","stateNum":1,"skin":"Game/img_red.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行榜","height":92,"sizeGrid":"31,32,26,76"}},{"type":"Text","props":{"y":1209,"x":20,"width":180,"text":"v1.2.1","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
 
@@ -43958,7 +43958,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-9cd46af0aa707aac'
+            adUnitId: 'adunit-8c35f072128a2d81'
         });
 
         var t_videoAd = this.videoAd;
