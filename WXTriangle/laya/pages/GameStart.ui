@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":6,
-    "selecteID":7,
+    "selectedBox":1,
+    "selecteID":6,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -27,18 +27,19 @@
                 {
                     "x":30,
                     "type":"Sprite",
-                    "props":{"x":-280,"width":1280,"height":1280,"alpha":0.5},
+                    "props":{"y":-138,"x":-280,"width":1280,"height":1556,"alpha":0.4},
                     "nodeParent":6,
                     "label":"Sprite",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":11,
                     "child":[
                         {
+                            "x":45,
                             "type":"Rect",
-                            "props":{"width":1280,"lineWidth":1,"height":1280,"fillColor":"#000000"},
+                            "props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"},
                             "nodeParent":11,
                             "label":"Rect",
                             "isDirectory":false,
@@ -52,7 +53,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":396,"x":-6,"skin":"Game/title-sheet0.png"},
+                    "props":{"y":396,"skin":"Game/title-sheet0.png","scaleY":1.2,"scaleX":1.2,"centerX":0},
                     "nodeParent":6,
                     "label":"Image",
                     "isDirectory":false,

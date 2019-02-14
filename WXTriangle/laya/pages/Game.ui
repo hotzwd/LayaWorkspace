@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":8,
-    "selecteID":26,
+    "selecteID":27,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -54,7 +54,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":264,"x":3,"width":177,"var":"t_gamescore","text":"9999","height":45,"fontSize":50,"font":"SimHei","color":"#2e4556","align":"center"},
+                    "props":{"y":264,"x":3,"width":177,"var":"t_gamescore","text":"0","height":45,"fontSize":50,"font":"SimHei","color":"#2e4556","align":"center"},
                     "nodeParent":8,
                     "label":"Text(t_gamescore)",
                     "isDirectory":false,
@@ -67,10 +67,10 @@
                 {
                     "x":30,
                     "type":"Box",
-                    "props":{"y":902,"x":360,"width":220,"var":"box_triangle","rotation":0,"height":220,"anchorY":0.38,"anchorX":0.5},
+                    "props":{"y":902,"x":360,"width":220,"var":"box_triangle","rotation":-300,"height":220,"anchorY":0.38,"anchorX":0.5},
                     "nodeParent":8,
                     "label":"Box(box_triangle)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
@@ -118,7 +118,7 @@
                         {
                             "x":45,
                             "type":"Sprite",
-                            "props":{"y":8,"x":11,"width":200,"var":"sp_color1","height":10},
+                            "props":{"y":8,"x":11,"width":200,"visible":false,"var":"sp_color1","height":10},
                             "nodeParent":23,
                             "label":"Sprite(sp_color1)",
                             "isOpen":false,
@@ -139,12 +139,13 @@
                                     "child":[
                                         ],
                                     "$HIDDEN":false
-                                }]
+                                }],
+                            "$HIDDEN":true
                         },
                         {
                             "x":45,
                             "type":"Sprite",
-                            "props":{"y":197,"x":114,"width":200,"var":"sp_color2","rotation":-60,"height":10},
+                            "props":{"y":197,"x":114,"width":200,"visible":false,"var":"sp_color2","rotation":-60,"height":10},
                             "nodeParent":23,
                             "label":"Sprite(sp_color2)",
                             "isOpen":false,
@@ -165,12 +166,13 @@
                                     "child":[
                                         ],
                                     "$HIDDEN":false
-                                }]
+                                }],
+                            "$HIDDEN":true
                         },
                         {
                             "x":45,
                             "type":"Sprite",
-                            "props":{"y":23,"x":7,"width":200,"var":"sp_color3","rotation":60,"height":10},
+                            "props":{"y":23,"x":7,"width":200,"visible":false,"var":"sp_color3","rotation":60,"height":10},
                             "nodeParent":23,
                             "label":"Sprite(sp_color3)",
                             "isOpen":false,
@@ -191,7 +193,8 @@
                                     "child":[
                                         ],
                                     "$HIDDEN":false
-                                }]
+                                }],
+                            "$HIDDEN":true
                         }],
                     "$HIDDEN":false
                 },
@@ -211,7 +214,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"y":225,"x":310,"var":"img_qiu","skin":"Game/dcolor2.png"},
+                    "props":{"y":225,"x":310,"visible":false,"var":"img_qiu","skin":"Game/dcolor2.png"},
                     "nodeParent":8,
                     "label":"Image(img_qiu)",
                     "isDirectory":false,
