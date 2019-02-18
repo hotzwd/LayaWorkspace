@@ -286,7 +286,7 @@ var wxGame = (function (_super) {
              return;
          }
         
-        return;
+        // return;
         Gamelog("createVideoAD-----");
 
         var isPass = false;
@@ -304,7 +304,7 @@ var wxGame = (function (_super) {
         }
         
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-68792ad4e658d32f'
+            adUnitId: 'adunit-14ec08e53184d099'
         });
 
         var t_videoAd = this.videoAd;

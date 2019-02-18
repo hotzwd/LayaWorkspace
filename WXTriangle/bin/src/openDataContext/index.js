@@ -19,14 +19,14 @@ var userInfo = null;
 Laya.MiniAdpter.init(true, true);
 
 //laya初始化
-Laya.init(1366, 768);
+Laya.init(720, 1280);
 
 //FPS
 // Laya.Stat.show(0,0);
 //设置适配模式 宽度不变，高度根据屏幕比缩放
 Laya.stage.scaleMode = "fixedauto";
 //场景布局类型 自动竖屏
-Laya.stage.screenMode = "horizontal";
+Laya.stage.screenMode = "vertical";
 //设置水平居中对齐
 Laya.stage.alignH = "center";
 //垂直居中对齐
@@ -184,7 +184,7 @@ function updateScore(data){
 }
 
 function showEndFriends(data){
-  return;
+  //return;
   console.log("showEndFriends");
   wx.getFriendCloudStorage({
     keyList: ['score_' + Utils.getWeekNum()],
@@ -248,7 +248,7 @@ function showEndFriends(data){
             var index = friends[i];
             var t_item = res.data[index];
 
-            var item_start = -30;
+            var item_start = -100;
             var item_heigh = -80;
 
             // 奖杯
@@ -266,9 +266,9 @@ function showEndFriends(data){
             var head = writeImage(res.data[index].avatarUrl, -100, item_start + item_heigh * (1 - i), 60, 60);
             head.anchorY = 0.5;
             Laya.stage.addChild(head);
-            
+
             //名字
-            var name = writeText(Utils.labelTransform(t_item.nickname,36,250), 0, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
+            var name = writeText(Utils.labelTransform(t_item.nickname, 36, 250), 0, item_start + item_heigh * (1 - i), 260, 600 + i * 90, 120, 30, 30, "white", "center");
             name.anchorY = 0.5;
             Laya.stage.addChild(name);
 

@@ -17,8 +17,8 @@ var GameSharedUILogic = (function(_super){
 
         this.aniShare.play(0, true);
         
-        this.btn_shard.on(Laya.Event.CLICK,this,this.onShowVidoAd);
-        this.btn_cancel.on(Laya.Event.CLICK,this,this.onCancelClick);
+        this.btn_shard.on(Laya.Event.CLICK,this,this.fangkuai_onShowVidoAd);
+        this.btn_cancel.on(Laya.Event.CLICK,this,this.fangkuai_onCancelClick);
 
 
     }
@@ -28,30 +28,28 @@ var GameSharedUILogic = (function(_super){
 
      
      /**点击跳过 */
-    _proto.onCancelClick = function(){
-        MusicManager.getInstance().playSound("res/music/click.wav");
+    _proto.fangkuai_onCancelClick = function(){
+        // MusicManager.getInstance().playSound("res/music/btnclick.wav");
         UIManager.getInstance().closeUI("GameSharedUI");
         UIManager.getInstance().showUI("GameOverUI");
     }
 
     /**显示视频广告 */
-    _proto.onShowVidoAd = function () {
-       qqGame.getInstance().showVideoAD(this,this.reviveGame);
+    _proto.fangkuai_onShowVidoAd = function () {
+       wxGame.getInstance().showVideoAD(this,this.fangkuai_reviveGame);
 
     }
     //复活
-    _proto.reviveGame = function(_success){
-        // MusicManager.getInstance().playSound("res/music/click.wav");
+    _proto.fangkuai_reviveGame = function(_success){
+        // MusicManager.getInstance().playSound("res/music/btnclick.wav");
         UIManager.getInstance().closeUI("GameSharedUI");
         if(_success){
             var scoreNum = SceneManager.getInstance().currentScene.gameScore;
-            SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
-            SceneManager.getInstance().currentScene.resumeGame();
-            qqGame.getInstance().createVideoAD();
-        }else{
-             UIManager.getInstance().showUI("GameOverUI");
+            SceneManager.getInstance().currentScene.fangkuai_restartGame(false,scoreNum);
+            SceneManager.getInstance().currentScene.fangkuai_resumeGame();
+            wxGame.getInstance().createVideoAD();
         }
     }
 
     return GameSharedUILogic;
-})();
+})(GameSharedUI);

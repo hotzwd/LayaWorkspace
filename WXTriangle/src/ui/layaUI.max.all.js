@@ -56,6 +56,28 @@ var GameOverUI=(function(_super){
 		GameOverUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-138,"x":-280,"width":1280,"height":1556,"alpha":0.5},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Button","props":{"y":957,"x":220,"width":280,"var":"btn_close","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"重新开始","height":92}},{"type":"Button","props":{"y":1083,"x":220,"width":280,"visible":true,"var":"btn_share","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"邀请好友","height":92}},{"type":"Text","props":{"y":222,"x":260,"text":"历史最高：","fontSize":40,"font":"SimHei","color":"#FFFFFF"}},{"type":"Text","props":{"y":269,"x":244,"width":204,"var":"t_highScore","text":"99999","height":45,"fontSize":50,"font":"SimHei","color":"#FFFFFF","align":"center"}},{"type":"Text","props":{"y":325,"x":260,"text":"当前分数：","fontSize":40,"font":"SimHei","color":"#FFFFFF"}},{"type":"Text","props":{"y":380,"x":242,"width":204,"var":"t_gamescore","text":"99999","height":45,"fontSize":40,"font":"SimHei","color":"#FFFFFF","align":"center"}}]}]};
 		return GameOverUI;
 	})(View);
+var GameSharedUI=(function(_super){
+		function GameSharedUI(){
+			
+		    this.aniShare=null;
+		    this.btn_shard=null;
+		    this.btn_cancel=null;
+
+			GameSharedUI.__super.call(this);
+		}
+
+		CLASS$(GameSharedUI,'ui.GameSharedUI',_super);
+		var __proto__=GameSharedUI.prototype;
+		__proto__.createChildren=function(){
+		    
+			laya.ui.Component.prototype.createChildren.call(this);
+			this.createView(GameSharedUI.uiView);
+
+		}
+
+		GameSharedUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1556,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-280,"alpha":0.5},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Button","props":{"y":778,"x":360,"var":"btn_shard","stateNum":1,"skin":"Game/fuhuo.png","scaleY":1,"scaleX":1,"labelSize":30,"labelPadding":"0,0,10,0","labelFont":"SimHei","labelColors":"#ffffff","anchorY":0.5,"anchorX":0.5},"compId":78},{"type":"Button","props":{"y":1306,"x":360,"width":141,"var":"btn_cancel","mouseEnabled":true,"labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"点击跳过","height":44,"anchorY":0.5,"anchorX":0.5}}]}],"animations":[{"nodes":[{"target":78,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":0},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleY","index":30}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":0},{"value":1.2,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":15},{"value":1,"tweenMethod":"linearNone","tween":true,"target":78,"key":"scaleX","index":30}]}}],"name":"aniShare","id":1,"frameRate":24,"action":0}]};
+		return GameSharedUI;
+	})(View);
 var GameStartUI=(function(_super){
 		function GameStartUI(){
 			
@@ -75,6 +97,6 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-138,"x":-280,"width":1280,"height":1556,"alpha":0.4},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":396,"skin":"Game/title-sheet0.png","scaleY":1.2,"scaleX":1.2,"centerX":0}},{"type":"Button","props":{"y":957,"x":220,"width":280,"var":"btn_start","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"开始游戏","height":92}},{"type":"Button","props":{"y":1083,"x":220,"width":280,"var":"btn_share","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"邀请好友","height":92}},{"type":"Text","props":{"y":1209,"x":20,"width":180,"text":"v1.0","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":720,"height":1280,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":-138,"x":-280,"width":1280,"height":1556,"alpha":0.4},"child":[{"type":"Rect","props":{"width":1280,"lineWidth":1,"height":1556,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":396,"skin":"Game/title-sheet0.png","scaleY":1.2,"scaleX":1.2,"centerX":0}},{"type":"Button","props":{"y":957,"x":220,"width":280,"var":"btn_start","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"开始游戏","height":92}},{"type":"Button","props":{"y":1083,"x":220,"width":280,"var":"btn_share","stateNum":1,"skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"邀请好友","height":92}},{"type":"Text","props":{"y":1209,"x":20,"width":180,"text":"v1.1","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);

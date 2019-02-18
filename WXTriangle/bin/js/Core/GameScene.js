@@ -94,7 +94,7 @@ var GameScene = (function (_super) {
         this.anim_line.play(0, true, "line_adle");
         this.curTriangle.rotation = 0;
 
-        this.gameSpeed = 1.5;
+        this.updateLevelData();
 
         if(this.startPoint != null)
             this.updateQiu();
@@ -114,14 +114,14 @@ var GameScene = (function (_super) {
         
     }
     /**暂停游戏 */
-    _proto.pauseGame = function(){
+    _proto.fangkuai_pauseGame = function(){
         Laya.timer.clear(this,this.fangkuai_onUpdate);
         // Laya.timer.clear(this,this.fangkuai_updateGameTime);
         // this.leftGameTime = this.gameTime;
     }
 
     /**恢复游戏 */
-    _proto.resumeGame = function(){
+    _proto.fangkuai_resumeGame = function(){
         Laya.timer.frameLoop(1, this, this.fangkuai_onUpdate);
         // Laya.timer.loop(1000,this,this.fangkuai_updateGameTime);
         // this.startTime = new Date().getTime();
@@ -136,18 +136,17 @@ var GameScene = (function (_super) {
         Laya.timer.clear(this,this.fangkuai_updateGameTime);
         this.isGameover = true;
 
-        UIManager.getInstance().showUI("GameOverUI");
 
-        // if(GameInQQ){
-        //     if(qqGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
-        //         UIManager.getInstance().showUI("GameOverUI");
-        //         return;
-        //     }
-        //     UIManager.getInstance().showUI("GameSharedUI");
-        // }else{
-        //     // this.btn_addLife.visible = true;
-        //     UIManager.getInstance().showUI("GameSharedUI");
-        // }
+        if(Browser.onMiniGame){
+            if(wxGame.getInstance().videoAd == null || !window.wxLoadVideoAd){
+                UIManager.getInstance().showUI("GameOverUI");
+                return;
+            }
+                UIManager.getInstance().showUI("GameSharedUI");
+        }else{
+            // this.btn_addLife.visible = true;
+            UIManager.getInstance().showUI("GameSharedUI");
+        }
 
         
     }
@@ -226,7 +225,7 @@ var GameScene = (function (_super) {
     //更新关卡数据
     _proto.updateLevelData = function(){
 
-        for (var i = LevelData.length -1; i > 0; i--) {
+        for (var i = LevelData.length -1; i >= 0; i--) {
             var t_data = LevelData[i];
             if(this.gameScore >= t_data.score){
                 this.gameSpeed = t_data.speed;
