@@ -49,7 +49,8 @@ var GameStartUiLogic = (function (_super) {
     
     _proto._sharefangkuai_ClickEvent = function(){
         // MusicManager.getInstance().playSound("res/music/click.wav");
-        wxGame.getInstance().shareGame();
+        // wxGame.getInstance().shareGame();
+        UIManager.getInstance().showUI("GameRankUI");
     }
     _proto._rankfangkuai_ClickEvent = function(){
         // MusicManager.getInstance().playSound("res/music/click.wav");

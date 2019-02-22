@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":6,
-    "selecteID":10,
+    "selecteID":8,
     "props":{"width":720,"sceneColor":"#000000","height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -79,7 +79,7 @@
                 {
                     "x":30,
                     "type":"Button",
-                    "props":{"y":1083,"x":220,"width":280,"var":"btn_share","stateNum":"1","skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"邀请好友","height":92},
+                    "props":{"y":1083,"x":220,"width":280,"var":"btn_share","stateNum":"1","skin":"Game/img_button.png","labelSize":35,"labelFont":"SimHei","labelColors":"#ffffff","label":"好友排行","height":92},
                     "nodeParent":6,
                     "label":"Button(btn_share)",
                     "isDirectory":false,
@@ -92,7 +92,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":1209,"x":20,"width":180,"text":"v1.1","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":1209,"x":20,"width":180,"text":"v1.2","height":63,"fontSize":25,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":6,
                     "label":"Text",
                     "isDirectory":false,

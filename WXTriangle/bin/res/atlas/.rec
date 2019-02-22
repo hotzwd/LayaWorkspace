@@ -3,6 +3,7 @@ D Game
 P 2B7ED3D8 audiobtn-sheet0.png
 P 6F29E660 audiobtn-sheet1.png
 R 189BD85D background.png
+P 336359A8 btn_guanbi.png
 P 642A663A dcolor1.png
 P DEA35607 dcolor2.png
 P E4985701 dcolor3.png
@@ -10,6 +11,8 @@ P AE2342C7 exitbtn-sheet0.png
 P 98B2AE84 fuhuo.png
 P 87E7DEB3 guide1.png
 P ADC754B8 img_button.png
+R 4F627580 rank_bg.png
+P 9AB85FEF rankBg.png
 P B8403426 rope-sheet0_02.png
 P 9854C369 rope-sheet0_03.png
 P 52831FB0 rope-sheet0_04.png
