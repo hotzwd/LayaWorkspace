@@ -50316,7 +50316,7 @@ var GameStartUI=(function(_super){
 
 		}
 
-		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-2,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1362,"x":314,"var":"btn_share","stateNum":1,"skin":"Game/img_yaoqing.png"}},{"type":"Button","props":{"y":1480,"x":312,"visible":false,"var":"btn_rank","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Label","props":{"y":1778,"x":54,"text":"v1.1","fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]};
+		GameStartUI.uiView={"type":"View","props":{"width":960,"height":1708,"centerY":0,"centerX":0},"child":[{"type":"Box","props":{"width":960,"height":2078,"centerY":0,"centerX":0},"child":[{"type":"Sprite","props":{"y":0,"x":-2,"alpha":0.5},"child":[{"type":"Rect","props":{"width":960,"lineWidth":1,"height":2078,"fillColor":"#000000"}}]},{"type":"Image","props":{"y":461,"x":46,"skin":"Game/menutitulo-sheet0.png"}},{"type":"Image","props":{"y":1125,"x":480,"var":"btn_start","skin":"Game/btndefeatcont-sheet1.png","anchorY":0.5,"anchorX":0.5}},{"type":"Button","props":{"y":1362,"x":314,"var":"btn_share","stateNum":1,"skin":"Game/img_yaoqing.png"}},{"type":"Button","props":{"y":1480,"x":312,"visible":false,"var":"btn_rank","stateNum":1,"skin":"Game/newbest-sheet0.png"}},{"type":"Label","props":{"y":1778,"x":54,"text":"v1.2","fontSize":35,"font":"SimHei","color":"#ffffff"}}]}]};
 		return GameStartUI;
 	})(View);
 /**
@@ -51813,8 +51813,9 @@ var wxGame = (function (_super) {
             return;
         }
         
+        
         this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-6f8f25c6772b4b61'
+            adUnitId: 'adunit-521318a7d72432a4'
         });
 
         var t_videoAd = this.videoAd;
