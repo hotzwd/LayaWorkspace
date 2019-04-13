@@ -1,0 +1,17 @@
+{
+    "appid": "15052700",
+    "libversion": "game",
+    "compileType": "game",
+    "setting": {
+        "urlCheck": true
+    },
+    "libVersion": "1.4.1",
+    "condition": {
+        "swan": {
+            "current": -2,
+            "list": []
+        }
+    },
+    "name": "",
+    "projectOrigin": "weapp"
+}
