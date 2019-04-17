@@ -1,9 +1,9 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":7,
-    "props":{"width":720,"sceneColor":"#fff8f5","height":1280,"centerY":0,"centerX":0},
+    "selectedBox":7,
+    "selecteID":11,
+    "props":{"width":720,"height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -26,18 +26,30 @@
             "child":[
                 {
                     "x":30,
+                    "type":"Image",
+                    "props":{"y":0,"x":0,"width":720,"skin":"Game/bg.png","height":1556},
+                    "nodeParent":7,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":22,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
                     "type":"Box",
                     "props":{"y":0,"x":0,"width":720,"var":"treeLayer","height":1556},
                     "nodeParent":7,
                     "label":"Box(treeLayer)",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":11,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
                             "props":{"y":0,"x":0,"var":"g_trajectory"},
                             "nodeParent":11,
@@ -50,7 +62,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":333,"x":151,"visible":false,"skin":"Game/img_tree.png","name":"tree1"},
                             "nodeParent":11,
@@ -63,7 +74,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":654,"x":74,"visible":false,"skin":"Game/img_tree.png","name":"tree2"},
                             "nodeParent":11,
@@ -76,7 +86,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":290,"x":554,"visible":false,"skin":"Game/img_tree.png","name":"tree3"},
                             "nodeParent":11,
@@ -89,7 +98,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":824,"x":541,"visible":false,"skin":"Game/img_tree.png","name":"tree4"},
                             "nodeParent":11,
@@ -102,7 +110,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":1027,"x":167,"visible":false,"skin":"Game/img_tree.png","name":"tree5"},
                             "nodeParent":11,
@@ -115,7 +122,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "props":{"y":1229,"x":367,"visible":false,"skin":"Game/img_tree.png","name":"tree6"},
                             "nodeParent":11,
@@ -166,7 +172,8 @@
                     "compId":10,
                     "child":[
                         ]
-                }]
+                }],
+            "$HIDDEN":false
         },
         {
             "x":15,

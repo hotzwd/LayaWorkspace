@@ -26,6 +26,8 @@ var GameStartUiLogic = (function (_super) {
         this.img_app.skin = MiniGameData[t_randomAppId].icon;
 
         wxGame.getInstance().showClubBtn(true);
+        wxGame.getInstance().showBannerAD(true);
+        
     }
     
     _proto.onDestroy = function () {
@@ -35,6 +37,9 @@ var GameStartUiLogic = (function (_super) {
     _proto._startClickEvent = function(){
         MusicManager.getInstance().playSound("res/music/click.wav");
         wxGame.getInstance().showClubBtn(false);
+
+        wxGame.getInstance().showBannerAD(true);
+
         wxGame.getInstance().createVideoAD();
 
         UIManager.getInstance().closeUI("GameStartUI");

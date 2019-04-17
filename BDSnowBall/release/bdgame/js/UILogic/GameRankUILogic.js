@@ -1,1 +1,41 @@
-var GameRankUILogic=function(a){function n(){n.super(this)}Laya.class(n,"UILogic.GameRankUILogic",a);var t=n.prototype;return t.onInit=function(){this.width=Laya.stage.width,this.height=Laya.stage.height,this.zOrder=10,wxGame.getInstance().postMessage({act:"showRank"},!0),this.close.on(Laya.Event.CLICK,this,this.onCloseRank)},t.onDestroy=function(){},t.updateItem=function(a,n){},t.onCloseRank=function(){MusicManager.getInstance().playSound("res/music/click.wav"),wxGame.getInstance().showOpenDataContext(!1),UIManager.getInstance().closeUI("GameRankUI")},n}(GameRankUI);
+/**
+ * 好友界面逻辑 by lzq
+ */
+var GameRankUILogic = (function(_super){
+    function GameRankUILogic(){
+        GameRankUILogic.super(this);
+
+    }
+    Laya.class(GameRankUILogic,"UILogic.GameRankUILogic",_super);
+    var _proto = GameRankUILogic.prototype;
+    
+    _proto.onInit = function(){
+        this.width = Laya.stage.width;
+        this.height = Laya.stage.height;
+        //设置层级 相对于stage
+        this.zOrder = 10;
+
+        wxGame.getInstance().postMessage({
+                act: "showRank"
+            }, true);
+
+
+        this.close.on(Laya.Event.CLICK,this,this.onCloseRank);
+    }
+    _proto.onDestroy = function(){
+        //MessageController.getInstance().RemoveNotification(MessageEventName.RankListEvent,this,this.RankListReceiver);
+    }
+
+    _proto.updateItem = function(cell, index) {
+
+    }
+
+    /**关闭排行 */
+    _proto.onCloseRank = function(){
+        MusicManager.getInstance().playSound("res/music/click.wav");
+        wxGame.getInstance().showOpenDataContext(false);
+        UIManager.getInstance().closeUI("GameRankUI");
+        
+    }
+    return GameRankUILogic;
+})(GameRankUI);

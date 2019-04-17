@@ -1,17 +1,1 @@
-{
-    "appid": "16018280",
-    "libversion": "game",
-    "compileType": "game",
-    "setting": {
-        "urlCheck": true
-    },
-    "libVersion": "1.4.1",
-    "condition": {
-        "swan": {
-            "current": -2,
-            "list": []
-        }
-    },
-    "name": "",
-    "projectOrigin": "weapp"
-}
+{"appid":"16018280","compileType":"game","condition":{"swan":{"current":-2,"list":[]}},"editor":{"curPath":"D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\code.js","expands":["D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\libs","D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\js"],"paths":["D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\game.json","D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\game.js","D:\\LayaWorkspace\\BDSnowBall\\release\\bdgame\\code.js"]},"libVersion":"1.13.29","libversion":"1.5.2","name":"","projectOrigin":"weapp","setting":{"urlCheck":true}}

@@ -30,6 +30,7 @@ var GameOverUILogic = (function (_super) {
         var highscoreNum = SetLocalMaxScore(scoreNum);
         this.t_highScore.text = highscoreNum;
         wxGame.getInstance().uploadUserScore(highscoreNum);
+        wxGame.getInstance().showBannerAD(true);
 
     }
     

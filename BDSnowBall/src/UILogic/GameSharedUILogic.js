@@ -48,6 +48,8 @@ var GameSharedUILogic = (function(_super){
             SceneManager.getInstance().currentScene.restartGame(false,scoreNum);
             SceneManager.getInstance().currentScene.resumeGame();
             wxGame.getInstance().createVideoAD();
+        }else{
+            UIManager.getInstance().showUI("GameOverUI");
         }
     }
 

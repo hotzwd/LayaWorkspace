@@ -1,1 +1,32 @@
-function Gamelog(o){GameLogVisible&&(void 0===o&&console.error(o),console.log(o))}function GameLogError(o){GameLogVisible&&(void 0===o&&console.error(o),console.error(o))}function GameLogObject(o){var e="";for(var r in o)e+=r+" = "+o[r]+"\n";console.log(e)}
+/**
+ * 打印普通日志
+ */
+function Gamelog(param){
+    if(GameLogVisible){
+        if(typeof param === "undefined"){
+            console.error(param);
+        }
+        console.log(param);
+    }
+}
+
+/**
+ * 打印错误日志
+ */
+function GameLogError(param){
+    if(GameLogVisible){
+        if(typeof param === "undefined"){
+            console.error(param);
+        }
+        console.error(param);
+    }
+}
+
+
+function GameLogObject(obj) {  
+    var description = "";  
+    for (var i in obj) {  
+        description += i + " = " + obj[i] + "\n";  
+    }  
+    console.log(description);  
+}  

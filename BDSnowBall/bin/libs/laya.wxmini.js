@@ -1192,7 +1192,7 @@ var MiniLoader=(function(_super){
 				tempData=data.data;
 			}
 			if(!MiniAdpter.isZiYu &&MiniAdpter.isPosMsgYu && type !=/*laya.net.Loader.BUFFER*/"arraybuffer"){
-				// /*__JS__ */wx.postMessage({url:url,data:tempData,isLoad:"filedata"});
+				/*__JS__ */wx.postMessage({url:url,data:tempData,isLoad:"filedata"});
 			}
 			thisLoader.onLoaded(tempData);
 			}else if (errorCode==1){

@@ -1,1 +1,284 @@
-function GetQueryString(e){var t=new RegExp("(^|&)"+e+"=([^&]*)(&|$)"),r=window.location.search.substr(1).match(t);return null!=r?unescape(r[2]):""}function GetCountDownText(e){var t=e/1e3,r=t/60,a=r/60,o=a/24;return o>1?parseInt(o)+"天":a>1?parseInt(a)+"小时":r>1?parseInt(r)+"分钟":parseInt(t)+"秒"}function GetFormtName(e){for(var t=e,r=0,a=0;a<e.length;a++){if(/^[0-9a-zA-Z]*$/g.test(e[a])?r+=1:r+=2,r>8){t=e.substring(0,a+1)+"...";break}}return t}function isChinese(e){return!!/^[\u3220-\uFA29]+$/.test(e)}function labelTransform(e,t,r){for(var a=0,o="",n=0;n<e.length;n++){var l=e.charAt(n);if((a+=isChinese(l)?t:t/2)>r-t){o+="..";break}o+=l}return o}function GetWeekNum(){var e=new Date,t=e.toLocaleDateString();console.log("curDay:"+t);var r=new Date;r.setFullYear(2018,4,20),r.setHours(0,0,0);var a=DateDiff("d",r,e),o=Math.ceil(a/7);return console.log("weekNum = "+o),o}function GetMonthNum(){var e=new Date,t=new Date;t.setFullYear(2018,4,20),t.setHours(0,0,0);var r=DateDiff("m",t,e);return console.log("----monthDiff = "+r),r}function DateDiff(e,t,r){var a=r.getTime()-t.getTime();switch(e.toLowerCase()){case"y":return parseInt(r.getFullYear()-t.getFullYear());case"m":return parseInt(12*(r.getFullYear()-t.getFullYear())+(r.getMonth()-t.getMonth()));case"d":return parseInt(a/1e3/60/60/24);case"w":return parseInt(a/1e3/60/60/24/7);case"h":return parseInt(a/1e3/60/60);case"n":return parseInt(a/1e3/60);case"s":return parseInt(a/1e3);case"l":return parseInt(a)}}function SetLocalMaxScore(e){var t=e,r="LocalHighScore_"+GetWeekNum(),a=LocalStorage.getItem(r);if(null==a||""==a){var o="LocalHighScore_"+(GetWeekNum()-1),n=LocalStorage.getItem(o);""!=n&&null!=n&&LocalStorage.removeItem(o),LocalStorage.setItem(r,e)}else e>(a=parseInt(a,10))?LocalStorage.setItem(r,e):t=a;return t}function SetLocalWorldMaxScore(e){var t=e,r="LocalWorldHighScore_"+GetMonthNum(),a=LocalStorage.getItem(r);if(null==a||""==a){var o="LocalWorldHighScore_"+(GetMonthNum()-1),n=LocalStorage.getItem(o);""!=n&&null!=n&&LocalStorage.removeItem(o),LocalStorage.setItem(r,e)}else e>(a=parseInt(a,10))?LocalStorage.setItem(r,e):t=a;return t}function SetLocalGoldNum(e){LocalStorage.setItem("LocalGoldNum",e)}function GetLocalGoldNum(){var e=LocalStorage.getItem("LocalGoldNum");return null==e||""==e?(SetLocalGoldNum(10),e=10):e=parseInt(e,10),e}function SetLocalLifeNum(e){LocalStorage.setItem("LocalLifeNum",e)}function GetLocalLifeNum(){var e=LocalStorage.getItem("LocalLifeNum");return null==e||""==e?(SetLocalLifeNum(0),e=0):e=parseInt(e,10),e}function GetRandomColor(){var e=Math.floor(196*Math.random()+60),t=Math.floor(196*Math.random()+60),r=Math.floor(196*Math.random()+60);return e=e<60?60:e.toString(16),t=t<60?60:t.toString(16),r=r<60?60:r.toString(16),"#"+e+t+r}function GetTimeFormat(e){var t=parseInt(e),r=parseInt(t/60),a=t%60;r<10&&(r="0"+r),a<10&&(a="0"+a);return r+":"+a}
+/**
+ * 从地址中获取数据
+ */
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),
+        r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return '';
+}
+
+/**
+ * 返回倒计时
+ * _countDownNum  倒计时总时间 毫秒
+ */
+function GetCountDownText(countDownNum) {
+    var secondNum = countDownNum / 1000;
+    var minuteNum = secondNum / 60;
+    var hourNum = minuteNum / 60;
+    var dayNum = hourNum / 24;
+
+    var timeText = "";
+    if (dayNum > 1) {
+        timeText = parseInt(dayNum) + "天";
+    } else if (hourNum > 1) {
+        timeText = parseInt(hourNum) + "小时";
+    } else if (minuteNum > 1) {
+        timeText = parseInt(minuteNum) + "分钟";
+    } else {
+        timeText = parseInt(secondNum) + "秒";
+    }
+    return timeText;
+}
+/**
+ * 格式化名字长度
+ */
+function GetFormtName(name) {
+    var newName = name;
+    var nameNum = 0;
+    for (var i = 0; i < name.length; i++) {
+        var reg = /^[0-9a-zA-Z]*$/g;
+        if (reg.test(name[i])) {
+            // Gamelog("----是字母数字");
+            nameNum += 1;
+        } else {
+            nameNum += 2;
+        }
+        if (nameNum > 8) {
+            newName = name.substring(0, i + 1) + "...";
+            break;
+        }
+    }
+    return newName;
+}
+
+
+//检测是否为中文，true表示是中文，false表示非中文
+function isChinese(str) {
+    if (/^[\u3220-\uFA29]+$/.test(str)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//名字太长转换...
+function labelTransform(strOld, fontSize, width) {
+    var strLen = 0;
+    var strNew = "";
+    for (var i = 0; i < strOld.length; i++) {
+        var char = strOld.charAt(i);
+        var isChin = isChinese(char);
+        // Gamelog(char + ":" + isChin);
+        if (isChin) {
+            strLen = strLen + fontSize;
+        }
+        else {
+            strLen = strLen + fontSize / 2;
+        }
+
+        if (strLen > width - fontSize) {
+            strNew = strNew + "..";
+            break;
+        }
+        else {
+            strNew = strNew + char;
+        }
+    }
+
+    return strNew;
+}
+
+//获取第几周
+function GetWeekNum() {
+    var myDate = new Date();
+    // myDate.setFullYear(2018, 5, 4);
+    var curDay = myDate.toLocaleDateString();
+    console.log("curDay:" + curDay);
+
+    var dateBase = new Date();
+    dateBase.setFullYear(2018, 4, 20);
+    dateBase.setHours(0, 0, 0);
+    // console.log("dateBase:" + dateBase.toLocaleDateString());
+    var dayDiff = DateDiff("d", dateBase, myDate);
+    var weekNum = Math.ceil(dayDiff / 7);
+    // console.log("dayDiff = " + dayDiff);
+    console.log("weekNum = " + weekNum);
+
+    return weekNum;
+}
+//获取第几月
+function GetMonthNum(){
+    var myDate = new Date();
+
+    var dateBase = new Date();
+    dateBase.setFullYear(2018, 4, 20);
+    dateBase.setHours(0, 0, 0);
+    // console.log("dateBase:" + dateBase.toLocaleDateString());
+    var monthDiff = DateDiff("m", dateBase, myDate);
+    // var weekNum = Math.ceil(dayDiff / 7);
+    // console.log("dayDiff = " + dayDiff);
+    console.log("----monthDiff = " + monthDiff);
+
+    return monthDiff;
+}
+
+function DateDiff(interval, date1, date2) {
+    var long = date2.getTime() - date1.getTime(); //相差毫秒
+    switch (interval.toLowerCase()) {
+        case "y": return parseInt(date2.getFullYear() - date1.getFullYear());
+        case "m": return parseInt((date2.getFullYear() - date1.getFullYear()) * 12 + (date2.getMonth() - date1.getMonth()));
+        case "d": return parseInt(long / 1000 / 60 / 60 / 24);
+        case "w": return parseInt(long / 1000 / 60 / 60 / 24 / 7);
+        case "h": return parseInt(long / 1000 / 60 / 60);
+        case "n": return parseInt(long / 1000 / 60);
+        case "s": return parseInt(long / 1000);
+        case "l": return parseInt(long);
+    }
+}
+
+//设置本地最高分
+function SetLocalMaxScore(newScore) {
+
+    var maxScore = newScore;
+    var key = "LocalHighScore_" + GetWeekNum();
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        var lastKey = "LocalHighScore_" + (GetWeekNum() - 1);
+        var lastScore = LocalStorage.getItem(lastKey);
+        if(lastScore != "" && lastScore != null){
+            LocalStorage.removeItem(lastKey);
+        }
+
+        LocalStorage.setItem(key, newScore);
+    }
+    else {
+        score = parseInt(score, 10);
+        if (newScore > score) {
+            LocalStorage.setItem(key, newScore);
+        }
+        else {
+            maxScore = score;
+        }
+    }
+
+    // console.log("maxScore = " + maxScore);
+    return maxScore;
+}
+
+
+//设置世界排行本地最高分
+function SetLocalWorldMaxScore(newScore) {
+    var maxScore = newScore;
+    var key = "LocalWorldHighScore_" + GetMonthNum();
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        var lastKey = "LocalWorldHighScore_" + (GetMonthNum() - 1);
+        var lastScore = LocalStorage.getItem(lastKey);
+        if(lastScore != "" && lastScore != null){
+            LocalStorage.removeItem(lastKey);
+        }
+        LocalStorage.setItem(key, newScore);
+    }
+    else {
+
+        score = parseInt(score, 10);
+        if (newScore > score) {
+            LocalStorage.setItem(key, newScore);
+        }
+        else {
+            maxScore = score;
+        }
+    }
+    return maxScore;
+}
+
+//设置本地金币数量
+function SetLocalGoldNum(newScore) {
+
+    var key = "LocalGoldNum";
+    LocalStorage.setItem(key, newScore);
+}
+//获取本地金币数量
+function GetLocalGoldNum() {
+
+    var key = "LocalGoldNum";
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        SetLocalGoldNum(10);
+        score = 10;
+    }
+    else {
+        score = parseInt(score, 10);
+    }
+
+    return score;
+}
+//设置本地生命数量
+function SetLocalLifeNum(newScore) {
+
+    var key = "LocalLifeNum";
+    LocalStorage.setItem(key, newScore);
+}
+//获取本地生命数量
+function GetLocalLifeNum() {
+
+    var key = "LocalLifeNum";
+    var score = LocalStorage.getItem(key);
+    if (score == null || score == "") {
+        SetLocalLifeNum(0);
+        score = 0;
+    }
+    else {
+        score = parseInt(score, 10);
+    }
+
+    return score;
+}
+
+//获取16进制颜色
+function GetRandomColor(){
+    var t_addValue = 60;
+
+    var r = Math.floor(Math.random()*(256 - t_addValue)  + t_addValue);
+    var g = Math.floor(Math.random()*(256 - t_addValue)  + t_addValue);
+    var b = Math.floor(Math.random()*(256 - t_addValue)  + t_addValue);
+    
+    if(r < t_addValue){
+        // r = "0"+r.toString(16);
+        r = t_addValue;
+    }else{
+        r = r.toString(16);
+    }
+    if(g < t_addValue){
+        // g = "0"+g.toString(16);
+        g= t_addValue;
+    }else{
+        g = g.toString(16);
+    }
+    if(b < t_addValue){
+        // b = "0"+b.toString(16);
+        b = t_addValue;
+    }else{
+        b = b.toString(16);
+    }
+    
+    return "#"+r+g+b;
+}
+
+/**
+ * 获得时间格式化 00:00
+ */
+function GetTimeFormat(_secondNum){
+    var secondNum = parseInt(_secondNum);
+    var t_minute = parseInt(secondNum / 60);
+    var t_second = secondNum % 60;
+    if(t_minute < 10){
+        t_minute = "0"+t_minute;
+    }
+    if(t_second < 10){
+        t_second = "0"+t_second;
+    }
+    
+    var t_str = t_minute + ":" + t_second;
+    return t_str;
+}

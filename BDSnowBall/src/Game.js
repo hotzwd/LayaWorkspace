@@ -1,8 +1,10 @@
 //初始化微信小游戏
-Laya.MiniAdpter.init(true);
+// Laya.MiniAdpter.init(true);
+Laya.MiniAdpter.init();
 
 //laya初始化
-Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
+// Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
+Laya.init(GameConfig.GameWidth, GameConfig.GameHeight);
 
 wxGame.getInstance().Init();
 
@@ -17,7 +19,7 @@ Laya.stage.alignH = "center";
 //垂直居中对齐
 Laya.stage.alignV = "middle";
 
-Laya.stage.bgColor = "#fff8f5";//设置画布的背景颜色。
+// Laya.stage.bgColor = "#fff8f5";//设置画布的背景颜色。
 //使用WebWorker加载并解码图片，把耗费cpu的工作放到worker中执行，防止js主线程卡死，从而能大大减少游戏中加载卡顿现象。
 //指定worker.js所在的路径,比如放在libs目录下
 //Laya.WorkerLoader.workerPath = "libs/worker.js";

@@ -1,1 +1,2 @@
-require("weapp-adapter.js"),require("code.js");
+require("weapp-adapter.js");
+require("code.js");

@@ -288,23 +288,28 @@ var wxGame = (function (_super) {
         
         Gamelog("createVideoAD-----");
 
-        var isPass = false;
-        wx.getSystemInfo({
-            success: function (res) {
-                Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
-                var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
-                if(isPassNum >= 0){
-                    isPass = true;
-                }
-            }
-        }); 
-        if(!isPass){
-            return;
-        }
+        // var isPass = false;
+        // wx.getSystemInfo({
+        //     success: function (res) {
+        //         Gamelog("getSystemInfo SDKVersion="+ res.SDKVersion);
+        //         var isPassNum = compareVersion(res.SDKVersion,"2.0.4");
+        //         if(isPassNum >= 0){
+        //             isPass = true;
+        //         }
+        //     }
+        // }); 
+        // if(!isPass){
+        //     return;
+        // }
         
-        this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-21935fac02b0497e'
+        // this.videoAd = wx.createRewardedVideoAd({
+        //     adUnitId: 'adunit-21935fac02b0497e'
+        // });
+        this.videoAd = swan.createRewardedVideoAd({
+            adUnitId: '6151369',
+            appSid: 'e38f9620' 
         });
+
 
         var t_videoAd = this.videoAd;
         this.videoAd.load().then(function () {
@@ -318,11 +323,13 @@ var wxGame = (function (_super) {
          this.videoAd.onError(function (err) {
             console.log("createVideoAD 拉取失败 err.errMsg="+err.errMsg+" errCode="+err.errCode);
             wxLoadVideoAd = false;
+            t_videoAd.offError();
         });
 
         this.videoAd.onLoad(function () {
             console.log("createVideoAD 拉取成功 = true");
             wxLoadVideoAd = true;
+            t_videoAd.offLoad();
         });
     }
 
@@ -355,6 +362,76 @@ var wxGame = (function (_super) {
         });
     }
 
+    //显示Banner广告
+    _proto.showBannerAD = function (p_show) {
+         if (!Browser.onMiniGame) {
+             return;
+         }
+        var adIndex = 0;
+        Gamelog("----showBannerAD="+p_show);
+
+        if (p_show == false) {
+            if(this.bannerAd_2 != null)
+                this.bannerAd_2.hide();
+        }
+        else {    
+            this.bannerAd_2 = this.createAD(this.bannerAd_2);
+        }
+    }
+
+    //创建广告
+    _proto.createAD = function (Ad) {
+        if (Browser.onMiniGame) {
+            
+            if (Ad != null) {
+                // Gamelog("destroy");
+                Ad.destroy();
+            }
+            Gamelog("create banner ad");
+            // Ad = wx.createBannerAd({
+            //     adUnitId: AdID,
+            //     style: {
+            //         left: 0,
+            //         top: 0,
+            //         width: 300
+            //     }
+            // })
+            Ad = swan.createBannerAd({
+                adUnitId: '6151368',
+                appSid: 'e38f9620',
+                style: {
+                    left: 0,
+                    top: 0,
+                    width: 300
+                }
+            })
+            
+            Ad.onLoad(function () {
+                console.log('banner 广告加载成功');
+                Ad.show();
+            })
+
+            Ad.onError(function (err) {
+                console.log("banner 加载错误码="+err.errCode)
+            })
+
+            var sysInfo = swan.getSystemInfoSync();
+            
+            // console.log("---getSystemInfoSync screenHeight="+ sysInfo.screenHeight);
+            Ad.style.top = sysInfo.screenHeight - Ad.style.realHeight;
+            Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+
+            Ad.onResize(function (res) {
+                // console.log(res.width, res.height);
+                // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
+                // Ad.style.top = sysInfo.screenHeight - Ad.style.realHeight;
+                // Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            })
+            
+        }
+
+        return Ad;
+    }
 
     /**微信官方对比版本号 */
     function compareVersion(v1, v2) {
@@ -381,21 +458,30 @@ var wxGame = (function (_super) {
     /**显示微信游戏圈 */
     _proto.showClubBtn = function(_show){
         if (Browser.onMiniGame) {
-
-            if(compareVersion(wxSDKVersion,"2.0.3") < 0){
+            console.log("----显示游戏圈="+_show)
+            if(compareVersion(wxSDKVersion,"1.5.2") < 0){
                 return;
             }
             if(this.btn_club == null){
                 // this.btn_club.destroy();
-                this.btn_club = wx.createGameClubButton({
-                    icon: 'white',
-                    style: {
-                        left: 10,
-                        top: 40,
-                        width: 40,
-                        height: 40
-                    }
-                })
+                // this.btn_club = wx.createGameClubButton({
+                //     icon: 'white',
+                //     style: {
+                //         left: 10,
+                //         top: 40,
+                //         width: 40,
+                //         height: 40
+                //     }
+                // })
+				// console.log("----显示游戏圈 创建按钮")
+				// 创建按钮
+				this.btn_club = swan.createRecommendationButton({
+					type: 'list',
+					style: {
+						left: 100,
+						top: 300
+					}
+				});
             }
 
             if(_show){

@@ -28,11 +28,13 @@ var GameUILogic = (function (_super) {
         this.curLevel = 0;
         // this.updateBlockData();
         wxGame.getInstance().showClubBtn(false);
+        // wxGame.getInstance().showBannerAD(true);
         // this.guidBox.visible = true;
     }
     
     _proto.onDestroy = function () {
         // MusicManager.getInstance().stopMusic();
+        // wxGame.getInstance().showBannerAD(false);
     }
 
     //引导
