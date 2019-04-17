@@ -409,10 +409,12 @@ var wxGame = (function (_super) {
             Ad.onLoad(function () {
                 console.log('banner 广告加载成功');
                 Ad.show();
+                Ad.offLoad();
             })
 
             Ad.onError(function (err) {
-                console.log("banner 加载错误码="+err.errCode)
+                console.log("banner 加载错误码="+err.errCode);
+                Ad.offError();
             })
 
             var sysInfo = swan.getSystemInfoSync();
@@ -421,12 +423,12 @@ var wxGame = (function (_super) {
             Ad.style.top = sysInfo.screenHeight - Ad.style.realHeight;
             Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
 
-            Ad.onResize(function (res) {
-                // console.log(res.width, res.height);
-                // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
-                // Ad.style.top = sysInfo.screenHeight - Ad.style.realHeight;
-                // Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
-            })
+            // Ad.onResize(function (res) {
+            //     // console.log(res.width, res.height);
+            //     // console.log(tempAd.style.realWidth, tempAd.style.realHeight);
+            //     // Ad.style.top = sysInfo.screenHeight - Ad.style.realHeight;
+            //     // Ad.style.left = (sysInfo.screenWidth - Ad.style.realWidth) / 2;
+            // })
             
         }
 
@@ -482,12 +484,29 @@ var wxGame = (function (_super) {
 						top: 300
 					}
 				});
+                
             }
 
+            var t_club = this.btn_club;
             if(_show){
-                this.btn_club.show();
+                // this.btn_club.show();
+                // 触发资源加载
+                t_club.load();
+                console.log('交叉推荐加载开始---');
+                t_club.onLoad(function () {
+                    console.log('交叉推荐加载成功');
+                    t_club.show();
+                    t_club.offLoad();
+                })
+
+                t_club.onError(function (err) {
+                    console.log("交叉推荐 加载错误="+err);
+                    t_club.offError();
+                })
             }else{
-                this.btn_club.hide();
+                // this.btn_club.hide();
+                if(t_club != null)
+                    t_club.destroy();
             }
             
         }

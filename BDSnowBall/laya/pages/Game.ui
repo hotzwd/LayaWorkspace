@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":7,
-    "selecteID":11,
+    "selectedBox":2,
+    "selecteID":6,
     "props":{"width":720,"height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
     "label":"View",
@@ -181,13 +181,14 @@
             "props":{"width":720,"visible":false,"var":"guidBox","height":1556,"centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Box(guidBox)",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":2,
             "child":[
                 {
+                    "x":30,
                     "type":"Sprite",
                     "props":{"alpha":0.5},
                     "nodeParent":2,
@@ -199,6 +200,7 @@
                     "compId":3,
                     "child":[
                         {
+                            "x":45,
                             "type":"Rect",
                             "props":{"width":720,"lineWidth":1,"height":1556,"fillColor":"#000000"},
                             "nodeParent":3,
@@ -210,11 +212,12 @@
                             "child":[
                                 ]
                         }],
-                    "$HIDDEN":true
+                    "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Text",
-                    "props":{"y":593,"x":220,"text":"点击改变雪球方向","fontSize":35,"font":"SimHei","color":"#ffffff"},
+                    "props":{"y":593,"x":185,"text":"点击改变一次雪球方向","fontSize":35,"font":"SimHei","color":"#ffffff"},
                     "nodeParent":2,
                     "label":"Text",
                     "isDirectory":false,
@@ -225,6 +228,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":659,"x":313,"width":93,"skin":"Game/guide1.png","pivotY":11,"height":104},
                     "nodeParent":2,
