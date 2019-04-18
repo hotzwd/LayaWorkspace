@@ -52471,8 +52471,8 @@ var GameLogVisible = true;
 Laya.MiniAdpter.init();
 
 //laya初始化
-// Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
-Laya.init(GameConfig.GameWidth, GameConfig.GameHeight);
+Laya.init(GameConfig.GameWidth, GameConfig.GameHeight, Laya.WebGL);
+// Laya.init(GameConfig.GameWidth, GameConfig.GameHeight);
 
 wxGame.getInstance().Init();
 
